@@ -632,7 +632,9 @@ namespace Server.Items
                 SetInstrument(from, this);
 
                 // Delay of 7 second before beign able to play another instrument again
-                new InternalTimer(from).Start();
+                // NO! Instruments don't have a timer
+		// new InternalTimer(from).Start();
+		Timer.DelayCall(TimeSpan.FromMilliseconds(500), () => from.EndAction(typeof(BaseInstrument)));
 
                 if (CheckMusicianship(from))
                     PlayInstrumentWell(from);

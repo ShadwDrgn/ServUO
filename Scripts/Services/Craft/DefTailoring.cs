@@ -173,7 +173,9 @@ namespace Server.Engines.Craft
 
             #region Materials
 
-            AddCraft(typeof(CutUpCloth), 1044457, 1044458, 0.0, 0.0, typeof(BoltOfCloth), 1044453, 1, 1044253);
+            index = AddCraft(typeof(UncutCloth), 1044457, 1044458, 0.0, 0.0, typeof(BoltOfCloth), 1044453, 1, 1044253);
+            this.SetUseAllRes(index, true);
+            this.SetForceTypeRes(index, true);
             AddCraft(typeof(CombineCloth), 1044457, 1044459, 0.0, 0.0, typeof(Cloth), 1044455, 1, 1044253);
             
             if (Core.HS)

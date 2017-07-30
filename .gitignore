@@ -13,6 +13,7 @@
 /Scripts/bin
 /Scripts/obj
 /Scripts/Output
+/Scripts/Custom/*
 /Logs
 /Backups
 /Saves

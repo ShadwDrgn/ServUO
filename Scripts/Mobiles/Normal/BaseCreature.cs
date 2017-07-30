@@ -4215,7 +4215,7 @@ namespace Server.Mobiles
             }
 
             list = Aggressed;
-
+/*
             for (int i = 0; i < list.Count; ++i)
             {
                 AggressorInfo ai = list[i];
@@ -4234,6 +4234,7 @@ namespace Server.Mobiles
                     return;
                 }
             }
+*/
         }
 
         private static Mobile m_NoDupeGuards;

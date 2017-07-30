@@ -163,6 +163,12 @@ namespace Server.Engines.CleanUpBritannia
             Rewards.Add(new CollectionItem(typeof(NecromancersPhylactery), 0x2F5A, 1154742, 1912, 300000));
             Rewards.Add(new CollectionItem(typeof(WizardsCurio), 0x2F58, 1154743, 1912, 300000));
             Rewards.Add(new CollectionItem(typeof(MysticsMemento), 0x2F5B, 1154744, 1912, 300000));
+
+            // THIS IS CUSTOM
+            Rewards.Add(new CollectionItem(typeof(HeritageToken), 0x367A, 1076596, 0, 10000));
+            Rewards.Add(new CollectionItem(typeof(SoulstoneFragmentToken ), 0x2AAA, 1071000, 0, 20000));
+            Rewards.Add(new CollectionItem(typeof(ChargerOfTheFallen), 0x2D9C, 1074816, 0, 50000));
+            Rewards.Add(new CollectionItem(typeof(MythicCharacterToken), 0x2AAA, 1152353, 0, 250000));
         }
     }
 }

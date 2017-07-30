@@ -341,7 +341,7 @@ namespace Server.Mobiles
 
 		public DateTime LastRestock { get { return m_LastRestock; } set { m_LastRestock = value; } }
 
-		public virtual TimeSpan RestockDelay { get { return TimeSpan.FromHours(1); } }
+		public virtual TimeSpan RestockDelay { get { return TimeSpan.ParseExact(Config.Get("Vendors.RestockDelay", "00:01:00:00"), @"dd\:hh\:mm\:ss", null); } }
 
 		public Container BuyPack
 		{
