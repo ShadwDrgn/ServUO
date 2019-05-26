@@ -155,7 +155,7 @@ namespace Server.Items
         }
     }
 
-    public class BouraPelt : Item
+    public class BouraPelt : Item, ICommodity
     {
         [Constructable]
         public BouraPelt()
@@ -175,6 +175,9 @@ namespace Server.Items
             : base(serial)
         {
         }
+
+        TextDefinition ICommodity.Description { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
         public override int LabelNumber
         {
@@ -284,23 +287,24 @@ namespace Server.Items
         }
     }
 
-    public class EnchantEssence : Item
+    [TypeAlias("Server.Items.EnchantEssence")]
+    public class EnchantedEssence : Item, ICommodity
     {
         [Constructable]
-        public EnchantEssence()
+        public EnchantedEssence()
             : this(1)
         {
         }
 
         [Constructable]
-        public EnchantEssence(int amount)
+        public EnchantedEssence(int amount)
             : base(0x2DB2)
         {
             Stackable = true;
             Amount = amount;
         }
 
-        public EnchantEssence(Serial serial)
+        public EnchantedEssence(Serial serial)
             : base(serial)
         {
         }
@@ -312,6 +316,20 @@ namespace Server.Items
                 return 1031698;
             }
         }// Enchaned Essence
+		TextDefinition ICommodity.Description
+        {
+            get
+            {
+                return this.LabelNumber;
+            }
+        }
+        bool ICommodity.IsDeedable
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -382,10 +400,12 @@ namespace Server.Items
 
         [Constructable]
         public LeatherWolfSkin(int amount)
-            : base(0x3189)
+            : base(0xDF8)
         {
             Stackable = true;
             Amount = amount;
+
+            Hue = 248;
         }
 
         public LeatherWolfSkin(Serial serial)
@@ -404,7 +424,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write((int)1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -412,10 +432,16 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            if (version == 0)
+            {
+                ItemID = 0xDF8;
+                Hue = 248;
+            }
         }
     }
 
-    public class LuckyCoin : Item
+    public class LuckyCoin : Item, ICommodity
     {
         [Constructable]
         public LuckyCoin()
@@ -437,6 +463,9 @@ namespace Server.Items
             : base(serial)
         {
         }
+
+        TextDefinition ICommodity.Description { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
         public override int LabelNumber
         {
@@ -494,7 +523,7 @@ namespace Server.Items
         }
     }
 
-    public class MagicalResidue : Item
+    public class MagicalResidue : Item, ICommodity
     {
         [Constructable]
         public MagicalResidue()
@@ -522,6 +551,20 @@ namespace Server.Items
                 return 1031697;
             }
         }// Magical Residue
+		TextDefinition ICommodity.Description
+        {
+            get
+            {
+                return this.LabelNumber;
+            }
+        }
+        bool ICommodity.IsDeedable
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -576,7 +619,7 @@ namespace Server.Items
         }
     }
 
-    public class RelicFragment : Item
+    public class RelicFragment : Item, ICommodity
     {
         [Constructable]
         public RelicFragment()
@@ -604,6 +647,20 @@ namespace Server.Items
                 return 1031699;
             }
         }// Relic Fragment
+		TextDefinition ICommodity.Description
+        {
+            get
+            {
+                return this.LabelNumber;
+            }
+        }
+        bool ICommodity.IsDeedable
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -719,7 +776,7 @@ namespace Server.Items
 
         [Constructable]
         public TatteredAncientScroll(int amount)
-            : base(0x1437)
+            : base(0x1700)
         {
         }
 
@@ -759,7 +816,7 @@ namespace Server.Items
         }
     }
 
-    public class UndamagedIronBeetleScale : Item
+    public class UndamagedIronBeetleScale : Item, ICommodity
     {
         [Constructable]
         public UndamagedIronBeetleScale()
@@ -779,6 +836,9 @@ namespace Server.Items
             : base(serial)
         {
         }
+
+        TextDefinition ICommodity.Description { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
         public override int LabelNumber
         {
@@ -986,6 +1046,250 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+        }
+    }
+
+    public class BarrelOfBarley : Item
+    {
+        public override int LabelNumber { get { return 1094999; } } // Barrel of Barley
+
+        [Constructable]
+        public BarrelOfBarley()
+            : base(4014)
+        {
+            Weight = 25;
+        }
+
+        public BarrelOfBarley(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class FlintsLogbook : Item
+    {
+        public override int LabelNumber { get { return 1095000; } } // Flint's Logbook
+
+        [Constructable]
+        public FlintsLogbook()
+            : base(7185)
+        {
+        }
+
+        public FlintsLogbook(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class BottleOfFlintsPungnentBrew : BaseBeverage
+    {
+        public override int LabelNumber
+        {
+            get
+            {
+                return IsEmpty ? 1113607 : 1094967; // a bottle of Flint's Pungent Brew
+            }
+        }
+
+        [Constructable]
+        public BottleOfFlintsPungnentBrew()
+            : base(BeverageType.Ale)
+        {
+        }
+
+        public override int ComputeItemID()
+        {
+            return 0x99F;
+        }
+
+        public override int MaxQuantity { get { return 5; } }
+
+        public BottleOfFlintsPungnentBrew(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    [Flipable(6870, 6871)]
+    public class KegOfFlintsPungnentBrew : Item
+    {
+        public override int LabelNumber { get { return 1113608; } } // a keg of Flint's Pungent Brew
+
+        [Constructable]
+        public KegOfFlintsPungnentBrew()
+            : base(6870)
+        {
+            Weight = 25;
+        }
+
+        public KegOfFlintsPungnentBrew(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class FloorTrapComponent : Item
+    {
+        public override int LabelNumber { get { return 1095001; } } // Floor Trap Components
+
+        [Constructable]
+        public FloorTrapComponent()
+            : base(Utility.RandomMinMax(3117, 3120))
+        {
+        }
+
+        public FloorTrapComponent(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class DuganMissingQuestCorpse : QuestHintItem
+    {
+        public override Type QuestType { get { return typeof(Server.Engines.Quests.Missing); } }
+
+        [Constructable]
+        public DuganMissingQuestCorpse()
+            : base(1094954) // You observe the remains of four humans here.  As you observe the tragic scene, you are reminded that you promised to bring evidence to Elder Dugan of their fate.
+        {
+        }
+
+        public DuganMissingQuestCorpse(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.WriteEncodedInt(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadEncodedInt();
+        }
+    }
+
+    public class FlintLostBarrelHint : QuestHintItem
+    {
+        public override Type QuestType { get { return typeof(Server.Engines.Quests.ThievesBeAfootQuest); } }
+        public override Type QuestItemType { get { return typeof(BarrelOfBarley); } }
+        public override int DefaultRange { get { return 5; } }
+
+        [Constructable]
+        public FlintLostBarrelHint()
+            : base(1094963) // The smug smell of Barley fills this chamber.
+        {
+        }
+
+        public FlintLostBarrelHint(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.WriteEncodedInt(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadEncodedInt();
+        }
+    }
+
+    public class FlintLostLogbookHint : QuestHintItem
+    {
+        public override Type QuestType { get { return typeof(Server.Engines.Quests.BibliophileQuest); } }
+        public override Type QuestItemType { get { return typeof(FlintsLogbook); } }
+        public override int DefaultRange { get { return 5; } }
+
+        [Constructable]
+        public FlintLostLogbookHint()
+            : base(1094974) // This appears to be Flint's logbook.  It is not clear why the goblins were using it in a ritual.  Perhaps they were summoning a nefarious intention?
+        {
+        }
+
+        public FlintLostLogbookHint(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.WriteEncodedInt(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadEncodedInt();
         }
     }
 }

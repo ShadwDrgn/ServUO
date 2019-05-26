@@ -115,6 +115,12 @@ namespace Server.Engines.Quests
                 return CurProgress == -1;
             }
         }
+
+        public virtual object ObjectiveDescription
+        {
+            get { return null; }
+        }
+
         public virtual void Complete()
         {
             CurProgress = MaxProgress;
@@ -183,28 +189,44 @@ namespace Server.Engines.Quests
 
     public class SlayObjective : BaseObjective
     {
-        private Type m_Creature;
+        private Type[] m_Creatures;
         private string m_Name;
         private Region m_Region;
+
         public SlayObjective(Type creature, string name, int amount)
-            : this(creature, name, amount, null)
+            : this(new Type[] { creature }, name, amount, null, 0)
         {
         }
 
         public SlayObjective(Type creature, string name, int amount, string region)
-            : this(creature, name, amount, region, 0)
+            : this(new Type[] { creature }, name, amount, region, 0)
         {
         }
 
         public SlayObjective(Type creature, string name, int amount, int seconds)
-            : this(creature, name, amount, null, seconds)
+            : this(new Type[] { creature }, name, amount, null, seconds)
         {
         }
 
-        public SlayObjective(Type creature, string name, int amount, string region, int seconds)
+        public SlayObjective(string name, int amount, params Type[] creatures)
+            : this(creatures, name, amount, null, 0)
+        {
+        }
+
+        public SlayObjective(string name, int amount, string region, params Type[] creatures)
+            : this(creatures, name, amount, region, 0)
+        {
+        }
+
+        public SlayObjective(string name, int amount, int seconds, params Type[] creatures)
+            : this(creatures, name, amount, null, seconds)
+        {
+        }
+
+        public SlayObjective(Type[] creatures, string name, int amount, string region, int seconds)
             : base(amount, seconds)
-        { 
-            m_Creature = creature;
+        {
+            m_Creatures = creatures;
             m_Name = name;
 
             if (region != null)
@@ -216,15 +238,15 @@ namespace Server.Engines.Quests
             }
         }
 
-        public Type Creature
+        public Type[] Creatures
         { 
             get
             {
-                return m_Creature;
+                return m_Creatures;
             }
             set
             {
-                m_Creature = value;
+                m_Creatures = value;
             }
         }
         public string Name
@@ -249,6 +271,7 @@ namespace Server.Engines.Quests
                 m_Region = value;
             }
         }
+
         public virtual void OnKill(Mobile killed)
         {
             if (Completed)
@@ -259,15 +282,18 @@ namespace Server.Engines.Quests
 
         public virtual bool IsObjective(Mobile mob)
         { 
-            if (m_Creature == null)
+            if (m_Creatures == null)
                 return false;
-		
-            if (m_Creature.IsAssignableFrom(mob.GetType()))
+
+            foreach (var type in m_Creatures)
             {
-                if (m_Region != null && !m_Region.Contains(mob.Location))
-                    return false;
-					
-                return true;
+                if (type.IsAssignableFrom(mob.GetType()))
+                {
+                    if (m_Region != null && !m_Region.Contains(mob.Location))
+                        return false;
+
+                    return true;
+                }
             }
 			
             return false;
@@ -294,7 +320,7 @@ namespace Server.Engines.Quests
 
         public override Type Type()
         {
-            return m_Creature;
+            return m_Creatures != null && m_Creatures.Length > 0 ? m_Creatures[0] : null;
         }
 
         public override void Serialize(GenericWriter writer)
@@ -317,6 +343,8 @@ namespace Server.Engines.Quests
         private Type m_Obtain;
         private string m_Name;
         private int m_Image;
+        private int m_Hue;
+
         public ObtainObjective(Type obtain, string name, int amount)
             : this(obtain, name, amount, 0, 0)
         {
@@ -328,11 +356,17 @@ namespace Server.Engines.Quests
         }
 
         public ObtainObjective(Type obtain, string name, int amount, int image, int seconds)
+            : this(obtain, name, amount, image, seconds, 0)
+        {
+        }
+
+        public ObtainObjective(Type obtain, string name, int amount, int image, int seconds, int hue)
             : base(amount, seconds)
         { 
             m_Obtain = obtain;
             m_Name = name;
             m_Image = image;
+            m_Hue = hue;
         }
 
         public Type Obtain
@@ -368,6 +402,17 @@ namespace Server.Engines.Quests
                 m_Image = value;
             }
         }
+        public int Hue
+        {
+            get
+            {
+                return m_Hue;
+            }
+            set
+            {
+                m_Hue = value;
+            }
+        }
         public override bool Update(object obj)
         { 
             if (obj is Item)
@@ -382,6 +427,8 @@ namespace Server.Engines.Quests
 							
                         obtained.QuestItem = true;
                         Quest.Owner.SendLocalizedMessage(1072353); // You set the item to Quest Item status
+
+                        Quest.OnObjectiveUpdate(obtained);
                     }
                     else
                     {
@@ -601,11 +648,18 @@ namespace Server.Engines.Quests
 
     public class EscortObjective : BaseObjective
     {
-        private Region m_Region;
-        private int m_Fame;
-        private int m_Compassion;
+        public Region Region { get; set; }
+        public int Fame { get; set; }
+        public int Compassion { get; set; }
+        public int Label { get; set; }
+
         public EscortObjective(string region)
-            : this(region, 10, 200, 0)
+            : this(region, 10, 200, 0, 0)
+        {
+        }
+
+        public EscortObjective(int label, string region)
+            : this(region, 10, 200, 0, label)
         {
         }
 
@@ -615,54 +669,21 @@ namespace Server.Engines.Quests
         }
 
         public EscortObjective(string region, int fame, int compassion)
-            : this(region, fame, compassion, 0)
+            : this(region, fame, compassion, 0, 0)
         {
         }
 
-        public EscortObjective(string region, int fame, int compassion, int seconds)
+        public EscortObjective(string region, int fame, int compassion, int seconds, int label)
             : base(1, seconds)
         {
-            m_Region = QuestHelper.FindRegion(region);
-            m_Fame = fame;
-            m_Compassion = compassion;
+            Region = QuestHelper.FindRegion(region);
+            Fame = fame;
+            Compassion = compassion;
+            Label = label;
 
-            if (m_Region == null)
+            if (Region == null)
                 Console.WriteLine(String.Format("Invalid region name ('{0}') in '{1}' objective!", region, GetType()));
-        }
-
-        public Region Region
-        { 
-            get
-            {
-                return m_Region;
-            }
-            set
-            {
-                m_Region = value;
-            }
-        }
-        public int Fame
-        {
-            get
-            {
-                return m_Fame;
-            }
-            set
-            {
-                m_Fame = value;
-            }
-        }
-        public int Compassion
-        {
-            get
-            {
-                return m_Compassion;
-            }
-            set
-            {
-                m_Compassion = value;
-            }
-        }
+        }        
 
         public override void OnCompleted()
         {

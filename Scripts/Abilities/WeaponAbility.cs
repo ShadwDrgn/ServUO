@@ -109,10 +109,7 @@ namespace Server.Items
         {
             int mana = BaseMana;
 
-            double skillTotal = GetSkill(from, SkillName.Swords) + GetSkill(from, SkillName.Macing) +
-                                GetSkill(from, SkillName.Fencing) + GetSkill(from, SkillName.Archery) + GetSkill(from, SkillName.Parry) +
-                                GetSkill(from, SkillName.Lumberjacking) + GetSkill(from, SkillName.Stealth) +
-                                GetSkill(from, SkillName.Poisoning) + GetSkill(from, SkillName.Bushido) + GetSkill(from, SkillName.Ninjitsu);
+            double skillTotal = GetSkillTotal(from);
 
             if (skillTotal >= 300.0)
                 mana -= 10;
@@ -120,6 +117,7 @@ namespace Server.Items
                 mana -= 5;
 
             double scalar = 1.0;
+
             if (!Server.Spells.Necromancy.MindRotSpell.GetMindRotScalar(from, ref scalar))
             {
                 scalar = 1.0;
@@ -214,6 +212,14 @@ namespace Server.Items
             return CheckWeaponSkill(from);
         }
 
+        public virtual double GetSkillTotal(Mobile from)
+        {
+            return GetSkill(from, SkillName.Swords) + GetSkill(from, SkillName.Macing) +
+                   GetSkill(from, SkillName.Fencing) + GetSkill(from, SkillName.Archery) + GetSkill(from, SkillName.Parry) +
+                   GetSkill(from, SkillName.Lumberjacking) + GetSkill(from, SkillName.Stealth) + GetSkill(from, SkillName.Throwing) +
+                   GetSkill(from, SkillName.Poisoning) + GetSkill(from, SkillName.Bushido) + GetSkill(from, SkillName.Ninjitsu);
+        }
+
         public virtual double GetSkill(Mobile from, SkillName skillName)
         {
             Skill skill = from.Skills[skillName];
@@ -255,7 +261,7 @@ namespace Server.Items
 
         public virtual bool Validate(Mobile from)
         {
-            if (!from.Player)
+            if (!from.Player && (!Core.TOL || CheckMana(from, false)))
                 return true;
 
             NetState state = from.NetState;
@@ -281,64 +287,10 @@ namespace Server.Items
                 return false;
             }
 
-            #region Dueling
-            string option = null;
-
-            if (this is ArmorIgnore)
-                option = "Armor Ignore";
-            else if (this is BleedAttack)
-                option = "Bleed Attack";
-            else if (this is ConcussionBlow)
-                option = "Concussion Blow";
-            else if (this is CrushingBlow)
-                option = "Crushing Blow";
-            else if (this is Disarm)
-                option = "Disarm";
-            else if (this is Dismount)
-                option = "Dismount";
-            else if (this is DoubleStrike)
-                option = "Double Strike";
-            else if (this is InfectiousStrike)
-                option = "Infectious Strike";
-            else if (this is MortalStrike)
-                option = "Mortal Strike";
-            else if (this is MovingShot)
-                option = "Moving Shot";
-            else if (this is ParalyzingBlow)
-                option = "Paralyzing Blow";
-            else if (this is ShadowStrike)
-                option = "Shadow Strike";
-            else if (this is WhirlwindAttack)
-                option = "Whirlwind Attack";
-            else if (this is RidingSwipe)
-                option = "Riding Swipe";
-            else if (this is FrenziedWhirlwind)
-                option = "Frenzied Whirlwind";
-            else if (this is Block)
-                option = "Block";
-            else if (this is DefenseMastery)
-                option = "Defense Mastery";
-            else if (this is NerveStrike)
-                option = "Nerve Strike";
-            else if (this is TalonStrike)
-                option = "Talon Strike";
-            else if (this is Feint)
-                option = "Feint";
-            else if (this is DualWield)
-                option = "Dual Wield";
-            else if (this is DoubleShot)
-                option = "Double Shot";
-            else if (this is ArmorPierce)
-                option = "Armor Pierce";
-
-            if (option != null && !Engines.ConPVP.DuelContext.AllowSpecialAbility(from, option, true))
-                return false;
-            #endregion
-
             return CheckSkills(from) && CheckMana(from, false);
         }
 
-        private static readonly WeaponAbility[] m_Abilities = new WeaponAbility[33]
+        private static readonly WeaponAbility[] m_Abilities = new WeaponAbility[34]
         {
             null,
             new ArmorIgnore(),
@@ -372,7 +324,8 @@ namespace Server.Items
             new ForceOfNature(),
             new InfusedThrow(),
             new MysticArc(),
-            new Disrobe()
+            new Disrobe(),
+            new ColdWind()
         };
 
         public static WeaponAbility[] Abilities
@@ -429,6 +382,7 @@ namespace Server.Items
         public static readonly WeaponAbility MysticArc = m_Abilities[31];
 
         public static readonly WeaponAbility Disrobe = m_Abilities[32];
+        public static readonly WeaponAbility ColdWind = m_Abilities[33];
 
         public static bool IsWeaponAbility(Mobile m, WeaponAbility a)
         {

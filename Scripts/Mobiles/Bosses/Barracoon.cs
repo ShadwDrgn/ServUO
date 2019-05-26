@@ -172,6 +172,9 @@ namespace Server.Mobiles
                 return false;
             }
         }
+
+        public override bool ForceStayHome { get { return true; } }
+
         public override void GenerateLoot()
         {
             AddLoot(LootPack.UltraRich, 3);
@@ -215,11 +218,15 @@ namespace Server.Mobiles
 
             int rats = 0;
 
-            foreach (Mobile m in GetMobilesInRange(10))
+            IPooledEnumerable eable = GetMobilesInRange(10);
+
+            foreach (Mobile m in eable)
             {
                 if (m is Ratman || m is RatmanArcher || m is RatmanMage)
                     ++rats;
             }
+
+            eable.Free();
 
             if (rats < 16)
             {
@@ -275,7 +282,8 @@ namespace Server.Mobiles
         {
             if (target == null || target.Deleted) //sanity
                 return;
-            if (0.6 >= Utility.RandomDouble()) // 60% chance to polymorph attacker into a ratman
+
+            if (target.Player && 0.6 >= Utility.RandomDouble()) // 60% chance to polymorph attacker into a ratman
                 Polymorph(target);
 
             if (0.1 >= Utility.RandomDouble()) // 10% chance to more ratmen

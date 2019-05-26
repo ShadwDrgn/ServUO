@@ -88,7 +88,11 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Lute), 21, 20, 0x0EB3, 0));
 
                 if (owner != null && owner.Race == Race.Gargoyle)
+                {
+                    Add(new GenericBuyInfo(typeof(AudChar), 33, 20, 0x403B, 0));
+                    Add(new GenericBuyInfo("1080201", typeof(StatuetteEngravingTool), 1253, 20, 0x12B3, 0));
                     Add(new GenericBuyInfo(typeof(BasketWeavingBook), 10625, 20, 0xFBE, 0));
+                }
             }
         }
 

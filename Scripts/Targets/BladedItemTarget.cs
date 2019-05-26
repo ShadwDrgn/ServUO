@@ -4,6 +4,7 @@ using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Targeting;
 
 namespace Server.Targets
@@ -14,14 +15,14 @@ namespace Server.Targets
         public BladedItemTarget(Item item)
             : base(2, false, TargetFlags.None)
         {
-            this.m_Item = item;
+            m_Item = item;
         }
 
         protected override void OnTargetOutOfRange(Mobile from, object targeted)
         {
             if (targeted is UnholyBone && from.InRange(((UnholyBone)targeted), 12))
             {
-                if (((UnholyBone)targeted).Carve(from, this.m_Item) && Siege.SiegeShard)
+                if (((UnholyBone)targeted).Carve(from, m_Item) && Siege.SiegeShard)
                 {
                     Siege.CheckUsesRemaining(from, m_Item);
                 }
@@ -32,12 +33,23 @@ namespace Server.Targets
 
         protected override void OnTarget(Mobile from, object targeted)
         {
-            if (this.m_Item.Deleted)
+            if (m_Item.Deleted)
                 return;
 
             if (targeted is ICarvable)
             {
-                if (((ICarvable)targeted).Carve(from, this.m_Item) && Siege.SiegeShard)
+                if (targeted is Item)
+                {
+                    Item item = targeted as Item;
+
+                    if (item.IsLockedDown || (item.RootParent is Container && (!item.Movable || !((Container)item.RootParent).LiftOverride)))
+                    {
+                        from.SendLocalizedMessage(500494); // You can't use a bladed item on that!
+                        return;
+                    }
+                }
+
+                if (((ICarvable)targeted).Carve(from, m_Item) && Siege.SiegeShard)
                 {
                     Siege.CheckUsesRemaining(from, m_Item);
                 }
@@ -60,7 +72,12 @@ namespace Server.Targets
             }
             else
             {
-                if (targeted is StaticTarget)
+                if (targeted is Mobile)
+                {
+                    ((Mobile)targeted).PrivateOverheadMessage(MessageType.Regular, 0x3B2, 500450, from.NetState); // You can only skin dead creatures.
+                    return;
+                }
+                else if (targeted is StaticTarget)
                 {
                     int itemID = ((StaticTarget)targeted).ItemID;
 
@@ -100,7 +117,7 @@ namespace Server.Targets
                 Map map;
                 Point3D loc;
 
-                if (!system.GetHarvestDetails(from, this.m_Item, targeted, out tileID, out map, out loc))
+                if (!system.GetHarvestDetails(from, m_Item, targeted, out tileID, out map, out loc))
                 {
                     from.SendLocalizedMessage(500494); // You can't use a bladed item on that!
                 }

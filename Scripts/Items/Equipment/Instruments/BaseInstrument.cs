@@ -422,6 +422,19 @@ namespace Server.Items
                 }
             }
 
+            if (m_Slayer == SlayerName.None && m_Slayer2 == SlayerName.None)
+            {
+                SlayerEntry entry = SlayerGroup.GetEntryByName(SlayerSocket.GetSlayer(this));
+
+                if (entry != null)
+                {
+                    if (entry.Slays(targ))
+                        val -= 10.0; // 20%
+                    else if (entry.Group.OppositionSuperSlays(targ))
+                        val += 10.0; // -20%
+                }
+            }
+
             return val;
         }
 
@@ -632,9 +645,9 @@ namespace Server.Items
                 SetInstrument(from, this);
 
                 Timer.DelayCall(TimeSpan.FromMilliseconds(1000), () =>
-                    {
-                        from.EndAction(typeof(BaseInstrument));
-                    });
+                {
+                    from.EndAction(typeof(BaseInstrument));
+                });
 
                 if (CheckMusicianship(from))
                     PlayInstrumentWell(from);
@@ -666,7 +679,7 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 

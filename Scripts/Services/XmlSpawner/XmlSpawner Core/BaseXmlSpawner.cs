@@ -7456,7 +7456,7 @@ namespace Server.Mobiles
 		public static string ParseObjectType(string str)
 		{
 			string[] arglist = ParseSlashArgs(str, 2);
-			if (arglist.Length > 0)
+			if (arglist != null && arglist.Length > 0)
 			{
 				// parse out any arguments of the form typename,arg,arg,..
 				string[] typeargs = ParseCommaArgs(arglist[0], 2);
@@ -8911,11 +8911,13 @@ namespace Server.Mobiles
 										}
 										else if(invoker!=null && invoker is IEntity)
 										{
-											foreach(Mobile m in map.GetMobilesInRange(((IEntity)invoker).Location, range))
+                                            IPooledEnumerable eable = map.GetMobilesInRange(((IEntity)invoker).Location, range);
+											foreach(Mobile m in eable)
 											{
 												if(objecttype.IsAssignableFrom(m.GetType()) && CheckNameMatch(objectname, m.Name))
 													mobs.Add(m);
 											}
+                                            eable.Free();
 										}
 										for(int x = mobs.Count - 1; x>=0; --x)
 										{

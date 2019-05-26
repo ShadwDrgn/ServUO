@@ -5,16 +5,22 @@ namespace Server.Items
 { 
 	public class MasterCraftsmanTalisman : BaseTalisman
     {
+        public override bool IsArtifact { get { return true; } }
+    
+        private int _Type;
+        public virtual int Type { get { return _Type; } }
+
         [Constructable]
-        public MasterCraftsmanTalisman(int charges, int itemID, SkillName skill)
+        public MasterCraftsmanTalisman(int charges, int itemID, TalismanSkill skill)
             : base(itemID)
         {
             Skill = skill;
 
             SuccessBonus = GetRandomSuccessful();
             ExceptionalBonus = BaseTalisman.GetRandomExceptional();
-            Blessed = GetRandomBlessed();	
+            Blessed = GetRandomBlessed();
 
+            _Type = charges;
 			Charges = charges;
 		}
 
@@ -51,7 +57,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write((int)1); // version
+
+            writer.Write(_Type);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -59,6 +67,16 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 1:
+                    _Type = reader.ReadInt();
+                    break;
+                case 0:
+                    _Type = 10;
+                    break;
+            }
         }
     }
 }

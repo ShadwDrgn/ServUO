@@ -65,7 +65,7 @@ namespace Server.Mobiles
             c.DropItem( new ParrotItem() );
 
             if ( Paragon.ChestChance > Utility.RandomDouble() )
-            c.DropItem( new ParagonChest( Name, TreasureMapLevel ) );
+            c.DropItem( new ParagonChest( Name, 5 ) );
         }
 
         public override bool GivesMLMinorArtifact
@@ -81,15 +81,7 @@ namespace Server.Mobiles
             {
                 return Poison.Deadly;
             }
-        }// Becomes Lethal with Paragon bonus
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 5;
-            }
-        }
-
+        }// Becomes Lethal with Paragon bonus   
         public override void OnDamagedBySpell(Mobile attacker)
         {
             base.OnDamagedBySpell(attacker);
@@ -133,8 +125,9 @@ namespace Server.Mobiles
                 this.Animate(10, 4, 1, true, false, 0);
 
                 List<Mobile> targets = new List<Mobile>();
+                IPooledEnumerable eable = target.GetMobilesInRange(8);
 
-                foreach (Mobile m in target.GetMobilesInRange(8))
+                foreach (Mobile m in eable)
                 {
                     if (m == this || !this.CanBeHarmful(m))
                         continue;
@@ -144,6 +137,7 @@ namespace Server.Mobiles
                     else if (m.Player)
                         targets.Add(m);
                 }
+                eable.Free();
 
                 for (int i = 0; i < targets.Count; ++i)
                 {

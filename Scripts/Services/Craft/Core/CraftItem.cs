@@ -1,9 +1,3 @@
-#region Header
-// **********
-// ServUO - CraftItem.cs
-// **********
-#endregion
-
 #region References
 using System;
 using System.Collections.Generic;
@@ -33,7 +27,7 @@ namespace Server.Engines.Craft
 			Mobile from,
 			CraftSystem craftSystem,
 			Type typeRes,
-			BaseTool tool,
+            ITool tool,
 			CraftItem craftItem,
 			int resHue);
 	}
@@ -45,13 +39,13 @@ namespace Server.Engines.Craft
         /// such as resource check, actual crafting, etc. 
         /// For use for abnormal crafting, ie combine cloth, etc.
         /// </summary>
-        public Action<Mobile, CraftItem, BaseTool> TryCraft { get; set; }
+        public Action<Mobile, CraftItem, ITool> TryCraft { get; set; }
 
         /// <summary>
         /// this func will create complex items that may require args, or other
         /// things to create that Activator may not be able to accomidate.
         /// </summary>
-        public Func<Mobile, CraftItem, BaseTool, Item> CreateItem { get; set; }
+        public Func<Mobile, CraftItem, ITool, Item> CreateItem { get; set; }
 
 		private readonly CraftResCol m_arCraftRes;
 		private readonly CraftSkillCol m_arCraftSkill;
@@ -69,22 +63,21 @@ namespace Server.Engines.Craft
 		private bool m_NeedHeat;
 		private bool m_NeedOven;
 		private bool m_NeedMill;
+        private bool m_NeedMaker;
 
-		private bool m_UseSubRes2;
+        private bool m_UseSubRes2;
 
 		private bool m_ForceNonExceptional;
 
 		public bool ForceNonExceptional { get { return m_ForceNonExceptional; } set { m_ForceNonExceptional = value; } }
 
 		public Expansion RequiredExpansion { get; set; }
+        public ThemePack RequiredThemePack { get; set; }
 
-        #region SA
         public bool RequiresBasketWeaving { get; set; }
         public bool RequiresResTarget { get; set; }
         public bool RequiresMechanicalLife { get; set; }
-        #endregion
 
-        #region TOL
         private object m_Data;
         private int m_DisplayID;
 
@@ -99,7 +92,8 @@ namespace Server.Engines.Craft
             get { return m_DisplayID; }
             set { m_DisplayID = value; }
         }
-        #endregion
+
+        public int ForceSuccessChance { get; set; } = -1;
 
         public Func<Mobile, ConsumeType, int> ConsumeResCallback { get; set; }
 
@@ -258,7 +252,8 @@ namespace Server.Engines.Craft
 		public bool ForceTypeRes { get; set; }
 		public bool NeedHeat { get { return m_NeedHeat; } set { m_NeedHeat = value; } }
 		public bool NeedOven { get { return m_NeedOven; } set { m_NeedOven = value; } }
-		public bool NeedMill { get { return m_NeedMill; } set { m_NeedMill = value; } }
+        public bool NeedMaker { get { return m_NeedMaker; } set { m_NeedMaker = value; } }
+        public bool NeedMill { get { return m_NeedMill; } set { m_NeedMill = value; } }
 		public Type ItemType { get { return m_Type; } }
 		public int ItemHue { get; set; }
 		public string GroupNameString { get { return m_GroupNameString; } }
@@ -359,17 +354,23 @@ namespace Server.Engines.Craft
 			0x19AA, 0x19BB, // Veteran Reward Brazier
 			0x197A, 0x19A9, // Large Forge 
 			0x0FB1, 0x0FB1, // Small Forge
-			0x2DD8, 0x2DD8 // Elven Forge
-		};
+			0x2DD8, 0x2DD8, // Elven Forge
+            0xA2A4, 0xA2A5, 0xA2A8, 0xA2A9 // Wood Stove
+        };
 
 		private static readonly int[] m_Ovens = new[]
 		{
 			0x461, 0x46F, // Sandstone oven
 			0x92B, 0x93F, // Stone oven
-			0x2DDB, 0x2DDC //Elven stove
+			0x2DDB, 0x2DDC, //Elven stove
 		};
 
-		private static readonly int[] m_Mills = new[]
+        private static readonly int[] m_Makers = new[]
+        {
+            0x9A96, 0x9A96 // steam powered beverage maker
+        };
+
+        private static readonly int[] m_Mills = new[]
 		{
 			0x1920, 0x1921, 0x1922, 0x1923, 0x1924, 0x1295, 0x1926, 0x1928, 0x192C, 0x192D, 0x192E, 0x129F, 0x1930, 0x1931,
 			0x1932, 0x1934
@@ -394,7 +395,9 @@ namespace Server.Engines.Craft
 			new[] {typeof(Pumpkin), typeof(SmallPumpkin)}, 
             new[] {typeof(WoodenBowlOfPeas), typeof(PewterBowlOfPeas)},
             new[] { typeof( CrystallineFragments ), typeof( BrokenCrystals ), typeof( ShatteredCrystals ), typeof( ScatteredCrystals ), typeof( CrushedCrystals ), typeof( JaggedCrystals ), typeof( AncientPotteryFragments ) },
-            new[] { typeof( RedScales ), typeof( BlueScales ), typeof( BlackScales ), typeof( YellowScales ), typeof( GreenScales ), typeof( WhiteScales ), typeof( MedusaDarkScales ), typeof( MedusaLightScales ) }
+            new[] { typeof( MedusaDarkScales ), typeof( MedusaLightScales ), typeof( RedScales ), typeof( BlueScales ), typeof( BlackScales ), typeof( YellowScales ), typeof( GreenScales ), typeof( WhiteScales ) },
+            new[] { typeof(Sausage), typeof(CookableSausage) },
+            new[] { typeof(Lettuce), typeof(FarmableLettuce) }
 		};
 
 		private static readonly Type[] m_ColoredItemTable = new[]
@@ -411,6 +414,15 @@ namespace Server.Engines.Craft
             typeof(MedusaLightScales), typeof(MedusaDarkScales)
             #endregion
 		};
+
+        private static readonly Type[] m_ClothColoredItemTable = new[]
+        {
+            typeof( GozaMatSouthDeed ), typeof( GozaMatEastDeed ),
+			typeof( SquareGozaMatSouthDeed ), typeof( SquareGozaMatEastDeed ),
+			typeof( BrocadeGozaMatSouthDeed ), typeof( BrocadeGozaMatEastDeed ),
+			typeof( BrocadeSquareGozaMatSouthDeed ), typeof( BrocadeSquareGozaMatEastDeed ),
+            typeof( Tessen )
+        };
 
 		private static readonly Type[] m_ColoredResourceTable = new[]
 		{
@@ -432,16 +444,20 @@ namespace Server.Engines.Craft
 
 			typeof(BaseArmor), typeof(BaseWeapon), typeof(BaseClothing), typeof(BaseInstrument), typeof(BaseTool),
 			typeof(BaseHarvestTool), typeof(BaseQuiver), typeof(DragonBardingDeed), typeof(Fukiya), typeof(FukiyaDarts),
-			typeof(Shuriken), typeof(Spellbook), typeof(Runebook), typeof(ShortMusicStand), typeof(TallMusicStand),
-			typeof(RedHangingLantern), typeof(WhiteHangingLantern), typeof(BambooScreen), typeof(ShojiScreen), typeof(Easle),
+			typeof(Shuriken), typeof(Spellbook), typeof(Runebook), typeof(ShortMusicStandLeft), typeof(ShortMusicStandRight),
+            typeof(TallMusicStandLeft), typeof(TallMusicStandRight), typeof(EasleNorth), typeof(EasleEast), typeof(EasleSouth),
+            typeof(RedHangingLantern), typeof(WhiteHangingLantern), typeof(BambooScreen), typeof(ShojiScreen),
 			typeof(FishingPole), typeof(Stool), typeof(FootStool), typeof(WoodenBench), typeof(WoodenThrone), typeof(Throne),
 			typeof(BambooChair), typeof(WoodenChair), typeof(FancyWoodenChairCushion), typeof(WoodenChairCushion),
 			typeof(Nightstand), typeof(LargeTable), typeof(WritingTable), typeof(YewWoodTable), typeof(PlainLowTable),
-			typeof(ElegantLowTable), typeof(Dressform), typeof(BasePlayerBB), typeof(BaseContainer), typeof(BarrelStaves),
-			typeof(BarrelLid), typeof(Clippers), typeof(Scissors), typeof(BaseTool),
+			typeof(ElegantLowTable), typeof(DressformFront), typeof(DressformSide), typeof(BasePlayerBB), typeof(BarrelStaves),
+			typeof(BarrelLid), typeof(Clippers), typeof(Scissors),
 
-            typeof(KeyRing), typeof(Key), typeof(Globe), typeof(Spyglass), typeof(Lantern), typeof(Candelabra), typeof(Scales),
-            typeof(BaseUtensil), typeof(BaseBeverage)
+            typeof(KeyRing), typeof(Key), typeof(Globe), typeof(Spyglass), typeof(Lantern), typeof(Candelabra), typeof(Scales), typeof(BroadcastCrystal), typeof(TerMurStyleCandelabra),
+            typeof(BaseUtensil), typeof(BaseBeverage), 
+            
+            typeof(FruitBowl), typeof(SackFlour), typeof(Dough), typeof(SweetDough), typeof(CocoaButter), typeof(CocoaLiquor),
+            typeof(Food)
 		};
 
 		private static readonly Dictionary<Type, Type> m_ResourceConversionTable = new Dictionary<Type, Type>()
@@ -513,6 +529,19 @@ namespace Server.Engines.Craft
 
 			return (inItemTable && inResourceTable);
 		}
+
+        public bool RetainsColorFromCloth(Item item)
+        {
+            Type t = item.GetType();
+
+            foreach (var type in m_ClothColoredItemTable)
+            {
+                if (type == t)
+                    return true;
+            }
+
+            return false;
+        }
 
 		public bool Find(Mobile from, int[] itemIDs)
 		{
@@ -853,6 +882,12 @@ namespace Server.Engines.Craft
 				return false;
 			}
 
+            if (ourPack.TotalItems >= ourPack.MaxItems || ourPack.TotalWeight >= ourPack.MaxWeight)
+            {
+                message = 1048147; // Your backpack can't hold anything else.
+                return false;
+            }
+
             if (ConsumeResCallback != null)
             {
                 int resMessage = ConsumeResCallback(from, consumeType);
@@ -876,7 +911,13 @@ namespace Server.Engines.Craft
 				return false;
 			}
 
-			if (m_NeedMill && !Find(from, m_Mills))
+            if (m_NeedMaker && !Find(from, m_Makers))
+            {
+                message = 1155732; // You must be near a steam powered beverage maker to do that.
+                return false;
+            }
+
+            if (m_NeedMill && !Find(from, m_Mills))
 			{
 				message = 1044491; // You must be near a flour mill to do that.
 				return false;
@@ -888,6 +929,7 @@ namespace Server.Engines.Craft
 			maxAmount = int.MaxValue;
 
 			CraftSubResCol resCol = (m_UseSubRes2 ? craftSystem.CraftSubRes2 : craftSystem.CraftSubRes);
+            MasterCraftsmanTalisman talisman = null;
 
 			for (int i = 0; i < types.Length; ++i)
 			{
@@ -963,11 +1005,16 @@ namespace Server.Engines.Craft
 				}
 				// ****************************
 
-				if (isFailure && !craftSystem.ConsumeOnFailure(from, types[i][0], this))
+                if (isFailure && (talisman != null || !craftSystem.ConsumeOnFailure(from, types[i][0], this, ref talisman)))
 				{
 					amounts[i] = 0;
 				}
 			}
+
+            if (talisman != null)
+            {
+                talisman.Charges--;
+            }
 
 			// We adjust the amount of each resource to consume the max posible
 			if (UseAllRes)
@@ -1015,6 +1062,7 @@ namespace Server.Engines.Craft
 				m_ResHue = 0;
 				m_ResAmount = 0;
 				m_System = craftSystem;
+                m_CaddelliteCraft = true;
 
 				if (IsQuantityType(types))
 				{
@@ -1139,8 +1187,10 @@ namespace Server.Engines.Craft
 		}
 
 		private int m_ResHue;
+        private int m_ClothHue;
 		private int m_ResAmount;
 		private CraftSystem m_System;
+        private bool m_CaddelliteCraft;
 
 		#region Plant Pigments
 		private PlantHue m_PlantHue = PlantHue.None;
@@ -1165,11 +1215,21 @@ namespace Server.Engines.Craft
 				return;
 			}
 
+            if (item is Cloth || item is UncutCloth || item is AbyssalCloth)
+            {
+                m_ClothHue = item.Hue;
+            }
+
             if (amount >= m_ResAmount)
 			{
 				m_ResHue = item.Hue;
 				m_ResAmount = amount;
 			}
+
+            if (m_CaddelliteCraft && (!item.HasSocket<Caddellite>() || !Server.Engines.Points.PointsSystem.Khaldun.InSeason))
+            {
+                m_CaddelliteCraft = false;
+            }
 		}
 
 		private int CheckHueGrouping(Item a, Item b)
@@ -1190,7 +1250,7 @@ namespace Server.Engines.Craft
 			{
 				BaseTalisman talisman = (BaseTalisman)from.Talisman;
 
-				if (talisman.Skill == system.MainSkill)
+				if (talisman.CheckSkill(system))
 				{
 					bonus = talisman.ExceptionalBonus / 100.0;
 				}
@@ -1201,6 +1261,11 @@ namespace Server.Engines.Craft
             if (apron != null)
             {
                 bonus += apron.Bonus / 100.0;
+            }
+
+            if (WoodworkersBench.HasBonus(from, system.MainSkill))
+            {
+                bonus += .3;
             }
 
 			switch (system.ECA)
@@ -1260,6 +1325,11 @@ namespace Server.Engines.Craft
 		public double GetSuccessChance(
 			Mobile from, Type typeRes, CraftSystem craftSystem, bool gainSkills, ref bool allRequiredSkills)
 		{
+            if (ForceSuccessChance > -1)
+            {
+                return ((double)ForceSuccessChance / 100.0);
+            }
+
 			double minMainSkill = 0.0;
 			double maxMainSkill = 0.0;
 			double valMainSkill = 0.0;
@@ -1308,11 +1378,16 @@ namespace Server.Engines.Craft
 			{
 				BaseTalisman talisman = (BaseTalisman)from.Talisman;
 
-				if (talisman.Skill == craftSystem.MainSkill)
+				if (talisman.CheckSkill(craftSystem))
 				{
 					chance += talisman.SuccessBonus / 100.0;
 				}
 			}
+
+            if (WoodworkersBench.HasBonus(from, craftSystem.MainSkill))
+            {
+                chance += .5;
+            }
 
 			if (allRequiredSkills && valMainSkill == maxMainSkill)
 			{
@@ -1322,7 +1397,7 @@ namespace Server.Engines.Craft
 			return chance;
 		}
 
-		public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool)
+        public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool)
 		{
 			if (from.BeginAction(typeof(CraftSystem)))
 			{
@@ -1452,18 +1527,18 @@ namespace Server.Engines.Craft
 			}
 		}
 
-		public void CompleteCraft(
+        public void CompleteCraft(
 			int quality,
 			bool makersMark,
 			Mobile from,
 			CraftSystem craftSystem,
 			Type typeRes,
-			BaseTool tool,
+			ITool tool,
 			CustomCraft customCraft)
 		{
 			int badCraft = craftSystem.CanCraft(from, tool, m_Type);
 
-			if (badCraft > 0)
+            if (badCraft > 0)
 			{
 				if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
 				{
@@ -1642,6 +1717,7 @@ namespace Server.Engines.Craft
 						}
 
 						CraftResource thisResource = CraftResources.GetFromType(resourceType);
+                        Item oldItem = item;
 
 						switch (thisResource)
 						{
@@ -1667,6 +1743,11 @@ namespace Server.Engines.Craft
 								item = new Board();
 								break;
 						}
+
+                        if (item != oldItem)
+                        {
+                            oldItem.Delete();
+                        }
 					}
 					#endregion
 
@@ -1674,6 +1755,9 @@ namespace Server.Engines.Craft
                     if (Core.HS && item is MapItem)
                         ((MapItem)item).Facet = from.Map;
                     #endregion
+
+                    CraftContext context = craftSystem.GetContext(from);
+                    int originalHue = item.Hue;
 
 					if (item is ICraftable)
 					{
@@ -1687,6 +1771,17 @@ namespace Server.Engines.Craft
 					{
 						item.Hue = resHue;
 					}
+
+                    if (item.Hue == 0 && RetainsColorFromCloth(item) && m_ClothHue != 0)
+                    {
+                        item.Hue = m_ClothHue;
+                    }
+
+                    // This takes into account for natural hues, ie plant hues
+                    if (item.Hue != originalHue && context.DoNotColor)
+                    {
+                        item.Hue = originalHue;
+                    }
 
 					if (maxAmount > 0)
 					{
@@ -1713,8 +1808,6 @@ namespace Server.Engines.Craft
                         ((IPigmentHue)item).PigmentHue = m_PlantPigmentHue;
                     }
 
-                    CraftContext context = craftSystem.GetContext(from);
-
                     if (context.QuestOption == CraftQuestOption.QuestItem)
                     {
                         PlayerMobile px = from as PlayerMobile;
@@ -1730,9 +1823,14 @@ namespace Server.Engines.Craft
                     m_PlantPigmentHue = PlantPigmentHue.None;
 					#endregion
 
-                    if (tool.Parent is Container)
+                    if (m_CaddelliteCraft)
                     {
-                        Container cntnr = (Container)tool.Parent;
+                        Caddellite.TryInfuse(from, item, craftSystem);
+                    }
+
+                    if (tool is Item && ((Item)tool).Parent is Container)
+                    {
+                        Container cntnr = (Container)((Item)tool).Parent;
 
                         if (!cntnr.TryDropItem(from, item, false))
                         {
@@ -1747,16 +1845,13 @@ namespace Server.Engines.Craft
                         from.AddToBackpack(item);
                     }
 
-					EventSink.InvokeCraftSuccess(new CraftSuccessEventArgs(from, item, tool));
+                    EventSink.InvokeCraftSuccess(new CraftSuccessEventArgs(from, item, tool is Item ? (Item)tool : null));
 
 					if (from.IsStaff())
 					{
 						CommandLogging.WriteLine(
 							from, "Crafting {0} with craft system {1}", CommandLogging.Format(item), craftSystem.GetType().Name);
 					}
-
-                    AutoCraftTimer.OnSuccessfulCraft(from);
-					//from.PlaySound( 0x57 );
 				}
 
                 tool.UsesRemaining--;
@@ -1914,11 +2009,11 @@ namespace Server.Engines.Craft
 			private readonly CraftItem m_CraftItem;
 			private readonly CraftSystem m_CraftSystem;
 			private readonly Type m_TypeRes;
-			private readonly BaseTool m_Tool;
+			private readonly ITool m_Tool;
             private bool m_AutoCraft;
 
 			public InternalTimer(
-				Mobile from, CraftSystem craftSystem, CraftItem craftItem, Type typeRes, BaseTool tool, int iCountMax)
+				Mobile from, CraftSystem craftSystem, CraftItem craftItem, Type typeRes, ITool tool, int iCountMax)
 				: base(TimeSpan.Zero, TimeSpan.FromSeconds(craftSystem.Delay), iCountMax)
 			{
 				m_From = from;
@@ -2091,9 +2186,9 @@ namespace Server.Engines.Craft
             private CraftItem m_CraftItem;
             private CraftSystem m_CraftSystem;
             private Type m_TypeRes;
-            private BaseTool m_Tool;
+            private ITool m_Tool;
 
-            public ChooseResTarget(Mobile from, CraftItem craftitem, CraftSystem craftSystem, Type typeRes, BaseTool tool)
+            public ChooseResTarget(Mobile from, CraftItem craftitem, CraftSystem craftSystem, Type typeRes, ITool tool)
                 : base(-1, false, Server.Targeting.TargetFlags.None)
             {
                 m_CraftItem = craftitem;

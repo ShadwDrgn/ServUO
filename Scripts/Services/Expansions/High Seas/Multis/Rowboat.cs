@@ -1,4 +1,7 @@
-﻿using System;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
 using Server;
 using Server.Items;
 using Server.Engines.PartySystem;
@@ -59,6 +62,32 @@ namespace Server.Multis
             m_Rudder.Handle = new RudderHandle(m_Rudder, d);
         }
 
+        public override void OnAfterPlacement(bool initial)
+        {
+            if (Owner != null)
+            {
+                foreach (var rowBoat in BaseBoat.Boats.OfType<RowBoat>().Where(rb => rb.Owner == Owner && rb != this && rb.Map != Map.Internal))
+                {
+                    BaseDockedBoat boat = rowBoat.BoatItem;
+
+                    if (boat == null || boat.Deleted)
+                        boat = rowBoat.DockedBoat;
+
+                    if (boat == null)
+                    {
+                        rowBoat.Delete();
+                        return;
+                    }
+
+                    boat.BoatItem = rowBoat;
+                    Owner.AddToBackpack(boat);
+
+                    rowBoat.Refresh();
+                    rowBoat.Internalize();
+                }
+            }
+        }
+
         public override TimeSpan GetMovementInterval(bool fast, bool drifting, out int clientSpeed)
         {
             clientSpeed = 0x2;
@@ -98,6 +127,32 @@ namespace Server.Multis
                 m_Rudder.Handle.Location = new Point3D(X + (m_Rudder.Handle.X - old.X), Y + (m_Rudder.Handle.Y - old.Y), Z + (m_Rudder.Handle.Z - old.Z));
         }
 
+        /// <summary>
+        /// This must be overriden due to the tillerman not being in the MCL bounds
+        /// </summary>
+        /// <returns></returns>
+        public override IEnumerable<IEntity> GetEntitiesOnBoard()
+        {
+            Map map = Map;
+
+            if (map == null || map == Map.Internal)
+                yield break;
+
+            MultiComponentList mcl = Components;
+            IPooledEnumerable eable = map.GetObjectsInBounds(new Rectangle2D(X + mcl.Min.X, Y + mcl.Min.Y, mcl.Width, mcl.Height));
+
+            foreach (IEntity ent in eable)
+            {
+                if (Contains(ent) && CheckOnBoard(ent))
+                {
+                    yield return ent;
+                }
+            }
+
+            eable.Free();
+            yield return m_Rudder;
+        }
+
         public override void OnMapChange()
         {
             base.OnMapChange();
@@ -133,7 +188,7 @@ namespace Server.Multis
 
         public override bool IsComponentItem(IEntity item)
         {
-            return item == this || item == m_Line || item == m_Rudder || item is RudderHandle;
+            return item == this || item == m_Line || item == m_Rudder || (m_Rudder != null && item == m_Rudder.Handle);
         }
 
         public override bool HasAccess(Mobile from)
@@ -179,6 +234,8 @@ namespace Server.Multis
 
     public class Rudder : TillerMan
     {
+        public override bool Babbles { get { return false; } }
+
         private RudderHandle m_Handle;
 
         [CommandProperty(AccessLevel.GameMaster)]

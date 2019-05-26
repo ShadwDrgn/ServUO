@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace Server.Engines.MyrmidexInvasion
 {
-    public class BattleRegion : StygianAbyssRegion
+    public class BattleRegion : DungeonRegion
 	{
         public BattleSpawner Spawner { get; set; }
 
@@ -55,7 +55,7 @@ namespace Server.Engines.MyrmidexInvasion
         {
             Mobile attacker = m.FindMostRecentDamager(false);
 
-            if (MyrmidexInvasionSystem.IsEnemies(m, attacker) && EodonianPotion.IsUnderEffects(attacker, PotionEffect.Kurak))
+            if (MyrmidexInvasionSystem.AreEnemies(m, attacker) && EodonianPotion.IsUnderEffects(attacker, PotionEffect.Kurak))
             {
                 Damage *= 3;
 

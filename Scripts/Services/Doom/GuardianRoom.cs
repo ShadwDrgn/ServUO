@@ -51,7 +51,7 @@ namespace Server.Engines.Doom
 		{
 			base.OnLocationChanged( m, oldLocation );
 			
-			if(!Active && CanActivate && m is PlayerMobile && m.AccessLevel == AccessLevel.Player)
+			if(!Active && CanActivate && m is PlayerMobile && m.AccessLevel == AccessLevel.Player && m.Alive)
 			{
 				for(int x = m.X - 3; x <= m.X + 3; x++)
 				{
@@ -67,42 +67,53 @@ namespace Server.Engines.Doom
 				}
 			}
 		}
+
+        public bool CheckReset()
+        {
+            if (GetPlayerCount() == 0 || Guardians == null || Guardians.Count == 0 || !Guardians.Any(x => !x.Deleted))
+            {
+                Reset();
+                return true;
+            }
+
+            return false;
+        }
 		
 		public override void OnDeath( Mobile m )
 		{
-			if(Guardians != null)
+			if(Guardians != null && m is DarkGuardian && Guardians.Contains((DarkGuardian)m))
 			{
-				if(m is DarkGuardian && Guardians.Contains((DarkGuardian)m))
-					Guardians.Remove((DarkGuardian)m);
-
-                if (Guardians.Count == 0)
-                {
-                    Reset();
-                    Guardians.Clear();
-                    Guardians.TrimExcess();
-                }
+		        Guardians.Remove((DarkGuardian)m);
 			}
 			
-			if(m is PlayerMobile)
+			if(m is PlayerMobile && Active)
 			{
-                Timer.DelayCall(TimeSpan.FromSeconds(1), () => 
-                { 
-                    BaseCreature.TeleportPets(m, KickLoc, Map.Malas); 
-                    m.MoveToWorld(KickLoc, Map.Malas);
-
-                    if (m.Corpse != null)
-                        m.Corpse.MoveToWorld(KickLoc, Map.Malas);
-
-                    if (this.GetEnumeratedMobiles().FirstOrDefault(mob => mob is PlayerMobile && mob.Alive) == null)
-                    {
-                        Reset();
-                    }
-                });
+                Timer.DelayCall<PlayerMobile>(TimeSpan.FromSeconds(3), MoveDeadPlayer, (PlayerMobile)m);
 			}
 		}
+
+        public void MoveDeadPlayer(PlayerMobile pm)
+        {
+            if (pm.Region == this)
+            {
+                BaseCreature.TeleportPets(pm, KickLoc, Map.Malas);
+                pm.MoveToWorld(KickLoc, Map.Malas);
+
+                if (pm.Corpse != null)
+                    pm.Corpse.MoveToWorld(KickLoc, Map.Malas);
+            }
+
+            if (!GetEnumeratedMobiles().Any(mob => mob is PlayerMobile && mob.Alive))
+            {
+                Reset();
+            }
+        }
 		
 		public void Activate(Mobile m)
 		{
+            if (Active)
+                return;
+
             CheckDoors();
 
             DoorOne.Open = false;
@@ -116,7 +127,17 @@ namespace Server.Engines.Doom
             if (Guardians == null)
                 Guardians = new List<DarkGuardian>();
 
-            int count = MobileCount() * 2;
+            int count = 0;
+            foreach (var mob in this.GetEnumeratedMobiles().Where(mob => mob is PlayerMobile || (mob is BaseCreature && ((BaseCreature)mob).GetMaster() != null && !mob.IsDeadBondedPet)))
+            {
+                if (mob.NetState != null)
+                    mob.SendLocalizedMessage(1050000, "", 365); // The locks on the door click loudly and you begin to hear a faint hissing near the walls.
+
+                if(mob.Alive)
+                    count++;
+            }
+
+            count = Math.Max(1, count * 2);
 
 			for(int i = 0; i < count; i++)
 			{
@@ -142,13 +163,11 @@ namespace Server.Engines.Doom
 			m_Timer.Start();
 		}
 
-        private int MobileCount()
-        {
-            return this.GetEnumeratedMobiles().Where(m => m is PlayerMobile || (m is BaseCreature && ((BaseCreature)m).GetMaster() != null)).Count();
-        }
-
 		public void Reset()
 		{
+            if (!Active)
+                return;
+
             if (m_Timer != null)
             {
                 m_Timer.Stop();
@@ -159,7 +178,7 @@ namespace Server.Engines.Doom
 			DoorTwo.Locked = false;
 
             Active = false;
-			NextActivate = DateTime.UtcNow + TimeSpan.FromMinutes(3);
+			NextActivate = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(15, 60));
 		}
 		
 		public void CheckDoors()
@@ -238,37 +257,37 @@ namespace Server.Engines.Doom
 		private class InternalTimer : Timer
 		{
 			public DoomGuardianRegion Region { get; private set; }
-			
-			public InternalTimer(DoomGuardianRegion reg) : base(TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3))
+            public DateTime NextGas { get; private set; }
+
+            public InternalTimer(DoomGuardianRegion reg)
+                : base(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(500))
 			{
 				Region = reg;
+                NextGas = DateTime.UtcNow + TimeSpan.FromSeconds(3);
 			}
 			
 			protected override void OnTick()
 			{
-				for(int i = 0; i < Utility.RandomMinMax(5, 12); i++)
-				{
-					Point3D p = Region.RandomSpawnLocation(0, true, false, Point3D.Zero, 0);
-					Effects.SendLocationEffect( p, Map.Malas, Utility.RandomList(0x113C, 0x1147, 0x11A8) - 2, 16, 3, 0, 0 );
-				}
-
-                List<Mobile> list = Region.GetEnumeratedMobiles().Where(mob => mob is PlayerMobile && mob.Alive).ToList();
-
-                if (list.Count == 0)
+                if (Region.CheckReset())
                 {
                     Region.Reset();
                 }
-                else
+                else if (NextGas < DateTime.UtcNow)
                 {
-                    foreach (var m in list.Where(m => m.AccessLevel == AccessLevel.Player && m.Poison == null))
+                    for (int i = 0; i < Utility.RandomMinMax(5, 12); i++)
+                    {
+                        Point3D p = Region.RandomSpawnLocation(0, true, false, Point3D.Zero, 0);
+                        Effects.SendLocationEffect(p, Map.Malas, Utility.RandomList(0x113C, 0x1147, 0x11A8) - 2, 16, 3, 0, 0);
+                    }
+
+                    foreach (var m in Region.GetEnumeratedMobiles().Where(m => m is PlayerMobile && m.Alive && m.AccessLevel == AccessLevel.Player && m.Poison == null))
                     {
                         m.ApplyPoison(m, Poison.Deadly);
                         m.SendSound(0x231);
                     }
-                }
 
-				list.Clear();
-                list.TrimExcess();
+                    NextGas = DateTime.UtcNow + TimeSpan.FromSeconds(3);
+                }
 			}
 		}
 	}

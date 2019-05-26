@@ -34,21 +34,6 @@ namespace Server.Misc
             {
                 Server.Engines.Help.PageQueue.Pages_OnCalled(m);
             }
-
-            if (args.Mobile.NetState == null)
-            {
-                return;
-            }
-
-            foreach (var quester in World.Mobiles.Values.OfType<MondainQuester>())
-            {
-                string name = quester.Name;
-
-                if (quester.Title != null)
-                    name += " " + quester.Title;
-
-                args.Mobile.NetState.Send(new DisplayWaypoint(quester.Serial, quester.X, quester.Y, quester.Z, quester.Map.MapID, WaypointType.QuestGiver, name));
-            }
         }
     }
 }

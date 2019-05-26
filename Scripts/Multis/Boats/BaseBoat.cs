@@ -166,34 +166,36 @@ namespace Server.Multis
             }
         }
 
-        public int Status
+        public virtual int Status
         {
             get
             {
                 if (!m_Decay)
                     return 1043010; // This structure is like new.
 
-                if(m_DecayTime <= DateTime.UtcNow)
+                if (m_DecayTime <= DateTime.UtcNow)
                     return 1043015; // This structure is in danger of collapsing.
 
                 TimeSpan decaySpan = m_DecayTime - DateTime.UtcNow;
+                int percentWorn = 1000 - (int)((decaySpan.Ticks * 1000) / BoatDecayDelay.Ticks);
 
-                if(decaySpan > TimeSpan.FromDays(6.0))
-                    return 1043010; // This structure is like new.
+                if (percentWorn >= 923) // 92.3% worn
+                    return 1043015; // This structure is in danger of collapsing
 
-                if(decaySpan > TimeSpan.FromDays(5.0))
-                    return 1043011; // This structure is slightly worn.
+                if (percentWorn >= 711) // 71.1% worn
+                    return 1043014; // This structure is greatly worn.
 
-                if(decaySpan > TimeSpan.FromDays(4.0))
-                    return 1043012; // This structure is somewhat worn.
-
-                if(decaySpan > TimeSpan.FromDays(3.0))
+                if (percentWorn >= 500) // 50.0% worn
                     return 1043013; // This structure is fairly worn.
 
-                 if(decaySpan > TimeSpan.FromDays(1.5))
-                     return 1043014; // This structure is greatly worn.
+                if (percentWorn >= 289) // 28.9% worn
+                    return 1043012; // This structure is somewhat worn.
 
-                 return 1043015; // This structure is in danger of collapsing.*/
+                if (percentWorn >= 77) // 7.7% worn
+                    return 1043011; // This structure is slightly worn.
+
+                // else 
+                return 1043010; // This structure is like new.
             }
         }
 
@@ -212,13 +214,13 @@ namespace Server.Multis
         public virtual bool IsClassicBoat { get { return true; } }
         public virtual double TurnDelay { get { return 0.5; } }
         public virtual bool Scuttled { get { return false; } }
-        public virtual TimeSpan BoatDecayDelay { get { return TimeSpan.FromDays(9); } }
+        public virtual TimeSpan BoatDecayDelay { get { return TimeSpan.FromDays(13); } }
         public virtual bool CanLinkToLighthouse { get { return true; } }
 
         #region IMount Members
         public Mobile Rider { get { return m_Pilot; } set { m_Pilot = value; } }
 
-        public void OnRiderDamaged(int amount, Mobile from, bool willKill)
+        public void OnRiderDamaged(Mobile from, ref int amount, bool willKill)
         {
         }
         #endregion
@@ -243,7 +245,6 @@ namespace Server.Multis
             Facing = direction;
             Layer = Layer.Mount;
             m_Anchored = false;
-            m_VirtualMount = new BoatMountItem(this);
 
             if (isClassic)
             {
@@ -295,7 +296,7 @@ namespace Server.Multis
 
             if (m_TillerMan != null)
             {
-                if (m_TillerMan is Item)
+                if (m_TillerMan is TillerMan)
                 {
                     TillerMan tillerman = (TillerMan)m_TillerMan;
                     tillerman.Location = new Point3D(X + (xOffset * TillerManDistance) + (m_Facing == Direction.North ? 1 : 0), Y + (yOffset * TillerManDistance), tillerman.Z);
@@ -435,9 +436,6 @@ namespace Server.Multis
             }
 
             m_Instances.Add(this);
-
-            if (m_VirtualMount == null)
-                m_VirtualMount = new BoatMountItem(this);
 
             if (version == 6)
             {
@@ -607,7 +605,9 @@ namespace Server.Multis
 
         public virtual bool IsOwner(Mobile from)
         {
-            if (from.AccessLevel > AccessLevel.Player || (from != null && from == m_Owner))
+            if (from == null)
+                return false;
+            if (from.AccessLevel > AccessLevel.Player || from == m_Owner)
                 return true;
 
             if (m_Owner == null)
@@ -746,7 +746,7 @@ namespace Server.Multis
             if (from.AccessLevel < AccessLevel.GameMaster && from != m_Owner)
             {
                 if (m_TillerMan != null)
-                    TillerManSay(Utility.Random(1042876, 4)); // Arr, don't do that! | Arr, leave me alone! | Arr, watch what thour'rt doing, matey! | Arr! Do that again and I’ll throw ye overhead!
+                    TillerManSay(Utility.Random(1042876, 4)); // Arr, don't do that! | Arr, leave me alone! | Arr, watch what thour'rt doing, matey! | Arr! Do that again and Iâ€™ll throw ye overhead!
 
                 return;
             }
@@ -1471,6 +1471,9 @@ namespace Server.Multis
                 {
                     Item item = e as Item;
 
+                    if ((item is BaseAddon || item is AddonComponent) && CheckAddon(item))
+                        continue;
+
                     // Special item, we're good
                     if (CheckItem(itemID, item, p) || CanMoveOver(item) || item.Z < p.Z || ExemptOverheadComponent(p, itemID, item.X, item.Y, item.Z + item.ItemData.Height))
                         continue;
@@ -1496,13 +1499,36 @@ namespace Server.Multis
             return true;
         }
 
+        public virtual bool CheckAddon(Item item)
+        {
+            return false;
+        }
+
         public virtual bool CheckItem(int itemID, Item item, Point3D p)
         {
-            return Contains(item) || item is BaseMulti || item.ItemID > TileData.MaxItemValue || !item.Visible || item is Corpse || IsComponentItem((IEntity)item) || item is EffectItem;
+            return Contains(item) ||
+                item is BaseMulti ||
+                item.ItemID > TileData.MaxItemValue ||
+                !item.Visible ||
+                item is Corpse ||
+                IsComponentItem((IEntity)item) ||
+                item is EffectItem;
         }
 
         public virtual bool CanMoveOver(IEntity entity)
         {
+            if (entity is Corpse)
+            {
+                var corpse = (Corpse)entity;
+
+                if (corpse.Owner == null || corpse.Owner is BaseCreature)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
             return entity is Blood;
         }
 
@@ -1517,6 +1543,10 @@ namespace Server.Multis
         }
 
         public virtual void OnPlacement(Mobile from)
+        {
+        }
+
+        public virtual void OnAfterPlacement(bool initial)
         {
         }
 
@@ -1563,6 +1593,19 @@ namespace Server.Multis
                 return true;
 
             return false;
+        }
+
+        public static bool HasBoat(Mobile from)
+        {
+            if (from.AccessLevel > AccessLevel.Player)
+                return false;
+
+            return Boats.Any(boat => boat.Owner == from && !boat.Deleted && boat.Map != Map.Internal && !(boat is RowBoat));
+        }
+
+        public static BaseBoat GetBoat(Mobile from)
+        {
+            return Boats.FirstOrDefault(boat => boat.Owner == from && !boat.Deleted && boat.Map != Map.Internal && !(boat is RowBoat));
         }
 
         public static bool IsValidLocation(Point3D p, Map map)
@@ -1784,7 +1827,9 @@ namespace Server.Multis
                 NoMoveHS = true;
 
                 foreach (var e in toMove)
+                {
                     e.NoMoveHS = true;
+                }
 
                 // packet created
                 MoveBoatHS smooth = new MoveBoatHS(this, d, clientSpeed, xOffset, yOffset);
@@ -1830,7 +1875,7 @@ namespace Server.Multis
         {
             foreach (var ent in GetEntitiesOnBoard().Where(e => !IsComponentItem(e) && !CanMoveOver(e) && e != m_TillerMan))
             {
-                ent.Location = new Point3D(ent.X + xOffset, ent.Y + yOffset, ent.Z);
+                ent.Location = new Point3D(ent.X + xOffset, ent.Y + yOffset, ent.Z + zOffset);
             }
 
             Location = new Point3D(X + xOffset, Y + yOffset, Z + zOffset);
@@ -1893,7 +1938,7 @@ namespace Server.Multis
                     if (CanMoveOver(item))
                         continue;
 
-                    if (item != this && Contains(item) && item.Visible && item.Z >= Z && !(item is TillerMan || item is Hold || item is Plank || item is BaseAddon || item is RudderHandle))
+                    if (item != this && Contains(item) && item.Visible && item.Z >= Z && !(item is TillerMan || item is Hold || item is Plank || item is RudderHandle))
                         toMove.Add(o);
                 }
                 else if (o is Mobile && Contains((Mobile)o))
@@ -2027,6 +2072,9 @@ namespace Server.Multis
         {
             m_Pilot = pilot;
 
+            if (m_VirtualMount == null || m_VirtualMount.Deleted)
+                m_VirtualMount = new BoatMountItem(this);
+
             pilot.AddItem(m_VirtualMount);
             pilot.Direction = m_Facing;
             pilot.Delta(MobileDelta.Direction | MobileDelta.Properties);
@@ -2056,23 +2104,7 @@ namespace Server.Multis
 
         public static bool IsDriving(Mobile from)
         {
-            foreach (BaseBoat boat in m_Instances)
-            {
-                if (boat.Pilot == from)
-                    return true;
-            }
-
-            return false;
-        }
-
-        public static BaseBoat GetPiloting(Mobile from)
-        {
-            BaseBoat boat = FindBoatAt(from, from.Map);
-
-            if (boat != null && boat.Pilot == from)
-                return boat;
-
-            return null;
+            return m_Instances.Any(b => b.Pilot == from);
         }
 
         public virtual void OnMousePilotCommand(Mobile from, Direction d, int rawSpeed)
@@ -2093,18 +2125,32 @@ namespace Server.Multis
 
         public static void EventSink_Disconnected(DisconnectedEventArgs e)
         {
-            BaseBoat boat = GetPiloting(e.Mobile);
-
-            if (boat != null)
-                boat.RemovePilot(e.Mobile);
+            ForceRemovePilot(e.Mobile);
         }
 
         public static void EventSink_PlayerDeath(PlayerDeathEventArgs e)
         {
-            BaseBoat boat = GetPiloting(e.Mobile);
+            ForceRemovePilot(e.Mobile);
+        }
 
-            if (boat != null)
-                boat.RemovePilot(e.Mobile);
+        public static void ForceRemovePilot(Mobile m)
+        {
+            var mountItem = m.FindItemOnLayer(Layer.Mount) as BoatMountItem;
+
+            if (mountItem != null)
+            {
+                BaseBoat boat = mountItem.Mount as BaseBoat;
+
+                if (boat != null)
+                {
+                    boat.RemovePilot(m);
+                }
+                else
+                {
+                    m.RemoveItem(mountItem);
+                    mountItem.Delete();
+                }
+            }
         }
 
         public void SendMessageToAllOnBoard(object message)
@@ -2149,7 +2195,7 @@ namespace Server.Multis
             return false;
         }
 
-        public IEnumerable<IEntity> GetEntitiesOnBoard()
+        public virtual IEnumerable<IEntity> GetEntitiesOnBoard()
         {
             Map map = Map;
 
@@ -2161,7 +2207,7 @@ namespace Server.Multis
 
             foreach (IEntity ent in eable)
             {
-                if (Contains(ent))
+                if (Contains(ent) && CheckOnBoard(ent))
                 {
                     yield return ent;
                 }
@@ -2182,12 +2228,15 @@ namespace Server.Multis
 
         public int PlayerCount()
         {
-            int count = 0;
+            return GetMobilesOnBoard().Where(m => m is PlayerMobile).Count();
+        }
 
-            foreach (var m in GetMobilesOnBoard())
-                count++;
+        protected virtual bool CheckOnBoard(IEntity e)
+        {
+            if (e is Item && ((Item)e).IsVirtualItem)
+                return false;
 
-            return count;
+            return true;
         }
 
         public void TillerManSay(object message)
@@ -2382,6 +2431,8 @@ namespace Server.Multis
 
                 state.Send(GetPacketContainer(GetEntitiesOnBoard()));
             }
+
+            eable.Free();
         }
 
         public sealed class MoveBoatHS : Packet

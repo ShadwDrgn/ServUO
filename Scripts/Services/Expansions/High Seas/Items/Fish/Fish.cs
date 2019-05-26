@@ -5,7 +5,7 @@ namespace Server.Items
 {
     public class BaseHighseasFish : Item, ICarvable, ICommodity
     {
-        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        TextDefinition ICommodity.Description { get { return LabelNumber; } }
         bool ICommodity.IsDeedable { get { return true; } }
 
         public virtual Item GetCarved { get { return new RawFishSteak(); } }
@@ -25,10 +25,18 @@ namespace Server.Items
 
             Item newItem = GetCarved;
 
+            if (newItem == null)
+            {
+                newItem = new RawFishSteak();
+            }
+
+            if (newItem != null && HasSocket<Caddellite>())
+            {
+                newItem.AttachSocket(new Caddellite());
+            }
+
             if (newItem != null)
                 base.ScissorHelper(from, newItem, GetCarvedAmount);
-            else
-                base.ScissorHelper(from, new RawFishSteak(), 2);
 
             return true;
         }

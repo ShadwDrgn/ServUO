@@ -18,14 +18,6 @@ namespace Server.Gumps
         public double Points { get; protected set; }
         public List<CollectionItem> Collection { get; protected set; }
 
-        public virtual int YDist 
-        { 
-            get 
-            {
-                return 10;
-            }
-        }
-
         public BaseRewardGump(Mobile owner, PlayerMobile user, List<CollectionItem> col, int title, double points = -1.0)
             : base(50, 50)
 		{
@@ -69,6 +61,11 @@ namespace Server.Gumps
             while (Collection != null && Index < Collection.Count)
                 DisplayRewardPage();
 		}
+
+        public virtual int GetYOffset(int id)
+        {
+            return 10;
+        }
 
         protected virtual void AddPoints()
         {
@@ -114,8 +111,8 @@ namespace Server.Gumps
                     AddTooltip(item.Tooltip);
 
                 AddLabel(65 + max, offset + (int)(height / 2) - 10, Points >= item.Points ? 0x64 : 0x21, item.Points.ToString());
-				
-                offset += YDist + height;
+
+                offset += GetYOffset(item.ItemID) + height;
                 Index++;
 
                 if (Index < Collection.Count)
@@ -175,11 +172,17 @@ namespace Server.Gumps
                 }
                 else
                 {
+                    OnItemCreated(item);
+
                     User.SendLocalizedMessage(1073621); // Your reward has been placed in your backpack.
                     RemovePoints(citem.Points);
-                    User.PlaySound(0x5A7);
+                    User.PlaySound(0x5A8);
                 }
             }
+        }
+
+        public virtual void OnItemCreated(Item item)
+        {
         }
 
         public virtual int GetItemHue(Item i, CollectionItem item)

@@ -11,9 +11,9 @@ namespace Server.Engines.Craft
         private Mobile m_From;
         private CraftSystem m_CraftSystem;
         private CraftItem m_CraftItem;
-        private BaseTool m_Tool;
+        private ITool m_Tool;
 
-        public MakeNumberCraftPrompt(Mobile from, CraftSystem system, CraftItem item, BaseTool tool)
+        public MakeNumberCraftPrompt(Mobile from, CraftSystem system, CraftItem item, ITool tool)
         {
             m_From = from;
             m_CraftSystem = system;
@@ -39,7 +39,7 @@ namespace Server.Engines.Craft
             else
             {
                 AutoCraftTimer.EndTimer(from);
-                new AutoCraftTimer(m_From, m_CraftSystem, m_CraftItem, m_Tool, amount, TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 0.5), TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 0.5));
+                new AutoCraftTimer(m_From, m_CraftSystem, m_CraftItem, m_Tool, amount, TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 1.0), TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 1.0));
 
                 CraftContext context = m_CraftSystem.GetContext(from);
 
@@ -62,16 +62,16 @@ namespace Server.Engines.Craft
         private Mobile m_From;
         private CraftSystem m_CraftSystem;
         private CraftItem m_CraftItem;
-        private BaseTool m_Tool;
+        private ITool m_Tool;
         private int m_Amount;
-        private int m_Success;
+        private int m_Attempts;
         private int m_Ticks;
         private Type m_TypeRes;
 
         public int Amount { get { return m_Amount; } }
-        public int Attempts { get { return m_Success; } }
+        public int Attempts { get { return m_Attempts; } }
 
-        public AutoCraftTimer(Mobile from, CraftSystem system, CraftItem item, BaseTool tool, int amount, TimeSpan delay, TimeSpan interval)
+        public AutoCraftTimer(Mobile from, CraftSystem system, CraftItem item, ITool tool, int amount, TimeSpan delay, TimeSpan interval)
             : base(delay, interval)
         {
             m_From = from;
@@ -80,7 +80,7 @@ namespace Server.Engines.Craft
             m_Tool = tool;
             m_Amount = amount;
             m_Ticks = 0;
-            m_Success = 0;
+            m_Attempts = 0;
 
             CraftContext context = m_CraftSystem.GetContext(m_From);
 
@@ -98,7 +98,8 @@ namespace Server.Engines.Craft
             this.Start();
         }
 
-        public AutoCraftTimer(Mobile from, CraftSystem system, CraftItem item, BaseTool tool, int amount) : this(from,system,item,tool,amount,TimeSpan.FromSeconds(2.5), TimeSpan.FromSeconds(2.5))
+        public AutoCraftTimer(Mobile from, CraftSystem system, CraftItem item, ITool tool, int amount)
+            : this(from, system, item, tool, amount, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3))
         {
         }
 
@@ -126,7 +127,16 @@ namespace Server.Engines.Craft
             if (m_From.HasGump(typeof(CraftGumpItem)))
                 m_From.CloseGump(typeof(CraftGumpItem));
 
-            m_CraftSystem.CreateItem(m_From, m_CraftItem.ItemType, m_TypeRes, m_Tool, m_CraftItem);
+            m_Attempts++;
+
+            if (m_CraftItem.TryCraft != null)
+            {
+                m_CraftItem.TryCraft(m_From, m_CraftItem, m_Tool);
+            }
+            else
+            {
+                m_CraftSystem.CreateItem(m_From, m_CraftItem.ItemType, m_TypeRes, m_Tool, m_CraftItem);
+            }
         }
 
         public static void EndTimer(Mobile from)
@@ -136,12 +146,6 @@ namespace Server.Engines.Craft
                 m_AutoCraftTable[from].Stop();
                 m_AutoCraftTable.Remove(from);
             }
-        }
-
-        public static void OnSuccessfulCraft(Mobile from)
-        {
-            if (HasTimer(from))
-                m_AutoCraftTable[from].m_Success++;
         }
 
         public static bool HasTimer(Mobile from)

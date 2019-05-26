@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Regions;
-using System.Linq;
+using Server.Services.Virtues;
 using Server.Spells.Necromancy;
 
 namespace Server.Engines.CannedEvil
@@ -42,6 +44,11 @@ namespace Server.Engines.CannedEvil
         private bool m_ConfinedRoaming;
 
         private Dictionary<Mobile, int> m_DamageEntries;
+
+        public List<Mobile> Creatures
+        {
+            get { return m_Creatures; }
+        }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public string GroupName { get; set; }
@@ -302,6 +309,9 @@ namespace Server.Engines.CannedEvil
             }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int StartLevel { get; private set; }
+
         private void RemoveSkulls()
         {
             if (m_WhiteSkulls != null)
@@ -359,7 +369,7 @@ namespace Server.Engines.CannedEvil
             }
         }
 
-        public void Start()
+        public void Start(bool serverLoad = false)
         {
             if (m_Active || Deleted)
                 return;
@@ -379,30 +389,31 @@ namespace Server.Engines.CannedEvil
             m_RestartTimer = null;
 
             if (m_Altar != null)
-            {
-                if (m_Champion != null)
-                    m_Altar.Hue = 0x26;
-                else
-                    m_Altar.Hue = 0;
-            }
-
-            if (m_Platform != null)
-                m_Platform.Hue = 0x452;
+                m_Altar.Hue = 0;
 
             PrimevalLichPuzzle.Update(this);
 
-            double chance = Utility.RandomDouble();
+            if (!serverLoad)
+            {
+                double chance = Utility.RandomDouble();
 
-            if (chance < 0.1)
-                Level = 4;
-            else if (chance < 0.25)
-                Level = 3;
-            else if (chance < 0.5)
-                Level = 2;
-            else if (Utility.RandomBool())
-                Level = 1;
-            else
-                Level = 0;
+                if (chance < 0.1)
+                    Level = 4;
+                else if (chance < 0.25)
+                    Level = 3;
+                else if (chance < 0.5)
+                    Level = 2;
+                else if (Utility.RandomBool())
+                    Level = 1;
+
+                StartLevel = Level;
+
+                if (Level > 0 && m_Altar != null)
+                {
+                    Effects.PlaySound(m_Altar.Location, m_Altar.Map, 0x29);
+                    Effects.SendLocationEffect(new Point3D(m_Altar.X + 1, m_Altar.Y + 1, m_Altar.Z), m_Altar.Map, 0x3728, 10);
+                }
+            }
         }
 
         public void Stop()
@@ -433,10 +444,7 @@ namespace Server.Engines.CannedEvil
             m_RestartTimer = null;
 
             if (m_Altar != null)
-                m_Altar.Hue = 0;
-
-            if (m_Platform != null)
-                m_Platform.Hue = 0x497;
+                m_Altar.Hue = 0x455;
 
             PrimevalLichPuzzle.Update(this);
 
@@ -480,14 +488,14 @@ namespace Server.Engines.CannedEvil
         }
 
         #region Scroll of Transcendence
-        private ScrollofTranscendence CreateRandomSoT(bool felucca)
+        private ScrollOfTranscendence CreateRandomSoT(bool felucca)
         {
             int level = Utility.RandomMinMax(1, 5);
 			
             if (felucca)
                 level += 5;
 
-            return ScrollofTranscendence.CreateRandom(level, level);
+            return ScrollOfTranscendence.CreateRandom(level, level);
         }
 
         #endregion
@@ -497,7 +505,7 @@ namespace Server.Engines.CannedEvil
             if (scroll == null || killer == null)	//sanity
                 return;
 
-            if (scroll is ScrollofTranscendence)
+            if (scroll is ScrollOfTranscendence)
                 killer.SendLocalizedMessage(1094936); // You have received a Scroll of Transcendence!
             else
                 killer.SendLocalizedMessage(1049524); // You have received a scroll of power!
@@ -578,12 +586,9 @@ namespace Server.Engines.CannedEvil
 
                     m_DamageEntries.Clear();
 
-                    if (m_Platform != null)
-                        m_Platform.Hue = 0x497;
-
                     if (m_Altar != null)
                     {
-                        m_Altar.Hue = 0;
+                        m_Altar.Hue = 0x455;
 
                         if (!Core.ML || Map == Map.Felucca)
                         {
@@ -643,7 +648,7 @@ namespace Server.Engines.CannedEvil
 
                                         if (Utility.RandomDouble() < ChampionSystem.TranscendenceChance)
                                         {
-                                            ScrollofTranscendence SoTF = CreateRandomSoT(true);
+                                            ScrollOfTranscendence SoTF = CreateRandomSoT(true);
                                             GiveScrollTo(pm, (SpecialScroll)SoTF);
                                         }
                                         else
@@ -659,7 +664,7 @@ namespace Server.Engines.CannedEvil
                                     if (Utility.RandomDouble() < 0.0015)
                                     {
                                         killer.SendLocalizedMessage(1094936); // You have received a Scroll of Transcendence!
-                                        ScrollofTranscendence SoTT = CreateRandomSoT(false);
+                                        ScrollOfTranscendence SoTT = CreateRandomSoT(false);
                                         killer.AddToBackpack(SoTT);
                                     }
                                 }
@@ -756,14 +761,9 @@ namespace Server.Engines.CannedEvil
 
         public void SpawnChampion()
         {
-            if (m_Altar != null)
-                m_Altar.Hue = 0x26;
-
-            if (m_Platform != null)
-                m_Platform.Hue = 0x452;
-
             m_Kills = 0;
             Level = 0;
+            StartLevel = 0;
             InvalidateProperties();
             SetWhiteSkullCount(0);
 
@@ -776,7 +776,17 @@ namespace Server.Engines.CannedEvil
             }
 
             if (m_Champion != null)
-                m_Champion.MoveToWorld(new Point3D(X, Y, Z - 15), Map);
+            {
+                Point3D p = new Point3D(X, Y, Z - 15);
+
+                m_Champion.MoveToWorld(p, Map);
+                ((BaseCreature)m_Champion).Home = p;
+
+                if (m_Champion is BaseChampion)
+                {
+                    ((BaseChampion)m_Champion).OnChampPopped(this);
+                }
+            }
         }
 
         public void Respawn()
@@ -946,7 +956,7 @@ namespace Server.Engines.CannedEvil
             if (m_WhiteSkulls.Count == 0)
             {
                 // They didn't even get 20%, go back a level
-                if (Level > 0)
+                if (Level > StartLevel)
                     --Level;
 
                 InvalidateProperties();
@@ -1245,7 +1255,9 @@ namespace Server.Engines.CannedEvil
         {
             base.Serialize(writer);
 
-            writer.Write((int)7); // version
+            writer.Write((int)8); // version
+
+            writer.Write(StartLevel);
 
 			writer.Write(KillsMod);
 			writer.Write(GroupName);
@@ -1300,6 +1312,9 @@ namespace Server.Engines.CannedEvil
 
             switch( version )
             {
+                case 8:
+                    StartLevel = reader.ReadInt();
+                    goto case 7;
 				case 7:
 					KillsMod = reader.ReadDouble();
 					GroupName = reader.ReadString();
@@ -1393,7 +1408,7 @@ namespace Server.Engines.CannedEvil
                         if (m_Platform == null || m_Altar == null || m_Idol == null)
                             Delete();
                         else if (active)
-                            Start();
+                            Start(true);
 
                         break;
                     }
@@ -1516,6 +1531,7 @@ namespace Server.Engines.CannedEvil
         public static void Initialize()
         {
             EventSink.Logout += OnLogout;
+            EventSink.Login += OnLogin;
         }
 
         public override bool YoungProtected
@@ -1555,7 +1571,7 @@ namespace Server.Engines.CannedEvil
 
         public override bool OnMoveInto(Mobile m, Direction d, Point3D newLocation, Point3D oldLocation)
         {
-            if (m is PlayerMobile && !m.Alive && (m.Corpse == null || m.Corpse.Deleted))
+            if (m is PlayerMobile && !m.Alive && (m.Corpse == null || m.Corpse.Deleted) && Map == Map.Felucca)
             {
                 return false;
             }
@@ -1567,7 +1583,7 @@ namespace Server.Engines.CannedEvil
         {
             Mobile m = e.Mobile;
 
-            if (m is PlayerMobile && m.Region.IsPartOf<ChampionSpawnRegion>() && m.AccessLevel == AccessLevel.Player)
+            if (m is PlayerMobile && m.Region.IsPartOf<ChampionSpawnRegion>() && m.AccessLevel == AccessLevel.Player && m.Map == Map.Felucca)
             {
                 if (m.Alive && m.Backpack != null)
                 {
@@ -1605,7 +1621,7 @@ namespace Server.Engines.CannedEvil
         {
             Mobile m = e.Mobile;
 
-            if (m is PlayerMobile && !m.Alive && (m.Corpse == null || m.Corpse.Deleted) && m.Region.IsPartOf<ChampionSpawnRegion>())
+            if (m is PlayerMobile && !m.Alive && (m.Corpse == null || m.Corpse.Deleted) && m.Region.IsPartOf<ChampionSpawnRegion>() && m.Map == Map.Felucca)
             {
                 Map map = m.Map;
                 Point3D loc = ExorcismSpell.GetNearestShrine(m, ref map);

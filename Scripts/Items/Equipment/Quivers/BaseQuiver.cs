@@ -6,8 +6,13 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
+    public interface IRangeDamage
+    {
+        void AlterRangedDamage(ref int phys, ref int fire, ref int cold, ref int pois, ref int nrgy, ref int chaos, ref int direct);
+    }
+
     [Alterable(typeof(DefTailoring), typeof(GargishLeatherWingArmor), true)]
-    public class BaseQuiver : Container, ICraftable, ISetItem, IVvVItem, IOwnerRestricted
+    public class BaseQuiver : Container, ICraftable, ISetItem, IVvVItem, IOwnerRestricted, IRangeDamage, IArtifact
     {
         private bool _VvVItem;
         private Mobile _Owner;
@@ -72,6 +77,8 @@ namespace Server.Items
                 return base.DisplayWeight;
             }
         }
+
+        public virtual int ArtifactRarity { get { return 0; } }
 
         private AosAttributes m_Attributes;
         private AosSkillBonuses m_AosSkillBonuses;
@@ -257,16 +264,40 @@ namespace Server.Items
         {
         }
 
+        public override bool DisplaysContent { get { return false; } }
+
         public override void OnAfterDuped(Item newItem)
         {
-            BaseQuiver quiver = newItem as BaseQuiver;
+            var quiver = newItem as BaseQuiver;
 
-            if (quiver == null)
-                return;
+            if (quiver != null)
+            {
+                quiver.m_Attributes = new AosAttributes(newItem, m_Attributes);
+                quiver.m_AosSkillBonuses = new AosSkillBonuses(newItem, m_AosSkillBonuses);
+                quiver.m_Resistances = new AosElementAttributes(newItem, m_Resistances);
+                quiver.m_SetAttributes = new AosAttributes(newItem, m_SetAttributes);
+                quiver.m_SetSkillBonuses = new AosSkillBonuses(newItem, m_SetSkillBonuses);
+            }
 
-            quiver.m_Attributes = new AosAttributes(newItem, m_Attributes);
-            quiver.m_AosSkillBonuses = new AosSkillBonuses(newItem, m_AosSkillBonuses);
-            quiver.m_Resistances = new AosElementAttributes(newItem, m_Resistances);
+            var wing = newItem as GargishLeatherWingArmor;
+
+            if (wing != null)
+            {
+                int phys, fire, cold, pois, nrgy, chaos, direct;
+                phys = fire = cold = pois = nrgy = chaos = direct = 0;
+
+                AlterRangedDamage(ref phys, ref fire, ref cold, ref pois, ref nrgy, ref chaos, ref direct);
+
+                wing.AosElementDamages.Physical = phys;
+                wing.AosElementDamages.Fire = fire;
+                wing.AosElementDamages.Cold = cold;
+                wing.AosElementDamages.Poison = pois;
+                wing.AosElementDamages.Energy = nrgy;
+                wing.AosElementDamages.Chaos = chaos;
+                wing.AosElementDamages.Direct = direct;
+            }
+
+            base.OnAfterDuped(newItem);
         }
 
         public override void UpdateTotal(Item sender, TotalType type, int delta)
@@ -315,6 +346,9 @@ namespace Server.Items
 
         public override bool CheckHold(Mobile m, Item item, bool message, bool checkItems, int plusItems, int plusWeight)
         {
+            if (!Movable)
+                return false;
+
             if (!CheckType(item))
             {
                 if (message)
@@ -324,26 +358,45 @@ namespace Server.Items
             }
 
             Item ammo = Ammo;
+
             if(ammo != null && ammo.Amount > 0)
             {
                 if (IsArrowAmmo && item is Bolt)
                     return false;
+
                 if (!IsArrowAmmo && item is Arrow)
                     return false;
             }
 
-            if (Items.Count < DefaultMaxItems)
+            if (!checkItems || Items.Count < DefaultMaxItems)
             {
-                if (item.Amount <= m_Capacity)
-                    return base.CheckHold(m, item, message, checkItems, plusItems, plusWeight);
+                int currentAmount = 0;
 
+                Items.ForEach(i => currentAmount += i.Amount);
+
+                if (item.Amount + currentAmount <= m_Capacity)
+                    return base.CheckHold(m, item, message, checkItems, plusItems, plusWeight);
+            }
+
+            return false;
+        }
+
+        public override bool CheckStack(Mobile from, Item item)
+        {
+            if (!CheckType(item))
+            {
                 return false;
             }
-            else if (checkItems)
-                return false;
 
-            if (ammo == null || ammo.Deleted)
-                return false;
+            Item ammo = Ammo;
+
+            if (ammo != null)
+            {
+                int currentAmount = Items.Sum(i => i.Amount);
+
+                if (item.Amount + currentAmount <= m_Capacity)
+                    return base.CheckStack(from, item);
+            }
 
             return false;
         }
@@ -515,6 +568,12 @@ namespace Server.Items
             else
                 list.Add(1075265, "{0}\t{1}", 0, Capacity); // Ammo: ~1_QUANTITY~/~2_CAPACITY~ arrows
 
+
+            if (ArtifactRarity > 0)
+            {
+                list.Add(1061078, ArtifactRarity.ToString()); // artifact rarity ~1_val~
+            }
+
             int prop;
 
             if ((prop = m_DamageIncrease) != 0)
@@ -523,7 +582,7 @@ namespace Server.Items
             int phys, fire, cold, pois, nrgy, chaos, direct;
             phys = fire = cold = pois = nrgy = chaos = direct = 0;
 
-            AlterBowDamage(ref phys, ref fire, ref cold, ref pois, ref nrgy, ref chaos, ref direct);
+            AlterRangedDamage(ref phys, ref fire, ref cold, ref pois, ref nrgy, ref chaos, ref direct);
 
             if (phys != 0)
                 list.Add(1060403, phys.ToString()); // physical damage ~1_val~%
@@ -927,6 +986,11 @@ namespace Server.Items
         {
         }
 
+        public virtual void AlterRangedDamage(ref int phys, ref int fire, ref int cold, ref int pois, ref int nrgy, ref int chaos, ref int direct)
+        {
+            AlterBowDamage(ref phys, ref fire, ref cold, ref pois, ref nrgy, ref chaos, ref direct);
+        }
+
         public void InvalidateWeight()
         {
             if (RootParent is Mobile)
@@ -938,7 +1002,7 @@ namespace Server.Items
         }
 		
         #region ICraftable
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 

@@ -22,10 +22,9 @@ namespace Server.Engines.Craft
         private bool m_Repair;
         private bool m_MarkOption;
         private bool m_CanEnhance;
-        #region SA
+
         private bool m_QuestOption;
 		private bool m_CanAlter;
-        #endregion
 
         private readonly CraftItemCol m_CraftItems;
         private readonly CraftGroupCol m_CraftGroups;
@@ -153,6 +152,22 @@ namespace Server.Engines.Craft
                 c.OnMade(item);
         }
 
+        public void OnRepair(Mobile m, ITool tool, Item deed, Item addon, IEntity e)
+        {
+            Item source;
+
+            if (tool is Item)
+            {
+                source = (Item)tool;
+            }
+            else
+            {
+                source = deed ?? addon;
+            }
+
+            EventSink.InvokeRepairItem(new RepairItemEventArgs(m, source, e));
+        }
+
         public bool Resmelt
         {
             get
@@ -201,7 +216,6 @@ namespace Server.Engines.Craft
             }
         }
 		
-        #region SA
         public bool QuestOption
         {
             get
@@ -225,7 +239,6 @@ namespace Server.Engines.Craft
                 m_CanAlter = value;
             }
         }
-        #endregion
 
         public CraftSystem(int minCraftEffect, int maxCraftEffect, double delay)
         {
@@ -252,29 +265,31 @@ namespace Server.Engines.Craft
 
         public virtual bool ConsumeOnFailure(Mobile from, Type resourceType, CraftItem craftItem)
         {
-		    Item item = from.FindItemOnLayer(Layer.Talisman);
-
-			if (item is MasterCraftsmanTalisman)
-			{
-				MasterCraftsmanTalisman mct = (MasterCraftsmanTalisman)item;
-				
-				if( mct.Charges > 0 )
-				{
-					mct.Charges--;
-
-                    if (mct.Charges <= 0)
-                    {
-                        mct.Delete();
-                        from.SendLocalizedMessage(1157211); // Your talisman has been destroyed.
-                    }
-
-					return false;
-				}
-			}
             return true;
         }
 
-        public void CreateItem(Mobile from, Type type, Type typeRes, BaseTool tool, CraftItem realCraftItem)
+        public virtual bool ConsumeOnFailure(Mobile from, Type resourceType, CraftItem craftItem, ref MasterCraftsmanTalisman talisman)
+        {
+            if (!ConsumeOnFailure(from, resourceType, craftItem))
+                return false;
+
+            Item item = from.FindItemOnLayer(Layer.Talisman);
+
+            if (item is MasterCraftsmanTalisman)
+            {
+                MasterCraftsmanTalisman mct = (MasterCraftsmanTalisman)item;
+
+                if (mct.Charges > 0)
+                {
+                    talisman = mct;
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void CreateItem(Mobile from, Type type, Type typeRes, ITool tool, CraftItem realCraftItem)
         { 
             // Verify if the type is in the list of the craftable item
             CraftItem craftItem = m_CraftItems.SearchFor(type);
@@ -376,6 +391,12 @@ namespace Server.Engines.Craft
             craftItem.NeedOven = needOven;
         }
 
+        public void SetNeedMaker(int index, bool needMaker)
+        {
+            CraftItem craftItem = m_CraftItems.GetAt(index);
+            craftItem.NeedMaker = needMaker;
+        }
+
         public void SetBeverageType(int index, BeverageType requiredBeverage)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
@@ -388,13 +409,12 @@ namespace Server.Engines.Craft
             craftItem.NeedMill = needMill;
         }
 
-        public void SetNeededExpansion(int index, Expansion expansion)
+        public void SetNeededThemePack(int index, ThemePack pack)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
-            craftItem.RequiredExpansion = expansion;
+            craftItem.RequiredThemePack = pack;
         }
 
-        #region SA
         public void SetRequiresBasketWeaving(int index)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
@@ -412,9 +432,7 @@ namespace Server.Engines.Craft
             CraftItem craftItem = m_CraftItems.GetAt(index);
             craftItem.RequiresMechanicalLife = true;
         }
-        #endregion
 
-        #region TOL
         public void SetData(int index, object data)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
@@ -426,7 +444,12 @@ namespace Server.Engines.Craft
             CraftItem craftItem = m_CraftItems.GetAt(index);
             craftItem.DisplayID = id;
         }
-        #endregion
+
+        public void SetForceSuccess(int index, int success)
+        {
+            CraftItem craftItem = m_CraftItems.GetAt(index);
+            craftItem.ForceSuccessChance = success;
+        }
 
         public void AddRes(int index, Type type, TextDefinition name, int amount)
         {
@@ -475,13 +498,13 @@ namespace Server.Engines.Craft
             craftItem.MinSkillOffset = skillOffset;
         }
 
-        public void AddCraftAction(int index, Action<Mobile, CraftItem, BaseTool> action)
+        public void AddCraftAction(int index, Action<Mobile, CraftItem, ITool> action)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
             craftItem.TryCraft = action;
         }
 
-        public void AddCreateItem(int index, Func<Mobile, CraftItem, BaseTool, Item> func)
+        public void AddCreateItem(int index, Func<Mobile, CraftItem, ITool, Item> func)
         {
             CraftItem craftItem = m_CraftItems.GetAt(index);
             craftItem.CreateItem = func;
@@ -557,6 +580,6 @@ namespace Server.Engines.Craft
 
         public abstract int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item);
 
-        public abstract int CanCraft(Mobile from, BaseTool tool, Type itemType);
+        public abstract int CanCraft(Mobile from, ITool tool, Type itemType);
     }
 }

@@ -21,7 +21,7 @@ namespace Server.Items
         {
             get
             {
-                return 20;
+                return Core.TOL ? 25 : 20;
             }
         }
         public override bool Validate(Mobile from)
@@ -46,7 +46,7 @@ namespace Server.Items
             if (defender is ChaosDragoon || defender is ChaosDragoonElite)
                 return;
 
-            if ((attacker.Mounted || attacker.Flying) && (!(attacker.Weapon is Lance) && !(defender.Weapon is Lance) && !(attacker.Weapon is GargishLance) && !(defender.Weapon is GargishLance))) // TODO: Should there be a message here?
+            if (CheckMountedNoLance(attacker, defender)) // TODO: Should there be a message here?
                 return;
 
             ClearCurrentAbility(attacker);
@@ -69,10 +69,22 @@ namespace Server.Items
                 return; //Lesser Hiryu have an 80% chance of missing this attack
             }
 
-            attacker.SendLocalizedMessage(1060082); // The force of your attack has dislodged them from their mount!
-
             defender.PlaySound(0x140);
             defender.FixedParticles(0x3728, 10, 15, 9955, EffectLayer.Waist);
+
+            int delay = Core.TOL && attacker.Weapon is BaseRanged ? 8 : 10;
+
+            DoDismount(attacker, defender, mount, delay);
+
+            if (!attacker.Mounted)
+            {
+                AOS.Damage(defender, attacker, Utility.RandomMinMax(15, 25), 100, 0, 0, 0, 0);
+            }
+        }
+
+        public static void DoDismount(Mobile attacker, Mobile defender, IMount mount, int delay, BlockMountType type = BlockMountType.Dazed)
+        {
+            attacker.SendLocalizedMessage(1060082); // The force of your attack has dislodged them from their mount!
 
             if (defender is PlayerMobile)
             {
@@ -89,7 +101,7 @@ namespace Server.Items
                     defender.SendLocalizedMessage(1060083); // You fall off of your mount and take damage!
                 }
 
-                ((PlayerMobile)defender).SetMountBlock(BlockMountType.Dazed, TimeSpan.FromSeconds(10), true);
+                ((PlayerMobile)defender).SetMountBlock(type, TimeSpan.FromSeconds(delay), true);
             }
             else if (mount != null)
             {
@@ -98,7 +110,7 @@ namespace Server.Items
 
             if (attacker is PlayerMobile)
             {
-                ((PlayerMobile)attacker).SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(10), false);
+                ((PlayerMobile)attacker).SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(Core.TOL && attacker.Weapon is BaseRanged ? 8 : 10), false);
             }
             else if (Core.ML && attacker is BaseCreature)
             {
@@ -108,14 +120,22 @@ namespace Server.Items
                 {
                     PlayerMobile pm = bc.ControlMaster as PlayerMobile;
 
-                    pm.SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(10), false);
+                    pm.SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(delay), false);
                 }
             }
+        }
 
-            if (!attacker.Mounted)
+        private bool CheckMountedNoLance(Mobile attacker, Mobile defender)
+        {
+            if (!attacker.Mounted && !attacker.Flying)
+                return false;
+
+            if ((attacker.Weapon is Lance || attacker.Weapon is GargishLance) && (defender.Weapon is Lance || defender.Weapon is GargishLance))
             {
-                AOS.Damage(defender, attacker, Utility.RandomMinMax(15, 25), 100, 0, 0, 0, 0);
+                return false;
             }
+
+            return true;
         }
     }
 }

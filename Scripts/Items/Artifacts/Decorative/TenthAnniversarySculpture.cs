@@ -2,6 +2,7 @@ using System;
 using Server.Mobiles;
 using System.Collections.Generic;
 using Server.Accounting;
+using Server.Engines.VeteranRewards;
 
 namespace Server.Items
 {
@@ -17,8 +18,7 @@ namespace Server.Items
         private static List<TenthAnniversarySculpture> m_sculptures = new List<TenthAnniversarySculpture>();
 
         private static Timer m_Timer;
-
-        private static readonly int MinLuckBonus = 200;
+        
         private static readonly int MaxLuckBonus = 1000;
 
         [Constructable]
@@ -123,7 +123,7 @@ namespace Server.Items
 
                 if(account != null)
                 {
-                    return (int)Math.Max(MinLuckBonus, Math.Min(MaxLuckBonus, ((DateTime.UtcNow - account.Created).TotalDays / 365) * 50));
+                    return (int)Math.Min(MaxLuckBonus, 200 + (RewardSystem.GetRewardLevel(account)) * 50);
                 }
             }
 

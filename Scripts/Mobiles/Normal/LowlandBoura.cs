@@ -7,13 +7,7 @@ namespace Server.Mobiles
     [CorpseName("a boura corpse")]
     public class LowlandBoura : BaseCreature, ICarvable
     {
-        public static Type[] VArtifacts =
-        {
-            typeof (BouraTailShield)
-        };
-
         private bool GatheredFur { get; set; }
-        private bool m_Stunning;
 
         [Constructable]
         public LowlandBoura() : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
@@ -47,7 +41,7 @@ namespace Server.Mobiles
             MinTameSkill = 19.1;
 
             Fame = 5000;
-            Karma = 5000; //Lose Karma for killing
+            Karma = -3500;
 
             VirtualArmor = 16;
         }
@@ -56,39 +50,20 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get { return 10; }
-        }
-
-        public override int Hides
-        {
-            get { return 20; }
-        }
-
+        public override int Meat { get { return 10; } }
+        public override int Hides { get { return 20; } }
         public override int DragonBlood { get { return 8; } }
         public override bool DoesColossalBlow { get { return true; } }
-
-        public override HideType HideType
-        {
-            get { return HideType.Horned; }
-        }
-
-        public override FoodType FavoriteFood
-        {
-            get { return FoodType.FruitsAndVegies | FoodType.GrainsAndHay; }
-        }
-
-        public override int Wool
-        {
-            get { return (Body == 0x2CB ? 3 : 0); }
-        }
+        public override HideType HideType { get { return HideType.Horned; } }
+        public override FoodType FavoriteFood { get { return FoodType.FruitsAndVegies; } }
+        public override int Fur { get { return GatheredFur ? 0 : 30; } }
+        public override FurType FurType { get { return FurType.Green; } }
 
         public bool Carve(Mobile from, Item item)
         {
             if (!GatheredFur)
             {
-                var fur = new BouraFur(30);
+                var fur = new Fur(FurType, Fur);
 
                 if (from.Backpack == null || !from.Backpack.TryDropItem(from, fur, false))
                 {
@@ -104,21 +79,11 @@ namespace Server.Mobiles
                 }
             }
             else
-                from.SendLocalizedMessage(1112354); // The boura glares at you and will not let you shear its fur.
+            {
+                PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1112354, from.NetState); // The boura glares at you and will not let you shear its fur.
+            }
 
             return false;
-        }
-
-        public override void OnCarve(Mobile from, Corpse corpse, Item with)
-        {
-            base.OnCarve(from, corpse, with);
-
-            if (!GatheredFur)
-            {
-                from.SendLocalizedMessage(1112765); // You shear it, and the fur is now on the corpse.
-                corpse.AddCarvedItem(new BouraFur(15), from);
-                GatheredFur = true;
-            }
         }
 
         public override int GetIdleSound()
@@ -144,7 +109,11 @@ namespace Server.Mobiles
         public override void OnDeath(Container c)
         {
             base.OnDeath(c);
+            
+            if (Controlled)
+                return;
 
+            if (!Controlled)
             c.DropItem(new BouraSkin());
         }
 

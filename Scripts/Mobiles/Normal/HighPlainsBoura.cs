@@ -7,13 +7,7 @@ namespace Server.Mobiles
     [CorpseName("a boura corpse")]
     public class HighPlainsBoura : BaseCreature, ICarvable
     {
-        public static Type[] VArtifacts =
-        {
-            typeof (BouraTailShield)
-        };
-
         private bool GatheredFur { get; set; }
-        private bool m_Stunning;
 
         [Constructable]
         public HighPlainsBoura()
@@ -48,9 +42,11 @@ namespace Server.Mobiles
             MinTameSkill = 47.1;
 
             Fame = 5000;
-            Karma = 5000; //Lose Karma for killing
+            Karma = -5000; 
 
             VirtualArmor = 16;
+
+            SetSpecialAbility(SpecialAbility.TailSwipe);
         }
 
         public HighPlainsBoura(Serial serial) : base(serial)
@@ -75,16 +71,16 @@ namespace Server.Mobiles
             get { return HideType.Horned; }
         }
 
-        public override FoodType FavoriteFood
-        {
-            get { return FoodType.FruitsAndVegies | FoodType.GrainsAndHay; }
-        }
+        public override FoodType FavoriteFood { get { return FoodType.FruitsAndVegies; } }
+
+        public override int Fur { get { return GatheredFur ? 0 : 30; } }
+        public override FurType FurType { get { return FurType.Yellow; } }
 
         public bool Carve(Mobile from, Item item)
         {
             if (!GatheredFur)
             {
-                var fur = new BouraFur(30);
+                var fur = new Fur(FurType, Fur);
 
                 if (from.Backpack == null || !from.Backpack.TryDropItem(from, fur, false))
                 {
@@ -100,21 +96,11 @@ namespace Server.Mobiles
                 }
             }
             else
-                from.SendLocalizedMessage(1112354); // The boura glares at you and will not let you shear its fur.
+            {
+                PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1112354, from.NetState); // The boura glares at you and will not let you shear its fur.
+            }
 
             return false;
-        }
-
-        public override void OnCarve(Mobile from, Corpse corpse, Item with)
-        {
-            base.OnCarve(from, corpse, with);
-
-            if (!GatheredFur)
-            {
-                from.SendLocalizedMessage(1112765); // You shear it, and the fur is now on the corpse.
-                corpse.AddCarvedItem(new BouraFur(15), from);
-                GatheredFur = true;
-            }
         }
 
         public override int GetIdleSound()
@@ -141,29 +127,15 @@ namespace Server.Mobiles
         {
             base.OnDeath(c);
 
-            c.DropItem(new BouraSkin());
-
-            if (c != null && !c.Deleted && c is Corpse)
+            if (!Controlled)
             {
-                var corpse = (Corpse) c;
+                c.DropItem(new BouraSkin());
 
-                if (Utility.RandomDouble() < 0.01 && corpse.Killer != null && !corpse.Killer.Deleted)
+                if (Utility.RandomDouble() <= 0.005)
                 {
-                    GiveVArtifactTo(corpse.Killer);
+                    c.DropItem(new BouraTailShield());
                 }
             }
-        }
-
-        public static void GiveVArtifactTo(Mobile m)
-        {
-            var item = (Item) Activator.CreateInstance(VArtifacts[Utility.Random(VArtifacts.Length)]);
-			m.PlaySound(0x5B4);
-
-            if (m.AddToBackpack(item))
-                m.SendLocalizedMessage(1062317);
-                    // For your valor in combating the fallen beast, a special artifact has been bestowed on you.
-            else
-                m.SendMessage("As your backpack is full, your reward has been placed at your feet.");
         }
 
         public override void Serialize(GenericWriter writer)

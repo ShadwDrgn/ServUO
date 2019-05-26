@@ -3,19 +3,18 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    public class ScrappersCompendium : Spellbook, ITokunoDyable
+    public class ScrappersCompendium : Spellbook
 	{
 		public override bool IsArtifact { get { return true; } }
         [Constructable]
         public ScrappersCompendium()
             : base()
         {
-            this.Hue = 0x494;
-			
-            this.Attributes.SpellDamage = 25;
-            this.Attributes.LowerManaCost = 10;
-            this.Attributes.CastSpeed = 1;
-            this.Attributes.CastRecovery = 1;
+            Hue = 0x494;			
+            Attributes.SpellDamage = 25;
+            Attributes.LowerManaCost = 10;
+            Attributes.CastSpeed = 1;
+            Attributes.CastRecovery = 1;
         }
 
         public ScrappersCompendium(Serial serial)
@@ -44,7 +43,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public override int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             double magery = from.Skills.Magery.Value - 100;
 			

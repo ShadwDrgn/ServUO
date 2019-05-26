@@ -1,9 +1,3 @@
-#region Header
-// **********
-// ServUO - Loot.cs
-// **********
-#endregion
-
 #region References
 using System;
 
@@ -92,7 +86,7 @@ namespace Server
         private static readonly Type[] m_AosWeaponTypes = new[]
 		{
 			typeof(Scythe), typeof(BoneHarvester), typeof(Scepter), typeof(BladedStaff), typeof(Pike), typeof(DoubleBladedStaff),
-			typeof(Lance), typeof(CrescentBlade)
+			typeof(Lance), typeof(CrescentBlade), typeof(SmithyHammer), typeof(SledgeHammerWeapon)
 		};
 
         public static Type[] AosWeaponTypes { get { return m_AosWeaponTypes; } }

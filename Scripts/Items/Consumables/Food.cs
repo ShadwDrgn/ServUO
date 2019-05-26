@@ -117,9 +117,11 @@ namespace Server.Items
             food.Poisoner = m_Poisoner;
             food.Poison = m_Poison;
             food.Quality = _Quality;
+
+            base.OnAfterDuped(newItem);
         }
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 
@@ -132,6 +134,14 @@ namespace Server.Items
 
             if (from.Alive)
                 list.Add(new ContextMenus.EatEntry(from, this));
+        }
+
+        public virtual bool TryEat(Mobile from)
+        {
+            if (Deleted || !Movable || !from.CheckAlive() || !CheckItemUse(from))
+                return false;
+
+            return Eat(from);
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -179,7 +189,16 @@ namespace Server.Items
                 from.PlaySound(Utility.Random(0x3A, 3));
 
                 if (from.Body.IsHuman && !from.Mounted)
-                    from.Animate(34, 5, 1, true, false, 0);
+                {
+                    if (Core.SA)
+                    {
+                        from.Animate(AnimationType.Eat, 0);
+                    }
+                    else
+                    {
+                        from.Animate(34, 5, 1, true, false, 0);
+                    }
+                }
 
                 if (m_Poison != null)
                     from.ApplyPoison(m_Poisoner, m_Poison);
@@ -923,7 +942,7 @@ namespace Server.Items
         public Muffins()
             : base(0x9eb)
         {
-            Stackable = false;
+            Stackable = true;
             Weight = 1.0;
             FillFactor = 4;
         }
@@ -937,7 +956,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write((int)1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -945,6 +964,9 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            if (version == 0)
+                Stackable = true;
         }
     }
 
@@ -1614,7 +1636,7 @@ namespace Server.Items
             Pieces = 10;
         }
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 
@@ -1671,6 +1693,170 @@ namespace Server.Items
 
             _Quality = (ItemQuality)reader.ReadInt();
             _Pieces = reader.ReadInt();
+        }
+    }
+
+    public class Hamburger : Food
+    {
+        [Constructable]
+        public Hamburger()
+            : this(1)
+        {
+        }
+
+        [Constructable]
+        public Hamburger(int amount)
+            : base(amount, 0xA0DA)
+        {
+            FillFactor = 2;
+        }
+
+        public Hamburger(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+    [Flipable(0xA0D8, 0xA0D9)]
+    public class HotDog : Food
+    {
+        [Constructable]
+        public HotDog()
+            : this(1)
+        {
+        }
+
+        [Constructable]
+        public HotDog(int amount)
+            : base(amount, 0xA0D8)
+        {
+            FillFactor = 2;
+        }
+
+        public HotDog(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+    [Flipable(0xA0D6, 0xA0D7)]
+    public class CookableSausage : Food
+    {
+        [Constructable]
+        public CookableSausage()
+            : base(0xA0D6)
+        {
+            FillFactor = 2;
+        }
+
+        public CookableSausage(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class PulledPorkPlatter : Food
+    {
+        public override int LabelNumber { get { return 1123351; } } // Pulled Pork Platter
+
+        [Constructable]
+        public PulledPorkPlatter()
+            : base(1, 0x999F)
+        {
+            FillFactor = 5;
+            Stackable = false;
+            Hue = 1157;
+        }
+
+        public PulledPorkPlatter(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+
+        }
+    }
+
+    public class PulledPorkSandwich : Food
+    {
+        public override int LabelNumber { get { return 1123352; } } // Pulled Pork Sandwich
+
+        [Constructable]
+        public PulledPorkSandwich()
+            : base(1, 0x99A0)
+        {
+            FillFactor = 3;
+            Stackable = false;
+        }
+
+        public PulledPorkSandwich(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+
         }
     }
 }

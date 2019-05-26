@@ -111,6 +111,7 @@ namespace Server.Items
                 return false;
 
             m_Instance = new ArisenController();
+            WeakEntityCollection.Add("sa", m_Instance);
             return true;
         }
 
@@ -255,7 +256,17 @@ namespace Server.Items
                         m_Spawners = new XmlSpawner[length];
 
                         for (int i = 0; i < length; i++)
-                            m_Spawners[i] = reader.ReadItem<XmlSpawner>();
+                        {
+                            var spawner = reader.ReadItem<XmlSpawner>();
+
+                            if (spawner == null)
+                            {
+                                spawner = m_Entries[i].CreateSpawner();
+                                spawner.SmartSpawning = true;
+                            }
+
+                            m_Spawners[i] = spawner;
+                        }
 
                         break;
                     }

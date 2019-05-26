@@ -15,8 +15,21 @@ namespace Server.Items
         int MaxArcaneCharges { get; set; }
     }
 
-    public abstract class BaseClothing : Item, IDyable, IScissorable, IFactionItem, ICraftable, IWearableDurability, IResource, ISetItem, IVvVItem, IOwnerRestricted
+    public abstract class BaseClothing : Item, IDyable, IScissorable, IFactionItem, ICraftable, IWearableDurability, IResource, ISetItem, IVvVItem, IOwnerRestricted, IArtifact, ICombatEquipment, IEngravable, IQuality
     {
+        private string m_EngravedText;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public string EngravedText
+        {
+            get { return m_EngravedText; }
+            set
+            {
+                m_EngravedText = value;
+                InvalidateProperties();
+            }
+        }
+
         #region Factions
         private FactionItem m_FactionState;
 
@@ -62,7 +75,7 @@ namespace Server.Items
             set { _OwnerName = value; InvalidateProperties(); }
         }
 
-        public virtual bool CanFortify { get { return !IsImbued && NegativeAttributes.Antique < 3; } }
+        public virtual bool CanFortify { get { return !IsImbued && NegativeAttributes.Antique < 4; } }
         public virtual bool CanRepair { get { return m_NegativeAttributes.NoRepair == 0; } }
 		public virtual bool CanAlter { get { return true; } }
 
@@ -97,7 +110,6 @@ namespace Server.Items
         #endregion
 
         #region Runic Reforging
-        private bool m_BlockRepair;
         private ItemPower m_ItemPower;
         private ReforgedPrefix m_ReforgedPrefix;
         private ReforgedSuffix m_ReforgedSuffix;
@@ -242,34 +254,59 @@ namespace Server.Items
             set { m_GorgonLenseType = value; InvalidateProperties(); }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public int PhysNonImbuing
         {
             get { return m_PhysNonImbuing; }
             set { m_PhysNonImbuing = value; }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public int FireNonImbuing
         {
             get { return m_FireNonImbuing; }
             set { m_FireNonImbuing = value; }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public int ColdNonImbuing
         {
             get { return m_ColdNonImbuing; }
             set { m_ColdNonImbuing = value; }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public int PoisonNonImbuing
         {
             get { return m_PoisonNonImbuing; }
             set { m_PoisonNonImbuing = value; }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public int EnergyNonImbuing
         {
             get { return m_EnergyNonImbuing; }
             set { m_EnergyNonImbuing = value; }
+        }
+
+        public virtual int[] BaseResists
+        {
+            get
+            {
+                var list = new int[5];
+
+                list[0] = BasePhysicalResistance;
+                list[1] = BaseFireResistance;
+                list[2] = BaseColdResistance;
+                list[3] = BasePoisonResistance;
+                list[4] = BaseEnergyResistance;
+
+                return list;
+            }
+        }
+
+        public virtual void OnAfterImbued(Mobile m, int mod, int value)
+        {
         }
         #endregion
 
@@ -286,13 +323,6 @@ namespace Server.Items
         {
             get { return m_ReforgedSuffix; }
             set { m_ReforgedSuffix = value; InvalidateProperties(); }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool BlockRepair
-        {
-            get { return m_BlockRepair; }
-            set { m_BlockRepair = value; InvalidateProperties(); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -637,19 +667,17 @@ namespace Server.Items
 
                 bool morph = from.FindItemOnLayer(Layer.Earrings) is MorphEarrings;
 
-                #region Stygian Abyss
                 if (from.Race == Race.Gargoyle && !CanBeWornByGargoyles)
                 {
-                    from.SendLocalizedMessage(1111708); // Gargoyles can't wear this.
+                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1111708); // Gargoyles can't wear this.
                     return false;
                 }
-                #endregion
                 else if (RequiredRace != null && from.Race != RequiredRace && !morph)
                 {
                     if (RequiredRace == Race.Elf)
                         from.SendLocalizedMessage(1072203); // Only Elves may use this.
                     else if (RequiredRace == Race.Gargoyle)
-                        from.SendLocalizedMessage(1111707); // Only gargoyles can wear this.
+                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1111707); // Only gargoyles can wear this.
                     else
                         from.SendMessage("Only {0} may use this.", RequiredRace.PluralName);
 
@@ -658,7 +686,7 @@ namespace Server.Items
                 else if (!AllowMaleWearer && !from.Female)
                 {
                     if (AllowFemaleWearer)
-                        from.SendLocalizedMessage(1010388); // Only females can wear 
+                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1010388); // Only females can wear this.
                     else
                         from.SendMessage("You may not wear this.");
 
@@ -667,7 +695,7 @@ namespace Server.Items
                 else if (!AllowFemaleWearer && from.Female)
                 {
                     if (AllowMaleWearer)
-                        from.SendLocalizedMessage(1063343); // Only males can wear this.
+                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1063343); // Only males can wear this.
                     else
                         from.SendMessage("You may not wear this.");
 
@@ -1021,6 +1049,8 @@ namespace Server.Items
             clothing.m_SetAttributes = new AosAttributes(newItem, m_SetAttributes);
             clothing.m_SetSkillBonuses = new AosSkillBonuses(newItem, m_SetSkillBonuses);
             #endregion
+
+            base.OnAfterDuped(newItem);
         }
 
         public BaseClothing(Serial serial)
@@ -1178,36 +1208,41 @@ namespace Server.Items
 
             if (IsVvVItem)
                 list.Add(1154937); // VvV Item
+
+            if (!String.IsNullOrEmpty(m_EngravedText))
+            {
+                list.Add(1158847, Utility.FixHtml(m_EngravedText)); // Embroidered: ~1_MESSAGE~	
+            }
         }
 
-        public override void GetProperties(ObjectPropertyList list)
+        public override void AddNameProperties(ObjectPropertyList list)
         {
-            base.GetProperties(list);
+            base.AddNameProperties(list);
 
             if (OwnerName != null)
             {
                 list.Add(1153213, OwnerName);
             }
 
-            #region Stygian Abyss
+            if (m_Crafter != null)
+                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+
+            if (m_Quality == ItemQuality.Exceptional)
+                list.Add(1018303); // Exceptional
+            
             if (IsImbued == true)
                 list.Add(1080418); // (Imbued)
-
-            if (m_GorgonLenseCharges > 0)
-                list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~
-            #endregion
-			
-            if (m_Crafter != null)
-				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
             if (m_Altered)
                 list.Add(1111880); // Altered
 
             #region Factions
-            if (m_FactionState != null)
-                list.Add(1041350); // faction item
+            FactionEquipment.AddFactionProperties(this, list);
             #endregion
 
+            if (m_GorgonLenseCharges > 0)
+                list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~
+            
             #region Mondain's Legacy Sets
             if (IsSetItem)
             {
@@ -1234,9 +1269,6 @@ namespace Server.Items
             }
             #endregion
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // exceptional
-
             if (RequiredRace == Race.Elf)
                 list.Add(1075086); // Elves Only
             #region Stygian Abyss
@@ -1254,92 +1286,8 @@ namespace Server.Items
 
             if ((prop = ArtifactRarity) > 0)
                 list.Add(1061078, prop.ToString()); // artifact rarity ~1_val~
-
-            if ((prop = m_AosAttributes.WeaponDamage) != 0)
-                list.Add(1060401, prop.ToString()); // damage increase ~1_val~%
-
-            if ((prop = m_AosAttributes.DefendChance) != 0)
-                list.Add(1060408, prop.ToString()); // defense chance increase ~1_val~%
-
-            if ((prop = m_AosAttributes.BonusDex) != 0)
-                list.Add(1060409, prop.ToString()); // dexterity bonus ~1_val~
-
-            if ((prop = m_AosAttributes.EnhancePotions) != 0)
-                list.Add(1060411, prop.ToString()); // enhance potions ~1_val~%
-
-            if ((prop = m_AosAttributes.CastRecovery) != 0)
-                list.Add(1060412, prop.ToString()); // faster cast recovery ~1_val~
-
-            if ((prop = m_AosAttributes.CastSpeed) != 0)
-                list.Add(1060413, prop.ToString()); // faster casting ~1_val~
-
-            if ((prop = m_AosAttributes.AttackChance) != 0)
-                list.Add(1060415, prop.ToString()); // hit chance increase ~1_val~%
-
-            if ((prop = m_AosAttributes.BonusHits) != 0)
-                list.Add(1060431, prop.ToString()); // hit point increase ~1_val~
-
-            if ((prop = m_AosAttributes.BonusInt) != 0)
-                list.Add(1060432, prop.ToString()); // intelligence bonus ~1_val~
-
-            if ((prop = m_AosAttributes.LowerManaCost) != 0)
-                list.Add(1060433, prop.ToString()); // lower mana cost ~1_val~%
-
-            if ((prop = m_AosAttributes.LowerRegCost) != 0)
-                list.Add(1060434, prop.ToString()); // lower reagent cost ~1_val~%
-
-            if ((prop = m_AosClothingAttributes.LowerStatReq) != 0)
-                list.Add(1060435, prop.ToString()); // lower requirements ~1_val~%
-
-            if ((prop = m_AosAttributes.Luck) != 0)
-                list.Add(1060436, prop.ToString()); // luck ~1_val~
-
-            if ((prop = m_AosClothingAttributes.MageArmor) != 0)
-                list.Add(1060437); // mage armor
-
-            if ((prop = m_AosAttributes.BonusMana) != 0)
-                list.Add(1060439, prop.ToString()); // mana increase ~1_val~
-
-            if ((prop = m_AosAttributes.RegenMana) != 0)
-                list.Add(1060440, prop.ToString()); // mana regeneration ~1_val~
-
-            if ((prop = m_AosAttributes.NightSight) != 0)
-                list.Add(1060441); // night sight
-
-            if ((prop = m_AosAttributes.ReflectPhysical) != 0)
-                list.Add(1060442, prop.ToString()); // reflect physical damage ~1_val~%
-
-            if ((prop = m_AosAttributes.RegenStam) != 0)
-                list.Add(1060443, prop.ToString()); // stamina regeneration ~1_val~
-
-            if ((prop = m_AosAttributes.RegenHits) != 0)
-                list.Add(1060444, prop.ToString()); // hit point regeneration ~1_val~
-
-            if ((prop = m_AosClothingAttributes.SelfRepair) != 0)
-                list.Add(1060450, prop.ToString()); // self repair ~1_val~
-
-            if ((prop = m_AosAttributes.SpellChanneling) != 0)
-                list.Add(1060482); // spell channeling
-
-            if ((prop = m_AosAttributes.SpellDamage) != 0)
-                list.Add(1060483, prop.ToString()); // spell damage increase ~1_val~%
-
-            if ((prop = m_AosAttributes.BonusStam) != 0)
-                list.Add(1060484, prop.ToString()); // stamina increase ~1_val~
-
-            if ((prop = m_AosAttributes.BonusStr) != 0)
-                list.Add(1060485, prop.ToString()); // strength bonus ~1_val~
-
-            if ((prop = m_AosAttributes.WeaponSpeed) != 0)
-                list.Add(1060486, prop.ToString()); // swing speed increase ~1_val~%
-
-            if (Core.ML && (prop = m_AosAttributes.IncreasedKarmaLoss) != 0)
-                list.Add(1075210, prop.ToString()); // Increased Karma Loss ~1val~%
-
-            #region SA
-            if ((prop = m_SAAbsorptionAttributes.CastingFocus) != 0)
-                list.Add(1113696, prop.ToString()); // Casting Focus ~1_val~%
-
+			
+			#region SA
             if ((prop = m_SAAbsorptionAttributes.EaterFire) != 0)
                 list.Add(1113593, prop.ToString()); // Fire Eater ~1_Val~%
 
@@ -1372,15 +1320,102 @@ namespace Server.Items
 
             if ((prop = m_SAAbsorptionAttributes.ResonanceKinetic) != 0)
                 list.Add(1113695, prop.ToString()); // Kinetic Resonance ~1_val~%
+			
+			if ((prop = m_SAAbsorptionAttributes.CastingFocus) != 0)
+                list.Add(1113696, prop.ToString()); // Casting Focus ~1_val~%
             #endregion
 
+            if ((prop = m_AosAttributes.SpellChanneling) != 0)
+                list.Add(1060482); // spell channeling
+			
+			if ((prop = m_AosClothingAttributes.SelfRepair) != 0)
+                list.Add(1060450, prop.ToString()); // self repair ~1_val~
+			
+			if ((prop = m_AosAttributes.NightSight) != 0)
+                list.Add(1060441); // night sight
+
+            if ((prop = m_AosAttributes.BonusStr) != 0)
+                list.Add(1060485, prop.ToString()); // strength bonus ~1_val~
+			
+			if ((prop = m_AosAttributes.BonusDex) != 0)
+                list.Add(1060409, prop.ToString()); // dexterity bonus ~1_val~
+			
+			if ((prop = m_AosAttributes.BonusInt) != 0)
+                list.Add(1060432, prop.ToString()); // intelligence bonus ~1_val~
+			
+			if ((prop = m_AosAttributes.BonusHits) != 0)
+                list.Add(1060431, prop.ToString()); // hit point increase ~1_val~
+			
+			if ((prop = m_AosAttributes.BonusStam) != 0)
+                list.Add(1060484, prop.ToString()); // stamina increase ~1_val~
+			
+			if ((prop = m_AosAttributes.BonusMana) != 0)
+                list.Add(1060439, prop.ToString()); // mana increase ~1_val~
+
+            if ((prop = m_AosAttributes.RegenHits) != 0)
+                list.Add(1060444, prop.ToString()); // hit point regeneration ~1_val~
+			
+			if ((prop = m_AosAttributes.RegenStam) != 0)
+                list.Add(1060443, prop.ToString()); // stamina regeneration ~1_val~
+			
+			if ((prop = m_AosAttributes.RegenMana) != 0)
+                list.Add(1060440, prop.ToString()); // mana regeneration ~1_val~
+			
+			if ((prop = m_AosAttributes.Luck) != 0)
+                list.Add(1060436, prop.ToString()); // luck ~1_val~
+			
+			if ((prop = m_AosAttributes.EnhancePotions) != 0)
+                list.Add(1060411, prop.ToString()); // enhance potions ~1_val~%
+			
+			if ((prop = m_AosAttributes.ReflectPhysical) != 0)
+                list.Add(1060442, prop.ToString()); // reflect physical damage ~1_val~%
+			
+			if ((prop = m_AosAttributes.AttackChance) != 0)
+                list.Add(1060415, prop.ToString()); // hit chance increase ~1_val~%
+
+            if ((prop = m_AosAttributes.WeaponSpeed) != 0)
+                list.Add(1060486, prop.ToString()); // swing speed increase ~1_val~%
+			
+			if ((prop = m_AosAttributes.WeaponDamage) != 0)
+                list.Add(1060401, prop.ToString()); // damage increase ~1_val~%
+			
+			if ((prop = m_AosAttributes.DefendChance) != 0)
+                list.Add(1060408, prop.ToString()); // defense chance increase ~1_val~%
+			
+			if ((prop = m_AosAttributes.CastRecovery) != 0)
+                list.Add(1060412, prop.ToString()); // faster cast recovery ~1_val~		
+			
+			if ((prop = m_AosAttributes.CastSpeed) != 0)
+                list.Add(1060413, prop.ToString()); // faster casting ~1_val~
+			
+			if ((prop = m_AosAttributes.SpellDamage) != 0)
+                list.Add(1060483, prop.ToString()); // spell damage increase ~1_val~%
+			
+			if ((prop = m_AosAttributes.LowerManaCost) != 0)
+                list.Add(1060433, prop.ToString()); // lower mana cost ~1_val~%
+
+            if ((prop = m_AosAttributes.LowerRegCost) != 0)
+                list.Add(1060434, prop.ToString()); // lower reagent cost ~1_val~%
+            
+            if ((prop = m_AosAttributes.LowerAmmoCost) != 0)
+				list.Add(1075208, prop.ToString()); // Lower Ammo Cost ~1_Percentage~%
+
+            if (Core.ML && (prop = m_AosAttributes.IncreasedKarmaLoss) != 0)
+                list.Add(1075210, prop.ToString()); // Increased Karma Loss ~1val~%
+
             base.AddResistanceProperties(list);
+			
+			if ((prop = m_AosClothingAttributes.MageArmor) != 0)
+                list.Add(1060437); // mage armor
+			
+			if ((prop = m_AosClothingAttributes.LowerStatReq) != 0)
+                list.Add(1060435, prop.ToString()); // lower requirements ~1_val~%
+			
+			if ((prop = ComputeStatReq(StatType.Str)) > 0)
+                list.Add(1061170, prop.ToString()); // strength requirement ~1_val~
 
             if ((prop = m_AosClothingAttributes.DurabilityBonus) > 0)
                 list.Add(1060410, prop.ToString()); // durability ~1_val~%
-
-            if ((prop = ComputeStatReq(StatType.Str)) > 0)
-                list.Add(1061170, prop.ToString()); // strength requirement ~1_val~
 
             if (m_HitPoints >= 0 && m_MaxHitPoints > 0)
                 list.Add(1060639, "{0}\t{1}", m_HitPoints, m_MaxHitPoints); // durability ~1_val~ / ~2_val~
@@ -1392,7 +1427,10 @@ namespace Server.Items
                 GetSetProperties(list);
             }
             #endregion
+        }
 
+        public override void AddItemPowerProperties(ObjectPropertyList list)
+        {
             if (m_ItemPower != ItemPower.None)
             {
                 if (m_ItemPower <= ItemPower.LegendaryArtifact)
@@ -1426,6 +1464,15 @@ namespace Server.Items
             EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
 
             from.Send(new DisplayEquipmentInfo(this, eqInfo));
+        }
+
+        public override bool DropToWorld(Mobile from, Point3D p)
+        {
+            bool drop = base.DropToWorld(from, p);
+
+            EnchantedHotItemSocket.CheckDrop(from, this);
+
+            return drop;
         }
 
         public virtual void AddEquipInfoAttributes(Mobile from, List<EquipInfoAttribute> attrs)
@@ -1516,9 +1563,13 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(9); // version
+            writer.Write(11); // version
 
-            writer.Write(_VvVItem);
+            // Embroidery Tool version 11
+            writer.Write(m_EngravedText);
+
+            // Version 10 - removed VvV Item (handled in VvV System) and BlockRepair (Handled as negative attribute)
+
             writer.Write(_Owner);
             writer.Write(_OwnerName);
 
@@ -1532,7 +1583,6 @@ namespace Server.Items
             writer.Write((int)m_ReforgedPrefix);
             writer.Write((int)m_ReforgedSuffix);
             writer.Write((int)m_ItemPower);
-            writer.Write(m_BlockRepair);
             #endregion
 
             #region Stygian Abyss
@@ -1667,9 +1717,17 @@ namespace Server.Items
 
             switch ( version )
             {
+                case 11:
+                    {
+                        m_EngravedText = reader.ReadString();
+                        goto case 9;
+                    }
+                case 10:
                 case 9:
                     {
-                        _VvVItem = reader.ReadBool();
+                        if (version == 9)
+                            reader.ReadBool();
+
                         _Owner = reader.ReadMobile();
                         _OwnerName = reader.ReadString();
                         goto case 8;
@@ -1687,7 +1745,14 @@ namespace Server.Items
                         m_ReforgedPrefix = (ReforgedPrefix)reader.ReadInt();
                         m_ReforgedSuffix = (ReforgedSuffix)reader.ReadInt();
                         m_ItemPower = (ItemPower)reader.ReadInt();
-                        m_BlockRepair = reader.ReadBool();
+
+                        if (version == 9 && reader.ReadBool())
+                        {
+                            Timer.DelayCall(TimeSpan.FromSeconds(1), () =>
+                                {
+                                    m_NegativeAttributes.NoRepair = 1;
+                                });
+                        }
                         #endregion
 
                         #region Stygian Abyss
@@ -1953,36 +2018,47 @@ namespace Server.Items
             return false;
         }
 
-        public void DistributeBonuses(int amount)
+        public void DistributeBonuses(Mobile from, int amount)
         {
             for (int i = 0; i < amount; ++i)
             {
                 switch ( Utility.Random(5) )
                 {
-                    case 0:
-                        ++m_AosResistances.Physical;
-                        break;
-                    case 1:
-                        ++m_AosResistances.Fire;
-                        break;
-                    case 2:
-                        ++m_AosResistances.Cold;
-                        break;
-                    case 3:
-                        ++m_AosResistances.Poison;
-                        break;
-                    case 4:
-                        ++m_AosResistances.Energy;
-                        break;
+                    case 0: ++m_AosResistances.Physical; break;
+                    case 1: ++m_AosResistances.Fire; break;
+                    case 2: ++m_AosResistances.Cold; break;
+                    case 3: ++m_AosResistances.Poison; break;
+                    case 4: ++m_AosResistances.Energy; break;
                 }
             }
 
+            // Arms Lore Bonus - Verified on EA
+            if (Core.ML && from != null)
+            {
+                double div = Siege.SiegeShard ? 12.5 : 20;
+                int bonus = (int)Math.Min(4, (from.Skills.ArmsLore.Value / div));
+
+                for (int i = 0; i < bonus; i++)
+                {
+                    switch (Utility.Random(5))
+                    {
+                        case 0: Resistances.Physical++; break;
+                        case 1: Resistances.Fire++; break;
+                        case 2: Resistances.Cold++; break;
+                        case 3: Resistances.Poison++; break;
+                        case 4: Resistances.Energy++; break;
+                    }
+                }
+
+                from.CheckSkill(SkillName.ArmsLore, 0, 100);
+            }
+
             #region Stygian Abyss
-            m_PhysNonImbuing = m_AosResistances.Physical;
-            m_FireNonImbuing = m_AosResistances.Fire;
-            m_ColdNonImbuing = m_AosResistances.Cold;
-            m_PoisonNonImbuing = m_AosResistances.Poison;
-            m_EnergyNonImbuing = m_AosResistances.Energy;
+            m_PhysNonImbuing = PhysicalResistance;
+            m_FireNonImbuing = FireResistance;
+            m_ColdNonImbuing = ColdResistance;
+            m_PoisonNonImbuing = PoisonResistance;
+            m_EnergyNonImbuing = EnergyResistance;
             #endregion
 
             InvalidateProperties();
@@ -1990,7 +2066,7 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue)
+        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 
@@ -2017,11 +2093,6 @@ namespace Server.Items
             #endregion
 
             PlayerConstructed = true;
-
-            CraftContext context = craftSystem.GetContext(from);
-
-            if (context != null && context.DoNotColor)
-                Hue = 0;
 
             return quality;
         }

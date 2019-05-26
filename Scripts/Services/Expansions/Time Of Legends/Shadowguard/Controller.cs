@@ -17,12 +17,12 @@ namespace Server.Engines.Shadowguard
     [Flags]
     public enum EncounterType
     {
-        Bar = 0x00000001,
-        Orchard = 0x00000002,
-        Armory = 0x00000004,
-        Fountain = 0x00000008,
-        Belfry = 0x00000010,
-        Roof = 0x00000020,
+        Bar         = 0x00000001,
+        Orchard     = 0x00000002,
+        Armory      = 0x00000004,
+        Fountain    = 0x00000008,
+        Belfry      = 0x00000010,
+        Roof        = 0x00000020,
 
         Required = Bar | Orchard | Armory | Fountain | Belfry
     }
@@ -140,19 +140,7 @@ namespace Server.Engines.Shadowguard
             if(Table == null)
                 return;
 
-            Party p = Party.Get(m);
-
-            if (p != null)
-            {
-                foreach (PartyMemberInfo info in p.Members)
-                {
-                    Mobile mobile = info.Mobile;
-
-                    if (Table.ContainsKey(mobile))
-                        Table.Remove(mobile);
-                }
-            }
-            else if (Table.ContainsKey(m))
+            if (Table.ContainsKey(m))
             {
                 Table.Remove(m);
             }
@@ -168,23 +156,9 @@ namespace Server.Engines.Shadowguard
 
             if (!expired)
             {
-                Mobile m = encounter.PartyLeader;
-
-                if (m == null)
-                    return;
-
-                Party p = Party.Get(m);
-
-                if (p != null)
+                foreach (var pm in encounter.Region.GetEnumeratedMobiles().OfType<PlayerMobile>())
                 {
-                    foreach (PartyMemberInfo info in p.Members)
-                    {
-                        AddToTable(info.Mobile, encounter.Encounter);
-                    }
-                }
-                else
-                {
-                    AddToTable(m, encounter.Encounter);
+                    AddToTable(pm, encounter.Encounter);
                 }
             }
         }
@@ -387,9 +361,6 @@ namespace Server.Engines.Shadowguard
             {
                 Queue.Remove(m);
 
-                if (Queue.Count == 0)
-                    Queue = null;
-
                 return false;
             }
 
@@ -432,20 +403,25 @@ namespace Server.Engines.Shadowguard
                 {
                     message = true;
 
-                    Timer.DelayCall(TimeSpan.FromMinutes(2), () =>
+                    Timer.DelayCall(TimeSpan.FromMinutes(2), mobile =>
                     {
-                        EncounterType type = Queue[m];
-                        ShadowguardInstance instance = GetAvailableInstance(type);
-
-                        if (instance != null && instance.TryBeginEncounter(m, true, type))
+                        if (Queue.ContainsKey(m))
                         {
-                            RemoveFromQueue(m);
+                            EncounterType type = Queue[m];
+                            ShadowguardInstance instance = GetAvailableInstance(type);
+
+                            if (instance != null && instance.TryBeginEncounter(m, true, type))
+                            {
+                                RemoveFromQueue(m);
+                            }
                         }
-                    });
+                    }, m);
                 }
 
                 break;
             }
+
+            ColUtility.Free(copy);
 
             if (message && Queue.Count > 0)
             {
@@ -700,16 +676,16 @@ namespace Server.Engines.Shadowguard
             ankh.MoveToWorld(new Point3D(503, 2191, 25), Map.TerMur);    
 
             Item item = new Static(19343);
-            item.MoveToWorld(new Point3D(64, 2336, 30), Map.TerMur);
+            item.MoveToWorld(new Point3D(64, 2336, 29), Map.TerMur);
 
             item = new Static(19343);
-            item.MoveToWorld(new Point3D(160, 2336, 30), Map.TerMur);
+            item.MoveToWorld(new Point3D(160, 2336, 29), Map.TerMur);
 
             item = new Static(19343);
-            item.MoveToWorld(new Point3D(64, 2432, 30), Map.TerMur);
+            item.MoveToWorld(new Point3D(64, 2432, 29), Map.TerMur);
 
             item = new Static(19343);
-            item.MoveToWorld(new Point3D(160, 2432, 30), Map.TerMur);
+            item.MoveToWorld(new Point3D(160, 2432, 29), Map.TerMur);
 
             from.SendMessage("Shadowguard has been setup!");
             Console.WriteLine("Shadowguard setup!");
