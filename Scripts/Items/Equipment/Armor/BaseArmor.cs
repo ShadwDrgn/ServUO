@@ -2771,6 +2771,23 @@ namespace Server.Items
 
         public override void AddWeightProperty(ObjectPropertyList list)
         {
+            if (OwnerName != null)
+                list.Add(1153213, OwnerName);
+
+            if (m_Crafter != null)
+                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+
+            if (m_Quality == ItemQuality.Exceptional)
+                list.Add(1060636); // Exceptional
+
+            if (IsImbued)
+                list.Add(1080418); // (Imbued)
+
+            if (m_Altered)
+                list.Add(1111880); // Altered
+
+            AddLootTypeProperty(list);
+
             base.AddWeightProperty(list);
 
             if (IsVvVItem)
@@ -2784,23 +2801,6 @@ namespace Server.Items
         public override void AddNameProperties(ObjectPropertyList list)
         {
             base.AddNameProperties(list);
-
-            if (OwnerName != null)
-            {
-                list.Add(1153213, OwnerName);
-            }            
-
-            if (m_Crafter != null)
-				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
-
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // Exceptional
-           
-            if (IsImbued)
-                list.Add(1080418); // (Imbued)
-
-            if (m_Altered)
-                list.Add(1111880); // Altered
 
             #region Factions
             FactionEquipment.AddFactionProperties(this, list);
@@ -2852,6 +2852,9 @@ namespace Server.Items
 
             if ((prop = ArtifactRarity) > 0)
                 list.Add(1061078, prop.ToString()); // artifact rarity ~1_val~
+
+            if ((prop = m_AosArmorAttributes.DurabilityBonus) != 0)
+                list.Add(1060410, prop.ToString()); // durability ~1_val~%
 
             if (m_TalismanProtection != null && !m_TalismanProtection.IsEmpty && m_TalismanProtection.Amount > 0)
                 list.Add(1072387, "{0}\t{1}", m_TalismanProtection.Name != null ? m_TalismanProtection.Name.ToString() : "Unknown", m_TalismanProtection.Amount); // ~1_NAME~ Protection: +~2_val~%
