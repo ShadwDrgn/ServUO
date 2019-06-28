@@ -27,7 +27,7 @@ namespace Server.Engines.BulkOrders
 
     public class BulkOrderSystem
     {
-        public static readonly int MaxCachedDeeds = 3;
+        public static readonly int MaxCachedDeeds = 12;
         public static readonly int Delay = 6;
 
         public static bool NewSystemEnabled = Core.TOL;
