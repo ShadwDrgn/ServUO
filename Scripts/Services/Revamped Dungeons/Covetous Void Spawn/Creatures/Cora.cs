@@ -5,8 +5,10 @@ using Server.Engines.VoidPool;
 
  namespace Server.Mobiles
  {
-	public class CoraTheSorceress : BaseCreature
+	public class CoraTheSorceress : BaseCreature, IElementalCreature, IAuraCreature
 	{
+        public ElementType ElementType { get { return ElementType.Chaos; } }
+
         public DateTime NextManaDrain { get; set; }
 
         public TimeSpan ManaDrainInterval { get { return TimeSpan.FromSeconds(Utility.RandomMinMax(15, 120)); } }
@@ -22,7 +24,7 @@ using Server.Engines.VoidPool;
             HairHue = 452;
 
             SetStr(909, 949);
-            SetDex(901, 948);
+            SetDex(125);
             SetInt(903, 947);
 
             SetHits(35000);
@@ -53,20 +55,16 @@ using Server.Engines.VoidPool;
             AddAndEquip(new ChainLegs(), 1936);
             AddAndEquip(new LeatherGloves(), 1910);
             AddAndEquip(new LeatherBustierArms(), 1947);
+
+            SetSpecialAbility(SpecialAbility.DragonBreath);
+            SetAreaEffect(AreaEffect.AuraDamage);
         }
 
-        public override int BreathChaosDamage { get { return 100; } }
-        public override bool HasBreath { get { return true; } }
         public override bool AlwaysMurderer { get { return true; } }
         public override bool ClickTitle { get { return false; } }
         public override bool ShowFameTitle { get { return false; } }
 
-        public override bool HasAura { get { return true; } }
-        public override int AuraRange { get { return 3; } }
-        public override int AuraBaseDamage { get { return 0; } }
-        public override int AuraFireDamage { get { return 0; } }
-
-        public override void AuraEffect(Mobile m)
+        public void AuraEffect(Mobile m)
         {
             int mana = Utility.Random(1, m.Mana);
             m.Mana -= mana;

@@ -10,8 +10,67 @@ namespace Server
 {
 	public class SpeedInfo
 	{
-		// Should we use the new method of speeds?
-		private static readonly bool Enabled = true;
+        public static readonly double MinDelay = 0.1;
+        public static readonly double MaxDelay = 0.5;
+        public static readonly double MaxAdjustedSpeed = 0.7;
+
+        public static bool GetSpeedsNew(BaseCreature bc, ref double activeSpeed, ref double passiveSpeed)
+        {
+            var maxDex = GetMaxMovementDex(bc);
+            var dex = Math.Min(maxDex, Math.Max(25, bc.Dex));
+
+            activeSpeed = MaxDelay - ((MaxDelay - MinDelay) * ((double)dex / 150.0));
+
+            if (activeSpeed < MinDelay)
+            {
+                activeSpeed = MinDelay;
+            }
+
+            passiveSpeed = activeSpeed * 2;
+
+            return true;
+        }
+
+        private static int GetMaxMovementDex(BaseCreature bc)
+        {
+            return bc.IsMonster ? 150 : 190;
+        }
+
+        public static double TransformMoveDelay(BaseCreature bc, double delay)
+        {
+            if (bc.IsMonster)
+            {
+                double monsterDelay = 0.0;
+                var dex = bc.Dex;
+
+                if (dex > 150)
+                {
+                    monsterDelay += ((dex - 150) / 100.0); // this
+                }
+
+                delay = delay * (1.5 + (monsterDelay * 1.5));
+            }
+
+            if (!bc.IsDeadPet && (bc.ReduceSpeedWithDamage || bc.IsSubdued))
+            {
+                var offset = (double)bc.Stam / (double)bc.StamMax;
+
+                if (offset < 1.0)
+                {
+                    delay = delay + ((MaxAdjustedSpeed - delay) * (1.0 - offset));
+                }
+            }
+
+            if (delay > MaxAdjustedSpeed)
+            {
+                delay = MaxAdjustedSpeed;
+            }
+
+            return delay;
+        }
+
+        // Should we use the new method of speeds?
+        private static readonly bool Enabled = true;
 
 		public double ActiveSpeed { get; set; }
 
@@ -39,7 +98,7 @@ namespace Server
 			return (sp != null);
 		}
 
-		public static bool GetSpeeds(object obj, ref double activeSpeed, ref double passiveSpeed)
+        public static bool GetSpeeds(object obj, ref double activeSpeed, ref double passiveSpeed)
 		{
 			if (!Enabled)
 				return false;

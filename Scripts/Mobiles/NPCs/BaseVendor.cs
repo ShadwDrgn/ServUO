@@ -148,7 +148,7 @@ namespace Server.Mobiles
 			private readonly BaseVendor m_Vendor;
 
 			public BulkOrderInfoEntry(Mobile from, BaseVendor vendor)
-				: base(6152, 3)
+				: base(6152, 10)
 			{
                 Enabled = vendor.CheckVendorAccess(from);
 
@@ -158,7 +158,7 @@ namespace Server.Mobiles
 
 			public override void OnClick()
 			{
-                if (!m_From.InRange(m_Vendor.Location, 3))
+                if (!m_From.InRange(m_Vendor.Location, 10))
                     return;
 
 				EventSink.InvokeBODOffered(new BODOfferEventArgs(m_From, m_Vendor));
