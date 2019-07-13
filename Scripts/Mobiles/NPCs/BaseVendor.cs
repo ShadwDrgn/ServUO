@@ -15,6 +15,7 @@ using Server.Network;
 using Server.Regions;
 using Server.Services.Virtues;
 using Server.Targeting;
+using Server.Gumps;
 #endregion
 
 namespace Server.Mobiles
@@ -58,6 +59,18 @@ namespace Server.Mobiles
 		public override bool PlayerRangeSensitive { get { return true; } }
 
         public override bool UseSmartAI { get { return true; } }
+#region double click vendors
+		public override void OnDoubleClick( Mobile from )
+		{
+			bool enabled = true;
+			enabled = CheckVendorAccess(from);
+
+			if (enabled) {
+				from.CloseGump (typeof(BuySellGump));
+				from.SendGump (new BuySellGump (from, this));
+			}
+		}
+#endregion
 
 		public virtual bool IsActiveVendor { get { return true; } }
 		public virtual bool IsActiveBuyer { get { return IsActiveVendor && !Siege.SiegeShard; } } // response to vendor SELL

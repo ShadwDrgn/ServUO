@@ -41,11 +41,6 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool HasBreath
-        {
-            get { return true; }
-        } // fire breath enabled
-
         public override int Meat
         {
             get { return 6; }
@@ -64,7 +59,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Average, 2);
+            AddLoot(LootPack.Average, 7);
         }
 
         public override void OnDeath(Container c)
