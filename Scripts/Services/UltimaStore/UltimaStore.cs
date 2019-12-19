@@ -276,7 +276,7 @@ namespace Server.Engines.UOStore
             Register<RaisedGardenDeed>(new TextDefinition[] { 1150359, 1156688 }, 1156680, 0, 0x9C8B, 0, 2000, cat, ConstructRaisedGarden);
             Register<HouseTeleporterTileBag>(new TextDefinition[] { 1156683, 1156826 }, 1156668, 0x40B9, 0, 1201, 1000, cat);
             Register<WoodworkersBenchDeed>(1026641, 1156670, 0x14F0, 0, 0, 600, cat);
-            Register<LargeGlowingLadyBug>(1026641, 1156660, 0x2CFD, 0, 0, 200, cat);
+            Register<LargeGlowingLadyBug>(1071400, 1156660, 0x2CFD, 0, 0, 200, cat);
             Register<FreshGreenLadyBug>(1071401, 1156661, 0x2D01, 0, 0, 200, cat);
             Register<WillowTreeDeed>(1071105, 1156658, 0x224A, 0, 0, 200, cat);
 
@@ -290,10 +290,12 @@ namespace Server.Engines.UOStore
 
             // mounts
             cat = StoreCategory.Mounts;
+            Register<CoconutCrabStatue>(1159165, 1159166, 0xA335, 0, 0, 1000, cat);
+            Register<SkeletalCatStatue>(1158462, 1158738, 0xA138, 0, 0, 1000, cat);
+            Register<EowmuStatue>(1158082, 1158433, 0xA0C0, 0, 0, 1000, cat);
             Register<WindrunnerStatue>(1124685, 1157373, 0x9ED5, 0, 0, 1000, cat);
             Register<LasherStatue>(1157214, 1157305, 0x9E35, 0, 0, 1000, cat);
             Register<ChargerOfTheFallen>(1075187, 1156646, 0x2D9C, 0, 0, 1000, cat);
-            Register<EowmuStatue>(1158082, 1158433, 0xA0C0, 0, 0, 1000, cat);
 
             // misc
             cat = StoreCategory.Misc;

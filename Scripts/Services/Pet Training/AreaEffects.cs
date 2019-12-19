@@ -435,17 +435,17 @@ namespace Server.Mobiles
 
         public Poison GetPoison(BaseCreature bc)
         {
-            int level = 1;
+            int level = 0;
             double total = bc.Skills[SkillName.Poisoning].Value;
 
             if (total >= 100)
-                level = 5;
-            else if (total > 60)
                 level = 4;
-            else if (total > 40)
+            else if (total > 60)
                 level = 3;
-            else if (total > 20)
+            else if (total > 40)
                 level = 2;
+            else if (total > 20)
+                level = 1;
 
             return Poison.GetPoison(level);
         }
@@ -525,7 +525,7 @@ namespace Server.Mobiles
             public Type[] Uses { get; private set; }
 
             public AuraDefinition()
-                : this(TimeSpan.FromSeconds(5), 4, 5, 0, 0, 0, 0, 0, 0, 0, new Type[] { })
+                : this(TimeSpan.FromSeconds(5), 4, 5, 0, 0, 0, 0, 0, 0, 100, new Type[] { })
             {
             }
 
@@ -564,7 +564,7 @@ namespace Server.Mobiles
 
                 cora = new AuraDefinition(typeof(CoraTheSorceress));
                 cora.Range = 3;
-                cora.Damage = 0;
+                cora.Damage = 10;
                 cora.Fire = 0;
                 Definitions.Add(cora);
 

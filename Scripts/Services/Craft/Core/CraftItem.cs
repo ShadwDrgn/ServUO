@@ -63,6 +63,7 @@ namespace Server.Engines.Craft
 
         public double MinSkillOffset { get; set; }
         public bool ForceNonExceptional { get; set; }
+        public bool ForceExceptional { get; set; }
         public Expansion RequiredExpansion { get; set; }
         public ThemePack RequiredThemePack { get; set; }
 
@@ -87,6 +88,8 @@ namespace Server.Engines.Craft
         public bool NeedMill { get; set; }
         public bool NeedWater { get; set; }
         public int ItemHue { get; set; }
+
+        public Action<Mobile, Item, ITool> MutateAction { get; set; }
 
         public void AddRecipe(int id, CraftSystem system)
         {
@@ -1259,7 +1262,16 @@ namespace Server.Engines.Craft
 				return 0.0;
 			}
 
-			double bonus = 0.0;
+            if (ForceExceptional)
+            {
+                bool allRequiredSkills = false;
+                GetSuccessChance(from, null, system, false, ref allRequiredSkills);
+
+                if (allRequiredSkills)
+                    return 100.0;
+            }
+
+            double bonus = 0.0;
 
 			if (from.Talisman is BaseTalisman)
 			{
@@ -1856,6 +1868,8 @@ namespace Server.Engines.Craft
                     m_PlantHue = PlantHue.None;
                     m_PlantPigmentHue = PlantPigmentHue.None;
 					#endregion
+
+                    MutateAction?.Invoke(from,item,tool);
 
                     if (CaddelliteCraft)
                     {

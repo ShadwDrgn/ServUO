@@ -764,9 +764,11 @@ namespace Server.Mobiles
 			{
 				var old = _Mastery;
 				_Mastery = value;
-				
-				if(old != _Mastery)
-					UpdateMasteryInfo();
+
+                if (old != _Mastery)
+                {
+                    UpdateMasteryInfo();
+                }
 			}
 		}
 		
@@ -781,7 +783,7 @@ namespace Server.Mobiles
             }
             else
             {
-                var masteries = MasteryInfo.Infos.Where(i => i.MasterySkill == _Mastery && !i.Passive && i.SpellType != typeof(BodyGuardSpell)).ToArray();
+                var masteries = MasteryInfo.Infos.Where(i => i.MasterySkill == _Mastery && !i.Passive && (i.SpellType != typeof(BodyGuardSpell) || Controlled)).ToArray();
 
                 if (masteries != null && masteries.Length > 0)
                 {
@@ -999,6 +1001,11 @@ namespace Server.Mobiles
                 }
 
                 base.Combatant = value;
+
+                if (Controlled)
+                {
+                    AdjustSpeeds();
+                }
             }
         }
 
@@ -2137,7 +2144,7 @@ namespace Server.Mobiles
                     }
                 }
 
-                if (with is HarvestersBlade)
+                if (special)
                 {
                     feathers = (int)Math.Ceiling((double)feathers * 1.1);
                     wool = (int)Math.Ceiling((double)wool * 1.1);
@@ -2205,17 +2212,30 @@ namespace Server.Mobiles
                 if (hides != 0)
                 {
                     Item leather = null;
+                    var cutHides = (with is SkinningKnife && from.FindItemOnLayer(Layer.OneHanded) == with) || special || with is ButchersWarCleaver;
 
                     switch (HideType)
                     {
                         default:
-                        case HideType.Regular: leather = new Leather(hides); break;
-                        case HideType.Spined: leather = new SpinedLeather(hides); break;
-                        case HideType.Horned: leather = new HornedLeather(hides); break;
-                        case HideType.Barbed: leather = new BarbedLeather(hides); break;
+                        case HideType.Regular:
+                            if (cutHides) leather = new Leather(hides);
+                            else leather = new Hides(hides);
+                            break;
+                        case HideType.Spined:
+                            if (cutHides) leather = new SpinedLeather(hides);
+                            else leather = new SpinedHides(hides);
+                            break;
+                        case HideType.Horned:
+                            if (cutHides) leather = new HornedLeather(hides);
+                            else leather = new HornedHides(hides);
+                            break;
+                        case HideType.Barbed:
+                            if (cutHides) leather = new BarbedLeather(hides);
+                            else leather = new BarbedHides(hides);
+                            break;
                     }
 
-                    if (!Core.AOS || (!special && !(with is ButchersWarCleaver)) || !from.AddToBackpack(leather))
+                    if (!Core.AOS || !cutHides || !from.AddToBackpack(leather))
                     {
                         corpse.AddCarvedItem(leather, from);
                         from.SendLocalizedMessage(500471); // You skin it, and the hides are now in the corpse.
@@ -4523,14 +4543,11 @@ namespace Server.Mobiles
         public virtual void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
         { }
 
-        public virtual bool CanDrop { get { return IsBonded; } }
-        public virtual bool OwnerCanRename { get { return true; } }
-
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
 
-            if (m_bControlled && m_ControlMaster == from && !m_bSummoned && OwnerCanRename)
+            if (CanBeRenamedBy(from) && m_bControlled && m_ControlMaster == from && !m_bSummoned)
             {
                 list.Add(new RenameEntry(from, this));
             }
@@ -4826,6 +4843,7 @@ namespace Server.Mobiles
         }
 
         public virtual bool CanStealth { get { return false; } }
+        public virtual bool SupportsRunAnimation { get { return true; } }
 
         protected override bool OnMove(Direction d)
         {
@@ -5280,14 +5298,19 @@ namespace Server.Mobiles
         {
             if (Core.ML && oldDex != RawDex)
             {
-                double activeSpeed = 0.0;
-                double passiveSpeed = 0.0;
-
-                SpeedInfo.GetSpeedsNew(this, ref activeSpeed, ref passiveSpeed);
-
-                m_dActiveSpeed = activeSpeed;
-                m_dPassiveSpeed = passiveSpeed;
+                AdjustSpeeds();
             }
+        }
+
+        public void AdjustSpeeds()
+        {
+            double activeSpeed = 0.0;
+            double passiveSpeed = 0.0;
+
+            SpeedInfo.GetSpeedsNew(this, ref activeSpeed, ref passiveSpeed);
+
+            m_dActiveSpeed = activeSpeed;
+            m_dPassiveSpeed = passiveSpeed;
         }
         #endregion
 
@@ -6314,8 +6337,6 @@ namespace Server.Mobiles
                     var karma = new List<int>();
 
                     bool givenFactionKill = false;
-                    bool givenToTKill = false;
-                    bool givenVASKill = false;
 
                     for (int i = 0; i < list.Count; ++i)
                     {
@@ -6384,18 +6405,6 @@ namespace Server.Mobiles
                         {
                             givenFactionKill = true;
                             Faction.HandleDeath(this, ds.m_Mobile);
-                        }
-
-                        Region region = ds.m_Mobile.Region;
-
-                        if (!givenToTKill && TreasuresOfTokuno.HandleKill(this, ds.m_Mobile))
-                        {
-                            givenToTKill = true;
-                        }
-
-                        if (!givenVASKill && VirtueArtifactsSystem.HandleKill(this, ds.m_Mobile))
-                        {
-                            givenVASKill = true;
                         }
                     }
 
@@ -6488,6 +6497,8 @@ namespace Server.Mobiles
                 }
             }
         }
+
+        public bool GivenSpecialArtifact { get; set; }
 
         /* To save on cpu usage, RunUO creatures only reacquire creatures under the following circumstances:
         *  - 10 seconds have elapsed since the last time it tried
@@ -6582,6 +6593,8 @@ namespace Server.Mobiles
                 ControlOrder = OrderType.None;
                 Guild = null;
 
+                UpdateMasteryInfo();
+
                 Delta(MobileDelta.Noto);
             }
             else
@@ -6609,6 +6622,11 @@ namespace Server.Mobiles
                 ControlTarget = null;
                 ControlOrder = OrderType.Come;
                 Guild = null;
+
+                UpdateMasteryInfo();
+
+                AdjustSpeeds();
+                CurrentSpeed = m_dActiveSpeed;
 
                 if (m_DeleteTimer != null)
                 {
@@ -6735,18 +6753,7 @@ namespace Server.Mobiles
             creature.Hits = creature.HitsMaxSeed;
 
             return true;
-        }
-
-        private static readonly Type[] m_MinorArtifactsMl = new[]
-        {
-            typeof(AegisOfGrace), typeof(BladeDance), typeof(Bonesmasher), typeof(Boomstick), typeof(FeyLeggings),
-            typeof(FleshRipper), typeof(HelmOfSwiftness), typeof(PadsOfTheCuSidhe), typeof(QuiverOfRage),
-            typeof(QuiverOfElements), typeof(RaedsGlory), typeof(RighteousAnger), typeof(RobeOfTheEclipse),
-            typeof(RobeOfTheEquinox), typeof(SoulSeeker), typeof(TalonBite), typeof(WildfireBow), typeof(Windsong),
-			// TODO: Brightsight lenses, Bloodwood spirit, Totem of the void
-		};
-
-        public static Type[] MinorArtifactsMl { get { return m_MinorArtifactsMl; } }
+        }        
 
         private static bool EnableRummaging = true;
 
@@ -6937,7 +6944,7 @@ namespace Server.Mobiles
 
                     if (info.Defender.InRange(Location, Core.GlobalMaxUpdateRange) && info.Defender.DamageEntries.Any(de => de.Damager == this))
                     {
-                        info.Defender.RegisterDamage(amount / 2, from);
+                        info.Defender.RegisterDamage(amount, from);
                     }
 
                     if (info.Defender.Player && from.CanBeHarmful(info.Defender))
@@ -6952,7 +6959,7 @@ namespace Server.Mobiles
 
                     if (info.Attacker.InRange(Location, Core.GlobalMaxUpdateRange) && info.Attacker.DamageEntries.Any(de => de.Damager == this))
                     {
-                        info.Attacker.RegisterDamage(amount / 2, from);
+                        info.Attacker.RegisterDamage(amount, from);
                     }
 
                     if (info.Attacker.Player && from.CanBeHarmful(info.Attacker))
@@ -7029,10 +7036,6 @@ namespace Server.Mobiles
         public virtual bool CanProvoke { get { return false; } }
 
         public virtual bool PlayInstrumentSound { get { return true; } }
-
-        public virtual TimeSpan DiscordInterval { get { return TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120)); } }
-        public virtual TimeSpan PeaceInterval { get { return TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120)); } }
-        public virtual TimeSpan ProvokeInterval { get { return TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120)); } }
 
         public virtual bool DoDiscord()
         {
@@ -7160,7 +7163,14 @@ namespace Server.Mobiles
             Mobile m = Combatant as Mobile;
 
             if (m == null && GetMaster() is PlayerMobile)
+            {
                 m = GetMaster().Combatant as Mobile;
+            }
+
+            if (creaturesOnly && m is PlayerMobile)
+            {
+                return null;
+            }
 
             if (m == null || m == this || !CanBeHarmful(m, false) || (creaturesOnly && !(m is BaseCreature)))
             {
@@ -7168,12 +7178,15 @@ namespace Server.Mobiles
                 list.AddRange(Aggressors.Where(info => !creaturesOnly || info.Attacker is PlayerMobile));
 
                 if (list.Count > 0)
+                {
                     m = list[Utility.Random(list.Count)].Attacker;
+                }
                 else
+                {
                     m = null;
+                }
 
-                list.Clear();
-                list.TrimExcess();
+                ColUtility.Free(list);
             }
 
             return m;
@@ -7436,10 +7449,8 @@ namespace Server.Mobiles
             }
             else if (combatant != null && CanProvoke && tc >= m_NextProvoke && 0.33 > Utility.RandomDouble())
             {
-                if (DoProvoke())
-                    m_NextProvoke = tc + (int)ProvokeInterval.TotalMilliseconds;
-                else
-                    m_NextProvoke = tc + (int)TimeSpan.FromSeconds(15).TotalMilliseconds;
+                DoProvoke();
+                m_NextProvoke = tc + Utility.RandomMinMax(5000, 12500);
             }
 
             if (combatant != null && TeleportsTo && tc >= m_NextTeleport)
@@ -7879,7 +7890,7 @@ namespace Server.Mobiles
                         {
                             Mobile owner = c.ControlMaster;
 
-                            if (!c.IsStabled &&
+                            if (!c.IsStabled && !(c is BaseVendor) &&
                                 (owner == null || owner.Deleted || owner.Map != c.Map || !owner.InRange(c, 12) || !c.CanSee(owner) ||
                                  !c.InLOS(owner)))
                             {

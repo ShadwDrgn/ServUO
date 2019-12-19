@@ -173,10 +173,12 @@ namespace Server.Mobiles
 
                             if (bulkOrder is LargeBOD)
                             {
+								m_From.CloseGump(typeof (LargeBODAcceptGump));
                                 m_From.SendGump(new LargeBODAcceptGump(m_From, (LargeBOD)bulkOrder));
                             }
                             else if (bulkOrder is SmallBOD)
                             {
+								m_From.CloseGump(typeof (SmallBODAcceptGump));
                                 m_From.SendGump(new SmallBODAcceptGump(m_From, (SmallBOD)bulkOrder));
                             }
                         }
@@ -209,10 +211,12 @@ namespace Server.Mobiles
 
                                 if (bulkOrder is LargeBOD)
                                 {
+									m_From.CloseGump(typeof (LargeBODAcceptGump));
                                     m_From.SendGump(new LargeBODAcceptGump(m_From, (LargeBOD)bulkOrder));
                                 }
                                 else if (bulkOrder is SmallBOD)
                                 {
+									m_From.CloseGump(typeof (SmallBODAcceptGump));
                                     m_From.SendGump(new SmallBODAcceptGump(m_From, (SmallBOD)bulkOrder));
                                 }
                             }

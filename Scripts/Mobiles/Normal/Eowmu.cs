@@ -82,6 +82,7 @@ namespace Server.Mobiles
 
             Tamable = true;
             ControlSlots = 1;
+            MinTameSkill = 30.0;
         }
 
         public Eowmu(Serial serial)

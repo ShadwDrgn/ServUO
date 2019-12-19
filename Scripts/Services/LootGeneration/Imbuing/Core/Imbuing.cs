@@ -115,7 +115,7 @@ namespace Server.SkillHandlers
 
         public static bool OnBeforeImbue(Mobile from, Item item, int id, int value)
         {
-            return OnBeforeImbue(from, item, id, value, Imbuing.GetTotalMods(item, id), GetMaxProps(item), Imbuing.GetTotalWeight(item, id, false, true), Imbuing.GetMaxWeight(item));
+            return OnBeforeImbue(from, item, id, value, GetTotalMods(item, id), GetMaxProps(item), GetTotalWeight(item, id, false, true), Imbuing.GetMaxWeight(item));
         }
 
         public static bool OnBeforeImbue(Mobile from, Item item, int id, int value, int totalprops, int maxprops, int totalitemweight, int maxweight)
@@ -227,7 +227,8 @@ namespace Server.SkillHandlers
             typeof(ClockworkLeggings), typeof(GargishClockworkLeggings), typeof(OrcishKinMask), typeof(SavageMask), typeof(VirtuososArmbands), 
             typeof(VirtuososCap), typeof(VirtuososCollar), typeof(VirtuososEarpieces), typeof(VirtuososKidGloves), typeof(VirtuososKilt), 
             typeof(VirtuososNecklace), typeof(VirtuososTunic), typeof(BestialArms), typeof(BestialEarrings), typeof(BestialGloves), typeof(BestialGorget),
-            typeof(BestialHelm), typeof(BestialKilt), typeof(BestialLegs), typeof(BestialNecklace)
+            typeof(BestialHelm), typeof(BestialKilt), typeof(BestialLegs), typeof(BestialNecklace), typeof(BarbedWhip), typeof(BladedWhip),
+			typeof(SpikedWhip)
         };
 
         private static Type[] _NonCraftables =
@@ -285,7 +286,7 @@ namespace Server.SkillHandlers
                 }
             }*/
 
-            return Math.Round(Math.Floor(20 * skill + 10 * a * Math.Pow(e, (b / (resultWeight + c))) + 10 * w - 2400) / 1000 * (i) + bonus, 3) * 100;
+            return Math.Max(0, Math.Round(Math.Floor(20 * skill + 10 * a * Math.Pow(e, (b / (resultWeight + c))) + 10 * w - 2400) / 1000 * (i) + bonus, 3) * 100);
         }
 
         public static int GetQualityBonus(Item item)
@@ -349,8 +350,8 @@ namespace Server.SkillHandlers
                 var maxWeight = GetMaxWeight(i);
                 context.Imbue_IWmax = maxWeight;
 
-                var trueWeight = GetTotalWeight(i, id, false, true);
-                var imbuingWeight = GetTotalWeight(i, id, true, true);
+                var trueWeight = GetTotalWeight(i, id, true, true);
+                var imbuingWeight = GetTotalWeight(i, id, false, true);
                 var totalItemMods = GetTotalMods(i, id);
                 var maxint = ItemPropertyInfo.GetMaxIntensity(i, id, true);
 
@@ -442,12 +443,12 @@ namespace Server.SkillHandlers
             if (item is BaseJewel && id >= 151 && id <= 183)
             {
                 var jewel = (BaseJewel)item;
-                var skill = (SkillName)ItemPropertyInfo.GetAttribute(id);
+                var group = GetSkillGroup((SkillName)ItemPropertyInfo.GetAttribute(id));
 
-                //Removes skill bonus if jewel already exist
+                //Removes skill bonus if that group already exists on the item
                 for (int j = 0; j < 5; j++)
                 {
-                    if (jewel.SkillBonuses.GetSkill(j) == skill)
+                    if (jewel.SkillBonuses.GetBonus(j) > 0 && group.Any(sk => sk == jewel.SkillBonuses.GetSkill(j)))
                     {
                         jewel.SkillBonuses.SetBonus(j, 0.0);
                         jewel.SkillBonuses.SetSkill(j, SkillName.Alchemy);
@@ -724,17 +725,14 @@ namespace Server.SkillHandlers
                 else if (prop is SkillName)
                 {
                     SkillName skill = (SkillName)prop;
+                    var bonuses = jewel.SkillBonuses;
 
-                    if (id >= 151 && id <= 155)
-                        jewel.SkillBonuses.SetValues(0, skill, value);
-                    else if (id >= 156 && id <= 160)
-                        jewel.SkillBonuses.SetValues(1, skill, value);
-                    else if (id >= 161 && id <= 166)
-                        jewel.SkillBonuses.SetValues(2, skill, value);
-                    else if (id >= 167 && id <= 173)
-                        jewel.SkillBonuses.SetValues(3, skill, value);
-                    else if (id >= 174 && id <= 180)
-                        jewel.SkillBonuses.SetValues(4, skill, value);
+                    var index = GetAvailableSkillIndex(bonuses);
+
+                    if (index >= 0 && index <= 4)
+                    {
+                        bonuses.SetValues(index, skill, value);
+                    }
                 }
             }
 
@@ -1632,6 +1630,24 @@ namespace Server.SkillHandlers
             new SkillName[] { SkillName.Mysticism, SkillName.Bushido, SkillName.Necromancy, SkillName.Veterinary, SkillName.Stealing, SkillName.EvalInt, SkillName.Anatomy },
             new SkillName[] { SkillName.Peacemaking, SkillName.Ninjitsu, SkillName.Chivalry, SkillName.Archery, SkillName.MagicResist, SkillName.Healing, SkillName.Throwing }
         };
+
+        public static SkillName[] GetSkillGroup(SkillName skill)
+        {
+            return m_SkillGroups.FirstOrDefault(list => list.Any(sk => sk == skill));
+        }
+
+        public static int GetAvailableSkillIndex(AosSkillBonuses skills)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (skills.GetBonus(i) == 0)
+                {
+                    return i;
+                }
+            }
+
+            return 01;
+        }
         
         public static bool CheckSoulForge(Mobile from, int range)
         {

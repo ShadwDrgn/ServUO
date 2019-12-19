@@ -53,7 +53,7 @@ namespace Server.Mobiles
 
 	#region Enums
 	[Flags]
-	public enum PlayerFlag : ulong // First 16 bits are reserved for default-distro use, start custom flags at 0x00010000
+	public enum PlayerFlag
 	{
 		None = 0x00000000,
 		Glassblowing = 0x00000001,
@@ -85,7 +85,6 @@ namespace Server.Mobiles
         ToggleCutTopiaries = 0x10000000,
         HasValiantStatReward = 0x20000000,
         RefuseTrades = 0x40000000,
-        DisabledPvpWarning = 0x80000000,
     }
 
     [Flags]
@@ -95,6 +94,7 @@ namespace Server.Mobiles
         ToggleStoneOnly             = 0x00000002,
         CanBuyCarpets               = 0x00000004,
         VoidPool                    = 0x00000008,
+        DisabledPvpWarning          = 0x00000010,
     }
 
 	public enum NpcGuild
@@ -252,13 +252,6 @@ namespace Server.Mobiles
 		private List<Mobile> m_RecentlyReported;
 
         public bool UseSummoningRite { get; set; }
-
-        #region Guantlet Points
-        private double m_GauntletPoints;
-
-		[CommandProperty(AccessLevel.Administrator)]
-		public double GauntletPoints { get { return m_GauntletPoints; } set { m_GauntletPoints = value; } }
-		#endregion
 
         #region Points System
         private PointsSystemProps _PointsSystemProps;
@@ -430,22 +423,7 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public TimeSpan NpcGuildGameTime { get { return m_NpcGuildGameTime; } set { m_NpcGuildGameTime = value; } }
 
-		private int m_ToTItemsTurnedIn;
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int ToTItemsTurnedIn { get { return m_ToTItemsTurnedIn; } set { m_ToTItemsTurnedIn = value; } }
-
-		private int m_ToTTotalMonsterFame;
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int ToTTotalMonsterFame { get { return m_ToTTotalMonsterFame; } set { m_ToTTotalMonsterFame = value; } }
-
 		public int ExecutesLightningStrike { get { return m_ExecutesLightningStrike; } set { m_ExecutesLightningStrike = value; } }
-
-		private int m_VASTotalMonsterFame;
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int VASTotalMonsterFame { get { return m_VASTotalMonsterFame; } set { m_VASTotalMonsterFame = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int ToothAche { get { return BaseSweet.GetToothAche(this); } set { BaseSweet.SetToothAche(this, value, true); } }
@@ -516,8 +494,8 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public bool DisabledPvpWarning
         {
-            get { return GetFlag(PlayerFlag.DisabledPvpWarning); }
-            set { SetFlag(PlayerFlag.DisabledPvpWarning, value); }
+            get { return GetFlag(ExtendedPlayerFlag.DisabledPvpWarning); }
+            set { SetFlag(ExtendedPlayerFlag.DisabledPvpWarning, value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -2216,7 +2194,7 @@ namespace Server.Mobiles
 
                     if (info.Defender.InRange(Location, Core.GlobalMaxUpdateRange) && info.Defender.DamageEntries.Any(de => de.Damager == this))
                     {
-                        info.Defender.RegisterDamage(amount / 2, from);
+                        info.Defender.RegisterDamage(amount, from);
                     }
 
                     if (info.Defender.Player && from.CanBeHarmful(info.Defender, false))
@@ -2231,7 +2209,7 @@ namespace Server.Mobiles
 
                     if (info.Attacker.InRange(Location, Core.GlobalMaxUpdateRange) && info.Attacker.DamageEntries.Any(de => de.Damager == this))
                     {
-                        info.Attacker.RegisterDamage(amount / 2, from);
+                        info.Attacker.RegisterDamage(amount, from);
                     }
 
                     if (info.Attacker.Player && from.CanBeHarmful(info.Attacker, false))
@@ -2338,9 +2316,11 @@ namespace Server.Mobiles
 
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
-			base.GetContextMenuEntries(from, list);
+            //base.GetContextMenuEntries(from, list);
 
-			if (from == this)
+            list.Add(new PaperdollEntry(this));
+
+            if (from == this)
 			{
                 if (Core.HS && Alive)
                 {
@@ -2360,58 +2340,55 @@ namespace Server.Mobiles
                 if (Core.SA)
                 {
                     list.Add(new TitlesMenuEntry(this));
-
-					if (Alive)
-					{
-						QuestHelper.GetContextMenuEntries(list);
-					}
 				}
-                else if (Core.ML)
-                {
-                    #region Mondains Legacy
-                    if (Alive)
-                    {
-                        QuestHelper.GetContextMenuEntries(list);
 
-						if (m_RewardTitles.Count > 0)
-						{
-							list.Add(new CallbackEntry(6229, ShowChangeTitle));
-						}
-					}
-                    #endregion
+                if (Alive && Core.SA)
+                {
+                    list.Add(new Engines.Points.LoyaltyRating(this));
+                }
+
+                list.Add(new OpenBackpackEntry(this));
+
+                if (Alive && InsuranceEnabled)
+                {
+                    if (Core.SA)
+                    {
+                        list.Add(new CallbackEntry(1114299, OpenItemInsuranceMenu));
+                    }
+
+                    list.Add(new CallbackEntry(6201, ToggleItemInsurance));
+
+                    if (!Core.SA)
+                    {
+                        if (AutoRenewInsurance)
+                        {
+                            list.Add(new CallbackEntry(6202, CancelRenewInventoryInsurance));
+                        }
+                        else
+                        {
+                            list.Add(new CallbackEntry(6200, AutoRenewInventoryInsurance));
+                        }
+                    }
+                }
+                else if (Siege.SiegeShard)
+                {
+                    list.Add(new CallbackEntry(3006168, SiegeBlessItem));
+                }
+
+                if (Core.ML && Alive)
+                {
+                    QuestHelper.GetContextMenuEntries(list);
+
+                    if (!Core.SA && m_RewardTitles.Count > 0)
+                    {
+                        list.Add(new CallbackEntry(6229, ShowChangeTitle));
+                    }
                 }
 
                 if (m_Quest != null)
                 {
                     m_Quest.GetContextMenuEntries(list);
                 }
-
-			    if (Alive && Core.SA)
-			    {
-                    list.Add(new Engines.Points.LoyaltyRating(this));
-			    }
-
-				if (Alive && InsuranceEnabled)
-				{
-					list.Add(new CallbackEntry(6201, ToggleItemInsurance));
-
-					if (Core.SA)
-					{
-						list.Add(new CallbackEntry(1114299, OpenItemInsuranceMenu));
-					}
-					else if (AutoRenewInsurance)
-					{
-						list.Add(new CallbackEntry(6202, CancelRenewInventoryInsurance));
-					}
-					else
-					{
-						list.Add(new CallbackEntry(6200, AutoRenewInventoryInsurance));
-					}
-				}
-				else if (Siege.SiegeShard)
-				{
-					list.Add(new CallbackEntry(3006168, SiegeBlessItem));
-				}
 
 				if (house != null)
                 {
@@ -2472,7 +2449,15 @@ namespace Server.Mobiles
 			}
 			else
 			{
-				if (Alive && Core.AOS)
+                if (Core.HS)
+                {
+                    BaseGalleon galleon = BaseGalleon.FindGalleonAt(from.Location, from.Map);
+
+                    if (galleon != null && galleon.IsOwner(from))
+                        list.Add(new ShipAccessEntry(this, from, galleon));
+                }
+
+                if (Alive && Core.AOS)
 				{
 					Party theirParty = from.Party as Party;
 					Party ourParty = Party as Party;
@@ -4329,7 +4314,7 @@ namespace Server.Mobiles
 
         public override ApplyPoisonResult ApplyPoison(Mobile from, Poison poison)
 		{
-			if (!Alive)
+			if (!Alive || poison == null)
 			{
 				return ApplyPoisonResult.Immune;
 			}
@@ -4514,6 +4499,7 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+                case 40: // Version 40, moved gauntlet points, virtua artys and TOT turn ins to PointsSystem
                 case 39: // Version 39, removed ML quest save/load
                 case 38:
                     NextGemOfSalvationUse = reader.ReadDateTime();
@@ -4550,7 +4536,10 @@ namespace Server.Mobiles
                 case 30: goto case 29;
 				case 29:
 					{
-						m_GauntletPoints = reader.ReadDouble();
+                        if (version < 40)
+                        {
+                            PointsSystem.DoomGauntlet.SetPoints(this, reader.ReadDouble());
+                        }
 
 						m_SSNextSeed = reader.ReadDateTime();
 						m_SSSeedExpire = reader.ReadDateTime();
@@ -4570,7 +4559,10 @@ namespace Server.Mobiles
                             reader.ReadString(); // Old m_ExpTitle
                         }
 
-                        m_VASTotalMonsterFame = reader.ReadInt();
+                        if (version < 40)
+                        {
+                            PointsSystem.VirtueArtifacts.SetPoints(this, reader.ReadInt());
+                        }
 
                         if (version < 39)
                         {
@@ -4655,8 +4647,10 @@ namespace Server.Mobiles
 					}
 				case 21:
 					{
-						m_ToTItemsTurnedIn = reader.ReadEncodedInt();
-						m_ToTTotalMonsterFame = reader.ReadInt();
+                        if (version < 40)
+                        {
+                            PointsSystem.TreasuresOfTokuno.Convert(this, reader.ReadEncodedInt(), reader.ReadInt());
+                        }
 						goto case 20;
 					}
 				case 20:
@@ -4971,7 +4965,7 @@ namespace Server.Mobiles
 
 			base.Serialize(writer);
 
-			writer.Write(39); // version
+			writer.Write(40); // version
 
             writer.Write((DateTime)NextGemOfSalvationUse);
 
@@ -4999,9 +4993,6 @@ namespace Server.Mobiles
 
             // Version 30 open to take out old Queens Loyalty Info
 
-			// Version 29
-			writer.Write(m_GauntletPoints);
-
 			#region Plant System
 			writer.Write(m_SSNextSeed);
 			writer.Write(m_SSSeedExpire);
@@ -5009,12 +5000,7 @@ namespace Server.Mobiles
 			writer.Write(m_SSSeedMap);
 			#endregion
 
-            writer.Write(m_VASTotalMonsterFame);
-
             #region Mondain's Legacy
-            // Quest save/load moved to Scripts\Services\MondainsLegacyQuests\Helpers\Persistence.cs
-            //QuestWriter.Quests(writer, m_Quests);
-            //QuestWriter.Chains(writer, m_Chains);
 
             if (m_Collections == null)
 			{
@@ -5073,8 +5059,6 @@ namespace Server.Mobiles
 			ChampionTitleInfo.Serialize(writer, m_ChampionTitles);
 
 			writer.Write(m_LastValorLoss);
-			writer.WriteEncodedInt(m_ToTItemsTurnedIn);
-			writer.Write(m_ToTTotalMonsterFame); //This ain't going to be a small #.
 
 			writer.WriteEncodedInt(m_AllianceMessageHue);
 			writer.WriteEncodedInt(m_GuildMessageHue);
@@ -5757,14 +5741,7 @@ namespace Server.Mobiles
 		}
 
         public override void AddNameProperties(ObjectPropertyList list)
-        {
-            string name = Name;
-
-            if (name == null)
-            {
-                name = String.Empty;
-            }
-
+        {           
             string prefix = "";
 
             if (ShowFameTitle && Fame >= 10000)
@@ -5835,6 +5812,7 @@ namespace Server.Mobiles
             }
 
             suffix = ApplyNameSuffix(suffix);
+			string name = Name;
 
             list.Add(1050045, "{0} \t{1}\t {2}", prefix, name, suffix); // ~1_PREFIX~~2_NAME~~3_SUFFIX~
 
@@ -5958,9 +5936,12 @@ namespace Server.Mobiles
 
 			TransformContext context = TransformationSpellHelper.GetContext(this);
 
-			if (context != null && context.Type == typeof(ReaperFormSpell))
+			if (context != null)
 			{
-				return WalkFoot;
+                if ((!Core.SA && context.Type == typeof(ReaperFormSpell)) || (!Core.HS && context.Type == typeof(Server.Spells.Mysticism.StoneFormSpell)))
+                {
+                    return WalkFoot;
+                }
 			}
 
 			bool running = ((dir & Direction.Running) != 0);
