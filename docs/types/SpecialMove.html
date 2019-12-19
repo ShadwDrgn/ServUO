@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - SpecialMove</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Spells.html">Back to Server.Spells</a></h4>
+      <h2>SpecialMove</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="NinjaMove.html">NinjaMove</a>, <!-- DBG-3 --><a href="SamuraiMove.html">SamuraiMove</a>, <!-- DBG-3 --><a href="SkillMasteryMove.html">SkillMasteryMove</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="SpecialMoveContext.html">SpecialMoveContext</a>, <!-- DBG-4 --><a href="SpecialMoveTimer.html">SpecialMoveTimer</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="SpecialMove.html">SpecialMove</a>&gt; Table( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="SpecialMoveContext.html">SpecialMoveContext</a> context )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ClearAllMoves( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ClearCurrentMove( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SpecialMoveContext.html">SpecialMoveContext</a> GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SpecialMove.html">SpecialMove</a> GetCurrentMove( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SetCurrentMove( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="SpecialMove.html">SpecialMove</a> move )<br />
+      (<span style="color: blue;">ctor</span>) SpecialMove()<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> AbilityMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseMana( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> BlockedByAnimalForm( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DelayedContext( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillName.html">SkillName</a> MoveSkill( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> RequiredSkill( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ValidatesDuringHit( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> CheckGain( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckMana( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> consume )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckSkills( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAccuracyBonus( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetDamageScalar( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetPropertyBonus( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IgnoreArmor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeSwing( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnClearMove( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender, <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMiss( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ScaleMana( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> mana )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendAbilityMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Validate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+   </body>
+</html>

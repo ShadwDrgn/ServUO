@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - ChampionSpawn</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.CannedEvil.html">Back to Server.Engines.CannedEvil</a></h4>
+      <h2>ChampionSpawn : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="ChampionSpawnInfoGump.html">ChampionSpawnInfoGump</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnSlice>m__0( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GiveScrollTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> killer, <!-- DBG-0 --><a href="SpecialScroll.html">SpecialScroll</a> scroll )<br />
+      (<span style="color: blue;">ctor</span>) ChampionSpawn()<br />
+      (<span style="color: blue;">ctor</span>) ChampionSpawn( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Active( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AutoRestart( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Champion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ConfinedRoaming( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Creatures( <span style="color: blue;">get</span>; )<br />
+      TimeSpan ExpireDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime ExpireTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> GroupName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasBeenAdvanced( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Kills( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> KillsMod( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxKills( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> RandomizeType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Rank( <span style="color: blue;">get</span>; )<br />
+      TimeSpan RestartDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime RestartTime( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> SpawnArea( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> SpawnMod( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> SpawnName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpawnRadius( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StartLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ChampionSpawnType.html">ChampionSpawnType</a> Type( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> AdvanceLevel()<br />
+      <span style="color: blue;">void</span> AwardArtifact( <!-- DBG-0 --><a href="Item.html">Item</a> artifact )<br />
+      <span style="color: blue;">void</span> BeginRestart( TimeSpan ts )<br />
+      <!-- DBG-0 --><a href="ScrollOfTranscendence.html">ScrollOfTranscendence</a> CreateRandomSoT( <span style="color: blue;">bool</span> felucca )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> EndRestart()<br />
+      <span style="color: blue;">void</span> Expire()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">int</span> GetRankFor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetRedSkullLocation( <span style="color: blue;">int</span> index )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnLocation()<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnLocation( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> rect, <span style="color: blue;">int</span> range )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetWhiteSkullLocation( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">void</span> GiveArtifact( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <!-- DBG-0 --><a href="Item.html">Item</a> artifact )<br />
+      <span style="color: blue;">bool</span> IsChampionSpawn( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsEligible( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> Artifact )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChange( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLoc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnSlice()<br />
+      <span style="color: blue;">void</span> RegisterDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RegisterDamageTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> RemoveSkulls()<br />
+      <span style="color: blue;">void</span> Respawn()<br />
+      <span style="color: blue;">void</span> SendGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SetInitialSpawnArea()<br />
+      <span style="color: blue;">void</span> SetWhiteSkullCount( <span style="color: blue;">int</span> val )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Spawn()<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Spawn( Type[] types )<br />
+      <span style="color: blue;">void</span> SpawnChampion()<br />
+      <span style="color: blue;">void</span> Start( <span style="color: blue;">bool</span> serverLoad )<br />
+      <span style="color: blue;">void</span> Stop()<br />
+      <span style="color: blue;">void</span> UpdateRegion()<br />
+   </body>
+</html>

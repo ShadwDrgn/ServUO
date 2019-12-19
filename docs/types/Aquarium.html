@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Aquarium</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>Aquarium : <!-- DBG-1 --><a href="BaseAddonContainer.html">BaseAddonContainer</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IAddon.html">IAddon</a>, <!-- DBG-2.2 --><a href="IChopable.html">IChopable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="CancelVacationMode.html">CancelVacationMode</a>, <!-- DBG-4 --><a href="CollectRewardEntry.html">CollectRewardEntry</a>, <!-- DBG-4 --><a href="ExamineEntry.html">ExamineEntry</a>, <!-- DBG-4 --><a href="GMAddFood.html">GMAddFood</a>, <!-- DBG-4 --><a href="GMAddWater.html">GMAddWater</a>, <!-- DBG-4 --><a href="GMFill.html">GMFill</a>, <!-- DBG-4 --><a href="GMForceEvaluate.html">GMForceEvaluate</a>, <!-- DBG-4 --><a href="GMOpen.html">GMOpen</a>, <!-- DBG-4 --><a href="ViewEventEntry.html">ViewEventEntry</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span>[] FishHues( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Accepts( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="FishBowl.html">FishBowl</a> GetEmptyBowl( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">ctor</span>) Aquarium( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) Aquarium( <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">int</span> DeadCreatures( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BaseAddonContainerDeed.html">BaseAddonContainerDeed</a> Deed( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> DefaultWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; Events( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AquariumState.html">AquariumState</a> Food( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsFull( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> LiveCreatures( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxLiveCreatures( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> OptimalState( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> RewardAvailable( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> VacationLeft( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AquariumState.html">AquariumState</a> Water( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AddDecoration( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AddDecoration( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AddFish( <!-- DBG-0 --><a href="BaseFish.html">BaseFish</a> fish )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AddFish( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseFish.html">BaseFish</a> fish )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckItemUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="LRReason.html">LRReason</a> reject )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DropItemsToGround()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Evaluate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ExamineAquarium( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">int</span> FoodNumber()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GiveReward( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HasAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> KillFish( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDrop( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">void</span> RecountLiveCreatures()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> RemoveItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> at )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateFoodState()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateWaterState()<br />
+      <span style="color: blue;">void</span> Validate()<br />
+      <span style="color: blue;">int</span> WaterNumber()<br />
+   </body>
+</html>

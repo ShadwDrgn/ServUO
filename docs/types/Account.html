@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Account</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Accounting.html">Back to Server.Accounting</a></h4>
+      <h2>Account : <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="IGoldAccount.html">IGoldAccount</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Account.html">Account</a>&gt;, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IAccount.html">IAccount</a>&gt;, <!-- DBG-2.2 --><a href="IAccount.html">IAccount</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetTag-c__AnonStorey3.html">(Anonymous-Type)-GetTag-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-LoadAddressList-c__AnonStorey0.html">(Anonymous-Type)-LoadAddressList-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-LoadAddressList-c__AnonStorey1.html">(Anonymous-Type)-LoadAddressList-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SetTag-c__AnonStorey2.html">(Anonymous-Type)-SetTag-c__AnonStorey2</a>, <!-- DBG-4 --><a href="YoungTimer.html">YoungTimer</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> CurrencyThreshold( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <Account>m__2( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) TimeSpan <Account>m__3( TimeSpan current, <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ConvertCurrency>m__0( <!-- DBG-0 --><a href="Account.html">Account</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ConvertCurrency>m__1( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> <GetTag>m__7( <!-- DBG-0 --><a href="AccountTag.html">AccountTag</a> tag )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> <LoadAccessCheck>m__5( XmlElement ip )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <LoadAccessCheck>m__6( <span style="color: blue;">string</span> text )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <RemoveYoungStatus>m__8( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <get_TotalGameTime>m__4( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ConvertCurrency( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Connected( <!-- DBG-0 --><a href="ConnectedEventArgs.html">ConnectedEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Disconnected( <!-- DBG-0 --><a href="DisconnectedEventArgs.html">DisconnectedEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Login( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> HashMD5( <span style="color: blue;">string</span> phrase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> HashSHA1( <span style="color: blue;">string</span> phrase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> HashSHA512( <span style="color: blue;">string</span> phrase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span>[] LoadAccessCheck( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) IPAddress[] LoadAddressList( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="AccountComment.html">AccountComment</a>&gt; LoadComments( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Mobile.html">Mobile</a>[] LoadMobiles( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="AccountTag.html">AccountTag</a>&gt; LoadTags( XmlElement node )<br />
+      (<span style="color: blue;">ctor</span>) Account( XmlElement node )<br />
+      (<span style="color: blue;">ctor</span>) Account( <span style="color: blue;">string</span> username, <span style="color: blue;">string</span> password )<br />
+      <!-- DBG-0 --><a href="AccessLevel.html">AccessLevel</a> AccessLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan Age( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Banned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="AccountComment.html">AccountComment</a>&gt; Comments( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Count( <span style="color: blue;">get</span>; )<br />
+      DateTime Created( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Email( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Flags( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="HardwareInfo.html">HardwareInfo</a> HardwareInfo( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span>[] IPRestrictions( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Inactive( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Item( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastLogin( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Length( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Limit( <span style="color: blue;">get</span>; )<br />
+      IPAddress[] LoginIPs( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> PlainPassword( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Sovereigns( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="AccountTag.html">AccountTag</a>&gt; Tags( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> TotalCurrency( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan TotalGameTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TotalGold( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TotalPlat( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Username( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Young( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> _MD5Password( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> _SHA1Password( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> _SHA512Password( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddTag( <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> value )<br />
+      <span style="color: blue;">bool</span> CheckAccess( IPAddress ipAddress )<br />
+      <span style="color: blue;">bool</span> CheckAccess( <!-- DBG-0 --><a href="NetState.html">NetState</a> ns )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckPassword( <span style="color: blue;">string</span> plainPassword )<br />
+      <span style="color: blue;">void</span> CheckYoung()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <!-- DBG-0 --><a href="Account.html">Account</a> other )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <!-- DBG-0 --><a href="IAccount.html">IAccount</a> other )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositCurrency( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositGold( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositGold( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositPlat( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositPlat( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">bool</span> DepositSovereigns( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">bool</span> DepositToSecure( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold, <span style="color: blue;">out</span> <span style="color: blue;">long</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold, <span style="color: blue;">out</span> <span style="color: blue;">int</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">bool</span> GetBanTags( <span style="color: blue;">out</span> DateTime banTime, <span style="color: blue;">out</span> TimeSpan banDuration )<br />
+      <span style="color: blue;">bool</span> GetFlag( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetGoldBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetGoldBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetPlatBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetPlatBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">int</span> GetSecureAccountAmount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">string</span> GetTag( <span style="color: blue;">string</span> name )<br />
+      <span style="color: blue;">bool</span> HasAccess( <!-- DBG-0 --><a href="NetState.html">NetState</a> ns )<br />
+      <span style="color: blue;">bool</span> HasAccess( IPAddress ipAddress )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HasGoldBalance( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HasPlatBalance( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">void</span> LoadSecureAccounts( XmlElement node )<br />
+      <span style="color: blue;">void</span> LogAccess( IPAddress ipAddress )<br />
+      <span style="color: blue;">void</span> LogAccess( <!-- DBG-0 --><a href="NetState.html">NetState</a> ns )<br />
+      <span style="color: blue;">void</span> RemoveTag( <span style="color: blue;">string</span> name )<br />
+      <span style="color: blue;">void</span> RemoveYoungStatus( <span style="color: blue;">int</span> message )<br />
+      <span style="color: blue;">void</span> Save( XmlTextWriter xml )<br />
+      <span style="color: blue;">void</span> SetBanTags( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, DateTime banTime, TimeSpan banDuration )<br />
+      <span style="color: blue;">void</span> SetFlag( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> value )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SetPassword( <span style="color: blue;">string</span> plainPassword )<br />
+      <span style="color: blue;">void</span> SetSovereigns( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">void</span> SetTag( <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> value )<br />
+      <span style="color: blue;">void</span> SetUnspecifiedBan( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawCurrency( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">bool</span> WithdrawFromSecure( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawGold( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawGold( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawPlat( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawPlat( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">bool</span> WithdrawSovereigns( <span style="color: blue;">int</span> amount )<br />
+   </body>
+</html>

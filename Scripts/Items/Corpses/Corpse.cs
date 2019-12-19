@@ -275,8 +275,8 @@ namespace Server.Items
                     for (int j = 0; j < ((remainder == 0) ? attackers.Count - 1 : attackers.Count); j++)
                     {
                         Item splitItem = Mobile.LiftItemDupe(item, item.Amount - amountPerAttacker);
+			Console.WriteLine(splitItem.Name);
                         //LiftItemDupe automagically adds it as a child item to the corpse
-
                         if (!m_InstancedItems.ContainsKey(splitItem))
                         {
                             m_InstancedItems.Add(splitItem, new InstancedItemInfo(splitItem, attackers[j]));

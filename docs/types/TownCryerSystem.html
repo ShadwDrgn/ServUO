@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - TownCryerSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Services.TownCryer.html">Back to Server.Services.TownCryer</a></h4>
+      <h2>TownCryerSystem</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CityEntryCount-c__AnonStorey0.html">(Anonymous-Type)-CityEntryCount-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-HasGuildEntry-c__AnonStorey1.html">(Anonymous-Type)-HasGuildEntry-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Reload_OnCommand-c__AnonStorey2.html">(Anonymous-Type)-Reload_OnCommand-c__AnonStorey2</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="TownCryerCityEntry.html">TownCryerCityEntry</a>&gt; CityEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a>&gt; GreetingsEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="TownCryerGuildEntry.html">TownCryerGuildEntry</a>&gt; GuildEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="TownCryerModeratorEntry.html">TownCryerModeratorEntry</a>&gt; ModeratorEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="DateTime.html">DateTime</a>&gt; MysteriousPotionEffects( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> NewGreeting( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="TownCryerNewsEntry.html">TownCryerNewsEntry</a>&gt; NewsEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Timer.html">Timer</a> Timer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; TownCryerExempt( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckTimer>m__2( <!-- DBG-0 --><a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <HasCustomEntries>m__1( <!-- DBG-0 --><a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnLogin>m__0( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <Save>m__3( <!-- DBG-0 --><a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <Save>m__4( <!-- DBG-0 --><a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddEntry( <!-- DBG-0 --><a href="TownCryerGreetingEntry.html">TownCryerGreetingEntry</a> entry )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddEntry( <!-- DBG-0 --><a href="TownCryerGuildEntry.html">TownCryerGuildEntry</a> entry )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddEntry( <!-- DBG-0 --><a href="TownCryerCityEntry.html">TownCryerCityEntry</a> entry )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddEntry( <!-- DBG-0 --><a href="TownCryerModeratorEntry.html">TownCryerModeratorEntry</a> entry )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddExempt( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddMysteriousPotionEffects( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckExpiredEntries()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckTimer()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> CityEntryCount( <!-- DBG-0 --><a href="City.html">City</a> city )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CompleteQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CompleteQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <span style="color: blue;">object</span> title, <span style="color: blue;">object</span> body, <span style="color: blue;">int</span> gumpID )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ErrorToConsole( <span style="color: blue;">string</span> type, <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetCityLoc( <!-- DBG-0 --><a href="City.html">City</a> city )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetContextMenus( <!-- DBG-0 --><a href="TownCrier.html">TownCrier</a> tc, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      (<span style="color: blue;">static</span>) DateTime GetDateTime( <span style="color: blue;">string</span> text )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasCustomEntries()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasGuildEntry( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsExempt( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsGovernor( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <!-- DBG-0 --><a href="CityLoyaltySystem.html">CityLoyaltySystem</a> system )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Load( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadPreloadedMessages()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLogin( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Reload_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Save( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> UnderMysteriousPotionEffects( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> checkQuest )<br />
+   </body>
+</html>

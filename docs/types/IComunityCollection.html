@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - IComunityCollection</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>IComunityCollection</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="FactionCollectionBox.html">FactionCollectionBox</a>, <!-- DBG-3 --><a href="MoonglowDonationBox.html">MoonglowDonationBox</a>, <!-- DBG-3 --><a href="VesperDonationBox.html">VesperDonationBox</a></h4>
+      <!-- DBG-0 --><a href="Collection.html">Collection</a> CollectionID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">long</span> CurrentTier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">long</span> DailyDecay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="CollectionItem.html">CollectionItem</a>&gt; Donations( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxTier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">long</span> NextTier( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> Points( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> PreviousTier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="CollectionItem.html">CollectionItem</a>&gt; Rewards( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">long</span> StartTier( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Tier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Donate( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="CollectionItem.html">CollectionItem</a> item, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DonatePet( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> pet )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Reward( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="CollectionItem.html">CollectionItem</a> reward, <span style="color: blue;">int</span> hue )<br />
+   </body>
+</html>

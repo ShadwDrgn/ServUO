@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Auction</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Auction.html">Back to Server.Engines.Auction</a></h4>
+      <h2>Auction : <!-- DBG-2.1 --><a href="IDisposable.html">IDisposable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetBidEntry-c__AnonStorey0.html">(Anonymous-Type)-GetBidEntry-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-HouseCollapse-c__AnonStorey1.html">(Anonymous-Type)-HouseCollapse-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-ResendGumps-c__AnonStorey2.html">(Anonymous-Type)-ResendGumps-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey3.html">(Anonymous-Type)-Serialize-c__AnonStorey3</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Auction.html">Auction</a>&gt; Auctions( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <CloseGumps>m__1( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__0()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__2( <!-- DBG-0 --><a href="Auction.html">Auction</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">ctor</span>) Auction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <!-- DBG-0 --><a href="AuctionSafe.html">AuctionSafe</a> safe )<br />
+      (<span style="color: blue;">ctor</span>) Auction( <!-- DBG-0 --><a href="AuctionSafe.html">AuctionSafe</a> safe, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> AuctionItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="HistoryEntry.html">HistoryEntry</a>&gt; BidHistory( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> Buyout( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> BuyoutGold( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BuyoutPlat( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanModify( <span style="color: blue;">get</span>; )<br />
+      DateTime ClaimPeriod( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> CurrentBid( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> CurrentGoldBid( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> CurrentPlatBid( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Description( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Duration( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime EndTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasBegun( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BidEntry.html">BidEntry</a> HighestBid( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> InClaimPeriod( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> OnGoing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AuctionSafe.html">AuctionSafe</a> Safe( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> StartBid( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime StartTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; Viewers( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddToHistory( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">long</span> highBid )<br />
+      <span style="color: blue;">void</span> AddViewer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">bool</span> AuctionItemOnDisplay()<br />
+      <span style="color: blue;">bool</span> CheckModifyAuction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> checkingItem )<br />
+      <span style="color: blue;">void</span> ClaimPrize( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> CloseGumps()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Dispose()<br />
+      <span style="color: blue;">void</span> EndAuction()<br />
+      <span style="color: blue;">void</span> EndClaimPeriod()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Finalize()<br />
+      <!-- DBG-0 --><a href="BidEntry.html">BidEntry</a> GetBidEntry( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> create )<br />
+      <span style="color: blue;">void</span> HouseCollapse()<br />
+      <span style="color: blue;">void</span> OnBegin()<br />
+      <span style="color: blue;">void</span> RemoveAuction()<br />
+      <span style="color: blue;">void</span> RemoveViewer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> ResendGumps( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> TrayAuction()<br />
+      <span style="color: blue;">bool</span> TryBuyout( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> TryPlaceBid( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">long</span> bidTotal )<br />
+   </body>
+</html>

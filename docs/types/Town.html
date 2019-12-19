@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Town</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Factions.html">Back to Server.Factions</a></h4>
+      <h2>Town : <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="Britain.html">Britain</a>, <!-- DBG-3 --><a href="Magincia.html">Magincia</a>, <!-- DBG-3 --><a href="Minoc.html">Minoc</a>, <!-- DBG-3 --><a href="Moonglow.html">Moonglow</a>, <!-- DBG-3 --><a href="SkaraBrae.html">SkaraBrae</a>, <!-- DBG-3 --><a href="Trinsic.html">Trinsic</a>, <!-- DBG-3 --><a href="Vesper.html">Vesper</a>, <!-- DBG-3 --><a href="Yew.html">Yew</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Town.html">Town</a>&gt; Towns( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Town.html">Town</a> FromRegion( <!-- DBG-0 --><a href="Region.html">Region</a> reg )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GrantTownSilver_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Town.html">Town</a> Parse( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Town.html">Town</a> ReadReference( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> WriteReference( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer, <!-- DBG-0 --><a href="Town.html">Town</a> town )<br />
+      (<span style="color: blue;">ctor</span>) Town()<br />
+      <span style="color: blue;">int</span> DailyIncome( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TownDefinition.html">TownDefinition</a> Definition( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Finance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FinanceUpkeep( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="GuardList.html">GuardList</a>&gt; GuardLists( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastIncome( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastTaxChange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TownMonolith.html">TownMonolith</a> Monolith( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> NetCashFlow( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Faction.html">Faction</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Sheriff( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SheriffUpkeep( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Silver( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TownState.html">TownState</a> State( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Tax( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> TaxChangeReady( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="VendorList.html">VendorList</a>&gt; VendorLists( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> BeginOrderFiring( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      ArrayList BuildFinanceList()<br />
+      <span style="color: blue;">void</span> Capture( <!-- DBG-0 --><a href="Faction.html">Faction</a> f )<br />
+      <span style="color: blue;">void</span> CheckIncome()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">void</span> ConstructGuardLists()<br />
+      <span style="color: blue;">void</span> ConstructVendorLists()<br />
+      <span style="color: blue;">void</span> EndOrderFiring( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> obj )<br />
+      <!-- DBG-0 --><a href="GuardList.html">GuardList</a> FindGuardList( Type type )<br />
+      <!-- DBG-0 --><a href="VendorList.html">VendorList</a> FindVendorList( Type type )<br />
+      <span style="color: blue;">bool</span> IsFinance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">bool</span> IsSheriff( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> ProcessIncome()<br />
+      <span style="color: blue;">bool</span> RegisterGuard( <!-- DBG-0 --><a href="BaseFactionGuard.html">BaseFactionGuard</a> guard )<br />
+      <span style="color: blue;">bool</span> RegisterVendor( <!-- DBG-0 --><a href="BaseFactionVendor.html">BaseFactionVendor</a> vendor )<br />
+      <span style="color: blue;">void</span> StartIncomeTimer()<br />
+      <span style="color: blue;">void</span> StopIncomeTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">bool</span> UnregisterGuard( <!-- DBG-0 --><a href="BaseFactionGuard.html">BaseFactionGuard</a> guard )<br />
+      <span style="color: blue;">bool</span> UnregisterVendor( <!-- DBG-0 --><a href="BaseFactionVendor.html">BaseFactionVendor</a> vendor )<br />
+   </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - AreaEffect</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>AreaEffect</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AuraOfEnergy.html">AuraOfEnergy</a>, <!-- DBG-3 --><a href="AuraOfNausea.html">AuraOfNausea</a>, <!-- DBG-3 --><a href="EssenceOfDisease.html">EssenceOfDisease</a>, <!-- DBG-3 --><a href="EssenceOfEarth.html">EssenceOfEarth</a>, <!-- DBG-3 --><a href="ExplosiveGoo.html">ExplosiveGoo</a>, <!-- DBG-3 --><a href="Firestorm.html">Firestorm</a>, <!-- DBG-3 --><a href="PoisonBreath.html">PoisonBreath</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckThinkTrigger-c__AnonStorey1.html">(Anonymous-Type)-CheckThinkTrigger-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-FindValidTargets-c__Iterator0.html">(Anonymous-Type)-FindValidTargets-c__Iterator0</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> AuraOfEnergy( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> AuraOfNausea( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a>[] Effects( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> EssenceOfDisease( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> EssenceOfEarth( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> ExplosiveGoo( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> Firestorm( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> PoisonBreath( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckThinkTrigger( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; FindValidTargets( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <span style="color: blue;">int</span> range )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ValidTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      (<span style="color: blue;">ctor</span>) AreaEffect()<br />
+      TimeSpan CooldownDuration( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EffectRange( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ManaCost( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxRange( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> TriggerChance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> AddToCooldown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> CheckMana( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoEffect( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoEffects( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> combatant )<br />
+      <span style="color: blue;">bool</span> IsInCooldown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterEffects( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">void</span> RemoveFromCooldown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Trigger( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> combatant )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Validate( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+   </body>
+</html>

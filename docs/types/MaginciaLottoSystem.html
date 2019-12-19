@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MaginciaLottoSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.NewMagincia.html">Back to Server.Engines.NewMagincia</a></h4>
+      <h2>MaginciaLottoSystem : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-ValidatePlots-c__AnonStorey0.html">(Anonymous-Type)-ValidatePlots-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Map.html">Map</a>,<span style="color: blue;">List`1</span>&gt; FreeHousingZones( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GoldSink( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MaginciaLottoSystem.html">MaginciaLottoSystem</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] MagHousingZones( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; MessageQueue( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a>&gt; Plots( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddMessageToQueue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="NewMaginciaMessage.html">NewMaginciaMessage</a> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckHousePlacement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> center )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckMessages( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> FormatSextant( <!-- DBG-0 --><a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a> plot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> FormatSextant( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="NewMaginciaMessage.html">NewMaginciaMessage</a>&gt; GetMessages( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetPlotStoneLoc( <!-- DBG-0 --><a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a> plot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetWinnerGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasMessageInQueue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsFreeHousingZone( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsInMagincia( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsRegisteredPlot( <!-- DBG-0 --><a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a> plot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLogin( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RegisterPlot( <!-- DBG-0 --><a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a> plot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveMessageFromQueue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="NewMaginciaMessage.html">NewMaginciaMessage</a> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendMessageTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="NewMaginciaMessage.html">NewMaginciaMessage</a> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendMessageTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> title, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> body, TimeSpan expires )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> UnregisterPlot( <!-- DBG-0 --><a href="MaginciaHousingPlot.html">MaginciaHousingPlot</a> plot )<br />
+      (<span style="color: blue;">ctor</span>) MaginciaLottoSystem()<br />
+      (<span style="color: blue;">ctor</span>) MaginciaLottoSystem( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan LottoDuration( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ResetAuctions( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> CheckMessages()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> EndTimer()<br />
+      <span style="color: blue;">void</span> LoadPlots()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> ProcessTick()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> StartTimer()<br />
+      <span style="color: blue;">void</span> ValidatePlots()<br />
+   </body>
+</html>

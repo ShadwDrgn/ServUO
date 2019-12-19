@@ -27,11 +27,21 @@ namespace Server.Misc
                         Container pack = m_Mobile.Backpack;
                         if (pack != null)
                         {
-                                pack.DropItem( new Spellbook( UInt64.MaxValue ) );
-                                pack.DropItem( new NecromancerSpellbook( (UInt64)0xFFFF ) );
-                                pack.DropItem( new FallenMysticsSpellbook( UInt64.MaxValue ) );
+                                Spellbook book = new NecromancerSpellbook();
+                                book.Content = (1ul << book.BookCount) - 1;
+                                pack.DropItem(book);
+                                book = new Spellbook();
+                                book.Content = (1ul << book.BookCount) - 1;
+                                pack.DropItem(book);
+                                book = new MysticBook();
+                                book.Content = (1ul << book.BookCount) - 1;
+                                pack.DropItem(book);
+
                                 pack.DropItem( new Runebook( 10 ) );
-                                pack.DropItem( new NewAccountTicket() );
+                                pack.DropItem( new ChargerOfTheFallen() );
+                                pack.DropItem( new MythicCharacterToken() );
+                                pack.DropItem( new SoulstoneToken() );
+                                pack.DropItem( new SoulstoneToken() );
                                 a_Account.SetTag("FirstChar", "true");
                         }
                 }

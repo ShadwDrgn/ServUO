@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - CityTradeSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.CityLoyalty.html">Back to Server.Engines.CityLoyalty</a></h4>
+      <h2>CityTradeSystem : <!-- DBG-1 --><a href="PointsSystem.html">PointsSystem</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CancelTradeOrder-c__AnonStorey0.html">(Anonymous-Type)-CancelTradeOrder-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetDistance-c__AnonStorey1.html">(Anonymous-Type)-GetDistance-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SpawnCreatures-c__AnonStorey2.html">(Anonymous-Type)-SpawnCreatures-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SpawnCreatures-c__AnonStorey3.html">(Anonymous-Type)-SpawnCreatures-c__AnonStorey3</a>, <!-- DBG-4 --><a href="CityTradeEntry.html">CityTradeEntry</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="TradeOrderCrate.html">TradeOrderCrate</a>&gt; ActiveTrades( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="BaseCreature.html">BaseCreature</a>,<a href="DateTime.html">DateTime</a>&gt; Ambushers( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> KrampusEncounterActive( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GetRandomTrade>m__0( <!-- DBG-0 --><a href="BaseVendor.html">BaseVendor</a> bv )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnTick>m__1( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <SpawnCreatures>m__2( <!-- DBG-0 --><a href="Skill.html">Skill</a> s )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanFit( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">int</span> height, <span style="color: blue;">bool</span> checkMobiles, <span style="color: blue;">bool</span> requireSurface )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CancelTradeOrder( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeOrderCrate.html">TradeOrderCrate</a> crate )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckAmbush( <!-- DBG-0 --><a href="TradeOrderCrate.html">TradeOrderCrate</a> crate )<br />
+      (<span style="color: blue;">static</span>) Type[] GetCreatureType( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> wet )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetDistance( <!-- DBG-0 --><a href="TradeMinister.html">TradeMinister</a> origin, <!-- DBG-0 --><a href="City.html">City</a> destination )<br />
+      (<span style="color: blue;">static</span>) Type GetRandomTrade( <!-- DBG-0 --><a href="City.html">City</a> originCity, <!-- DBG-0 --><a href="City.html">City</a> dest, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> worth, <span style="color: blue;">ref</span> <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasTrade( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnPublicMoongateUsed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnTick()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SpawnCreatures( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">double</span> difficulty )<br />
+      (<span style="color: blue;">ctor</span>) CityTradeSystem()<br />
+      <span style="color: blue;">bool</span> AutoAdd( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="PointsType.html">PointsType</a> Loyalty( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> MaxPoints( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> Name( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ShowOnLoyaltyGump( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> CheckTitle( <!-- DBG-0 --><a href="CityTradeEntry.html">CityTradeEntry</a> entry )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">int</span> GetMaxTrades( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">string</span> GetNameFor( Type t, <span style="color: blue;">string</span> fallbackname )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="PointsEntry.html">PointsEntry</a> GetSystemEntry( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">bool</span> HasTurnIn( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeMinister.html">TradeMinister</a> minister )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnPlayerAdded( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ProcessKill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> damager )<br />
+      <span style="color: blue;">void</span> RemoveCrate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeOrderCrate.html">TradeOrderCrate</a> crate )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">bool</span> TryOfferTrade( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeMinister.html">TradeMinister</a> minister )<br />
+      <span style="color: blue;">bool</span> TryTurnIn( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeOrderCrate.html">TradeOrderCrate</a> order, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> turninMobile )<br />
+      <span style="color: blue;">bool</span> TryTurnInToSlim( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="TradeOrderCrate.html">TradeOrderCrate</a> order, <!-- DBG-0 --><a href="SlimTheFence.html">SlimTheFence</a> slim )<br />
+   </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MethodEmitter</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>MethodEmitter</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CompareTo-c__AnonStorey0.html">(Anonymous-Type)-CompareTo-c__AnonStorey0</a>, <!-- DBG-4 --><a href="CallInfo.html">CallInfo</a>, <!-- DBG-4 --><a href="Callback.html">Callback</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CompareTo>m__0( Type type, <span style="color: blue;">object</span> obj )<br />
+      (<span style="color: blue;">ctor</span>) MethodEmitter( TypeBuilder typeBuilder )<br />
+      Type Active( <span style="color: blue;">get</span>; )<br />
+      ILGenerator Generator( <span style="color: blue;">get</span>; )<br />
+      MethodBuilder Method( <span style="color: blue;">get</span>; )<br />
+      TypeBuilder Type( <span style="color: blue;">get</span>; )<br />
+      LocalBuilder AcquireTemp( Type localType )<br />
+      <span style="color: blue;">void</span> ArgumentPushed()<br />
+      <span style="color: blue;">void</span> BeginCall( MethodInfo method )<br />
+      <span style="color: blue;">void</span> Branch( Label label )<br />
+      <span style="color: blue;">void</span> BranchIfFalse( Label label )<br />
+      <span style="color: blue;">void</span> BranchIfTrue( Label label )<br />
+      <span style="color: blue;">void</span> Call( MethodInfo method )<br />
+      <span style="color: blue;">void</span> CastAs( Type type )<br />
+      <span style="color: blue;">void</span> Chain( <!-- DBG-0 --><a href="Property.html">Property</a> prop )<br />
+      <span style="color: blue;">void</span> Compare( OpCode opCode )<br />
+      <span style="color: blue;">bool</span> CompareTo( <span style="color: blue;">int</span> sign, <!-- DBG-0 --><a href="Callback.html">Callback</a> argGenerator )<br />
+      Label CreateLabel()<br />
+      LocalBuilder CreateLocal( Type localType )<br />
+      <span style="color: blue;">void</span> Define( <span style="color: blue;">string</span> name, MethodAttributes attr, Type returnType, Type[] parms )<br />
+      <span style="color: blue;">void</span> FinishCall()<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">long</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">int</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">bool</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">char</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">double</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">float</span> value )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">string</span> value )<br />
+      <span style="color: blue;">void</span> Load( Enum value )<br />
+      <span style="color: blue;">void</span> LoadArgument( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">void</span> LoadField( FieldInfo field )<br />
+      <span style="color: blue;">void</span> LoadLocal( LocalBuilder local )<br />
+      <span style="color: blue;">void</span> LoadNull()<br />
+      <span style="color: blue;">void</span> LoadNull( Type type )<br />
+      <span style="color: blue;">void</span> LogicalNot()<br />
+      <span style="color: blue;">void</span> MarkLabel( Label label )<br />
+      <span style="color: blue;">void</span> Neg()<br />
+      <span style="color: blue;">void</span> Pop()<br />
+      <span style="color: blue;">void</span> Pop( Type expected )<br />
+      <span style="color: blue;">void</span> Push( Type type )<br />
+      <span style="color: blue;">void</span> ReleaseTemp( LocalBuilder local )<br />
+      <span style="color: blue;">void</span> Return()<br />
+      <span style="color: blue;">void</span> StoreLocal( LocalBuilder local )<br />
+      <span style="color: blue;">void</span> Xor()<br />
+   </body>
+</html>

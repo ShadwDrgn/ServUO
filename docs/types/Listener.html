@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Listener</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Network.html">Back to Server.Network</a></h4>
+      <h2>Listener : <!-- DBG-2.1 --><a href="IDisposable.html">IDisposable</a></h2>
+      (<span style="color: blue;">static</span>) IPEndPoint[] EndPoints( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">ctor</span>) Listener( IPEndPoint ipep )<br />
+      Socket Bind( IPEndPoint ipep )<br />
+      <span style="color: blue;">void</span> DisplayListener()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Dispose()<br />
+      <span style="color: blue;">void</span> Enqueue( Socket socket )<br />
+      <span style="color: blue;">void</span> OnAccept( IAsyncResult asyncResult )<br />
+      <span style="color: blue;">void</span> Release( Socket socket )<br />
+      Socket[] Slice()<br />
+      <span style="color: blue;">bool</span> VerifySocket( Socket socket )<br />
+   </body>
+</html>

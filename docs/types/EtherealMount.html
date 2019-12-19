@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - EtherealMount</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>EtherealMount : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IMount.html">IMount</a>, <!-- DBG-2.2 --><a href="IMountItem.html">IMountItem</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IRewardItem.html">IRewardItem</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="ChargerOfTheFallen.html">ChargerOfTheFallen</a>, <!-- DBG-3 --><a href="EtherealAncientHellHound.html">EtherealAncientHellHound</a>, <!-- DBG-3 --><a href="EtherealBeetle.html">EtherealBeetle</a>, <!-- DBG-3 --><a href="EtherealBoura.html">EtherealBoura</a>, <!-- DBG-3 --><a href="EtherealCuSidhe.html">EtherealCuSidhe</a>, <!-- DBG-3 --><a href="EtherealHiryu.html">EtherealHiryu</a>, <!-- DBG-3 --><a href="EtherealHorse.html">EtherealHorse</a>, <!-- DBG-3 --><a href="EtherealKirin.html">EtherealKirin</a>, <!-- DBG-3 --><a href="EtherealLasher.html">EtherealLasher</a>, <!-- DBG-3 --><a href="EtherealLlama.html">EtherealLlama</a>, <!-- DBG-3 --><a href="EtherealOstard.html">EtherealOstard</a>, <!-- DBG-3 --><a href="EtherealReptalon.html">EtherealReptalon</a>, <!-- DBG-3 --><a href="EtherealRidgeback.html">EtherealRidgeback</a>, <!-- DBG-3 --><a href="EtherealSerpentineDragon.html">EtherealSerpentineDragon</a>, <!-- DBG-3 --><a href="EtherealSwampDragon.html">EtherealSwampDragon</a>, <!-- DBG-3 --><a href="EtherealTarantula.html">EtherealTarantula</a>, <!-- DBG-3 --><a href="EtherealTiger.html">EtherealTiger</a>, <!-- DBG-3 --><a href="EtherealUnicorn.html">EtherealUnicorn</a>, <!-- DBG-3 --><a href="RideablePolarBear.html">RideablePolarBear</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="EtherealSpell.html">EtherealSpell</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Dismount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> StopMounting( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">ctor</span>) EtherealMount( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) EtherealMount( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> transMountedID, <span style="color: blue;">int</span> nonTransMountedID, <span style="color: blue;">int</span> transHue, <span style="color: blue;">int</span> nonTransHue )<br />
+      <span style="color: blue;">double</span> DefaultWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DisplayLootType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> FollowerSlots( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsRewardItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="IMount.html">IMount</a> Mount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MountedHue( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MountedID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> NonTransparentMountedHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> NonTransparentMountedID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Rider( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StatueHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StatueID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Transparent( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TransparentMountedHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TransparentMountedID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddFollowers()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> MountMe()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="DeathMoveResult.html">DeathMoveResult</a> OnParentDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRiderDamaged( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> amount, <span style="color: blue;">bool</span> willKill )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> RemoveFollowers()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> UnmountMe()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Validate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+   </body>
+</html>

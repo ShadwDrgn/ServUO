@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - ScriptCompiler</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>ScriptCompiler</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-FindTypesByFullName-c__Iterator0.html">(Anonymous-Type)-FindTypesByFullName-c__Iterator0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-FindTypesByName-c__Iterator1.html">(Anonymous-Type)-FindTypesByName-c__Iterator1</a>, <!-- DBG-4 --><a href="Compiler.html">Compiler</a></h4>
+      (<span style="color: blue;">static</span>) Assembly[] Assemblies( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AppendCompilerOption( <span style="color: blue;">ref</span> StringBuilder sb, <span style="color: blue;">string</span> define )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Compile()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Compile( <span style="color: blue;">bool</span> debug )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Compile( <span style="color: blue;">bool</span> debug, <span style="color: blue;">bool</span> cache )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CompileCSScripts( <span style="color: blue;">out</span> Assembly assembly )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CompileCSScripts( <span style="color: blue;">bool</span> debug, <span style="color: blue;">out</span> Assembly assembly )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CompileCSScripts( <span style="color: blue;">bool</span> debug, <span style="color: blue;">bool</span> cache, <span style="color: blue;">out</span> Assembly assembly )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DeleteFiles( <span style="color: blue;">string</span> mask )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Display( CompilerResults results )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EnsureDirectory( <span style="color: blue;">string</span> dir )<br />
+      (<span style="color: blue;">static</span>) Type FindTypeByFullName( <span style="color: blue;">string</span> fullName )<br />
+      (<span style="color: blue;">static</span>) Type FindTypeByFullName( <span style="color: blue;">string</span> fullName, <span style="color: blue;">bool</span> ignoreCase )<br />
+      (<span style="color: blue;">static</span>) Type FindTypeByName( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) Type FindTypeByName( <span style="color: blue;">string</span> name, <span style="color: blue;">bool</span> ignoreCase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Type.html">Type</a>&gt; FindTypesByFullName( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Type.html">Type</a>&gt; FindTypesByFullName( <span style="color: blue;">string</span> name, <span style="color: blue;">bool</span> ignoreCase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Type.html">Type</a>&gt; FindTypesByName( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Type.html">Type</a>&gt; FindTypesByName( <span style="color: blue;">string</span> name, <span style="color: blue;">bool</span> ignoreCase )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetCompilerOptions( <span style="color: blue;">bool</span> debug )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">byte</span>[] GetHashCode( <span style="color: blue;">string</span> compiledFile, <span style="color: blue;">string</span>[] scriptFiles, <span style="color: blue;">bool</span> debug )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span>[] GetReferenceAssemblies()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span>[] GetScripts( <span style="color: blue;">string</span> filter )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetScripts( <span style="color: blue;">List</span>&lt;<a href="String.html">String</a>&gt; list, <span style="color: blue;">string</span> path, <span style="color: blue;">string</span> filter )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="TypeCache.html">TypeCache</a> GetTypeCache( Assembly asm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetUnusedPath( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Invoke( <span style="color: blue;">string</span> method )<br />
+   </body>
+</html>

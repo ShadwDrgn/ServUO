@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - SpawnerPersistence</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>SpawnerPersistence</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-ActionOnSpawner-c__AnonStorey2.html">(Anonymous-Type)-ActionOnSpawner-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-ConvertSpawner-c__AnonStorey5.html">(Anonymous-Type)-ConvertSpawner-c__AnonStorey5</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-ConvertSpawnerByLocation-c__AnonStorey4.html">(Anonymous-Type)-ConvertSpawnerByLocation-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DeleteSpawner-c__AnonStorey6.html">(Anonymous-Type)-DeleteSpawner-c__AnonStorey6</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Initialize-c__AnonStorey0.html">(Anonymous-Type)-Initialize-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Replace-c__AnonStorey1.html">(Anonymous-Type)-Replace-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-ReplaceSpawnersByRegionName-c__AnonStorey3.html">(Anonymous-Type)-ReplaceSpawnersByRegionName-c__AnonStorey3</a>, <!-- DBG-4 --><a href="SpawnerVersion.html">SpawnerVersion</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SpawnsConverted( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> Version( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SpawnerVersion.html">SpawnerVersion</a> VersionFlag( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckQuestQuesters>m__A( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> q )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckSmartSpawn>m__B( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> s )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ConvertHonestyItems>m__6( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <FixCampSpawnersVersion3>m__9( <!-- DBG-0 --><a href="ISpawner.html">ISpawner</a> spawner )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GenerateTramKhaldun>m__5( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> <GetSpawnList>m__C( <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <HonestyItemsVersion5>m__8()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <HonestyItemsVersion5>m__F( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__0( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__1( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__2( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__E( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> ok, <span style="color: blue;">object</span> state )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnLoad>m__4( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnSave>m__3( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <RemovePaladinsAndKrakens>m__7( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> sp )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ReplaceSpawnersByRegionName>m__D( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ActionOnSpawner( <!-- DBG-0 --><a href="ISpawner.html">ISpawner</a> spawner, Type typeCheck, <span style="color: blue;">string</span> lineCheck, <span style="color: blue;">string</span> exempt, <a href="Action-T-.html">Action</a>&lt;<a href="ISpawner.html">ISpawner</a>&gt; action, <span style="color: blue;">bool</span> inherits )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ActionOnSpawner( Type typeCheck, <span style="color: blue;">string</span> lineCheck, <span style="color: blue;">string</span> nameCheck, <span style="color: blue;">string</span> exempt, <a href="Action-T-.html">Action</a>&lt;<a href="ISpawner.html">ISpawner</a>&gt; action, <span style="color: blue;">bool</span> inherits )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddSphinx()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BrigandsVersion4()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckQuestQuesters()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckSmartSpawn( Type check, <span style="color: blue;">bool</span> subclasses )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSmartSpawn( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, Type check, <span style="color: blue;">bool</span> subclasses )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckVersion()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ConvertHonestyItems()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ConvertSpawner( <span style="color: blue;">string</span> id, DataRow dr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ConvertSpawner( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, DataRow d, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> keep )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ConvertSpawnerByLocation( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map, DataRow dr, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> keep )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ConvertXmlToSpawners()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CopyAndPlaceItem( <!-- DBG-0 --><a href="Item.html">Item</a> oldItem, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Delete( <span style="color: blue;">string</span> current )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> DeleteSpawner( <span style="color: blue;">string</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FixAddonDeco()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FixCampSpawnersVersion3()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GenerateTramKhaldun()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span>[] GetSpawnList( <!-- DBG-0 --><a href="ISpawner.html">ISpawner</a> spawner )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasSpecialXmlSpawnerString( <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a>[] spawns )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HonestyItemsVersion5()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadFromXmlSpawner( <span style="color: blue;">string</span> location, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">string</span> prefix )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LootNerf2()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLoad()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnSave( <!-- DBG-0 --><a href="WorldSaveEventArgs.html">WorldSaveEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Remove( <span style="color: blue;">string</span> toRemove, <a href="Func-T-.html">Func</a>&lt;<a href="XmlSpawner.html">XmlSpawner</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> Remove( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, <span style="color: blue;">string</span> toRemove, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> deleted )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveIceHounds()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemovePaladinsAndKrakens()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveSpawnVersion1()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveSpawnsFromXmlFile( <span style="color: blue;">string</span> directory, <span style="color: blue;">string</span> filename )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Replace( <span style="color: blue;">string</span> current, <span style="color: blue;">string</span> replace, <span style="color: blue;">string</span> check )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Replace( <!-- DBG-0 --><a href="ISpawner.html">ISpawner</a> spwner, <span style="color: blue;">string</span> current, <span style="color: blue;">string</span> replace, <span style="color: blue;">string</span> check )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Replace( <span style="color: blue;">string</span> current, <span style="color: blue;">string</span> replace, <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> check )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReplaceSolenHivesVersion8()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReplaceSpawnersByRectangle( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> rec, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">string</span> file )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReplaceSpawnersByRegionName( <span style="color: blue;">string</span> region, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">string</span> file )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReplaceTwistedWealdVersion7()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReplaceUnderworldVersion9()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RevertToXmlSpawners( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SpawnLifeStealers()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SpawnTrinsicPaladins()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ToConsole( <span style="color: blue;">string</span> str, ConsoleColor color )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> WipeSpawnersFromFile()<br />
+      (<span style="color: blue;">ctor</span>) SpawnerPersistence()<br />
+   </body>
+</html>

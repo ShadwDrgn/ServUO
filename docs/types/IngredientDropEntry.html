@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - IngredientDropEntry</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>IngredientDropEntry</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="IngredientDropEntry.html">IngredientDropEntry</a>&gt; IngredientTable( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckDrop( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc, <!-- DBG-0 --><a href="Container.html">Container</a> c )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnCreatureDeath( <!-- DBG-0 --><a href="CreatureDeathEventArgs.html">CreatureDeathEventArgs</a> e )<br />
+      (<span style="color: blue;">ctor</span>) IngredientDropEntry( Type creature, <span style="color: blue;">bool</span> dropMultiples, <span style="color: blue;">double</span> chance, Type[] ingredients )<br />
+      (<span style="color: blue;">ctor</span>) IngredientDropEntry( Type creature, <span style="color: blue;">bool</span> dropMultiples, <span style="color: blue;">string</span> region, <span style="color: blue;">double</span> chance, Type[] ingredients )<br />
+      <span style="color: blue;">double</span> Chance( <span style="color: blue;">get</span>; )<br />
+      Type CreatureType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DropMultiples( <span style="color: blue;">get</span>; )<br />
+      Type[] Ingredients( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Region( <span style="color: blue;">get</span>; )<br />
+   </body>
+</html>

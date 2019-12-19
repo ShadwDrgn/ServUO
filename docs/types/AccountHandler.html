@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - AccountHandler</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Misc.html">Back to Server.Misc</a></h4>
+      <h2>AccountHandler</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<span style="color: blue;">IPAddress</span>,<a href="Int32.html">Int32</a>&gt; IPTable( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="AccessLevel.html">AccessLevel</a> LockdownLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanCreate( IPAddress ip )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckAccount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mobCheck, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> accCheck )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Account.html">Account</a> CreateAccount( <!-- DBG-0 --><a href="NetState.html">NetState</a> state, <span style="color: blue;">string</span> un, <span style="color: blue;">string</span> pw )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_AccountLogin( <!-- DBG-0 --><a href="AccountLoginEventArgs.html">AccountLoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_DeleteRequest( <!-- DBG-0 --><a href="DeleteRequestEventArgs.html">DeleteRequestEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_GameLogin( <!-- DBG-0 --><a href="GameLoginEventArgs.html">GameLoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsForbiddenChar( <span style="color: blue;">char</span> c )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Password_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">ctor</span>) AccountHandler()<br />
+   </body>
+</html>

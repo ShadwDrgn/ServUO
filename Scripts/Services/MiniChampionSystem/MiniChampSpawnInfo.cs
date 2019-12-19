@@ -80,7 +80,7 @@ namespace Server.Engines.MiniChamps
                 bc.OnBeforeSpawn(loc, map);
                 bc.MoveToWorld(loc, map);
 
-                if (bc.Fame > Utility.Random(100000) || bc is BaseRenowned)
+                if ((!(bc is ClockworkScorpion || bc is ClanSSW || bc is ClanRibbonPlagueRat) && 10 >= Utility.Random(100)) || bc is BaseRenowned)
                 {
                     DropEssence(bc);
                 }

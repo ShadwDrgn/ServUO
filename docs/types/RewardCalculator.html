@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - RewardCalculator</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.BulkOrders.html">Back to Server.Engines.BulkOrders</a></h4>
+      <h2>RewardCalculator</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AlchemyRewardCalculator.html">AlchemyRewardCalculator</a>, <!-- DBG-3 --><a href="CarpentryRewardCalculator.html">CarpentryRewardCalculator</a>, <!-- DBG-3 --><a href="CookingRewardCalculator.html">CookingRewardCalculator</a>, <!-- DBG-3 --><a href="FletchingRewardCalculator.html">FletchingRewardCalculator</a>, <!-- DBG-3 --><a href="InscriptionRewardCalculator.html">InscriptionRewardCalculator</a>, <!-- DBG-3 --><a href="SmithRewardCalculator.html">SmithRewardCalculator</a>, <!-- DBG-3 --><a href="TailorRewardCalculator.html">TailorRewardCalculator</a>, <!-- DBG-3 --><a href="TinkeringRewardCalculator.html">TinkeringRewardCalculator</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> HarvestMap( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> NaturalDye( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> Recipe( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> RewardTitle( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> RockHammer( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> SmeltersTalisman( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> WoodsmansTalisman( <span style="color: blue;">int</span> type )<br />
+      (<span style="color: blue;">ctor</span>) RewardCalculator()<br />
+      <!-- DBG-0 --><a href="RewardGroup.html">RewardGroup</a>[] Groups( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="CollectionItem.html">CollectionItem</a>&gt; RewardCollection( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputeFame( <!-- DBG-0 --><a href="LargeBOD.html">LargeBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputeFame( <!-- DBG-0 --><a href="SmallBOD.html">SmallBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputeGold( <!-- DBG-0 --><a href="SmallBOD.html">SmallBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputeGold( <!-- DBG-0 --><a href="LargeBOD.html">LargeBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputeGold( <span style="color: blue;">int</span> quantity, <span style="color: blue;">bool</span> exceptional, <!-- DBG-0 --><a href="BulkMaterialType.html">BulkMaterialType</a> material, <span style="color: blue;">int</span> itemCount, Type type )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputePoints( <!-- DBG-0 --><a href="SmallBOD.html">SmallBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputePoints( <!-- DBG-0 --><a href="LargeBOD.html">LargeBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ComputePoints( <span style="color: blue;">int</span> quantity, <span style="color: blue;">bool</span> exceptional, <!-- DBG-0 --><a href="BulkMaterialType.html">BulkMaterialType</a> material, <span style="color: blue;">int</span> itemCount, Type type )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="RewardGroup.html">RewardGroup</a> LookupRewards( <span style="color: blue;">int</span> points )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> LookupTypePoints( <!-- DBG-0 --><a href="RewardType.html">RewardType</a>[] types, Type type )<br />
+   </body>
+</html>

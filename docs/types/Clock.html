@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Clock</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>Clock : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ISecurable.html">ISecurable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="ClockLeft.html">ClockLeft</a>, <!-- DBG-3 --><a href="ClockRight.html">ClockRight</a>, <!-- DBG-3 --><a href="ClockTime.html">ClockTime</a>, <!-- DBG-3 --><a href="HolidayTimepiece.html">HolidayTimepiece</a>, <!-- DBG-3 --><a href="WristWatch.html">WristWatch</a></h4>
+      (<span style="color: blue;">static</span>) DateTime ServerStart( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MoonPhase.html">MoonPhase</a> GetMoonPhase( <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTime( <span style="color: blue;">out</span> <span style="color: blue;">int</span> generalNumber, <span style="color: blue;">out</span> <span style="color: blue;">string</span> exactTime )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTime( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">out</span> <span style="color: blue;">int</span> generalNumber, <span style="color: blue;">out</span> <span style="color: blue;">string</span> exactTime )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTime( <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">out</span> <span style="color: blue;">int</span> hours, <span style="color: blue;">out</span> <span style="color: blue;">int</span> minutes )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTime( <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">out</span> <span style="color: blue;">int</span> generalNumber, <span style="color: blue;">out</span> <span style="color: blue;">string</span> exactTime )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTime( <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">out</span> <span style="color: blue;">int</span> hours, <span style="color: blue;">out</span> <span style="color: blue;">int</span> minutes, <span style="color: blue;">out</span> <span style="color: blue;">int</span> totalMinutes )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">ctor</span>) Clock()<br />
+      (<span style="color: blue;">ctor</span>) Clock( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) Clock( <span style="color: blue;">int</span> itemID )<br />
+      <!-- DBG-0 --><a href="SecureLevel.html">SecureLevel</a> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

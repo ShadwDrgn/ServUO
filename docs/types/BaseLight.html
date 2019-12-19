@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseLight</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseLight : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="ISecurable.html">ISecurable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IQuality.html">IQuality</a>, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="IResource.html">IResource</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BaseArtifactLight.html">BaseArtifactLight</a>, <!-- DBG-3 --><a href="BaseEquipableLight.html">BaseEquipableLight</a>, <!-- DBG-3 --><a href="Brazier.html">Brazier</a>, <!-- DBG-3 --><a href="BrazierTall.html">BrazierTall</a>, <!-- DBG-3 --><a href="Candelabra.html">Candelabra</a>, <!-- DBG-3 --><a href="CandelabraStand.html">CandelabraStand</a>, <!-- DBG-3 --><a href="CandleLarge.html">CandleLarge</a>, <!-- DBG-3 --><a href="CandleLong.html">CandleLong</a>, <!-- DBG-3 --><a href="CandleShort.html">CandleShort</a>, <!-- DBG-3 --><a href="CandleSkull.html">CandleSkull</a>, <!-- DBG-3 --><a href="DragonLamp.html">DragonLamp</a>, <!-- DBG-3 --><a href="FlamingScarecrow.html">FlamingScarecrow</a>, <!-- DBG-3 --><a href="FreshGreenLadyBug.html">FreshGreenLadyBug</a>, <!-- DBG-3 --><a href="GargoyleCandelabra.html">GargoyleCandelabra</a>, <!-- DBG-3 --><a href="GypsyWagonLamp.html">GypsyWagonLamp</a>, <!-- DBG-3 --><a href="HangingLantern.html">HangingLantern</a>, <!-- DBG-3 --><a href="HeatingStand.html">HeatingStand</a>, <!-- DBG-3 --><a href="LampPost1.html">LampPost1</a>, <!-- DBG-3 --><a href="LampPost2.html">LampPost2</a>, <!-- DBG-3 --><a href="LampPost3.html">LampPost3</a>, <!-- DBG-3 --><a href="LargeGlowingLadyBug.html">LargeGlowingLadyBug</a>, <!-- DBG-3 --><a href="PaperLantern.html">PaperLantern</a>, <!-- DBG-3 --><a href="RedHangingLantern.html">RedHangingLantern</a>, <!-- DBG-3 --><a href="RoundPaperLantern.html">RoundPaperLantern</a>, <!-- DBG-3 --><a href="ShojiLantern.html">ShojiLantern</a>, <!-- DBG-3 --><a href="StainedGlassLamp.html">StainedGlassLamp</a>, <!-- DBG-3 --><a href="TallDoubleLamp.html">TallDoubleLamp</a>, <!-- DBG-3 --><a href="TerMurStyleCandelabra.html">TerMurStyleCandelabra</a>, <!-- DBG-3 --><a href="WallSconce.html">WallSconce</a>, <!-- DBG-3 --><a href="WallTorch.html">WallTorch</a>, <!-- DBG-3 --><a href="WhiteHangingLantern.html">WhiteHangingLantern</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseLight( <span style="color: blue;">int</span> itemID )<br />
+      (<span style="color: blue;">ctor</span>) BaseLight( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Burning( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BurntOut( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> BurntOutItemID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BurntOutSound( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Crafter( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan Duration( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SecureLevel.html">SecureLevel</a> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> LitItemID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> LitSound( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerConstructed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Protected( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ItemQuality.html">ItemQuality</a> Quality( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> Resource( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> UnlitItemID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> UnlitSound( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCraftedProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Burn()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoTimer( TimeSpan delay )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Douse()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Ignite()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> OnCraft( <span style="color: blue;">int</span> quality, <span style="color: blue;">bool</span> makersMark, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool, <!-- DBG-0 --><a href="CraftItem.html">CraftItem</a> craftItem, <span style="color: blue;">int</span> resHue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> PlayLitSound()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> PlayUnlitSound()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

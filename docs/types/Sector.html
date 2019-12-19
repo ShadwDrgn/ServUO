@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Sector</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>Sector</h2>
+      (<span style="color: blue;">ctor</span>) Sector( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <!-- DBG-0 --><a href="Map.html">Map</a> owner )<br />
+      <span style="color: blue;">bool</span> Active( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="NetState.html">NetState</a>&gt; Clients( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; Items( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Mobiles( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseMulti.html">BaseMulti</a>&gt; Multis( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Map.html">Map</a> Owner( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Players( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="RegionRect.html">RegionRect</a>&gt; RegionRects( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> X( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Y( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> Activate()<br />
+      <span style="color: blue;">void</span> Add( <span style="color: blue;">ref</span> <span style="color: blue;">List</span>&lt;<span style="color: blue;">T</span>&gt; list, T value )<br />
+      <span style="color: blue;">void</span> Deactivate()<br />
+      <span style="color: blue;">void</span> OnClientChange( <!-- DBG-0 --><a href="NetState.html">NetState</a> oldState, <!-- DBG-0 --><a href="NetState.html">NetState</a> newState )<br />
+      <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Region.html">Region</a> region, <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> rect )<br />
+      <span style="color: blue;">void</span> OnLeave( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> OnLeave( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> OnLeave( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      <span style="color: blue;">void</span> OnMultiEnter( <!-- DBG-0 --><a href="BaseMulti.html">BaseMulti</a> multi )<br />
+      <span style="color: blue;">void</span> OnMultiLeave( <!-- DBG-0 --><a href="BaseMulti.html">BaseMulti</a> multi )<br />
+      <span style="color: blue;">void</span> Remove( <span style="color: blue;">ref</span> <span style="color: blue;">List</span>&lt;<span style="color: blue;">T</span>&gt; list, T value )<br />
+      <span style="color: blue;">void</span> Replace( <span style="color: blue;">ref</span> <span style="color: blue;">List</span>&lt;<span style="color: blue;">T</span>&gt; list, T oldValue, T newValue )<br />
+      <span style="color: blue;">void</span> UpdateMobileRegions()<br />
+   </body>
+</html>

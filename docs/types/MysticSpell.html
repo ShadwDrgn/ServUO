@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MysticSpell</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Spells.Mysticism.html">Back to Server.Spells.Mysticism</a></h4>
+      <h2>MysticSpell : <!-- DBG-1 --><a href="Spell.html">Spell</a>, <!-- DBG-2.2 --><a href="ISpell.html">ISpell</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AnimatedWeaponSpell.html">AnimatedWeaponSpell</a>, <!-- DBG-3 --><a href="BombardSpell.html">BombardSpell</a>, <!-- DBG-3 --><a href="CleansingWindsSpell.html">CleansingWindsSpell</a>, <!-- DBG-3 --><a href="EagleStrikeSpell.html">EagleStrikeSpell</a>, <!-- DBG-3 --><a href="EnchantSpell.html">EnchantSpell</a>, <!-- DBG-3 --><a href="HailStormSpell.html">HailStormSpell</a>, <!-- DBG-3 --><a href="HealingStoneSpell.html">HealingStoneSpell</a>, <!-- DBG-3 --><a href="MassSleepSpell.html">MassSleepSpell</a>, <!-- DBG-3 --><a href="MysticTransformationSpell.html">MysticTransformationSpell</a>, <!-- DBG-3 --><a href="NetherBoltSpell.html">NetherBoltSpell</a>, <!-- DBG-3 --><a href="NetherCycloneSpell.html">NetherCycloneSpell</a>, <!-- DBG-3 --><a href="PurgeMagicSpell.html">PurgeMagicSpell</a>, <!-- DBG-3 --><a href="RisingColossusSpell.html">RisingColossusSpell</a>, <!-- DBG-3 --><a href="SleepSpell.html">SleepSpell</a>, <!-- DBG-3 --><a href="SpellPlagueSpell.html">SpellPlagueSpell</a>, <!-- DBG-3 --><a href="SpellTriggerSpell.html">SpellTriggerSpell</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetBaseSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetBoostSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">ctor</span>) MysticSpell( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> caster, <!-- DBG-0 --><a href="Item.html">Item</a> scroll, <!-- DBG-0 --><a href="SpellInfo.html">SpellInfo</a> info )<br />
+      TimeSpan CastDelayBase( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> CastDelayFastScalar( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillName.html">SkillName</a> CastSkill( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> ChanceOffset( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SpellCircle.html">SpellCircle</a> Circle( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillName.html">SkillName</a> DamageSkill( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckCast()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckResisted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> TimeSpan GetCastDelay()<br />
+      <span style="color: blue;">virtual</span> TimeSpan GetCastRecovery()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetCastSkills( <span style="color: blue;">out</span> <span style="color: blue;">double</span> min, <span style="color: blue;">out</span> <span style="color: blue;">double</span> max )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetMana()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetResistPercent( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetResistPercentForCircle( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target, <!-- DBG-0 --><a href="SpellCircle.html">SpellCircle</a> circle )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendCastEffect()<br />
+   </body>
+</html>

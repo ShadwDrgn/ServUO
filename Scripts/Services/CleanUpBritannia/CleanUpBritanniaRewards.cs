@@ -28,6 +28,9 @@ namespace Server.Engines.CleanUpBritannia
             Rewards.Add(new CollectionItem(typeof(Mushrooms3), 0x0D10, 1023340, 0, 5000));
             Rewards.Add(new CollectionItem(typeof(Mushrooms4), 0x0D13, 1023340, 0, 5000));
             Rewards.Add(new CollectionItem(typeof(NocturneEarrings), 0x1F07, 1151243, 0x3E5, 5000));
+
+            Rewards.Add(new CollectionItem(typeof(PowerScrollBook), 0x9A95, 1155684, 0, 10000));
+            Rewards.Add(new CollectionItem(typeof(ScrollOfTranscendenceBook), 0x577E, 1151679, 0, 10000));
 			
             Rewards.Add(new CollectionItem(typeof(SherryTheMouseStatue), 0x20D0, 1080171, 0, 10000));			
 			Rewards.Add(new CollectionItem(typeof(RefinementAmalgamator), 0x9966, 1154340, 0x480, 10000));		
@@ -174,11 +177,6 @@ namespace Server.Engines.CleanUpBritannia
                 Rewards.Add(new CollectionItem(typeof(VollemHeldInCrystal), 0x1f19, 1113629, 1154, 500000));
             }
 
-            // THIS IS CUSTOM
-            Rewards.Add(new CollectionItem(typeof(HeritageToken), 0x367A, 1076596, 0, 10000));
-            Rewards.Add(new CollectionItem(typeof(SoulstoneFragmentToken ), 0x2AAA, 1071000, 0, 20000));
-            Rewards.Add(new CollectionItem(typeof(ChargerOfTheFallen), 0x2D9C, 1074816, 0, 50000));
-            Rewards.Add(new CollectionItem(typeof(MythicCharacterToken), 0x2AAA, 1152353, 0, 250000));
         }
     }
 }

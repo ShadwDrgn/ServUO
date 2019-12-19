@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PlantSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Plants.html">Back to Server.Engines.Plants</a></h4>
+      <h2>PlantSystem</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Login( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> args )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_WorldLoad()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_WorldSave( <!-- DBG-0 --><a href="WorldSaveEventArgs.html">WorldSaveEventArgs</a> args )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GrowAll()<br />
+      (<span style="color: blue;">ctor</span>) PlantSystem( <!-- DBG-0 --><a href="PlantItem.html">PlantItem</a> plant, <span style="color: blue;">bool</span> fertileDirt )<br />
+      (<span style="color: blue;">ctor</span>) PlantSystem( <!-- DBG-0 --><a href="PlantItem.html">PlantItem</a> plant, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">int</span> AvailableResources( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> AvailableSeeds( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> CurePotion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Disease( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> FertileDirt( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Fungus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlantGrowthIndicator.html">PlantGrowthIndicator</a> GrowthIndicator( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasMaladies( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> HealPotion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlantHealth.html">PlantHealth</a> Health( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Hits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Infestation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsFullCurePotion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsFullHealPotion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsFullPoisonPotion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsFullStrengthPotion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsFullWater( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> LeftResources( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> LeftSeeds( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxHits( <span style="color: blue;">get</span>; )<br />
+      DateTime NextGrowth( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlantItem.html">PlantItem</a> Plant( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Poison( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PoisonPotion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> PollenProducing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Pollinated( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlantHue.html">PlantHue</a> SeedHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlantType.html">PlantType</a> SeedType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StrengthPotion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Water( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> ApplyBeneficEffects()<br />
+      <span style="color: blue;">bool</span> ApplyMaladiesEffects()<br />
+      <span style="color: blue;">void</span> DoGrowthCheck()<br />
+      <span style="color: blue;">int</span> GetLocalizedDirtStatus()<br />
+      <span style="color: blue;">int</span> GetLocalizedHealth()<br />
+      <span style="color: blue;">void</span> Grow()<br />
+      <span style="color: blue;">void</span> Reset( <span style="color: blue;">bool</span> potions )<br />
+      <span style="color: blue;">void</span> Save( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> UpdateMaladies()<br />
+   </body>
+</html>

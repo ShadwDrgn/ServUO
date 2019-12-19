@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PeerlessAltar</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>PeerlessAltar : <!-- DBG-1 --><a href="Container.html">Container</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-Enter-c__AnonStorey2.html">(Anonymous-Type)-Enter-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-KeyStartTimer-c__AnonStorey1.html">(Anonymous-Type)-KeyStartTimer-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-OnDragDrop-c__AnonStorey0.html">(Anonymous-Type)-OnDragDrop-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SendMessage-c__AnonStorey3.html">(Anonymous-Type)-SendMessage-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SendMessage-c__AnonStorey4.html">(Anonymous-Type)-SendMessage-c__AnonStorey4</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <FinishSequence>m__4( <!-- DBG-0 --><a href="Item.html">Item</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnDragDrop>m__0( <!-- DBG-0 --><a href="PeerlessKeyArray.html">PeerlessKeyArray</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnDragDrop>m__1( <!-- DBG-0 --><a href="PeerlessKeyArray.html">PeerlessKeyArray</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnPeerlessDeath>m__6( <!-- DBG-0 --><a href="Item.html">Item</a> x )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Mobile.html">Mobile</a> <SendConfirmations>m__2( <!-- DBG-0 --><a href="PartyMemberInfo.html">PartyMemberInfo</a> info )<br />
+      (<span style="color: blue;">ctor</span>) PeerlessAltar( <span style="color: blue;">int</span> itemID )<br />
+      (<span style="color: blue;">ctor</span>) PeerlessAltar( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <!-- DBG-0 --><a href="BasePeerless.html">BasePeerless</a> Boss( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] BossBounds( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> BossLocation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime Deadline( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan DelayAfterBossSlain( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> ExitDest( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FighterCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Fighters( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseCreature.html">BaseCreature</a>&gt; Helpers( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsDecoContainer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsPublicContainer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> KeyCount( <span style="color: blue;">get</span>; )<br />
+      Type[] Keys( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MasterKey.html">MasterKey</a> MasterKey( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; MasterKeys( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BasePeerless.html">BasePeerless</a> Peerless( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ResetPeerless( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> TeleportDest( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan TimeToSlay( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <DeadlineCheck>m__7( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> x )<br />
+      <span style="color: blue;">bool</span> <Exit>m__5( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> pet )<br />
+      <span style="color: blue;">void</span> <FinishSequence>m__3( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> x )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddFighter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> fighter )<br />
+      <span style="color: blue;">void</span> AddHelper( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> helper )<br />
+      <span style="color: blue;">bool</span> AllHelpersDead()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BeginSequence( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanEnter( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> pet )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanEnter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> fighter )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="LRReason.html">LRReason</a> reject )<br />
+      <span style="color: blue;">void</span> CleanupHelpers()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ClearContainer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DeadlineCheck()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> Enter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> fighter )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Exit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> fighter )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FinishSequence()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsKey( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> KeyStartTimer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> KeyStopTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> MobileIsInBossArea( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> MobileIsInBossArea( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDrop( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnPeerlessDeath()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendConfirmations( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendMessage( <span style="color: blue;">int</span> message )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendMessage( <span style="color: blue;">int</span> message, <span style="color: blue;">object</span> param )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SpawnBoss()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StartSlayTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StopDeadlineTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StopSlayTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StopTimers()<br />
+   </body>
+</html>

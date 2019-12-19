@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - CityElection</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.CityLoyalty.html">Back to Server.Engines.CityLoyalty</a></h4>
+      <h2>CityElection</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetTotalVotes-c__AnonStorey6.html">(Anonymous-Type)-GetTotalVotes-c__AnonStorey6</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-OnRejectOffice-c__AnonStorey7.html">(Anonymous-Type)-OnRejectOffice-c__AnonStorey7</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey8.html">(Anonymous-Type)-Serialize-c__AnonStorey8</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryEndorse-c__AnonStorey1.html">(Anonymous-Type)-TryEndorse-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryEndorse-c__AnonStorey2.html">(Anonymous-Type)-TryEndorse-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryNominate-c__AnonStorey0.html">(Anonymous-Type)-TryNominate-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryVote-c__AnonStorey3.html">(Anonymous-Type)-TryVote-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryVote-c__AnonStorey4.html">(Anonymous-Type)-TryVote-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryWithdraw-c__AnonStorey5.html">(Anonymous-Type)-TryWithdraw-c__AnonStorey5</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <TryEndorse>m__0( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckConflict( DateTime[] times )<br />
+      (<span style="color: blue;">static</span>) DateTime[] ValidateStartTimes( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span>[] times )<br />
+      (<span style="color: blue;">ctor</span>) CityElection( <!-- DBG-0 --><a href="CityLoyaltySystem.html">CityLoyaltySystem</a> city )<br />
+      (<span style="color: blue;">ctor</span>) CityElection( <!-- DBG-0 --><a href="CityLoyaltySystem.html">CityLoyaltySystem</a> city, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      DateTime AutoPickGovernor( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BallotEntry.html">BallotEntry</a>&gt; Candidates( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CityLoyaltySystem.html">CityLoyaltySystem</a> City( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ElectionEnded( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ForceStart( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Ongoing( <span style="color: blue;">get</span>; )<br />
+      DateTime[] StartTimes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Time1( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Time2( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Time3( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Time4( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> <OnTick>m__1( <!-- DBG-0 --><a href="BallotEntry.html">BallotEntry</a> c )<br />
+      <span style="color: blue;">void</span> <OnTick>m__2( <!-- DBG-0 --><a href="BallotEntry.html">BallotEntry</a> entry )<br />
+      <span style="color: blue;">bool</span> CanNominate()<br />
+      <span style="color: blue;">bool</span> CanNominate( <span style="color: blue;">out</span> DateTime until )<br />
+      <span style="color: blue;">bool</span> CanVote()<br />
+      <span style="color: blue;">bool</span> CanVote( <span style="color: blue;">out</span> DateTime until )<br />
+      <span style="color: blue;">void</span> EndElection()<br />
+      <span style="color: blue;">void</span> GetDefaultStartTimes()<br />
+      <span style="color: blue;">double</span> GetStanding( <!-- DBG-0 --><a href="BallotEntry.html">BallotEntry</a> entry )<br />
+      <span style="color: blue;">int</span> GetTotalVotes()<br />
+      DateTime NextElection()<br />
+      <span style="color: blue;">void</span> OnRejectOffice( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> StartNewElection()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">bool</span> TryEndorse( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> nominee )<br />
+      <span style="color: blue;">bool</span> TryNominate( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">bool</span> TryVote( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> voter, <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> candidate )<br />
+      <span style="color: blue;">void</span> TryWithdraw( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+   </body>
+</html>

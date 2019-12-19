@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BountyQuestSpawner</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Quests.html">Back to Server.Engines.Quests</a></h4>
+      <h2>BountyQuestSpawner : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="Int32.html">Int32</a>&gt; Bounties( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BountyQuestSpawner.html">BountyQuestSpawner</a> Instance( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="SpawnZone.html">SpawnZone</a>,<a href="SpawnDefinition.html">SpawnDefinition</a>&gt; Zones( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddZone( <!-- DBG-0 --><a href="SpawnDefinition.html">SpawnDefinition</a> def )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FillHold( <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> galleon )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GenerateShipSpawner()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetRoutes_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ResetNavPoints( <!-- DBG-0 --><a href="BaseBoat.html">BaseBoat</a> boat )<br />
+      (<span style="color: blue;">ctor</span>) BountyQuestSpawner()<br />
+      (<span style="color: blue;">ctor</span>) BountyQuestSpawner( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Active( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxFel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxTokuno( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxTram( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan SpawnTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Timer.html">Timer</a> Timer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aFelJhelomCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aFelMerch1Count( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aFelMerch2Count( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aFelMoonglowCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTokunoMerchCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTokunoPirateCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTramJhelomCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTramMerch1Count( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTramMerch2Count( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> aTramMoonglowCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> bMerchantCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> bPirateCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> HandleDeath( <!-- DBG-0 --><a href="BaseShipCaptain.html">BaseShipCaptain</a> captain )<br />
+      <span style="color: blue;">bool</span> IsObjective( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">void</span> RemoveBounty( <!-- DBG-0 --><a href="BaseShipCaptain.html">BaseShipCaptain</a> pirate )<br />
+      <span style="color: blue;">void</span> RemoveMerchant( <!-- DBG-0 --><a href="BaseShipCaptain.html">BaseShipCaptain</a> merchant )<br />
+      <span style="color: blue;">void</span> RemoveSpawns()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SpawnMerchantAndGalleon( <!-- DBG-0 --><a href="SpawnZone.html">SpawnZone</a> zone, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <span style="color: blue;">void</span> SpawnPirateAndGalleon( <!-- DBG-0 --><a href="SpawnZone.html">SpawnZone</a> zone, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <span style="color: blue;">void</span> SpawnRandom()<br />
+   </body>
+</html>

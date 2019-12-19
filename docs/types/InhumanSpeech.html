@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - InhumanSpeech</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Misc.html">Back to Server.Misc</a></h4>
+      <h2>InhumanSpeech</h2>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InhumanSpeech.html">InhumanSpeech</a> Lizardman( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InhumanSpeech.html">InhumanSpeech</a> Orc( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InhumanSpeech.html">InhumanSpeech</a> Ratman( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InhumanSpeech.html">InhumanSpeech</a> Wisp( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">ctor</span>) InhumanSpeech()<br />
+      <!-- DBG-0 --><a href="IHSFlags.html">IHSFlags</a> Flags( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Hue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span>[] Keywords( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span>[] Responses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Sound( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span>[] Syllables( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> ConstructSentance( <span style="color: blue;">int</span> wordCount )<br />
+      <span style="color: blue;">string</span> ConstructWord( <span style="color: blue;">int</span> syllableCount )<br />
+      <span style="color: blue;">string</span> GetRandomResponseWord( <span style="color: blue;">List</span>&lt;<a href="String.html">String</a>&gt; keywordsFound )<br />
+      <span style="color: blue;">string</span> GetRandomSyllable()<br />
+      <span style="color: blue;">void</span> OnConstruct( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> OnDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mover, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">bool</span> OnSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> speaker, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> SayRandomTranslate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">string</span>[] sentancesInEnglish )<br />
+      <span style="color: blue;">void</span> SaySentance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">int</span> wordCount )<br />
+   </body>
+</html>

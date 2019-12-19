@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - AbilityProfile</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>AbilityProfile</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-AddAbility-c__AnonStorey3.html">(Anonymous-Type)-AddAbility-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-AddAbility-c__AnonStorey4.html">(Anonymous-Type)-AddAbility-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-AddAbility-c__AnonStorey5.html">(Anonymous-Type)-AddAbility-c__AnonStorey5</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-EnumerateAllAbilities-c__Iterator0.html">(Anonymous-Type)-EnumerateAllAbilities-c__Iterator0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-EnumerateAreaEffects-c__Iterator2.html">(Anonymous-Type)-EnumerateAreaEffects-c__Iterator2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-EnumerateSpecialAbilities-c__Iterator1.html">(Anonymous-Type)-EnumerateSpecialAbilities-c__Iterator1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-HasAbility-c__AnonStorey9.html">(Anonymous-Type)-HasAbility-c__AnonStorey9</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-IsNaturalAbility-c__AnonStoreyB.html">(Anonymous-Type)-IsNaturalAbility-c__AnonStoreyB</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-IsRuleBreaker-c__AnonStoreyA.html">(Anonymous-Type)-IsRuleBreaker-c__AnonStoreyA</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-RemoveAbility-c__AnonStorey6.html">(Anonymous-Type)-RemoveAbility-c__AnonStorey6</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-RemoveAbility-c__AnonStorey7.html">(Anonymous-Type)-RemoveAbility-c__AnonStorey7</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-RemoveAbility-c__AnonStorey8.html">(Anonymous-Type)-RemoveAbility-c__AnonStorey8</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <AbilityCount>m__1( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CanChooseMagicalAbility>m__2( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CanChooseSpecialAbility>m__4( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CanChooseSpecialAbility>m__5( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnAddAbility>m__0( <!-- DBG-0 --><a href="TrainingPointRequirement.html">TrainingPointRequirement</a> r )<br />
+      (<span style="color: blue;">ctor</span>) AbilityProfile( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">ctor</span>) AbilityProfile( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; Advancements( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a>[] AreaEffects( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> Creature( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> DamageIndex( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> MagicalAbility( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RegenHits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RegenMana( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RegenStam( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a>[] SpecialAbilities( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> TokunoTame( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a>[] WeaponAbilities( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> <CanChooseSpecialAbility>m__3( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> abil )<br />
+      <span style="color: blue;">int</span> AbilityCount()<br />
+      <span style="color: blue;">bool</span> AddAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">bool</span> AddAbility( <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skill, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">bool</span> AddAbility( <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a> ability, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">bool</span> AddAbility( <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> ability, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">bool</span> AddAbility( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> ability, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">void</span> AddMagicalAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability )<br />
+      <span style="color: blue;">void</span> AddPetAdvancement( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">bool</span> CanAddAbility( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">bool</span> CanChooseAreaEffect()<br />
+      <span style="color: blue;">bool</span> CanChooseMagicalAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability )<br />
+      <span style="color: blue;">bool</span> CanChooseSpecialAbility( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a>[] list )<br />
+      <span style="color: blue;">bool</span> CanChooseWeaponAbility()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Object.html">Object</a>&gt; EnumerateAllAbilities()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="AreaEffect.html">AreaEffect</a>&gt; EnumerateAreaEffects()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="SpecialAbility.html">SpecialAbility</a>&gt; EnumerateSpecialAbilities()<br />
+      <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a>[] GetAreaEffects()<br />
+      <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a>[] GetSpecialAbilities()<br />
+      <span style="color: blue;">bool</span> HasAbility( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">bool</span> HasCustomized()<br />
+      <span style="color: blue;">bool</span> HasSpecialMagicalAbility()<br />
+      <span style="color: blue;">bool</span> IsNaturalAbility( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">bool</span> IsRuleBreaker( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> ability )<br />
+      <span style="color: blue;">bool</span> IsSpecialMagicalAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability )<br />
+      <span style="color: blue;">void</span> OnAddAbility( <span style="color: blue;">object</span> newAbility, <span style="color: blue;">bool</span> advancement )<br />
+      <span style="color: blue;">void</span> OnRemoveMagicalAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> oldAbility, <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> newAbility )<br />
+      <span style="color: blue;">void</span> OnTame()<br />
+      <span style="color: blue;">void</span> RemoveAbility( <!-- DBG-0 --><a href="AreaEffect.html">AreaEffect</a> ability )<br />
+      <span style="color: blue;">void</span> RemoveAbility( <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a> ability )<br />
+      <span style="color: blue;">void</span> RemoveAbility( <!-- DBG-0 --><a href="SpecialAbility.html">SpecialAbility</a> ability )<br />
+      <span style="color: blue;">void</span> RemoveAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability )<br />
+      <span style="color: blue;">void</span> RemovePetAdvancement( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">void</span> RemoveSpecialMagicalAbility( <!-- DBG-0 --><a href="MagicalAbility.html">MagicalAbility</a> ability )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+   </body>
+</html>

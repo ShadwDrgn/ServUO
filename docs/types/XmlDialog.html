@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - XmlDialog</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.XmlSpawner2.html">Back to Server.Engines.XmlSpawner2</a></h4>
+      <h2>XmlDialog : <!-- DBG-1 --><a href="XmlAttachment.html">XmlAttachment</a>, <!-- DBG-2.2 --><a href="IXmlAttachment.html">IXmlAttachment</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="ConfirmSaveGump.html">ConfirmSaveGump</a>, <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a>, <!-- DBG-4 --><a href="LoadNPCTarget.html">LoadNPCTarget</a>, <!-- DBG-4 --><a href="SaveNPCTarget.html">SaveNPCTarget</a>, <!-- DBG-4 --><a href="SpeechEntry.html">SpeechEntry</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AssignSettings( <span style="color: blue;">string</span> argname, <span style="color: blue;">string</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DialogGumpCallback( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> invoker, <span style="color: blue;">string</span> response )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadNPC_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SaveNPC_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">ctor</span>) XmlDialog()<br />
+      (<span style="color: blue;">ctor</span>) XmlDialog( <!-- DBG-0 --><a href="ASerial.html">ASerial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) XmlDialog( <span style="color: blue;">string</span> ConfigFile )<br />
+      <span style="color: blue;">string</span> Action( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> ActivePlayer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowGhostTrig( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowNPCTrigger( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Condition( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> ConfigFile( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SpeechEntry.html">SpeechEntry</a> CurrentEntry( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> DependsOn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DoReset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> EntryNumber( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan GameTOD( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Gump( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnMovement( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnSpeech( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IgnoreCarried( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsActive( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Keywords( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastInteraction( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LoadConfig( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LockConversation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="MoonPhase.html">MoonPhase</a> MoonPhase( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> NoTriggerOnCarried( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Pause( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PrePause( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ProximityRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RealDay( <span style="color: blue;">get</span>; )<br />
+      DayOfWeek RealDayOfWeek( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RealMonth( <span style="color: blue;">get</span>; )<br />
+      TimeSpan RealTOD( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ResetRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan ResetTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> ResponseString( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Running( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      ArrayList SpeechEntries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpeechHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpeechPace( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="MessageType.html">MessageType</a> SpeechStyle( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Text( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AccessLevel.html">AccessLevel</a> TriggerAccessLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> TriggerOnCarried( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CheckDependsOn( <!-- DBG-0 --><a href="SpeechEntry.html">SpeechEntry</a> s, <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">void</span> CheckForReset()<br />
+      <span style="color: blue;">void</span> DelayedSpeech( <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">void</span> DeleteTextEntryBook()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoLoadNPC( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> filename )<br />
+      <span style="color: blue;">void</span> DoSaveNPC( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> filename, <span style="color: blue;">bool</span> updateconfig )<br />
+      <span style="color: blue;">void</span> DoTimer( TimeSpan delay, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> trigmob )<br />
+      <span style="color: blue;">void</span> ExecuteAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">string</span> action )<br />
+      <span style="color: blue;">void</span> ExecuteGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">string</span> gumpstring )<br />
+      <!-- DBG-0 --><a href="SpeechEntry.html">SpeechEntry</a> FindMatchingKeyword( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> keyword, <span style="color: blue;">int</span> currententryid )<br />
+      <!-- DBG-0 --><a href="SpeechEntry.html">SpeechEntry</a> GetEntry( <span style="color: blue;">int</span> entryid )<br />
+      <span style="color: blue;">bool</span> IsInRange( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e1, <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e2, <span style="color: blue;">int</span> range )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="MovementEventArgs.html">MovementEventArgs</a> e )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      <span style="color: blue;">bool</span> ProcessSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">string</span> speech )<br />
+      <span style="color: blue;">void</span> ReportError( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">string</span> status_str )<br />
+      <span style="color: blue;">void</span> Reset()<br />
+      <span style="color: blue;">bool</span> SaveFile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, DataSet ds, <span style="color: blue;">string</span> dirname, <span style="color: blue;">string</span> configname, <span style="color: blue;">bool</span> updateconfig )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">bool</span> ValidMovementTrig( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> ValidSpeechTrig( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+   </body>
+</html>

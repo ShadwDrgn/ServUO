@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - WeaponAbility</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>WeaponAbility</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="WhirlwindAttack.html">WhirlwindAttack</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="WeaponAbilityContext.html">WeaponAbilityContext</a>, <!-- DBG-4 --><a href="WeaponAbilityTimer.html">WeaponAbilityTimer</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a>[] Abilities( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) Hashtable Table( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="WeaponAbilityContext.html">WeaponAbilityContext</a> context )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ClearCurrentAbility( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_SetAbility( <!-- DBG-0 --><a href="SetAbilityEventArgs.html">SetAbilityEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="WeaponAbilityContext.html">WeaponAbilityContext</a> GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a> GetCurrentAbility( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsWeaponAbility( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="WeaponAbilityContext.html">WeaponAbilityContext</a> context )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SetCurrentAbility( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="WeaponAbility.html">WeaponAbility</a> a )<br />
+      (<span style="color: blue;">ctor</span>) WeaponAbility()<br />
+      <span style="color: blue;">int</span> AccuracyBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseMana( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ConsumeAmmo( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> DamageScalar( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> RequiresSE( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ValidatesDuringHit( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CalculateMana( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckMana( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> consume )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckSkills( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckWeaponSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetRequiredSecondarySkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetRequiredSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="SkillName.html">SkillName</a> GetSecondarySkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillName )<br />
+      <span style="color: blue;">int</span> GetSkillLocalization( <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skill )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetSkillTotal( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeSwing( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender, <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMiss( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> RequiresSecondarySkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Validate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+   </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MaginciaBazaar</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.NewMagincia.html">Back to Server.Engines.NewMagincia</a></h4>
+      <h2>MaginciaBazaar : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="Phase.html">Phase</a></h4>
+      (<span style="color: blue;">static</span>) TimeSpan GetLongAuctionTime( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) TimeSpan GetShortAuctionTime( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MaginciaBazaar.html">MaginciaBazaar</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="BidEntry.html">BidEntry</a>&gt; NextAvailable( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="MaginciaBazaarPlot.html">MaginciaBazaarPlot</a>&gt; Plots( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="Int32.html">Int32</a>&gt; Reserve( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddToReserve( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AwardPlot( <!-- DBG-0 --><a href="MaginciaPlotAuction.html">MaginciaPlotAuction</a> auction, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> winner, <span style="color: blue;">int</span> highest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DeductReserve( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetBidMatching( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MaginciaBazaarPlot.html">MaginciaBazaarPlot</a> GetBiddingPlot( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MaginciaBazaarPlot.html">MaginciaBazaarPlot</a> GetBiddingPlotForAccount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetNextAvailableBid( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="MaginciaBazaarPlot.html">MaginciaBazaarPlot</a> GetPlot( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="StorageEntry.html">StorageEntry</a> GetStorageEntry( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasPlot( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsActivePlot( <!-- DBG-0 --><a href="MaginciaBazaarPlot.html">MaginciaBazaarPlot</a> plot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsBiddingNextAvailable( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSameAccount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> checkAgainst )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSameAccount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> checkAgainst, <span style="color: blue;">bool</span> checkLink )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadPlots()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> MakeBidNextAvailable( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RegisterPlot( <!-- DBG-0 --><a href="PlotDef.html">PlotDef</a> plotDef )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveBidNextAvailable( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveFromStorage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> RetractBid( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> TryRetractBid( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">ctor</span>) MaginciaBazaar()<br />
+      (<span style="color: blue;">ctor</span>) MaginciaBazaar( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Phase.html">Phase</a> PlotPhase( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> ActivatePlots()<br />
+      <span style="color: blue;">void</span> AddInventoryToWarehouse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <!-- DBG-0 --><a href="BaseBazaarBroker.html">BaseBazaarBroker</a> broker )<br />
+      <span style="color: blue;">void</span> AddPlotSigns()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> EndTimer()<br />
+      <span style="color: blue;">bool</span> HasActiveBid( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> StartTimer()<br />
+   </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseDoor</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseDoor : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ITelekinesisable.html">ITelekinesisable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="ILockable.html">ILockable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BarredMetalDoor.html">BarredMetalDoor</a>, <!-- DBG-3 --><a href="BarredMetalDoor2.html">BarredMetalDoor2</a>, <!-- DBG-3 --><a href="BaseHouseDoor.html">BaseHouseDoor</a>, <!-- DBG-3 --><a href="ClothSlidingDoor.html">ClothSlidingDoor</a>, <!-- DBG-3 --><a href="DarkWoodDoor.html">DarkWoodDoor</a>, <!-- DBG-3 --><a href="DarkWoodGate.html">DarkWoodGate</a>, <!-- DBG-3 --><a href="IronGate.html">IronGate</a>, <!-- DBG-3 --><a href="IronGateShort.html">IronGateShort</a>, <!-- DBG-3 --><a href="LightWoodDoor.html">LightWoodDoor</a>, <!-- DBG-3 --><a href="LightWoodGate.html">LightWoodGate</a>, <!-- DBG-3 --><a href="MediumWoodDoor.html">MediumWoodDoor</a>, <!-- DBG-3 --><a href="MetalDoor.html">MetalDoor</a>, <!-- DBG-3 --><a href="MetalDoor2.html">MetalDoor2</a>, <!-- DBG-3 --><a href="PaperSlidingDoor.html">PaperSlidingDoor</a>, <!-- DBG-3 --><a href="PortcullisEW.html">PortcullisEW</a>, <!-- DBG-3 --><a href="PortcullisNS.html">PortcullisNS</a>, <!-- DBG-3 --><a href="RattanDoor.html">RattanDoor</a>, <!-- DBG-3 --><a href="SecretDungeonDoor.html">SecretDungeonDoor</a>, <!-- DBG-3 --><a href="SecretLightWoodDoor.html">SecretLightWoodDoor</a>, <!-- DBG-3 --><a href="SecretStoneDoor1.html">SecretStoneDoor1</a>, <!-- DBG-3 --><a href="SecretStoneDoor2.html">SecretStoneDoor2</a>, <!-- DBG-3 --><a href="SecretStoneDoor3.html">SecretStoneDoor3</a>, <!-- DBG-3 --><a href="SecretWoodenDoor.html">SecretWoodenDoor</a>, <!-- DBG-3 --><a href="StrongWoodDoor.html">StrongWoodDoor</a>, <!-- DBG-3 --><a href="WoodenSlidingDoor.html">WoodenSlidingDoor</a>, <!-- DBG-3 --><a href="WrongBarredMetalDoor.html">WrongBarredMetalDoor</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ChainLink_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ChainLink_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> targeted, <span style="color: blue;">object</span> state )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_OpenDoorMacroUsed( <!-- DBG-0 --><a href="OpenDoorMacroEventArgs.html">OpenDoorMacroEventArgs</a> args )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetOffset( <!-- DBG-0 --><a href="DoorFacing.html">DoorFacing</a> facing )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Link_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Link_OnFirstTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> targeted )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Link_OnSecondTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> targeted, <span style="color: blue;">object</span> state )<br />
+      (<span style="color: blue;">ctor</span>) BaseDoor( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseDoor( <span style="color: blue;">int</span> closedID, <span style="color: blue;">int</span> openedID, <span style="color: blue;">int</span> openedSound, <span style="color: blue;">int</span> closedSound, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> offset )<br />
+      <span style="color: blue;">int</span> ClosedID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ClosedSound( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">uint</span> KeyValue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> Link( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Locked( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> Offset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Open( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> OpenedID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> OpenedSound( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UseChainedFunctionality( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanClose()<br />
+      <span style="color: blue;">bool</span> CheckFit( <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <span style="color: blue;">int</span> height )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseDoor.html">BaseDoor</a>&gt; GetChain()<br />
+      <span style="color: blue;">bool</span> IsFreeToClose()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsInside( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnClosed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnOpened( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTelekinesis( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Use( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> UseLocks()<br />
+   </body>
+</html>

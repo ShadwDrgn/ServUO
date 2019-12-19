@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseDecayingItem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseDecayingItem : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AquaGem.html">AquaGem</a>, <!-- DBG-3 --><a href="BearingAssembly.html">BearingAssembly</a>, <!-- DBG-3 --><a href="BrightDaemonBlood.html">BrightDaemonBlood</a>, <!-- DBG-3 --><a href="BrokenShipwreckRemains.html">BrokenShipwreckRemains</a>, <!-- DBG-3 --><a href="BurlyBone.html">BurlyBone</a>, <!-- DBG-3 --><a href="BurstingBrimstone.html">BurstingBrimstone</a>, <!-- DBG-3 --><a href="ClockworkMechanism.html">ClockworkMechanism</a>, <!-- DBG-3 --><a href="CompletedClockworkAssembly.html">CompletedClockworkAssembly</a>, <!-- DBG-3 --><a href="CopperPuzzleKey.html">CopperPuzzleKey</a>, <!-- DBG-3 --><a href="DreamSerpentCharm.html">DreamSerpentCharm</a>, <!-- DBG-3 --><a href="DreamSerpentScale.html">DreamSerpentScale</a>, <!-- DBG-3 --><a href="ExodusSummoningAlter.html">ExodusSummoningAlter</a>, <!-- DBG-3 --><a href="ExodusSummoningRite.html">ExodusSummoningRite</a>, <!-- DBG-3 --><a href="ExodusTomeAltar.html">ExodusTomeAltar</a>, <!-- DBG-3 --><a href="ExoticToolkit.html">ExoticToolkit</a>, <!-- DBG-3 --><a href="ExperimentalGem.html">ExperimentalGem</a>, <!-- DBG-3 --><a href="FlyWheel.html">FlyWheel</a>, <!-- DBG-3 --><a href="GoldPuzzleKey.html">GoldPuzzleKey</a>, <!-- DBG-3 --><a href="GoldenCompass.html">GoldenCompass</a>, <!-- DBG-3 --><a href="GuardsmansRope.html">GuardsmansRope</a>, <!-- DBG-3 --><a href="IceWyrmScale.html">IceWyrmScale</a>, <!-- DBG-3 --><a href="LockerKey.html">LockerKey</a>, <!-- DBG-3 --><a href="MagicDrakeWing.html">MagicDrakeWing</a>, <!-- DBG-3 --><a href="MagicKey.html">MagicKey</a>, <!-- DBG-3 --><a href="MazePuzzleItem.html">MazePuzzleItem</a>, <!-- DBG-3 --><a href="MechanicalComponent.html">MechanicalComponent</a>, <!-- DBG-3 --><a href="MightyMandrake.html">MightyMandrake</a>, <!-- DBG-3 --><a href="OrcishSchematics.html">OrcishSchematics</a>, <!-- DBG-3 --><a href="PerfectBlackPearl.html">PerfectBlackPearl</a>, <!-- DBG-3 --><a href="Phylactery.html">Phylactery</a>, <!-- DBG-3 --><a href="PowerCore.html">PowerCore</a>, <!-- DBG-3 --><a href="PristineCrystalLotus.html">PristineCrystalLotus</a>, <!-- DBG-3 --><a href="PunchCard.html">PunchCard</a>, <!-- DBG-3 --><a href="SalvagerSuitPlans.html">SalvagerSuitPlans</a>, <!-- DBG-3 --><a href="ShadowguardApple.html">ShadowguardApple</a>, <!-- DBG-3 --><a href="ShadowguardBottleOfLiquor.html">ShadowguardBottleOfLiquor</a>, <!-- DBG-3 --><a href="ShadowguardCanal.html">ShadowguardCanal</a>, <!-- DBG-3 --><a href="SoulbinderTear.html">SoulbinderTear</a>, <!-- DBG-3 --><a href="StrongboxKey.html">StrongboxKey</a>, <!-- DBG-3 --><a href="UnderworldPuzzleItem.html">UnderworldPuzzleItem</a>, <!-- DBG-3 --><a href="UnknownShipwreck.html">UnknownShipwreck</a>, <!-- DBG-3 --><a href="WireSpool.html">WireSpool</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseDecayingItem( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseDecayingItem( <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">int</span> Lifespan( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TimeLeft( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UseSeconds( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Decay()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Slice()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StartTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StopTimer()<br />
+   </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - NetState</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Network.html">Back to Server.Network</a></h4>
+      <h2>NetState : <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="NetState.html">NetState</a>&gt;</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="AsyncState.html">AsyncState</a>, <!-- DBG-4 --><a href="ProtocolChanges.html">ProtocolChanges</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> CoalesceSleep( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GumpCap( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> HuePickerCap( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="NetState.html">NetState</a>&gt; Instances( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> MenuCap( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BufferPool.html">BufferPool</a> ReceiveBuffers( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BufferPool.html">BufferPool</a> SendBuffers( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckAllAlive()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FlushAll()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Pause()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ProcessDisposedQueue()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Resume()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> TraceException( Exception ex )<br />
+      (<span style="color: blue;">ctor</span>) NetState( Socket socket, <!-- DBG-0 --><a href="MessagePump.html">MessagePump</a> messagePump )<br />
+      <!-- DBG-0 --><a href="IAccount.html">IAccount</a> Account( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      IPAddress Address( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">uint</span> AuthID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BlockAllPackets( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BuffIcon( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ByteQueue.html">ByteQueue</a> Buffer( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="CityInfo.html">CityInfo</a>[] CityInfo( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CompressionEnabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan ConnectedFor( <span style="color: blue;">get</span>; )<br />
+      DateTime ConnectedOn( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ContainerGridLines( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DamagePacket( <span style="color: blue;">get</span>; )<br />
+      <a href="Nullable-T-.html">Nullable</a>&lt;<a href="Boolean.html">Boolean</a>&gt; Encrypted( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> EndlessJourney( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Expansion.html">Expansion</a> Expansion( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ExpansionInfo.html">ExpansionInfo</a> ExpansionInfo( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ExtendedStatus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ExtendedSupportedFeatures( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ClientFlags.html">ClientFlags</a> Flags( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Gump.html">Gump</a>&gt; Gumps( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HighSeas( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="HuePicker.html">HuePicker</a>&gt; HuePickers( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsDisposing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsEnhancedClient( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsSAClient( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsUOTDClient( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="IMenu.html">IMenu</a>&gt; Menus( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Mobile( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NewCharacterCreation( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NewCharacterList( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NewHaven( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NewMobileIncoming( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NewSecureTrading( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NewSpellbook( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="IPacketEncoder.html">IPacketEncoder</a> PacketEncoder( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="IPacketEncryptor.html">IPacketEncryptor</a> PacketEncryptor( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Running( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">uint</span> Seed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Seeded( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SentFirstPacket( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Sequence( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ServerInfo.html">ServerInfo</a>[] ServerInfo( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Socket Socket( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> StygianAbyss( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SecureTrade.html">SecureTrade</a>&gt; Trades( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> UltimaStore( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Unpack( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> UpdateRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ClientVersion.html">ClientVersion</a> Version( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddGump( <!-- DBG-0 --><a href="Gump.html">Gump</a> gump )<br />
+      <span style="color: blue;">void</span> AddHuePicker( <!-- DBG-0 --><a href="HuePicker.html">HuePicker</a> huePicker )<br />
+      <span style="color: blue;">void</span> AddMenu( <!-- DBG-0 --><a href="IMenu.html">IMenu</a> menu )<br />
+      <!-- DBG-0 --><a href="SecureTradeContainer.html">SecureTradeContainer</a> AddTrade( <!-- DBG-0 --><a href="NetState.html">NetState</a> state )<br />
+      <span style="color: blue;">void</span> CancelAllTrades()<br />
+      <span style="color: blue;">void</span> CheckAlive( <span style="color: blue;">long</span> curTicks )<br />
+      <span style="color: blue;">void</span> ClearGumps()<br />
+      <span style="color: blue;">void</span> ClearHuePickers()<br />
+      <span style="color: blue;">void</span> ClearMenus()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <!-- DBG-0 --><a href="NetState.html">NetState</a> other )<br />
+      <span style="color: blue;">void</span> Dispose()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Dispose( <span style="color: blue;">bool</span> flush )<br />
+      <!-- DBG-0 --><a href="SecureTrade.html">SecureTrade</a> FindTrade( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <!-- DBG-0 --><a href="SecureTradeContainer.html">SecureTradeContainer</a> FindTradeContainer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> Flush()<br />
+      <!-- DBG-0 --><a href="PacketHandler.html">PacketHandler</a> GetHandler( <span style="color: blue;">int</span> packetID )<br />
+      <span style="color: blue;">void</span> InternalBeginReceive()<br />
+      <span style="color: blue;">void</span> LaunchBrowser( <span style="color: blue;">string</span> url )<br />
+      <span style="color: blue;">void</span> OnReceive( IAsyncResult asyncResult )<br />
+      <span style="color: blue;">void</span> OnSend( IAsyncResult asyncResult )<br />
+      <span style="color: blue;">void</span> RemoveGump( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">void</span> RemoveGump( <!-- DBG-0 --><a href="Gump.html">Gump</a> gump )<br />
+      <span style="color: blue;">void</span> RemoveHuePicker( <!-- DBG-0 --><a href="HuePicker.html">HuePicker</a> huePicker )<br />
+      <span style="color: blue;">void</span> RemoveHuePicker( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">void</span> RemoveMenu( <!-- DBG-0 --><a href="IMenu.html">IMenu</a> menu )<br />
+      <span style="color: blue;">void</span> RemoveMenu( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">void</span> RemoveTrade( <!-- DBG-0 --><a href="SecureTrade.html">SecureTrade</a> trade )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Send( <!-- DBG-0 --><a href="Packet.html">Packet</a> p )<br />
+      <span style="color: blue;">void</span> Start()<br />
+      <span style="color: blue;">bool</span> SupportsExpansion( <!-- DBG-0 --><a href="Expansion.html">Expansion</a> ex )<br />
+      <span style="color: blue;">bool</span> SupportsExpansion( <!-- DBG-0 --><a href="ExpansionInfo.html">ExpansionInfo</a> info )<br />
+      <span style="color: blue;">bool</span> SupportsExpansion( <!-- DBG-0 --><a href="ExpansionInfo.html">ExpansionInfo</a> info, <span style="color: blue;">bool</span> checkCoreExpansion )<br />
+      <span style="color: blue;">bool</span> SupportsExpansion( <!-- DBG-0 --><a href="Expansion.html">Expansion</a> ex, <span style="color: blue;">bool</span> checkCoreExpansion )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">void</span> ValidateAllTrades()<br />
+      <span style="color: blue;">void</span> WriteConsole( <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> WriteConsole( <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+   </body>
+</html>

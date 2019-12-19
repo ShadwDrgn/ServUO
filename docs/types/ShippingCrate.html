@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - ShippingCrate</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>ShippingCrate : <!-- DBG-1 --><a href="SmallCrate.html">SmallCrate</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="ITelekinesisable.html">ITelekinesisable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IShipwreckedItem.html">IShipwreckedItem</a>, <!-- DBG-2.2 --><a href="ILockpickable.html">ILockpickable</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="ILockable.html">ILockable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IQuality.html">IQuality</a>, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="IResource.html">IResource</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+      (<span style="color: blue;">ctor</span>) ShippingCrate( <!-- DBG-0 --><a href="ProfessionalFisherQuest.html">ProfessionalFisherQuest</a> quest )<br />
+      (<span style="color: blue;">ctor</span>) ShippingCrate( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">int</span> DefaultMaxWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DisplaysContent( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ProfessionalFisherQuest.html">ProfessionalFisherQuest</a> Quest( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> QuestComplete( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Quester( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> TurnInMonger( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> AddQuest( <!-- DBG-0 --><a href="ProfessionalFisherQuest.html">ProfessionalFisherQuest</a> quest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowSecureTrade( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> newOwner, <span style="color: blue;">bool</span> accepted )<br />
+      <span style="color: blue;">bool</span> CheckCarve( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="LRReason.html">LRReason</a> reject )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DropToItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> target, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">object</span> GetDeliveryInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDrop( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDropInto( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDroppedToMobile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDroppedToWorld( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnStackAttempt( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> stack, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

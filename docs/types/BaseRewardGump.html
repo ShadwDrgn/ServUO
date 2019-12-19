@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseRewardGump</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Gumps.html">Back to Server.Gumps</a></h4>
+      <h2>BaseRewardGump : <!-- DBG-1 --><a href="Gump.html">Gump</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BlackthornRewardGump.html">BlackthornRewardGump</a>, <!-- DBG-3 --><a href="CleanUpBritanniaRewardGump.html">CleanUpBritanniaRewardGump</a>, <!-- DBG-3 --><a href="DoomRewardGump.html">DoomRewardGump</a>, <!-- DBG-3 --><a href="HuntmasterRewardGump.html">HuntmasterRewardGump</a>, <!-- DBG-3 --><a href="KhaldunRewardGump.html">KhaldunRewardGump</a>, <!-- DBG-3 --><a href="KotlCityRewardGump.html">KotlCityRewardGump</a>, <!-- DBG-3 --><a href="RewardsGump.html">RewardsGump</a>, <!-- DBG-3 --><a href="RisingTideRewardGump.html">RisingTideRewardGump</a>, <!-- DBG-3 --><a href="SorcerersDungeonRewardGump.html">SorcerersDungeonRewardGump</a>, <!-- DBG-3 --><a href="VoidPoolRewardGump.html">VoidPoolRewardGump</a>, <!-- DBG-3 --><a href="VvVRewardGump.html">VvVRewardGump</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseRewardGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> user, <span style="color: blue;">List</span>&lt;<a href="CollectionItem.html">CollectionItem</a>&gt; col, <span style="color: blue;">int</span> title, <span style="color: blue;">double</span> points )<br />
+      <span style="color: blue;">List</span>&lt;<a href="CollectionItem.html">CollectionItem</a>&gt; Collection( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Index( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Page( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> Points( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PointsName( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RewardLabel( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Title( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> User( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddPoints()<br />
+      <span style="color: blue;">void</span> DisplayRewardPage()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetItemHue( <!-- DBG-0 --><a href="Item.html">Item</a> i, <!-- DBG-0 --><a href="CollectionItem.html">CollectionItem</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetMax()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> GetPoints( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetYOffset( <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnConfirmed( <!-- DBG-0 --><a href="CollectionItem.html">CollectionItem</a> citem, <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnItemCreated( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnResponse( <!-- DBG-0 --><a href="NetState.html">NetState</a> state, <!-- DBG-0 --><a href="RelayInfo.html">RelayInfo</a> info )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RemovePoints( <span style="color: blue;">double</span> points )<br />
+   </body>
+</html>

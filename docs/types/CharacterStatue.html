@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - CharacterStatue</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>CharacterStatue : <!-- DBG-1 --><a href="Mobile.html">Mobile</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IRewardItem.html">IRewardItem</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="DemolishEntry.html">DemolishEntry</a></h4>
+      (<span style="color: blue;">ctor</span>) CharacterStatue( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) CharacterStatue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="StatueType.html">StatueType</a> type )<br />
+      <span style="color: blue;">bool</span> IsRewardItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="StatueMaterial.html">StatueMaterial</a> Material( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CharacterStatuePlinth.html">CharacterStatuePlinth</a> Plinth( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="StatuePose.html">StatuePose</a> Pose( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> SculptedBy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime SculptedOn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="StatueType.html">StatueType</a> StatueType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanBeDamaged()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanBeRenamedBy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> CloneBody( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> CloneClothes( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> CloneItem( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> Demolish( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> by )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> InvalidateHues()<br />
+      <span style="color: blue;">void</span> InvalidatePose()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAosSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChange( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange( <!-- DBG-0 --><a href="Map.html">Map</a> oldMap )<br />
+      <span style="color: blue;">void</span> OnRequestedAnimation( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> Restore( <!-- DBG-0 --><a href="CharacterStatue.html">CharacterStatue</a> from )<br />
+      <span style="color: blue;">void</span> Sculpt( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> by )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

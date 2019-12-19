@@ -78,7 +78,8 @@
 		<CompetitiveClaimRadius type="int">10</CompetitiveClaimRadius>
 
 		<!-- Class of the container, if found in players pack, to drop gold to -->
-		<GoldBagType type="string">Xanthos.Claim.GoldBag</GoldBagType>
+		<!--<GoldBagType type="string">Xanthos.Claim.GoldBag</GoldBagType>-->
+		<GoldBagType type="string">Server.Items.CheckBook</GoldBagType>
 
 		<!-- Class of the container, if found in players pack, to drop silver to -->
 		<SilverBagType type="string">Xanthos.Claim.SilverBag</SilverBagType>

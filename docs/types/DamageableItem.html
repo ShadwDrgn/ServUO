@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - DamageableItem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>DamageableItem : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageableItem.html">IDamageableItem</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="CannonBase.html">CannonBase</a>, <!-- DBG-3 --><a href="DesCityWallEast.html">DesCityWallEast</a>, <!-- DBG-3 --><a href="DesCityWallSouth.html">DesCityWallSouth</a>, <!-- DBG-3 --><a href="MoonstonePowerGenerator.html">MoonstonePowerGenerator</a>, <!-- DBG-3 --><a href="SAShadowWall1East.html">SAShadowWall1East</a>, <!-- DBG-3 --><a href="SAShadowWall1South.html">SAShadowWall1South</a>, <!-- DBG-3 --><a href="SAStoneWall1East.html">SAStoneWall1East</a>, <!-- DBG-3 --><a href="SAStoneWall1South.html">SAStoneWall1South</a>, <!-- DBG-3 --><a href="SAStoneWall2East.html">SAStoneWall2East</a>, <!-- DBG-3 --><a href="SAStoneWall2South.html">SAStoneWall2South</a>, <!-- DBG-3 --><a href="TestDamageableItem.html">TestDamageableItem</a>, <!-- DBG-3 --><a href="WoodenKeyBarrel.html">WoodenKeyBarrel</a>, <!-- DBG-3 --><a href="WoodenToMetalBarrel.html">WoodenToMetalBarrel</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="ItemLevel.html">ItemLevel</a></h4>
+      (<span style="color: blue;">ctor</span>) DamageableItem( <span style="color: blue;">int</span> startID )<br />
+      (<span style="color: blue;">ctor</span>) DamageableItem( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) DamageableItem( <span style="color: blue;">int</span> startID, <span style="color: blue;">int</span> halfID )<br />
+      (<span style="color: blue;">ctor</span>) DamageableItem( <span style="color: blue;">int</span> startID, <span style="color: blue;">int</span> halfID, <span style="color: blue;">int</span> destroyID )<br />
+      <span style="color: blue;">bool</span> Alive( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanDamage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ColdResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="Int32.html">Int32</a>&gt; DamageStore( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DeleteOnDestroy( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DestroySound( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Destroyed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> EnergyResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> FireResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ForceShowProperties( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> HitEffect( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Hits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> HitsMax( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> IDChange( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> IDDestroyed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> IDHalfHits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> IDStart( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ItemLevel.html">ItemLevel</a> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PhysicalResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> PoisonResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ResistBaseCold( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ResistBaseEnergy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ResistBaseFire( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ResistBasePhys( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ResistBasePoison( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> <GetLootingRights>m__0( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BoltEffect( <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckReflect( <span style="color: blue;">int</span> circle, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> caster )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> Damage( <span style="color: blue;">int</span> amount, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">bool</span> Destroy()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedEffect( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedEffect( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedParticles( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> effect, <!-- DBG-0 --><a href="EffectLayer.html">EffectLayer</a> layer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedParticles( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> effect, <!-- DBG-0 --><a href="EffectLayer.html">EffectLayer</a> layer, <span style="color: blue;">int</span> unknown )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedParticles( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode, <!-- DBG-0 --><a href="EffectLayer.html">EffectLayer</a> layer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FixedParticles( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode, <!-- DBG-0 --><a href="EffectLayer.html">EffectLayer</a> layer, <span style="color: blue;">int</span> unknown )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetLootingRights()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingEffect( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingEffect( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingParticles( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> explodeEffect, <span style="color: blue;">int</span> explodeSound )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingParticles( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> explodeEffect, <span style="color: blue;">int</span> explodeSound, <span style="color: blue;">int</span> unknown )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingParticles( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> explodeEffect, <span style="color: blue;">int</span> explodeSound, <span style="color: blue;">int</span> unknown )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MovingParticles( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">bool</span> fixedDirection, <span style="color: blue;">bool</span> explodes, <span style="color: blue;">int</span> hue, <span style="color: blue;">int</span> renderMode, <span style="color: blue;">int</span> effect, <span style="color: blue;">int</span> explodeEffect, <span style="color: blue;">int</span> explodeSound, <!-- DBG-0 --><a href="EffectLayer.html">EffectLayer</a> layer, <span style="color: blue;">int</span> unknown )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDestroyed()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDestroyed()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDamage( <span style="color: blue;">int</span> amount, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> willkill )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHarmfulSpell( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHitsChange( <span style="color: blue;">int</span> oldhits )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnIDChange( <span style="color: blue;">int</span> oldID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnStatsQuery( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> PlaySound( <span style="color: blue;">int</span> soundID )<br />
+      <span style="color: blue;">void</span> RegisterDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendDamagePacket( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateDelta()<br />
+   </body>
+</html>

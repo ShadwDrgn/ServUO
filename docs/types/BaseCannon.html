@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseCannon</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseCannon : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IShipCannon.html">IShipCannon</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="HeavyShipCannon.html">HeavyShipCannon</a>, <!-- DBG-3 --><a href="LightShipCannon.html">LightShipCannon</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-OnShipHit-c__AnonStorey0.html">(Anonymous-Type)-OnShipHit-c__AnonStorey0</a>, <!-- DBG-4 --><a href="ChargeContext.html">ChargeContext</a>, <!-- DBG-4 --><a href="CleanContext.html">CleanContext</a>, <!-- DBG-4 --><a href="DismantleContext.html">DismantleContext</a>, <!-- DBG-4 --><a href="LoadCannonTarget.html">LoadCannonTarget</a>, <!-- DBG-4 --><a href="LoadContext.html">LoadContext</a>, <!-- DBG-4 --><a href="PrimeContext.html">PrimeContext</a>, <!-- DBG-4 --><a href="RepairContext.html">RepairContext</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckForItem( Type type, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> toCheck )<br />
+      (<span style="color: blue;">ctor</span>) BaseCannon( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseCannon( <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> galleon )<br />
+      TimeSpan ActionTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; Actions( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AmmunitionType.html">AmmunitionType</a> AmmoType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CanLight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Charged( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Cleaned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="DamageLevel.html">DamageLevel</a> DamageState( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> Durability( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Direction.html">Direction</a> Facing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ForceShowProperties( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> Galleon( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ShipCannonDeed.html">ShipCannonDeed</a> GetDeed( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnMovement( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HitMultipleMobs( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Hits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type[] LoadTypes( <span style="color: blue;">get</span>; )<br />
+      Type LoadedAmmo( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxHits( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ShipPosition.html">ShipPosition</a> Position( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Primed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Range( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <Deserialize>m__0()<br />
+      <span style="color: blue;">void</span> AddAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> cliloc )<br />
+      <span style="color: blue;">void</span> Charge( <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">void</span> CheckDirty()<br />
+      <span style="color: blue;">bool</span> CheckRegion( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> Clean( <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">void</span> ClearCannon()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoAreaMessage( <span style="color: blue;">int</span> cliloc, <span style="color: blue;">int</span> range, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> DoLoad( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> ammo )<br />
+      <span style="color: blue;">void</span> DoShootEffects()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; FindMobiles( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> shooter, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">bool</span> player, <span style="color: blue;">bool</span> pet, <span style="color: blue;">bool</span> monsters, <span style="color: blue;">bool</span> seacreature )<br />
+      <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> FindValidBoatTarget( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> newPoint, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="AmmoInfo.html">AmmoInfo</a> info )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetDamage( <!-- DBG-0 --><a href="AmmoInfo.html">AmmoInfo</a> info )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="Direction.html">Direction</a> GetFacing()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> InvalidateDamageState()<br />
+      <span style="color: blue;">void</span> InvalidateDamageState( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> LightFuse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> Load( <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDamage( <span style="color: blue;">int</span> damage, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMobileHit( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnShipHit( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">void</span> Prime( <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">void</span> RemoveCharge( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> RemoveLoad( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> RemovePrime( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> Replace()<br />
+      <span style="color: blue;">void</span> ResendGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Shoot( <span style="color: blue;">object</span> cannoneer )<br />
+      <span style="color: blue;">bool</span> TryCharge( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> TryClean( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> TryLightFuse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> TryLoad( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> TryLoadAmmo( <!-- DBG-0 --><a href="Item.html">Item</a> ammo )<br />
+      <span style="color: blue;">bool</span> TryPrime( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> TryRepairCannon( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> VerifyAmmo( Type type )<br />
+   </body>
+</html>

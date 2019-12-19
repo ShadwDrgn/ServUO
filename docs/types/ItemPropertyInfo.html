@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - ItemPropertyInfo</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>ItemPropertyInfo</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetItemTypeInfo-c__AnonStorey0.html">(Anonymous-Type)-GetItemTypeInfo-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="ItemType.html">ItemType</a>,<span style="color: blue;">List`1</span>&gt; LootTable( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Int32.html">Int32</a>,<a href="ItemPropertyInfo.html">ItemPropertyInfo</a>&gt; Table( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddSpecial( <!-- DBG-0 --><a href="ItemType.html">ItemType</a> type, <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; list )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BuildLootTables()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> GetAttribute( <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> GetAttributeName( <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> GetAttributeName( <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetID( <span style="color: blue;">object</span> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="AosAttribute.html">AosAttribute</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="SAAbsorptionAttribute.html">SAAbsorptionAttribute</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="AosArmorAttribute.html">AosArmorAttribute</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="SkillName.html">SkillName</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="SlayerName.html">SlayerName</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="TalismanSlayerName.html">TalismanSlayerName</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="AosElementAttribute.html">AosElementAttribute</a> type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <span style="color: blue;">string</span> str )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="AosWeaponAttribute.html">AosWeaponAttribute</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIDForAttribute( <!-- DBG-0 --><a href="ExtendedWeaponAttribute.html">ExtendedWeaponAttribute</a> attr )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="ItemPropertyInfo.html">ItemPropertyInfo</a> GetInfo( <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="ItemPropertyInfo.html">ItemPropertyInfo</a> GetInfo( <span style="color: blue;">object</span> attribute )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="ItemType.html">ItemType</a> GetItemType( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMaxIntensity( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMaxIntensity( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attribute )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span>[] GetMaxOvercappedRange( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMinIntensity( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">bool</span> loot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMinIntensity( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attribute, <span style="color: blue;">bool</span> loot )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetScale( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetScale( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attribute )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetSpecialMaxIntensity( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> wep )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetTotalWeight( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attribute, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetWeight( <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasEater( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasHitArea( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> wep )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasHitSpell( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> wep )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; LookupLootTable( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Register( <span style="color: blue;">int</span> id, <!-- DBG-0 --><a href="ItemPropertyInfo.html">ItemPropertyInfo</a> info )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ValidateProperty( <span style="color: blue;">object</span> attribute )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ValidateProperty( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">bool</span> reforged )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ValidateProperty( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attribute, <span style="color: blue;">bool</span> reforged )<br />
+      (<span style="color: blue;">ctor</span>) ItemPropertyInfo( <span style="color: blue;">object</span> attribute, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> attributeName, <span style="color: blue;">int</span> weight, <span style="color: blue;">int</span> scale, <span style="color: blue;">int</span> start, <span style="color: blue;">int</span> maxInt )<br />
+      (<span style="color: blue;">ctor</span>) ItemPropertyInfo( <span style="color: blue;">object</span> attribute, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> attributeName, <span style="color: blue;">int</span> weight, <span style="color: blue;">int</span> scale, <span style="color: blue;">int</span> start, <span style="color: blue;">int</span> maxInt, <span style="color: blue;">int</span> description )<br />
+      (<span style="color: blue;">ctor</span>) ItemPropertyInfo( <span style="color: blue;">object</span> attribute, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> attributeName, <span style="color: blue;">int</span> weight, <span style="color: blue;">int</span> scale, <span style="color: blue;">int</span> start, <span style="color: blue;">int</span> maxInt, <span style="color: blue;">int</span> description, <!-- DBG-0 --><a href="PropInfo.html">PropInfo</a>[] categories )<br />
+      (<span style="color: blue;">ctor</span>) ItemPropertyInfo( <span style="color: blue;">object</span> attribute, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> attributeName, <span style="color: blue;">int</span> weight, Type pRes, Type gRes, Type spRes, <span style="color: blue;">int</span> scale, <span style="color: blue;">int</span> start, <span style="color: blue;">int</span> maxInt, <span style="color: blue;">int</span> desc, <!-- DBG-0 --><a href="PropInfo.html">PropInfo</a>[] categories )<br />
+      (<span style="color: blue;">ctor</span>) ItemPropertyInfo( <span style="color: blue;">object</span> attribute, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> attributeName, <span style="color: blue;">int</span> weight, Type pRes, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> pResName, Type gRes, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> gResName, Type spRes, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> spResName, <span style="color: blue;">int</span> scale, <span style="color: blue;">int</span> start, <span style="color: blue;">int</span> maxInt, <span style="color: blue;">int</span> desc, <!-- DBG-0 --><a href="PropInfo.html">PropInfo</a>[] categories )<br />
+      <span style="color: blue;">object</span> Attribute( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> AttributeName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Description( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> GemName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type GemRes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Imbuable( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Type.html">Type</a>,<a href="TextDefinition.html">TextDefinition</a>&gt; LocBuffer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxIntensity( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> PrimaryName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type PrimaryRes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PropInfo.html">PropInfo</a>[] PropCategories( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Scale( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> SpecialName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type SpecialRes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Start( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Weight( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CanImbue( <!-- DBG-0 --><a href="ItemType.html">ItemType</a> type )<br />
+      <!-- DBG-0 --><a href="PropInfo.html">PropInfo</a> GetItemTypeInfo( <!-- DBG-0 --><a href="ItemType.html">ItemType</a> type )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> GetName( Type type )<br />
+   </body>
+</html>

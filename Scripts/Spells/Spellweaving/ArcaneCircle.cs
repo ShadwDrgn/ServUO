@@ -52,12 +52,6 @@ namespace Server.Spells.Spellweaving
                 return false;
             }
 
-            if (GetArcanists().Count < 2)
-            {
-                Caster.SendLocalizedMessage(1080452); //There are not enough spellweavers present to create an Arcane Focus.
-                return false;
-            }
-
             return base.CheckCast();
         }
 
@@ -67,14 +61,22 @@ namespace Server.Spells.Spellweaving
             {
                 Caster.FixedParticles(0x3779, 10, 20, 0x0, EffectLayer.Waist);
                 Caster.PlaySound(0x5C0);
-
+/*    
+                if (GetArcanists().Count < 2)
+                {
+                    Caster.SendLocalizedMessage(1080452); //There are not enough spellweavers present to create an Arcane Focus.
+                    FinishSequence();
+                    return;
+                }
+*/
                 List<Mobile> Arcanists = GetArcanists();
 
                 TimeSpan duration = TimeSpan.FromHours(Math.Max(1, (int)(Caster.Skills.Spellweaving.Value / 24)));
 
-                duration += TimeSpan.FromHours(Math.Min(6, Arcanists.Count));
+//                duration += TimeSpan.FromHours(Math.Min(6, Arcanists.Count));
 
-                int strengthBonus = Math.Min(IsBonus(Caster.Location, Caster.Map) ? 6 : 5, Arcanists.Sum(m => GetStrength(m))); // Math.Min(Arcanists.Count, IsBonus(Caster.Location, Caster.Map) ? 6 : 5);	//The Sanctuary is a special, single location place
+//                int strengthBonus = Math.Min(IsBonus(Caster.Location, Caster.Map) ? 6 : 5, Arcanists.Sum(m => GetStrength(m))); // Math.Min(Arcanists.Count, IsBonus(Caster.Location, Caster.Map) ? 6 : 5);	//The Sanctuary is a special, single location place
+                int strengthBonus = 5;
 
                 for (int i = 0; i < Arcanists.Count; i++)
                 {

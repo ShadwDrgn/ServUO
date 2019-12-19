@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BattleSpawner</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.MyrmidexInvasion.html">Back to Server.Engines.MyrmidexInvasion</a></h4>
+      <h2>BattleSpawner : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-AssignNavpoints-c__AnonStorey3.html">(Anonymous-Type)-AssignNavpoints-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetPlayers-c__AnonStorey0.html">(Anonymous-Type)-GetPlayers-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-HasPlayers-c__AnonStorey1.html">(Anonymous-Type)-HasPlayers-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-RegisterDeath-c__AnonStorey2.html">(Anonymous-Type)-RegisterDeath-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey4.html">(Anonymous-Type)-Serialize-c__AnonStorey4</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BattleSpawner.html">BattleSpawner</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <AssignFlags>m__9( <!-- DBG-0 --><a href="BattleFlag.html">BattleFlag</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <AssignFlags>m__A( <!-- DBG-0 --><a href="BattleFlag.html">BattleFlag</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <BattleSpawner>m__0( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckWaves>m__6( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckWaves>m__7( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ClearWave>m__4( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GetAll>m__8( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <Initialize>m__1( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__2( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <Reset>m__5( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> b )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckPoints( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">ctor</span>) BattleSpawner()<br />
+      (<span style="color: blue;">ctor</span>) BattleSpawner( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Active( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BattleRegion.html">BattleRegion</a> BattleRegion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastMyrmidexWave( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastPlayers( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastTribeWave( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BattleFlag.html">BattleFlag</a> MyrmidexFlag( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Int32.html">Int32</a>,<span style="color: blue;">List`1</span>&gt; MyrmidexTeam( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>,<a href="Int32.html">Int32</a>&gt; Players( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Timer.html">Timer</a> Timer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BattleFlag.html">BattleFlag</a> TribalFlag( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Int32.html">Int32</a>,<span style="color: blue;">List`1</span>&gt; TribeTeam( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> <CheckAdvance>m__3( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> AssignFlags()<br />
+      <span style="color: blue;">void</span> AssignNavPoints()<br />
+      <span style="color: blue;">bool</span> AssignNavpoints( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc, <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance )<br />
+      <span style="color: blue;">void</span> CheckAdvance()<br />
+      <span style="color: blue;">void</span> CheckPlayers()<br />
+      <span style="color: blue;">void</span> CheckWaves()<br />
+      <span style="color: blue;">void</span> ClearWave( <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance, <span style="color: blue;">int</span> wave )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> FixFlags()<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseCreature.html">BaseCreature</a>&gt; GetAll( <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance )<br />
+      <span style="color: blue;">int</span> GetLeg( <!-- DBG-0 --><a href="Point2D.html">Point2D</a> p, <span style="color: blue;">out</span> <span style="color: blue;">int</span> lane, <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance )<br />
+      <!-- DBG-0 --><a href="Point2D.html">Point2D</a> GetNearest( <!-- DBG-0 --><a href="Point2D.html">Point2D</a>[] list, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">out</span> <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; GetPlayers( <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance )<br />
+      <span style="color: blue;">int</span> GetWave( <span style="color: blue;">Dictionary</span>&lt;<a href="Int32.html">Int32</a>,<span style="color: blue;">List`1</span>&gt; list, <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">bool</span> HasPlayers( <span style="color: blue;">bool</span> ignorestaff )<br />
+      <span style="color: blue;">bool</span> IsFrontLine( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> killer, <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">bool</span> IsInMyrmidexObjective( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">bool</span> IsInTribalObjective( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">bool</span> IsSameLeg( <!-- DBG-0 --><a href="IPoint2D.html">IPoint2D</a> p1, <!-- DBG-0 --><a href="IPoint2D.html">IPoint2D</a> p2 )<br />
+      <span style="color: blue;">void</span> OnLeaveRegion( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">void</span> RegionMessage( <span style="color: blue;">int</span> message )<br />
+      <span style="color: blue;">void</span> RegisterDeath( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">void</span> Reset()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SpawnWave( <!-- DBG-0 --><a href="Allegiance.html">Allegiance</a> allegiance )<br />
+   </body>
+</html>

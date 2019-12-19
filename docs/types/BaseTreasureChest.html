@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseTreasureChest</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseTreasureChest : <!-- DBG-1 --><a href="LockableContainer.html">LockableContainer</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="ITelekinesisable.html">ITelekinesisable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IShipwreckedItem.html">IShipwreckedItem</a>, <!-- DBG-2.2 --><a href="ILockpickable.html">ILockpickable</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="ILockable.html">ILockable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IQuality.html">IQuality</a>, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="IResource.html">IResource</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="MetalGoldenTreasureChest.html">MetalGoldenTreasureChest</a>, <!-- DBG-3 --><a href="MetalTreasureChest.html">MetalTreasureChest</a>, <!-- DBG-3 --><a href="PuzzleChest.html">PuzzleChest</a>, <!-- DBG-3 --><a href="WoodenTreasureChest.html">WoodenTreasureChest</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="TreasureLevel.html">TreasureLevel</a>, <!-- DBG-4 --><a href="TreasureResetTimer.html">TreasureResetTimer</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseTreasureChest( <span style="color: blue;">int</span> itemID )<br />
+      (<span style="color: blue;">ctor</span>) BaseTreasureChest( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseTreasureChest( <span style="color: blue;">int</span> itemID, <!-- DBG-0 --><a href="TreasureLevel.html">TreasureLevel</a> level )<br />
+      <span style="color: blue;">string</span> DefaultName( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsDecoContainer( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TreasureLevel.html">TreasureLevel</a> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Locked( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">short</span> MaxSpawnTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">short</span> MinSpawnTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> ClearContents()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GenerateTreasure()<br />
+      <span style="color: blue;">void</span> Reset()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SetLockLevel()<br />
+      <span style="color: blue;">void</span> StartResetTimer()<br />
+   </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - InvasionController</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Blackthorn.html">Back to Server.Engines.Blackthorn</a></h4>
+      <h2>InvasionController : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey0.html">(Anonymous-Type)-Serialize-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InvasionController.html">InvasionController</a> FelInstance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="InvasionController.html">InvasionController</a> TramInstance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CleanupSpawn>m__2( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnDeath>m__1( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> b )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <RemoveSpawn>m__5( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> b )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <get_SpawnCount>m__0( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> CreateItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> damager )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">ctor</span>) InvasionController( <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">ctor</span>) InvasionController( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <!-- DBG-0 --><a href="InvasionBeacon.html">InvasionBeacon</a> Beacon( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BeaconVulnerable( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="City.html">City</a> CurrentInvasion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> CurrentWave( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ForceRespawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="InvasionType.html">InvasionType</a> InvasionType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="BaseCreature.html">BaseCreature</a>,<span style="color: blue;">List`1</span>&gt; Spawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpawnCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Rectangle2D.html">Rectangle2D</a>&gt; SpawnZones( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> <Deserialize>m__6()<br />
+      <span style="color: blue;">void</span> <Deserialize>m__7()<br />
+      <span style="color: blue;">void</span> <OnBeaconDestroyed>m__3()<br />
+      <span style="color: blue;">bool</span> <OnEndInvasion>m__4( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> BeginInvasion()<br />
+      <span style="color: blue;">void</span> Cleanup()<br />
+      <span style="color: blue;">void</span> CleanupSpawn()<br />
+      <span style="color: blue;">void</span> CompleteWave()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoMessage()<br />
+      <span style="color: blue;">void</span> OnBeaconDestroyed()<br />
+      <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnEndInvasion()<br />
+      <span style="color: blue;">void</span> RemoveSpawn()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">bool</span> SpawnMobile( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> spawnrec )<br />
+      <span style="color: blue;">void</span> SpawnWave()<br />
+   </body>
+</html>

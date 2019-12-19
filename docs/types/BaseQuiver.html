@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseQuiver</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseQuiver : <!-- DBG-1 --><a href="Container.html">Container</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="IArtifact.html">IArtifact</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IRangeDamage.html">IRangeDamage</a>, <!-- DBG-2.2 --><a href="IVvVItem.html">IVvVItem</a>, <!-- DBG-2.2 --><a href="IOwnerRestricted.html">IOwnerRestricted</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="ISetItem.html">ISetItem</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="ElvenQuiver.html">ElvenQuiver</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckHold-c__AnonStorey0.html">(Anonymous-Type)-CheckHold-c__AnonStorey0</a>, <!-- DBG-4 --><a href="RefillQuiverEntry.html">RefillQuiverEntry</a>, <!-- DBG-4 --><a href="SaveFlag.html">SaveFlag</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <CheckStack>m__0( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GetSaveFlag( <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toGet )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetSaveFlag( <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toSet, <span style="color: blue;">bool</span> setIf )<br />
+      (<span style="color: blue;">ctor</span>) BaseQuiver()<br />
+      (<span style="color: blue;">ctor</span>) BaseQuiver( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseQuiver( <span style="color: blue;">int</span> itemID )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Ammo( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ArtifactRarity( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AosAttributes.html">AosAttributes</a> Attributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BardMasteryBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseColdResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseEnergyResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseFireResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BasePhysicalResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BasePoisonResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanAlter( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Capacity( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ColdResistance( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Crafter( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> DamageIncrease( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> DefaultGumpID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DefaultMaxItems( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DefaultMaxWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> DefaultWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DisplayWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DisplaysContent( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EnergyResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> FireResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsArrowAmmo( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsSetItem( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsVvVItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LastEquipped( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> LowerAmmoCost( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> OwnerName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PhysicalResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Pieces( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerConstructed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PoisonResistance( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ItemQuality.html">ItemQuality</a> Quality( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosElementAttributes.html">AosElementAttributes</a> Resistances( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosAttributes.html">AosAttributes</a> SetAttributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetColdBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetEnergyBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SetEquipped( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetFireBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SetItem.html">SetItem</a> SetID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SetPhysicalBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetPoisonBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> SetSkillBonuses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> SkillBonuses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> WeightReduction( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCraftedProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddItem( <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddWeightProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AlterBowDamage( <span style="color: blue;">ref</span> <span style="color: blue;">int</span> phys, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> fire, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> cold, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> pois, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> nrgy, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> chaos, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> direct )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AlterRangedDamage( <span style="color: blue;">ref</span> <span style="color: blue;">int</span> phys, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> fire, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> cold, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> pois, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> nrgy, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> chaos, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> direct )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanEquip( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHold( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> message, <span style="color: blue;">bool</span> checkItems, <span style="color: blue;">int</span> plusItems, <span style="color: blue;">int</span> plusWeight )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckStack( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> CheckType( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetTotal( <!-- DBG-0 --><a href="TotalType.html">TotalType</a> type )<br />
+      <span style="color: blue;">void</span> InvalidateWeight()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAdded( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDuped( <!-- DBG-0 --><a href="Item.html">Item</a> newItem )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> OnCraft( <span style="color: blue;">int</span> quality, <span style="color: blue;">bool</span> makersMark, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool, <!-- DBG-0 --><a href="CraftItem.html">CraftItem</a> craftItem, <span style="color: blue;">int</span> resHue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRemoved( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RemoveItem( <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> SetResistBonus( <!-- DBG-0 --><a href="ResistanceType.html">ResistanceType</a> resist )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateTotal( <!-- DBG-0 --><a href="Item.html">Item</a> sender, <!-- DBG-0 --><a href="TotalType.html">TotalType</a> type, <span style="color: blue;">int</span> delta )<br />
+   </body>
+</html>

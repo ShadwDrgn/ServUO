@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - FishingPole</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>FishingPole : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="IUsesRemaining.html">IUsesRemaining</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IQuality.html">IQuality</a>, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="IResource.html">IResource</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="CaddelliteFishingPole.html">CaddelliteFishingPole</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="SaveFlag.html">SaveFlag</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GetSaveFlag( <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toGet )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetSaveFlag( <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toSet, <span style="color: blue;">bool</span> setIf )<br />
+      (<span style="color: blue;">ctor</span>) FishingPole()<br />
+      (<span style="color: blue;">ctor</span>) FishingPole( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <!-- DBG-0 --><a href="AosAttributes.html">AosAttributes</a> Attributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type BaitType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> BaitUses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Crafter( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> EnhancedBait( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="HookType.html">HookType</a> HookType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> HookUses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> LowerStatReq( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> OriginalHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerConstructed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ItemQuality.html">ItemQuality</a> Quality( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> Resource( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ShowUsesRemaining( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> SkillBonuses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> UsesRemaining( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCraftedProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddUsesRemainingProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowEquipedCast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanEquip( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DistributeMaterialBonus()<br />
+      <span style="color: blue;">void</span> DistributeMaterialBonus( <!-- DBG-0 --><a href="CraftAttributeInfo.html">CraftAttributeInfo</a> attrInfo )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetLuckBonus()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">int</span> GetStrRequirement()<br />
+      <span style="color: blue;">int</span> GetUsesScalar()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAdded( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> OnCraft( <span style="color: blue;">int</span> quality, <span style="color: blue;">bool</span> makersMark, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool, <!-- DBG-0 --><a href="CraftItem.html">CraftItem</a> craftItem, <span style="color: blue;">int</span> resHue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnEquip( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnFishedHarvest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> caughtAnything )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRemoved( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">void</span> ScaleUses()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> UnscaleUses()<br />
+   </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseBulletinBoard</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseBulletinBoard : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BBClientRequest( <!-- DBG-0 --><a href="NetState.html">NetState</a> state, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BBPostMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseBulletinBoard.html">BaseBulletinBoard</a> board, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BBRemoveMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseBulletinBoard.html">BaseBulletinBoard</a> board, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BBRequestContent( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseBulletinBoard.html">BaseBulletinBoard</a> board, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> BBRequestHeader( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseBulletinBoard.html">BaseBulletinBoard</a> board, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckTime( DateTime time, TimeSpan range )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> FormatTS( TimeSpan ts )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">ctor</span>) BaseBulletinBoard( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseBulletinBoard( <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">string</span> BoardName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckRange( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Cleanup()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> GetLastPostTime( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> poster, <span style="color: blue;">bool</span> onlyCheckRoot, <span style="color: blue;">ref</span> DateTime lastPostTime )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> PostMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BulletinMessage.html">BulletinMessage</a> thread, <span style="color: blue;">string</span> subject, <span style="color: blue;">string</span>[] lines )<br />
+      <span style="color: blue;">void</span> RecurseDelete( <!-- DBG-0 --><a href="BulletinMessage.html">BulletinMessage</a> msg )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseContainer</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseContainer : <!-- DBG-1 --><a href="Container.html">Container</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AcademicBookCase.html">AcademicBookCase</a>, <!-- DBG-3 --><a href="Backpack.html">Backpack</a>, <!-- DBG-3 --><a href="Bag.html">Bag</a>, <!-- DBG-3 --><a href="Barrel.html">Barrel</a>, <!-- DBG-3 --><a href="BaseBagBall.html">BaseBagBall</a>, <!-- DBG-3 --><a href="Basket.html">Basket</a>, <!-- DBG-3 --><a href="BasketCraftable.html">BasketCraftable</a>, <!-- DBG-3 --><a href="EnchantedPicnicBasket.html">EnchantedPicnicBasket</a>, <!-- DBG-3 --><a href="FancyElvenArmoire.html">FancyElvenArmoire</a>, <!-- DBG-3 --><a href="FurnitureContainer.html">FurnitureContainer</a>, <!-- DBG-3 --><a href="GiftBox.html">GiftBox</a>, <!-- DBG-3 --><a href="GiftBoxAngel.html">GiftBoxAngel</a>, <!-- DBG-3 --><a href="GiftBoxCube.html">GiftBoxCube</a>, <!-- DBG-3 --><a href="GiftBoxCylinder.html">GiftBoxCylinder</a>, <!-- DBG-3 --><a href="GiftBoxNeon.html">GiftBoxNeon</a>, <!-- DBG-3 --><a href="GiftBoxOctogon.html">GiftBoxOctogon</a>, <!-- DBG-3 --><a href="GiftBoxRectangle.html">GiftBoxRectangle</a>, <!-- DBG-3 --><a href="GreenStocking.html">GreenStocking</a>, <!-- DBG-3 --><a href="InternalContainer.html">InternalContainer</a>, <!-- DBG-3 --><a href="Keg.html">Keg</a>, <!-- DBG-3 --><a href="PackingBox.html">PackingBox</a>, <!-- DBG-3 --><a href="PicnicBasket.html">PicnicBasket</a>, <!-- DBG-3 --><a href="PlagueBeastBackpack.html">PlagueBeastBackpack</a>, <!-- DBG-3 --><a href="PlayerBones.html">PlayerBones</a>, <!-- DBG-3 --><a href="RedStocking.html">RedStocking</a>, <!-- DBG-3 --><a href="RedVelvetGiftBox.html">RedVelvetGiftBox</a>, <!-- DBG-3 --><a href="SimpleElvenArmoire.html">SimpleElvenArmoire</a>, <!-- DBG-3 --><a href="StrongBox.html">StrongBox</a>, <!-- DBG-3 --><a href="TrapableContainer.html">TrapableContainer</a>, <!-- DBG-3 --><a href="UnknownBardSkeleton.html">UnknownBardSkeleton</a>, <!-- DBG-3 --><a href="UnknownMageSkeleton.html">UnknownMageSkeleton</a>, <!-- DBG-3 --><a href="UnknownRogueSkeleton.html">UnknownRogueSkeleton</a>, <!-- DBG-3 --><a href="WoodenBookcase.html">WoodenBookcase</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseContainer( <span style="color: blue;">int</span> itemID )<br />
+      (<span style="color: blue;">ctor</span>) BaseContainer( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">int</span> DefaultMaxWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> EngravedText( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Security( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> CheckBank( <!-- DBG-0 --><a href="BankBox.html">BankBox</a> bank, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHold( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> message, <span style="color: blue;">bool</span> checkItems, <span style="color: blue;">int</span> plusItems, <span style="color: blue;">int</span> plusWeight )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckItemUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DropItemStacked( <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DropToWorld( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetChildContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsAccessibleTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDropInto( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDroppedInto( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Container.html">Container</a> target, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Open( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> TryDropItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped, <span style="color: blue;">bool</span> sendFullMessage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateTotal( <!-- DBG-0 --><a href="Item.html">Item</a> sender, <!-- DBG-0 --><a href="TotalType.html">TotalType</a> type, <span style="color: blue;">int</span> delta )<br />
+   </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - CraftItem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Craft.html">Back to Server.Engines.Craft</a></h4>
+      <h2>CraftItem</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="ChooseResTarget.html">ChooseResTarget</a>, <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddResTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasResTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> ItemIDOf( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveResTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> RetainsColor( Type type )<br />
+      (<span style="color: blue;">ctor</span>) CraftItem( Type type, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> groupName, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> name )<br />
+      <span style="color: blue;">bool</span> CaddelliteCraft( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="ConsumeType.html">ConsumeType</a>,<a href="Int32.html">Int32</a>&gt; ConsumeResCallback( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="CraftItem.html">CraftItem</a>,<a href="ITool.html">ITool</a>,<a href="Item.html">Item</a>&gt; CreateItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">object</span> Data( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> DisplayID( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ForceNonExceptional( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ForceSuccessChance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ForceTypeRes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> GroupNameNumber( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> GroupNameString( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Hits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ItemHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type ItemType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Mana( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> MinSkillOffset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> NameNumber( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> NameString( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NeedHeat( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NeedMaker( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NeedMill( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NeedOven( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NeedWater( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Recipe.html">Recipe</a> Recipe( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BeverageType.html">BeverageType</a> RequiredBeverage( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Expansion.html">Expansion</a> RequiredExpansion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ThemePack.html">ThemePack</a> RequiredThemePack( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> RequiresBasketWeaving( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> RequiresMechanicalLife( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> RequiresResTarget( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CraftResCol.html">CraftResCol</a> Resources( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CraftSkillCol.html">CraftSkillCol</a> Skills( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Stam( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <a href="Action-T-.html">Action</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="CraftItem.html">CraftItem</a>,<a href="ITool.html">ITool</a>&gt; TryCraft( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UseAllRes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UseSubRes2( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddRecipe( <span style="color: blue;">int</span> id, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> system )<br />
+      <span style="color: blue;">void</span> AddRes( Type type, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> name, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">void</span> AddRes( Type type, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> name, <span style="color: blue;">int</span> amount, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> message )<br />
+      <span style="color: blue;">void</span> AddSkill( <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillToMake, <span style="color: blue;">double</span> minSkill, <span style="color: blue;">double</span> maxSkill )<br />
+      <span style="color: blue;">int</span> CheckHueGrouping( <!-- DBG-0 --><a href="Item.html">Item</a> a, <!-- DBG-0 --><a href="Item.html">Item</a> b )<br />
+      <span style="color: blue;">bool</span> CheckSkills( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> quality, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> allRequiredSkills, <span style="color: blue;">int</span> maxAmount )<br />
+      <span style="color: blue;">bool</span> CheckSkills( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> quality, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> allRequiredSkills, <span style="color: blue;">bool</span> gainSkills, <span style="color: blue;">int</span> maxAmount )<br />
+      <span style="color: blue;">void</span> CompleteCraft( <span style="color: blue;">int</span> quality, <span style="color: blue;">bool</span> makersMark, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool, <!-- DBG-0 --><a href="CustomCraft.html">CustomCraft</a> customCraft )<br />
+      <span style="color: blue;">bool</span> ConsumeAttributes( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">ref</span> <span style="color: blue;">object</span> message, <span style="color: blue;">bool</span> consume )<br />
+      <span style="color: blue;">int</span> ConsumeQuantity( <!-- DBG-0 --><a href="Container.html">Container</a> cont, Type[][] types, <span style="color: blue;">int</span>[] amounts )<br />
+      <span style="color: blue;">int</span> ConsumeQuantityByPlantHue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <!-- DBG-0 --><a href="Container.html">Container</a> cont, Type[][] types, <span style="color: blue;">int</span>[] amounts )<br />
+      <span style="color: blue;">bool</span> ConsumeRes( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> resHue, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> maxAmount, <!-- DBG-0 --><a href="ConsumeType.html">ConsumeType</a> consumeType, <span style="color: blue;">ref</span> <span style="color: blue;">object</span> message )<br />
+      <span style="color: blue;">bool</span> ConsumeRes( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> resHue, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> maxAmount, <!-- DBG-0 --><a href="ConsumeType.html">ConsumeType</a> consumeType, <span style="color: blue;">ref</span> <span style="color: blue;">object</span> message, <span style="color: blue;">bool</span> isFailure )<br />
+      <span style="color: blue;">void</span> Craft( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool )<br />
+      <span style="color: blue;">bool</span> Find( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span>[] itemIDs )<br />
+      <span style="color: blue;">bool</span> Find( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span>[] itemIDs )<br />
+      <span style="color: blue;">bool</span> FindWater( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">double</span> GetExceptionalChance( <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> system, <span style="color: blue;">double</span> chance, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">int</span> GetPlantHueAmount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <!-- DBG-0 --><a href="Container.html">Container</a> cont, Type[] types )<br />
+      <span style="color: blue;">int</span> GetQuantity( <!-- DBG-0 --><a href="Container.html">Container</a> cont, Type[] types )<br />
+      <span style="color: blue;">double</span> GetSuccessChance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">bool</span> gainSkills, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> allRequiredSkills )<br />
+      <span style="color: blue;">double</span> GetSuccessChance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type typeRes, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, <span style="color: blue;">bool</span> gainSkills, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> allRequiredSkills, <span style="color: blue;">int</span> maxAmount )<br />
+      <span style="color: blue;">bool</span> IsMarkable( Type type )<br />
+      <span style="color: blue;">bool</span> IsPlantHueType( Type[][] types )<br />
+      <span style="color: blue;">bool</span> IsQuantityType( Type[][] types )<br />
+      <span style="color: blue;">void</span> MultipleSkillCheck( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">bool</span> NeedsResTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem )<br />
+      <span style="color: blue;">void</span> OnResourceConsumed( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">object</span> RequiredExpansionMessage( <!-- DBG-0 --><a href="Expansion.html">Expansion</a> expansion )<br />
+      <span style="color: blue;">bool</span> RetainsColorFrom( <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> system, Type type )<br />
+      <span style="color: blue;">bool</span> RetainsColorFromCloth( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+   </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseModule</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/CustomsFramework.html">Back to CustomsFramework</a></h4>
+      <h2>BaseModule : <!-- DBG-1 --><a href="SaveData.html">SaveData</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="SaveData.html">SaveData</a>&gt;, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="ICustomsEntity.html">ICustomsEntity</a>&gt;, <!-- DBG-2.2 --><a href="ICustomsEntity.html">ICustomsEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+      (<span style="color: blue;">ctor</span>) BaseModule()<br />
+      (<span style="color: blue;">ctor</span>) BaseModule( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">ctor</span>) BaseModule( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">ctor</span>) BaseModule( <!-- DBG-0 --><span style="color: blue;">CustomSerial</span> serial )<br />
+      DateTime CreatedTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Description( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AccessLevel.html">AccessLevel</a> EditLevel( <span style="color: blue;">get</span>; )<br />
+      DateTime LastEditedTime( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> LinkedItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> LinkedMobile( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Name( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Gump.html">Gump</a> SettingsGump( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Version( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">bool</span> LinkItem( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> LinkMobile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Prep()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">bool</span> UnlinkItem()<br />
+      <span style="color: blue;">bool</span> UnlinkMobile()<br />
+      <span style="color: blue;">void</span> Update()<br />
+   </body>
+</html>

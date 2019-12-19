@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - AbyssalInfernal</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>AbyssalInfernal : <!-- DBG-1 --><a href="BaseChampion.html">BaseChampion</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-DoCondemn-c__AnonStorey0.html">(Anonymous-Type)-DoCondemn-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoCondemn-c__AnonStorey1.html">(Anonymous-Type)-DoCondemn-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoCondemn-c__AnonStorey2.html">(Anonymous-Type)-DoCondemn-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoDamage_Callback-c__AnonStorey4.html">(Anonymous-Type)-DoDamage_Callback-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoNuke-c__AnonStorey3.html">(Anonymous-Type)-DoNuke-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey5.html">(Anonymous-Type)-Serialize-c__AnonStorey5</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <DoNuke>m__0( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <TotalSummons>m__1( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">ctor</span>) AbyssalInfernal()<br />
+      (<span style="color: blue;">ctor</span>) AbyssalInfernal( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      Type[] DecorativeList( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Poison.html">Poison</a> PoisonImmune( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ScaleType.html">ScaleType</a> ScaleType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Scales( <span style="color: blue;">get</span>; )<br />
+      Type[] SharedList( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ChampionSkullType.html">ChampionSkullType</a> SkullType( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MonsterStatuetteType.html">MonsterStatuetteType</a>[] StatueTypes( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseCreature.html">BaseCreature</a>&gt; SummonedHelpers( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Type[] UniqueList( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <DoSummon>m__2( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> o )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddHelper( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoCondemn()<br />
+      <span style="color: blue;">void</span> DoDamage_Callback( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">void</span> DoNuke()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoSummon()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GenerateLoot()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAttackSound()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetDeathSound()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetHurtSound()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetIdleSound()<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> GetRandomTarget( <span style="color: blue;">int</span> range, <span style="color: blue;">bool</span> playersOnly )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetTargets( <span style="color: blue;">int</span> range, <span style="color: blue;">bool</span> playersOnly )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="Container.html">Container</a> c )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnThink()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">int</span> TotalSummons()<br />
+   </body>
+</html>

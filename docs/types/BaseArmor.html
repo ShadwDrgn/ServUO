@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseArmor</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BaseArmor : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="ICombatEquipment.html">ICombatEquipment</a>, <!-- DBG-2.2 --><a href="ICraftable.html">ICraftable</a>, <!-- DBG-2.2 --><a href="IScissorable.html">IScissorable</a>, <!-- DBG-2.2 --><a href="IArtifact.html">IArtifact</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.2 --><a href="IVvVItem.html">IVvVItem</a>, <!-- DBG-2.2 --><a href="IOwnerRestricted.html">IOwnerRestricted</a>, <!-- DBG-2.2 --><a href="IFactionItem.html">IFactionItem</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.2 --><a href="ISetItem.html">ISetItem</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IQuality.html">IQuality</a>, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="IResource.html">IResource</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a>, <!-- DBG-2.2 --><a href="ITalismanProtection.html">ITalismanProtection</a>, <!-- DBG-2.2 --><a href="IDurability.html">IDurability</a>, <!-- DBG-2.2 --><a href="IImbuableEquipement.html">IImbuableEquipement</a>, <!-- DBG-2.2 --><a href="IWearableDurability.html">IWearableDurability</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BaseShield.html">BaseShield</a>, <!-- DBG-3 --><a href="BoneArms.html">BoneArms</a>, <!-- DBG-3 --><a href="BoneChest.html">BoneChest</a>, <!-- DBG-3 --><a href="BoneGloves.html">BoneGloves</a>, <!-- DBG-3 --><a href="BoneHelm.html">BoneHelm</a>, <!-- DBG-3 --><a href="BoneLegs.html">BoneLegs</a>, <!-- DBG-3 --><a href="ChainChest.html">ChainChest</a>, <!-- DBG-3 --><a href="ChainCoif.html">ChainCoif</a>, <!-- DBG-3 --><a href="ChainHatsuburi.html">ChainHatsuburi</a>, <!-- DBG-3 --><a href="ChainLegs.html">ChainLegs</a>, <!-- DBG-3 --><a href="Circlet.html">Circlet</a>, <!-- DBG-3 --><a href="CloseHelm.html">CloseHelm</a>, <!-- DBG-3 --><a href="DecorativePlateKabuto.html">DecorativePlateKabuto</a>, <!-- DBG-3 --><a href="DragonArms.html">DragonArms</a>, <!-- DBG-3 --><a href="DragonChest.html">DragonChest</a>, <!-- DBG-3 --><a href="DragonGloves.html">DragonGloves</a>, <!-- DBG-3 --><a href="DragonHelm.html">DragonHelm</a>, <!-- DBG-3 --><a href="DragonLegs.html">DragonLegs</a>, <!-- DBG-3 --><a href="DragonTurtleHideArms.html">DragonTurtleHideArms</a>, <!-- DBG-3 --><a href="DragonTurtleHideBustier.html">DragonTurtleHideBustier</a>, <!-- DBG-3 --><a href="DragonTurtleHideChest.html">DragonTurtleHideChest</a>, <!-- DBG-3 --><a href="DragonTurtleHideHelm.html">DragonTurtleHideHelm</a>, <!-- DBG-3 --><a href="DragonTurtleHideLegs.html">DragonTurtleHideLegs</a>, <!-- DBG-3 --><a href="ElvenGlasses.html">ElvenGlasses</a>, <!-- DBG-3 --><a href="FemaleElvenPlateChest.html">FemaleElvenPlateChest</a>, <!-- DBG-3 --><a href="FemaleGargishLeatherArms.html">FemaleGargishLeatherArms</a>, <!-- DBG-3 --><a href="FemaleGargishLeatherChest.html">FemaleGargishLeatherChest</a>, <!-- DBG-3 --><a href="FemaleGargishLeatherKilt.html">FemaleGargishLeatherKilt</a>, <!-- DBG-3 --><a href="FemaleGargishLeatherLegs.html">FemaleGargishLeatherLegs</a>, <!-- DBG-3 --><a href="FemaleGargishPlateArms.html">FemaleGargishPlateArms</a>, <!-- DBG-3 --><a href="FemaleGargishPlateChest.html">FemaleGargishPlateChest</a>, <!-- DBG-3 --><a href="FemaleGargishPlateKilt.html">FemaleGargishPlateKilt</a>, <!-- DBG-3 --><a href="FemaleGargishPlateLegs.html">FemaleGargishPlateLegs</a>, <!-- DBG-3 --><a href="FemaleGargishStoneArms.html">FemaleGargishStoneArms</a>, <!-- DBG-3 --><a href="FemaleGargishStoneChest.html">FemaleGargishStoneChest</a>, <!-- DBG-3 --><a href="FemaleGargishStoneKilt.html">FemaleGargishStoneKilt</a>, <!-- DBG-3 --><a href="FemaleGargishStoneLegs.html">FemaleGargishStoneLegs</a>, <!-- DBG-3 --><a href="FemaleLeafChest.html">FemaleLeafChest</a>, <!-- DBG-3 --><a href="FemaleLeatherChest.html">FemaleLeatherChest</a>, <!-- DBG-3 --><a href="FemalePlateChest.html">FemalePlateChest</a>, <!-- DBG-3 --><a href="FemaleStuddedChest.html">FemaleStuddedChest</a>, <!-- DBG-3 --><a href="GargishClothArmsArmor.html">GargishClothArmsArmor</a>, <!-- DBG-3 --><a href="GargishClothChestArmor.html">GargishClothChestArmor</a>, <!-- DBG-3 --><a href="GargishClothKiltArmor.html">GargishClothKiltArmor</a>, <!-- DBG-3 --><a href="GargishClothLegsArmor.html">GargishClothLegsArmor</a>, <!-- DBG-3 --><a href="GargishEarrings.html">GargishEarrings</a>, <!-- DBG-3 --><a href="GargishLeatherArms.html">GargishLeatherArms</a>, <!-- DBG-3 --><a href="GargishLeatherChest.html">GargishLeatherChest</a>, <!-- DBG-3 --><a href="GargishLeatherKilt.html">GargishLeatherKilt</a>, <!-- DBG-3 --><a href="GargishLeatherLegs.html">GargishLeatherLegs</a>, <!-- DBG-3 --><a href="GargishLeatherWingArmor.html">GargishLeatherWingArmor</a>, <!-- DBG-3 --><a href="GargishNecklace.html">GargishNecklace</a>, <!-- DBG-3 --><a href="GargishPlateArms.html">GargishPlateArms</a>, <!-- DBG-3 --><a href="GargishPlateChest.html">GargishPlateChest</a>, <!-- DBG-3 --><a href="GargishPlateKilt.html">GargishPlateKilt</a>, <!-- DBG-3 --><a href="GargishPlateLegs.html">GargishPlateLegs</a>, <!-- DBG-3 --><a href="GargishStoneArms.html">GargishStoneArms</a>, <!-- DBG-3 --><a href="GargishStoneChest.html">GargishStoneChest</a>, <!-- DBG-3 --><a href="GargishStoneKilt.html">GargishStoneKilt</a>, <!-- DBG-3 --><a href="GargishStoneLegs.html">GargishStoneLegs</a>, <!-- DBG-3 --><a href="GemmedCirclet.html">GemmedCirclet</a>, <!-- DBG-3 --><a href="HeavyPlateJingasa.html">HeavyPlateJingasa</a>, <!-- DBG-3 --><a href="Helmet.html">Helmet</a>, <!-- DBG-3 --><a href="HideChest.html">HideChest</a>, <!-- DBG-3 --><a href="HideFemaleChest.html">HideFemaleChest</a>, <!-- DBG-3 --><a href="HideGloves.html">HideGloves</a>, <!-- DBG-3 --><a href="HideGorget.html">HideGorget</a>, <!-- DBG-3 --><a href="HidePants.html">HidePants</a>, <!-- DBG-3 --><a href="HidePauldrons.html">HidePauldrons</a>, <!-- DBG-3 --><a href="KrampusMinionEarrings.html">KrampusMinionEarrings</a>, <!-- DBG-3 --><a href="LeafArms.html">LeafArms</a>, <!-- DBG-3 --><a href="LeafChest.html">LeafChest</a>, <!-- DBG-3 --><a href="LeafGloves.html">LeafGloves</a>, <!-- DBG-3 --><a href="LeafGorget.html">LeafGorget</a>, <!-- DBG-3 --><a href="LeafLegs.html">LeafLegs</a>, <!-- DBG-3 --><a href="LeafTonlet.html">LeafTonlet</a>, <!-- DBG-3 --><a href="LeatherArms.html">LeatherArms</a>, <!-- DBG-3 --><a href="LeatherBustierArms.html">LeatherBustierArms</a>, <!-- DBG-3 --><a href="LeatherCap.html">LeatherCap</a>, <!-- DBG-3 --><a href="LeatherChest.html">LeatherChest</a>, <!-- DBG-3 --><a href="LeatherDo.html">LeatherDo</a>, <!-- DBG-3 --><a href="LeatherGloves.html">LeatherGloves</a>, <!-- DBG-3 --><a href="LeatherGorget.html">LeatherGorget</a>, <!-- DBG-3 --><a href="LeatherHaidate.html">LeatherHaidate</a>, <!-- DBG-3 --><a href="LeatherHiroSode.html">LeatherHiroSode</a>, <!-- DBG-3 --><a href="LeatherJingasa.html">LeatherJingasa</a>, <!-- DBG-3 --><a href="LeatherLegs.html">LeatherLegs</a>, <!-- DBG-3 --><a href="LeatherMempo.html">LeatherMempo</a>, <!-- DBG-3 --><a href="LeatherNinjaHood.html">LeatherNinjaHood</a>, <!-- DBG-3 --><a href="LeatherNinjaJacket.html">LeatherNinjaJacket</a>, <!-- DBG-3 --><a href="LeatherNinjaMitts.html">LeatherNinjaMitts</a>, <!-- DBG-3 --><a href="LeatherNinjaPants.html">LeatherNinjaPants</a>, <!-- DBG-3 --><a href="LeatherShorts.html">LeatherShorts</a>, <!-- DBG-3 --><a href="LeatherSkirt.html">LeatherSkirt</a>, <!-- DBG-3 --><a href="LeatherSuneate.html">LeatherSuneate</a>, <!-- DBG-3 --><a href="LightPlateJingasa.html">LightPlateJingasa</a>, <!-- DBG-3 --><a href="NorseHelm.html">NorseHelm</a>, <!-- DBG-3 --><a href="OrcHelm.html">OrcHelm</a>, <!-- DBG-3 --><a href="PlateArms.html">PlateArms</a>, <!-- DBG-3 --><a href="PlateBattleKabuto.html">PlateBattleKabuto</a>, <!-- DBG-3 --><a href="PlateChest.html">PlateChest</a>, <!-- DBG-3 --><a href="PlateDo.html">PlateDo</a>, <!-- DBG-3 --><a href="PlateGloves.html">PlateGloves</a>, <!-- DBG-3 --><a href="PlateGorget.html">PlateGorget</a>, <!-- DBG-3 --><a href="PlateHaidate.html">PlateHaidate</a>, <!-- DBG-3 --><a href="PlateHatsuburi.html">PlateHatsuburi</a>, <!-- DBG-3 --><a href="PlateHelm.html">PlateHelm</a>, <!-- DBG-3 --><a href="PlateHiroSode.html">PlateHiroSode</a>, <!-- DBG-3 --><a href="PlateLegs.html">PlateLegs</a>, <!-- DBG-3 --><a href="PlateMempo.html">PlateMempo</a>, <!-- DBG-3 --><a href="PlateSuneate.html">PlateSuneate</a>, <!-- DBG-3 --><a href="RavenHelm.html">RavenHelm</a>, <!-- DBG-3 --><a href="RingmailArms.html">RingmailArms</a>, <!-- DBG-3 --><a href="RingmailChest.html">RingmailChest</a>, <!-- DBG-3 --><a href="RingmailGloves.html">RingmailGloves</a>, <!-- DBG-3 --><a href="RingmailLegs.html">RingmailLegs</a>, <!-- DBG-3 --><a href="RoyalCirclet.html">RoyalCirclet</a>, <!-- DBG-3 --><a href="SmallPlateJingasa.html">SmallPlateJingasa</a>, <!-- DBG-3 --><a href="StandardPlateKabuto.html">StandardPlateKabuto</a>, <!-- DBG-3 --><a href="StuddedArms.html">StuddedArms</a>, <!-- DBG-3 --><a href="StuddedBustierArms.html">StuddedBustierArms</a>, <!-- DBG-3 --><a href="StuddedChest.html">StuddedChest</a>, <!-- DBG-3 --><a href="StuddedDo.html">StuddedDo</a>, <!-- DBG-3 --><a href="StuddedGloves.html">StuddedGloves</a>, <!-- DBG-3 --><a href="StuddedGorget.html">StuddedGorget</a>, <!-- DBG-3 --><a href="StuddedHaidate.html">StuddedHaidate</a>, <!-- DBG-3 --><a href="StuddedHiroSode.html">StuddedHiroSode</a>, <!-- DBG-3 --><a href="StuddedLegs.html">StuddedLegs</a>, <!-- DBG-3 --><a href="StuddedMempo.html">StuddedMempo</a>, <!-- DBG-3 --><a href="StuddedSuneate.html">StuddedSuneate</a>, <!-- DBG-3 --><a href="TigerPeltBustier.html">TigerPeltBustier</a>, <!-- DBG-3 --><a href="TigerPeltChest.html">TigerPeltChest</a>, <!-- DBG-3 --><a href="TigerPeltCollar.html">TigerPeltCollar</a>, <!-- DBG-3 --><a href="TigerPeltHelm.html">TigerPeltHelm</a>, <!-- DBG-3 --><a href="TigerPeltLegs.html">TigerPeltLegs</a>, <!-- DBG-3 --><a href="TigerPeltLongSkirt.html">TigerPeltLongSkirt</a>, <!-- DBG-3 --><a href="TigerPeltShorts.html">TigerPeltShorts</a>, <!-- DBG-3 --><a href="TigerPeltSkirt.html">TigerPeltSkirt</a>, <!-- DBG-3 --><a href="VultureHelm.html">VultureHelm</a>, <!-- DBG-3 --><a href="WingedHelm.html">WingedHelm</a>, <!-- DBG-3 --><a href="WoodlandArms.html">WoodlandArms</a>, <!-- DBG-3 --><a href="WoodlandChest.html">WoodlandChest</a>, <!-- DBG-3 --><a href="WoodlandGloves.html">WoodlandGloves</a>, <!-- DBG-3 --><a href="WoodlandGorget.html">WoodlandGorget</a>, <!-- DBG-3 --><a href="WoodlandLegs.html">WoodlandLegs</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="SaveFlag.html">SaveFlag</a>, <!-- DBG-4 --><a href="SetFlag.html">SetFlag</a>, <!-- DBG-4 --><a href="UnBlessEntry.html">UnBlessEntry</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span>[] ArmorScalars( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <GetInherentStaminaLossReduction>m__1( <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> arm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <HasRefinedResist>m__0( <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetArmorRatingReduction( <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetInherentLowerManaCost( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetInherentStaminaLossReduction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetRefinedDefenseChance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetRefinedResist( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="ResistanceType.html">ResistanceType</a> attr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GetSaveFlag( <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toGet )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GetSaveFlag( <!-- DBG-0 --><a href="SetFlag.html">SetFlag</a> flags, <!-- DBG-0 --><a href="SetFlag.html">SetFlag</a> toGet )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasRefinedResist( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsMageArmorType( <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetSaveFlag( <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="SetFlag.html">SetFlag</a> flags, <!-- DBG-0 --><a href="SetFlag.html">SetFlag</a> toSet, <span style="color: blue;">bool</span> setIf )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetSaveFlag( <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> flags, <!-- DBG-0 --><a href="SaveFlag.html">SaveFlag</a> toSet, <span style="color: blue;">bool</span> setIf )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ValidateMobile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">ctor</span>) BaseArmor( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseArmor( <span style="color: blue;">int</span> itemID )<br />
+      <!-- DBG-0 --><a href="SAAbsorptionAttributes.html">SAAbsorptionAttributes</a> AbsorptionAttributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowFemaleWearer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> AllowMaleWearer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Altered( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> AosDexBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AosDexReq( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AosIntBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AosIntReq( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorMeditationAllowance.html">ArmorMeditationAllowance</a> AosMedAllowance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AosStrBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AosStrReq( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AosArmorAttributes.html">AosArmorAttributes</a> ArmorAttributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ArmorBase( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> ArmorRating( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> ArmorRatingScaled( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> ArmorScalar( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ArtifactRarity( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AosAttributes.html">AosAttributes</a> Attributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BardMasteryBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseArmorRating( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> BaseArmorRatingScaled( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseColdResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseEnergyResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BaseFireResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BasePhysicalResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BasePoisonResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span>[] BaseResists( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> BlessedBy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorBodyType.html">ArmorBodyType</a> BodyPosition( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanAlter( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanBeWornByGargoyles( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanFortify( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanRepair( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ColdBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ColdNonImbuing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ColdResistance( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Crafter( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorMeditationAllowance.html">ArmorMeditationAllowance</a> DefMedAllowance( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> DefaultResource( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> DefaultWeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DexBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> DexRequirement( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DisplayWeight( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorDurabilityLevel.html">ArmorDurabilityLevel</a> Durability( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> EnergyBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> EnergyNonImbuing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> EnergyResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> EngravedText( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="FactionItem.html">FactionItem</a> FactionItemState( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FireBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FireNonImbuing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FireResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> GorgonLenseCharges( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="LenseType.html">LenseType</a> GorgonLenseType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> HitPoints( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Hue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Identified( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> InitMaxHits( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> InitMinHits( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> IntBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> IntOrDexPropertyValue( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> IntRequirement( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsImbued( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsSetItem( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsVvVItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ItemPower.html">ItemPower</a> ItemPower( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LastEquipped( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorMaterialType.html">ArmorMaterialType</a> MaterialType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxHitPoints( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorMeditationAllowance.html">ArmorMeditationAllowance</a> MeditationAllowance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> MixedSet( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="NegativeAttributes.html">NegativeAttributes</a> NegativeAttributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextSelfRepair( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> OldDexBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> OldDexReq( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> OldIntBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> OldIntReq( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorMeditationAllowance.html">ArmorMeditationAllowance</a> OldMedAllowance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> OldStrBonus( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> OldStrReq( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> OwnerName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PhysNonImbuing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PhysicalBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PhysicalResistance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Pieces( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerConstructed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PoisonBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PoisonNonImbuing( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> PoisonResistance( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TalismanAttribute.html">TalismanAttribute</a> Protection( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArmorProtectionLevel.html">ArmorProtectionLevel</a> ProtectionLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ItemQuality.html">ItemQuality</a> Quality( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RefinedCold( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RefinedDefenseChance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RefinedEnergy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RefinedFire( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RefinedPhysical( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RefinedPoison( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ReforgedPrefix.html">ReforgedPrefix</a> ReforgedPrefix( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ReforgedSuffix.html">ReforgedSuffix</a> ReforgedSuffix( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Race.html">Race</a> RequiredRace( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> Resource( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RevertArmorBase( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AosAttributes.html">AosAttributes</a> SetAttributes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetColdBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetEnergyBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SetEquipped( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetFireBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetHue( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SetItem.html">SetItem</a> SetID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SetPhysicalBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetPoisonBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SetSelfRepair( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> SetSkillBonuses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> SkillBonuses( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StrBonus( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StrRequirement( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TimesImbued( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UseIntOrDexProperty( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <Deserialize>m__2()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCraftedProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddDamageTypeProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddItemPowerProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddNameProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddResistanceProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddWeightProperty( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowEquipedCast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowSecureTrade( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> newOwner, <span style="color: blue;">bool</span> accepted )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ApplyResourceResistances( <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> oldResource )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanEquip( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckPropertyConfliction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">int</span> ComputeStatBonus( <!-- DBG-0 --><a href="StatType.html">StatType</a> type )<br />
+      <span style="color: blue;">int</span> ComputeStatReq( <!-- DBG-0 --><a href="StatType.html">StatType</a> type )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DistributeExceptionalBonuses( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DistributeMaterialBonus( <!-- DBG-0 --><a href="CraftAttributeInfo.html">CraftAttributeInfo</a> attrInfo )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DropToWorld( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetDurabilityBonus()<br />
+      <span style="color: blue;">int</span> GetLowerStatReq()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetLuckBonus()<br />
+      <span style="color: blue;">string</span> GetNameString()<br />
+      <span style="color: blue;">int</span> GetProtOffset()<br />
+      <!-- DBG-0 --><a href="CraftAttributeInfo.html">CraftAttributeInfo</a> GetResourceAttrs( <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> res )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetSetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> Invalidate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAdded( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDuped( <!-- DBG-0 --><a href="Item.html">Item</a> newItem )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterImbued( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> mod, <span style="color: blue;">int</span> value )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> OnCraft( <span style="color: blue;">int</span> quality, <span style="color: blue;">bool</span> makersMark, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="CraftSystem.html">CraftSystem</a> craftSystem, Type typeRes, <!-- DBG-0 --><a href="ITool.html">ITool</a> tool, <!-- DBG-0 --><a href="CraftItem.html">CraftItem</a> craftItem, <span style="color: blue;">int</span> resHue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnEquip( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> OnHit( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> weapon, <span style="color: blue;">int</span> damageTaken )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRemoved( <span style="color: blue;">object</span> parent )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> ScaleArmorByDurability( <span style="color: blue;">double</span> armor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ScaleDurability()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Scissor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Scissors.html">Scissors</a> scissors )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SetProtection( Type type, <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> name, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> SetResistBonus( <!-- DBG-0 --><a href="ResistanceType.html">ResistanceType</a> resist )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UnscaleDurability()<br />
+   </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Faction</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Factions.html">Back to Server.Factions</a></h4>
+      <h2>Faction : <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="CouncilOfMages.html">CouncilOfMages</a>, <!-- DBG-3 --><a href="Minax.html">Minax</a>, <!-- DBG-3 --><a href="Shadowlords.html">Shadowlords</a>, <!-- DBG-3 --><a href="TrueBritannians.html">TrueBritannians</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="BroadcastPrompt.html">BroadcastPrompt</a>, <!-- DBG-4 --><a href="SkillLossContext.html">SkillLossContext</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Faction.html">Faction</a>&gt; Factions( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) TimeSpan SkillLossPeriod( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ApplySkillLoss( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckLeaveTimer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ClearSkillLoss( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ClearSkillLoss_Callback( <span style="color: blue;">object</span> state )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DistributePoints( <span style="color: blue;">int</span> distrib )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Login( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Logout( <!-- DBG-0 --><a href="LogoutEventArgs.html">LogoutEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionCommander_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionCommander_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionElection_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionElection_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionItemReset_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionKick_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionKick_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionReset_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FactionTownReset_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> Find( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> Find( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">bool</span> inherit )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> Find( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">bool</span> inherit, <span style="color: blue;">bool</span> creatureAllegiances )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> FindSmallestFaction()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HandleAtrophy()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HandleDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HandleDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> killer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> InSkillLoss( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsFactionBanned( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsNearType( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, Type type, <span style="color: blue;">int</span> range )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsNearType( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, Type[] types, <span style="color: blue;">int</span> range )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> Parse( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ProcessTick()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Faction.html">Faction</a> ReadReference( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> StabilityActive()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> WriteReference( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer, <!-- DBG-0 --><a href="Faction.html">Faction</a> fact )<br />
+      (<span style="color: blue;">ctor</span>) Faction()<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Commander( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="FactionDefinition.html">FactionDefinition</a> Definition( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Election.html">Election</a> Election( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> FactionMessageReady( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaximumTraps( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="PlayerState.html">PlayerState</a>&gt; Members( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Silver( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="FactionState.html">FactionState</a> State( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="StrongholdRegion.html">StrongholdRegion</a> StrongholdRegion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Tithe( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseFactionTrap.html">BaseFactionTrap</a>&gt; Traps( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddMember( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">bool</span> AlreadyHasCharInFaction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">int</span> AwardSilver( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob, <span style="color: blue;">int</span> silver )<br />
+      <span style="color: blue;">void</span> BeginBroadcast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> BeginHonorLeadership( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> Broadcast( <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> Broadcast( <span style="color: blue;">int</span> number )<br />
+      <span style="color: blue;">void</span> Broadcast( <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> Broadcast( <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+      <span style="color: blue;">void</span> Broadcast( <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+      <span style="color: blue;">bool</span> CanHandleInflux( <span style="color: blue;">int</span> influx )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> CompareTo( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">void</span> EndBroadcast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> HonorLeadership_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">bool</span> IsCommander( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> JoinAlone( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> JoinGuilded( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> mob, <!-- DBG-0 --><a href="Guild.html">Guild</a> guild )<br />
+      <span style="color: blue;">void</span> OnJoinAccepted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> RemoveMember( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> RemovePlayerState( <!-- DBG-0 --><a href="PlayerState.html">PlayerState</a> pl )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+   </body>
+</html>

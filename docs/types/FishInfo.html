@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - FishInfo</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>FishInfo</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetInfo-c__AnonStorey1.html">(Anonymous-Type)-GetInfo-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetInfo-c__AnonStorey2.html">(Anonymous-Type)-GetInfo-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-IsRareFish-c__AnonStorey0.html">(Anonymous-Type)-IsRareFish-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="FishInfo.html">FishInfo</a>&gt; FishInfos( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) Type[] SOSArtifacts( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetFishHue( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetFishHue( <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> GetFishLabel( <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> GetFishLabel( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetFishLocation( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIndexFromType( Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="FishInfo.html">FishInfo</a> GetInfo( Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="FishInfo.html">FishInfo</a> GetInfo( <span style="color: blue;">int</span> hue )<br />
+      (<span style="color: blue;">static</span>) Type GetSpecialItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> harvestItem, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <span style="color: blue;">bool</span> rareOnly )<br />
+      (<span style="color: blue;">static</span>) Type GetSpecialItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> harvestItem, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <span style="color: blue;">double</span> bump, <span style="color: blue;">bool</span> rareOnly )<br />
+      (<span style="color: blue;">static</span>) Type GetTypeFromIndex( <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> InvalidateLocations()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsDeepWater( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsDungeon( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsMondainDungeon( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsRareFish( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsShore( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      (<span style="color: blue;">ctor</span>) FishInfo( <span style="color: blue;">int</span> hue, Type type, <span style="color: blue;">object</span> label, <span style="color: blue;">object</span> found, <span style="color: blue;">bool</span> deepwater, <span style="color: blue;">double</span> basechance, <span style="color: blue;">double</span> minskill )<br />
+      <span style="color: blue;">double</span> BaseChance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Hue( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">object</span> LabelNumber( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">object</span> Location( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> MinSkill( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> RequiresDeepWater( <span style="color: blue;">get</span>; )<br />
+      Type Type( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> GetBaitStrength( Type baitType, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> enhanced )<br />
+      <span style="color: blue;">bool</span> Roll( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">double</span> baitStr, <span style="color: blue;">double</span> bump )<br />
+   </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Race</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>Race</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="Elf.html">Elf</a>, <!-- DBG-3 --><a href="Gargoyle.html">Gargoyle</a>, <!-- DBG-3 --><a href="Human.html">Human</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Race.html">Race</a>&gt; AllRaces( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a> DefaultRace( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a> Elf( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a> Gargoyle( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a> Human( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a>[] Races( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckNamesAndValues()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span>[] GetRaceNames()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a>[] GetRaceValues()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Race.html">Race</a> Parse( <span style="color: blue;">string</span> value )<br />
+      (<span style="color: blue;">ctor</span>) Race( <span style="color: blue;">int</span> raceID, <span style="color: blue;">int</span> raceIndex, <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> pluralName, <span style="color: blue;">int</span> maleBody, <span style="color: blue;">int</span> femaleBody, <span style="color: blue;">int</span> maleGhostBody, <span style="color: blue;">int</span> femaleGhostBody, <!-- DBG-0 --><a href="Expansion.html">Expansion</a> requiredExpansion )<br />
+      <span style="color: blue;">int</span> FemaleBody( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> FemaleGhostBody( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaleBody( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaleGhostBody( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Name( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> PluralName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> RaceID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RaceIndex( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Expansion.html">Expansion</a> RequiredExpansion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> AliveBody( <span style="color: blue;">bool</span> female )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> AliveBody( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> Body( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ClipFaceHue( <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ClipHairHue( <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> ClipSkinHue( <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GhostBody( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GhostBody( <span style="color: blue;">bool</span> female )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomFace( <span style="color: blue;">bool</span> female )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomFace( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomFaceHue()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomFacialHair( <span style="color: blue;">bool</span> female )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomFacialHair( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomHair( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomHair( <span style="color: blue;">bool</span> female )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomHairHue()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> RandomSkinHue()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateFace( <span style="color: blue;">bool</span> female, <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateFace( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateFacialHair( <span style="color: blue;">bool</span> female, <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateFacialHair( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateHair( <span style="color: blue;">bool</span> female, <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateHair( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> itemID )<br />
+   </body>
+</html>

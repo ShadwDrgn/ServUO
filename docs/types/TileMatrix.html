@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - TileMatrix</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>TileMatrix</h2>
+      (<span style="color: blue;">ctor</span>) TileMatrix( <!-- DBG-0 --><a href="Map.html">Map</a> owner, <span style="color: blue;">int</span> fileIndex, <span style="color: blue;">int</span> mapID, <span style="color: blue;">int</span> width, <span style="color: blue;">int</span> height )<br />
+      <span style="color: blue;">int</span> BlockHeight( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BlockWidth( <span style="color: blue;">get</span>; )<br />
+      FileStream DataStream( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[][][] EmptyStaticBlock( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Exists( <span style="color: blue;">get</span>; )<br />
+      BinaryReader IndexReader( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      FileStream IndexStream( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      FileStream MapStream( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TileMatrixPatch.html">TileMatrixPatch</a> Patch( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> Dispose()<br />
+      <span style="color: blue;">void</span> Force()<br />
+      <!-- DBG-0 --><a href="LandTile.html">LandTile</a>[] GetLandBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <!-- DBG-0 --><a href="LandTile.html">LandTile</a> GetLandTile( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[][][] GetStaticBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[] GetStaticTiles( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[] GetStaticTiles( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">bool</span> multis )<br />
+      <!-- DBG-0 --><a href="LandTile.html">LandTile</a>[] ReadLandBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[][][] ReadStaticBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <span style="color: blue;">void</span> SetLandBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <!-- DBG-0 --><a href="LandTile.html">LandTile</a>[] value )<br />
+      <span style="color: blue;">void</span> SetStaticBlock( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[][][] value )<br />
+   </body>
+</html>

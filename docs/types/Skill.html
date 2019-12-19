@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Skill</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>Skill</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> UseStatMods( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">ctor</span>) Skill( <!-- DBG-0 --><a href="Skills.html">Skills</a> owner, <!-- DBG-0 --><a href="SkillInfo.html">SkillInfo</a> info, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">ctor</span>) Skill( <!-- DBG-0 --><a href="Skills.html">Skills</a> owner, <!-- DBG-0 --><a href="SkillInfo.html">SkillInfo</a> info, <span style="color: blue;">int</span> baseValue, <span style="color: blue;">int</span> cap, <!-- DBG-0 --><a href="SkillLock.html">SkillLock</a> skillLock )<br />
+      <span style="color: blue;">double</span> Base( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> BaseFixedPoint( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> Cap( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> CapFixedPoint( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Fixed( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillInfo.html">SkillInfo</a> Info( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsMastery( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillLock.html">SkillLock</a> Lock( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Name( <span style="color: blue;">get</span>; )<br />
+      DateTime NextGGSGain( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> NonRacialValue( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Skills.html">Skills</a> Owner( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SkillID( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SkillName.html">SkillName</a> SkillName( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> Value( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> VolumeLearned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasLearnedMastery()<br />
+      <span style="color: blue;">bool</span> HasLearnedVolume( <span style="color: blue;">int</span> volume )<br />
+      <span style="color: blue;">bool</span> LearnMastery( <span style="color: blue;">int</span> volume )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">bool</span> SetCurrent()<br />
+      <span style="color: blue;">void</span> SetLockNoRelay( <!-- DBG-0 --><a href="SkillLock.html">SkillLock</a> skillLock )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">void</span> Update()<br />
+   </body>
+</html>

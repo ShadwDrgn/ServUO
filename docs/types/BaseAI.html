@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseAI</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>BaseAI</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BerserkAI.html">BerserkAI</a>, <!-- DBG-3 --><a href="CloneAI.html">CloneAI</a>, <!-- DBG-3 --><a href="FactionGuardAI.html">FactionGuardAI</a>, <!-- DBG-3 --><a href="HealerAI.html">HealerAI</a>, <!-- DBG-3 --><a href="MageAI.html">MageAI</a>, <!-- DBG-3 --><a href="MeleeAI.html">MeleeAI</a>, <!-- DBG-3 --><a href="OrcScoutAI.html">OrcScoutAI</a>, <!-- DBG-3 --><a href="PredatorAI.html">PredatorAI</a>, <!-- DBG-3 --><a href="SpellbinderAI.html">SpellbinderAI</a>, <!-- DBG-3 --><a href="ThiefAI.html">ThiefAI</a>, <!-- DBG-3 --><a href="VendorAI.html">VendorAI</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-BeginPickTargetDelayed-c__AnonStorey0.html">(Anonymous-Type)-BeginPickTargetDelayed-c__AnonStorey0</a>, <!-- DBG-4 --><a href="AITimer.html">AITimer</a>, <!-- DBG-4 --><a href="InternalEntry.html">InternalEntry</a>, <!-- DBG-4 --><a href="TransferItem.html">TransferItem</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Mobile.html">Mobile</a> <DoOrderGuard>m__0( <!-- DBG-0 --><a href="AggressorInfo.html">AggressorInfo</a> x )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Mobile.html">Mobile</a> <DoOrderGuard>m__2( <!-- DBG-0 --><a href="AggressorInfo.html">AggressorInfo</a> x )<br />
+      (<span style="color: blue;">ctor</span>) BaseAI( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> m )<br />
+      <!-- DBG-0 --><a href="ActionType.html">ActionType</a> Action( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DirectionLocked( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">long</span> NextMove( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> <DoOrderGuard>m__1( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> <DoOrderGuard>m__3( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AcquireFocusMob( <span style="color: blue;">int</span> iRange, <!-- DBG-0 --><a href="FightMode.html">FightMode</a> acqType, <span style="color: blue;">bool</span> bPlayerOnly, <span style="color: blue;">bool</span> bFacFriend, <span style="color: blue;">bool</span> bFacFoe )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Activate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AfterThink()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BeginPickTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="OrderType.html">OrderType</a> order )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BeginPickTargetDelayed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="OrderType.html">OrderType</a> order )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckCharming()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckFlee()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHerding()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckMove()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> CheckNavPoint()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deactivate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionBackoff()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionCombat()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionFlee()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionGuard()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionInteract()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoActionWander()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoBardPacified()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoBardProvoked()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoMove( <!-- DBG-0 --><a href="Direction.html">Direction</a> d )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoMove( <!-- DBG-0 --><a href="Direction.html">Direction</a> d, <span style="color: blue;">bool</span> badStateOk )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="MoveResult.html">MoveResult</a> DoMoveImpl( <!-- DBG-0 --><a href="Direction.html">Direction</a> d )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderAttack()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderCome()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderDrop()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderFollow()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderFriend()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderGuard()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderNone()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderPatrol()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderRelease()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderStay()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderStop()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderTransfer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DoOrderUnfriend()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> EndPickTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> target, <!-- DBG-0 --><a href="OrderType.html">OrderType</a> order )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HandlesOnSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsHostile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="FightMode.html">FightMode</a> mode )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> MoveTo( <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <span style="color: blue;">bool</span> run, <span style="color: blue;">int</span> range )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Obey()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnActionChanged()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAggressiveAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> aggressor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnAtWayPoint()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnCurrentOrderChanged()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnCurrentSpeedChanged()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTeleported()<br />
+      <span style="color: blue;">void</span> ReturnToHome()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Think()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> TransformMoveDelay( <span style="color: blue;">double</span> delay )<br />
+      <span style="color: blue;">bool</span> ValidGuardTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> combatant )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WalkMobileRange( <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <span style="color: blue;">int</span> iSteps, <span style="color: blue;">bool</span> bRun, <span style="color: blue;">int</span> iWantDistMin, <span style="color: blue;">int</span> iWantDistMax )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> WalkRandom( <span style="color: blue;">int</span> iChanceToNotMove, <span style="color: blue;">int</span> iChanceToDir, <span style="color: blue;">int</span> iSteps )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> WalkRandomInHome( <span style="color: blue;">int</span> iChanceToNotMove, <span style="color: blue;">int</span> iChanceToDir, <span style="color: blue;">int</span> iSteps )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WasNamed( <span style="color: blue;">string</span> speech )<br />
+   </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseSeaChampion</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>BaseSeaChampion : <!-- DBG-1 --><a href="BaseChampion.html">BaseChampion</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="Charydbis.html">Charydbis</a>, <!-- DBG-3 --><a href="CorgulTheSoulBinder.html">CorgulTheSoulBinder</a>, <!-- DBG-3 --><a href="Osiredon.html">Osiredon</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseSeaChampion( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseSeaChampion( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> fisher, <!-- DBG-0 --><a href="AIType.html">AIType</a> ai, <!-- DBG-0 --><a href="FightMode.html">FightMode</a> fm )<br />
+      TimeSpan BoatDamageCooldown( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> BonusPetDamageScalar( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanDamageBoats( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DamageRange( <span style="color: blue;">get</span>; )<br />
+      Type[] DecorativeList( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxBoatDamage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MinBoatDamage( <span style="color: blue;">get</span>; )<br />
+      DateTime NextBoatDamage( <span style="color: blue;">get</span>; )<br />
+      Type[] SharedList( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ChampionSkullType.html">ChampionSkullType</a> SkullType( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MonsterStatuetteType.html">MonsterStatuetteType</a>[] StatueTypes( <span style="color: blue;">get</span>; )<br />
+      Type[] UniqueList( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> AwardArtifact( <!-- DBG-0 --><a href="Item.html">Item</a> artifact )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoDamageBoat( <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> galleon )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetValidPoint( <!-- DBG-0 --><a href="BaseBoat.html">BaseBoat</a> boat, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> distance )<br />
+      <span style="color: blue;">void</span> GiveArtifact( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <!-- DBG-0 --><a href="Item.html">Item</a> artifact )<br />
+      <span style="color: blue;">bool</span> IsEligible( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> Artifact )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDeath()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHitByCannon( <!-- DBG-0 --><a href="IShipCannon.html">IShipCannon</a> cannon, <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnThink()<br />
+      <span style="color: blue;">void</span> RegisterDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RegisterDamageTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> TryDamageBoat()<br />
+   </body>
+</html>

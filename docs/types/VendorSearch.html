@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - VendorSearch</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.VendorSearching.html">Back to Server.Engines.VendorSearching</a></h4>
+      <h2>VendorSearch</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-DoSearch-c__AnonStorey0.html">(Anonymous-Type)-DoSearch-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoSearch-c__AnonStorey1.html">(Anonymous-Type)-DoSearch-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Initialize-c__AnonStorey2.html">(Anonymous-Type)-Initialize-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Initialize-c__AnonStorey3.html">(Anonymous-Type)-Initialize-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-IsSearchableContainer-c__AnonStorey4.html">(Anonymous-Type)-IsSearchableContainer-c__AnonStorey4</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="SearchCategory.html">SearchCategory</a>&gt; Categories( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>,<a href="SearchCriteria.html">SearchCriteria</a>&gt; Contexts( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="String.html">String</a>,<a href="Type.html">Type</a>&gt; Keywords( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) StringList StringList( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <DoSearch>m__0( <!-- DBG-0 --><a href="SearchDetail.html">SearchDetail</a> d )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <DoSearch>m__1( <!-- DBG-0 --><a href="VendorItem.html">VendorItem</a> vi )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <DoSearch>m__2( <!-- DBG-0 --><a href="VendorItem.html">VendorItem</a> vi )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__5( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__6()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__9( <!-- DBG-0 --><a href="SearchCriteriaCategory.html">SearchCriteriaCategory</a> x )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnLoad>m__4( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnSave>m__3( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnSave>m__7( <span style="color: blue;">KeyValuePair</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>,<a href="SearchCriteria.html">SearchCriteria</a>&gt; kvp )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnSave>m__8( <span style="color: blue;">KeyValuePair</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>,<a href="SearchCriteria.html">SearchCriteria</a>&gt; kvp )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SearchCriteria.html">SearchCriteria</a> AddNewContext( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanSearch( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckCanRepair( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckKeyword( <span style="color: blue;">string</span> searchstring, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckMatch( <!-- DBG-0 --><a href="VendorItem.html">VendorItem</a> vitem, <!-- DBG-0 --><a href="SearchCriteria.html">SearchCriteria</a> searchCriteria )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSlayer( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="VendorItem.html">VendorItem</a>&gt; DoSearch( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="SearchCriteria.html">SearchCriteria</a> criteria )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SearchCriteria.html">SearchCriteria</a> GetContext( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetItemName( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; GetItems( <!-- DBG-0 --><a href="PlayerVendor.html">PlayerVendor</a> pv )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetItems( <!-- DBG-0 --><a href="Container.html">Container</a> c, <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; list )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsElf( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsGargoyle( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSearchableContainer( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLoad()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnSave( <!-- DBG-0 --><a href="WorldSaveEventArgs.html">WorldSaveEventArgs</a> e )<br />
+      (<span style="color: blue;">ctor</span>) VendorSearch()<br />
+   </body>
+</html>

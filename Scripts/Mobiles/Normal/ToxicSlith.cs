@@ -34,7 +34,6 @@ namespace Server.Mobiles
             SetSkill(SkillName.Wrestling, 90.4, 95.1);
             SetSkill(SkillName.Poisoning, 90.0, 110.0);
 
-            SetSpecialAbility(SpecialAbility.DragonBreath);
         }
 
         public override int DragonBlood { get { return 6; } }

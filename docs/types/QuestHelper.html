@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - QuestHelper</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Quests.html">Back to Server.Engines.Quests</a></h4>
+      <h2>QuestHelper</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckDoneOnce-c__AnonStorey0.html">(Anonymous-Type)-CheckDoneOnce-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryReceiveQuestItem-c__AnonStorey1.html">(Anonymous-Type)-TryReceiveQuestItem-c__AnonStorey1</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckRewardItem>m__0( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> q )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckRewardItem>m__2( <!-- DBG-0 --><a href="BaseObjective.html">BaseObjective</a> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GetQuest`1>m__1( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AnyRewards( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanOffer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckCreature( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> creature )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckDoneOnce( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> quester, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckDoneOnce( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, Type questType, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> quester, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckItem( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckRewardItem( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSkill( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CompleteQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> Construct( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> CountQuestItems( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Delay( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, Type type, TimeSpan delay )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Delayed( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DeleteItems( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DeleteItems( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type itemType, <span style="color: blue;">int</span> amount, <span style="color: blue;">bool</span> questItem )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> DeliveryArrived( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="BaseVendor.html">BaseVendor</a> vendor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> EnhancedSkill( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> FindCompletedQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type type, <span style="color: blue;">bool</span> delete )<br />
+      (<span style="color: blue;">static</span>) Type FindFirstChainQuest( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Region.html">Region</a> FindRegion( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> FirstChainQuest( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest, <span style="color: blue;">object</span> quester )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetContextMenuEntries( <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      (<span style="color: blue;">static</span>) T GetQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> GetQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type t )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> InProgress( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> quester )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> InProgress( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, Type[] quests )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnKilledBy( <!-- DBG-0 --><a href="OnKilledByEventArgs.html">OnKilledByEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> QuestLimitReached( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> RandomQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type[] quests, <span style="color: blue;">object</span> quester )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> RandomQuest( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type[] quests, <span style="color: blue;">object</span> quester, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveAcceleratedSkillgain( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveStatus( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> RemoveStatus( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> StartTimer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> StopTimer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> TryDeleteItems( <!-- DBG-0 --><a href="BaseQuest.html">BaseQuest</a> quest )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> TryReceiveQuestItem( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> player, Type type, TimeSpan delay )<br />
+      (<span style="color: blue;">ctor</span>) QuestHelper()<br />
+   </body>
+</html>

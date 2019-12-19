@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BufferPool</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Network.html">Back to Server.Network</a></h4>
+      <h2>BufferPool</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="BufferPool.html">BufferPool</a>&gt; Pools( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">ctor</span>) BufferPool( <span style="color: blue;">string</span> name, <span style="color: blue;">int</span> initialCapacity, <span style="color: blue;">int</span> bufferSize )<br />
+      <span style="color: blue;">int</span> Count( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">byte</span>[] AcquireBuffer()<br />
+      <span style="color: blue;">void</span> Free()<br />
+      <span style="color: blue;">void</span> GetInfo( <span style="color: blue;">out</span> <span style="color: blue;">string</span> name, <span style="color: blue;">out</span> <span style="color: blue;">int</span> freeCount, <span style="color: blue;">out</span> <span style="color: blue;">int</span> initialCapacity, <span style="color: blue;">out</span> <span style="color: blue;">int</span> currentCapacity, <span style="color: blue;">out</span> <span style="color: blue;">int</span> bufferSize, <span style="color: blue;">out</span> <span style="color: blue;">int</span> misses )<br />
+      <span style="color: blue;">void</span> ReleaseBuffer( <span style="color: blue;">byte</span>[] buffer )<br />
+   </body>
+</html>

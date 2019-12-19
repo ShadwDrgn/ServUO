@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Fishing</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Harvest.html">Back to Server.Engines.Harvest</a></h4>
+      <h2>Fishing : <!-- DBG-1 --><a href="HarvestSystem.html">HarvestSystem</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-OnHarvestStarted-c__AnonStorey1.html">(Anonymous-Type)-OnHarvestStarted-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-StartHarvesting-c__AnonStorey0.html">(Anonymous-Type)-StartHarvesting-c__AnonStorey0</a>, <!-- DBG-4 --><a href="MutateEntry.html">MutateEntry</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span>[] LavaTiles( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Fishing.html">Fishing</a> System( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasTypeHook( <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HookType.html">HookType</a> type )<br />
+      (<span style="color: blue;">ctor</span>) Fishing()<br />
+      <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> Definition( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> BeginHarvesting( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHarvest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHarvest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckHarvestSkill( <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="HarvestResource.html">HarvestResource</a> res, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckResources( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <span style="color: blue;">bool</span> timed )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="Item.html">Item</a> Construct( Type type, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> FinishHarvesting( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <span style="color: blue;">object</span> toHarvest, <span style="color: blue;">object</span> locked )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> GetDefinition( <span style="color: blue;">int</span> tileID, <!-- DBG-0 --><a href="Item.html">Item</a> tool )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> GetHarvestDetails( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <span style="color: blue;">object</span> toHarvest, <span style="color: blue;">out</span> <span style="color: blue;">int</span> tileID, <span style="color: blue;">out</span> <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">out</span> <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">object</span> GetLock( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">virtual</span> Type GetResourceType( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <!-- DBG-0 --><a href="HarvestResource.html">HarvestResource</a> resource )<br />
+      Type GetSpecialLavaItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> type, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> pnt, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> Give( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> placeAtFeet )<br />
+      <span style="color: blue;">bool</span> IsDeepWater( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <span style="color: blue;">bool</span> IsLavaHarvest( <!-- DBG-0 --><a href="Item.html">Item</a> tool, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">bool</span> IsLavaHarvest( <!-- DBG-0 --><a href="Item.html">Item</a> tool, <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">virtual</span> Type MutateType( Type type, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <!-- DBG-0 --><a href="HarvestResource.html">HarvestResource</a> resource )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnConcurrentHarvest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHarvestFinished( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <!-- DBG-0 --><a href="HarvestVein.html">HarvestVein</a> vein, <!-- DBG-0 --><a href="HarvestBank.html">HarvestBank</a> bank, <!-- DBG-0 --><a href="HarvestResource.html">HarvestResource</a> resource, <span style="color: blue;">object</span> harvested )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnHarvestStarted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnToolUsed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <span style="color: blue;">bool</span> caughtsomething )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendSuccessTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="HarvestResource.html">HarvestResource</a> resource )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> SpecialHarvest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <!-- DBG-0 --><a href="HarvestDefinition.html">HarvestDefinition</a> def, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StartHarvesting( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> tool, <span style="color: blue;">object</span> toHarvest )<br />
+      <span style="color: blue;">bool</span> ValidateSpecialTile( <span style="color: blue;">int</span> tileID )<br />
+   </body>
+</html>

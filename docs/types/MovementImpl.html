@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MovementImpl</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Movement.html">Back to Server.Movement</a></h4>
+      <h2>MovementImpl : <!-- DBG-2.2 --><a href="IMovementImpl.html">IMovementImpl</a></h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AlwaysIgnoreDoors( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> Goal( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IgnoreMovableImpassables( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IgnoreSpellFields( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">ctor</span>) MovementImpl()<br />
+      <span style="color: blue;">bool</span> CanMoveOver( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> t )<br />
+      <span style="color: blue;">bool</span> Check( <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; items, <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; mobiles, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> startTop, <span style="color: blue;">int</span> startZ, <span style="color: blue;">bool</span> canSwim, <span style="color: blue;">bool</span> cantWalk, <span style="color: blue;">out</span> <span style="color: blue;">int</span> newZ )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckMovement( <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <!-- DBG-0 --><a href="Direction.html">Direction</a> d, <span style="color: blue;">out</span> <span style="color: blue;">int</span> newZ )<br />
+      <span style="color: blue;">void</span> GetStartZ( <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; itemList, <span style="color: blue;">out</span> <span style="color: blue;">int</span> zLow, <span style="color: blue;">out</span> <span style="color: blue;">int</span> zTop )<br />
+      <span style="color: blue;">bool</span> IsOk( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> ignoreDoors, <span style="color: blue;">bool</span> ignoreSpellFields, <span style="color: blue;">int</span> ourZ, <span style="color: blue;">int</span> ourTop, <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a>[] tiles, <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; items )<br />
+      <span style="color: blue;">void</span> Offset( <!-- DBG-0 --><a href="Direction.html">Direction</a> d, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> x, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> y )<br />
+   </body>
+</html>

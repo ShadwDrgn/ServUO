@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseRegion</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Regions.html">Back to Server.Regions</a></h4>
+      <h2>BaseRegion : <!-- DBG-1 --><a href="Region.html">Region</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="ApprenticeRegion.html">ApprenticeRegion</a>, <!-- DBG-3 --><a href="ArenaRegion.html">ArenaRegion</a>, <!-- DBG-3 --><a href="CancelQuestRegion.html">CancelQuestRegion</a>, <!-- DBG-3 --><a href="ChampionSpawnRegion.html">ChampionSpawnRegion</a>, <!-- DBG-3 --><a href="CorgulRegion.html">CorgulRegion</a>, <!-- DBG-3 --><a href="DespiseRegion.html">DespiseRegion</a>, <!-- DBG-3 --><a href="DungeonRegion.html">DungeonRegion</a>, <!-- DBG-3 --><a href="ExodusChestRegion.html">ExodusChestRegion</a>, <!-- DBG-3 --><a href="GaryRegion.html">GaryRegion</a>, <!-- DBG-3 --><a href="GauntletRegion.html">GauntletRegion</a>, <!-- DBG-3 --><a href="GreenAcres.html">GreenAcres</a>, <!-- DBG-3 --><a href="GuardedRegion.html">GuardedRegion</a>, <!-- DBG-3 --><a href="HouseRaffleRegion.html">HouseRaffleRegion</a>, <!-- DBG-3 --><a href="HouseRegion.html">HouseRegion</a>, <!-- DBG-3 --><a href="Jail.html">Jail</a>, <!-- DBG-3 --><a href="KhaldunCampRegion.html">KhaldunCampRegion</a>, <!-- DBG-3 --><a href="LampRoomRegion.html">LampRoomRegion</a>, <!-- DBG-3 --><a href="LeverPuzzleRegion.html">LeverPuzzleRegion</a>, <!-- DBG-3 --><a href="MonestaryRegion.html">MonestaryRegion</a>, <!-- DBG-3 --><a href="NoHousingRegion.html">NoHousingRegion</a>, <!-- DBG-3 --><a href="QuestCompleteObjectiveRegion.html">QuestCompleteObjectiveRegion</a>, <!-- DBG-3 --><a href="QuestNoEntryRegion.html">QuestNoEntryRegion</a>, <!-- DBG-3 --><a href="QuestOfferRegion.html">QuestOfferRegion</a>, <!-- DBG-3 --><a href="SeaMarketRegion.html">SeaMarketRegion</a>, <!-- DBG-3 --><a href="ShadowguardRegion.html">ShadowguardRegion</a>, <!-- DBG-3 --><a href="StrongholdRegion.html">StrongholdRegion</a>, <!-- DBG-3 --><a href="ToKBridgeRegion.html">ToKBridgeRegion</a>, <!-- DBG-3 --><a href="TombOfKingsRegion.html">TombOfKingsRegion</a>, <!-- DBG-3 --><a href="Underwater.html">Underwater</a>, <!-- DBG-3 --><a href="VoidPoolRegion.html">VoidPoolRegion</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanSpawn( <!-- DBG-0 --><a href="Region.html">Region</a> region, Type[] types )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetRuneNameFor( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      (<span style="color: blue;">ctor</span>) BaseRegion( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent )<br />
+      (<span style="color: blue;">ctor</span>) BaseRegion( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent, <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) BaseRegion( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) BaseRegion( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> priority, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) BaseRegion( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> priority, <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] area )<br />
+      <span style="color: blue;">bool</span> ExcludeFromParentSpawns( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> NoLogoutDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> RuneName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SpawnZLevel.html">SpawnZLevel</a> SpawnZLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="SpawnEntry.html">SpawnEntry</a>[] Spawns( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> YoungProtected( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AcceptsSpawnsFrom( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanSee( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckTravel( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> traveller, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="TravelCheckType.html">TravelCheckType</a> type )<br />
+      <span style="color: blue;">virtual</span> TimeSpan GetLogoutDelay( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> InitRectangles()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnUnregister()<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RandomSpawnLocation( <span style="color: blue;">int</span> spawnHeight, <span style="color: blue;">bool</span> land, <span style="color: blue;">bool</span> water, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> home, <span style="color: blue;">int</span> range )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+   </body>
+</html>

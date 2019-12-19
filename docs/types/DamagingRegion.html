@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - DamagingRegion</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Regions.html">Back to Server.Regions</a></h4>
+      <h2>DamagingRegion : <!-- DBG-1 --><a href="MondainRegion.html">MondainRegion</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="AcidRiver.html">AcidRiver</a>, <!-- DBG-3 --><a href="CrystalField.html">CrystalField</a>, <!-- DBG-3 --><a href="IcyRiver.html">IcyRiver</a>, <!-- DBG-3 --><a href="ParoxysmusBossEntry.html">ParoxysmusBossEntry</a>, <!-- DBG-3 --><a href="PoisonedSemetery.html">PoisonedSemetery</a>, <!-- DBG-3 --><a href="PoisonedTree.html">PoisonedTree</a>, <!-- DBG-3 --><a href="TheLostCityEntry.html">TheLostCityEntry</a></h4>
+      (<span style="color: blue;">ctor</span>) DamagingRegion( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent )<br />
+      TimeSpan DamageInterval( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EnterMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EnterSound( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="Timer.html">Timer</a>&gt; Table( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> Damage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnExit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChanged( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">void</span> StartTimer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> StopTimer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+   </body>
+</html>

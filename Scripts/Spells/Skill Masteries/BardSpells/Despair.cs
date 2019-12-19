@@ -60,10 +60,6 @@ namespace Server.Spells.SkillMasteries
             {
                 Caster.SendLocalizedMessage(1115773); // Your target is dead.
             }
-            else if (Caster == m)
-            {
-                // TODO: Message?
-            }
             else if (BardSpell.HasHarmfulEffects(m, this.GetType()))
             {
                 Caster.SendLocalizedMessage(1115772); //Your target is already under the effect of this spellsong.

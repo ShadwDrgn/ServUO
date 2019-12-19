@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - VvVTrap</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.VvV.html">Back to Server.Engines.VvV</a></h4>
+      <h2>VvVTrap : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IRevealableItem.html">IRevealableItem</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="VvVBladeTrap.html">VvVBladeTrap</a>, <!-- DBG-3 --><a href="VvVColdTrap.html">VvVColdTrap</a>, <!-- DBG-3 --><a href="VvVEnergyTrap.html">VvVEnergyTrap</a>, <!-- DBG-3 --><a href="VvVExplosionTrap.html">VvVExplosionTrap</a>, <!-- DBG-3 --><a href="VvVPoisonTrap.html">VvVPoisonTrap</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey0.html">(Anonymous-Type)-Serialize-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Delete>m__1( <!-- DBG-0 --><a href="VvVTrap.html">VvVTrap</a> l )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnRevealed>m__0( <!-- DBG-0 --><a href="VvVTrap.html">VvVTrap</a> l )<br />
+      (<span style="color: blue;">ctor</span>) VvVTrap( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) VvVTrap( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <!-- DBG-0 --><a href="DeploymentType.html">DeploymentType</a> type )<br />
+      <span style="color: blue;">bool</span> CheckWhenHidden( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="DeploymentType.html">DeploymentType</a> DeploymentType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnMovement( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="VvVTrap.html">VvVTrap</a>&gt; Links( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxDamage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MinDamage( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="VvVTrap.html">VvVTrap</a> ParentTrap( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="VvVTrapType.html">VvVTrapType</a> TrapType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckPassiveDetect( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckReveal( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Detonate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsEnemy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnMoveOver( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRevealed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">bool</span> SetTripwire( <!-- DBG-0 --><a href="VvVTrapKit.html">VvVTrapKit</a> deed, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> myLocation, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> wireLocation, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+   </body>
+</html>

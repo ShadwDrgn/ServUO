@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - SpawnArea</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>SpawnArea : <!-- DBG-2.1 --><span style="color: blue;">IEnumerable</span>&lt;<a href="Point3D.html">Point3D</a>&gt;, <!-- DBG-2.1 --><span style="color: blue;">IEnumerable</span>, <!-- DBG-2.1 --><span style="color: blue;">ICollection</span>&lt;<a href="Point3D.html">Point3D</a>&gt;</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-Compute-c__AnonStorey3.html">(Anonymous-Type)-Compute-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetFilters-c__AnonStorey1.html">(Anonymous-Type)-GetFilters-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetImage-c__AnonStorey2.html">(Anonymous-Type)-GetImage-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Slice-c__Iterator0.html">(Anonymous-Type)-Slice-c__Iterator0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <GetHashCode>m__1( <span style="color: blue;">int</span> v, <span style="color: blue;">char</span> c )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <SpawnArea>m__0( <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a> f )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a>[] GetFilters( <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a> filter )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetHashCode( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetHashCode( <!-- DBG-0 --><a href="Map.html">Map</a> facet, <span style="color: blue;">string</span> region, <span style="color: blue;">IEnumerable</span>&lt;<a href="TileFlag.html">TileFlag</a>&gt; filters, <!-- DBG-0 --><a href="SpawnValidator.html">SpawnValidator</a> validator )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SpawnArea.html">SpawnArea</a> Instantiate( <!-- DBG-0 --><a href="Region.html">Region</a> region, <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a> filter, <!-- DBG-0 --><a href="SpawnValidator.html">SpawnValidator</a> validator, <span style="color: blue;">bool</span> cache )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetPixel( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, BitmapData data )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Rectangle3D.html">Rectangle3D</a>&gt; Slice( <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> rect )<br />
+      (<span style="color: blue;">ctor</span>) SpawnArea( <!-- DBG-0 --><a href="Map.html">Map</a> facet, <span style="color: blue;">string</span> region, <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a>[] filters, <!-- DBG-0 --><a href="SpawnValidator.html">SpawnValidator</a> validator )<br />
+      <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> Bounds( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point2D.html">Point2D</a> Center( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Count( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Map.html">Map</a> Facet( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a>[] Filters( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      Bitmap Image( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Region( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> System.Collections.Generic.ICollection<Server.Point3D>.IsReadOnly( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SpawnValidator.html">SpawnValidator</a> Validator( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CanSpawn( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <span style="color: blue;">void</span> Compute( <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> area )<br />
+      <span style="color: blue;">bool</span> Contains( <!-- DBG-0 --><a href="IPoint2D.html">IPoint2D</a> p )<br />
+      <span style="color: blue;">bool</span> Contains( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">IEnumerator</span>&lt;<a href="Point3D.html">Point3D</a>&gt; GetEnumerator()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetHashCode()<br />
+      Bitmap GetImage()<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetRandom()<br />
+      <span style="color: blue;">void</span> Invalidate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> System.Collections.Generic.ICollection<Server.Point3D>.Add( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> System.Collections.Generic.ICollection<Server.Point3D>.Clear()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> System.Collections.Generic.ICollection<Server.Point3D>.Contains( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> System.Collections.Generic.ICollection<Server.Point3D>.CopyTo( <!-- DBG-0 --><a href="Point3D.html">Point3D</a>[] array, <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> System.Collections.Generic.ICollection<Server.Point3D>.Remove( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> IEnumerator System.Collections.IEnumerable.GetEnumerator()<br />
+   </body>
+</html>

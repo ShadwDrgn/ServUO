@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseChampion</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>BaseChampion : <!-- DBG-1 --><a href="BaseCreature.html">BaseCreature</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BaseSeaChampion.html">BaseSeaChampion</a>, <!-- DBG-3 --><a href="DragonTurtle.html">DragonTurtle</a>, <!-- DBG-3 --><a href="Ilhenir.html">Ilhenir</a>, <!-- DBG-3 --><a href="KhalAnkur.html">KhalAnkur</a>, <!-- DBG-3 --><a href="LordOaks.html">LordOaks</a>, <!-- DBG-3 --><a href="Mephitis.html">Mephitis</a>, <!-- DBG-3 --><a href="Meraktus.html">Meraktus</a>, <!-- DBG-3 --><a href="Neira.html">Neira</a>, <!-- DBG-3 --><a href="PrimevalLich.html">PrimevalLich</a>, <!-- DBG-3 --><a href="Rikktor.html">Rikktor</a>, <!-- DBG-3 --><a href="Semidar.html">Semidar</a>, <!-- DBG-3 --><a href="Serado.html">Serado</a>, <!-- DBG-3 --><a href="Twaulo.html">Twaulo</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="PowerScroll.html">PowerScroll</a> CreateRandomPowerScroll()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SkillMasteryPrimer.html">SkillMasteryPrimer</a> CreateRandomPrimer()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GivePowerScrollTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="BaseChampion.html">BaseChampion</a> champ )<br />
+      (<span style="color: blue;">ctor</span>) BaseChampion( <!-- DBG-0 --><a href="AIType.html">AIType</a> aiType )<br />
+      (<span style="color: blue;">ctor</span>) BaseChampion( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseChampion( <!-- DBG-0 --><a href="AIType.html">AIType</a> aiType, <!-- DBG-0 --><a href="FightMode.html">FightMode</a> mode )<br />
+      <span style="color: blue;">bool</span> CanBeParagon( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanGivePowerscrolls( <span style="color: blue;">get</span>; )<br />
+      Type[] DecorativeList( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> NoGoodies( <span style="color: blue;">get</span>; )<br />
+      Type[] SharedList( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ChampionSkullType.html">ChampionSkullType</a> SkullType( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MonsterStatuetteType.html">MonsterStatuetteType</a>[] StatueTypes( <span style="color: blue;">get</span>; )<br />
+      Type[] UniqueList( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> CreateArtifact( Type[] list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="Item.html">Item</a> GetArtifact()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GivePowerScrolls()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDeath()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnChampPopped( <!-- DBG-0 --><a href="ChampionSpawn.html">ChampionSpawn</a> spawn )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="Container.html">Container</a> c )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

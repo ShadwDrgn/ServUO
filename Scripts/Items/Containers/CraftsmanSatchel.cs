@@ -11,30 +11,21 @@ namespace Server.Items
             Hue = Reward.SatchelHue();
 			
             int count = 1;
-			
-            if (0.015 > Utility.RandomDouble())
+            if (0.15 > Utility.RandomDouble())
                 count = 2;
 			
-            bool equipment = false;
-            bool jewlery = false;
-            bool talisman = false;
-			
+            if (0.33 > Utility.RandomDouble())
+                DropItem(Loot.RandomTalisman());
+
             while (Items.Count < count)
             { 
-                if (0.33 > Utility.RandomDouble() && !talisman)
-                {
-                    DropItem(Loot.RandomTalisman());
-                    talisman = true;					
-                }
-                else if (0.4 > Utility.RandomDouble() && !equipment)
+                if (0.4 > Utility.RandomDouble())
                 {
                     DropItem(RandomItem());		
-                    equipment = true;		
                 }
-                else if (0.88 > Utility.RandomDouble() && !jewlery)
+                else if (0.88 > Utility.RandomDouble())
                 {
                     DropItem(Reward.Jewlery());
-                    jewlery = true;
                 }
             }
         }
@@ -70,7 +61,7 @@ namespace Server.Items
         public AlchemistCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.AlchemyRecipe();
 
@@ -112,7 +103,7 @@ namespace Server.Items
         public FletcherCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.FletcherRecipe();
 
@@ -161,7 +152,7 @@ namespace Server.Items
         public TailorsCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.TailorRecipe();
 
@@ -203,7 +194,7 @@ namespace Server.Items
         public SmithsCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.SmithRecipe();
 
@@ -245,7 +236,7 @@ namespace Server.Items
         public TinkersCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.TinkerRecipe();
 
@@ -287,7 +278,7 @@ namespace Server.Items
         public CarpentersCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
+            if (0.5 > Utility.RandomDouble())
             {
                 var recipe = Reward.CarpentryRecipe();
 

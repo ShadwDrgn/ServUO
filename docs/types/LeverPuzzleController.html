@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - LeverPuzzleController</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Doom.html">Back to Server.Engines.Doom</a></h4>
+      <h2>LeverPuzzleController : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="LampRoomKickTimer.html">LampRoomKickTimer</a>, <!-- DBG-4 --><a href="LampRoomTimer.html">LampRoomTimer</a>, <!-- DBG-4 --><a href="RockTimer.html">RockTimer</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Item.html">Item</a> AddLeverPuzzlePart( <span style="color: blue;">int</span>[] Loc, <!-- DBG-0 --><a href="Item.html">Item</a> newitem )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AniSafe( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DoDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> min, <span style="color: blue;">int</span> max, <span style="color: blue;">bool</span> poison )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GenLampPuzzle_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsValidDamagable( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LampPuzzleDelete_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> MoveMobileOut( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> NukeItemList( <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; list )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> POHMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> PlayEffect( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> from, <!-- DBG-0 --><a href="IEntity.html">IEntity</a> to, <span style="color: blue;">int</span> itemid, <span style="color: blue;">int</span> speed, <span style="color: blue;">bool</span> explodes )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> PlaySounds( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> location, <span style="color: blue;">int</span>[] sounds )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> PlayerSendASCII( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> player, <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RandomPointIn( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> point, <span style="color: blue;">int</span> range )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RandomPointIn( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> rect, <span style="color: blue;">int</span> z )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RandomPointIn( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> x2, <span style="color: blue;">int</span> y2, <span style="color: blue;">int</span> z )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendLocationEffect( <!-- DBG-0 --><a href="IPoint3D.html">IPoint3D</a> p, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> speed, <span style="color: blue;">int</span> duration, <span style="color: blue;">int</span> hue )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="IEntity.html">IEntity</a> ZAdjustedIEFromMobile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> ZDelta )<br />
+      (<span style="color: blue;">ctor</span>) LeverPuzzleController()<br />
+      (<span style="color: blue;">ctor</span>) LeverPuzzleController( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> CircleComplete( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">ushort</span> MyKey( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Successful( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">ushort</span> TheirKey( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GenKey()<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="LeverPuzzleLever.html">LeverPuzzleLever</a> GetLever( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> GetOccupant( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="LeverPuzzleStatue.html">LeverPuzzleStatue</a> GetStatue( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> KillTimers()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> LeverPulled( <span style="color: blue;">ushort</span> code )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> PuzzleStatus( <span style="color: blue;">int</span> message, <span style="color: blue;">string</span> fstring )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RemoveSuccessful()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ResetLevers()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ResetPuzzle()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

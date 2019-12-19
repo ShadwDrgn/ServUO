@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MannedCannon</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>MannedCannon : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="MannedBlundercannon.html">MannedBlundercannon</a>, <!-- DBG-3 --><a href="MannedCarronade.html">MannedCarronade</a>, <!-- DBG-3 --><a href="MannedCulverin.html">MannedCulverin</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetTargets-c__Iterator0.html">(Anonymous-Type)-GetTargets-c__Iterator0</a>, <!-- DBG-4 --><a href="Target.html">Target</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetID( <!-- DBG-0 --><a href="Direction.html">Direction</a> facing, <!-- DBG-0 --><a href="CannonPower.html">CannonPower</a> power )<br />
+      (<span style="color: blue;">ctor</span>) MannedCannon( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) MannedCannon( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> opera, <!-- DBG-0 --><a href="Direction.html">Direction</a> facing )<br />
+      <!-- DBG-0 --><a href="AmmunitionType.html">AmmunitionType</a> AmmoType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanFireUnmanned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Direction.html">Direction</a> Facing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> LateralOffset( <span style="color: blue;">get</span>; )<br />
+      DateTime NextScan( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Operator( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="CannonPower.html">CannonPower</a> Power( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Range( <span style="color: blue;">get</span>; )<br />
+      TimeSpan ScanDelay( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> <GetFacing>m__0( <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">bool</span> <GetFacing>m__1( <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">bool</span> <GetFacing>m__2( <span style="color: blue;">int</span> id )<br />
+      <span style="color: blue;">bool</span> <OnShipHit>m__3( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <!-- DBG-0 --><a href="Target.html">Target</a>[] AcquireTarget()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoShootEffects()<br />
+      <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> FindValidBoatTarget( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> newPoint, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="AmmoInfo.html">AmmoInfo</a> info )<br />
+      <!-- DBG-0 --><a href="Direction.html">Direction</a> GetFacing()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetTargets( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> newPoint, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMobileHit( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnShipHit( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">bool</span> Scan( <span style="color: blue;">bool</span> shoot )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

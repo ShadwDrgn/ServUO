@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseHouse</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Multis.html">Back to Server.Multis</a></h4>
+      <h2>BaseHouse : <!-- DBG-1 --><a href="BaseMulti.html">BaseMulti</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BaseContestHouse.html">BaseContestHouse</a>, <!-- DBG-3 --><a href="Castle.html">Castle</a>, <!-- DBG-3 --><a href="GuildHouse.html">GuildHouse</a>, <!-- DBG-3 --><a href="HouseFoundation.html">HouseFoundation</a>, <!-- DBG-3 --><a href="Keep.html">Keep</a>, <!-- DBG-3 --><a href="LargeMarbleHouse.html">LargeMarbleHouse</a>, <!-- DBG-3 --><a href="LargePatioHouse.html">LargePatioHouse</a>, <!-- DBG-3 --><a href="LogCabin.html">LogCabin</a>, <!-- DBG-3 --><a href="SandStonePatio.html">SandStonePatio</a>, <!-- DBG-3 --><a href="SmallOldHouse.html">SmallOldHouse</a>, <!-- DBG-3 --><a href="SmallShop.html">SmallShop</a>, <!-- DBG-3 --><a href="SmallTower.html">SmallTower</a>, <!-- DBG-3 --><a href="Tower.html">Tower</a>, <!-- DBG-3 --><a href="TwoStoryHouse.html">TwoStoryHouse</a>, <!-- DBG-3 --><a href="TwoStoryVilla.html">TwoStoryVilla</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckContentsDecay-c__AnonStorey2.html">(Anonymous-Type)-CheckContentsDecay-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-CheckCounts-c__AnonStorey1.html">(Anonymous-Type)-CheckCounts-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-CheckLockdownOwnership-c__AnonStorey4.html">(Anonymous-Type)-CheckLockdownOwnership-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-CheckLockdownOwnership-c__AnonStorey5.html">(Anonymous-Type)-CheckLockdownOwnership-c__AnonStorey5</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Decay_Sandbox-c__AnonStorey0.html">(Anonymous-Type)-Decay_Sandbox-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetSecureInfoFor-c__AnonStorey6.html">(Anonymous-Type)-GetSecureInfoFor-c__AnonStorey6</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetSecureInfoFor-c__AnonStorey7.html">(Anonymous-Type)-GetSecureInfoFor-c__AnonStorey7</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetSecureInfosFor-c__AnonStorey8.html">(Anonymous-Type)-GetSecureInfosFor-c__AnonStorey8</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey9.html">(Anonymous-Type)-Serialize-c__AnonStorey9</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-SetLockdown-c__AnonStorey3.html">(Anonymous-Type)-SetLockdown-c__AnonStorey3</a>, <!-- DBG-4 --><a href="FixColumnTimer.html">FixColumnTimer</a>, <!-- DBG-4 --><a href="TransferItem.html">TransferItem</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> AccountHouseLimit( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="BaseHouse.html">BaseHouse</a>&gt; AllHouses( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GlobalBonusStorageScalar( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> MaxBans( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> MaxFriends( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> NewVendorSystem( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckUnregisteredAddons>m__5( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckUnregisteredAddons>m__6( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <KillVendors>m__0( <!-- DBG-0 --><a href="PlayerVendor.html">PlayerVendor</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <KillVendors>m__1( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <OnAfterDelete>m__7( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnAfterDelete>m__8( <!-- DBG-0 --><a href="VendorInventory.html">VendorInventory</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AtAccountHouseLimit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckAccessible( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckAccountHouseLimit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckHold( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Container.html">Container</a> cont, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> message, <span style="color: blue;">bool</span> checkItems, <span style="color: blue;">int</span> plusItems, <span style="color: blue;">int</span> plusWeight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckLockedDown( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckLockedDownOrSecured( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSecured( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Decay_OnTick()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseHouse.html">BaseHouse</a> FindHouseAt( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseHouse.html">BaseHouse</a> FindHouseAt( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="BaseHouse.html">BaseHouse</a> FindHouseAt( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> height )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetAccountHouseCount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetAccountHouseLimit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetHouseCount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="BaseHouse.html">BaseHouse</a>&gt; GetHouses( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="DoorFacing.html">DoorFacing</a> GetSADoorFacing( <span style="color: blue;">int</span> offset )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HandleDeletion( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasHouse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> IsThereVendor( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> location, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">out</span> <span style="color: blue;">bool</span> vendor, <span style="color: blue;">out</span> <span style="color: blue;">bool</span> rentalContract )<br />
+      (<span style="color: blue;">ctor</span>) BaseHouse( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseHouse( <span style="color: blue;">int</span> multiID, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <span style="color: blue;">int</span> MaxLockDown, <span style="color: blue;">int</span> MaxSecure )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Access( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<a href="Mobile.html">Mobile</a>&gt; Addons( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] Area( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> BanLocation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Bans( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> BaseBanLocation( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> BonusStorageScalar( <span style="color: blue;">get</span>; )<br />
+      DateTime BuiltOn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CanDecay( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; Carpets( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; CoOwners( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="HousePlacementEntry.html">HousePlacementEntry</a> ConvertEntry( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ConvertOffsetX( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ConvertOffsetY( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ConvertOffsetZ( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="DecayLevel.html">DecayLevel</a> DecayLevel( <span style="color: blue;">get</span>; )<br />
+      TimeSpan DecayPeriod( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="DecayType.html">DecayType</a> DecayType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Decays( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DefaultPrice( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; Doors( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Friends( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasActiveAuction( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasAddonContainers( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasPersonalVendors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasRentedVendors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; InternalizedVendors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsActive( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsAosRules( <span style="color: blue;">get</span>; )<br />
+      DateTime LastRefreshed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastTraded( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> LockDownCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<a href="Mobile.html">Mobile</a>&gt; LockDowns( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> MaxLockDowns( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxSecures( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="MovingCrate.html">MovingCrate</a> MovingCrate( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextDecayStage( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Owner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; PlayerBarkeepers( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; PlayerVendors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Price( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Public( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> Region( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RelativeBanLocation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="RelocatedEntity.html">RelocatedEntity</a>&gt; RelocatedEntities( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> RestrictDecay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan RestrictedPlacingTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SecureCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SecureInfo.html">SecureInfo</a>&gt; Secures( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="HouseSign.html">HouseSign</a> Sign( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TotalVisits( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="VendorInventory.html">VendorInventory</a>&gt; VendorInventories( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; VendorRentalContracts( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="DateTime.html">DateTime</a>&gt; Visits( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> <GetAosCurLockdowns>m__4( <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> x )<br />
+      <span style="color: blue;">bool</span> <GetAosCurSecures>m__2( <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> x )<br />
+      <span style="color: blue;">bool</span> <GetHouseEntities>m__3( <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> i )<br />
+      <span style="color: blue;">void</span> AddCoOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> AddCoOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddDoor( <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> xOffset, <span style="color: blue;">int</span> yOffset, <span style="color: blue;">int</span> zOffset )<br />
+      <span style="color: blue;">void</span> AddDoor( <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> door, <span style="color: blue;">int</span> xoff, <span style="color: blue;">int</span> yoff, <span style="color: blue;">int</span> zoff )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddDoor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> itemID, <span style="color: blue;">int</span> xOffset, <span style="color: blue;">int</span> yOffset, <span style="color: blue;">int</span> zOffset )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddEastDoor( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddEastDoor( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddEastDoor( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddEastDoor( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k, <span style="color: blue;">bool</span> invert )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">bool</span> invert, <span style="color: blue;">bool</span> altopen )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddEastDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k, <span style="color: blue;">bool</span> invert, <span style="color: blue;">bool</span> altopen )<br />
+      <span style="color: blue;">void</span> AddFriend( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> AddSecure( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddSouthDoor( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddSouthDoor( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddSouthDoor( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> AddSouthDoor( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddSouthDoors( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddSouthDoors( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddSouthDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddSouthDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">bool</span> inv )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a>[] AddSouthDoors( <span style="color: blue;">bool</span> wood, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">uint</span> k )<br />
+      <span style="color: blue;">void</span> AddStrongBox( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> AddTrashBarrel( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> AddVisit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> AreThereAvailableVendorsFor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; AvailableVendorsFor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> Ban( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> BeginConfirmTransfer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanPlaceNewBarkeep()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanPlaceNewVendor()<br />
+      <span style="color: blue;">bool</span> CanRelease( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> ChangeLocks( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ChangeSignType( <span style="color: blue;">int</span> itemID )<br />
+      <span style="color: blue;">bool</span> CheckAccessibility( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckAosLockdowns( <span style="color: blue;">int</span> need )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckAosStorage( <span style="color: blue;">int</span> need )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckContentsDecay( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckCounts( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckDecay()<br />
+      <span style="color: blue;">bool</span> CheckLockdownOwnership( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <!-- DBG-0 --><a href="SecureAccessResult.html">SecureAccessResult</a> CheckSecureAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> CheckTransferPosition( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      <span style="color: blue;">void</span> CheckUnregisteredAddons()<br />
+      <span style="color: blue;">void</span> ConfirmTransfer_Callback( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <span style="color: blue;">bool</span> ok, <span style="color: blue;">object</span> state )<br />
+      <span style="color: blue;">void</span> ConvertDoor( <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> door, <span style="color: blue;">int</span> closedID, <span style="color: blue;">bool</span> invert )<br />
+      <span style="color: blue;">uint</span> CreateKeys( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Decay_Sandbox()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DropToMovingCrate( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> EndConfirmTransfer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="Guildstone.html">Guildstone</a> FindGuildstone()<br />
+      <span style="color: blue;">void</span> FixLockdowns_Sandbox()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAosCurLockdowns()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAosCurSecures( <span style="color: blue;">out</span> <span style="color: blue;">int</span> fromSecures, <span style="color: blue;">out</span> <span style="color: blue;">int</span> fromVendors, <span style="color: blue;">out</span> <span style="color: blue;">int</span> fromLockdowns, <span style="color: blue;">out</span> <span style="color: blue;">int</span> fromMovingCrate )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="HousePlacementEntry.html">HousePlacementEntry</a> GetAosEntry()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAosMaxLockdowns()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetAosMaxSecures()<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="HouseDeed.html">HouseDeed</a> GetDeed()<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="IEntity.html">IEntity</a>,<a href="Mobile.html">Mobile</a>&gt; GetHouseEntities()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; GetItems()<br />
+      <span style="color: blue;">int</span> GetLockdowns()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetMobiles()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetNewVendorSystemMaxVendors()<br />
+      <!-- DBG-0 --><a href="DecayLevel.html">DecayLevel</a> GetOldDecayLevel()<br />
+      <!-- DBG-0 --><a href="SecureLevel.html">SecureLevel</a> GetSecureAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> GetSecureInfoFor( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> GetSecureInfoFor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SecureInfo.html">SecureInfo</a>&gt; GetSecureInfosFor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> GrantAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">bool</span> HasAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> HasSecureAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="SecureInfo.html">SecureInfo</a> info )<br />
+      <span style="color: blue;">bool</span> HasSecureAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="SecureLevel.html">SecureLevel</a> level )<br />
+      <span style="color: blue;">bool</span> InRange( <!-- DBG-0 --><a href="IPoint2D.html">IPoint2D</a> from, <span style="color: blue;">int</span> range )<br />
+      <span style="color: blue;">bool</span> IsBanned( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsCoOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsCombatRestricted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsFriend( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsGuildMember( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsInList( <!-- DBG-0 --><a href="Item.html">Item</a> item, Type[] list )<br />
+      <span style="color: blue;">bool</span> IsInside( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> IsInside( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsInside( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <span style="color: blue;">int</span> height )<br />
+      <span style="color: blue;">bool</span> IsLockedDown( <!-- DBG-0 --><a href="Item.html">Item</a> check )<br />
+      <span style="color: blue;">bool</span> IsNewer( <!-- DBG-0 --><a href="BaseHouse.html">BaseHouse</a> check, <!-- DBG-0 --><a href="BaseHouse.html">BaseHouse</a> house )<br />
+      <span style="color: blue;">bool</span> IsOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsSameAccount( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> one, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> two )<br />
+      <span style="color: blue;">bool</span> IsSecure( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> Kick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> KillVendors()<br />
+      DateTime LastVisit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> LockDown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> LockDown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> checkIsInside )<br />
+      <!-- DBG-0 --><a href="BaseDoor.html">BaseDoor</a> MakeDoor( <span style="color: blue;">bool</span> wood, <!-- DBG-0 --><a href="DoorFacing.html">DoorFacing</a> facing )<br />
+      <span style="color: blue;">void</span> MoveAllToCrate()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDecay( <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] recs, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">void</span> OnCondemned()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChange( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTransfer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> RefreshDecay()<br />
+      <span style="color: blue;">bool</span> Release( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">bool</span> ReleaseSecure( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> RelocateEntities()<br />
+      <span style="color: blue;">void</span> RemoveAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> RemoveBan( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> RemoveCoOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> RemoveCoOwner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ, <span style="color: blue;">bool</span> fromMessage )<br />
+      <span style="color: blue;">void</span> RemoveFriend( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ )<br />
+      <span style="color: blue;">void</span> RemoveFriend( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> targ, <span style="color: blue;">bool</span> fromMessage )<br />
+      <span style="color: blue;">void</span> RemoveKeys( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> RemoveLocks()<br />
+      <span style="color: blue;">void</span> ResetDynamicDecay()<br />
+      <span style="color: blue;">void</span> RestoreRelocatedEntities()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SetDynamicDecay( <!-- DBG-0 --><a href="DecayLevel.html">DecayLevel</a> level )<br />
+      <span style="color: blue;">void</span> SetLockdown( <!-- DBG-0 --><a href="Item.html">Item</a> i, <span style="color: blue;">bool</span> locked )<br />
+      <span style="color: blue;">void</span> SetLockdown( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Item.html">Item</a> i, <span style="color: blue;">bool</span> locked )<br />
+      <span style="color: blue;">void</span> SetSign( <span style="color: blue;">int</span> xoff, <span style="color: blue;">int</span> yoff, <span style="color: blue;">int</span> zoff )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> UpdateRegion()<br />
+   </body>
+</html>

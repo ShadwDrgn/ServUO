@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - ArenaDuel</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.ArenaSystem.html">Back to Server.Engines.ArenaSystem</a></h4>
+      <h2>ArenaDuel</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-AssignStartPoints-c__AnonStorey3.html">(Anonymous-Type)-AssignStartPoints-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-CheckTeamAlive-c__AnonStorey7.html">(Anonymous-Type)-CheckTeamAlive-c__AnonStorey7</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-DoWinEffects-c__AnonStorey4.html">(Anonymous-Type)-DoWinEffects-c__AnonStorey4</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-EndDuel-c__AnonStorey5.html">(Anonymous-Type)-EndDuel-c__AnonStorey5</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetParticipants-c__Iterator0.html">(Anonymous-Type)-GetParticipants-c__Iterator0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetTeam-c__AnonStorey2.html">(Anonymous-Type)-GetTeam-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-RecordStats-c__AnonStorey6.html">(Anonymous-Type)-RecordStats-c__AnonStorey6</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <PlaceBlockers>m__2( <!-- DBG-0 --><a href="Item.html">Item</a> bl )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <get_ParticipantCount>m__0( <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> t )<br />
+      (<span style="color: blue;">ctor</span>) ArenaDuel( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader, <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> arena )<br />
+      (<span style="color: blue;">ctor</span>) ArenaDuel( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> arena, <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> host )<br />
+      <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> Arena( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; Banned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BattleMode.html">BattleMode</a> BattleMode( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Complete( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime EndTime( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Entries( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime EntryDeadline( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="EntryFee.html">EntryFee</a> EntryFee( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> FieldSpellsAllowed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArenaGate.html">ArenaGate</a> Gate( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasBegun( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> Host( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> InPreFight( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="String.html">String</a>,<a href="String.html">String</a>&gt; KillRecord( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ParticipantCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> PetSlots( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Pot( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PotionRules.html">PotionRules</a> PotionRules( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> RangedWeaponsAllowed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Ranked( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> RidingFlyingAllowed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="RoomType.html">RoomType</a> RoomType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime StartTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SummonSpellsAllowed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> TeamChaos( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> TeamOrder( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="ArenaTeam.html">ArenaTeam</a>&gt; Teams( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TimeLimit.html">TimeLimit</a> TimeLimit( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; Warned( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> <BeginDuel>m__1()<br />
+      <span style="color: blue;">void</span> AssignStartPoints()<br />
+      <span style="color: blue;">void</span> BeginDuel()<br />
+      <span style="color: blue;">void</span> CancelDuel( <span style="color: blue;">bool</span> refund )<br />
+      <span style="color: blue;">bool</span> CheckTeamAlive( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> justDied, <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> team )<br />
+      <span style="color: blue;">void</span> Closeout()<br />
+      <span style="color: blue;">void</span> ConfigureDefault()<br />
+      <span style="color: blue;">void</span> ConfigureFromProfile( <!-- DBG-0 --><a href="DuelProfile.html">DuelProfile</a> profile )<br />
+      <span style="color: blue;">void</span> DoGateEffect()<br />
+      <span style="color: blue;">void</span> DoPreDuel()<br />
+      <span style="color: blue;">void</span> DoStartEffects()<br />
+      <span style="color: blue;">void</span> DoWinEffects( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> EndDuel()<br />
+      <span style="color: blue;">void</span> EndDuel( <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> winner )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<span style="color: blue;">KeyValuePair`2</span>&gt; GetParticipants( <span style="color: blue;">bool</span> inArena )<br />
+      <!-- DBG-0 --><a href="PlayerStatsEntry.html">PlayerStatsEntry</a> GetStats( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> check )<br />
+      <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> GetTeam( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">List</span>&lt;<a href="ArenaTeam.html">ArenaTeam</a>&gt; GetTeamsPresent()<br />
+      <span style="color: blue;">void</span> HandleDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim )<br />
+      <span style="color: blue;">bool</span> InArena( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> IsBanned( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">bool</span> IsEnemy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> one, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> two )<br />
+      <span style="color: blue;">bool</span> IsFriendly( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> one, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> two )<br />
+      <span style="color: blue;">bool</span> IsParticipant( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> MoveToArena( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> OnPlayerLeave( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">List</span>&lt;<a href="PlayerMobile.html">PlayerMobile</a>&gt; ParticipantList()<br />
+      <span style="color: blue;">void</span> PlaceBlockers()<br />
+      <span style="color: blue;">void</span> RecordStats( <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> winner )<br />
+      <span style="color: blue;">void</span> RegisterPlayer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">void</span> RemoveBlockers()<br />
+      <span style="color: blue;">void</span> RemovePlayer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <span style="color: blue;">bool</span> ban )<br />
+      <span style="color: blue;">void</span> RemovePlayers( <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> winners )<br />
+      <span style="color: blue;">void</span> SendResults( <!-- DBG-0 --><a href="ArenaTeam.html">ArenaTeam</a> winner )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SetDuel()<br />
+      <span style="color: blue;">bool</span> SwapParticipant( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">bool</span> TryAddPlayer( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+   </body>
+</html>

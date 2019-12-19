@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseShipCaptain</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>BaseShipCaptain : <!-- DBG-1 --><a href="BaseCreature.html">BaseCreature</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="MerchantCaptain.html">MerchantCaptain</a>, <!-- DBG-3 --><a href="PirateCaptain.html">PirateCaptain</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckBlock-c__AnonStorey0.html">(Anonymous-Type)-CheckBlock-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckCrew>m__1( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <ShootCannons>m__0( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">ctor</span>) BaseShipCaptain()<br />
+      (<span style="color: blue;">ctor</span>) BaseShipCaptain( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseShipCaptain( <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> galleon )<br />
+      (<span style="color: blue;">ctor</span>) BaseShipCaptain( <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> galleon, <!-- DBG-0 --><a href="AIType.html">AIType</a> ai, <!-- DBG-0 --><a href="FightMode.html">FightMode</a> fm, <span style="color: blue;">int</span> per, <span style="color: blue;">int</span> range, <span style="color: blue;">double</span> passive, <span style="color: blue;">double</span> active )<br />
+      <span style="color: blue;">string</span> AddHoldItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Aggressive( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Blockade( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; Crew( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> Galleon( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> HoldItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextCannonShot( <span style="color: blue;">get</span>; )<br />
+      DateTime NextCrewCheck( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextMoveCheck( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> OnCourse( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerRangeSensitive( <span style="color: blue;">get</span>; )<br />
+      TimeSpan ShootFrequency( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> TreasureMapChance( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TreasureMapLevel( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SpawnZone.html">SpawnZone</a> Zone( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddItemToHold( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> AddToCrew( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">void</span> CheckBlock( <!-- DBG-0 --><a href="StaticTile.html">StaticTile</a> tile, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">void</span> CheckBlock( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> loc )<br />
+      <span style="color: blue;">void</span> CheckCrew()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Delete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <!-- DBG-0 --><a href="BaseGalleon.html">BaseGalleon</a> GetFocusBoat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> focusMob )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> GetFocusMob()<br />
+      <span style="color: blue;">bool</span> HasTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> focus, <!-- DBG-0 --><a href="IShipCannon.html">IShipCannon</a> cannon, <span style="color: blue;">bool</span> shootatboat )<br />
+      <span style="color: blue;">bool</span> IsInBattle()<br />
+      <span style="color: blue;">void</span> MoveBoat( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnCombatantChange()<br />
+      <span style="color: blue;">void</span> OnShipDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnThink()<br />
+      <span style="color: blue;">void</span> ResumeCourse()<br />
+      <span style="color: blue;">void</span> ResumeCourseTimed( TimeSpan ts, <span style="color: blue;">bool</span> check )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> ShootCannons( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> focus, <span style="color: blue;">bool</span> shootAtBoat )<br />
+      <span style="color: blue;">void</span> SpawnShip()<br />
+      <span style="color: blue;">void</span> TryDecayGalleon( <span style="color: blue;">object</span> obj )<br />
+   </body>
+</html>

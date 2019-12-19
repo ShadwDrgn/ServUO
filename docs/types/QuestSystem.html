@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - QuestSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Quests.html">Back to Server.Engines.Quests</a></h4>
+      <h2>QuestSystem</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanOfferQuest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check, Type questType )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanOfferQuest( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check, Type questType, <span style="color: blue;">out</span> <span style="color: blue;">bool</span> inRestartPeriod )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FocusTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> who, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnKilledBy( <!-- DBG-0 --><a href="OnKilledByEventArgs.html">OnKilledByEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> RandomBrightHue()<br />
+      (<span style="color: blue;">ctor</span>) QuestSystem()<br />
+      (<span style="color: blue;">ctor</span>) QuestSystem( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from )<br />
+      ArrayList Conversations( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> From( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsTutorial( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">object</span> Name( <span style="color: blue;">get</span>; )<br />
+      ArrayList Objectives( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">object</span> OfferMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Picture( <span style="color: blue;">get</span>; )<br />
+      TimeSpan RestartDelay( <span style="color: blue;">get</span>; )<br />
+      Type[] TypeReferenceTable( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Accept()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddConversation( <!-- DBG-0 --><a href="QuestConversation.html">QuestConversation</a> conv )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddObjective( <!-- DBG-0 --><a href="QuestObjective.html">QuestObjective</a> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BaseDeserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BaseSerialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BeginCancelQuest()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Cancel()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ChildDeserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ChildSerialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ClearQuest( <span style="color: blue;">bool</span> completed )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Complete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Decline()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> EndCancelQuest( <span style="color: blue;">bool</span> shouldCancel )<br />
+      <!-- DBG-0 --><a href="QuestObjective.html">QuestObjective</a> FindObjective( Type type )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IgnoreYoungProtection( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> IsObjectiveInProgress( Type type )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnKill( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> creature, <!-- DBG-0 --><a href="Container.html">Container</a> corpse )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendOffer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ShowQuestConversation()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ShowQuestLog()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ShowQuestLogUpdated()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Slice()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StartTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> StopTimer()<br />
+   </body>
+</html>

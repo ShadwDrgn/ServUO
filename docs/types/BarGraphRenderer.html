@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BarGraphRenderer</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Reports.html">Back to Server.Engines.Reports</a></h4>
+      <h2>BarGraphRenderer : <!-- DBG-1 --><a href="ChartRenderer.html">ChartRenderer</a></h2>
+      (<span style="color: blue;">ctor</span>) BarGraphRenderer()<br />
+      (<span style="color: blue;">ctor</span>) BarGraphRenderer( Color bgColor )<br />
+      Color BackgroundColor( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> BottomBuffer( <span style="color: blue;">set</span>; )<br />
+      Color FontColor( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> FontFamily( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Height( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BarGraphRenderMode.html">BarGraphRenderMode</a> RenderMode( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ShowData( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ShowLegend( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TopBuffer( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> VerticalLabel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> VerticalTickCount( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Width( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AssignDefaultSettings()<br />
+      <span style="color: blue;">void</span> CalculateBarWidth( <span style="color: blue;">int</span> dataCount, <span style="color: blue;">float</span> barGraphWidth )<br />
+      <span style="color: blue;">void</span> CalculateGraphDimension()<br />
+      <span style="color: blue;">float</span> CalculateImgFontWidth( <span style="color: blue;">string</span> text, <span style="color: blue;">float</span> size, <span style="color: blue;">string</span> family )<br />
+      <span style="color: blue;">void</span> CalculateSweepValues()<br />
+      <span style="color: blue;">void</span> CalculateTickAndMax()<br />
+      <span style="color: blue;">void</span> CollectDataPoints( <span style="color: blue;">string</span>[] values )<br />
+      <span style="color: blue;">void</span> CollectDataPoints( <span style="color: blue;">string</span>[] labels, <span style="color: blue;">string</span>[] values )<br />
+      <span style="color: blue;">virtual</span> Bitmap Draw()<br />
+      <span style="color: blue;">void</span> DrawBars( Graphics graph )<br />
+      <span style="color: blue;">void</span> DrawLegend( Graphics graph )<br />
+      <span style="color: blue;">void</span> DrawRegions( Graphics gfx )<br />
+      <span style="color: blue;">void</span> DrawVerticalLabelArea( Graphics graph )<br />
+      <span style="color: blue;">void</span> DrawXLabelArea( Graphics graph )<br />
+      <span style="color: blue;">void</span> DrawXLabelBack( Graphics graph )<br />
+      <span style="color: blue;">void</span> FindLongestTickValue()<br />
+      <span style="color: blue;">string</span> MakeShortLabel( <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> SetTitles( <span style="color: blue;">string</span> xTitle, <span style="color: blue;">string</span> yTitle )<br />
+   </body>
+</html>

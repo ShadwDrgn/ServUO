@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PacketReader</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Network.html">Back to Server.Network</a></h4>
+      <h2>PacketReader</h2>
+      (<span style="color: blue;">ctor</span>) PacketReader( <span style="color: blue;">byte</span>[] data, <span style="color: blue;">int</span> size, <span style="color: blue;">bool</span> fixedSize )<br />
+      <span style="color: blue;">byte</span>[] Buffer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Size( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsSafeChar( <span style="color: blue;">int</span> c )<br />
+      <span style="color: blue;">bool</span> ReadBoolean()<br />
+      <span style="color: blue;">byte</span> ReadByte()<br />
+      <span style="color: blue;">short</span> ReadInt16()<br />
+      <span style="color: blue;">int</span> ReadInt32()<br />
+      <span style="color: blue;">sbyte</span> ReadSByte()<br />
+      <span style="color: blue;">string</span> ReadString()<br />
+      <span style="color: blue;">string</span> ReadString( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">string</span> ReadStringSafe()<br />
+      <span style="color: blue;">string</span> ReadStringSafe( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">ushort</span> ReadUInt16()<br />
+      <span style="color: blue;">uint</span> ReadUInt32()<br />
+      <span style="color: blue;">string</span> ReadUTF8String()<br />
+      <span style="color: blue;">string</span> ReadUTF8StringSafe()<br />
+      <span style="color: blue;">string</span> ReadUTF8StringSafe( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">string</span> ReadUnicodeString()<br />
+      <span style="color: blue;">string</span> ReadUnicodeString( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">string</span> ReadUnicodeStringLE()<br />
+      <span style="color: blue;">string</span> ReadUnicodeStringLESafe()<br />
+      <span style="color: blue;">string</span> ReadUnicodeStringLESafe( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">string</span> ReadUnicodeStringSafe()<br />
+      <span style="color: blue;">string</span> ReadUnicodeStringSafe( <span style="color: blue;">int</span> fixedLength )<br />
+      <span style="color: blue;">int</span> Seek( <span style="color: blue;">int</span> offset, SeekOrigin origin )<br />
+      <span style="color: blue;">void</span> Trace( <!-- DBG-0 --><a href="NetState.html">NetState</a> state )<br />
+   </body>
+</html>

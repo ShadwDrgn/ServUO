@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Imbuing</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.SkillHandlers.html">Back to Server.SkillHandlers</a></h4>
+      <h2>Imbuing</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-IsSpecialImbuable-c__AnonStorey0.html">(Anonymous-Type)-IsSpecialImbuable-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="ImbuingContext.html">ImbuingContext</a>&gt; ContextTable( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) Type[] IngredTypes( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SkillName.html">SkillName</a>[] PossibleSkills( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="Type.html">Type</a>,<a href="Int32[].html">Int32[]</a>&gt; ResistBuffer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="ImbuingContext.html">ImbuingContext</a> context )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanImbueItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanImbueProperty( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanUnravelItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> CheckSkillBonuses( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> check, <span style="color: blue;">bool</span> imbuingWeight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSoulForge( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> range )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSoulForge( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> range, <span style="color: blue;">bool</span> message, <span style="color: blue;">bool</span> checkqueen )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetBaseResistBonus( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="AosElementAttribute.html">AosElementAttribute</a> resist )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span>[] GetBaseResists( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="ImbuingContext.html">ImbuingContext</a> GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetGemAmount( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIntensityForAttribute( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attr, <span style="color: blue;">int</span> checkID, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIntensityForAttribute( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> attr, <span style="color: blue;">int</span> checkID, <span style="color: blue;">int</span> value, <span style="color: blue;">bool</span> imbuingWeight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIntensityForID( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> checkID, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetIntensityForID( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> checkID, <span style="color: blue;">int</span> value, <span style="color: blue;">bool</span> imbuingWeight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMaxProps( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetMaxWeight( <span style="color: blue;">object</span> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetPrimaryAmount( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetQualityBonus( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetSkillBonuses( <!-- DBG-0 --><a href="AosSkillBonuses.html">AosSkillBonuses</a> bonus, <span style="color: blue;">object</span> prop )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetSpecialAmount( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetSuccessChance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> totalItemIntensity, <span style="color: blue;">int</span> propintensity, <span style="color: blue;">out</span> <span style="color: blue;">double</span> dif )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetTotalMods( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTotalMods_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTotalMods_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> targeted )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetTotalWeight( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetTotalWeight( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetTotalWeight( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">bool</span> imbuingWeight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTotalWeight_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetTotalWeight_OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> targeted )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetValueForID( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ImbueItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsDerivedArmorOrClothing( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsHitAreaOrSpell( <!-- DBG-0 --><a href="AosWeaponAttribute.html">AosWeaponAttribute</a> attr, <span style="color: blue;">int</span> id )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsInNonImbueList( Type itemType )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsInSkillGroup( <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skill, <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSpecialImbuable( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSpecialImbuable( Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSpecialItem( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> NonCraftableImbuable( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> OnBeforeImbue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> OnBeforeImbue( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value, <span style="color: blue;">int</span> totalprops, <span style="color: blue;">int</span> maxprops, <span style="color: blue;">int</span> totalitemweight, <span style="color: blue;">int</span> maxweight )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLogin( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) TimeSpan OnUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SetProperty( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> TimesImbued( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> TryImbueItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> i, <span style="color: blue;">int</span> id, <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> UnravelItem( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">ctor</span>) Imbuing()<br />
+   </body>
+</html>

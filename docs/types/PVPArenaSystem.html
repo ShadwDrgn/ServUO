@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PVPArenaSystem</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.ArenaSystem.html">Back to Server.Engines.ArenaSystem</a></h4>
+      <h2>PVPArenaSystem : <!-- DBG-1 --><a href="PointsSystem.html">PointsSystem</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetBookedDuel-c__AnonStorey0.html">(Anonymous-Type)-GetBookedDuel-c__AnonStorey0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetDefinition-c__AnonStorey1.html">(Anonymous-Type)-GetDefinition-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-ResetStats_OnTarget-c__AnonStorey2.html">(Anonymous-Type)-ResetStats_OnTarget-c__AnonStorey2</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="PVPArena.html">PVPArena</a>&gt; Arenas( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> BlockSameIP( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="String.html">String</a>&gt; BlockedArenas( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="PVPArenaSystem.html">PVPArenaSystem</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SystemInitialized( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GetBookedDuel>m__2( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <GetBookedDuels>m__1( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <Initialize>m__4()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <OnTick>m__0( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <RemoveBlockedArena>m__3()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ArenaSetup( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasSameIP( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="ArenaDuel.html">ArenaDuel</a> duel )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> InitializeArenas()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsEnemy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> source, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsFriendly( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> source, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsSameIP( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> one, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> two )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ResetStats_OnTarget( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> message, <span style="color: blue;">int</span> hue )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> message, <span style="color: blue;">string</span> args, <span style="color: blue;">int</span> hue )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SendParticipantMessage( <!-- DBG-0 --><a href="ArenaDuel.html">ArenaDuel</a> duel, <span style="color: blue;">int</span> message, <span style="color: blue;">bool</span> inRegion, <span style="color: blue;">string</span> args, <span style="color: blue;">int</span> hue )<br />
+      (<span style="color: blue;">ctor</span>) PVPArenaSystem()<br />
+      <span style="color: blue;">bool</span> AutoAdd( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="PointsType.html">PointsType</a> Loyalty( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">double</span> MaxPoints( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> Name( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ShowOnLoyaltyGump( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> AddBlockedArena( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> arena )<br />
+      <span style="color: blue;">void</span> CheckTitle( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <!-- DBG-0 --><a href="ArenaDuel.html">ArenaDuel</a> GetBookedDuel( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">List</span>&lt;<a href="ArenaDuel.html">ArenaDuel</a>&gt; GetBookedDuels()<br />
+      <!-- DBG-0 --><a href="ArenaDefinition.html">ArenaDefinition</a> GetDefinition( <span style="color: blue;">string</span> name )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="PointsEntry.html">PointsEntry</a> GetSystemEntry( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="TextDefinition.html">TextDefinition</a> GetTitle( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from )<br />
+      <span style="color: blue;">bool</span> IsBlocked( <!-- DBG-0 --><a href="ArenaDefinition.html">ArenaDefinition</a> def )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">void</span> Register( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> arena )<br />
+      <span style="color: blue;">void</span> RemoveBlockedArena( <!-- DBG-0 --><a href="ArenaDefinition.html">ArenaDefinition</a> def )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendMessage( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> from, <span style="color: blue;">double</span> old, <span style="color: blue;">double</span> points, <span style="color: blue;">bool</span> quest )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> Unregister( <!-- DBG-0 --><a href="PVPArena.html">PVPArena</a> arena )<br />
+   </body>
+</html>

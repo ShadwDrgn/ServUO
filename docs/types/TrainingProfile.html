@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - TrainingProfile</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>TrainingProfile</h2>
+      (<span style="color: blue;">ctor</span>) TrainingProfile( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      (<span style="color: blue;">ctor</span>) TrainingProfile( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc, <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">bool</span> CanApplyOptions( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ControlSlots( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ControlSlotsMax( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ControlSlotsMin( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> Creature( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasBegunTraining( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasIncreasedControlSlot( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HasRecievedControlSlotWarning( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> InPowerHour( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="PlanningProfile.html">PlanningProfile</a> PlanningProfile( <span style="color: blue;">get</span>; )<br />
+      DateTime PowerHourBegin( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> PowerHourMultiplier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> StartingTrainingPoints( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TrainedThisLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="TrainingMode.html">TrainingMode</a> TrainingMode( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TrainingPoints( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> TrainingProgress( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> TrainingProgressMax( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> TrainingProgressPercentile( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AssignStartingTrainingPoints()<br />
+      <span style="color: blue;">void</span> BeginTraining()<br />
+      <span style="color: blue;">bool</span> CheckCanProgress( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">void</span> CheckProgress( <!-- DBG-0 --><a href="BaseCreature.html">BaseCreature</a> bc )<br />
+      <span style="color: blue;">void</span> EndTraining()<br />
+      <span style="color: blue;">int</span> GetGainsPerCreature()<br />
+      <span style="color: blue;">int</span> GetRequirementIncrease( <span style="color: blue;">bool</span> slotIncreased )<br />
+      <span style="color: blue;">void</span> OnTrain( <!-- DBG-0 --><a href="PlayerMobile.html">PlayerMobile</a> pm, <span style="color: blue;">int</span> points )<br />
+      <span style="color: blue;">void</span> ResendProgressGump( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+   </body>
+</html>

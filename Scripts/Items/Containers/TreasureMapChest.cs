@@ -20,8 +20,8 @@ namespace Server.Items
             typeof(LunaLance), typeof(NightsKiss), typeof(NoxRangersHeavyCrossbow),
             typeof(PolarBearMask), typeof(VioletCourage), typeof(HeartOfTheLion),
             typeof(ColdBlood), typeof(AlchemistsBauble), typeof(CaptainQuacklebushsCutlass),
-			typeof(ShieldOfInvulnerability), typeof(AncientShipModelOfTheHMSCape),
-			typeof(AdmiralsHeartyRum)
+      typeof(ShieldOfInvulnerability), typeof(AncientShipModelOfTheHMSCape),
+      typeof(AdmiralsHeartyRum)
         };
 
         public static Type[] ArtifactsLevelFiveToSeven { get { return m_LevelFiveToSeven; } }
@@ -53,11 +53,11 @@ namespace Server.Items
 
 
         private static Type[] m_ImbuingIngreds =
-		{
-			typeof(AbyssalCloth),   typeof(EssencePrecision), typeof(EssenceAchievement), typeof(EssenceBalance), 
-			typeof(EssenceControl), typeof(EssenceDiligence), typeof(EssenceDirection),   typeof(EssenceFeeling), 
-			typeof(EssenceOrder),   typeof(EssencePassion),   typeof(EssencePersistence), typeof(EssenceSingularity)
-		};
+    {
+      typeof(AbyssalCloth),   typeof(EssencePrecision), typeof(EssenceAchievement), typeof(EssenceBalance), 
+      typeof(EssenceControl), typeof(EssenceDiligence), typeof(EssenceDirection),   typeof(EssenceFeeling), 
+      typeof(EssenceOrder),   typeof(EssencePassion),   typeof(EssencePersistence), typeof(EssenceSingularity)
+    };
 
         private int m_Level;
         private DateTime m_DeleteTime;
@@ -236,7 +236,7 @@ namespace Server.Items
                     case 6:
                         cont.RequiredSkill = 80;
                         break;
-					case 7:
+                    case 7:
                         cont.RequiredSkill = 80;
                         break;
                 }
@@ -277,15 +277,15 @@ namespace Server.Items
                     {
                         case 1:
                             count = isSos ? Utility.RandomMinMax(2, 6) : 32;
-							propsScale = 0.5625;
+                            propsScale = 0.5625;
                             break;
                         case 2:
                             count = isSos ? Utility.RandomMinMax(10, 15) : 40;
-							propsScale = 0.6875;
+                            propsScale = 0.6875;
                             break;
                         case 3:
                             count = isSos ? Utility.RandomMinMax(15, 20) : 48;
-							propsScale = 0.875;
+                            propsScale = 0.875;
                             break;
                         case 4:
                             count = isSos ? Utility.RandomMinMax(15, 20) : 56;
@@ -464,8 +464,6 @@ namespace Server.Items
                         special = Loot.Construct(m_LevelSevenOnly);
                     else if (0.10 > Utility.RandomDouble())
                         special = Loot.Construct(m_LevelFiveToSeven);
-                    else if (0.25 > Utility.RandomDouble())
-                        special = GetRandomSpecial(level, cont.Map);
 
                     arty = Loot.Construct(m_Artifacts);
                 }
@@ -473,8 +471,6 @@ namespace Server.Items
                 {
                     if (0.025 > Utility.RandomDouble())
                         special = Loot.Construct(m_LevelFiveToSeven);
-                    else if (0.20 > Utility.RandomDouble())
-                        special = GetRandomSpecial(level, cont.Map);
 
                     arty = Loot.Construct(m_Artifacts);
                 }
@@ -482,13 +478,8 @@ namespace Server.Items
                 {
                     if (0.005 > Utility.RandomDouble())
                         special = Loot.Construct(m_LevelFiveToSeven);
-                    else if (0.15 > Utility.RandomDouble())
-                        special = GetRandomSpecial(level, cont.Map);
                 }
-                else if (.10 > Utility.RandomDouble())
-                {
-                    special = GetRandomSpecial(level, cont.Map);
-                }
+                DropSpecials(level, cont, map);
             }
 
             if (arty != null)
@@ -499,9 +490,6 @@ namespace Server.Items
                 pack.DropItem(arty);
                 cont.DropItem(pack);
             }
-
-            if (special != null)
-                cont.DropItem(special);
 
             if (Core.SA)
             {
@@ -514,24 +502,17 @@ namespace Server.Items
             }
         }
 
-        private static Item GetRandomSpecial(int level, Map map)
+        private static void DropSpecials(int level, LockableContainer cont, Map map)
         {
-            Item special;
-
-            switch (Utility.Random(8))
-            {
-                default:
-                case 0: special = new CreepingVine(); break;
-                case 1: special = new MessageInABottle(); break;
-                case 2: special = new ScrollOfAlacrity(PowerScroll.Skills[Utility.Random(PowerScroll.Skills.Count)]); break;
-                case 3: special = new Skeletonkey(); break;
-                case 4: special = new TastyTreat(5); break;
-                case 5: special = new TreasureMap(Utility.RandomMinMax(level, Math.Min(7, level + 1)), map); break;
-                case 6: special = GetRandomRecipe(); break;
-                case 7: special = ScrollOfTranscendence.CreateRandom(1, 5); break;
-            }
-
-            return special;
+          double mapChance = (double)level / 10;
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new CreepingVine());
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new MessageInABottle());
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new ScrollOfAlacrity(PowerScroll.Skills[Utility.Random(PowerScroll.Skills.Count)]));
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new Skeletonkey());
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new TastyTreat());
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(new TreasureMap(Utility.RandomMinMax(level, Math.Min(7, level + 1)), map));
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(GetRandomRecipe());
+          if (mapChance > Utility.RandomDouble()) cont.DropItem(ScrollOfTranscendence.CreateRandom(1, 5));
         }
 
         public static void GetRandomItemStat(out int min, out int max, double scale = 1.0)
@@ -559,8 +540,8 @@ namespace Server.Items
                 min = 100; max = 600;
             }
 
-			min = (int)(min * scale);
-			max = (int)(max * scale);
+      min = (int)(min * scale);
+      max = (int)(max * scale);
         }
 
         public static Item GetRandomRecipe()

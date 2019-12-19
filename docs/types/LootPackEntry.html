@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - LootPackEntry</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>LootPackEntry</h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsInTokuno( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsMondain( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsStygian( <!-- DBG-0 --><a href="IEntity.html">IEntity</a> e )<br />
+      (<span style="color: blue;">ctor</span>) LootPackEntry( <span style="color: blue;">bool</span> atSpawnTime, <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] items, <span style="color: blue;">double</span> chance, <span style="color: blue;">string</span> quantity )<br />
+      (<span style="color: blue;">ctor</span>) LootPackEntry( <span style="color: blue;">bool</span> atSpawnTime, <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] items, <span style="color: blue;">double</span> chance, <span style="color: blue;">int</span> quantity )<br />
+      (<span style="color: blue;">ctor</span>) LootPackEntry( <span style="color: blue;">bool</span> atSpawnTime, <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] items, <span style="color: blue;">double</span> chance, <span style="color: blue;">string</span> quantity, <span style="color: blue;">int</span> maxProps, <span style="color: blue;">int</span> minIntensity, <span style="color: blue;">int</span> maxIntensity )<br />
+      (<span style="color: blue;">ctor</span>) LootPackEntry( <span style="color: blue;">bool</span> atSpawnTime, <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] items, <span style="color: blue;">double</span> chance, <span style="color: blue;">int</span> quantity, <span style="color: blue;">int</span> maxProps, <span style="color: blue;">int</span> minIntensity, <span style="color: blue;">int</span> maxIntensity )<br />
+      (<span style="color: blue;">ctor</span>) LootPackEntry( <span style="color: blue;">bool</span> atSpawnTime, <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] items, <span style="color: blue;">double</span> chance, <!-- DBG-0 --><a href="LootPackDice.html">LootPackDice</a> quantity, <span style="color: blue;">int</span> maxProps, <span style="color: blue;">int</span> minIntensity, <span style="color: blue;">int</span> maxIntensity )<br />
+      <span style="color: blue;">int</span> Chance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="LootPackItem.html">LootPackItem</a>[] Items( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxIntensity( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxProps( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MinIntensity( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="LootPackDice.html">LootPackDice</a> Quantity( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Construct( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> luckChance, <span style="color: blue;">bool</span> spawning )<br />
+      <span style="color: blue;">int</span> GetBonusProperties()<br />
+      <span style="color: blue;">int</span> GetRandomOldBonus()<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Mutate( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> luckChance, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+   </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseContestHouse</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Multis.html">Back to Server.Multis</a></h4>
+      <h2>BaseContestHouse : <!-- DBG-1 --><a href="BaseHouse.html">BaseHouse</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="Camelot.html">Camelot</a>, <!-- DBG-3 --><a href="CasaMoga.html">CasaMoga</a>, <!-- DBG-3 --><a href="CastleOfOceania.html">CastleOfOceania</a>, <!-- DBG-3 --><a href="DarkthornKeep.html">DarkthornKeep</a>, <!-- DBG-3 --><a href="ElsaCastle.html">ElsaCastle</a>, <!-- DBG-3 --><a href="FeudalCastle.html">FeudalCastle</a>, <!-- DBG-3 --><a href="GothicRoseCastle.html">GothicRoseCastle</a>, <!-- DBG-3 --><a href="GrimswindSisters.html">GrimswindSisters</a>, <!-- DBG-3 --><a href="LacrimaeInCaelo.html">LacrimaeInCaelo</a>, <!-- DBG-3 --><a href="OkinawaSweetDreamCastle.html">OkinawaSweetDreamCastle</a>, <!-- DBG-3 --><a href="RobinsNest.html">RobinsNest</a>, <!-- DBG-3 --><a href="RobinsRoost.html">RobinsRoost</a>, <!-- DBG-3 --><a href="SandalwoodKeep.html">SandalwoodKeep</a>, <!-- DBG-3 --><a href="Spires.html">Spires</a>, <!-- DBG-3 --><a href="TheSandstoneCastle.html">TheSandstoneCastle</a>, <!-- DBG-3 --><a href="TraditionalKeep.html">TraditionalKeep</a>, <!-- DBG-3 --><a href="TrinsicKeep.html">TrinsicKeep</a>, <!-- DBG-3 --><a href="VillaCrowley.html">VillaCrowley</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-AutoAddFixtures-c__AnonStorey1.html">(Anonymous-Type)-AutoAddFixtures-c__AnonStorey1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-IsInside-c__AnonStorey0.html">(Anonymous-Type)-IsInside-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <AutoAddFixtures>m__0( <!-- DBG-0 --><a href="MultiTileEntry.html">MultiTileEntry</a> e )<br />
+      (<span style="color: blue;">ctor</span>) BaseContestHouse( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseContestHouse( <!-- DBG-0 --><a href="ContestHouseType.html">ContestHouseType</a> type, <span style="color: blue;">int</span> multiID, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> owner, <span style="color: blue;">int</span> MaxLockDown, <span style="color: blue;">int</span> MaxSecure )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] Area( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> BaseBanLocation( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; Fixtures( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="ContestHouseType.html">ContestHouseType</a> HouseType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SignPostID( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> AddFixture( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> AddTeleporters( <span style="color: blue;">int</span> id, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> offset1, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> offset2 )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AutoAddFixtures()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsInside( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <span style="color: blue;">int</span> height )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChange( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> SetSign( <span style="color: blue;">int</span> xOffset, <span style="color: blue;">int</span> yOffset, <span style="color: blue;">int</span> zOffset, <span style="color: blue;">bool</span> post )<br />
+   </body>
+</html>

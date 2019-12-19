@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PropertyEffect</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>PropertyEffect</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BoneBreakerContext.html">BoneBreakerContext</a>, <!-- DBG-3 --><a href="DamageEaterContext.html">DamageEaterContext</a>, <!-- DBG-3 --><a href="SearingWeaponContext.html">SearingWeaponContext</a>, <!-- DBG-3 --><a href="SoulChargeContext.html">SoulChargeContext</a>, <!-- DBG-3 --><a href="SparksContext.html">SparksContext</a>, <!-- DBG-3 --><a href="SplinteringWeaponContext.html">SplinteringWeaponContext</a>, <!-- DBG-3 --><a href="SwarmContext.html">SwarmContext</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="<GetContext>c__AnonStorey1-T-.html"><GetContext>c__AnonStorey1</a>&lt;<span style="color: blue;">T</span>&gt;, <!-- DBG-4 --><a href="<GetContext>c__AnonStorey2-T-.html"><GetContext>c__AnonStorey2</a>&lt;<span style="color: blue;">T</span>&gt;, <!-- DBG-4 --><a href="<GetContexts>c__Iterator0-T-.html"><GetContexts>c__Iterator0</a>&lt;<span style="color: blue;">T</span>&gt;, <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="PropertyEffect.html">PropertyEffect</a>&gt; Effects( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) T GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> type )<br />
+      (<span style="color: blue;">static</span>) T GetContext( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim, <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<span style="color: blue;">T</span>&gt; GetContexts( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim, <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsUnderEffects( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> effect )<br />
+      (<span style="color: blue;">ctor</span>) PropertyEffect( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> victim, <!-- DBG-0 --><a href="Item.html">Item</a> owner, <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> effect, TimeSpan duration, TimeSpan tickduration )<br />
+      TimeSpan Duration( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="EffectsType.html">EffectsType</a> Effect( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Mobile( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Owner( <span style="color: blue;">get</span>; )<br />
+      TimeSpan TickDuration( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Timer.html">Timer</a> Timer( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Victim( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsEquipped()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDamage( <span style="color: blue;">int</span> damage, <span style="color: blue;">int</span> phys, <span style="color: blue;">int</span> fire, <span style="color: blue;">int</span> cold, <span style="color: blue;">int</span> poison, <span style="color: blue;">int</span> energy, <span style="color: blue;">int</span> direct )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDamaged( <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> RemoveEffects()<br />
+      <span style="color: blue;">void</span> StartTimer()<br />
+      <span style="color: blue;">void</span> StopTimer()<br />
+   </body>
+</html>

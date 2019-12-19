@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - HeritageQuester</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Quests.html">Back to Server.Engines.Quests</a></h4>
+      <h2>HeritageQuester : <!-- DBG-1 --><a href="BaseVendor.html">BaseVendor</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IVendor.html">IVendor</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddPending( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="HeritageQuester.html">HeritageQuester</a> quester )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Check( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsPending( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsUnburdened( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="HeritageQuester.html">HeritageQuester</a> Pending( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemovePending( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Say( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">object</span> message )<br />
+      (<span style="color: blue;">ctor</span>) HeritageQuester()<br />
+      (<span style="color: blue;">ctor</span>) HeritageQuester( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) HeritageQuester( <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">ctor</span>) HeritageQuester( <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> title )<br />
+      <span style="color: blue;">int</span> AutoSpeakRange( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">object</span> ConfirmMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">object</span> IncompleteMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsActiveVendor( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; Objectives( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="HeritageQuestInfo.html">HeritageQuestInfo</a>&gt; Quests( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SBInfo.html">SBInfo</a>&gt; SBInfos( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; Story( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CheckCompleted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> CheckCompleted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> delete )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; FindIncompleted( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitSBInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Initialize()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTalk( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> SayInstructions( <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; incomplete )<br />
+      <span style="color: blue;">void</span> SayInstructions( <span style="color: blue;">object</span> args )<br />
+      <span style="color: blue;">void</span> SayStory( <span style="color: blue;">object</span> args )<br />
+      <span style="color: blue;">void</span> SayStory( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

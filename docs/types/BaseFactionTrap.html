@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseFactionTrap</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Factions.html">Back to Server.Factions</a></h4>
+      <h2>BaseFactionTrap : <!-- DBG-1 --><a href="BaseTrap.html">BaseTrap</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IRevealableItem.html">IRevealableItem</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="FactionExplosionTrap.html">FactionExplosionTrap</a>, <!-- DBG-3 --><a href="FactionGasTrap.html">FactionGasTrap</a>, <!-- DBG-3 --><a href="FactionSawTrap.html">FactionSawTrap</a>, <!-- DBG-3 --><a href="FactionSpikeTrap.html">FactionSpikeTrap</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseFactionTrap( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseFactionTrap( <!-- DBG-0 --><a href="Faction.html">Faction</a> f, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> itemID )<br />
+      <!-- DBG-0 --><a href="AllowedPlacing.html">AllowedPlacing</a> AllowedPlacing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> AttackMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CheckWhenHidden( <span style="color: blue;">get</span>; )<br />
+      TimeSpan ConcealPeriod( <span style="color: blue;">get</span>; )<br />
+      TimeSpan DecayPeriod( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> DisarmMessage( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EffectSound( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Faction.html">Faction</a> Faction( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MessageHue( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Placer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SilverFromDisarm( <span style="color: blue;">get</span>; )<br />
+      DateTime TimeOfPlacement( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> BeginConceal()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckDecay()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckPassiveDetect( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckReveal( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Conceal()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoAttackEffect( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> DoVisibleEffect()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsEnemy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> IsValidLocation()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> IsValidLocation( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRevealed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnTrigger( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> PrivateOverheadLocalizedMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> to, <span style="color: blue;">int</span> number, <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> name, <span style="color: blue;">string</span> args )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

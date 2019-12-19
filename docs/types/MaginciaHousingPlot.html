@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - MaginciaHousingPlot</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.NewMagincia.html">Back to Server.Engines.NewMagincia</a></h4>
+      <h2>MaginciaHousingPlot</h2>
+      (<span style="color: blue;">ctor</span>) MaginciaHousingPlot( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">ctor</span>) MaginciaHousingPlot( <span style="color: blue;">string</span> identifier, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> bounds, <span style="color: blue;">bool</span> prime, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> Bounds( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Complete( <span style="color: blue;">get</span>; )<br />
+      DateTime Expires( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Identifier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsAvailable( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsPrimeSpot( <span style="color: blue;">get</span>; )<br />
+      DateTime LottoEnds( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LottoOngoing( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> LottoPrice( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Map.html">Map</a> Map( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="Int32.html">Int32</a>&gt; Participants( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> RecallLoc( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MaginciaPlotStone.html">MaginciaPlotStone</a> Stone( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Winner( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="WritOfLease.html">WritOfLease</a> Writ( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> AddPlotStone()<br />
+      <span style="color: blue;">void</span> AddPlotStone( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">bool</span> CanPurchaseLottoTicket( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> CheckAccount( <!-- DBG-0 --><a href="Account.html">Account</a> acct )<br />
+      <span style="color: blue;">void</span> EndLotto()<br />
+      <span style="color: blue;">void</span> OnLottoComplete( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> winner )<br />
+      <span style="color: blue;">void</span> PurchaseLottoTicket( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> toBuy )<br />
+      <span style="color: blue;">void</span> ResetLotto()<br />
+      <span style="color: blue;">void</span> SendMessage_Callback( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+   </body>
+</html>

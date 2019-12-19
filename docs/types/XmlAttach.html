@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - XmlAttach</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.XmlSpawner2.html">Back to Server.Engines.XmlSpawner2</a></h4>
+      <h2>XmlAttach</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="AddAttCommand.html">AddAttCommand</a>, <!-- DBG-4 --><a href="AttachTarget.html">AttachTarget</a>, <!-- DBG-4 --><a href="DelAttCommand.html">DelAttCommand</a>, <!-- DBG-4 --><a href="DeserErrorDetails.html">DeserErrorDetails</a>, <!-- DBG-4 --><a href="DisplayAttachmentGump.html">DisplayAttachmentGump</a>, <!-- DBG-4 --><a href="ErrorReporter.html">ErrorReporter</a>, <!-- DBG-4 --><a href="ListAttachmentsGump.html">ListAttachmentsGump</a>, <!-- DBG-4 --><a href="TypeNameComparer.html">TypeNameComparer</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a>[] Values( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ActivateAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddAttachmentProperties( <span style="color: blue;">object</span> parent, <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> AddAttachment_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AlreadyReported( <span style="color: blue;">string</span> typestr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AttachTo( <span style="color: blue;">object</span> o, <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> attachment )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AttachTo( <span style="color: blue;">object</span> from, <span style="color: blue;">object</span> o, <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> attachment )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AttachTo( <span style="color: blue;">object</span> o, <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> attachment, <span style="color: blue;">bool</span> first )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AttachTo( <span style="color: blue;">object</span> from, <span style="color: blue;">object</span> o, <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> attachment, <span style="color: blue;">bool</span> first )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckCanEquip( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckOnBeforeKill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m_killed, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m_killer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckOnEquip( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckOnKill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m_killed, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m_killer )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckOnRemoved( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">object</span> parent )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CleanUp()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Defrag( <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Defrag( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Defrag( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Item.html">Item</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DeleteAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Movement( <!-- DBG-0 --><a href="MovementEventArgs.html">MovementEventArgs</a> args )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> EventSink_Speech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> args )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Item.html">Item</a> o )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">object</span> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">object</span> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachment( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachmentBySerial( <span style="color: blue;">int</span> serialno )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> FindAttachmentOnMobile( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Item.html">Item</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Item.html">Item</a> o, <span style="color: blue;">bool</span> original )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">object</span> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, <span style="color: blue;">bool</span> original )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">object</span> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type, <span style="color: blue;">string</span> name )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Item.html">Item</a> o, Type type, <span style="color: blue;">string</span> name, <span style="color: blue;">bool</span> original )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="XmlAttachment.html">XmlAttachment</a>&gt; FindAttachments( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> o, Type type, <span style="color: blue;">string</span> name, <span style="color: blue;">bool</span> original )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FullDefrag()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FullDefrag( <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<span style="color: blue;">List`1</span>&gt; attachments )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FullDefrag( <span style="color: blue;">Dictionary</span>&lt;<a href="Item.html">Item</a>,<span style="color: blue;">List`1</span>&gt; attachments )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> FullSerialDefrag( <span style="color: blue;">Dictionary</span>&lt;<a href="Int32.html">Int32</a>,<a href="XmlAttachment.html">XmlAttachment</a>&gt; attachments )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GetAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasAttachments( <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HashSerial( <!-- DBG-0 --><a href="ASerial.html">ASerial</a> key, <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsAttachable( ConstructorInfo ctor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ListAvailableAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ListItemAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ListMobileAttachments_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Load()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Type.html">Type</a>&gt; Match( Type matchtype )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Match( Type matchtype, Type[] types, <span style="color: blue;">List</span>&lt;<a href="Type.html">Type</a>&gt; results )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> OnArmorHit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender, <!-- DBG-0 --><a href="Item.html">Item</a> armor, <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> weapon, <span style="color: blue;">int</span> damage )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> OnDragLift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnWeaponHit( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> weapon, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> attacker, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> defender, <span style="color: blue;">int</span> damage )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReportDeserError( <span style="color: blue;">string</span> typestr, <span style="color: blue;">string</span> detailstr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RevealAttachments( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> o )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Save( <!-- DBG-0 --><a href="WorldSaveEventArgs.html">WorldSaveEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SerialDefrag( <!-- DBG-0 --><a href="XmlAttachment.html">XmlAttachment</a> a )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> UseReq( <!-- DBG-0 --><a href="NetState.html">NetState</a> state, <!-- DBG-0 --><a href="PacketReader.html">PacketReader</a> pvSrc )<br />
+      (<span style="color: blue;">ctor</span>) XmlAttach()<br />
+   </body>
+</html>

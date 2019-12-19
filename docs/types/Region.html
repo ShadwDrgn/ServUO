@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Region</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.html">Back to Server</a></h4>
+      <h2>Region : <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="BaseRegion.html">BaseRegion</a>, <!-- DBG-3 --><a href="CorgulWarpRegion.html">CorgulWarpRegion</a>, <!-- DBG-3 --><a href="EodonTribeRegion.html">EodonTribeRegion</a>, <!-- DBG-3 --><a href="InstanceRegion.html">InstanceRegion</a>, <!-- DBG-3 --><a href="MazeOfDeathRegion.html">MazeOfDeathRegion</a>, <!-- DBG-3 --><a href="QuestRegion.html">QuestRegion</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-GetEnumeratedItems-c__Iterator2.html">(Anonymous-Type)-GetEnumeratedItems-c__Iterator2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetEnumeratedMobiles-c__Iterator1.html">(Anonymous-Type)-GetEnumeratedMobiles-c__Iterator1</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetEnumeratedMultis-c__Iterator3.html">(Anonymous-Type)-GetEnumeratedMultis-c__Iterator3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetEnumeratedPlayers-c__Iterator0.html">(Anonymous-Type)-GetEnumeratedPlayers-c__Iterator0</a>, <!-- DBG-4 --><a href="<GetEnumeration>c__Iterator4-T-.html"><GetEnumeration>c__Iterator4</a>&lt;<span style="color: blue;">T</span>&gt;</h4>
+      (<span style="color: blue;">static</span>) TimeSpan DefaultLogoutDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) Type DefaultRegionType( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Region.html">Region</a>&gt; Regions( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) TimeSpan StaffLogoutDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanMove( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Direction.html">Direction</a> d, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> newLocation, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> ConvertTo3D( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> rect )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] ConvertTo3D( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] rects )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Region.html">Region</a> Find( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetAttribute( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Load()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadRegions( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnRegionChange( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Region.html">Region</a> oldRegion, <!-- DBG-0 --><a href="Region.html">Region</a> newRegion )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadBoolean( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadBoolean( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadDateTime( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> DateTime value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadDateTime( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> DateTime value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadEnum( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> T value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadEnum( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> T value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadInt32( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadInt32( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadMap( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Map.html">Map</a> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadMap( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Map.html">Map</a> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadPoint3D( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Point3D.html">Point3D</a> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadPoint3D( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Point3D.html">Point3D</a> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadRectangle3D( XmlElement xml, <span style="color: blue;">int</span> defaultMinZ, <span style="color: blue;">int</span> defaultMaxZ, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadRectangle3D( XmlElement xml, <span style="color: blue;">int</span> defaultMinZ, <span style="color: blue;">int</span> defaultMaxZ, <span style="color: blue;">ref</span> <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadString( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">string</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadString( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> <span style="color: blue;">string</span> value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadTimeSpan( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> TimeSpan value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadTimeSpan( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> TimeSpan value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadType( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> Type value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ReadType( XmlElement xml, <span style="color: blue;">string</span> attribute, <span style="color: blue;">ref</span> Type value, <span style="color: blue;">bool</span> mandatory )<br />
+      (<span style="color: blue;">ctor</span>) Region( XmlElement xml, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent )<br />
+      (<span style="color: blue;">ctor</span>) Region( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> priority, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) Region( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> priority, <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) Region( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent, <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] area )<br />
+      (<span style="color: blue;">ctor</span>) Region( <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Map.html">Map</a> map, <!-- DBG-0 --><a href="Region.html">Region</a> parent, <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] area )<br />
+      <!-- DBG-0 --><a href="Rectangle3D.html">Rectangle3D</a>[] Area( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> ChildLevel( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Region.html">Region</a>&gt; Children( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MusicName.html">MusicName</a> DefaultMusic( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Dynamic( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GoLocation( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> InsuranceMultiplier( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsDefault( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Map.html">Map</a> Map( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="MusicName.html">MusicName</a> Music( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> Name( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> Parent( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Priority( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Registered( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Sector.html">Sector</a>[] Sectors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AcceptsSpawnsFrom( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowAutoClaim( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowBeneficial( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowFlying( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowHarmful( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowHousing( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> AllowSpawn()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AlterLightLevel( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> global, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> personal )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanUseStuckMenu( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckAccessibility( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">bool</span> Contains( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetContextMenuEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<span style="color: blue;">T</span>&gt; GetDistinctEnumeration( <span style="color: blue;">List</span>&lt;<span style="color: blue;">T</span>&gt; list, <a href="Func-T-.html">Func</a>&lt;<span style="color: blue;">T</span>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Item.html">Item</a>&gt; GetEnumeratedItems()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Item.html">Item</a>&gt; GetEnumeratedItems( <a href="Func-T-.html">Func</a>&lt;<a href="Item.html">Item</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetEnumeratedMobiles()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetEnumeratedMobiles( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="BaseMulti.html">BaseMulti</a>&gt; GetEnumeratedMultis()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="BaseMulti.html">BaseMulti</a>&gt; GetEnumeratedMultis( <a href="Func-T-.html">Func</a>&lt;<a href="BaseMulti.html">BaseMulti</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetEnumeratedPlayers()<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetEnumeratedPlayers( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">IEnumerable</span>&lt;<span style="color: blue;">T</span>&gt; GetEnumeration( <span style="color: blue;">List</span>&lt;<span style="color: blue;">T</span>&gt; list, <a href="Func-T-.html">Func</a>&lt;<span style="color: blue;">T</span>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">int</span> GetItemCount()<br />
+      <span style="color: blue;">int</span> GetItemCount( <a href="Func-T-.html">Func</a>&lt;<a href="Item.html">Item</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; GetItems()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; GetItems( <a href="Func-T-.html">Func</a>&lt;<a href="Item.html">Item</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">virtual</span> TimeSpan GetLogoutDelay( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">int</span> GetMobileCount()<br />
+      <span style="color: blue;">int</span> GetMobileCount( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetMobiles()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetMobiles( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">int</span> GetMultiCount()<br />
+      <span style="color: blue;">int</span> GetMultiCount( <a href="Func-T-.html">Func</a>&lt;<a href="BaseMulti.html">BaseMulti</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseMulti.html">BaseMulti</a>&gt; GetMultis()<br />
+      <span style="color: blue;">List</span>&lt;<a href="BaseMulti.html">BaseMulti</a>&gt; GetMultis( <a href="Func-T-.html">Func</a>&lt;<a href="BaseMulti.html">BaseMulti</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">int</span> GetPlayerCount()<br />
+      <span style="color: blue;">int</span> GetPlayerCount( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetPlayers()<br />
+      <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; GetPlayers( <a href="Func-T-.html">Func</a>&lt;<a href="Mobile.html">Mobile</a>,<a href="Boolean.html">Boolean</a>&gt; predicate )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> GetRegion( <span style="color: blue;">string</span> regionName )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> GetRegion( Type regionType )<br />
+      <span style="color: blue;">virtual</span> Type GetResource( Type type )<br />
+      <span style="color: blue;">bool</span> IsChildOf( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      <span style="color: blue;">bool</span> IsPartOf()<br />
+      <span style="color: blue;">bool</span> IsPartOf( <span style="color: blue;">string</span> regionName )<br />
+      <span style="color: blue;">bool</span> IsPartOf( Type regionType )<br />
+      <span style="color: blue;">bool</span> IsPartOf( <!-- DBG-0 --><a href="Region.html">Region</a> region )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> MakeGuard( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> focus )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAggressed( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> aggressor, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> aggressed, <span style="color: blue;">bool</span> criminal )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeforeDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBeginSpellCast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="ISpell.html">ISpell</a> s )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnBeneficialAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> helper, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnChildAdded( <!-- DBG-0 --><a href="Region.html">Region</a> child )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnChildRemoved( <!-- DBG-0 --><a href="Region.html">Region</a> child )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnCombatantChange( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> Old, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> New )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnCriminalAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">bool</span> message )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDamage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDecay( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDidHarmful( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> harmer, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> harmed )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnEnter( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnExit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnGotBeneficialAction( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> helper, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnGotHarmful( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> harmer, <!-- DBG-0 --><a href="IDamageable.html">IDamageable</a> harmed )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnHeal( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> heal )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChanged( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnMoveInto( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Direction.html">Direction</a> d, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> newLocation, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnRegister()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnResurrect( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnSkillUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">int</span> Skill )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> args )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpellCast( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="ISpell.html">ISpell</a> s )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Target.html">Target</a> t, <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnUnregister()<br />
+      <span style="color: blue;">void</span> Register()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> SendInaccessibleMessage( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">double</span> SkillGain( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SpellDamageScalar( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> caster, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> target, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> damage )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> System.IComparable.CompareTo( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">string</span> ToString()<br />
+      <span style="color: blue;">void</span> Unregister()<br />
+   </body>
+</html>

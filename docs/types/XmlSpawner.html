@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - XmlSpawner</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>XmlSpawner : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="ISpawner.html">ISpawner</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="AssignSettingsHandler.html">AssignSettingsHandler</a>, <!-- DBG-4 --><a href="GetValueTarget.html">GetValueTarget</a>, <!-- DBG-4 --><a href="GlobalSectorTimer.html">GlobalSectorTimer</a>, <!-- DBG-4 --><a href="InternalTimer.html">InternalTimer</a>, <!-- DBG-4 --><a href="InternalTimer3.html">InternalTimer3</a>, <!-- DBG-4 --><a href="MovementInfo.html">MovementInfo</a>, <!-- DBG-4 --><a href="MovementTimer.html">MovementTimer</a>, <!-- DBG-4 --><a href="SectorTimer.html">SectorTimer</a>, <!-- DBG-4 --><a href="SpawnObject.html">SpawnObject</a>, <!-- DBG-4 --><a href="SpawnPositionInfo.html">SpawnPositionInfo</a>, <!-- DBG-4 --><a href="SpawnPositionType.html">SpawnPositionType</a>, <!-- DBG-4 --><a href="SpawnerTimer.html">SpawnerTimer</a>, <!-- DBG-4 --><a href="SubgroupSorter.html">SubgroupSorter</a>, <!-- DBG-4 --><a href="TODModeType.html">TODModeType</a>, <!-- DBG-4 --><a href="TagListTarget.html">TagListTarget</a>, <!-- DBG-4 --><a href="WarnTimer2.html">WarnTimer2</a>, <!-- DBG-4 --><a href="XmlHomeTarget.html">XmlHomeTarget</a>, <!-- DBG-4 --><a href="XmlSaveSingle.html">XmlSaveSingle</a>, <!-- DBG-4 --><a href="XmlSetCommand.html">XmlSetCommand</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> FactionsEnabled( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> PointsEnabled( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SocketsEnabled( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> <SaveSpawnList>m__0( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> a, <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> b )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AssignSettings( <span style="color: blue;">string</span> argname, <span style="color: blue;">string</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Configure()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> ConvertToInt( <span style="color: blue;">string</span> value )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> CreateObject( Type type, <span style="color: blue;">string</span> itemtypestring )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> CreateObject( Type type, <span style="color: blue;">string</span> itemtypestring, <span style="color: blue;">bool</span> requireconstructable )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> CreateObject( Type type, <span style="color: blue;">string</span>[] typewordargs, <span style="color: blue;">bool</span> requireconstructable, <span style="color: blue;">bool</span> requireattachable )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> CreateObject( Type type, <span style="color: blue;">string</span> itemtypestring, <span style="color: blue;">bool</span> requireconstructable, <span style="color: blue;">bool</span> requireattachable )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DelayedAssignSettings( <span style="color: blue;">object</span> state )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> DoGlobalSectorTimer( TimeSpan delay )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ExecuteAction( <span style="color: blue;">object</span> attachedto, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> trigmob, <span style="color: blue;">string</span> action )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetDistance( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p1, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> p2 )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a> GetSpawnObject( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, <span style="color: blue;">int</span> sgroup )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">object</span> GetSpawned( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, <span style="color: blue;">int</span> sgroup )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; GetSpawnedList( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner, <span style="color: blue;">int</span> sgroup )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> GetText( XmlElement node, <span style="color: blue;">string</span> defaultValue )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="WayPoint.html">WayPoint</a> GetWaypoint( <span style="color: blue;">string</span> waypointstr )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> HasTileSurface( <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> X, <span style="color: blue;">int</span> Y, <span style="color: blue;">int</span> Z )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HideSpawnPoints_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ImportMegaSpawner( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ImportSpawner( XmlElement node, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsConstructable( ConstructorInfo ctor )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsValidMapLocation( <!-- DBG-0 --><a href="Point2D.html">Point2D</a> location, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsValidMapLocation( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> location, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> IsValidMapLocation( <span style="color: blue;">int</span> X, <span style="color: blue;">int</span> Y, <!-- DBG-0 --><a href="Map.html">Map</a> map )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="String.html">String</a>&gt; LoadCreaturesName( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadDefaults( XmlElement node )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadHere_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> LoadSettings( <!-- DBG-0 --><a href="AssignSettingsHandler.html">AssignSettingsHandler</a> settingshandler, <span style="color: blue;">string</span> section )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Load_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> LocateFile( <span style="color: blue;">string</span> filename )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">string</span> LocateMultiFile( <span style="color: blue;">string</span> filename )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> NewLoadHere_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> NewLoad_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OptimalSmartSpawning_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ParseNewMapFormat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> line, <span style="color: blue;">string</span>[] args, <span style="color: blue;">int</span> linenumber, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> spawnercount, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> badspawnercount, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> overridemap, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> overridemintime, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> overridemaxtime )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ParseOldMapFormat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> line, <span style="color: blue;">string</span>[] args, <span style="color: blue;">int</span> linenumber, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> spawnercount, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> badspawnercount, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> overridemap, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> overridemintime, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> overridemaxtime )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveFromSectorTable( <!-- DBG-0 --><a href="Sector.html">Sector</a> s, <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RespawnAll_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RespawnSpawners( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e, <span style="color: blue;">bool</span> RespawnAll )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Respawn_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SaveAll_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SaveOld_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SaveSpawnList( <span style="color: blue;">List</span>&lt;<a href="XmlSpawner.html">XmlSpawner</a>&gt; savelist, Stream stream )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SaveSpawnList( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="XmlSpawner.html">XmlSpawner</a>&gt; savelist, <span style="color: blue;">string</span> dirname, <span style="color: blue;">bool</span> oldformat, <span style="color: blue;">bool</span> verbose )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> SaveSpawnList( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="XmlSpawner.html">XmlSpawner</a>&gt; savelist, <span style="color: blue;">string</span> dirname, Stream stream, <span style="color: blue;">bool</span> oldformat, <span style="color: blue;">bool</span> verbose )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SaveSpawns( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> xmlspawner, <span style="color: blue;">string</span> filename )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SaveSpawns( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e, <span style="color: blue;">bool</span> SaveAllMaps, <span style="color: blue;">bool</span> oldformat )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Save_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ShowSpawnPoints_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ShowTagList_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SmartStat_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SpawnEditorGo_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> SpawnerGumpCallback( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">object</span> invoker, <span style="color: blue;">string</span> response )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> UnLoad_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> WipeAll_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> WipeSpawners( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e, <span style="color: blue;">bool</span> WipeAll )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Wipe_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlDefaults_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlGetValue_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlHome_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlImportMSF_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlImportMap( <span style="color: blue;">string</span> filename, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlImportMap_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlImportSpawners_OnCommand( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadDefaults( <span style="color: blue;">string</span> filePath, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromFile( <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromFile( <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> loadrelative, <span style="color: blue;">int</span> maxrange, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromFile( <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> fromloc, <!-- DBG-0 --><a href="Map.html">Map</a> frommap, <span style="color: blue;">bool</span> loadrelative, <span style="color: blue;">int</span> maxrange, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromFile( <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> fromloc, <!-- DBG-0 --><a href="Map.html">Map</a> frommap, <span style="color: blue;">bool</span> loadrelative, <span style="color: blue;">int</span> maxrange, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromStream( Stream fs, <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> fromloc, <!-- DBG-0 --><a href="Map.html">Map</a> frommap, <span style="color: blue;">bool</span> loadrelative, <span style="color: blue;">int</span> maxrange, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlLoadFromStream( Stream fs, <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> fromloc, <!-- DBG-0 --><a href="Map.html">Map</a> frommap, <span style="color: blue;">bool</span> loadrelative, <span style="color: blue;">int</span> maxrange, <span style="color: blue;">bool</span> loadnew, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners, <span style="color: blue;">bool</span> verbose )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlSaveDefaults( <span style="color: blue;">string</span> filePath, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlUnLoadFromFile( <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> XmlUnLoadFromStream( Stream fs, <span style="color: blue;">string</span> filename, <span style="color: blue;">string</span> SpawnerPrefix, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedmaps, <span style="color: blue;">out</span> <span style="color: blue;">int</span> processedspawners )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> _TraceEnd( <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> _TraceStart( <span style="color: blue;">int</span> index )<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner()<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner( <span style="color: blue;">string</span> creatureName )<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner( <span style="color: blue;">int</span> amount, <span style="color: blue;">int</span> minDelay, <span style="color: blue;">int</span> maxDelay, <span style="color: blue;">int</span> team, <span style="color: blue;">int</span> homeRange, <span style="color: blue;">string</span> creatureName )<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner( <span style="color: blue;">int</span> amount, <span style="color: blue;">int</span> minDelay, <span style="color: blue;">int</span> maxDelay, <span style="color: blue;">int</span> team, <span style="color: blue;">int</span> homeRange, <span style="color: blue;">int</span> spawnRange, <span style="color: blue;">string</span> creatureName )<br />
+      (<span style="color: blue;">ctor</span>) XmlSpawner( Guid uniqueId, <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> width, <span style="color: blue;">int</span> height, <span style="color: blue;">string</span> name, <span style="color: blue;">int</span> maxCount, TimeSpan minDelay, TimeSpan maxDelay, TimeSpan duration, <span style="color: blue;">int</span> proximityRange, <span style="color: blue;">int</span> proximityTriggerSound, <span style="color: blue;">int</span> amount, <span style="color: blue;">int</span> team, <span style="color: blue;">int</span> homeRange, <span style="color: blue;">bool</span> isRelativeHomeRange, <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a>[] spawnObjects, TimeSpan minRefractory, TimeSpan maxRefractory, TimeSpan todstart, TimeSpan todend, <!-- DBG-0 --><a href="Item.html">Item</a> objectPropertyItem, <span style="color: blue;">string</span> objectPropertyName, <span style="color: blue;">string</span> proximityMessage, <span style="color: blue;">string</span> itemTriggerName, <span style="color: blue;">string</span> noitemTriggerName, <span style="color: blue;">string</span> speechTrigger, <span style="color: blue;">string</span> mobTriggerName, <span style="color: blue;">string</span> mobPropertyName, <span style="color: blue;">string</span> playerPropertyName, <span style="color: blue;">double</span> triggerProbability, <!-- DBG-0 --><a href="Item.html">Item</a> setPropertyItem, <span style="color: blue;">bool</span> isGroup, <!-- DBG-0 --><a href="TODModeType.html">TODModeType</a> todMode, <span style="color: blue;">int</span> killReset, <span style="color: blue;">bool</span> externalTriggering, <span style="color: blue;">int</span> sequentialSpawning, <span style="color: blue;">string</span> regionName, <span style="color: blue;">bool</span> allowghost, <span style="color: blue;">bool</span> allownpc, <span style="color: blue;">bool</span> spawnontrigger, <span style="color: blue;">string</span> configfile, TimeSpan despawnTime, <span style="color: blue;">string</span> skillTrigger, <span style="color: blue;">bool</span> smartSpawning, <!-- DBG-0 --><a href="WayPoint.html">WayPoint</a> wayPoint )<br />
+      <span style="color: blue;">int</span> ActiveSectorCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> AddSpawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowGhostTrig( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowNPCTrig( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> AllowTriggering( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TimerPriority.html">TimerPriority</a> BasePriority( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> BringHome( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> CanFreeSpawn( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanSpawn( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CheckRegionAssignment( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ClearSpawnedThisTick( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> ConfigFile( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> CurrentCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> DebugThis( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Decays( <span style="color: blue;">get</span>; )<br />
+      TimeSpan DespawnTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DisableGlobalAutoReset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DoDefrag( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DoReset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> DoRespawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan Duration( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan DurationOver( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ExtTrigState( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ExternalTriggering( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> FastestPlayerSpeed( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime FirstModified( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> FirstModifiedBy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> FreeRun( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan GameTOD( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Group( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> GumpReset( <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> GumpState( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnMovement( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnSkillUse( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HandlesOnSpeech( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasActiveSectors( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasDamagedOrDistantSpawns( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasHoldSmartSpawning( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HoldSequence( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> HomeLocation( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> HomeRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> HomeRangeIsRelative( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsEmpty( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsFull( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsInactivated( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> IsVirtualItem( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> KillCount( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> KillReset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime LastModified( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> LastModifiedBy( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> LoadConfig( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MaxCount( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan MaxDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan MinDelay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> MobTriggerId( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> MobTriggerName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> MobTriggerProp( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="MoonPhase.html">MoonPhase</a> MoonPhase( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> MostRecentSpawnPosition( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> MovingPlayerCount( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> NearbyPlayerCount( <span style="color: blue;">get</span>; )<br />
+      TimeSpan NextSeqReset( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan NextSpawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> NoTriggerOnCarried( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> OnHold( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerCreated( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> PlayerTriggerProp( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ProximityActivated( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> ProximityMsg( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ProximityRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> ProximitySound( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Range( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RealDay( <span style="color: blue;">get</span>; )<br />
+      DayOfWeek RealDayOfWeek( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RealMonth( <span style="color: blue;">get</span>; )<br />
+      TimeSpan RealTOD( <span style="color: blue;">get</span>; )<br />
+      TimeSpan RefractMax( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan RefractMin( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan RefractoryOver( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> RegionName( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> Running( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SafeCurrentCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SafeTotalSpawnedObjects( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SecCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SequentialSpawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> SetItem( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> SetItemName( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ShowBounds( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SingleSector( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> SkillTrigger( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SmartSpawning( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SomeOneHasGumpOpen( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a>[] SpawnObjects( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> SpawnOnTrigger( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpawnRange( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> SpawnRegion( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> SpawnerBounds( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="XmlSpawnerGump.html">XmlSpawnerGump</a> SpawnerGump( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> SpeechTrigger( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> StackAmount( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan TOD( <span style="color: blue;">get</span>; )<br />
+      TimeSpan TODEnd( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> TODInRange( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="TODModeType.html">TODModeType</a> TODMode( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan TODStart( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> Team( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> TotalSpawnObjectCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TotalSpawnedObjects( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="AccessLevel.html">AccessLevel</a> TriggerAccessLevel( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> TriggerMob( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> TriggerObject( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> TriggerObjectName( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> TriggerObjectProp( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> TriggerOnCarried( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> TriggerProbability( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Skill.html">Skill</a> TriggerSkill( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span> UniqueId( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> UnlinkOnTaming( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="WayPoint.html">WayPoint</a> WayPoint( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> X1_Y1( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> X2_Y2( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> <Deserialize>m__1()<br />
+      <span style="color: blue;">void</span> ActivateTrigger()<br />
+      <span style="color: blue;">void</span> AddSpawnObject( <span style="color: blue;">string</span> SpawnObjectName )<br />
+      <span style="color: blue;">void</span> AddToMovementList( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> AdvanceSequential()<br />
+      <span style="color: blue;">void</span> BringToHome()<br />
+      <span style="color: blue;">bool</span> CanFit( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <span style="color: blue;">int</span> height, <span style="color: blue;">bool</span> checkBlocksFit, <span style="color: blue;">bool</span> checkMobiles, <span style="color: blue;">bool</span> requireSurface, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">bool</span> CanSpawnMobile( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> z, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">bool</span> CheckForSequentialReset()<br />
+      <span style="color: blue;">bool</span> CheckHoldSmartSpawning( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">void</span> CheckTriggers( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Skill.html">Skill</a> s, <span style="color: blue;">bool</span> hasproximity )<br />
+      <span style="color: blue;">void</span> ClearGOTOTags()<br />
+      <span style="color: blue;">void</span> ClearSubgroup( <span style="color: blue;">int</span> subgroup )<br />
+      <span style="color: blue;">void</span> ClearTags( <span style="color: blue;">bool</span> all )<br />
+      <span style="color: blue;">void</span> Defrag( <span style="color: blue;">bool</span> killtest )<br />
+      <span style="color: blue;">void</span> DeleteFromList( <span style="color: blue;">List</span>&lt;<a href="Object.html">Object</a>&gt; list )<br />
+      <span style="color: blue;">void</span> DeleteFromList( <span style="color: blue;">List</span>&lt;<a href="Item.html">Item</a>&gt; listi, <span style="color: blue;">List</span>&lt;<a href="Mobile.html">Mobile</a>&gt; listm )<br />
+      <span style="color: blue;">void</span> DeleteGumpTags()<br />
+      <span style="color: blue;">void</span> DeleteSpawnObject( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> SpawnObjectName )<br />
+      <span style="color: blue;">void</span> DeleteTag( <!-- DBG-0 --><a href="KeywordTag.html">KeywordTag</a> tag )<br />
+      <span style="color: blue;">void</span> DeleteTextEntryBook()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoMovementTimer( TimeSpan delay )<br />
+      <span style="color: blue;">void</span> DoSectorTimer( TimeSpan delay )<br />
+      <span style="color: blue;">void</span> DoTimer()<br />
+      <span style="color: blue;">void</span> DoTimer( TimeSpan delay )<br />
+      <span style="color: blue;">void</span> DoTimer2( TimeSpan delay )<br />
+      <span style="color: blue;">void</span> DoTimer3( TimeSpan delay )<br />
+      <span style="color: blue;">void</span> FindRegionTileLocations( <span style="color: blue;">ref</span> <span style="color: blue;">List</span>&lt;<a href="Point3D.html">Point3D</a>&gt; locations, <!-- DBG-0 --><a href="Region.html">Region</a> r, <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; includetilelist, <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; excludetilelist, <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a> tileflag, <span style="color: blue;">bool</span> checkitems, <span style="color: blue;">int</span> spawnerZ )<br />
+      <span style="color: blue;">void</span> FindTileLocations( <span style="color: blue;">ref</span> <span style="color: blue;">List</span>&lt;<a href="Point3D.html">Point3D</a>&gt; locations, <!-- DBG-0 --><a href="Map.html">Map</a> map, <span style="color: blue;">int</span> startx, <span style="color: blue;">int</span> starty, <span style="color: blue;">int</span> width, <span style="color: blue;">int</span> height, <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; includetilelist, <span style="color: blue;">List</span>&lt;<a href="Int32.html">Int32</a>&gt; excludetilelist, <!-- DBG-0 --><a href="TileFlag.html">TileFlag</a> tileflag, <span style="color: blue;">bool</span> checkitems, <span style="color: blue;">int</span> spawnerZ )<br />
+      <span style="color: blue;">int</span> GetCreatureMax( <span style="color: blue;">int</span> index )<br />
+      <span style="color: blue;">int</span> GetCurrentAvailableSequentialSpawnIndex( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">int</span> GetCurrentSequentialSpawnIndex( <span style="color: blue;">int</span> sgroup )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetPackCoord( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <!-- DBG-0 --><a href="Point2D.html">Point2D</a> GetRandomRegionPoint( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      <span style="color: blue;">string</span> GetSerializedObjectList()<br />
+      <span style="color: blue;">string</span> GetSerializedObjectList2()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetSpawnContextEntries( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> user, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnPosition( <span style="color: blue;">bool</span> requiresurface )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnPosition( <span style="color: blue;">bool</span> requiresurface, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnPosition( <span style="color: blue;">bool</span> requiresurface, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">List</span>&lt;<a href="SpawnPositionInfo.html">SpawnPositionInfo</a>&gt; spawnpositioning )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetSpawnPosition( <span style="color: blue;">bool</span> requiresurface, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">List</span>&lt;<a href="SpawnPositionInfo.html">SpawnPositionInfo</a>&gt; spawnpositioning, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> mob )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetSpawnProperties( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn, <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">bool</span> HasIndividualSpawnTimes()<br />
+      <span style="color: blue;">bool</span> HasRegionPoints( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      <span style="color: blue;">bool</span> HasSubGroups()<br />
+      <span style="color: blue;">bool</span> InActivationRange( <!-- DBG-0 --><a href="Sector.html">Sector</a> s1, <!-- DBG-0 --><a href="Sector.html">Sector</a> s2 )<br />
+      <span style="color: blue;">void</span> InitSpawn( <span style="color: blue;">int</span> x, <span style="color: blue;">int</span> y, <span style="color: blue;">int</span> width, <span style="color: blue;">int</span> height, <span style="color: blue;">string</span> name, <span style="color: blue;">int</span> maxCount, TimeSpan minDelay, TimeSpan maxDelay, TimeSpan duration, <span style="color: blue;">int</span> proximityRange, <span style="color: blue;">int</span> proximityTriggerSound, <span style="color: blue;">int</span> amount, <span style="color: blue;">int</span> team, <span style="color: blue;">int</span> homeRange, <span style="color: blue;">bool</span> isRelativeHomeRange, <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a>[] objectsToSpawn, TimeSpan minRefractory, TimeSpan maxRefractory, TimeSpan todstart, TimeSpan todend, <!-- DBG-0 --><a href="Item.html">Item</a> objectPropertyItem, <span style="color: blue;">string</span> objectPropertyName, <span style="color: blue;">string</span> proximityMessage, <span style="color: blue;">string</span> itemTriggerName, <span style="color: blue;">string</span> noitemTriggerName, <span style="color: blue;">string</span> speechTrigger, <span style="color: blue;">string</span> mobTriggerName, <span style="color: blue;">string</span> mobPropertyName, <span style="color: blue;">string</span> playerPropertyName, <span style="color: blue;">double</span> triggerProbability, <!-- DBG-0 --><a href="Item.html">Item</a> setPropertyItem, <span style="color: blue;">bool</span> isGroup, <!-- DBG-0 --><a href="TODModeType.html">TODModeType</a> todMode, <span style="color: blue;">int</span> killReset, <span style="color: blue;">bool</span> externalTriggering, <span style="color: blue;">int</span> sequentialSpawning, <span style="color: blue;">string</span> regionName, <span style="color: blue;">bool</span> allowghost, <span style="color: blue;">bool</span> allownpc, <span style="color: blue;">bool</span> spawnontrigger, <span style="color: blue;">string</span> configfile, TimeSpan despawnTime, <span style="color: blue;">string</span> skillTrigger, <span style="color: blue;">bool</span> smartSpawning, <!-- DBG-0 --><a href="WayPoint.html">WayPoint</a> wayPoint )<br />
+      <span style="color: blue;">void</span> InitiateSequentialReset( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">void</span> LoadXmlConfig( <span style="color: blue;">string</span> filename )<br />
+      <span style="color: blue;">int</span> NextSequentialIndex( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDuped( <!-- DBG-0 --><a href="Item.html">Item</a> newItem )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnLocationChange( <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> OnSkillUse( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill, <span style="color: blue;">bool</span> success )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">int</span> RandomAvailableSpawnIndex()<br />
+      <span style="color: blue;">int</span> RandomAvailableSpawnIndex( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">int</span> RandomSpawnIndex( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">void</span> RefreshNextSpawnTime( <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a> so )<br />
+      <span style="color: blue;">void</span> RefreshNextSpawnTimes()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Remove( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn )<br />
+      <span style="color: blue;">void</span> RemoveSpawnObject( <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a> so )<br />
+      <span style="color: blue;">void</span> RemoveSpawnObjects()<br />
+      <span style="color: blue;">void</span> RemoveSpawnObjects( <!-- DBG-0 --><a href="SpawnObject.html">SpawnObject</a> so )<br />
+      <span style="color: blue;">void</span> ReportStatus()<br />
+      <span style="color: blue;">void</span> Reset()<br />
+      <span style="color: blue;">void</span> ResetAllFlags()<br />
+      <span style="color: blue;">void</span> ResetNextSpawnTimes()<br />
+      <span style="color: blue;">void</span> ResetProximityActivated()<br />
+      <span style="color: blue;">void</span> ResetSectorList()<br />
+      <span style="color: blue;">void</span> ResetSequential()<br />
+      <span style="color: blue;">bool</span> Respawn()<br />
+      <span style="color: blue;">void</span> RestoreISpawner()<br />
+      <span style="color: blue;">void</span> SeqResetTo( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> ShowTagList( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> spawner )<br />
+      <span style="color: blue;">void</span> SmartRemoveSpawnObjects()<br />
+      <span style="color: blue;">void</span> SmartRespawn()<br />
+      <span style="color: blue;">void</span> SortSpawns()<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">void</span> Spawn( <span style="color: blue;">string</span> SpawnObjectTypeName, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> count, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> count, <span style="color: blue;">bool</span> ignoreloopprotection, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">void</span> Spawn( <span style="color: blue;">string</span> SpawnObjectTypeName, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">bool</span> ignoreloopprotection, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> Spawn( <span style="color: blue;">int</span> index, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">int</span> count, <span style="color: blue;">int</span> packrange, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> packcoord, <span style="color: blue;">bool</span> ignoreloopprotection, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> SpawnSubGroup( <span style="color: blue;">int</span> sgroup, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> SpawnSubGroup( <span style="color: blue;">int</span> sgroup, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">bool</span> SpawnSubGroup( <span style="color: blue;">int</span> sgroup, <span style="color: blue;">bool</span> smartspawn, <span style="color: blue;">bool</span> ignoreloopprotection, <span style="color: blue;">byte</span> loops )<br />
+      <span style="color: blue;">void</span> Start()<br />
+      <span style="color: blue;">void</span> Stop()<br />
+      <span style="color: blue;">int</span> SubGroupCount( <span style="color: blue;">int</span> sgroup )<br />
+      <span style="color: blue;">bool</span> ValidPlayerTrig( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">bool</span> isEmpty()<br />
+   </body>
+</html>

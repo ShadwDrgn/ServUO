@@ -7,7 +7,7 @@ using Server.Accounting;
 using Server.ContextMenus;
 using Server.Items;
 using Server.Network;
-
+using Server.Gumps;
 using Acc = Server.Accounting.Account;
 #endregion
 
@@ -310,6 +310,28 @@ namespace Server.Mobiles
 
 		    base.OnSpeech(e);
 	    }
+
+#region double click banker
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (!from.CheckAlive())
+                return;
+            if (!CheckVendorAccess(from))
+                return;
+
+            if (from.Criminal)
+            {
+                Say(500378); // Thou art a criminal and cannot access thy bank box.
+            }
+            else
+            {
+                from.BankBox.Open();
+
+                if (Core.TOL && from is PlayerMobile)
+                    from.SendGump(new BankerGump((PlayerMobile)from));
+            }
+        }
+#endregion
 
 	    public static void HandleSpeech(Mobile vendor, SpeechEventArgs e)
 	    {

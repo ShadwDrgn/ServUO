@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - PacketWriter</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Network.html">Back to Server.Network</a></h4>
+      <h2>PacketWriter</h2>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="PacketWriter.html">PacketWriter</a> CreateInstance()<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="PacketWriter.html">PacketWriter</a> CreateInstance( <span style="color: blue;">int</span> capacity )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> ReleaseInstance( <!-- DBG-0 --><a href="PacketWriter.html">PacketWriter</a> pw )<br />
+      (<span style="color: blue;">ctor</span>) PacketWriter()<br />
+      (<span style="color: blue;">ctor</span>) PacketWriter( <span style="color: blue;">int</span> capacity )<br />
+      <span style="color: blue;">long</span> Length( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">long</span> Position( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      MemoryStream UnderlyingStream( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> Fill()<br />
+      <span style="color: blue;">void</span> Fill( <span style="color: blue;">int</span> length )<br />
+      <span style="color: blue;">long</span> Seek( <span style="color: blue;">long</span> offset, SeekOrigin origin )<br />
+      <span style="color: blue;">byte</span>[] ToArray()<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">bool</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">byte</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">sbyte</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">short</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">ushort</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">int</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">uint</span> value )<br />
+      <span style="color: blue;">void</span> Write( <span style="color: blue;">byte</span>[] buffer, <span style="color: blue;">int</span> offset, <span style="color: blue;">int</span> size )<br />
+      <span style="color: blue;">void</span> WriteAsciiFixed( <span style="color: blue;">string</span> value, <span style="color: blue;">int</span> size )<br />
+      <span style="color: blue;">void</span> WriteAsciiNull( <span style="color: blue;">string</span> value )<br />
+      <span style="color: blue;">void</span> WriteBigUniFixed( <span style="color: blue;">string</span> value, <span style="color: blue;">int</span> size )<br />
+      <span style="color: blue;">void</span> WriteBigUniNull( <span style="color: blue;">string</span> value )<br />
+      <span style="color: blue;">void</span> WriteLittleUniFixed( <span style="color: blue;">string</span> value, <span style="color: blue;">int</span> size )<br />
+      <span style="color: blue;">void</span> WriteLittleUniNull( <span style="color: blue;">string</span> value )<br />
+   </body>
+</html>

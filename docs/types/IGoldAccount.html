@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - IGoldAccount</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Accounting.html">Back to Server.Accounting</a></h4>
+      <h2>IGoldAccount</h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="Account.html">Account</a>, <!-- DBG-3 --><a href="IAccount.html">IAccount</a></h4>
+      <span style="color: blue;">double</span> TotalCurrency( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TotalGold( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> TotalPlat( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositCurrency( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositGold( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositGold( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositPlat( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> DepositPlat( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold, <span style="color: blue;">out</span> <span style="color: blue;">int</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold, <span style="color: blue;">out</span> <span style="color: blue;">long</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetGoldBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetGoldBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> gold, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalGold )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetPlatBalance( <span style="color: blue;">out</span> <span style="color: blue;">int</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetPlatBalance( <span style="color: blue;">out</span> <span style="color: blue;">long</span> plat, <span style="color: blue;">out</span> <span style="color: blue;">double</span> totalPlat )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HasGoldBalance( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HasPlatBalance( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawCurrency( <span style="color: blue;">double</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawGold( <span style="color: blue;">long</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawGold( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawPlat( <span style="color: blue;">int</span> amount )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> WithdrawPlat( <span style="color: blue;">long</span> amount )<br />
+   </body>
+</html>

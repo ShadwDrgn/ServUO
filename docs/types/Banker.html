@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - Banker</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>Banker : <!-- DBG-1 --><a href="BaseVendor.html">BaseVendor</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IVendor.html">IVendor</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="CasinoCashier.html">CasinoCashier</a>, <!-- DBG-3 --><a href="GypsyBanker.html">GypsyBanker</a>, <!-- DBG-3 --><a href="Minter.html">Minter</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <GetBalance>m__0( <span style="color: blue;">double</span> c, <!-- DBG-0 --><a href="Gold.html">Gold</a> t )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <GetBalance>m__1( <span style="color: blue;">double</span> c, <!-- DBG-0 --><a href="BankCheck.html">BankCheck</a> t )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <GetBalance>m__2( <span style="color: blue;">double</span> c, <!-- DBG-0 --><a href="Gold.html">Gold</a> t )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <GetBalance>m__3( <span style="color: blue;">double</span> c, <!-- DBG-0 --><a href="BankCheck.html">BankCheck</a> t )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Deposit( <!-- DBG-0 --><a href="Container.html">Container</a> cont, <span style="color: blue;">int</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Deposit( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> DepositUpTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetBalance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">int</span> GetBalance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <span style="color: blue;">out</span> <!-- DBG-0 --><a href="Item.html">Item</a>[] gold, <span style="color: blue;">out</span> <!-- DBG-0 --><a href="Item.html">Item</a>[] checks )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> HandleSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> vendor, <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Withdraw( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> amount, <span style="color: blue;">bool</span> message )<br />
+      (<span style="color: blue;">ctor</span>) Banker()<br />
+      (<span style="color: blue;">ctor</span>) Banker( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <!-- DBG-0 --><a href="NpcGuild.html">NpcGuild</a> NpcGuild( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SBInfo.html">SBInfo</a>&gt; SBInfos( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCustomContextEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HandlesOnSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitSBInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+   </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - KotlBattleSimulator</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.TreasuresOfKotlCity.html">Back to Server.Engines.TreasuresOfKotlCity</a></h4>
+      <h2>KotlBattleSimulator : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="ISpawner.html">ISpawner</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-Serialize-c__AnonStorey0.html">(Anonymous-Type)-Serialize-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="KotlBattleSimulator.html">KotlBattleSimulator</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) TimeSpan NextSpawnDuration( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> <EndSimulation>m__0( <!-- DBG-0 --><a href="PowerCoreDockingStation.html">PowerCoreDockingStation</a> station )<br />
+      (<span style="color: blue;">ctor</span>) KotlBattleSimulator()<br />
+      (<span style="color: blue;">ctor</span>) KotlBattleSimulator( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <span style="color: blue;">bool</span> Active( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> HomeLocation( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> HomeRange( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Kills( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> KillsPerWave( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> Level( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="ISpawnable.html">ISpawnable</a>&gt; Spawn( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">int</span> SpawnCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> SpawnPerWave( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Timer.html">Timer</a> Timer( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> UnlinkOnTaming( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <Deserialize>m__1()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoSpawn()<br />
+      <span style="color: blue;">void</span> EndSimulation()<br />
+      <span style="color: blue;">void</span> EndTimer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetSpawnContextEntries( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> user, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetSpawnProperties( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn, <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">void</span> IncreaseLevel()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Remove( <!-- DBG-0 --><a href="ISpawnable.html">ISpawnable</a> spawn )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> StartSpawn()<br />
+      <span style="color: blue;">void</span> StartTimer()<br />
+   </body>
+</html>

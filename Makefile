@@ -3,7 +3,7 @@ EXENAME=ServUO
 CURPATH=`pwd`
 SRVPATH=${CURPATH}/Server
 SDKPATH=${CURPATH}/Ultima
-REFS=System.Drawing.dll
+REFS=System.Drawing.dll,System.Net.Http.dll
 NOWARNS=0618,0219,0414,1635
 
 PHONY : default build clean run

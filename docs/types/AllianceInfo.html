@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - AllianceInfo</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Guilds.html">Back to Server.Guilds</a></h4>
+      <h2>AllianceInfo</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="AllianceRosterGump.html">AllianceRosterGump</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">Dictionary</span>&lt;<a href="String.html">String</a>,<a href="AllianceInfo.html">AllianceInfo</a>&gt; Alliances( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">ctor</span>) AllianceInfo( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      (<span style="color: blue;">ctor</span>) AllianceInfo( <!-- DBG-0 --><a href="Guild.html">Guild</a> leader, <span style="color: blue;">string</span> name, <!-- DBG-0 --><a href="Guild.html">Guild</a> partner )<br />
+      <!-- DBG-0 --><a href="Guild.html">Guild</a> Leader( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="Guild.html">Guild</a>&gt; Members( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Name( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> AddPendingGuild( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+      <span style="color: blue;">void</span> AllianceChat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> AllianceChat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number, <span style="color: blue;">string</span> args )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number, <span style="color: blue;">string</span> args, <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number, <span style="color: blue;">bool</span> append, <span style="color: blue;">string</span> affix )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number, <span style="color: blue;">bool</span> append, <span style="color: blue;">string</span> affix, <span style="color: blue;">string</span> args )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> num, <span style="color: blue;">bool</span> append, <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+      <span style="color: blue;">void</span> AllianceMessage( <span style="color: blue;">int</span> number, <span style="color: blue;">bool</span> append, <span style="color: blue;">string</span> affix, <span style="color: blue;">string</span> args, <span style="color: blue;">int</span> hue )<br />
+      <span style="color: blue;">void</span> AllianceTextMessage( <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> AllianceTextMessage( <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+      <span style="color: blue;">void</span> AllianceTextMessage( <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> text )<br />
+      <span style="color: blue;">void</span> AllianceTextMessage( <span style="color: blue;">int</span> hue, <span style="color: blue;">string</span> format, <span style="color: blue;">object</span>[] args )<br />
+      <span style="color: blue;">void</span> CalculateAllianceLeader()<br />
+      <span style="color: blue;">void</span> CheckLeader()<br />
+      <span style="color: blue;">void</span> Disband()<br />
+      <span style="color: blue;">void</span> InvalidateMemberNotoriety()<br />
+      <span style="color: blue;">void</span> InvalidateMemberProperties()<br />
+      <span style="color: blue;">void</span> InvalidateMemberProperties( <span style="color: blue;">bool</span> onlyOPL )<br />
+      <span style="color: blue;">bool</span> IsMember( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+      <span style="color: blue;">bool</span> IsPendingMember( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+      <span style="color: blue;">void</span> RemoveGuild( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+      <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> TurnToMember( <!-- DBG-0 --><a href="Guild.html">Guild</a> g )<br />
+   </body>
+</html>

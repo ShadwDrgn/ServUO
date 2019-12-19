@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseFactionGuard</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Factions.html">Back to Server.Factions</a></h4>
+      <h2>BaseFactionGuard : <!-- DBG-1 --><a href="BaseCreature.html">BaseCreature</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="FactionBerserker.html">FactionBerserker</a>, <!-- DBG-3 --><a href="FactionDeathKnight.html">FactionDeathKnight</a>, <!-- DBG-3 --><a href="FactionDragoon.html">FactionDragoon</a>, <!-- DBG-3 --><a href="FactionHenchman.html">FactionHenchman</a>, <!-- DBG-3 --><a href="FactionKnight.html">FactionKnight</a>, <!-- DBG-3 --><a href="FactionMercenary.html">FactionMercenary</a>, <!-- DBG-3 --><a href="FactionNecromancer.html">FactionNecromancer</a>, <!-- DBG-3 --><a href="FactionPaladin.html">FactionPaladin</a>, <!-- DBG-3 --><a href="FactionSorceress.html">FactionSorceress</a>, <!-- DBG-3 --><a href="FactionWizard.html">FactionWizard</a></h4>
+      (<span style="color: blue;">ctor</span>) BaseFactionGuard( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseFactionGuard( <span style="color: blue;">string</span> title )<br />
+      <span style="color: blue;">bool</span> BardImmune( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ClickTitle( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Faction.html">Faction</a> Faction( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="BaseAI.html">BaseAI</a> ForcedAI( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="GuardAI.html">GuardAI</a> GuardAI( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Orders.html">Orders</a> Orders( <span style="color: blue;">get</span>; )<br />
+      TimeSpan ReacquireDelay( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Town.html">Town</a> Town( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> ChangeReaction( <!-- DBG-0 --><a href="Faction.html">Faction</a> faction, <!-- DBG-0 --><a href="ReactionType.html">ReactionType</a> type )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GenerateBody( <span style="color: blue;">bool</span> isFemale, <span style="color: blue;">bool</span> randomHair )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GenerateRandomHair()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> GetProperties( <!-- DBG-0 --><a href="ObjectPropertyList.html">ObjectPropertyList</a> list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> HandlesOnSpeech( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Immovable( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsEnemy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Layered( <!-- DBG-0 --><a href="Item.html">Item</a> item, <!-- DBG-0 --><a href="Layer.html">Layer</a> layer )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Newbied( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDeath( <!-- DBG-0 --><a href="Container.html">Container</a> c )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMovement( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="Point3D.html">Point3D</a> oldLocation )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSingleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSpeech( <!-- DBG-0 --><a href="SpeechEventArgs.html">SpeechEventArgs</a> e )<br />
+      <span style="color: blue;">void</span> PackStrongPotion()<br />
+      <span style="color: blue;">void</span> PackStrongPotions( <span style="color: blue;">int</span> count )<br />
+      <span style="color: blue;">void</span> PackStrongPotions( <span style="color: blue;">int</span> min, <span style="color: blue;">int</span> max )<br />
+      <span style="color: blue;">void</span> PackWeakPotion()<br />
+      <span style="color: blue;">void</span> PackWeakPotions( <span style="color: blue;">int</span> count )<br />
+      <span style="color: blue;">void</span> PackWeakPotions( <span style="color: blue;">int</span> min, <span style="color: blue;">int</span> max )<br />
+      <span style="color: blue;">void</span> Register()<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Rehued( <!-- DBG-0 --><a href="Item.html">Item</a> item, <span style="color: blue;">int</span> hue )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Resourced( <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor, <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> resource )<br />
+      <!-- DBG-0 --><a href="Item.html">Item</a> Resourced( <!-- DBG-0 --><a href="BaseWeapon.html">BaseWeapon</a> weapon, <!-- DBG-0 --><a href="CraftResource.html">CraftResource</a> resource )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> Unregister()<br />
+      <span style="color: blue;">bool</span> WasNamed( <span style="color: blue;">string</span> speech )<br />
+   </body>
+</html>

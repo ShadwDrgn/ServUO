@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - DespiseController</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Engines.Despise.html">Back to Server.Engines.Despise</a></h4>
+      <h2>DespiseController : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-OnEnterRegion-c__AnonStorey0.html">(Anonymous-Type)-OnEnterRegion-c__AnonStorey0</a></h4>
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] EvilBounds( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] GoodBounds( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="DespiseController.html">DespiseController</a> Instance( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a>[] LowerLevelBounds( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckSpawnersVersion3>m__2( <!-- DBG-0 --><a href="XmlSpawner.html">XmlSpawner</a> s )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <CheckSpawnersVersion3>m__3( <!-- DBG-0 --><a href="Item.html">Item</a> i )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> <SendRegionMessage>m__1( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      (<span style="color: blue;">static</span>) <!-- DBG-0 --><a href="WispOrb.html">WispOrb</a> GetWispOrb( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnEnterRegion( <!-- DBG-0 --><a href="OnEnterRegionEventArgs.html">OnEnterRegionEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> OnLogin( <!-- DBG-0 --><a href="LoginEventArgs.html">LoginEventArgs</a> e )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> RemoveAnkh()<br />
+      (<span style="color: blue;">ctor</span>) DespiseController()<br />
+      (<span style="color: blue;">ctor</span>) DespiseController( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      <!-- DBG-0 --><a href="DespiseBoss.html">DespiseBoss</a> Boss( <span style="color: blue;">get</span>; )<br />
+      DateTime DeadLine( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Enabled( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="DespiseCreature.html">DespiseCreature</a>&gt; EvilArmy( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> EvilRegion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> EvilSpawnerCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="DespiseCreature.html">DespiseCreature</a>&gt; GoodArmy( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> GoodRegion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> GoodSpawnerCount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsInSequence( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> LowerRegion( <span style="color: blue;">get</span>; )<br />
+      DateTime NextBossEncounter( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">bool</span> ResetSpawns( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Alignment.html">Alignment</a> SequenceAlignment( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> Sequencing( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Region.html">Region</a> StartRegion( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">void</span> <EndSequence>m__0()<br />
+      <span style="color: blue;">void</span> BeginCleanupTimer()<br />
+      <span style="color: blue;">void</span> BeginSequence()<br />
+      <span style="color: blue;">void</span> BeginSequenceTimer()<br />
+      <span style="color: blue;">void</span> BeginTimer()<br />
+      <span style="color: blue;">void</span> CheckSpawnersVersion3()<br />
+      <span style="color: blue;">void</span> CheckSpawnersVersion3( <!-- DBG-0 --><a href="CommandEventArgs.html">CommandEventArgs</a> e )<br />
+      <span style="color: blue;">void</span> CreateSpawners()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> EndCleanupTimer()<br />
+      <span style="color: blue;">void</span> EndSequence()<br />
+      <span style="color: blue;">void</span> EndSequenceTimer()<br />
+      <span style="color: blue;">void</span> EndTimer()<br />
+      <span style="color: blue;">int</span> GetArmyPower( <!-- DBG-0 --><a href="Alignment.html">Alignment</a> alignment )<br />
+      <!-- DBG-0 --><a href="Point3D.html">Point3D</a> GetRandomLoc( <!-- DBG-0 --><a href="Rectangle2D.html">Rectangle2D</a> rec )<br />
+      <span style="color: blue;">bool</span> HasPlayers( <!-- DBG-0 --><a href="Region.html">Region</a> r )<br />
+      <span style="color: blue;">void</span> KickFromBossRegion( <span style="color: blue;">bool</span> deletepet )<br />
+      <span style="color: blue;">void</span> OnBossSlain()<br />
+      <span style="color: blue;">void</span> OnSequenceTick()<br />
+      <span style="color: blue;">void</span> OnTick()<br />
+      <span style="color: blue;">void</span> ResetSpawners( <span style="color: blue;">bool</span> reset )<br />
+      <span style="color: blue;">void</span> SendReadyMessage_Callback( <span style="color: blue;">object</span> o )<br />
+      <span style="color: blue;">void</span> SendRegionMessage( <!-- DBG-0 --><a href="DespiseRegion.html">DespiseRegion</a> region, <span style="color: blue;">int</span> cliloc )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> TransportPlayers()<br />
+      <span style="color: blue;">void</span> TryAddToArmy( <!-- DBG-0 --><a href="WispOrb.html">WispOrb</a> orb )<br />
+   </body>
+</html>

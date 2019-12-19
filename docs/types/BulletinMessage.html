@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BulletinMessage</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Items.html">Back to Server.Items</a></h4>
+      <h2>BulletinMessage : <!-- DBG-1 --><a href="Item.html">Item</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Item.html">Item</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a></h2>
+      (<span style="color: blue;">ctor</span>) BulletinMessage( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BulletinMessage( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> poster, <!-- DBG-0 --><a href="BulletinMessage.html">BulletinMessage</a> thread, <span style="color: blue;">string</span> subject, <span style="color: blue;">string</span>[] lines )<br />
+      DateTime LastPostTime( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">string</span>[] Lines( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> PostedBody( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BulletinEquip.html">BulletinEquip</a>[] PostedEquip( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> PostedHue( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> PostedName( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="Mobile.html">Mobile</a> Poster( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">string</span> Subject( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="BulletinMessage.html">BulletinMessage</a> Thread( <span style="color: blue;">get</span>; )<br />
+      DateTime Time( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Target.html">Target</a> targ, <span style="color: blue;">object</span> targeted )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">string</span> GetTimeAsString()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsAccessibleTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> check )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">void</span> Validate()<br />
+   </body>
+</html>

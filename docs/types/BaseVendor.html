@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - BaseVendor</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Mobiles.html">Back to Server.Mobiles</a></h4>
+      <h2>BaseVendor : <!-- DBG-1 --><a href="BaseCreature.html">BaseCreature</a>, <!-- DBG-2.2 --><a href="ISpawnable.html">ISpawnable</a>, <!-- DBG-2.2 --><a href="IDamageable.html">IDamageable</a>, <!-- DBG-2.2 --><a href="IHonorTarget.html">IHonorTarget</a>, <!-- DBG-2.2 --><a href="IVendor.html">IVendor</a>, <!-- DBG-2.2 --><a href="IPoint2D.html">IPoint2D</a>, <!-- DBG-2.2 --><a href="IPoint3D.html">IPoint3D</a>, <!-- DBG-2.1 --><a href="IComparable.html">IComparable</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="Mobile.html">Mobile</a>&gt;, <!-- DBG-2.2 --><a href="IHued.html">IHued</a>, <!-- DBG-2.1 --><a href="IComparable-T-.html">IComparable</a>&lt;<a href="IEntity.html">IEntity</a>&gt;, <!-- DBG-2.2 --><a href="IEntity.html">IEntity</a>, <!-- DBG-2.2 --><a href="ISerializable.html">ISerializable</a>, <!-- DBG-2.2 --><a href="IEngravable.html">IEngravable</a></h2>
+<h4>Derived Types: <!-- DBG-3 --><a href="ArmorRefiner.html">ArmorRefiner</a>, <!-- DBG-3 --><a href="BaseCollectionMobile.html">BaseCollectionMobile</a>, <!-- DBG-3 --><a href="BaseFactionVendor.html">BaseFactionVendor</a>, <!-- DBG-3 --><a href="BaseQuester.html">BaseQuester</a>, <!-- DBG-3 --><a href="Beekeeper.html">Beekeeper</a>, <!-- DBG-3 --><a href="Blacksmith.html">Blacksmith</a>, <!-- DBG-3 --><a href="BoatPainter.html">BoatPainter</a>, <!-- DBG-3 --><a href="Bolaevin.html">Bolaevin</a>, <!-- DBG-3 --><a href="Bowyer.html">Bowyer</a>, <!-- DBG-3 --><a href="Butcher.html">Butcher</a>, <!-- DBG-3 --><a href="CaddelliteVendor.html">CaddelliteVendor</a>, <!-- DBG-3 --><a href="Carpenter.html">Carpenter</a>, <!-- DBG-3 --><a href="CasinoDealer.html">CasinoDealer</a>, <!-- DBG-3 --><a href="CasinoWaitress.html">CasinoWaitress</a>, <!-- DBG-3 --><a href="Cobbler.html">Cobbler</a>, <!-- DBG-3 --><a href="CollectorOfOddities.html">CollectorOfOddities</a>, <!-- DBG-3 --><a href="Cook.html">Cook</a>, <!-- DBG-3 --><a href="CrabFisher.html">CrabFisher</a>, <!-- DBG-3 --><a href="Cryptologist.html">Cryptologist</a>, <!-- DBG-3 --><a href="CustomHairstylist.html">CustomHairstylist</a>, <!-- DBG-3 --><a href="Daelas.html">Daelas</a>, <!-- DBG-3 --><a href="DockMaster.html">DockMaster</a>, <!-- DBG-3 --><a href="DocksAlchemist.html">DocksAlchemist</a>, <!-- DBG-3 --><a href="Elizabeth.html">Elizabeth</a>, <!-- DBG-3 --><a href="Farmer.html">Farmer</a>, <!-- DBG-3 --><a href="Fisherman.html">Fisherman</a>, <!-- DBG-3 --><a href="Furtrader.html">Furtrader</a>, <!-- DBG-3 --><a href="GBBigglesby.html">GBBigglesby</a>, <!-- DBG-3 --><a href="Glassblower.html">Glassblower</a>, <!-- DBG-3 --><a href="GolemCrafter.html">GolemCrafter</a>, <!-- DBG-3 --><a href="GrandpaCharley.html">GrandpaCharley</a>, <!-- DBG-3 --><a href="GraveDigger.html">GraveDigger</a>, <!-- DBG-3 --><a href="GypsyMaiden.html">GypsyMaiden</a>, <!-- DBG-3 --><a href="HairStylist.html">HairStylist</a>, <!-- DBG-3 --><a href="HeplerPaulson.html">HeplerPaulson</a>, <!-- DBG-3 --><a href="Herbalist.html">Herbalist</a>, <!-- DBG-3 --><a href="HeritageQuester.html">HeritageQuester</a>, <!-- DBG-3 --><a href="HolyMage.html">HolyMage</a>, <!-- DBG-3 --><a href="HumilityQuestMobile.html">HumilityQuestMobile</a>, <!-- DBG-3 --><a href="HuntMaster.html">HuntMaster</a>, <!-- DBG-3 --><a href="IharaSoko.html">IharaSoko</a>, <!-- DBG-3 --><a href="InnKeeper.html">InnKeeper</a>, <!-- DBG-3 --><a href="IronWorker.html">IronWorker</a>, <!-- DBG-3 --><a href="Jeweler.html">Jeweler</a>, <!-- DBG-3 --><a href="Jothan.html">Jothan</a>, <!-- DBG-3 --><a href="KeeperOfChivalry.html">KeeperOfChivalry</a>, <!-- DBG-3 --><a href="KhaldunCampGuard.html">KhaldunCampGuard</a>, <!-- DBG-3 --><a href="LeadInvestigator.html">LeadInvestigator</a>, <!-- DBG-3 --><a href="LeatherWorker.html">LeatherWorker</a>, <!-- DBG-3 --><a href="Mage.html">Mage</a>, <!-- DBG-3 --><a href="Mallew.html">Mallew</a>, <!-- DBG-3 --><a href="Mapmaker.html">Mapmaker</a>, <!-- DBG-3 --><a href="Miller.html">Miller</a>, <!-- DBG-3 --><a href="Miner.html">Miner</a>, <!-- DBG-3 --><a href="MondainQuester.html">MondainQuester</a>, <!-- DBG-3 --><a href="Monk.html">Monk</a>, <!-- DBG-3 --><a href="Mystic.html">Mystic</a>, <!-- DBG-3 --><a href="Necromancer.html">Necromancer</a>, <!-- DBG-3 --><a href="Nythalia.html">Nythalia</a>, <!-- DBG-3 --><a href="Olaeni.html">Olaeni</a>, <!-- DBG-3 --><a href="Owain.html">Owain</a>, <!-- DBG-3 --><a href="PlayerBarkeeper.html">PlayerBarkeeper</a>, <!-- DBG-3 --><a href="Provisioner.html">Provisioner</a>, <!-- DBG-3 --><a href="Rancher.html">Rancher</a>, <!-- DBG-3 --><a href="Ranger.html">Ranger</a>, <!-- DBG-3 --><a href="RealEstateBroker.html">RealEstateBroker</a>, <!-- DBG-3 --><a href="Rebinil.html">Rebinil</a>, <!-- DBG-3 --><a href="SATinker.html">SATinker</a>, <!-- DBG-3 --><a href="SageHumbolt.html">SageHumbolt</a>, <!-- DBG-3 --><a href="Scribe.html">Scribe</a>, <!-- DBG-3 --><a href="SeaMarketTavernKeeper.html">SeaMarketTavernKeeper</a>, <!-- DBG-3 --><a href="Shipwright.html">Shipwright</a>, <!-- DBG-3 --><a href="SilverTrader.html">SilverTrader</a>, <!-- DBG-3 --><a href="StoneCrafter.html">StoneCrafter</a>, <!-- DBG-3 --><a href="Taellia.html">Taellia</a>, <!-- DBG-3 --><a href="Tailor.html">Tailor</a>, <!-- DBG-3 --><a href="Tanner.html">Tanner</a>, <!-- DBG-3 --><a href="TavernKeeper.html">TavernKeeper</a>, <!-- DBG-3 --><a href="TheCleanupOfficer.html">TheCleanupOfficer</a>, <!-- DBG-3 --><a href="Thief.html">Thief</a>, <!-- DBG-3 --><a href="Tinker.html">Tinker</a>, <!-- DBG-3 --><a href="Tyleelor.html">Tyleelor</a>, <!-- DBG-3 --><a href="Vagabond.html">Vagabond</a>, <!-- DBG-3 --><a href="VarietyDealer.html">VarietyDealer</a>, <!-- DBG-3 --><a href="Veterinarian.html">Veterinarian</a>, <!-- DBG-3 --><a href="Vicaie.html">Vicaie</a>, <!-- DBG-3 --><a href="Vrulkax.html">Vrulkax</a>, <!-- DBG-3 --><a href="VvVPriest.html">VvVPriest</a>, <!-- DBG-3 --><a href="Waiter.html">Waiter</a>, <!-- DBG-3 --><a href="Weaponsmith.html">Weaponsmith</a>, <!-- DBG-3 --><a href="Weaver.html">Weaver</a>, <!-- DBG-3 --><a href="Willebrord.html">Willebrord</a>, <!-- DBG-3 --><a href="Yellienir.html">Yellienir</a></h4>
+<h4>Nested Types: <!-- DBG-4 --><a href="(Anonymous-Type)-CheckConvertArmor-c__AnonStorey2.html">(Anonymous-Type)-CheckConvertArmor-c__AnonStorey2</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-FindGold-c__Iterator0.html">(Anonymous-Type)-FindGold-c__Iterator0</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-GetConvert-c__AnonStorey3.html">(Anonymous-Type)-GetConvert-c__AnonStorey3</a>, <!-- DBG-4 --><a href="(Anonymous-Type)-TryBribe-c__AnonStorey1.html">(Anonymous-Type)-TryBribe-c__AnonStorey1</a>, <!-- DBG-4 --><a href="BribeEntry.html">BribeEntry</a>, <!-- DBG-4 --><a href="BulkOrderInfoEntry.html">BulkOrderInfoEntry</a>, <!-- DBG-4 --><a href="ClaimRewardsEntry.html">ClaimRewardsEntry</a>, <!-- DBG-4 --><a href="PendingConvert.html">PendingConvert</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">List</span>&lt;<a href="BaseVendor.html">BaseVendor</a>&gt; AllVendors( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> <ConsumeGold>m__0( <span style="color: blue;">double</span> c, <!-- DBG-0 --><a href="Gold.html">Gold</a> g )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ConsumeGold( <!-- DBG-0 --><a href="Container.html">Container</a> cont, <span style="color: blue;">double</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> ConsumeGold( <!-- DBG-0 --><a href="Container.html">Container</a> cont, <span style="color: blue;">double</span> amount, <span style="color: blue;">bool</span> recurse )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">IEnumerable</span>&lt;<a href="Gold.html">Gold</a>&gt; FindGold( <!-- DBG-0 --><a href="Container.html">Container</a> cont, <span style="color: blue;">bool</span> recurse )<br />
+      (<span style="color: blue;">ctor</span>) BaseVendor( <!-- DBG-0 --><a href="Serial.html">Serial</a> serial )<br />
+      (<span style="color: blue;">ctor</span>) BaseVendor( <span style="color: blue;">string</span> title )<br />
+      <!-- DBG-0 --><a href="BODType.html">BODType</a> BODType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> BardImmune( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> BribeMultiplier( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">Dictionary</span>&lt;<a href="Mobile.html">Mobile</a>,<a href="PendingBribe.html">PendingBribe</a>&gt; Bribes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="Container.html">Container</a> BuyPack( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> CanTeach( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ChangeRace( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ConvertsMageArmor( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ForceRestock( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">double</span> GetMoveDelay( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> HasHonestyDiscount( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsActiveBuyer( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsActiveSeller( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsActiveVendor( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsInvulnerable( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsStygianVendor( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> IsTokunoVendor( <span style="color: blue;">get</span>; )<br />
+      DateTime LastRestock( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextMultiplierDecay( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      DateTime NextTrickOrTreat( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <!-- DBG-0 --><a href="NpcGuild.html">NpcGuild</a> NpcGuild( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> PlayerRangeSensitive( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">int</span> RecentBribes( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      TimeSpan RestockDelay( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">List</span>&lt;<a href="SBInfo.html">SBInfo</a>&gt; SBInfos( <span style="color: blue;">get</span>; )<br />
+      <!-- DBG-0 --><a href="VendorShoeType.html">VendorShoeType</a> ShoeType( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> ShowFameTitle( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> UnderWatch( <span style="color: blue;">get</span>; )<br />
+      <span style="color: blue;">bool</span> UseSmartAI( <span style="color: blue;">get</span>; )<br />
+      DateTime WatchEnds( <span style="color: blue;">get</span>; <span style="color: blue;">set</span>; )<br />
+      <span style="color: blue;">void</span> <Serialize>m__1()<br />
+      <span style="color: blue;">bool</span> AcceptsGift( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> AddCustomContextEntries( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">List</span>&lt;<a href="ContextMenuEntry.html">ContextMenuEntry</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CanConvertArmor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> CapitalizeTitle()<br />
+      <span style="color: blue;">bool</span> CheckConvertArmor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckGargoyle()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> CheckMorph()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckNecromancer()<br />
+      <span style="color: blue;">void</span> CheckNextMultiplierDecay( <span style="color: blue;">bool</span> force )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckTerMur()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckTokuno()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> CheckVendorAccess( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> ConvertMageArmor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="Item.html">Item</a> CreateBulkOrder( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <span style="color: blue;">bool</span> fromContextMenu )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Deserialize( <!-- DBG-0 --><a href="GenericReader.html">GenericReader</a> reader )<br />
+      <span style="color: blue;">void</span> DoBribe( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m, <!-- DBG-0 --><a href="IBOD.html">IBOD</a> bod )<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="IBuyItemInfo.html">IBuyItemInfo</a>[] GetBuyInfo()<br />
+      <!-- DBG-0 --><a href="PendingConvert.html">PendingConvert</a> GetConvert( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> GetGender()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetHairHue()<br />
+      <span style="color: blue;">virtual</span> TimeSpan GetNextBulkOrder( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetPriceScalar()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetRandomHue()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetRandomNecromancerHue()<br />
+      <span style="color: blue;">virtual</span> <!-- DBG-0 --><a href="IShopSellInfo.html">IShopSellInfo</a>[] GetSellInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">int</span> GetShoeHue()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitBody()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitGargOutfit()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitOutfit()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> InitSBInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> IsValidBulkOrder( <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">void</span> LoadSBInfo()<br />
+      <!-- DBG-0 --><a href="GenericBuyInfo.html">GenericBuyInfo</a> LookupDisplayObject( <span style="color: blue;">object</span> obj )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnAfterSpawn()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnBuyItems( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> buyer, <span style="color: blue;">List</span>&lt;<a href="BuyItemResponse.html">BuyItemResponse</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDelete()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnDoubleClick( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnDragDrop( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Item.html">Item</a> dropped )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnMapChange( <!-- DBG-0 --><a href="Map.html">Map</a> oldMap )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> OnSellItems( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> seller, <span style="color: blue;">List</span>&lt;<a href="SellItemResponse.html">SellItemResponse</a>&gt; list )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> OnSuccessfulBulkOrderReceive( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> ProcessSinglePurchase( <!-- DBG-0 --><a href="BuyItemResponse.html">BuyItemResponse</a> buy, <!-- DBG-0 --><a href="IBuyItemInfo.html">IBuyItemInfo</a> bii, <span style="color: blue;">List</span>&lt;<a href="BuyItemResponse.html">BuyItemResponse</a>&gt; validBuy, <span style="color: blue;">ref</span> <span style="color: blue;">int</span> controlSlots, <span style="color: blue;">ref</span> <span style="color: blue;">bool</span> fullPurchase, <span style="color: blue;">ref</span> <span style="color: blue;">double</span> cost )<br />
+      <span style="color: blue;">void</span> ProcessValidPurchase( <span style="color: blue;">int</span> amount, <!-- DBG-0 --><a href="IBuyItemInfo.html">IBuyItemInfo</a> bii, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> buyer, <!-- DBG-0 --><a href="Container.html">Container</a> cont )<br />
+      <span style="color: blue;">void</span> RemoveConvertEntry( <!-- DBG-0 --><a href="PendingConvert.html">PendingConvert</a> convert )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Restock()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> SendPacksTo( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> Serialize( <!-- DBG-0 --><a href="GenericWriter.html">GenericWriter</a> writer )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> SupportsBulkOrders( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">void</span> TryBribe( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">void</span> TryConvertArmor( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="BaseArmor.html">BaseArmor</a> armor )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> TurnToGargRace()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> TurnToGargoyle()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> TurnToNecromancer()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> TurnToTokuno()<br />
+      <span style="color: blue;">void</span> UpdateBuyInfo()<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateBought( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> buyer, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> m )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">bool</span> ValidateBought( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> buyer, <!-- DBG-0 --><a href="Item.html">Item</a> item )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> VendorBuy( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      <span style="color: blue;">virtual</span> <span style="color: blue;">void</span> VendorSell( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+   </body>
+</html>

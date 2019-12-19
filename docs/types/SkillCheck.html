@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>RunUO Documentation - Class Overview - SkillCheck</title>
+      <style type="text/css">
+      body { background-color: white; font-family: Tahoma; color: #000000; }
+      a, a:visited { color: #000000; }
+      a:active, a:hover { color: #808080; }
+      </style>
+   </head>
+   <body>
+      <h4><a href="../namespaces/Server.Misc.html">Back to Server.Misc</a></h4>
+      <h2>SkillCheck</h2>
+<h4>Nested Types: <!-- DBG-4 --><a href="Stat.html">Stat</a></h4>
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> GGSActive( <span style="color: blue;">get</span>; )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> AllowGain( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill, <span style="color: blue;">object</span> obj )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanLower( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Stat.html">Stat</a> stat )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CanRaise( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Stat.html">Stat</a> stat, <span style="color: blue;">bool</span> atTotalCap )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckGGS( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> CheckReduceSkill( <!-- DBG-0 --><a href="Skills.html">Skills</a> skills, <span style="color: blue;">int</span> toGain, <!-- DBG-0 --><a href="Skill.html">Skill</a> gainSKill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill, <span style="color: blue;">object</span> obj, <span style="color: blue;">double</span> chance )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckSkill( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> sk, <span style="color: blue;">double</span> minSkill, <span style="color: blue;">double</span> maxSkill, <span style="color: blue;">int</span> amount )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> CheckStatTimer( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Stat.html">Stat</a> stat )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Gain( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Gain( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill, <span style="color: blue;">int</span> toGain )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> GainStat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Stat.html">Stat</a> stat )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">double</span> GetGainChance( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill, <span style="color: blue;">double</span> chance, <span style="color: blue;">bool</span> success )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> IncreaseStat( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Stat.html">Stat</a> stat )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> Initialize()<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Mobile_SkillCheckDirectLocation( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillName, <span style="color: blue;">double</span> chance )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Mobile_SkillCheckDirectTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillName, <span style="color: blue;">object</span> target, <span style="color: blue;">double</span> chance )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Mobile_SkillCheckLocation( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillName, <span style="color: blue;">double</span> minSkill, <span style="color: blue;">double</span> maxSkill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">bool</span> Mobile_SkillCheckTarget( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="SkillName.html">SkillName</a> skillName, <span style="color: blue;">object</span> target, <span style="color: blue;">double</span> minSkill, <span style="color: blue;">double</span> maxSkill )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> TryStatGain( <!-- DBG-0 --><a href="SkillInfo.html">SkillInfo</a> info, <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from )<br />
+      (<span style="color: blue;">static</span>) <span style="color: blue;">void</span> UpdateGGS( <!-- DBG-0 --><a href="Mobile.html">Mobile</a> from, <!-- DBG-0 --><a href="Skill.html">Skill</a> skill )<br />
+      (<span style="color: blue;">ctor</span>) SkillCheck()<br />
+   </body>
+</html>
