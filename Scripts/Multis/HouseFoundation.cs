@@ -803,6 +803,7 @@ namespace Server.Multis
 
         public static void Initialize()
         {
+            EventSink.MultiDesign += QueryDesignDetails;
             PacketHandlers.RegisterExtended(0x1E, true, new OnPacketReceive(QueryDesignDetails));
 
             PacketHandlers.RegisterEncoded(0x02, true, new OnEncodedPacketReceive(Designer_Backup));
@@ -810,6 +811,7 @@ namespace Server.Multis
             PacketHandlers.RegisterEncoded(0x04, true, new OnEncodedPacketReceive(Designer_Commit));
             PacketHandlers.RegisterEncoded(0x05, true, new OnEncodedPacketReceive(Designer_Delete));
             PacketHandlers.RegisterEncoded(0x06, true, new OnEncodedPacketReceive(Designer_Build));
+            PacketHandlers.RegisterEncoded(0x0A, true, new OnEncodedPacketReceive(Designer_Action)); // WTF does this do?
             PacketHandlers.RegisterEncoded(0x0C, true, new OnEncodedPacketReceive(Designer_Close));
             PacketHandlers.RegisterEncoded(0x0D, true, new OnEncodedPacketReceive(Designer_Stairs));
             PacketHandlers.RegisterEncoded(0x0E, true, new OnEncodedPacketReceive(Designer_Sync));
@@ -853,6 +855,7 @@ namespace Server.Multis
 
         public static void Designer_Action(NetState state, IEntity e, EncodedReader pvSrc)
         {
+            pvSrc.Trace(state);
             // TODO: What does this do?
         }
 
@@ -1693,10 +1696,25 @@ namespace Server.Multis
 
         public static void QueryDesignDetails(NetState state, PacketReader pvSrc)
         {
+            var multi = World.FindItem(pvSrc.ReadInt32()) as BaseMulti;
+
+            if (multi != null)
+            {
+                EventSink.InvokeMultiDesignQuery(new MultiDesignQueryEventArgs(state, multi));
+            }
+        }
+
+        public static void QueryDesignDetails(MultiDesignQueryEventArgs e)
+        {
+            QueryDesignDetails(e.State, e.Multi);
+        }
+
+        public static void QueryDesignDetails(NetState state, BaseMulti multi)
+        {
             Mobile from = state.Mobile;
             DesignContext context = DesignContext.Find(from);
 
-            HouseFoundation foundation = World.FindItem(pvSrc.ReadInt32()) as HouseFoundation;
+            HouseFoundation foundation = multi as HouseFoundation;
 
             if (foundation != null && from.Map == foundation.Map)
             {
@@ -1791,7 +1809,15 @@ namespace Server.Multis
         }
     }
 
-    public class DesignState
+    public interface IDesignState
+    {
+        Packet PacketCache { get; set; }
+        int Revision { get; set; }
+        MultiComponentList Components { get; set; }
+        MultiTileEntry[] Fixtures { get; set; }
+    }
+
+    public class DesignState : IDesignState
     {
         private Packet m_PacketCache;
 
@@ -2235,13 +2261,13 @@ namespace Server.Multis
 
     public sealed class DesignStateGeneral : Packet
     {
-        public DesignStateGeneral(HouseFoundation house, DesignState state)
+        public DesignStateGeneral(BaseMulti multi, IDesignState state)
             : base(0xBF)
         {
             EnsureCapacity(13);
 
             m_Stream.Write((short)0x1D);
-            m_Stream.Write((int)house.Serial);
+            m_Stream.Write((int)multi.Serial);
             m_Stream.Write((int)state.Revision);
         }
     }
@@ -2512,14 +2538,14 @@ namespace Server.Multis
             public NetState State;
             public int Serial, Revision;
             public int xMin, yMin, xMax, yMax;
-            public DesignState Root;
+            public IDesignState Root;
             public MultiTileEntry[] Tiles;
             public bool EnableResponse;
 
-            public SendQueueEntry(NetState ns, HouseFoundation foundation, DesignState state, bool response)
+            public SendQueueEntry(NetState ns, BaseMulti multi, IDesignState state, bool response)
             {
                 State = ns;
-                Serial = foundation.Serial;
+                Serial = multi.Serial;
                 Revision = state.Revision;
                 Root = state;
                 EnableResponse = response;
@@ -2612,10 +2638,10 @@ namespace Server.Multis
             }
         }
 
-        public static void SendDetails(NetState ns, HouseFoundation house, DesignState state, bool response)
+        public static void SendDetails(NetState ns, BaseMulti multi, IDesignState state, bool response)
         {
             lock (m_SendQueueSyncRoot)
-                m_SendQueue.Enqueue(new SendQueueEntry(ns, house, state, response));
+                m_SendQueue.Enqueue(new SendQueueEntry(ns, multi, state, response));
             m_Sync.Set();
         }
     }

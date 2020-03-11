@@ -153,7 +153,10 @@ namespace Server.Items
 
 		public override void OnDoubleClick(Mobile m)
 		{
-			UseGate(m);
+            if (m.InRange(GetWorldLocation(), 1))
+            {
+                UseGate(m);
+            }
 		}
 
 		public override bool OnMoveOver(Mobile m)
@@ -219,7 +222,7 @@ namespace Server.Items
 			{
 				return false;
 			}
-
+            
 			m.CloseGump(typeof(MoongateGump));
 			m.SendGump(new MoongateGump(m, this));
 

@@ -228,7 +228,7 @@ namespace Server.SkillHandlers
             typeof(VirtuososCap), typeof(VirtuososCollar), typeof(VirtuososEarpieces), typeof(VirtuososKidGloves), typeof(VirtuososKilt), 
             typeof(VirtuososNecklace), typeof(VirtuososTunic), typeof(BestialArms), typeof(BestialEarrings), typeof(BestialGloves), typeof(BestialGorget),
             typeof(BestialHelm), typeof(BestialKilt), typeof(BestialLegs), typeof(BestialNecklace), typeof(BarbedWhip), typeof(BladedWhip),
-			typeof(SpikedWhip)
+			typeof(SpikedWhip), typeof(SkullGnarledStaff), typeof(GargishSkullGnarledStaff), typeof(SkullLongsword), typeof(GargishSkullLongsword)
         };
 
         private static Type[] _NonCraftables =
@@ -464,13 +464,6 @@ namespace Server.SkillHandlers
                 ((BaseWeapon)item).DImodded = true;
             }
 
-            // jewels get hits set to 255
-            if (item is BaseJewel && ((BaseJewel)item).MaxHitPoints <= 0 && ((BaseJewel)item).TimesImbued >= 1)
-            {
-                ((BaseJewel)item).MaxHitPoints = 255;
-                ((BaseJewel)item).HitPoints = 255;
-            }
-
             // removes nom-imbued Imbuing value, which changes the way the items total weight is calculated
             if (id >= 51 && id <= 55)
             {
@@ -508,6 +501,13 @@ namespace Server.SkillHandlers
 
                 imbuable.OnAfterImbued(from, id, value);
                 imbuable.TimesImbued++;
+            }
+
+            // jewels get hits set to 255
+            if (item is BaseJewel && ((BaseJewel)item).MaxHitPoints <= 0)
+            {
+                ((BaseJewel)item).MaxHitPoints = 255;
+                ((BaseJewel)item).HitPoints = 255;
             }
 
             // Removes self repair

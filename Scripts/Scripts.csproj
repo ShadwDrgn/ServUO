@@ -528,6 +528,7 @@
     <Compile Include="Gumps\ToTAdminGump.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Gumps\Traps\CircuitTrap.cs" />
     <Compile Include="Gumps\VendorInventoryGump.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -547,7 +548,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Items\Addons\AdvancedTrainingDummy.cs" />
+    <Compile Include="Items\Addons\Craft Addons\EnchantedSculptingTool.cs" />
+    <Compile Include="Items\Addons\EnchantedGraniteCart.cs" />
     <Compile Include="Items\Addons\JollyHolidayTree.cs" />
+    <Compile Include="Items\Addons\SkullTiledFloor.cs" />
     <Compile Include="Items\Addons\TheKingsCollection\AlchemistsBookshelf.cs" />
     <Compile Include="Items\Addons\TheKingsCollection\TheTokenBox.cs" />
     <Compile Include="Items\Addons\TheKingsCollection\FirePainting.cs" />
@@ -578,6 +582,11 @@
     <Compile Include="Items\Addons\TheKingsCollection\CastlePainting.cs" />
     <Compile Include="Items\Addons\TheKingsCollection\BullTapestry.cs" />
     <Compile Include="Items\Addons\TheKingsCollection\HorsePainting.cs" />
+    <Compile Include="Items\Addons\Craft Addons\GlassKiln.cs" />
+    <Compile Include="Items\Artifacts\Decorative\GildedStatue.cs" />
+    <Compile Include="Items\Artifacts\Decorative\KingsPainting.cs" />
+    <Compile Include="Items\Artifacts\Decorative\MedusasFloorTileAddon.cs" />
+    <Compile Include="Items\Artifacts\Equipment\Glasses\LegendaryMapmakersGlasses.cs" />
     <Compile Include="Items\Artifacts\Equipment\Weapons\TheRedeemer.cs" />
     <Compile Include="Items\Consumables\2019HolidayGiftToken.cs" />
     <Compile Include="Items\Consumables\AnniversaryPromotionalToken.cs" />
@@ -605,9 +614,11 @@
     <Compile Include="Items\Addons\FormalDiningTable.cs" />
     <Compile Include="Items\Addons\GadgetryTable.cs" />
     <Compile Include="Items\Consumables\DecorativeKitchenSet.cs" />
+    <Compile Include="Items\Consumables\DecorativeStableSet.cs" />
     <Compile Include="Items\Consumables\EmbroideryTool.cs" />
     <Compile Include="Items\Damageable\Beacon.cs" />
     <Compile Include="Items\Damageable\DamageableItem.cs" />
+    <Compile Include="Items\Decorative\AncientWeapons.cs" />
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\LanternBrokenShield.cs" />
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\LanternHand.cs" />
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\LanternHeart.cs" />
@@ -624,6 +635,7 @@
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\SculptureWoodCoin.cs" />
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\SculptureWoodEven.cs" />
     <Compile Include="Items\Decorative\ArtisanFestivalRewards\SculptureWoodScept.cs" />
+    <Compile Include="Items\Decorative\DecorativeHourglass.cs" />
     <Compile Include="Items\Decorative\DecorativeStableSet\ChickenStatue.cs" />
     <Compile Include="Items\Decorative\DecorativeStableSet\CowPie.cs" />
     <Compile Include="Items\Decorative\DecorativeStableSet\CowStatue.cs" />
@@ -657,6 +669,11 @@
     <Compile Include="Items\Equipment\Clothing\DaggerBelt.cs" />
     <Compile Include="Items\Equipment\Clothing\MaceBelt.cs" />
     <Compile Include="Items\Equipment\Clothing\SwordBelt.cs" />
+    <Compile Include="Items\Equipment\Weapons\SkullGnarledStaff.cs" />
+    <Compile Include="Items\Equipment\Weapons\SkullLongsword.cs" />
+    <Compile Include="Items\Functional\CircuitTrapTrainingKit.cs" />
+    <Compile Include="Items\Functional\CylinderTrapTrainingKit.cs" />
+    <Compile Include="Items\Functional\SliderTrapTrainingKit.cs" />
     <Compile Include="Items\Functional\StrangeContraption.cs" />
     <Compile Include="Items\Internal\ItemSockets\SearingWeapon.cs" />
     <Compile Include="Items\Quest\RewardBooks.cs" />
@@ -671,8 +688,25 @@
     <Compile Include="Items\Resource\VileTentacles.cs" />
     <Compile Include="Items\Resource\EtherealSand.cs" />
     <Compile Include="Items\StoreBought\BarrelMailbox.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DecorativeDungeonChair.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DecorativeDungeonStool.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DecorativeWallHook.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DecorativeStocks.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DecorativeDungeonMask.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DungeonFountain.cs" />
+    <Compile Include="Items\StoreBought\Decorative Dungeon Set\DungeonBull.cs" />
+    <Compile Include="Items\StoreBought\DrunkWomansSingingBall.cs" />
+    <Compile Include="Items\StoreBought\GardenSculpture.cs" />
+    <Compile Include="Items\StoreBought\MetalLadder.cs" />
     <Compile Include="Items\StoreBought\PetWhistle.cs" />
+    <Compile Include="Items\StoreBought\SecretChest.cs" />
+    <Compile Include="Items\StoreBought\DrunkMansSingingBall.cs" />
+    <Compile Include="Items\StoreBought\SingingBallOfBedlam.cs" />
+    <Compile Include="Items\StoreBought\SingingBallOfSosarianSteeds.cs" />
+    <Compile Include="Items\StoreBought\SingingBallOfBlueBoar.cs" />
+    <Compile Include="Items\StoreBought\SpiralStaircase.cs" />
     <Compile Include="Items\StoreBought\SquirrelMailbox.cs" />
+    <Compile Include="Items\StoreBought\WineRack.cs" />
     <Compile Include="Items\Tools\SteamPoweredBeverageMaker.cs" />
     <Compile Include="Items\Addons\ClawFootTub.cs" />
     <Compile Include="Items\Addons\GreenMarbleFireplace.cs" />
@@ -829,7 +863,8 @@
     <Compile Include="Mobiles\NPCs\Mannequin\Property\SkillBonusAttribute.cs" />
     <Compile Include="Mobiles\NPCs\Mannequin\Property\SlayerAttribute.cs" />
     <Compile Include="Mobiles\NPCs\Mannequin\Property\WeaponAttributeProperty.cs" />
-    <Compile Include="Mobiles\NPCs\MiningCooperativeMerchant.cs" />
+    <Compile Include="Services\Expansions\High Seas\Multis\GalleonItem.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Mobile\MiningCooperativeMerchant.cs" />
     <Compile Include="Mobiles\NPCs\CommissionPlayerVendor.cs" />
     <Compile Include="Multis\ContestHouses.cs" />
     <Compile Include="Quests\The Ritual\Items.cs" />
@@ -933,7 +968,6 @@
     <Compile Include="Items\Artifacts\Equipment\Clothing\CloakOfPower.cs" />
     <Compile Include="Items\Artifacts\Equipment\Clothing\CloakOfSilence.cs" />
     <Compile Include="Items\Artifacts\Equipment\Clothing\TheScholarsHalo.cs" />
-    <Compile Include="Items\Artifacts\Equipment\Clothing\JadeArmband.cs" />
     <Compile Include="Items\Artifacts\Equipment\Clothing\MagicalDoor.cs" />
     <Compile Include="Items\Artifacts\Equipment\Jewelry\AnkhPendant.cs" />
     <Compile Include="Items\Artifacts\Equipment\Jewelry\NecklaceofDiligence.cs" />
@@ -2725,7 +2759,6 @@
     <Compile Include="Mobiles\NPCs\GolemCrafter.cs" />
     <Compile Include="Mobiles\NPCs\Gorrow.cs" />
     <Compile Include="Mobiles\NPCs\GrandpaCharley.cs" />
-    <Compile Include="Mobiles\NPCs\Greeter1.cs" />
     <Compile Include="Mobiles\NPCs\Gustar.cs" />
     <Compile Include="Mobiles\NPCs\Gypsy.cs" />
     <Compile Include="Mobiles\NPCs\GypsyAnimalTrainer.cs" />
@@ -5045,9 +5078,6 @@
     <Compile Include="Items\Containers\TreasureChest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Items\Containers\TreasureMapChest.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Items\Containers\UnknownSkeletons.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -5318,6 +5348,9 @@
     <Compile Include="Items\Artifacts\Equipment\Jewelry\EssenceOfBattle.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Items\Artifacts\Equipment\Jewelry\JadeArmband.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Items\Artifacts\Equipment\Jewelry\PendantOfTheMagi.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -5478,9 +5511,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Items\Tools\SeaChart.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Items\Consumables\TreasureMap.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Items\Tools\WorldMap.cs">
@@ -8801,9 +8831,6 @@
     <Compile Include="Misc\ToggleItem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Misc\TreasureMapProtection.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Misc\ValidationQueue.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -8827,9 +8854,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Abilities\EnhancementTimer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Abilities\SelfDeletingItem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Abilities\TimedResistanceMod.cs">
@@ -9780,6 +9804,7 @@
     <Compile Include="Services\PointsSystems\PlayerMobileProps.cs" />
     <Compile Include="Services\PointsSystems\PointsSystem.cs" />
     <Compile Include="Services\PointsSystems\QueensLoyalty.cs" />
+    <Compile Include="Services\PointsSystems\FellowshipData.cs" />
     <Compile Include="Services\PointsSystems\ShameCrystals.cs" />
     <Compile Include="Services\PointsSystems\VirtueArtifactsSystem.cs" />
     <Compile Include="Services\PointsSystems\VoidPool.cs" />
@@ -10061,6 +10086,28 @@
     <Compile Include="Services\Revamped Dungeons\WrongDungeon\Mobile\WrongPrisoner.cs" />
     <Compile Include="Services\Revamped Dungeons\WrongDungeon\Items\MysteriousTunnel.cs" />
     <Compile Include="Services\Revamped Dungeons\WrongDungeon\Items\WrongMazeWall.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep3.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep4.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep5.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep6.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep7.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornEntry.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep2.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\BlackthornStep8.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\BlackthornDungeonTeleporter.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Generate.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\FellowshipMedallion.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\TheFellowshipStaff.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Addon\TheFellowshipHouse.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Gumps.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\EtherealSoulbinder.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\FellowshipDonationBox.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\EtherealSoulcleanser.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\FellowshipCoin.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Mobile\FellowshipAdept.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Mobile\Worker.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Mobile\Follower.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Rewards.cs" />
     <Compile Include="Services\Seasonal Events\KrampusEncounter\Items\BarbedWhip.cs" />
     <Compile Include="Services\Seasonal Events\KrampusEncounter\Items\BladedWhip.cs" />
     <Compile Include="Services\Seasonal Events\KrampusEncounter\Items\Branch.cs" />
@@ -10111,14 +10158,14 @@
     <Compile Include="Services\Seasonal Events\TreasuresOfDoom\RewardGump.cs" />
     <Compile Include="Services\Seasonal Events\TreasuresOfDoom\Rewards.cs" />
     <Compile Include="Services\Seasonal Events\TreasuresOfDoom\VaseSpawner.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\CommanderTitleDeed.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\CaptainTitleDeed.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\EnsignTitleDeed.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\ExplodingJackOLantern.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\PumpkinCannonDeed.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\JackOLanternHelm.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\AdmiralJacksPumpkinSpiceAle.cs" />
-    <Compile Include="Services\Seasonal Events\TreasuresOfHalloween\Items\PumpkinRowboat.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\CommanderTitleDeed.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\CaptainTitleDeed.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\EnsignTitleDeed.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\ExplodingJackOLantern.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\PumpkinCannonDeed.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\JackOLanternHelm.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\AdmiralJacksPumpkinSpiceAle.cs" />
+    <Compile Include="Services\Seasonal Events\ForsakenFoes\Items\PumpkinRowboat.cs" />
     <Compile Include="Services\Seasonal Events\TreasuresOfKhaldun\CaddelliteVendor.cs" />
     <Compile Include="Services\Seasonal Events\TreasuresOfKhaldun\Creatures\CultistAmbusher.cs" />
     <Compile Include="Services\Seasonal Events\TreasuresOfKhaldun\Creatures\KhalAnkur.cs" />
@@ -10251,6 +10298,11 @@
     <Compile Include="Services\Town Cryer\TownCryerModeratorEntry.cs" />
     <Compile Include="Services\Town Cryer\TownCryerNewsEntry.cs" />
     <Compile Include="Services\Town Cryer\TownCryerSystem.cs" />
+    <Compile Include="Services\TreasureMaps\BagOfGems.cs" />
+    <Compile Include="Services\TreasureMaps\TreasureMap.cs" />
+    <Compile Include="Services\TreasureMaps\TreasureMapChest.cs" />
+    <Compile Include="Services\TreasureMaps\TreasureMapInfo.cs" />
+    <Compile Include="Services\TreasureMaps\TreasureMapProtection.cs" />
     <Compile Include="Services\UltimaStore\PlayerProfile.cs" />
     <Compile Include="Services\UltimaStore\StoreEntry.cs" />
     <Compile Include="Services\UltimaStore\SystemConfig.cs" />
@@ -11101,9 +11153,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Underworld\PuzzleRoom\MastermindPuzzleItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Services\Underworld\PuzzleRoom\MazePuzzleGump.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Underworld\PuzzleRoom\MazePuzzleItem.cs">
@@ -12240,7 +12289,9 @@
       <Name>Ultima</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Services\TreasureMaps\desktop.ini" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

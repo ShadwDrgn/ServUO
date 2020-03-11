@@ -198,17 +198,18 @@ namespace Server
 
         public static Type[] SAJewelryTypes { get { return m_SAJewelryTypes; } }
 
+        public static Type[] RegTypes { get { return m_RegTypes; } }
         private static readonly Type[] m_RegTypes = new[]
 		{
 			typeof(BlackPearl), typeof(Bloodmoss), typeof(Garlic), typeof(Ginseng), typeof(MandrakeRoot), typeof(Nightshade),
 			typeof(SulfurousAsh), typeof(SpidersSilk)
 		};
 
-        public static Type[] RegTypes { get { return m_RegTypes; } }
-
+        public static Type[] NecroRegTypes { get { return m_NecroRegTypes; } }
         private static readonly Type[] m_NecroRegTypes = new[] { typeof(BatWing), typeof(GraveDust), typeof(DaemonBlood), typeof(NoxCrystal), typeof(PigIron) };
 
-        public static Type[] NecroRegTypes { get { return m_NecroRegTypes; } }
+        public static Type[] MysticRegTypes { get { return m_MysticRegTypes; } }
+        private static readonly Type[] m_MysticRegTypes = new[] { typeof(Bone), typeof(DragonBlood), typeof(FertileDirt), typeof(DaemonBone) };
 
         private static readonly Type[] m_PotionTypes = new[]
 		{
@@ -559,7 +560,7 @@ namespace Server
 
         public static BaseJewel RandomJewelry(bool isStygian = false)
         {
-            if (isStygian)
+            if (Core.SA && isStygian)
                 return Construct(m_SAJewelryTypes, m_JewelryTypes) as BaseJewel;
             else
                 return Construct(m_JewelryTypes) as BaseJewel;

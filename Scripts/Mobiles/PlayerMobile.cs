@@ -46,6 +46,7 @@ using Server.Engines.VendorSearching;
 using Server.Targeting;
 
 using RankDefinition = Server.Guilds.RankDefinition;
+using Server.Engines.Fellowship;
 #endregion
 
 namespace Server.Mobiles
@@ -1264,7 +1265,7 @@ namespace Server.Mobiles
                 from.Map = Map.Felucca;
             }
 
-            if (((from.Map == Map.Trammel && from.Region.IsPartOf("Blackthorn Castle")) || from.Region.IsPartOf("Ver Lor Reg")) && from.Player && from.AccessLevel == AccessLevel.Player && from.CharacterOut)
+            if (((from.Map == Map.Trammel && from.Region.IsPartOf("Blackthorn Castle")) || PointsSystem.FellowshipData.Enabled && from.Region.IsPartOf("BlackthornDungeon") || from.Region.IsPartOf("Ver Lor Reg")) && from.Player && from.AccessLevel == AccessLevel.Player && from.CharacterOut)
             {
                 StormLevelGump menu = new StormLevelGump(from);
                 menu.BeginClose();
@@ -3639,7 +3640,7 @@ namespace Server.Mobiles
 					deathRobe.Delete();
 				}
 
-                if (NetState != null && NetState.IsEnhancedClient)
+                if (NetState != null /*&& NetState.IsEnhancedClient*/)
                 {
                     Waypoints.RemoveHealers(this, Map);
                 }
@@ -3889,7 +3890,7 @@ namespace Server.Mobiles
 
 		public override void OnDeath(Container c)
 		{
-            if (NetState != null && NetState.IsEnhancedClient)
+            if (NetState != null /*&& NetState.IsEnhancedClient*/)
             {
                 Waypoints.OnDeath(this);
             }
@@ -3925,8 +3926,10 @@ namespace Server.Mobiles
             ClumsySpell.RemoveEffects(this);
             FeeblemindSpell.RemoveEffects(this);
             CurseSpell.RemoveEffect(this);
+            Spells.Second.ProtectionSpell.EndProtection(this);
 
-			EndAction(typeof(PolymorphSpell));
+
+            EndAction(typeof(PolymorphSpell));
 			EndAction(typeof(IncognitoSpell));
 
 			MeerMage.StopEffect(this, false);
@@ -4517,7 +4520,7 @@ namespace Server.Mobiles
                 case 34:
                 case 33:
                     {
-                        m_ExploringTheDeepQuest = (ExploringTheDeepQuestChain)reader.ReadInt();
+                        ExploringTheDeepQuest = (ExploringTheDeepQuestChain)reader.ReadInt();
                         goto case 31;
                     }
                 case 32:
@@ -4980,7 +4983,7 @@ namespace Server.Mobiles
 
             writer.Write(_BlessedItem);
 
-            writer.Write((int)m_ExploringTheDeepQuest);
+            writer.Write((int)ExploringTheDeepQuest);
 
             // Version 31/32 Titles
             writer.Write(DisplayGuildTitle);
@@ -5788,14 +5791,7 @@ namespace Server.Mobiles
             {
                 if (vvv)
                 {
-                    if (guild != null && DisplayGuildAbbr)
-                    {
-                        suffix = String.Format("[{0}] [VvV]", Utility.FixHtml(guild.Abbreviation));
-                    }
-                    else
-                    {
-                        suffix = "[VvV]";
-                    }
+                    suffix = String.Format("[{0}] [VvV]", Utility.FixHtml(guild.Abbreviation));
                 }
                 else if (suffix.Length > 0)
                 {
@@ -6870,12 +6866,8 @@ namespace Server.Mobiles
 		}
         #endregion
 
-        #region Exploring the Deep
-        private ExploringTheDeepQuestChain m_ExploringTheDeepQuest;
-
         [CommandProperty(AccessLevel.GameMaster)]
-        public ExploringTheDeepQuestChain ExploringTheDeepQuest { get { return m_ExploringTheDeepQuest; } set { m_ExploringTheDeepQuest = value; } }
-        #endregion
+        public ExploringTheDeepQuestChain ExploringTheDeepQuest { get; set; }
 
         public static bool PetAutoStable { get { return Core.SE; } }
 

@@ -85,19 +85,6 @@ namespace Server.Engines.Craft
             return 0.0; // 0%
         }
 
-        private System.Collections.Generic.List<Type> _NoConsumeOnFail = new System.Collections.Generic.List<Type>
-        {
-            typeof(LeggingsOfBane), typeof(GauntletsOfNobility)
-        };
-
-        public override bool ConsumeOnFailure(Mobile from, Type resourceType, CraftItem craftItem)
-        {
-            if (_NoConsumeOnFail.Contains(resourceType))
-                return false;
-
-            return base.ConsumeOnFailure(from, resourceType, craftItem);
-        }
-
         private DefBlacksmithy()
             : base(1, 1, 1.25) // base( 1, 2, 1.7 )
         {
@@ -135,7 +122,8 @@ namespace Server.Engines.Craft
                 bool isAnvil = (type.IsDefined(typeofAnvil, false) || item.ItemID == 4015 || item.ItemID == 4016 ||
                                 item.ItemID == 0x2DD5 || item.ItemID == 0x2DD6);
                 bool isForge = (type.IsDefined(typeofForge, false) || item.ItemID == 4017 ||
-                                (item.ItemID >= 6522 && item.ItemID <= 6569) || item.ItemID == 0x2DD8);
+                                (item.ItemID >= 6522 && item.ItemID <= 6569) || item.ItemID == 0x2DD8) ||
+                                item.ItemID == 0xA531 || item.ItemID == 0xA535;
 
                 if (!isAnvil && !isForge)
                 {
