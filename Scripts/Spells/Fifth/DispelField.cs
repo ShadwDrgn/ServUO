@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Misc;
 using Server.Targeting;
@@ -20,71 +19,50 @@ namespace Server.Spells.Fifth
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.Fifth;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.Fifth;
         public override void OnCast()
         {
-            this.Caster.Target = new InternalTarget(this);
+            Caster.Target = new InternalTarget(this);
         }
 
-        public void Target(Item item)
+        public void Target(IEntity e)
         {
-            Type t = item.GetType();
+            if (Caster.CanSee(e) && CheckSequence())
+            {
+                SpellHelper.Turn(Caster, e);
 
-            if (!this.Caster.CanSee(item))
-            {
-                this.Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (!t.IsDefined(typeof(DispellableFieldAttribute), false))
-            {
-                this.Caster.SendLocalizedMessage(1005049); // That cannot be dispelled.
-            }
-            else if (item is Moongate && !((Moongate)item).Dispellable)
-            {
-                this.Caster.SendLocalizedMessage(1005047); // That magic is too chaotic
-            }
-            else if (this.CheckSequence())
-            {
-                SpellHelper.Turn(this.Caster, item);
+                Effects.SendLocationParticles(EffectItem.Create(e.Location, e.Map, EffectItem.DefaultDuration), 0x376A, 9, 20, 5042);
+                Effects.PlaySound(e.Location, e.Map, 0x201);
 
-                Effects.SendLocationParticles(EffectItem.Create(item.Location, item.Map, EffectItem.DefaultDuration), 0x376A, 9, 20, 5042);
-                Effects.PlaySound(item.GetWorldLocation(), item.Map, 0x201);
-
-                item.Delete();
+                if (e is Item item && (e.GetType().IsDefined(typeof(DispellableFieldAttribute), false) || (item is Moongate && !((Moongate)item).Dispellable)))
+                {
+                    item.Delete();
+                }
             }
 
-            this.FinishSequence();
+            FinishSequence();
         }
 
         public class InternalTarget : Target
         {
             private readonly DispelFieldSpell m_Owner;
             public InternalTarget(DispelFieldSpell owner)
-                : base(Core.ML ? 10 : 12, false, TargetFlags.None)
+                : base(10, false, TargetFlags.None)
             {
-                this.m_Owner = owner;
+                m_Owner = owner;
             }
 
             protected override void OnTarget(Mobile from, object o)
             {
-                if (o is Item)
+                if (o is IEntity)
                 {
-                    this.m_Owner.Target((Item)o);
-                }
-                else
-                {
-                    this.m_Owner.Caster.SendLocalizedMessage(1005049); // That cannot be dispelled.
+                    m_Owner.Target((IEntity)o);
                 }
             }
 
             protected override void OnTargetFinish(Mobile from)
             {
-                this.m_Owner.FinishSequence();
+                m_Owner.FinishSequence();
             }
         }
     }

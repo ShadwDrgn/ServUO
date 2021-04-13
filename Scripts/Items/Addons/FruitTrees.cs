@@ -1,15 +1,16 @@
-using System;
 using Server.Network;
+using System;
 
 namespace Server.Items
 {
     public abstract class BaseFruitTreeAddon : BaseAddon
     {
-        private int m_Fruits;
+        private int m_Fruit;
+
         public BaseFruitTreeAddon()
             : base()
         {
-            Timer.DelayCall(TimeSpan.FromMinutes(5), new TimerCallback(Respawn));
+            Respawn();
         }
 
         public BaseFruitTreeAddon(Serial serial)
@@ -18,29 +19,34 @@ namespace Server.Items
         }
 
         public override abstract BaseAddonDeed Deed { get; }
-        public abstract Item Fruit { get; }
+        public abstract Item FruitItem { get; }
+
+        public virtual int MaxFruit => 10;
+        public virtual TimeSpan SpawnTime => TimeSpan.FromHours(24);
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public int Fruits
+        public int Fruit
         {
             get
             {
-                return this.m_Fruits;
+                return m_Fruit;
             }
             set
             {
-                if (value < 0)
-                    this.m_Fruits = 0;
-                else
-                    this.m_Fruits = value;
+                m_Fruit = Math.Max(0, Math.Min(MaxFruit, value));
             }
         }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public DateTime NextSpawn { get; set; }
+
         public override void OnComponentUsed(AddonComponent c, Mobile from)
         {
             if (from.InRange(c.Location, 2))
             {
-                if (this.m_Fruits > 0)
+                if (m_Fruit > 0)
                 {
-                    Item fruit = this.Fruit;
+                    Item fruit = FruitItem;
 
                     if (fruit == null)
                         return;
@@ -52,26 +58,34 @@ namespace Server.Items
                     }
                     else
                     {
-                        if (--this.m_Fruits == 0)
-                            Timer.DelayCall(TimeSpan.FromMinutes(30), new TimerCallback(Respawn));
-
+                        Fruit--;
                         from.SendLocalizedMessage(501016); // You pick some fruit and put it in your backpack.
                     }
                 }
                 else
+                {
                     from.SendLocalizedMessage(501017); // There is no more fruit on this tree
+                }
             }
             else
+            {
                 from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+            }
         }
 
         public override void Serialize(GenericWriter writer)
         {
+            if (NextSpawn < DateTime.UtcNow)
+            {
+                Respawn();
+            }
+
             base.Serialize(writer);
 
-            writer.WriteEncodedInt(0); // version
+            writer.WriteEncodedInt(1); // version
 
-            writer.Write((int)this.m_Fruits);
+            writer.Write(NextSpawn);
+            writer.Write(m_Fruit);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -80,15 +94,22 @@ namespace Server.Items
 
             int version = reader.ReadEncodedInt();
 
-            this.m_Fruits = reader.ReadInt();
-
-            if (this.m_Fruits == 0)
-                this.Respawn();
+            switch (version)
+            {
+                case 1:
+                    NextSpawn = reader.ReadDateTime();
+                    goto case 0;
+                case 0:
+                    m_Fruit = reader.ReadInt();
+                    break;
+            }
         }
 
         private void Respawn()
         {
-            this.m_Fruits = Utility.RandomMinMax(1, 4);
+            Fruit++;
+
+            NextSpawn = DateTime.UtcNow + SpawnTime;
         }
     }
 
@@ -98,8 +119,8 @@ namespace Server.Items
         public AppleTreeAddon()
             : base()
         {
-            this.AddComponent(new LocalizedAddonComponent(0xD98, 1076269), 0, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x3124, 1076269), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xD98, 1076269), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0x3124, 1076269), 0, 0, 0);
         }
 
         public AppleTreeAddon(Serial serial)
@@ -107,20 +128,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new AppleTreeDeed();
-            }
-        }
-        public override Item Fruit
-        {
-            get
-            {
-                return new Apple();
-            }
-        }
+        public override BaseAddonDeed Deed => new AppleTreeDeed();
+        public override Item FruitItem => new Apple();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -142,7 +151,7 @@ namespace Server.Items
         public AppleTreeDeed()
             : base()
         {
-            this.LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
         }
 
         public AppleTreeDeed(Serial serial)
@@ -150,20 +159,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new AppleTreeAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1076269;
-            }
-        }// Apple Tree
+        public override BaseAddon Addon => new AppleTreeAddon();
+        public override int LabelNumber => 1076269;// Apple Tree
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -185,8 +182,8 @@ namespace Server.Items
         public PeachTreeAddon()
             : base()
         {
-            this.AddComponent(new LocalizedAddonComponent(0xD9C, 1076270), 0, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x3123, 1076270), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xD9C, 1076270), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0x3123, 1076270), 0, 0, 0);
         }
 
         public PeachTreeAddon(Serial serial)
@@ -194,20 +191,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new PeachTreeDeed();
-            }
-        }
-        public override Item Fruit
-        {
-            get
-            {
-                return new Peach();
-            }
-        }
+        public override BaseAddonDeed Deed => new PeachTreeDeed();
+        public override Item FruitItem => new Peach();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -229,7 +214,7 @@ namespace Server.Items
         public PeachTreeDeed()
             : base()
         {
-            this.LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
         }
 
         public PeachTreeDeed(Serial serial)
@@ -237,20 +222,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new PeachTreeAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1076270;
-            }
-        }// Peach Tree
+        public override BaseAddon Addon => new PeachTreeAddon();
+        public override int LabelNumber => 1076270;// Peach Tree
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

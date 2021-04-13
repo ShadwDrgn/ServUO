@@ -1,44 +1,40 @@
-using System;
-using System.Linq;
-
-using Server;
-using Server.Multis;
-using Server.Mobiles;
 using Server.Engines.HuntsmasterChallenge;
+using Server.Multis;
+using System;
 
 namespace Server.Items
 {
-	public class HuntTrophy : Item, IFlipable
-	{
-		private string m_Owner;
-		private int m_Measurement;
-		private string m_Location;
-		private string m_DateKilled;
+    public class HuntTrophy : Item, IFlipable
+    {
+        private string m_Owner;
+        private int m_Measurement;
+        private string m_Location;
+        private string m_DateKilled;
         private int m_Index;
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public string Owner { get { return m_Owner; } set { m_Owner = value; } } 
-	
-		[CommandProperty(AccessLevel.GameMaster)]
-		public string KillLocation { get { return m_Location; } set { m_Location = value; } } 
-	
-		[CommandProperty(AccessLevel.GameMaster)]
-        public int Measurement { get { return m_Measurement; } set { m_Measurement = value; } } 
-		
-		[CommandProperty(AccessLevel.GameMaster)]
-		public string DateKilled { get { return m_DateKilled; } set { m_DateKilled = value; } }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public string Owner { get { return m_Owner; } set { m_Owner = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public TextDefinition Species { get { return Info.Species; } }
+        public string KillLocation { get { return m_Location; } set { m_Location = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MeasuredBy MeasuredBy { get { return Info.MeasuredBy; } }
+        public int Measurement { get { return m_Measurement; } set { m_Measurement = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual int EastID { get { return Info.EastID; } }
+        public string DateKilled { get { return m_DateKilled; } set { m_DateKilled = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual int SouthID { get { return Info.SouthID; } }
+        public TextDefinition Species => Info.Species;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MeasuredBy MeasuredBy => Info.MeasuredBy;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual int EastID => Info.EastID;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual int SouthID => Info.SouthID;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int Index
@@ -59,31 +55,25 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public HuntingTrophyInfo Info { get { return HuntingTrophyInfo.Infos[Index]; } }
+        public HuntingTrophyInfo Info => HuntingTrophyInfo.Infos[Index];
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return Info.TrophyName.Number;
-            }
-        }
+        public override int LabelNumber => Info.TrophyName.Number;
 
         public HuntTrophy(string name, int index, int measurement, string killed, string location)
-		{
+        {
             Index = index;
             ItemID = Info.SouthID;
 
             m_Owner = name;
-			m_Location = location;
-			m_DateKilled = killed;
+            m_Location = location;
+            m_DateKilled = killed;
             m_Measurement = measurement;
 
-            if (!String.IsNullOrEmpty(Info.TrophyName.String))
+            if (!string.IsNullOrEmpty(Info.TrophyName.String))
             {
                 Name = Info.TrophyName.String;
             }
-		}
+        }
 
         public void OnFlip(Mobile m)
         {
@@ -97,14 +87,14 @@ namespace Server.Items
             }
         }
 
-		public override void GetProperties(ObjectPropertyList list)
-		{
-			base.GetProperties(list);
+        public override void GetProperties(ObjectPropertyList list)
+        {
+            base.GetProperties(list);
 
             list.Add(1155708, m_Owner != null ? m_Owner : "Unknown"); // Hunter: ~1_NAME~
             list.Add(1155709, m_DateKilled); // Date of Kill: ~1_DATE~
-				
-			if(m_Location != null)
+
+            if (m_Location != null)
                 list.Add(1061114, m_Location); // Location: ~1_val~
 
             list.Add(1155718, Species.ToString());
@@ -118,26 +108,26 @@ namespace Server.Items
 
         }
 
-		public HuntTrophy(Serial serial) : base(serial)
-		{
-		}
-		
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-			writer.Write((int)2);
+        public HuntTrophy(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(2);
 
             writer.Write(m_Index);
-			writer.Write(m_Owner);
-			writer.Write(m_Measurement);
-			writer.Write(m_DateKilled);
-			writer.Write(m_Location);
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-			int v = reader.ReadInt();
+            writer.Write(m_Owner);
+            writer.Write(m_Measurement);
+            writer.Write(m_DateKilled);
+            writer.Write(m_Location);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int v = reader.ReadInt();
 
             switch (v)
             {
@@ -154,7 +144,7 @@ namespace Server.Items
                     m_Measurement = reader.ReadInt();
                     m_DateKilled = reader.ReadString();
                     m_Location = reader.ReadString();
-                    var td = TextDefinition.Deserialize(reader);
+                    TextDefinition td = TextDefinition.Deserialize(reader);
                     reader.ReadInt();
                     reader.ReadInt();
 
@@ -164,8 +154,8 @@ namespace Server.Items
                     });
                     break;
             }
-		}
-	}
+        }
+    }
 
     public class HuntTrophyDeed : Item
     {
@@ -188,16 +178,16 @@ namespace Server.Items
         public string DateKilled { get { return m_DateKilled; } set { m_DateKilled = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public TextDefinition Species { get { return Info.Species; } }
+        public TextDefinition Species => Info.Species;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MeasuredBy MeasuredBy { get { return Info.MeasuredBy; } }
+        public MeasuredBy MeasuredBy => Info.MeasuredBy;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual int EastID { get { return Info.EastID; } }
+        public virtual int EastID => Info.EastID;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual int SouthID { get { return Info.SouthID; } }
+        public virtual int SouthID => Info.SouthID;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int Index
@@ -218,7 +208,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public HuntingTrophyInfo Info { get { return HuntingTrophyInfo.Infos[Index]; } }
+        public HuntingTrophyInfo Info => HuntingTrophyInfo.Infos[Index];
 
         public override int LabelNumber
         {
@@ -286,8 +276,10 @@ namespace Server.Items
                         }
                         else
                         {
-                            trophy = new HuntTrophy(m_Owner, Index, m_Measurement, m_DateKilled, m_Location);
-                            trophy.ItemID = itemID;
+                            trophy = new HuntTrophy(m_Owner, Index, m_Measurement, m_DateKilled, m_Location)
+                            {
+                                ItemID = itemID
+                            };
                         }
 
                         trophy.MoveToWorld(from.Location, from.Map);
@@ -335,7 +327,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)2);
+            writer.Write(2);
 
             writer.Write(m_Index);
             writer.Write(m_Owner);
@@ -364,7 +356,7 @@ namespace Server.Items
                     m_Measurement = reader.ReadInt();
                     m_DateKilled = reader.ReadString();
                     m_Location = reader.ReadString();
-                    var td = TextDefinition.Deserialize(reader);
+                    TextDefinition td = TextDefinition.Deserialize(reader);
                     reader.ReadInt();
                     reader.ReadInt();
 
@@ -380,7 +372,7 @@ namespace Server.Items
 
         private void Replace()
         {
-            var trophy = new HuntTrophy(m_Owner, Index, m_Measurement, m_DateKilled, m_Location);
+            HuntTrophy trophy = new HuntTrophy(m_Owner, Index, m_Measurement, m_DateKilled, m_Location);
 
             if (Parent is Container)
             {

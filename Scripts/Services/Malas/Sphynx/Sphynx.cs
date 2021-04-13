@@ -1,10 +1,8 @@
-using System;
-using Server;
-using System.Collections.Generic;
-using Server.Network;
 using Server.ContextMenus;
-using Server.Gumps;
 using Server.Engines.SphynxFortune;
+using Server.Gumps;
+using Server.Network;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -43,18 +41,17 @@ namespace Server.Mobiles
             SetSkill(SkillName.Anatomy, 25.1, 50.0);
             SetSkill(SkillName.EvalInt, 90.1, 100.0);
             SetSkill(SkillName.Meditation, 95.1, 120.0);
-			SetSkill(SkillName.DetectHidden, 100.0);
+            SetSkill(SkillName.DetectHidden, 100.0);
 
             Fame = 15000;
             Karma = 0;
-
-            PackGold(1000, 1200);
         }
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich, 2);
-        }
+            AddLoot(LootPack.LootGold(1000, 1200));
+    }
 
         public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
         {
@@ -72,7 +69,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -83,8 +80,8 @@ namespace Server.Mobiles
 
         public class AskAboutFutureEntry : ContextMenuEntry
         {
-            private Sphynx m_Sphynx;
-            private Mobile m;
+            private readonly Sphynx m_Sphynx;
+            private readonly Mobile m;
 
             public AskAboutFutureEntry(Mobile from, Sphynx Sphynx)
                 : base(6199, 8)
@@ -104,7 +101,7 @@ namespace Server.Mobiles
 
         public class SphynxGump : Gump
         {
-            private Sphynx Sphynx;
+            private readonly Sphynx Sphynx;
 
             public SphynxGump(Sphynx s)
                 : base(150, 50)

@@ -1,16 +1,15 @@
+using Server.Commands;
+using Server.Engines.Points;
+using Server.Engines.VendorSearching;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-using Server.Commands;
-using Server.Mobiles;
-using Server.Items;
-using Server.Engines.VendorSearching;
-using Server.Gumps;
-using Server.Network;
-using Server.Engines.Points;
-using Server.Multis;
 
 namespace Server.Engines.UOStore
 {
@@ -80,12 +79,13 @@ namespace Server.Engines.UOStore
         {
             // Featured
             StoreCategory cat = StoreCategory.Featured;
+            Register<PotionOfGloriousFortune>(1158688, 1158739, 0xA1E6, 0, 1195, 200, cat);
+            Register<KnightChessPieceGuildstone>(1159490, 1159491, 0xA581, 0, 0, 500, cat);
+            Register<TransmogrificationPotion>(1159501, 1159496, 0xA1E9, 0, 2741, 1500, cat);
+            Register<AnvilofArtifactsDeed>(1159437, 1159466, 0xA108, 0, 0, 1000, cat);
             Register<VirtueShield>(1109616, 1158384, 0x7818, 0, 0, 1500, cat);
-            Register<SoulstoneToken>(1158404, 1158405, 0x2A93, 0, 2598, 1000, cat, ConstructSoulstone);
+            Register<PetBondingPotion>(1156613, 1156678, 0, 0x9CBC, 0, 500, cat);
             //Register<DeluxeStarterPackToken>(1158368, 1158369, 0, 0x9CCB, 0, 2000, cat);
-            Register<GreenGoblinStatuette>(1125133, 1158015, 0xA095, 0, 0, 600, cat);
-            //Register<TotemOfChromaticFortune>(1157606, 1157604, 0, 0x9CC9, 0, 300, cat);
-            Register<MythicCharacterToken>(new TextDefinition[] { 1156614, 1156615 }, 1156679, 0x2AAA, 0, 0, 2500, cat);
 
             // Character
             cat = StoreCategory.Character;
@@ -119,6 +119,7 @@ namespace Server.Engines.UOStore
 
             // Equipment
             cat = StoreCategory.Equipment;
+            Register<TransmogrificationPotion>(1159501, 1159496, 0xA1E9, 0, 2741, 1500, cat);
             Register<VirtueShield>(1109616, 1158384, 0x7818, 0, 0, 1500, cat);
             Register<HoodedBritanniaRobe>(1125155, 1158016, 0xA0AB, 0, 0, 1500, cat, ConstructRobe);
             Register<HoodedBritanniaRobe>(1125155, 1158016, 0xA0AC, 0, 0, 1500, cat, ConstructRobe);
@@ -188,9 +189,23 @@ namespace Server.Engines.UOStore
 
             // decorations
             cat = StoreCategory.Decorations;
+            Register<DecorativeGardenSculpture>(1159464, 1159465, 0xA565, 0, 0, 400, cat);
+            Register<WineRack>(1159462, 1159463, 0xA568, 0, 0, 400, cat);
+            Register<SpiralStaircaseDeed>(1159480, 1159481, 0, 0x9D41, 0, 1000, cat);
+            Register<DecorativeDungeonSet>(1159468, 1159475, 0, 0x9D40, 0, 1200, cat);
+            Register<MetalLadderDeed>(1159478, 1159479, 0xA55C, 0, 0, 400, cat);
+            Register<DecorativeStableSet>(1159272, 1159278, 0, 0x9D3C, 0, 1200, cat);
+            Register<LionMailbox>(1158859, 1158857, 0xA3F7, 0, 0, 400, cat);
+            Register<SittingKittenMailbox>(1158859, 1158857, 0xA3EB, 0, 0, 400, cat);
+            Register<ScarecrowMailbox>(1158859, 1158857, 0xA3F4, 0, 0, 400, cat);
+            Register<StandingKittenMailbox>(1158859, 1158857, 0xA3EF, 0, 0, 400, cat);
+            Register<FieldGardenBedDeed>(1159056, 1159076, 0, 0x9D35, 0, 700, cat);
+            Register<DecorativeFarmSet>(1159046, 1159077, 0, 0x9CEB, 0, 1200, cat);
+            Register<DolphinMailbox>(1158859, 1158857, 0xA203, 0, 0, 400, cat);
+            Register<LightMailbox>(1158859, 1158857, 0xA268, 0, 0, 400, cat);
             Register<DecorativeKitchenSet>(1158970, 1158971, 0, 0x9CE8, 0, 1200, cat);
-            Register<SquirrelMailbox>(1158859, 1158857, 0xA207, 0, 0, 400, cat);
             Register<BarrelMailbox>(1158859, 1158857, 0xA1F7, 0, 0, 400, cat);
+            Register<SquirrelMailbox>(1158859, 1158857, 0xA207, 0, 0, 400, cat);
             Register<DecorativeBlackwidowDeed>(1157897, 1157898, 0, 0x9CD7, 0, 600, cat);
             Register<HildebrandtDragonRugDeed>(1157889, 1157890, 0, 0x9CD8, 0, 700, cat);
             Register<SmallWorldTreeRugAddonDeed>(1157206, 1157898, 0, 0x9CBA, 0, 300, cat);
@@ -220,8 +235,9 @@ namespace Server.Engines.UOStore
             Register<TapestryOfSosaria>(1062917, 1156961, 0x234E, 0, 0, 100, cat);
             Register<RoseOfTrinsic>(1062913, 1156960, 0x234D, 0, 0, 100, cat);
             Register<HearthOfHomeFireDeed>(1062919, 1156958, 0, 0x9C97, 0, 100, cat);
-            // TODO: Singing Ball
-            // TODO: Secret Chest
+
+            Register<StoreSingingBall>(1041245, 1156907, 0, 0x9CB8, 0, 200, cat);
+            Register<SecretChest>(1151583, 1156909, 0x9706, 0, 0, 500, cat);
 
             Register<MiniHouseDeed>(new TextDefinition[] { 1062096, 1157015 }, 1156916, 0, 0x9CB5, 0, 200, cat, ConstructMiniHouseDeed); // two story wood & plaster
             Register<MiniHouseDeed>(new TextDefinition[] { 1062096, 1011317 }, 1156916, 0x22F5, 0, 0, 200, cat, ConstructMiniHouseDeed); // small stone tower
@@ -272,7 +288,7 @@ namespace Server.Engines.UOStore
             Register<VanityDeed>(1074027, 1156931, 0, 0x9C9C, 0, 100, cat);
             Register<AppleTrunkDeed>(1076785, 1156927, 0xD98, 0, 0, 100, cat);
             Register<TableWithPurpleClothDeed>(new TextDefinition[] { 1157011, 1157013 }, 1156929, 0x118B, 0, 0, 100, cat);
-            Register<WoodenCoffinDeed>(1076274, 1156928 , 0, 0x9C92, 0, 100, cat);
+            Register<WoodenCoffinDeed>(1076274, 1156928, 0, 0x9C92, 0, 100, cat);
             Register<RaisedGardenDeed>(new TextDefinition[] { 1150359, 1156688 }, 1156680, 0, 0x9C8B, 0, 2000, cat, ConstructRaisedGarden);
             Register<HouseTeleporterTileBag>(new TextDefinition[] { 1156683, 1156826 }, 1156668, 0x40B9, 0, 1201, 1000, cat);
             Register<WoodworkersBenchDeed>(1026641, 1156670, 0x14F0, 0, 0, 600, cat);
@@ -290,6 +306,7 @@ namespace Server.Engines.UOStore
 
             // mounts
             cat = StoreCategory.Mounts;
+            Register<CapybaraStatue>(1159492, 1159493, 0xA57B, 0, 0, 1000, cat);
             Register<CoconutCrabStatue>(1159165, 1159166, 0xA335, 0, 0, 1000, cat);
             Register<SkeletalCatStatue>(1158462, 1158738, 0xA138, 0, 0, 1000, cat);
             Register<EowmuStatue>(1158082, 1158433, 0xA0C0, 0, 0, 1000, cat);
@@ -299,13 +316,33 @@ namespace Server.Engines.UOStore
 
             // misc
             cat = StoreCategory.Misc;
-            Register<SoulstoneToken>(1158404, 1158405, 0x2A93, 0, 2598, 1000, cat, ConstructSoulstone);
+            Register<PotionOfGloriousFortune>(1158688, 1158739, 0xA1E6, 0, 1195, 200, cat);
+            Register<RookChessPieceGuildstone>(1159490, 1159491, 0xA583, 0, 0, 500, cat);
+            Register<LegacyGuildstone>(1159490, 1159491, 0xED4, 0, 0, 500, cat);
+            Register<KnightChessPieceGuildstone>(1159490, 1159491, 0xA581, 0, 0, 500, cat);
+            Register<AnvilofArtifactsDeed>(1159437, 1159466, 0xA108, 0, 0, 1000, cat);
+            Register<PetWhistle>(1159374, 1159394, 0xA4E7, 0, 0, 200, cat);
+            Register<SoulstoneToken>(1158869, 1158405, 0x32F4, 0, 43, 1000, cat, ConstructSoulstone);
+            Register<SoulstoneToken>(1158870, 1158405, 0x32F4, 0, 53, 1000, cat, ConstructSoulstone);
+            Register<SoulstoneToken>(1158868, 1158405, 0x32F4, 0, 1150, 1000, cat, ConstructSoulstone);
+            Register<SoulstoneToken>(1158867, 1158405, 0x32F4, 0, 1106, 1000, cat, ConstructSoulstone);
+
+            if (AccountVault.SystemSettings.UseTokens)
+            {
+                Register<VaultToken>(1158315, 1158316, 0x9FE8, 0, 0, 300, cat);
+            }
+
+            Register<SoulstoneToken>(1158404, 1158405, 0x32F4, 0, 2598, 1000, cat, ConstructSoulstone);
+            Register<WeddingChest>(1157895, 1157896, 0, 0x9CCC, 0, 500, cat);
             Register<BagOfBulkOrderCovers>(1071116, 1157603, 0, 0x9CC6, 0, 200, cat, ConstructBOBCoverOne);
 
-            //TODO: UndeadWeddingBundle, TotemOfChromaticFortune, 
+            //TODO: TotemOfChromaticFortune, 
 
             Register<PetBrandingIron>(1157314, 1157372, 0, 0x9CC3, 0, 600, cat);
-            Register<PetBondingPotion>(1152921, 1156678, 0, 0x9CBC, 0, 500, cat); 
+            Register<WeddingPackageAddonToken>(1157342, 1157371, 0, 0x9CC5, 0, 900, cat);
+            Register<WeddingPackageToken>(1157339, 1157370, 0, 0x9CC4, 0, 2900, cat);
+            Register<ImprovedRockHammer>(1157177, 1157306, 0, 0x9CBB, 0, 1000, cat);
+            Register<PetBondingPotion>(1156613, 1156678, 0, 0x9CBC, 0, 500, cat);
 
             Register<ForgedMetalOfArtifacts>(new TextDefinition[] { 1149868, 1156686 }, 1156674, 0, 0x9C65, 0, 1000, cat, ConstructForgedMetal);
             Register<ForgedMetalOfArtifacts>(new TextDefinition[] { 1149868, 1156687 }, 1156675, 0, 0x9C65, 0, 600, cat, ConstructForgedMetal);
@@ -343,6 +380,11 @@ namespace Server.Engines.UOStore
             Register(new StoreEntry(itemType, name, tooltip, itemID, gumpID, hue, cost, cat, constructor));
         }
 
+        public static StoreEntry GetEntry(Type t)
+        {
+            return Entries.FirstOrDefault(e => e.ItemType == t);
+        }
+
         public static void Register(StoreEntry entry)
         {
             Entries.Add(entry);
@@ -358,14 +400,14 @@ namespace Server.Engines.UOStore
             OpenStore(state.Mobile as PlayerMobile);
         }
 
-        public static void OpenStore(PlayerMobile user)
+        public static void OpenStore(PlayerMobile user, StoreEntry forcedEntry = null)
         {
             if (user == null || user.NetState == null)
             {
                 return;
             }
 
-            if (!Enabled || (Configuration.Expansion != Expansion.None && Core.Expansion < Configuration.Expansion))
+            if (!Enabled)
             {
                 // The promo code redemption system is currently unavailable. Please try again later.
                 user.SendLocalizedMessage(1062904);
@@ -379,12 +421,6 @@ namespace Server.Engines.UOStore
                 return;
             }
 
-            if (!user.NetState.UltimaStore)
-            {
-                user.SendMessage("You must update Ultima Online in order to use the in game store.");
-                return;
-            }
-
             if (user.AccessLevel < AccessLevel.Counselor && !CanSearch(user))
             {
                 // Before using the in game store, you must be in a safe log-out location
@@ -395,16 +431,16 @@ namespace Server.Engines.UOStore
 
             if (!user.HasGump(typeof(UltimaStoreGump)))
             {
-                BaseGump.SendGump(new UltimaStoreGump(user));
+                BaseGump.SendGump(new UltimaStoreGump(user, forcedEntry));
             }
         }
 
         #region Constructors
         public static Item ConstructHairDye(Mobile m, StoreEntry entry)
         {
-            var info = NaturalHairDye.Table.FirstOrDefault(x => x.Localization == entry.Name[1].Number);
+            NaturalHairDye.HairDyeInfo info = NaturalHairDye.Table.FirstOrDefault(x => x.Localization == entry.Name[1].Number);
 
-            if(info != null)
+            if (info != null)
             {
                 return new NaturalHairDye(info.Type);
             }
@@ -414,7 +450,7 @@ namespace Server.Engines.UOStore
 
         public static Item ConstructHaochisPigment(Mobile m, StoreEntry entry)
         {
-            var info = HaochisPigment.Table.FirstOrDefault(x => x.Localization == entry.Name[1].Number);
+            HaochisPigment.HoachisPigmentInfo info = HaochisPigment.Table.FirstOrDefault(x => x.Localization == entry.Name[1].Number);
 
             if (info != null)
             {
@@ -476,7 +512,7 @@ namespace Server.Engines.UOStore
                     {
                         if (MiniHouseInfo.Info[i].LabelNumber == entry.Name[1].Number)
                         {
-                            var type = (MiniHouseType)i;
+                            MiniHouseType type = (MiniHouseType)i;
 
                             return new MiniHouseDeed(type);
                         }
@@ -489,7 +525,7 @@ namespace Server.Engines.UOStore
 
         public static Item ConstructRaisedGarden(Mobile m, StoreEntry entry)
         {
-            var bag = new Bag();
+            Bag bag = new Bag();
 
             bag.DropItem(new RaisedGardenDeed());
             bag.DropItem(new RaisedGardenDeed());
@@ -500,7 +536,7 @@ namespace Server.Engines.UOStore
 
         public static Item ConstructLampPost(Mobile m, StoreEntry entry)
         {
-            var item = new LampPost2
+            LampPost2 item = new LampPost2
             {
                 Movable = true,
                 LootType = LootType.Blessed
@@ -527,6 +563,10 @@ namespace Server.Engines.UOStore
                 case 1078835: return new SoulstoneToken(SoulstoneType.Blue);
                 case 1078834: return new SoulstoneToken(SoulstoneType.Green);
                 case 1158404: return new SoulstoneToken(SoulstoneType.Violet);
+                case 1158869: return new SoulstoneToken(SoulstoneType.Orange);
+                case 1158870: return new SoulstoneToken(SoulstoneType.Yellow);
+                case 1158868: return new SoulstoneToken(SoulstoneType.White);
+                case 1158867: return new SoulstoneToken(SoulstoneType.Black);
             }
 
             return null;
@@ -534,7 +574,7 @@ namespace Server.Engines.UOStore
 
         public static Item ConstructMerchantsTrinket(Mobile m, StoreEntry entry)
         {
-            switch(entry.Name[0].Number)
+            switch (entry.Name[0].Number)
             {
                 case 1156827: return new MerchantsTrinket(false);
                 case 1156828: return new MerchantsTrinket(true);
@@ -561,9 +601,7 @@ namespace Server.Engines.UOStore
 
         public static void AddPendingItem(Mobile m, Item item)
         {
-            List<Item> list;
-
-            if (!PendingItems.TryGetValue(m, out list))
+            if (!PendingItems.TryGetValue(m, out List<Item> list))
             {
                 PendingItems[m] = list = new List<Item>();
             }
@@ -583,11 +621,9 @@ namespace Server.Engines.UOStore
 
         public static void CheckPendingItem(Mobile m)
         {
-            List<Item> list;
-
-            if (PendingItems.TryGetValue(m, out list))
+            if (PendingItems.TryGetValue(m, out List<Item> list))
             {
-                var index = list.Count;
+                int index = list.Count;
 
                 while (--index >= 0)
                 {
@@ -596,7 +632,7 @@ namespace Server.Engines.UOStore
                         continue;
                     }
 
-                    var item = list[index];
+                    Item item = list[index];
 
                     if (item != null)
                     {
@@ -609,7 +645,7 @@ namespace Server.Engines.UOStore
                             }
                             else if (item.LabelNumber > 0 || item.Name != null)
                             {
-                                var name = item.LabelNumber > 0 ? ("#" + item.LabelNumber) : item.Name;
+                                string name = item.LabelNumber > 0 ? ("#" + item.LabelNumber) : item.Name;
 
                                 // Your purchase of ~1_ITEM~ has been placed in your backpack.
                                 m.SendLocalizedMessage(1156844, name);
@@ -638,7 +674,7 @@ namespace Server.Engines.UOStore
 
         public static List<StoreEntry> GetSortedList(string searchString)
         {
-            var list = new List<StoreEntry>();
+            List<StoreEntry> list = new List<StoreEntry>();
 
             list.AddRange(Entries.Where(e => Insensitive.Contains(GetStringName(e.Name), searchString)));
 
@@ -647,17 +683,17 @@ namespace Server.Engines.UOStore
 
         public static string GetStringName(TextDefinition[] text)
         {
-            var str = string.Empty;
+            string str = string.Empty;
 
-            foreach (var td in text)
+            foreach (TextDefinition td in text)
             {
                 if (td.Number > 0 && VendorSearch.StringList != null)
                 {
-                    str += String.Format("{0} ", VendorSearch.StringList.GetString(td.Number));
+                    str += string.Format("{0} ", VendorSearch.StringList.GetString(td.Number));
                 }
-                else if (!String.IsNullOrWhiteSpace(td.String))
+                else if (!string.IsNullOrWhiteSpace(td.String))
                 {
-                    str += String.Format("{0} ", td.String);
+                    str += string.Format("{0} ", td.String);
                 }
             }
 
@@ -666,18 +702,23 @@ namespace Server.Engines.UOStore
 
         public static string GetStringName(TextDefinition text)
         {
-            var str = text.String;
+            string str = text.String;
 
             if (text.Number > 0 && VendorSearch.StringList != null)
             {
                 str = VendorSearch.StringList.GetString(text.Number);
             }
 
-            return str ?? String.Empty;
+            return str ?? string.Empty;
         }
 
-        public static List<StoreEntry> GetList(StoreCategory cat)
+        public static List<StoreEntry> GetList(StoreCategory cat, StoreEntry forcedEntry = null)
         {
+            if (forcedEntry != null)
+            {
+                return new List<StoreEntry>() { forcedEntry };
+            }
+
             return Entries.Where(e => e.Category == cat).ToList();
         }
 
@@ -685,26 +726,26 @@ namespace Server.Engines.UOStore
         {
             switch (sort)
             {
-                case SortBy.Name: 
-                        list.Sort((a, b) => String.CompareOrdinal(GetStringName(a.Name), GetStringName(b.Name)));
+                case SortBy.Name:
+                    list.Sort((a, b) => string.CompareOrdinal(GetStringName(a.Name), GetStringName(b.Name)));
                     break;
                 case SortBy.PriceLower:
-                        list.Sort((a, b) => a.Price.CompareTo(b.Price));
+                    list.Sort((a, b) => a.Price.CompareTo(b.Price));
                     break;
                 case SortBy.PriceHigher:
-                        list.Sort((a, b) => b.Price.CompareTo(a.Price));
+                    list.Sort((a, b) => b.Price.CompareTo(a.Price));
                     break;
                 case SortBy.Newest:
                     break;
                 case SortBy.Oldest:
-                        list.Reverse();
+                    list.Reverse();
                     break;
             }
         }
 
         public static int CartCount(Mobile m)
         {
-            var profile = GetProfile(m, false);
+            PlayerProfile profile = GetProfile(m, false);
 
             if (profile != null)
             {
@@ -721,9 +762,9 @@ namespace Server.Engines.UOStore
                 return 0;
             }
 
-            var sub = 0.0;
+            double sub = 0.0;
 
-            foreach (var kvp in cart)
+            foreach (KeyValuePair<StoreEntry, int> kvp in cart)
             {
                 sub += kvp.Key.Cost * kvp.Value;
             }
@@ -736,24 +777,24 @@ namespace Server.Engines.UOStore
             switch (Configuration.CurrencyImpl)
             {
                 case CurrencyType.Sovereigns:
-                {
-                    if (m is PlayerMobile)
                     {
-                        return ((PlayerMobile)m).AccountSovereigns;
+                        if (m is PlayerMobile)
+                        {
+                            return ((PlayerMobile)m).AccountSovereigns;
+                        }
                     }
-                }
                     break;
                 case CurrencyType.Gold:
                     return Banker.GetBalance(m);
                 case CurrencyType.PointsSystem:
-                {
-                    var sys = PointsSystem.GetSystemInstance(Configuration.PointsImpl);
-
-                    if (sys != null)
                     {
-                        return (int)Math.Min(Int32.MaxValue, sys.GetPoints(m));
+                        PointsSystem sys = PointsSystem.GetSystemInstance(Configuration.PointsImpl);
+
+                        if (sys != null)
+                        {
+                            return (int)Math.Min(int.MaxValue, sys.GetPoints(m));
+                        }
                     }
-                }
                     break;
                 case CurrencyType.Custom:
                     return Configuration.GetCustomCurrency(m);
@@ -764,13 +805,13 @@ namespace Server.Engines.UOStore
 
         public static void TryPurchase(Mobile m)
         {
-            var cart = GetCart(m);
-            var total = GetSubTotal(cart);
-            
+            Dictionary<StoreEntry, int> cart = GetCart(m);
+            int total = GetSubTotal(cart);
+
             if (cart == null || cart.Count == 0 || total == 0)
             {
                 // Purchase failed due to your cart being empty.
-                m.SendLocalizedMessage(1156842); 
+                m.SendLocalizedMessage(1156842);
             }
             else if (total > GetCurrency(m, true))
             {
@@ -781,14 +822,14 @@ namespace Server.Engines.UOStore
             }
             else
             {
-                var subtotal = 0;
-                var fail = false;
+                int subtotal = 0;
+                bool fail = false;
 
-                var remove = new List<StoreEntry>();
+                List<StoreEntry> remove = new List<StoreEntry>();
 
-                foreach (var entry in cart)
+                foreach (KeyValuePair<StoreEntry, int> entry in cart)
                 {
-                    for (var i = 0; i < entry.Value; i++)
+                    for (int i = 0; i < entry.Value; i++)
                     {
                         if (!entry.Key.Construct(m))
                         {
@@ -796,15 +837,17 @@ namespace Server.Engines.UOStore
 
                             try
                             {
-                                using (var op = File.AppendText("UltimaStoreError.log"))
+                                using (StreamWriter op = File.AppendText("UltimaStoreError.log"))
                                 {
                                     op.WriteLine("Bad Constructor: {0}", entry.Key.ItemType.Name);
 
                                     Utility.WriteConsoleColor(ConsoleColor.Red, "[Ultima Store]: Bad Constructor: {0}", entry.Key.ItemType.Name);
                                 }
                             }
-                            catch
-                            { }
+                            catch (Exception e)
+                            {
+                                Diagnostics.ExceptionLogging.LogException(e);
+                            }
                         }
                         else
                         {
@@ -820,9 +863,9 @@ namespace Server.Engines.UOStore
                     DeductCurrency(m, subtotal);
                 }
 
-                var profile = GetProfile(m);
+                PlayerProfile profile = GetProfile(m);
 
-                foreach (var entry in remove)
+                foreach (StoreEntry entry in remove)
                 {
                     profile.RemoveFromCart(entry);
                 }
@@ -830,7 +873,7 @@ namespace Server.Engines.UOStore
                 if (fail)
                 {
                     // Failed to process one of your items. Please check your cart and try again.
-                    m.SendLocalizedMessage(1156853); 
+                    m.SendLocalizedMessage(1156853);
                 }
             }
         }
@@ -845,30 +888,30 @@ namespace Server.Engines.UOStore
             switch (Configuration.CurrencyImpl)
             {
                 case CurrencyType.Sovereigns:
-                {
-                    if (m is PlayerMobile && ((PlayerMobile)m).WithdrawSovereigns(amount))
                     {
-                        return amount;
+                        if (m is PlayerMobile && ((PlayerMobile)m).WithdrawSovereigns(amount))
+                        {
+                            return amount;
+                        }
                     }
-                }
                     break;
                 case CurrencyType.Gold:
-                {
-                    if (Banker.Withdraw(m, amount, true))
                     {
-                        return amount;
+                        if (Banker.Withdraw(m, amount, true))
+                        {
+                            return amount;
+                        }
                     }
-                }
                     break;
                 case CurrencyType.PointsSystem:
-                {
-                    var sys = PointsSystem.GetSystemInstance(Configuration.PointsImpl);
-
-                    if (sys != null && sys.DeductPoints(m, amount, true))
                     {
-                        return amount;
+                        PointsSystem sys = PointsSystem.GetSystemInstance(Configuration.PointsImpl);
+
+                        if (sys != null && sys.DeductPoints(m, amount, true))
+                        {
+                            return amount;
+                        }
                     }
-                }
                     break;
                 case CurrencyType.Custom:
                     return Configuration.DeductCustomCurrecy(m, amount);
@@ -894,7 +937,7 @@ namespace Server.Engines.UOStore
 
         public static Dictionary<StoreEntry, int> GetCart(Mobile m)
         {
-            var profile = GetProfile(m, false);
+            PlayerProfile profile = GetProfile(m, false);
 
             if (profile != null)
             {
@@ -922,7 +965,7 @@ namespace Server.Engines.UOStore
 
             writer.Write(PendingItems.Count);
 
-            foreach (var kvp in PendingItems)
+            foreach (KeyValuePair<Mobile, List<Item>> kvp in PendingItems)
             {
                 writer.Write(kvp.Key);
                 writer.WriteItemList(kvp.Value, true);
@@ -930,7 +973,7 @@ namespace Server.Engines.UOStore
 
             writer.Write(PlayerProfiles.Count);
 
-            foreach (var pe in PlayerProfiles)
+            foreach (KeyValuePair<Mobile, PlayerProfile> pe in PlayerProfiles)
             {
                 pe.Value.Serialize(writer);
             }
@@ -942,12 +985,12 @@ namespace Server.Engines.UOStore
 
             _UltimaStoreContainer = reader.ReadItem<UltimaStoreContainer>();
 
-            var count = reader.ReadInt();
+            int count = reader.ReadInt();
 
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var m = reader.ReadMobile();
-                var list = reader.ReadStrongItemList<Item>();
+                Mobile m = reader.ReadMobile();
+                List<Item> list = reader.ReadStrongItemList<Item>();
 
                 if (m != null && list.Count > 0)
                 {
@@ -957,9 +1000,9 @@ namespace Server.Engines.UOStore
 
             count = reader.ReadInt();
 
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var pe = new PlayerProfile(reader);
+                PlayerProfile pe = new PlayerProfile(reader);
 
                 if (pe.Player != null)
                 {
@@ -975,9 +1018,9 @@ namespace Server.Engines.UOStore
     {
         private static readonly List<Item> _DisplayItems = new List<Item>();
 
-        public override bool Decays { get { return false; } }
+        public override bool Decays => false;
 
-        public override string DefaultName { get { return "Ultima Store Display Container"; } }
+        public override string DefaultName => "Ultima Store Display Container";
 
         public UltimaStoreContainer()
             : base(0) // No Draw
@@ -1009,7 +1052,7 @@ namespace Server.Engines.UOStore
 
         public Item FindDisplayItem(Type t)
         {
-            var item = GetDisplayItem(t);
+            Item item = GetDisplayItem(t);
 
             if (item == null)
             {
@@ -1044,7 +1087,7 @@ namespace Server.Engines.UOStore
 
             reader.ReadInt();
 
-            var list = reader.ReadStrongItemList();
+            List<Item> list = reader.ReadStrongItemList();
 
             if (list.Count > 0)
             {

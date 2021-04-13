@@ -1,4 +1,3 @@
-using System;
 using Server.Misc;
 
 namespace Server.Items
@@ -9,10 +8,10 @@ namespace Server.Items
         public EvilOrcHelm()
             : base()
         {
-            this.Hue = 0x96E;
-            this.Attributes.BonusStr = 10;
-            this.Attributes.BonusInt = this.IntOrDexPropertyValue;
-            this.Attributes.BonusDex = this.IntOrDexPropertyValue;
+            Hue = 0x96E;
+            Attributes.BonusStr = 10;
+            Attributes.BonusInt = IntOrDexPropertyValue;
+            Attributes.BonusDex = IntOrDexPropertyValue;
         }
 
         public EvilOrcHelm(Serial serial)
@@ -20,37 +19,25 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1062021;
-            }
-        }// an evil orc helm
+        public override int LabelNumber => 1062021;// an evil orc helm
         public override bool UseIntOrDexProperty
         {
             get
             {
-                if (Core.SA && !(this.Parent is Mobile))
+                if (!(Parent is Mobile))
                     return true;
 
                 return base.UseIntOrDexProperty;
             }
         }
-        public override int IntOrDexPropertyValue
-        {
-            get
-            {
-                return -10;
-            }
-        }
+        public override int IntOrDexPropertyValue => -10;
         public override bool OnEquip(Mobile from)
         {
             if (from.RawInt > from.RawDex)
-                this.Attributes.BonusDex = 0;
+                Attributes.BonusDex = 0;
             else
-                this.Attributes.BonusInt = 0;
-			
+                Attributes.BonusInt = 0;
+
             Titles.AwardKarma(from, -22, true);
 
             return base.OnEquip(from);
@@ -62,15 +49,15 @@ namespace Server.Items
 
             if (parent is Mobile)
             {
-                this.Attributes.BonusInt = this.IntOrDexPropertyValue;
-                this.Attributes.BonusDex = this.IntOrDexPropertyValue;
+                Attributes.BonusInt = IntOrDexPropertyValue;
+                Attributes.BonusDex = IntOrDexPropertyValue;
             }
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

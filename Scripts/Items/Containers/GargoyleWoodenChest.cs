@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [Furniture]
@@ -10,8 +8,8 @@ namespace Server.Items
         public GargoyleWoodenChest()
             : base(0x4025)
         {
-            this.Weight = 2.0;
-            this.GumpID = 0x42;
+            Weight = 2.0;
+            GumpID = 0x42;
         }
 
         public GargoyleWoodenChest(Serial serial)
@@ -22,18 +20,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (this.Weight == 15.0)
-                this.Weight = 2.0;
         }
     }
 }

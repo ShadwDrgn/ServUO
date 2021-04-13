@@ -1,7 +1,5 @@
 using System;
 
-using Server;
-
 namespace Server.Items
 {
     public class DailyRaresSpawner
@@ -17,7 +15,7 @@ namespace Server.Items
 
             // rocks
             Map map = Map.Felucca;
-            var p = new Point3D(new Point3D(2684, 2060, 28));
+            Point3D p = new Point3D(new Point3D(2684, 2060, 28));
             if (map.FindItem<DailyRocks>(p) == null)
             {
                 SetItem(new DailyRocks(), p, map);
@@ -110,8 +108,10 @@ namespace Server.Items
             p = new Point3D(5575, 1829, 6);
             if (map.FindItem<CandleLarge>(p) == null)
             {
-                var candle = new CandleLarge();
-                candle.Burning = true;
+                CandleLarge candle = new CandleLarge
+                {
+                    Burning = true
+                };
                 SetItem(candle, p, map);
             }
 
@@ -119,8 +119,10 @@ namespace Server.Items
             p = new Point3D(5575, 1829, 6);
             if (map.FindItem<CandleLarge>(p) == null)
             {
-                var candle = new CandleLarge();
-                candle.Burning = true;
+                CandleLarge candle = new CandleLarge
+                {
+                    Burning = true
+                };
                 SetItem(candle, p, map);
             }
 
@@ -247,7 +249,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -275,7 +277,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -303,7 +305,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -316,7 +318,7 @@ namespace Server.Items
 
     public class DailyMeatPie : Food
     {
-        public override int LabelNumber { get { return 1060141; } } // a tasty meat pie
+        public override int LabelNumber => 1060141;  // a tasty meat pie
 
         [Constructable]
         public DailyMeatPie()
@@ -336,7 +338,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

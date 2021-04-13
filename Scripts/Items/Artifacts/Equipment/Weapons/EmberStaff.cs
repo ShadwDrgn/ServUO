@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class EmberStaff : QuarterStaff
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public EmberStaff()
         {
@@ -21,13 +19,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1077582;
-            }
-        }// Ember Staff
+        public override int LabelNumber => 1077582;// Ember Staff
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

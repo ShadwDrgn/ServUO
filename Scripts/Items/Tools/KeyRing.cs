@@ -1,7 +1,7 @@
+using Server.Engines.Craft;
+using Server.Targeting;
 using System;
 using System.Collections.Generic;
-using Server.Targeting;
-using Server.Engines.Craft;
 
 namespace Server.Items
 {
@@ -20,7 +20,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ItemQuality Quality { get { return _Quality; } set { _Quality = value; InvalidateProperties(); } }
 
-        public bool PlayerConstructed { get { return true; } }
+        public bool PlayerConstructed => true;
 
         public static readonly int MaxKeys = 20;
         private List<Key> m_Keys;
@@ -39,13 +39,7 @@ namespace Server.Items
         {
         }
 
-        public List<Key> Keys
-        {
-            get
-            {
-                return m_Keys;
-            }
-        }
+        public List<Key> Keys => m_Keys;
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
             if (!IsChildOf(from.Backpack))
@@ -170,7 +164,7 @@ namespace Server.Items
         {
             if (_Resource > CraftResource.Iron)
             {
-                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), String.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
+                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), string.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
             }
             else
             {
@@ -206,7 +200,7 @@ namespace Server.Items
             writer.Write(_Crafter);
             writer.Write((int)_Quality);
 
-            writer.WriteItemList<Key>(m_Keys);
+            writer.WriteItemList(m_Keys);
         }
 
         public override void Deserialize(GenericReader reader)

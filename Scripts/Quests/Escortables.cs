@@ -1,697 +1,409 @@
-using System;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using System;
 
 namespace Server.Engines.Quests
 {
     public class EscortToYewQuest : BaseQuest
-    { 
+    {
         public EscortToYewQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Yew"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Yew"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Yew */
-        public override object Title
-        {
-            get
-            {
-                return 1072275;
-            }
-        }
+        public override object Title => 1072275;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Yew.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072289;
-            }
-        }
+        public override object Uncomplete => 1072289;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToVesperQuest : BaseQuest
-    { 
+    {
         public EscortToVesperQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Vesper"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Vesper"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Vesper */
-        public override object Title
-        {
-            get
-            {
-                return 1072276;
-            }
-        }
+        public override object Title => 1072276;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Vesper.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072290;
-            }
-        }
+        public override object Uncomplete => 1072290;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToTrinsicQuest : BaseQuest
-    { 
+    {
         public EscortToTrinsicQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Trinsic"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Trinsic"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Trinsic */
-        public override object Title
-        {
-            get
-            {
-                return 1072277;
-            }
-        }
+        public override object Title => 1072277;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Trinsic.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072291;
-            }
-        }
+        public override object Uncomplete => 1072291;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToSkaraQuest : BaseQuest
-    { 
+    {
         public EscortToSkaraQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Skara Brae"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Skara Brae"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Skara */
-        public override object Title
-        {
-            get
-            {
-                return 1072278;
-            }
-        }
+        public override object Title => 1072278;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Skara.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072292;
-            }
-        }
+        public override object Uncomplete => 1072292;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToSerpentsHoldQuest : BaseQuest
-    { 
+    {
         public EscortToSerpentsHoldQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Serpent's Hold"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Serpent's Hold"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Serpent's Hold */
-        public override object Title
-        {
-            get
-            {
-                return 1072279;
-            }
-        }
+        public override object Title => 1072279;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Serpent's Hold.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072293;
-            }
-        }
+        public override object Uncomplete => 1072293;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToNujelmQuest : BaseQuest
-    { 
+    {
         public EscortToNujelmQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Nujel'm"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Nujel'm"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Nujel'm */
-        public override object Title
-        {
-            get
-            {
-                return 1072280;
-            }
-        }
+        public override object Title => 1072280;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Nujel'm.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072294;
-            }
-        }
+        public override object Uncomplete => 1072294;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToMoonglowQuest : BaseQuest
-    { 
+    {
         public EscortToMoonglowQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Moonglow"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Moonglow"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Moonglow */
-        public override object Title
-        {
-            get
-            {
-                return 1072281;
-            }
-        }
+        public override object Title => 1072281;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Moonglow.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072295;
-            }
-        }
+        public override object Uncomplete => 1072295;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToMinocQuest : BaseQuest
-    { 
+    {
         public EscortToMinocQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Minoc"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Minoc"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Minoc */
-        public override object Title
-        {
-            get
-            {
-                return 1072282;
-            }
-        }
+        public override object Title => 1072282;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Minoc.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072296;
-            }
-        }
+        public override object Uncomplete => 1072296;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToMaginciaQuest : BaseQuest
-    { 
+    {
         public EscortToMaginciaQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Magincia"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Magincia"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Magincia */
-        public override object Title
-        {
-            get
-            {
-                return 1072283;
-            }
-        }
+        public override object Title => 1072283;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Magincia.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072297;
-            }
-        }
+        public override object Uncomplete => 1072297;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToJhelomQuest : BaseQuest
-    { 
+    {
         public EscortToJhelomQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Jhelom"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Jhelom"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Jhelom */
-        public override object Title
-        {
-            get
-            {
-                return 1072284;
-            }
-        }
+        public override object Title => 1072284;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Jhelom.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072298;
-            }
-        }
+        public override object Uncomplete => 1072298;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToCoveQuest : BaseQuest
-    { 
+    {
         public EscortToCoveQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Cove"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Cove"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Cove */
-        public override object Title
-        {
-            get
-            {
-                return 1072285;
-            }
-        }
+        public override object Title => 1072285;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Cove.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072299;
-            }
-        }
+        public override object Uncomplete => 1072299;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class EscortToBritainQuest : BaseQuest
-    { 
+    {
         public EscortToBritainQuest()
             : base()
-        { 
-            AddObjective(new EscortObjective("Britain"));		  
-            AddReward(new BaseReward(typeof(Gold), 500, 1062577)); 
+        {
+            AddObjective(new EscortObjective("Britain"));
+            AddReward(new BaseReward(typeof(Gold), 500, 1062577));
         }
 
         /* An escort to Britain */
-        public override object Title
-        {
-            get
-            {
-                return 1072286;
-            }
-        }
+        public override object Title => 1072286;
         /* I seek a worthy escort.  I can offer some small pay to any able bodied adventurer who can assist me.  
         * It is imperative that I reach my destination. */
-        public override object Description
-        {
-            get
-            {
-                return 1072287;
-            }
-        }
+        public override object Description => 1072287;
         /* I wish you would reconsider my offer.  I'll be waiting right here for someone brave enough to assist me. */
-        public override object Refuse
-        {
-            get
-            {
-                return 1072288;
-            }
-        }
+        public override object Refuse => 1072288;
         /* We have not yet arrived in Britain.  Let's keep going. */
-        public override object Uncomplete
-        {
-            get
-            {
-                return 1072300;
-            }
-        }
+        public override object Uncomplete => 1072300;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
+
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadEncodedInt();
         }
     }
 
     public class TownEscortable : BaseEscort
     {
-        private static readonly Type[] m_Quests = new Type[]
+        private static readonly Type[] m_Quests =
         {
             typeof(EscortToYewQuest),
             typeof(EscortToVesperQuest),
@@ -707,7 +419,7 @@ namespace Server.Engines.Quests
             typeof(EscortToBritainQuest)
         };
 
-        private static readonly string[] m_Destinations = new string[]
+        private static readonly string[] m_Destinations =
         {
             "Yew",
             "Vesper",
@@ -759,21 +471,15 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override Type[] Quests
-        {
-            get
-            {
-                return new Type[] { m_Quests[m_Quest] };
-            }
-        }
+        public override Type[] Quests => new Type[] { m_Quests[m_Quest] };
         public override void Advertise()
         {
             Say(Utility.RandomMinMax(1072301, 1072303));
         }
 
-        public override Region GetDestination()
+        public override string GetDestination()
         {
-            return QuestHelper.FindRegion(m_Destinations[m_Quest]);
+            return QuestHelper.ValidateRegion(m_Destinations[m_Quest]) ? m_Destinations[m_Quest] : null;
         }
 
         public override void Serialize(GenericWriter writer)
@@ -790,7 +496,7 @@ namespace Server.Engines.Quests
             base.Deserialize(reader);
 
             int version = reader.ReadEncodedInt();
-			
+
             m_Quest = reader.ReadInt();
 
             if (version == 0 && m_Destinations[m_Quest] == Region.Name)
@@ -816,27 +522,12 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool CanTeach
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanTeach => true;
+
+        public override bool ClickTitle => false;
+
         public override void InitOutfit()
         {
-            if (Female)
-                AddItem(new PlainDress());
-            else
-                AddItem(new Shirt(GetRandomHue()));
-
             int lowHue = GetRandomHue();
 
             AddItem(new ThighBoots());
@@ -853,7 +544,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -883,20 +574,8 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool CanTeach
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanTeach => true;
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
             AddItem(new Robe(GetRandomHue()));
@@ -917,7 +596,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -941,13 +620,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
             if (Female)
@@ -964,7 +637,7 @@ namespace Server.Engines.Quests
             else
                 AddItem(new Shoes(lowHue));
 
-            switch ( Utility.Random(4) )
+            switch (Utility.Random(4))
             {
                 case 0:
                     AddItem(new ShortHair(Utility.RandomHairHue()));
@@ -987,7 +660,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1011,13 +684,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
             if (Female)
@@ -1048,7 +715,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1076,20 +743,8 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool CanTeach
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanTeach => true;
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
             if (Female)
@@ -1121,7 +776,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1140,7 +795,7 @@ namespace Server.Engines.Quests
             if (Female)
                 Title = "the bride";
             else
-                Title = "the groom";	
+                Title = "the groom";
         }
 
         public EscortableBrideGroom(Serial serial)
@@ -1148,16 +803,10 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
-            if (Female)				
+            if (Female)
                 AddItem(new FancyDress());
             else
                 AddItem(new FancyShirt());
@@ -1185,7 +834,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1209,13 +858,7 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool ClickTitle => false;
         public override void InitOutfit()
         {
             if (Female)
@@ -1241,7 +884,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1265,7 +908,7 @@ namespace Server.Engines.Quests
             AI = AIType.AI_Mage;
             ActiveSpeed = 0.2;
             PassiveSpeed = 0.8;
-            RangePerception = BaseCreature.DefaultRangePerception;
+            RangePerception = DefaultRangePerception;
             FightMode = FightMode.Aggressor;
 
             SpeechHue = 0;
@@ -1296,10 +939,13 @@ namespace Server.Engines.Quests
 
             Fame = 1000;
             Karma = 10000;
+        }
 
-            PackItem(new Bandage(Utility.RandomMinMax(5, 10)));
-            PackItem(new HealPotion());
-            PackItem(new CurePotion());
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.LootItem<Bandage>(Utility.RandomMinMax(5, 10), true));
+            AddLoot(LootPack.LootItem<Bandage>(true));
+            AddLoot(LootPack.LootItem<Bandage>(true));
         }
 
         public EscortableHealer(Serial serial)
@@ -1307,27 +953,9 @@ namespace Server.Engines.Quests
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool CanTeach
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public virtual bool HealsYoungPlayers
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool ClickTitle => false;
+        public override bool CanTeach => true;
+        public virtual bool HealsYoungPlayers => true;
         public override bool CheckTeach(SkillName skill, Mobile from)
         {
             if (!base.CheckTeach(skill, from))
@@ -1354,7 +982,8 @@ namespace Server.Engines.Quests
                 Say(501222); // Thou art a criminal.  I shall not resurrect thee.
                 return false;
             }
-            else if (m.Murderer)
+
+            if (m.Murderer)
             {
                 Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
                 return false;
@@ -1422,7 +1051,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

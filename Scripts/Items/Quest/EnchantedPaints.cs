@@ -1,4 +1,3 @@
-using System;
 using Server.Mobiles;
 using Server.Targeting;
 
@@ -10,9 +9,9 @@ namespace Server.Engines.Quests.Collector
         public EnchantedPaints()
             : base(0xFC1)
         {
-            this.LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
 
-            this.Weight = 1.0;
+            Weight = 1.0;
         }
 
         public EnchantedPaints(Serial serial)
@@ -59,7 +58,7 @@ namespace Server.Engines.Quests.Collector
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -75,13 +74,13 @@ namespace Server.Engines.Quests.Collector
             public InternalTarget(EnchantedPaints paints)
                 : base(-1, false, TargetFlags.None)
             {
-                this.CheckLOS = false;
-                this.m_Paints = paints;
+                CheckLOS = false;
+                m_Paints = paints;
             }
 
             protected override void OnTarget(Mobile from, object targeted)
             {
-                if (this.m_Paints.Deleted || !this.m_Paints.IsChildOf(from.Backpack))
+                if (m_Paints.Deleted || !m_Paints.IsChildOf(from.Backpack))
                     return;
 
                 PlayerMobile player = from as PlayerMobile;
@@ -101,7 +100,7 @@ namespace Server.Engines.Quests.Collector
                                 ImageType image;
                                 CaptureResponse response = obj.CaptureImage((targeted.GetType().Name == "GreaterMongbat" ? new Mongbat().GetType() : targeted.GetType()), out image);
 
-                                switch ( response )
+                                switch (response)
                                 {
                                     case CaptureResponse.Valid:
                                         {

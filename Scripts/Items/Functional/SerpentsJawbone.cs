@@ -1,11 +1,10 @@
-using System;
-using Server.Mobiles;
-using Server.Gumps;
-using System.Collections.Generic;
-using Server.Network;
 using Server.ContextMenus;
+using Server.Gumps;
+using Server.Mobiles;
 using Server.Multis;
+using Server.Network;
 using Server.Spells;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -45,7 +44,7 @@ namespace Server.Items
             SetSecureLevelEntry.AddTo(from, this, list);
         }
 
-        public override int LabelNumber { get { return 1157654; } } // Serpent's Jawbone
+        public override int LabelNumber => 1157654;  // Serpent's Jawbone
 
         [Constructable]
         public SerpentsJawbone()
@@ -53,7 +52,7 @@ namespace Server.Items
         {
         }
 
-        public override bool ForceShowProperties { get { return true; } }
+        public override bool ForceShowProperties => true;
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -133,7 +132,7 @@ namespace Server.Items
                 {
                     User.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 }
-                else if (Factions.Sigil.ExistsOn(User))
+                else if (Engines.VvV.VvVSigil.ExistsOn(User))
                 {
                     User.SendLocalizedMessage(1019004); // You are not allowed to travel there.
                 }

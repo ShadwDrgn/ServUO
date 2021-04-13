@@ -1,8 +1,8 @@
-using System;
 using Server.Engines.CannedEvil;
 using Server.Items;
 using Server.Spells.Fifth;
 using Server.Spells.Seventh;
+using System;
 
 namespace Server.Mobiles
 {
@@ -42,8 +42,6 @@ namespace Server.Mobiles
             Fame = 22500;
             Karma = -22500;
 
-            VirtualArmor = 70;
-
             AddItem(new FancyShirt(Utility.RandomGreenHue()));
             AddItem(new LongPants(Utility.RandomYellowHue()));
             AddItem(new JesterHat(Utility.RandomPinkHue()));
@@ -61,119 +59,28 @@ namespace Server.Mobiles
         {
         }
 
-        public override ChampionSkullType SkullType
-        {
-            get
-            {
-                return ChampionSkullType.Greed;
-            }
-        }
-        public override Type[] UniqueList
-        {
-            get
-            {
-                return new Type[] { typeof(FangOfRactus) };
-            }
-        }
-        public override Type[] SharedList
-        {
-            get
-            {
-                return new Type[]
+        public override ChampionSkullType SkullType => ChampionSkullType.Greed;
+        public override Type[] UniqueList => new[] { typeof(FangOfRactus) };
+        public override Type[] SharedList => new[]
                 {
                     typeof(EmbroideredOakLeafCloak),
                     typeof(DjinnisRing),
                     typeof(DetectiveBoots),
                     typeof(GauntletsOfAnger)
                 };
-            }
-        }
-        public override Type[] DecorativeList
-        {
-            get
-            {
-                return new Type[] { typeof(SwampTile), typeof(MonsterStatuette) };
-            }
-        }
-        public override MonsterStatuetteType[] StatueTypes
-        {
-            get
-            {
-                return new MonsterStatuetteType[] { MonsterStatuetteType.Slime };
-            }
-        }
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool AutoDispel
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override double AutoDispelChance
-        {
-            get
-            {
-                return 1.0;
-            }
-        }
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.SE;
-            }
-        }
-		public override bool AllureImmune
-		{
-			get
-			{
-				return true;
-			}
-		}
-        public override bool Unprovokable
-        {
-            get
-            {
-                return Core.SE;
-            }
-        }
-        public override bool Uncalmable
-        {
-            get
-            {
-                return Core.SE;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Deadly;
-            }
-        }
-        public override bool ShowFameTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override Type[] DecorativeList => new[] { typeof(SwampTile), typeof(MonsterStatuette) };
+        public override MonsterStatuetteType[] StatueTypes => new[] { MonsterStatuetteType.Slime };
+        public override bool AlwaysMurderer => true;
+        public override bool AutoDispel => true;
+        public override double AutoDispelChance => 1.0;
+        public override bool AllureImmune => true;
+        public override bool Unprovokable => true;
+        public override bool Uncalmable => true;
+        public override Poison PoisonImmune => Poison.Deadly;
+        public override bool ShowFameTitle => false;
+        public override bool ClickTitle => false;
 
-        public override bool ForceStayHome { get { return true; } }
+        public override bool ForceStayHome => true;
 
         public override void GenerateLoot()
         {
@@ -200,11 +107,12 @@ namespace Server.Mobiles
             {
                 m.BodyMod = 42;
                 m.HueMod = 0;
-                if (m == this) { 
+                if (m == this)
+                {
                     m_SlayerVulnerabilities.Add("Vermin");
                     m_SlayerVulnerabilities.Add("Repond");
                 }
-   
+
                 new ExpirePolymorphTimer(m).Start();
             }
         }
@@ -238,7 +146,7 @@ namespace Server.Mobiles
                 {
                     BaseCreature rat;
 
-                    switch ( Utility.Random(5) )
+                    switch (Utility.Random(5))
                     {
                         default:
                         case 0:
@@ -318,7 +226,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -332,9 +240,9 @@ namespace Server.Mobiles
 
         private class ExpirePolymorphTimer : Timer
         {
-            private Mobile m_Owner;
+            private readonly Mobile m_Owner;
             public ExpirePolymorphTimer(Mobile owner)
-                : base(TimeSpan.FromMinutes(3.0)) //3.0
+                : base(TimeSpan.FromMinutes(3.0)) 
             {
                 m_Owner = owner;
 
@@ -351,7 +259,7 @@ namespace Server.Mobiles
                     if (m_Owner.SlayerVulnerabilities != null)
                     {
                         m_Owner.SlayerVulnerabilities.Remove("Vermin");
-                        m_Owner.SlayerVulnerabilities.Remove("Repond");    
+                        m_Owner.SlayerVulnerabilities.Remove("Repond");
                     }
                 }
             }

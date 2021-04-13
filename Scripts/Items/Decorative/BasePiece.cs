@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class BasePiece : Item
@@ -8,7 +6,7 @@ namespace Server.Items
         public BasePiece(int itemID, BaseBoard board)
             : base(itemID)
         {
-            this.m_Board = board;
+            m_Board = board;
         }
 
         public BasePiece(Serial serial)
@@ -20,33 +18,21 @@ namespace Server.Items
         {
             get
             {
-                return this.m_Board;
+                return m_Board;
             }
             set
             {
-                this.m_Board = value;
+                m_Board = value;
             }
         }
-        public override bool IsVirtualItem
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool CanTarget
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool IsVirtualItem => true;
+        public override bool CanTarget => false;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
-            writer.Write(this.m_Board);
+            writer.Write(0);
+            writer.Write(m_Board);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -55,40 +41,30 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 0:
                     {
-                        this.m_Board = (BaseBoard)reader.ReadItem();
+                        m_Board = (BaseBoard)reader.ReadItem();
 
-                        if (this.m_Board == null || this.Parent == null)
-                            this.Delete();
+                        if (m_Board == null || Parent == null)
+                            Delete();
 
                         break;
                     }
             }
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            if (this.m_Board == null || this.m_Board.Deleted)
-                this.Delete();
-            else if (!this.IsChildOf(this.m_Board))
-                this.m_Board.DropItem(this);
-            else
-                base.OnSingleClick(from);
-        }
-
         public override bool OnDragLift(Mobile from)
         {
-            if (this.m_Board == null || this.m_Board.Deleted)
+            if (m_Board == null || m_Board.Deleted)
             {
-                this.Delete();
+                Delete();
                 return false;
             }
-            else if (!this.IsChildOf(this.m_Board))
+            else if (!IsChildOf(m_Board))
             {
-                this.m_Board.DropItem(this);
+                m_Board.DropItem(this);
                 return false;
             }
             else
@@ -104,7 +80,7 @@ namespace Server.Items
 
         public override bool DropToItem(Mobile from, Item target, Point3D p)
         {
-            return (target == this.m_Board && p.X != -1 && p.Y != -1 && base.DropToItem(from, target, p));
+            return (target == m_Board && p.X != -1 && p.Y != -1 && base.DropToItem(from, target, p));
         }
 
         public override bool DropToWorld(Mobile from, Point3D p)

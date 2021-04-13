@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 using Server.Mobiles;
 
@@ -6,7 +5,7 @@ namespace Server.Items
 {
     public class SkinTingeingTincture : Item
     {
-        public override int LabelNumber { get { return 1114770; } } //Skin Tingeing Tincture
+        public override int LabelNumber => 1114770;  //Skin Tingeing Tincture
 
         [Constructable]
         public SkinTingeingTincture()
@@ -41,7 +40,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -70,7 +69,7 @@ namespace Server.Items
             public override void AddGumpLayout()
             {
                 AddBackground(0, 0, 460, 300, 2620);
- 
+
                 int[] list = GetHueList();
 
                 int rows = User.Race == Race.Human ? 8 : 6;
@@ -143,7 +142,7 @@ namespace Server.Items
 
                 if (User.Race == Race.Elf)
                 {
-                    return User.Female ? 15: 14;
+                    return User.Female ? 15 : 14;
                 }
 
                 if (User.Race == Race.Gargoyle)

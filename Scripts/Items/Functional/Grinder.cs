@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-
+using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Targeting;
-using Server.ContextMenus;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
     [Flipable(0x9A97, 0x9A98)]
     public class Grinder : Item, ISecurable
     {
-        public override int LabelNumber { get { return 1123599; } } // Grinder
+        public override int LabelNumber => 1123599;  // Grinder
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SecureLevel Level { get; set; }
@@ -59,7 +57,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            var house = BaseHouse.FindHouseAt(this);
+            BaseHouse house = BaseHouse.FindHouseAt(this);
 
             if (house == null || !house.IsLockedDown(this))
             {
@@ -82,7 +80,7 @@ namespace Server.Items
             {
                 if (targeted is CoffeePod)
                 {
-                    var pod = (CoffeePod)targeted;
+                    CoffeePod pod = (CoffeePod)targeted;
 
                     if (!pod.IsChildOf(from.Backpack))
                     {
@@ -104,7 +102,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write((int)Level);
         }

@@ -1,9 +1,8 @@
-using System;
-using System.Linq;
-
-using System.Collections.Generic;
-using Server.Network;
 using Server.Mobiles;
+using Server.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Misc
 {
@@ -14,7 +13,7 @@ namespace Server.Misc
         private const string AggressedFormat = "{0} is attacking you!";
         private const int Hue = 0x22;
 
-        public static TimeSpan CombatHeatDelay { get { return Delay; } }
+        public static TimeSpan CombatHeatDelay => Delay;
 
         public static void Initialize()
         {
@@ -33,8 +32,8 @@ namespace Server.Misc
 
             if (!CheckAggressions(aggressor, aggressed))
             {
-                aggressor.LocalOverheadMessage(MessageType.Regular, Hue, true, String.Format(AggressorFormat, aggressed.Name));
-                aggressed.LocalOverheadMessage(MessageType.Regular, Hue, true, String.Format(AggressedFormat, aggressor.Name));
+                aggressor.LocalOverheadMessage(MessageType.Regular, Hue, true, string.Format(AggressorFormat, aggressed.Name));
+                aggressed.LocalOverheadMessage(MessageType.Regular, Hue, true, string.Format(AggressedFormat, aggressor.Name));
             }
 
             BuffInfo.AddBuff(aggressor, new BuffInfo(BuffIcon.HeatOfBattleStatus, 1153801, 1153827, Delay, aggressor, true));
@@ -43,14 +42,14 @@ namespace Server.Misc
 
         public static void EventSink_PlayerDeath(PlayerDeathEventArgs e)
         {
-            var killed = e.Mobile;
-             
-            foreach (var m in killed.Aggressed.Select(m => m.Defender))
+            Mobile killed = e.Mobile;
+
+            foreach (Mobile m in killed.Aggressed.Select(m => m.Defender))
             {
                 CheckCombat(m);
             }
 
-            foreach (var m in killed.Aggressors.Select(x => x.Attacker))
+            foreach (Mobile m in killed.Aggressors.Select(x => x.Attacker))
             {
                 CheckCombat(m);
             }
@@ -60,14 +59,14 @@ namespace Server.Misc
 
         public static void EventSink_CreatureDeath(CreatureDeathEventArgs e)
         {
-            var killed = e.Creature;
+            Mobile killed = e.Creature;
 
-            foreach (var m in killed.Aggressed.Select(x => x.Defender))
+            foreach (Mobile m in killed.Aggressed.Select(x => x.Defender))
             {
                 CheckCombat(m);
             }
 
-            foreach (var m in killed.Aggressors.Select(x => x.Attacker))
+            foreach (Mobile m in killed.Aggressors.Select(x => x.Attacker))
             {
                 CheckCombat(m);
             }
@@ -108,17 +107,17 @@ namespace Server.Misc
 
         public static bool CheckHasAggression(Mobile m, bool aggressedOnly = false)
         {
-            if (Server.Engines.VvV.ViceVsVirtueSystem.HasBattleAggression(m))
+            if (Engines.VvV.ViceVsVirtueSystem.HasBattleAggression(m))
             {
                 return true;
             }
 
-            var list = m.Aggressed;
+            List<AggressorInfo> list = m.Aggressed;
 
             for (int i = 0; i < list.Count; ++i)
             {
                 AggressorInfo info = list[i];
-                var defender = info.Defender;
+                Mobile defender = info.Defender;
 
                 if ((defender is PlayerMobile || (defender is BaseCreature && !((BaseCreature)defender).IsMonster)) &&
                     (DateTime.UtcNow < info.LastCombatTime + Delay && defender.LastKilled < info.LastCombatTime))
@@ -137,7 +136,7 @@ namespace Server.Misc
             for (int i = 0; i < list.Count; ++i)
             {
                 AggressorInfo info = list[i];
-                var attacker = info.Attacker;
+                Mobile attacker = info.Attacker;
 
                 if ((attacker is PlayerMobile || (attacker is BaseCreature && !((BaseCreature)attacker).IsMonster)) &&
                     (DateTime.UtcNow < info.LastCombatTime + Delay && attacker.LastKilled < info.LastCombatTime))

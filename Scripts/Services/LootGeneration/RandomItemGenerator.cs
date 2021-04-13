@@ -1,17 +1,15 @@
-using System;
-using Server;
-using Server.Items;
-using System.Linq;
-using System.Collections.Generic;
 using Server.Engines.Despise;
 using Server.Engines.Shadowguard;
 using Server.Mobiles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Items
 {
     public class RandomItemGenerator
     {
-        public static bool Enabled { get { return Core.HS; } }
+        public static bool Enabled => true;
         public static int FeluccaLuckBonus { get; private set; }
         public static int FeluccaBudgetBonus { get; private set; }
 
@@ -29,7 +27,7 @@ namespace Server.Items
 
             MaxBaseBudget = Config.Get("Loot.MaxBaseBudget", 700);
             MinBaseBudget = Config.Get("Loot.MinBaseBudget", 150);
-            MaxProps = Config.Get("Loot.MaxProps", 11);
+            MaxProps = Config.Get("Loot.MaxProps", 8);
 
             MaxAdjustedBudget = Config.Get("Loot.MaxAdjustedBudget", 1450);
             MinAdjustedBudget = Config.Get("Loot.MinAdjustedBudget", 150);
@@ -48,7 +46,7 @@ namespace Server.Items
         /// <param name="victim">the victim</param>
         public static bool GenerateRandomItem(Item item, Mobile killer, BaseCreature victim)
         {
-            if(Enabled)
+            if (Enabled)
                 return RunicReforging.GenerateRandomItem(item, killer, victim);
             return false;
         }
@@ -64,10 +62,10 @@ namespace Server.Items
         public static void GenerateRandomItem(Item item, int luckChance, int attributeCount, int minIntensity, int maxIntensity)
         {
             int min = (attributeCount * 2) * minIntensity;
-            min = min + (int)((double)min * ((double)Utility.RandomMinMax(1, 4) / 10));
+            min = min + (int)(min * ((double)Utility.RandomMinMax(1, 4) / 10));
 
             int max = (attributeCount * 2) * maxIntensity;
-            max = max + (int)((double)max * ((double)Utility.RandomMinMax(1, 4) / 10));
+            max = max + (int)(max * ((double)Utility.RandomMinMax(1, 4) / 10));
 
             RunicReforging.GenerateRandomItem(item, luckChance, min, max);
         }
@@ -121,7 +119,7 @@ namespace Server.Items
 
         public static void CheckBoss(BaseCreature bc, ref int budget)
         {
-            foreach (var entry in Entries)
+            foreach (BossEntry entry in Entries)
             {
                 if (entry.List.FirstOrDefault(t => t == bc.GetType() || bc.GetType().IsSubclassOf(t)) != null)
                 {
@@ -139,7 +137,7 @@ namespace Server.Items
                 new BossEntry(100, typeof(BaseRenowned), typeof(TRex), typeof(BaseShipCaptain), typeof(Navrey)));
 
             Entries.Add(
-                new BossEntry(150, typeof(BaseChampion), typeof(Impaler), typeof(DarknightCreeper), typeof(FleshRenderer), 
+                new BossEntry(150, typeof(BaseChampion), typeof(Impaler), typeof(DarknightCreeper), typeof(FleshRenderer),
                                    typeof(ShadowKnight), typeof(AbysmalHorror), typeof(AdrianTheGloriousLord), typeof(AndrosTheDreadLord)));
 
             Entries.Add(

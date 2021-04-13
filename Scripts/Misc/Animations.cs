@@ -1,12 +1,10 @@
-using System;
-
 namespace Server.Misc
 {
     public class Animations
     {
         public static void Initialize()
         {
-            EventSink.AnimateRequest += new AnimateRequestEventHandler(EventSink_AnimateRequest);
+            EventSink.AnimateRequest += EventSink_AnimateRequest;
         }
 
         private static void EventSink_AnimateRequest(AnimateRequestEventArgs e)
@@ -14,15 +12,13 @@ namespace Server.Misc
             Mobile from = e.Mobile;
 
             int action;
-            bool useNew = Core.SA;
-
             switch (e.Action)
             {
                 case "bow":
-                    action = useNew ? 0 : 32;
+                    action = 0;
                     break;
                 case "salute":
-                    action = useNew ? 1 : 33;
+                    action = 1;
                     break;
                 default:
                     return;
@@ -30,14 +26,7 @@ namespace Server.Misc
 
             if (from.Alive && !from.Mounted && (from.Body.IsHuman || from.Body.IsGargoyle))
             {
-                if (useNew)
-                {
-                    from.Animate(AnimationType.Emote, action);
-                }
-                else
-                {
-                    from.Animate(action, 5, 1, true, false, 0);
-                }
+                from.Animate(AnimationType.Emote, action);
             }
         }
     }

@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using Server.Multis;
 using Server.ContextMenus;
+using Server.Multis;
 using Server.Network;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Items
@@ -10,18 +9,18 @@ namespace Server.Items
     [Furniture]
     public class Mailbox : LockableContainer, IFlipable
     {
-        public override int LabelNumber { get { return 1113927; } } // Mailbox
+        public override int LabelNumber => 1113927;  // Mailbox
 
-        public override int DefaultGumpID { get { return 0x11A; } }
+        public override int DefaultGumpID => 0x11A;
 
-        public virtual int SouthMailBoxID { get { return 0x4141; } }
-        public virtual int SouthEmptyMailBoxID { get { return 0x4142; } }
-        public virtual int EastMailBoxID { get { return 0x4143; } }
-        public virtual int EastEmptyMailBoxID { get { return 0x4144; } }
+        public virtual int SouthMailBoxID => 0x4141;
+        public virtual int SouthEmptyMailBoxID => 0x4142;
+        public virtual int EastMailBoxID => 0x4143;
+        public virtual int EastEmptyMailBoxID => 0x4144;
 
         public Dictionary<Item, Mobile> Contents { get; set; }
 
-        public bool IsEmpty { get { return Items.Count == 0; } }
+        public bool IsEmpty => Items.Count == 0;
 
         [CommandProperty(AccessLevel.Decorator)]
         public override int ItemID
@@ -33,6 +32,19 @@ namespace Server.Items
 
                 CheckMailBox();
             }
+        }
+
+        [Constructable]
+        public Mailbox()
+            : this(0x4142)
+        {
+        }
+
+        [Constructable]
+        public Mailbox(int id)
+            : base(id)
+        {
+            Weight = 5.0;
         }
 
         public void CheckMailBox()
@@ -59,19 +71,6 @@ namespace Server.Items
                     base.ItemID = EastMailBoxID;
                 }
             }
-        }
-
-        [Constructable]
-        public Mailbox()
-            : this(0x4142)
-        {
-        }
-
-        [Constructable]
-        public Mailbox(int id)
-            : base(id)
-        {
-            Weight = 5.0;
         }
 
         public virtual void OnFlip(Mobile from)
@@ -156,6 +155,27 @@ namespace Server.Items
             return true;
         }
 
+        public override void OnDoubleClick(Mobile from)
+        {
+            BaseHouse house = BaseHouse.FindHouseAt(this);
+
+            if (house != null && !house.IsOwner(from))
+            {
+                if (IsSecure)
+                {
+                    SendLocalizedMessageTo(from, 1010563); // This container is secure.                    
+                    return;
+                }
+                else if (IsLockedDown)
+                {
+                    SendLocalizedMessageTo(from, 1061637); // You are not allowed to access this.
+                    return;
+                }
+            }
+
+            base.OnDoubleClick(from);
+        }
+
         public override bool CheckLift(Mobile from, Item item, ref LRReason reject)
         {
             if (item == this)
@@ -167,7 +187,7 @@ namespace Server.Items
 
             if (house != null && IsSecure)
             {
-                var secure = house.GetSecureInfoFor(this);
+                SecureInfo secure = house.GetSecureInfoFor(this);
 
                 return secure != null && house.HasSecureAccess(from, secure);
             }
@@ -182,7 +202,7 @@ namespace Server.Items
 
         public virtual void OnItemDropped(Mobile from, Item item, BaseHouse house)
         {
-            var secure = house.GetSecureInfoFor(this);
+            SecureInfo secure = house.GetSecureInfoFor(this);
 
             if (secure != null && !house.HasSecureAccess(from, secure))
             {
@@ -229,9 +249,9 @@ namespace Server.Items
             if (Contents == null)
                 return;
 
-            var remove = Contents.Keys.Where(k => k.Deleted || !Items.Contains(k)).ToList();
+            List<Item> remove = Contents.Keys.Where(k => k.Deleted || !Items.Contains(k)).ToList();
 
-            foreach (var item in remove)
+            foreach (Item item in remove)
             {
                 Contents.Remove(item);
             }
@@ -248,13 +268,13 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1);
+            writer.Write(1);
 
             writer.Write(Contents == null ? 0 : Contents.Count);
 
             if (Contents != null)
             {
-                foreach (var kvp in Contents)
+                foreach (KeyValuePair<Item, Mobile> kvp in Contents)
                 {
                     writer.Write(kvp.Key);
                     writer.Write(kvp.Value);

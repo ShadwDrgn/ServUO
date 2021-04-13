@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Server.Network;
 
 namespace Server.Misc
@@ -8,7 +6,7 @@ namespace Server.Misc
     {
         public static void Initialize()
         {
-            EventSink.PaperdollRequest += new PaperdollRequestEventHandler(EventSink_PaperdollRequest);
+            EventSink.PaperdollRequest += EventSink_PaperdollRequest;
         }
 
         public static void EventSink_PaperdollRequest(PaperdollRequestEventArgs e)
@@ -18,15 +16,11 @@ namespace Server.Misc
 
             beholder.Send(new DisplayPaperdoll(beheld, Titles.ComputeTitle(beholder, beheld), beheld.AllowEquipFrom(beholder)));
 
-            if (beholder.ViewOPL)
-            {
-                List<Item> items = beheld.Items;
+            foreach (Item item in beheld.Items)
+                beholder.Send(item.OPLPacket);
 
-                for (int i = 0; i < items.Count; ++i)
-                    beholder.Send(items[i].OPLPacket);
-                // NOTE: OSI sends MobileUpdate when opening your own paperdoll.
-                // It has a very bad rubber-banding affect. What positive affects does it have?
-            }
+            // NOTE: OSI sends MobileUpdate when opening your own paperdoll.
+            // It has a very bad rubber-banding affect. What positive affects does it have?
         }
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using Server.Gumps;
-
 namespace Server.Items
 {
     public class CrystalAltarAddon : BaseAddon
@@ -19,12 +16,12 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed { get { return new CrystalAltarDeed(); } }
+        public override BaseAddonDeed Deed => new CrystalAltarDeed();
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -36,12 +33,12 @@ namespace Server.Items
 
     public class CrystalAltarDeed : BaseAddonDeed
     {
-        public override int LabelNumber { get { return 1076672; } } // Crystal Altar
+        public override int LabelNumber => 1076672;  // Crystal Altar
 
-        public override bool ExcludeDeedHue { get { return true; } }
+        public override bool ExcludeDeedHue => true;
 
-        public override BaseAddon Addon { get { return new CrystalAltarAddon(); } }
-        
+        public override BaseAddon Addon => new CrystalAltarAddon();
+
         [Constructable]
         public CrystalAltarDeed()
             : base()
@@ -58,7 +55,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -39,10 +38,6 @@ namespace Server.Mobiles
 
             Fame = 7000;
             Karma = 7000;
-
-            VirtualArmor = 100;
-            if (0.02 > Utility.RandomDouble())
-                PackStatue();
         }
 
         public Pixie(Serial serial)
@@ -50,51 +45,21 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool InitialInnocent
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Spined;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 5;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override bool InitialInnocent => true;
+        public override HideType HideType => HideType.Spined;
+        public override int Hides => 5;
+        public override int Meat => 1;
 
-        public override TribeType Tribe { get { return TribeType.Fey; } }
+        public override TribeType Tribe => TribeType.Fey;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
         public override void GenerateLoot()
         {
             AddLoot(LootPack.LowScrolls);
             AddLoot(LootPack.Gems, 2);
+            AddLoot(LootPack.Statue);
         }
 
-		public override void OnDeath(Container c)
+        public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 
@@ -105,13 +70,12 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

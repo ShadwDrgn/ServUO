@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -42,11 +41,6 @@ namespace Server.Mobiles
 
             Fame = 8000;
             Karma = -8000;
-
-            VirtualArmor = 40;
-
-            if (0.25 > Utility.RandomDouble())
-                PackItem(new DaemonBone(10));
         }
 
         public Ortanord(Serial serial)
@@ -54,23 +48,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
+        public override Poison PoisonImmune => Poison.Lethal;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
+            AddLoot(LootPack.LootItem<DaemonBone>(25.0, 10, false, true));
         }
 
         public override void OnDeath(Container c)
@@ -81,7 +63,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

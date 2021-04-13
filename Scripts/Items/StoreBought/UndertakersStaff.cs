@@ -1,15 +1,14 @@
-using System;
-using Server;
-using Server.Mobiles;
 using Server.ContextMenus;
-using System.Collections.Generic;
+using Server.Mobiles;
 using Server.Network;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class UndertakersStaff : GnarledStaff
     {
-        private static Dictionary<Mobile, CorpseRetrieveTimer> _Timers = new Dictionary<Mobile, CorpseRetrieveTimer>();
+        private static readonly Dictionary<Mobile, CorpseRetrieveTimer> _Timers = new Dictionary<Mobile, CorpseRetrieveTimer>();
 
         private int _Charges;
         private bool _SummonAll;
@@ -20,10 +19,10 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool SummonAll { get { return _SummonAll; } set { _SummonAll = value; InvalidateProperties(); } }
 
-        public override int LabelNumber { get { return 1071498; } } // Undertaker's Staff
-        public override bool IsArtifact { get { return true; } }
-		public override int InitMinHits { get { return 255; } }
-        public override int InitMaxHits { get { return 255; } }
+        public override int LabelNumber => 1071498;  // Undertaker's Staff
+        public override bool IsArtifact => true;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
 
         [Constructable]
         public UndertakersStaff()
@@ -38,7 +37,7 @@ namespace Server.Items
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
-            list.Add(1071518, String.Format("#{0}", _SummonAll ? "1071508" : "1071507"));
+            list.Add(1071518, string.Format("#{0}", _SummonAll ? "1071508" : "1071507"));
             list.Add(1060584, _Charges.ToString());
         }
 
@@ -48,19 +47,19 @@ namespace Server.Items
 
             if (IsChildOf(from.Backpack))
             {
-                var entry1 = new SimpleContextMenuEntry(from, 1071507, m =>
+                SimpleContextMenuEntry entry1 = new SimpleContextMenuEntry(from, 1071507, m =>
                     {
                         SummonAll = false;
                         InvalidateProperties();
                     }); // Summon Most Recent Corpse Only
 
-                var entry2 = new SimpleContextMenuEntry(from, 1071508, m => 
+                SimpleContextMenuEntry entry2 = new SimpleContextMenuEntry(from, 1071508, m =>
                     {
                         _SummonAll = true;
                         InvalidateProperties();
                     }); // Summon All Corpses
 
-                if(_SummonAll)
+                if (_SummonAll)
                     entry2.Flags |= CMEFlags.Highlighted;
                 else
                     entry1.Flags |= CMEFlags.Highlighted;
@@ -89,13 +88,13 @@ namespace Server.Items
 
                 if (_SummonAll)
                 {
-                    var corpses = GetCorpses(m);
+                    List<Corpse> corpses = GetCorpses(m);
 
                     if (corpses != null)
                     {
                         m.SendLocalizedMessage(1071527, corpses.Count.ToString()); // The staff reaches out to ~1_COUNT~ of your corpses and tries to draw them to you...
 
-                         _Timers[m] = new CorpseRetrieveTimer(m, corpses, this);
+                        _Timers[m] = new CorpseRetrieveTimer(m, corpses, this);
                     }
                     else
                     {
@@ -104,12 +103,12 @@ namespace Server.Items
                 }
                 else
                 {
-                    var corpse = GetCorpse(m);
+                    Corpse corpse = GetCorpse(m);
 
                     if (corpse != null)
                     {
                         m.SendLocalizedMessage(1071528); // The staff reaches out to your corpse and tries to draw it to you...
-                    
+
                         _Timers[m] = new CorpseRetrieveTimer(m, new List<Corpse> { corpse }, this);
                     }
                     else
@@ -122,7 +121,7 @@ namespace Server.Items
 
         private bool CanGetCorpse(Mobile m, bool firstCheck = true)
         {
-            if(m.Criminal)
+            if (m.Criminal)
             {
                 m.SendLocalizedMessage(1071510); // You are a criminal and cannot use this item...
                 return false;
@@ -156,7 +155,7 @@ namespace Server.Items
             {
                 List<Corpse> copy = new List<Corpse>(corpses);
 
-                foreach (var c in copy)
+                foreach (Corpse c in copy)
                 {
                     bool remove = false;
 
@@ -172,7 +171,7 @@ namespace Server.Items
                         notEnoughTime = true;
                     }
 
-                    if (Corpse.PlayerCorpses.ContainsKey(c) && Corpse.PlayerCorpses[c] >= 3)
+                    if (Corpse.PlayerCorpses != null && Corpse.PlayerCorpses.ContainsKey(c) && Corpse.PlayerCorpses[c] >= 3)
                     {
                         remove = true;
                         tooManySummons = true;
@@ -215,7 +214,7 @@ namespace Server.Items
             {
                 m.PlaySound(0xFA);
 
-                foreach (var c in corpses)
+                foreach (Corpse c in corpses)
                 {
                     c.MoveToWorld(m.Location, m.Map);
 
@@ -256,7 +255,7 @@ namespace Server.Items
 
             int count = 0;
 
-            foreach (var kvp in Corpse.PlayerCorpses)
+            foreach (KeyValuePair<Corpse, int> kvp in Corpse.PlayerCorpses)
             {
                 if (kvp.Key.Owner == m && kvp.Value < 3)
                     count++;
@@ -272,14 +271,14 @@ namespace Server.Items
 
             List<Corpse> list = null;
 
-            foreach (var kvp in Corpse.PlayerCorpses)
+            foreach (KeyValuePair<Corpse, int> kvp in Corpse.PlayerCorpses)
             {
                 if (kvp.Key.Owner == m && kvp.Value < 3)
                 {
                     if (list == null)
                         list = new List<Corpse>();
 
-                    if(!list.Contains(kvp.Key))
+                    if (!list.Contains(kvp.Key))
                         list.Add(kvp.Key);
                 }
 
@@ -292,7 +291,7 @@ namespace Server.Items
 
         private Corpse GetCorpse(Mobile m)
         {
-            var corpse = m.Corpse as Corpse;
+            Corpse corpse = m.Corpse as Corpse;
 
             if (corpse == null || Corpse.PlayerCorpses == null || !Corpse.PlayerCorpses.ContainsKey(corpse))
                 return null;
@@ -319,7 +318,7 @@ namespace Server.Items
 
         public bool IsSummoning()
         {
-            foreach (var timer in _Timers.Values)
+            foreach (CorpseRetrieveTimer timer in _Timers.Values)
             {
                 if (timer.Staff == this)
                     return true;
@@ -358,7 +357,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(_Charges);
             writer.Write(_SummonAll);

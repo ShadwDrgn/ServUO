@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class DecoGoldIngot : Item
@@ -8,8 +6,8 @@ namespace Server.Items
         public DecoGoldIngot()
             : base(0x1BE9)
         {
-            this.Movable = true;
-            this.Stackable = true;
+            Movable = true;
+            Stackable = true;
         }
 
         public DecoGoldIngot(Serial serial)
@@ -21,7 +19,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

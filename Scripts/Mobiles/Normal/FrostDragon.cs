@@ -1,5 +1,3 @@
-using System;
-using Server;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -43,8 +41,6 @@ namespace Server.Mobiles
             Fame = 25000;
             Karma = -25000;
 
-            VirtualArmor = 60;
-
             Tamable = true;
             ControlSlots = 5;
             MinTameSkill = 105.0;
@@ -67,16 +63,16 @@ namespace Server.Mobiles
             base.OnAfterTame(tamer);
         }
 
-        public override bool CanAngerOnTame { get { return true; } }
-        public override bool StatLossAfterTame { get { return true; } }
-        public override bool ReacquireOnMovement { get { return !Controlled; } }
-        public override bool AutoDispel { get { return !Controlled; } }
-        public override int TreasureMapLevel { get { return 4; } }
-        public override int Meat { get { return 19; } }
-        public override int Hides { get { return 33; } }
-        public override HideType HideType { get { return HideType.Barbed; } }
-        public override int DragonBlood { get { return 8; } }
-        public override FoodType FavoriteFood { get { return FoodType.Meat; } }
+        public override bool CanAngerOnTame => true;
+        public override bool StatLossAfterTame => true;
+        public override bool ReacquireOnMovement => !Controlled;
+        public override bool AutoDispel => !Controlled;
+        public override int TreasureMapLevel => 4;
+        public override int Meat => 19;
+        public override int Hides => 33;
+        public override HideType HideType => HideType.Barbed;
+        public override int DragonBlood => 8;
+        public override FoodType FavoriteFood => FoodType.Meat;
 
         public void AuraEffect(Mobile m)
         {
@@ -93,18 +89,13 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-
-            if (version == 0)
-            {
-                SetWeaponAbility(WeaponAbility.BleedAttack);
-            }
         }
     }
 }

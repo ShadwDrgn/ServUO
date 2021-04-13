@@ -1,16 +1,14 @@
+using Server.Items;
+using Server.Spells;
 using System;
 using System.Linq;
-
-using Server.Items;
-using Server.Network;
-using Server.Spells;
 
 namespace Server.Mobiles
 {
     [CorpseName("a monstrous interred grizzle corpse")]
     public class MonstrousInterredGrizzle : BasePeerless
     {
-        private static readonly int[] m_Tiles = new int[]
+        private static readonly int[] m_Tiles =
         {
             -2, 0,
             2, 0,
@@ -30,7 +28,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Spellweaving, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a monstrous interred grizzle";
-            Body = 0x103;			
+            Body = 0x103;
             BaseSoundID = 589;
 
             SetStr(1198, 1207);
@@ -63,15 +61,6 @@ namespace Server.Mobiles
             Fame = 24000;
             Karma = -24000;
 
-            VirtualArmor = 80;
-            PackResources(8);
-            PackTalismans(5);
-
-            for (int i = 0; i < Utility.RandomMinMax(1, 6); i++)
-            {
-                PackItem(Loot.RandomScroll(0, Loot.ArcanistScrollTypes.Length, SpellbookType.Arcanist));
-            }
-
             SetSpecialAbility(SpecialAbility.HowlOfCacophony);
         }
 
@@ -80,75 +69,23 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool GivesMLMinorArtifact
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 5;
-            }
-        }
+        public override bool GivesMLMinorArtifact => true;
+        public override int TreasureMapLevel => 5;
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.AosSuperBoss, 8);
-        }
+            AddLoot(LootPack.SuperBoss, 8);
+            AddLoot(LootPack.ArcanistScrolls, Utility.RandomMinMax(1, 6));
+            AddLoot(LootPack.PeerlessResource, 8);
+            AddLoot(LootPack.Talisman, 5);
+            AddLoot(LootPack.LootItem<GrizzledBones>());
 
-        public override void OnDeath(Container c)
-        {
-            base.OnDeath(c);
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(TombstoneOfTheDamned), typeof(GlobOfMonstreousInterredGrizzle), typeof(MonsterousInterredGrizzleMaggots), typeof(GrizzledSkullCollection) }));
 
-            c.DropItem(new GrizzledBones());
+            AddLoot(LootPack.LootItem<ParrotItem>(60.0));
+            AddLoot(LootPack.LootItem<GrizzledMareStatuette>(5.0));
 
-            switch (Utility.Random(4))
-            {
-                case 0:
-                    c.DropItem(new TombstoneOfTheDamned());
-                    break;
-                case 1:
-                    c.DropItem(new GlobOfMonstreousInterredGrizzle());
-                    break;
-                case 2:
-                    c.DropItem(new MonsterousInterredGrizzleMaggots());
-                    break;
-                case 3:
-                    c.DropItem(new GrizzledSkullCollection());
-                    break;
-            }
-
-            if (Utility.RandomDouble() < 0.6)
-                c.DropItem(new ParrotItem());
-
-            if (Utility.RandomDouble() < 0.05)
-                c.DropItem(new GrizzledMareStatuette());
-
-            if (Utility.RandomDouble() < 0.05)
-            {
-                switch (Utility.Random(5))
-                {
-                    case 0:
-                        c.DropItem(new GrizzleGauntlets());
-                        break;
-                    case 1:
-                        c.DropItem(new GrizzleGreaves());
-                        break;
-                    case 2:
-                        c.DropItem(new GrizzleHelm());
-                        break;
-                    case 3:
-                        c.DropItem(new GrizzleTunic());
-                        break;
-                    case 4:
-                        c.DropItem(new GrizzleVambraces());
-                        break;
-                }
-            }
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(GrizzleGauntlets), typeof(GrizzleGreaves), typeof(GrizzleHelm), typeof(GrizzleTunic), typeof(GrizzleVambraces) }, 5.0, 1));
         }
 
         public override int GetDeathSound()
@@ -179,14 +116,14 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
-            writer.Write((int)0); // version
+
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
+
             int version = reader.ReadInt();
         }
 
@@ -205,20 +142,19 @@ namespace Server.Mobiles
     }
 
     public class InfernalOoze : Item
-    { 
+    {
         private bool m_Corrosive;
-        private int m_Damage;
-        private Mobile m_Owner;
+        private readonly int m_Damage;
+        private readonly Mobile m_Owner;
         private Timer m_Timer;
 
-        private DateTime m_StartTime;
+        private readonly DateTime m_StartTime;
 
         public InfernalOoze(Mobile owner)
             : this(owner, false)
         {
         }
 
-        [Constructable]
         public InfernalOoze(Mobile owner, bool corrosive, int damage = 40)
             : base(0x122A)
         {
@@ -227,7 +163,7 @@ namespace Server.Mobiles
             Hue = 0x95;
 
             m_Damage = damage;
-			
+
             m_Corrosive = corrosive;
             m_StartTime = DateTime.UtcNow;
 
@@ -258,7 +194,7 @@ namespace Server.Mobiles
 
             if (!Deleted && Map != Map.Internal && Map != null)
             {
-                foreach (var m in SpellHelper.AcquireIndirectTargets(m_Owner, Location, Map, 0).OfType<Mobile>())
+                foreach (Mobile m in SpellHelper.AcquireIndirectTargets(m_Owner, Location, Map, 0).OfType<Mobile>())
                 {
                     OnMoveOver(m);
                 }
@@ -279,7 +215,7 @@ namespace Server.Mobiles
         }
 
         public virtual void Damage(Mobile m)
-        { 
+        {
             if (m_Corrosive)
             {
                 for (int i = 0; i < m.Items.Count; i++)
@@ -332,7 +268,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

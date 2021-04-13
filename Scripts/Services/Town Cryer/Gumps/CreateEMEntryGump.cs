@@ -1,7 +1,6 @@
-using Server;
-using System;
-using Server.Mobiles;
 using Server.Gumps;
+using Server.Mobiles;
+using System;
 
 namespace Server.Services.TownCryer
 {
@@ -26,7 +25,7 @@ namespace Server.Services.TownCryer
             base.AddGumpLayout();
 
             AddHtmlLocalized(58, 150, 100, 20, 1158027, false, false); // Author:
-            AddLabel(105, 150, 0, String.Format("EM {0}", User.Name));
+            AddLabel(105, 150, 0, string.Format("EM {0}", User.Name));
 
             AddHtmlLocalized(58, 180, 100, 20, 1158026, false, false); // Headline:
             AddBackground(58, 200, 740, 20, 0x2486);
@@ -83,7 +82,7 @@ namespace Server.Services.TownCryer
                     }
                 }
 
-                if(expires < 1 || expires > 30)
+                if (expires < 1 || expires > 30)
                 {
                     User.SendLocalizedMessage(1158033); // The expiry can be between 1 and 30 days. Please check your entry and try again.
                 }
@@ -100,7 +99,7 @@ namespace Server.Services.TownCryer
 
                     User.SendLocalizedMessage(1158039); // Your entry has been submitted.
 
-                    BaseGump.SendGump(new TownCryerGump(User, Cryer, 0, TownCryerGump.GumpCategory.EventModerator));
+                    SendGump(new TownCryerGump(User, Cryer, 0, TownCryerGump.GumpCategory.EventModerator));
                     return;
                 }
 

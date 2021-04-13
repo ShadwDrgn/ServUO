@@ -1,4 +1,3 @@
-using System;
 using Server.Engines.Craft;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
@@ -7,7 +6,7 @@ namespace Server.Items
 {
     public class EnchantedSculptingToolAddon : CraftAddon
     {
-        public override CraftSystem CraftSystem { get { return DefMasonry.CraftSystem; } }
+        public override CraftSystem CraftSystem => DefMasonry.CraftSystem;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IsRewardItem { get; set; }
@@ -49,9 +48,9 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
-            writer.Write((bool)IsRewardItem);
+            writer.Write(IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -65,7 +64,7 @@ namespace Server.Items
 
     public class EnchantedSculptingToolDeed : CraftAddonDeed, IRewardItem, IRewardOption
     {
-        public override int LabelNumber { get { return 1159421; } } // Enchanted Sculpting Tool
+        public override int LabelNumber => 1159421;  // Enchanted Sculpting Tool
 
         public override BaseAddon Addon
         {
@@ -151,9 +150,9 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
-            writer.Write((bool)m_IsRewardItem);
+            writer.Write(m_IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)

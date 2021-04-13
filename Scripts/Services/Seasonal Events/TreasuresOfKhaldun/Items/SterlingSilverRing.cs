@@ -1,22 +1,17 @@
-using System;
 using Server.Gumps;
 using Server.Mobiles;
-using Server.Network;
 
 namespace Server.Items
 {
     public class SterlingSilverRing : SilverRing
     {
-        public override bool IsArtifact { get { return true; } }
-        public override int LabelNumber { get { return 1155606; } } // Stirling Silver Ring
+        public override bool IsArtifact => true;
+        public override int LabelNumber => 1155606;  // Stirling Silver Ring
 
-        public override int InitMinHits { get { return 255; } }
-        public override int InitMaxHits { get { return 255; } }
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
 
-        public bool HasSkillBonus
-        {
-            get { return SkillBonuses.Skill_1_Value != 0; }
-        }
+        public bool HasSkillBonus => SkillBonuses.Skill_1_Value != 0;
 
         [Constructable]
         public SterlingSilverRing()
@@ -49,14 +44,14 @@ namespace Server.Items
         }
 
         public static SkillName[] Skills =
-		{
-			SkillName.Archery,
-			SkillName.Fencing,
-			SkillName.Macing,
-			SkillName.Swords,
-			SkillName.Throwing,
-			SkillName.Wrestling
-		};
+        {
+            SkillName.Archery,
+            SkillName.Fencing,
+            SkillName.Macing,
+            SkillName.Swords,
+            SkillName.Throwing,
+            SkillName.Wrestling
+        };
 
         public SterlingSilverRing(Serial serial)
             : base(serial)

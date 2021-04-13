@@ -1,10 +1,8 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("an ice serpent corpse")]
-    [TypeAlias("Server.Mobiles.Iceserpant")]
     public class IceSerpent : BaseCreature
     {
         [Constructable]
@@ -39,9 +37,6 @@ namespace Server.Mobiles
 
             Fame = 3500;
             Karma = -3500;
-
-            VirtualArmor = 32;
-
         }
 
         public IceSerpent(Serial serial)
@@ -49,56 +44,25 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool DeathAdderCharmable
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 4;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 15;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Spined;
-            }
-        }
+        public override bool DeathAdderCharmable => true;
+        public override int Meat => 4;
+        public override int Hides => 15;
+        public override HideType HideType => HideType.Spined;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-            PackItem(Loot.RandomArmorOrShieldOrWeapon());
-
-            PackBodyPartOrBones();
-
-            if (0.025 > Utility.RandomDouble())
-                PackItem(new GlacialStaff());
+            AddLoot(LootPack.LootItem<GlacialStaff>(2.5));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

@@ -1,91 +1,79 @@
-using System;
 using Server.Items;
 
-namespace Server.Mobiles 
+namespace Server.Mobiles
 {
-    public class HireBardArcher : BaseHire 
+    public class HireBardArcher : BaseHire
     {
-        [Constructable] 
+        [Constructable]
         public HireBardArcher()
             : base(AIType.AI_Archer)
         {
-            this.SpeechHue = Utility.RandomDyedHue();
-            this.Hue = Utility.RandomSkinHue();
+            SpeechHue = Utility.RandomDyedHue();
+            Hue = Utility.RandomSkinHue();
 
-            if (this.Female = Utility.RandomBool()) 
+            if (Female = Utility.RandomBool())
             {
-                this.Body = 0x191;
-                this.Name = NameList.RandomName("female");
+                Body = 0x191;
+                Name = NameList.RandomName("female");
 
-                switch ( Utility.Random(2) )
+                switch (Utility.Random(2))
                 {
                     case 0:
-                        this.AddItem(new Skirt(Utility.RandomDyedHue()));
+                        AddItem(new Skirt(Utility.RandomDyedHue()));
                         break;
                     case 1:
-                        this.AddItem(new Kilt(Utility.RandomNeutralHue()));
+                        AddItem(new Kilt(Utility.RandomNeutralHue()));
                         break;
                 }
             }
-            else 
+            else
             {
-                this.Body = 0x190;
-                this.Name = NameList.RandomName("male");
-                this.AddItem(new ShortPants(Utility.RandomNeutralHue()));
+                Body = 0x190;
+                Name = NameList.RandomName("male");
+                AddItem(new ShortPants(Utility.RandomNeutralHue()));
             }
-            this.Title = "the bard";
-            this.HairItemID = this.Race.RandomHair(this.Female);
-            this.HairHue = this.Race.RandomHairHue();
-            this.Race.RandomFacialHair(this);
+            Title = "the bard";
+            HairItemID = Race.RandomHair(Female);
+            HairHue = Race.RandomHairHue();
+            Race.RandomFacialHair(this);
 
-            this.SetStr(16, 16);
-            this.SetDex(26, 26);
-            this.SetInt(26, 26);
+            SetStr(16, 16);
+            SetDex(26, 26);
+            SetInt(26, 26);
 
-            this.SetDamage(5, 10);
+            SetDamage(5, 10);
 
-            this.SetSkill(SkillName.Tactics, 35, 57);
-            this.SetSkill(SkillName.Magery, 22, 22);
-            this.SetSkill(SkillName.Swords, 45, 67);
-            this.SetSkill(SkillName.Archery, 36, 67);
-            this.SetSkill(SkillName.Parry, 45, 60);
-            this.SetSkill(SkillName.Musicianship, 66.0, 97.5);
-            this.SetSkill(SkillName.Peacemaking, 65.0, 87.5);
+            SetSkill(SkillName.Tactics, 35, 57);
+            SetSkill(SkillName.Magery, 22, 22);
+            SetSkill(SkillName.Swords, 45, 67);
+            SetSkill(SkillName.Archery, 36, 67);
+            SetSkill(SkillName.Parry, 45, 60);
+            SetSkill(SkillName.Musicianship, 66.0, 97.5);
+            SetSkill(SkillName.Peacemaking, 65.0, 87.5);
 
-            this.Fame = 100;
-            this.Karma = 100;
+            Fame = 100;
+            Karma = 100;
 
-            this.AddItem(new Shoes(Utility.RandomNeutralHue()));
+            AddItem(new Shoes(Utility.RandomNeutralHue()));
 
-            switch ( Utility.Random(2) )
-            {
-                case 0:
-                    this.AddItem(new Doublet(Utility.RandomDyedHue()));
-                    break;
-                case 1:
-                    this.AddItem(new Shirt(Utility.RandomDyedHue()));
-                    break;
-            }
-            switch ( Utility.Random(4) )
+            switch (Utility.Random(2))
             {
                 case 0:
-                    this.PackItem(new Harp());
+                    AddItem(new Doublet(Utility.RandomDyedHue()));
                     break;
                 case 1:
-                    this.PackItem(new Lute());
-                    break;
-                case 2:
-                    this.PackItem(new Drums());
-                    break;
-                case 3:
-                    this.PackItem(new Tambourine());
+                    AddItem(new Shirt(Utility.RandomDyedHue()));
                     break;
             }
+        }
 
-            this.PackItem(new Longsword());
-            this.AddItem(new Bow());
-            this.PackItem(new Arrow(100));
-            this.PackGold(10, 50);
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(Harp), typeof(Lute), typeof(Drums), typeof(Tambourine) }));
+            AddLoot(LootPack.LootItem<Longsword>(true));
+            AddLoot(LootPack.LootItem<Bow>(true));
+            AddLoot(LootPack.LootItem<Arrow>(100, true));
+            AddLoot(LootPack.LootGold(10, 50));
         }
 
         public HireBardArcher(Serial serial)
@@ -93,21 +81,15 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override void Serialize(GenericWriter writer) 
+        public override bool ClickTitle => false;
+        public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);// version 
+            writer.Write(0);// version 
         }
 
-        public override void Deserialize(GenericReader reader) 
+        public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 

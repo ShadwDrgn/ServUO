@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -12,13 +11,7 @@ namespace Server.Mobiles
             m_Entry = entry;
         }
 
-        public override bool CanCacheDisplay
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanCacheDisplay => false;
         public override IEntity GetEntity()
         {
             return new PresetMap(m_Entry);

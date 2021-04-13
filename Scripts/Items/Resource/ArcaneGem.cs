@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
 using Server.Targeting;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class ArcaneGem : Item, ICommodity
     {
         public const int DefaultArcaneHue = 2117;
-        public override int LabelNumber {get {return 1114115;} } // Arcane Gem
+        public override int LabelNumber => 1114115;  // Arcane Gem
 
         [Constructable]
         public ArcaneGem()
@@ -29,9 +28,9 @@ namespace Server.Items
         {
         }
 
-        TextDefinition ICommodity.Description { get { return LabelNumber; } }
-        bool ICommodity.IsDeedable { get { return true; } }
-       
+        TextDefinition ICommodity.Description => LabelNumber;
+        bool ICommodity.IsDeedable => true;
+
         public static bool ConsumeCharges(Mobile from, int amount)
         {
             List<Item> items = from.Items;
@@ -88,7 +87,7 @@ namespace Server.Items
             }
             else
             {
-                from.BeginTarget(2, false, TargetFlags.None, new TargetCallback(OnTarget));
+                from.BeginTarget(2, false, TargetFlags.None, OnTarget);
             }
         }
 
@@ -130,7 +129,7 @@ namespace Server.Items
                 {
                     from.SendMessage("You may only target items in your backpack.");
                     return;
-                }             
+                }
 
                 int charges = GetChargesFor(from);
 
@@ -233,7 +232,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

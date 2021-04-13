@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 
 namespace Server.Items
@@ -9,9 +8,9 @@ namespace Server.Items
         public ResGate()
             : base(0xF6C)
         {
-            this.Movable = false;
-            this.Hue = 0x2D1;
-            this.Light = LightType.Circle300;
+            Movable = false;
+            Hue = 0x2D1;
+            Light = LightType.Circle300;
         }
 
         public ResGate(Serial serial)
@@ -19,13 +18,7 @@ namespace Server.Items
         {
         }
 
-        public override string DefaultName
-        {
-            get
-            {
-                return "a resurrection gate";
-            }
-        }
+        public override string DefaultName => "a resurrection gate";
         public override bool OnMoveOver(Mobile m)
         {
             if (!m.Alive && m.Map != null && m.Map.CanFit(m.Location, 16, false, false))
@@ -48,7 +41,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

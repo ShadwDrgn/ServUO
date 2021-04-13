@@ -1,17 +1,16 @@
-﻿using System;
-using Server;
-using Server.Mobiles;
-using Server.Gumps;
+﻿using Server.Gumps;
 using Server.Misc;
+using Server.Mobiles;
+using System;
 
 namespace Server.Items
 {
     public class NameChangeToken : Item, IPromotionalToken
     {
-        public override int LabelNumber { get { return 1070997; } } // a promotional token
-        public TextDefinition ItemName { get { return 1075247; } } // name change
+        public override int LabelNumber => 1070997;  // a promotional token
+        public TextDefinition ItemName => 1075247;  // name change
 
-        public Type GumpType { get { return typeof(NameChangeConfirmGump); } }
+        public Type GumpType => typeof(NameChangeConfirmGump);
 
         [Constructable]
         public NameChangeToken()
@@ -96,7 +95,7 @@ namespace Server.Items
 
                 if (relay != null)
                 {
-                    var text = relay.Text;
+                    string text = relay.Text;
 
                     if (string.IsNullOrEmpty(text))
                     {

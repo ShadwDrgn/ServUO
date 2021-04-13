@@ -1,33 +1,27 @@
-using System;
-using System.Globalization;
-using Server;
-using Server.Spells;
-using Server.Network;
-using Server.Mobiles;
-using Server.Spells.Necromancy;
-using Server.Spells.First;
-using Server.Spells.Fourth;
 using Server.Items;
-using System.Collections.Generic;
+using Server.Mobiles;
+using Server.Spells.Fourth;
+using Server.Spells.Necromancy;
+using System;
 
 namespace Server.Spells.SkillMasteries
 {
     public class RejuvinateSpell : SkillMasterySpell
     {
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Rejuvinate", "In Vas Ort Grav Mani",
                 204,
-				9061
+                9061
             );
 
-        public override double RequiredSkill { get { return 90; } }
-        public override double UpKeep { get { return 0; } }
-        public override int RequiredMana { get { return 10; } }
+        public override double RequiredSkill => 90;
+        public override double UpKeep => 0;
+        public override int RequiredMana => 10;
 
-        public int RequiredTithing { get { return 100; } }
+        public int RequiredTithing => 100;
 
-        public override SkillName CastSkill { get { return SkillName.Chivalry; } }
-        public override SkillName DamageSkill { get { return SkillName.Chivalry; } }
+        public override SkillName CastSkill => SkillName.Chivalry;
+        public override SkillName DamageSkill => SkillName.Chivalry;
 
         public RejuvinateSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
@@ -87,7 +81,7 @@ namespace Server.Spells.SkillMasteries
                 }
                 else if (CheckBSequence(m))
                 {
-                    double rejuv = ((double)GetMasteryLevel() * 33.3) / 100;
+                    double rejuv = (GetMasteryLevel() * 33.3) / 100;
 
                     if (rejuv > 1.0) rejuv = 1.0;
 
@@ -102,7 +96,7 @@ namespace Server.Spells.SkillMasteries
                         toRejuv = (int)Math.Ceiling(hitsNeeds * rejuv);
 
                         if (toRejuv > 0)
-                            SpellHelper.Heal(toRejuv, m, Caster, false); 
+                            SpellHelper.Heal(toRejuv, m, Caster, false);
                     }
 
                     if (stamNeeds > 0)
@@ -181,10 +175,10 @@ namespace Server.Spells.SkillMasteries
 
                     TimeSpan d;
 
-                    if(Caster.AccessLevel == AccessLevel.Player)
+                    if (Caster.AccessLevel == AccessLevel.Player)
                         d = TimeSpan.FromMinutes(duration);
                     else
-                        d =  TimeSpan.FromSeconds(10);
+                        d = TimeSpan.FromSeconds(10);
 
                     AddToCooldown(d);
                 }
@@ -195,7 +189,7 @@ namespace Server.Spells.SkillMasteries
 
         public override bool CheckSequence()
         {
-            int requiredTithing = this.RequiredTithing;
+            int requiredTithing = RequiredTithing;
 
             if (Caster is PlayerMobile && (Caster.Player && Caster.TithingPoints < requiredTithing))
             {

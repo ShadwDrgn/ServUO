@@ -1,9 +1,8 @@
+using Server.Mobiles;
+using Server.Targeting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Server.Mobiles;
-using Server.Targeting;
 
 namespace Server.Items
 {
@@ -11,7 +10,7 @@ namespace Server.Items
     {
         public const int Duration = 1; // hours
 
-        public override int LabelNumber { get { return 1158680; } } // khaldun tasty treat
+        public override int LabelNumber => 1158680;  // khaldun tasty treat
 
         [Constructable]
         public KhaldunTastyTreat()
@@ -123,9 +122,9 @@ namespace Server.Items
         {
             if (m is PlayerMobile)
             {
-                var pm = m as PlayerMobile;
+                PlayerMobile pm = m as PlayerMobile;
 
-                foreach (var pet in pm.AllFollowers.OfType<BaseCreature>())
+                foreach (BaseCreature pet in pm.AllFollowers.OfType<BaseCreature>())
                 {
                     if (UnderInfluence(pet))
                     {
@@ -145,7 +144,7 @@ namespace Server.Items
 
             if (Table != null)
             {
-                foreach (var kpv in Table)
+                foreach (KeyValuePair<BaseCreature, DateTime> kpv in Table)
                 {
                     writer.Write(kpv.Key);
                     writer.Write(kpv.Value);
@@ -161,8 +160,8 @@ namespace Server.Items
 
             for (int i = 0; i < count; i++)
             {
-                var bc = reader.ReadMobile() as BaseCreature;
-                var dt = reader.ReadDateTime();
+                BaseCreature bc = reader.ReadMobile() as BaseCreature;
+                DateTime dt = reader.ReadDateTime();
 
                 if (bc != null && dt > DateTime.UtcNow)
                 {
@@ -170,7 +169,7 @@ namespace Server.Items
                         Table = new Dictionary<BaseCreature, DateTime>();
 
                     Table[bc] = dt;
-                    
+
                     Timer.DelayCall(dt - DateTime.UtcNow, RemoveInfluence, bc);
                 }
             }
@@ -178,7 +177,7 @@ namespace Server.Items
 
         public static void OnLogin(LoginEventArgs e)
         {
-            var pm = e.Mobile as PlayerMobile;
+            PlayerMobile pm = e.Mobile as PlayerMobile;
 
             if (pm != null)
             {
@@ -190,12 +189,12 @@ namespace Server.Items
             : base(serial)
         {
         }
-        
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

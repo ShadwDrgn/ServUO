@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public enum LesserPigmentType
@@ -19,7 +17,7 @@ namespace Server.Items
 
     public class AncientFarmersKasa : Kasa
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public AncientFarmersKasa()
             : base()
@@ -36,39 +34,15 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070922;
-            }
-        }// Ancient Farmer's Kasa
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 19;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070922;// Ancient Farmer's Kasa
+        public override int BaseColdResistance => 19;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)2);
+            writer.Write(2);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -88,9 +62,9 @@ namespace Server.Items
         }
     }
 
-    public class AncientSamuraiDo : PlateDo 
+    public class AncientSamuraiDo : PlateDo
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public AncientSamuraiDo()
             : base()
@@ -105,67 +79,19 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070926;
-            }
-        }// Ancient Samurai Do
-        public override int BasePhysicalResistance
-        {
-            get
-            {
-                return 15;
-            }
-        }
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 12;
-            }
-        }
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 11;
-            }
-        }
-        public override int BaseEnergyResistance
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070926;// Ancient Samurai Do
+        public override int BasePhysicalResistance => 15;
+        public override int BaseFireResistance => 12;
+        public override int BaseColdResistance => 10;
+        public override int BasePoisonResistance => 11;
+        public override int BaseEnergyResistance => 8;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -178,7 +104,7 @@ namespace Server.Items
 
     public class ArmsOfTacticalExcellence : LeatherHiroSode
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public ArmsOfTacticalExcellence()
             : base()
@@ -192,53 +118,17 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070921;
-            }
-        }// Arms of Tactical Excellence
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 9;
-            }
-        }
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 13;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070921;// Arms of Tactical Excellence
+        public override int BaseFireResistance => 9;
+        public override int BaseColdResistance => 13;
+        public override int BasePoisonResistance => 8;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -251,7 +141,7 @@ namespace Server.Items
 
     public class BlackLotusHood : ClothNinjaHood
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public BlackLotusHood()
             : base()
@@ -266,67 +156,19 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070919;
-            }
-        }// Black Lotus Hood
-        public override int BasePhysicalResistance
-        {
-            get
-            {
-                return 0;
-            }
-        }
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 11;
-            }
-        }
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 15;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 11;
-            }
-        }
-        public override int BaseEnergyResistance
-        {
-            get
-            {
-                return 11;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070919;// Black Lotus Hood
+        public override int BasePhysicalResistance => 0;
+        public override int BaseFireResistance => 11;
+        public override int BaseColdResistance => 15;
+        public override int BasePoisonResistance => 11;
+        public override int BaseEnergyResistance => 11;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -345,7 +187,7 @@ namespace Server.Items
 
     public class DaimyosHelm : PlateBattleKabuto
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public DaimyosHelm()
             : base()
@@ -361,39 +203,15 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070920;
-            }
-        }// Daimyo's Helm
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070920;// Daimyo's Helm
+        public override int BaseColdResistance => 10;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -406,7 +224,7 @@ namespace Server.Items
 
     public class DemonForks : Sai
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public DemonForks()
             : base()
@@ -424,32 +242,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070917;
-            }
-        }// Demon Forks
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070917;// Demon Forks
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -462,7 +262,7 @@ namespace Server.Items
 
     public class DragonNunchaku : Nunchaku
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public DragonNunchaku()
             : base()
@@ -480,32 +280,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070914;
-            }
-        }// Dragon Nunchaku
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070914;// Dragon Nunchaku
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -518,7 +300,7 @@ namespace Server.Items
 
     public class Exiler : Tetsubo
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public Exiler()
             : base()
@@ -535,27 +317,9 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070913;
-            }
-        }// Exiler
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070913;// Exiler
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void GetDamageTypes(Mobile wielder, out int phys, out int fire, out int cold, out int pois, out int nrgy, out int chaos, out int direct)
         {
             phys = fire = cold = pois = chaos = direct = 0;
@@ -567,7 +331,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -580,7 +344,7 @@ namespace Server.Items
 
     public class GlovesOfTheSun : LeatherNinjaMitts
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public GlovesOfTheSun()
             : base()
@@ -596,39 +360,15 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070924;
-            }
-        }// Gloves of the Sun
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 24;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070924;// Gloves of the Sun
+        public override int BaseFireResistance => 24;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -641,7 +381,7 @@ namespace Server.Items
 
     public class HanzosBow : Yumi
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public HanzosBow()
             : base()
@@ -659,32 +399,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070918;
-            }
-        }// Hanzo's Bow
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070918;// Hanzo's Bow
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -697,7 +419,7 @@ namespace Server.Items
 
     public class LegsOfStability : PlateSuneate
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public LegsOfStability()
             : base()
@@ -714,46 +436,16 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070925;
-            }
-        }// Legs of Stability
-        public override int BasePhysicalResistance
-        {
-            get
-            {
-                return 20;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 18;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070925;// Legs of Stability
+        public override int BasePhysicalResistance => 20;
+        public override int BasePoisonResistance => 18;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -766,7 +458,7 @@ namespace Server.Items
 
     public class PeasantsBokuto : Bokuto
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public PeasantsBokuto()
             : base()
@@ -784,32 +476,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070912;
-            }
-        }// Peasant's Bokuto
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070912;// Peasant's Bokuto
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -822,7 +496,7 @@ namespace Server.Items
 
     public class PilferedDancerFans : Tessen
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public PilferedDancerFans()
             : base()
@@ -839,32 +513,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070916;
-            }
-        }// Pilfered Dancer Fans
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070916;// Pilfered Dancer Fans
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -877,7 +533,7 @@ namespace Server.Items
 
     public class TheDestroyer : NoDachi
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public TheDestroyer()
             : base()
@@ -894,32 +550,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070915;
-            }
-        }// The Destroyer
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1070915;// The Destroyer
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -932,7 +570,7 @@ namespace Server.Items
 
     public class TomeOfEnlightenment : Spellbook
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public TomeOfEnlightenment()
             : base()
@@ -950,18 +588,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070934;
-            }
-        }// Tome of Enlightenment
+        public override int LabelNumber => 1070934;// Tome of Enlightenment
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -974,7 +606,7 @@ namespace Server.Items
 
     public class LeurociansMempoOfFortune : LeatherMempo
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public LeurociansMempoOfFortune()
             : base()
@@ -991,67 +623,19 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1071460;
-            }
-        }// Leurocian's mempo of fortune
-        public override int BasePhysicalResistance
-        {
-            get
-            {
-                return 15;
-            }
-        }
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int BaseEnergyResistance
-        {
-            get
-            {
-                return 15;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1071460;// Leurocian's mempo of fortune
+        public override int BasePhysicalResistance => 15;
+        public override int BaseFireResistance => 10;
+        public override int BaseColdResistance => 10;
+        public override int BasePoisonResistance => 10;
+        public override int BaseEnergyResistance => 15;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1065,7 +649,7 @@ namespace Server.Items
     //Non weapon/armor ones:
     public class AncientUrn : Item
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         private static readonly string[] m_Names = new string[]
         {
             "Akira",
@@ -1124,13 +708,7 @@ namespace Server.Items
         {
         }
 
-        public static string[] Names
-        {
-            get
-            {
-                return m_Names;
-            }
-        }
+        public static string[] Names => m_Names;
         [CommandProperty(AccessLevel.GameMaster)]
         public string UrnName
         {
@@ -1143,18 +721,12 @@ namespace Server.Items
                 m_UrnName = value;
             }
         }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1071014;
-            }
-        }// Ancient Urn
+        public override int LabelNumber => 1071014;// Ancient Urn
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
             writer.Write(m_UrnName);
         }
 
@@ -1172,16 +744,11 @@ namespace Server.Items
         {
             list.Add(1070935, m_UrnName); // Ancient Urn of ~1_name~
         }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, 1070935, m_UrnName); // Ancient Urn of ~1_name~
-        }
     }
 
     public class HonorableSwords : Item
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         private string m_SwordsName;
         [Constructable]
         public HonorableSwords(string swordsName)
@@ -1215,18 +782,12 @@ namespace Server.Items
                 m_SwordsName = value;
             }
         }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1071015;
-            }
-        }// Honorable Swords
+        public override int LabelNumber => 1071015;// Honorable Swords
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
             writer.Write(m_SwordsName);
         }
 
@@ -1244,18 +805,13 @@ namespace Server.Items
         {
             list.Add(1070936, m_SwordsName); // Honorable Swords of ~1_name~
         }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, 1070936, m_SwordsName); // Honorable Swords of ~1_name~
-        }
     }
 
     [Furniture]
     [Flipable(0x2811, 0x2812)]
     public class ChestOfHeirlooms : LockableContainer
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public ChestOfHeirlooms()
             : base(0x2811)
@@ -1264,51 +820,38 @@ namespace Server.Items
             LockLevel = 95;
             MaxLockLevel = 140;
             RequiredSkill = 95;
-			
+
             TrapType = TrapType.ExplosionTrap;
             TrapLevel = 10;
             TrapPower = 100;
-			
+
             GumpID = 0x10B;
-			
+
             for (int i = 0; i < 10; ++i)
             {
                 Item item = Loot.ChestOfHeirloomsContains();
-				
+
                 int attributeCount = Utility.RandomMinMax(1, 5);
                 int min = 20;
                 int max = 80;
-				
+
                 if (item is BaseWeapon)
                 {
                     BaseWeapon weapon = (BaseWeapon)item;
 
-                    if (Core.AOS)
-                        BaseRunicTool.ApplyAttributesTo(weapon, attributeCount, min, max);
-                    else
-                    {
-                        weapon.DamageLevel = (WeaponDamageLevel)Utility.Random(6);
-                        weapon.AccuracyLevel = (WeaponAccuracyLevel)Utility.Random(6);
-                        weapon.DurabilityLevel = (WeaponDurabilityLevel)Utility.Random(6);
-                    }
+                    BaseRunicTool.ApplyAttributesTo(weapon, attributeCount, min, max);
                 }
                 else if (item is BaseArmor)
                 {
                     BaseArmor armor = (BaseArmor)item;
 
-                    if (Core.AOS)
-                        BaseRunicTool.ApplyAttributesTo(armor, attributeCount, min, max);
-                    else
-                    {
-                        armor.ProtectionLevel = (ArmorProtectionLevel)Utility.Random(6);
-                        armor.Durability = (ArmorDurabilityLevel)Utility.Random(6);
-                    }
+                    BaseRunicTool.ApplyAttributesTo(armor, attributeCount, min, max);
                 }
-                else if (item is BaseHat && Core.AOS)
+                else if (item is BaseHat)
                     BaseRunicTool.ApplyAttributesTo((BaseHat)item, attributeCount, min, max);
-                else if (item is BaseJewel && Core.AOS)
+                else if (item is BaseJewel)
                     BaseRunicTool.ApplyAttributesTo((BaseJewel)item, attributeCount, min, max);
-				
+
                 DropItem(item);
             }
         }
@@ -1318,18 +861,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070937;
-            }
-        }// Chest of heirlooms
+        public override int LabelNumber => 1070937;// Chest of heirlooms
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1342,7 +879,7 @@ namespace Server.Items
 
     public class FluteOfRenewal : BambooFlute
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public FluteOfRenewal()
             : base()
@@ -1357,32 +894,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1070927;
-            }
-        }// Flute of Renewal
-        public override int InitMinUses
-        {
-            get
-            {
-                return 300;
-            }
-        }
-        public override int InitMaxUses
-        {
-            get
-            {
-                return 300;
-            }
-        }
+        public override int LabelNumber => 1070927;// Flute of Renewal
+        public override int InitMinUses => 300;
+        public override int InitMaxUses => 300;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1398,7 +917,7 @@ namespace Server.Items
 
     public class LesserPigmentsOfTokuno : BasePigmentsOfTokuno
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         private static readonly int[][] m_Table = new int[][]
         {
             // Hue, Label
@@ -1444,7 +963,7 @@ namespace Server.Items
             set
             {
                 m_Type = value;
-				
+
                 int v = (int)m_Type;
 
                 if (v >= 0 && v < m_Table.Length)
@@ -1465,7 +984,7 @@ namespace Server.Items
 
             if (v < 0 || v >= m_Table.Length)
                 v = 0;
-			
+
             return m_Table[v];
         }
 
@@ -1473,7 +992,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1);
+            writer.Write(1);
 
             writer.WriteEncodedInt((int)m_Type);
         }
@@ -1483,8 +1002,8 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = (InheritsItem ? 0 : reader.ReadInt()); // Required for BasePigmentsOfTokuno insertion
-			
-            switch ( version )
+
+            switch (version)
             {
                 case 1:
                     Type = (LesserPigmentType)reader.ReadEncodedInt();
@@ -1497,7 +1016,7 @@ namespace Server.Items
 
     public class MetalPigmentsOfTokuno : BasePigmentsOfTokuno
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         [Constructable]
         public MetalPigmentsOfTokuno()
             : base(1)
@@ -1524,7 +1043,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

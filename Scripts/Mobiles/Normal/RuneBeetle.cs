@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Server.Items;
+using System.Collections;
 
 namespace Server.Mobiles
 {
@@ -44,11 +42,6 @@ namespace Server.Mobiles
             Fame = 15000;
             Karma = -15000;
 
-            if (Utility.RandomDouble() < .25)
-                PackItem(Engines.Plants.Seed.RandomBonsaiSeed());
-
-            PackBodyPartOrBones();
-
             Tamable = true;
             ControlSlots = 3;
             MinTameSkill = 93.9;
@@ -62,33 +55,17 @@ namespace Server.Mobiles
         {
         }
 
-        public override Poison PoisonImmune
+        public override Poison PoisonImmune => Poison.Greater;
+        public override Poison HitPoison => Poison.Greater;
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override bool CanAngerOnTame => true;
+
+        public override void GenerateLoot()
         {
-            get
-            {
-                return Poison.Greater;
-            }
-        }
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Greater;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
-            }
-        }
-        public override bool CanAngerOnTame
-        {
-            get
-            {
-                return true;
-            }
+            AddLoot(LootPack.FilthyRich, 2);
+            AddLoot(LootPack.MedScrolls, 1);
+            AddLoot(LootPack.BodyPartsAndBones);
+            AddLoot(LootPack.BonsaiSeed);
         }
 
         public override int GetAngerSound()
@@ -116,49 +93,16 @@ namespace Server.Mobiles
             return 0x4E5;
         }
 
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.FilthyRich, 2);
-            AddLoot(LootPack.MedScrolls, 1);
-        }
-
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)3);
+            writer.Write(3);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-
-            if (version < 1)
-            {
-                for (int i = 0; i < Skills.Length; ++i)
-                {
-                    Skills[i].Cap = Math.Max(100.0, Skills[i].Cap * 0.9);
-
-                    if (Skills[i].Base > Skills[i].Cap)
-                    {
-                        Skills[i].Base = Skills[i].Cap;
-                    }
-                }
-            }
-
-            if (version < 3)
-            {
-                if (AbilityProfile == null || AbilityProfile.MagicalAbility == MagicalAbility.None)
-                {
-                    SetMagicalAbility(MagicalAbility.Poisoning);
-                }
-
-                if (version == 1)
-                {
-                    SetSpecialAbility(SpecialAbility.RuneCorruption);
-                    SetWeaponAbility(WeaponAbility.BleedAttack);
-                }
-            }
         }
     }
 }

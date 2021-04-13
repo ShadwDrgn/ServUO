@@ -1,11 +1,11 @@
+using Server.ContextMenus;
+using Server.Engines.Auction;
+using Server.Engines.VendorSearching;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Multis;
 using System;
 using System.Collections.Generic;
-using Server.Engines.VendorSearching;
-using Server.Mobiles;
-using Server.ContextMenus;
-using Server.Multis;
-using Server.Gumps;
-using Server.Engines.Auction;
 
 namespace Server.Items
 {
@@ -15,16 +15,13 @@ namespace Server.Items
         public readonly int DeleteDelayMinutes = 30;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public PlayerVendor Vendor { get; set; }
+        public PlayerVendor Vendor { get; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public AuctionSafe AuctionSafe { get; set; }
+        public IAuctionItem AuctionSafe { get; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsAuction { get; set; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Item SearchItem { get; set; }
+        public Item SearchItem { get; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Point3D SetLocation { get; set; }
@@ -33,37 +30,41 @@ namespace Server.Items
         public Map SetMap { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime DeleteTime { get; set; }
+        public DateTime DeleteTime { get; }
 
-        public int TimeRemaining { get { return DeleteTime <= DateTime.UtcNow ? 0 : (int)(DeleteTime - DateTime.UtcNow).TotalMinutes; } }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool IsAuction => AuctionSafe != null;
 
-        public VendorSearchMap(Item item, bool auction)
+        public int TimeRemaining => DeleteTime <= DateTime.UtcNow ? 0 : (int)(DeleteTime - DateTime.UtcNow).TotalMinutes;
+
+        public VendorSearchMap(SearchItem item)
             : base(item.Map)
         {
-            LootType = LootType.Blessed;
-            Hue = RecallRune.CalculateHue(item.Map, null, true);
+            var map = item.Map;
 
-            IsAuction = auction;
-            SearchItem = item;
+            LootType = LootType.Blessed;
+            Hue = RecallRune.CalculateHue(map, null, true);
+
+            SearchItem = item.Item;
+            Vendor = item.Vendor;
+            AuctionSafe = item.AuctionSafe;
 
             Point3D p;
 
             if (IsAuction)
             {
-                AuctionSafe = Auction.Auctions.Find(x => x.AuctionItem == item).Safe;
                 p = AuctionSafe.Location;
             }
             else
             {
-                Vendor = item.RootParentEntity as PlayerVendor;
                 p = Vendor.Location;
-            }            
+            }
 
-            Width = 300;
-            Height = 300;
+            const int width = 300;
+            const int height = 300;
 
-            Bounds = new Rectangle2D(p.X - 300, p.Y - 300, 600, 600);
-            AddWorldPin(p.X, p.Y);            
+            SetDisplay(p.X - (width / 2), p.Y - (height / 2), p.X + (width / 2), p.Y + (height / 2), width, height);
+            AddWorldPin(p.X, p.Y);
 
             DeleteTime = DateTime.UtcNow + TimeSpan.FromMinutes(DeleteDelayMinutes);
             Timer.DelayCall(TimeSpan.FromMinutes(DeleteDelayMinutes), Delete);
@@ -109,7 +110,7 @@ namespace Server.Items
                     }
 
                     Shop = (SearchItem.LabelNumber != 0) ? string.Format("#{0}", SearchItem.LabelNumber) : SearchItem.Name;
-                }                
+                }
             }
             else
             {
@@ -120,7 +121,7 @@ namespace Server.Items
                 }
             }
 
-            return new string[] { Name, Shop };
+            return new[] { Name, Shop };
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -183,11 +184,11 @@ namespace Server.Items
 
                 if (Sextant.Format(new Point3D(x, y, z), map, ref xLong, ref yLat, ref xMins, ref yMins, ref xEast, ref ySouth))
                 {
-                    return new string[] { string.Format("{0}o {1}'{2}, {3}o {4}'{5}", yLat, yMins, ySouth ? "S" : "N", xLong, xMins, xEast ? "E" : "W"), map.ToString() };
+                    return new[] { string.Format("{0}o {1}'{2}, {3}o {4}'{5}", yLat, yMins, ySouth ? "S" : "N", xLong, xMins, xEast ? "E" : "W"), map.ToString() };
                 }
             }
 
-            return new string[] { "an unknown location", "Unknown" };
+            return new[] { "an unknown location", "Unknown" };
         }
 
         public void OnBeforeTravel(Mobile from)
@@ -232,7 +233,7 @@ namespace Server.Items
             {
                 if (AuctionSafe != null)
                 {
-                    h = BaseHouse.FindHouseAt(AuctionSafe);                    
+                    h = BaseHouse.FindHouseAt(AuctionSafe);
                 }
             }
             else
@@ -279,8 +280,8 @@ namespace Server.Items
 
         public class OpenMapEntry : ContextMenuEntry
         {
-            public VendorSearchMap VendorMap { get; set; }
-            public Mobile Clicker { get; set; }
+            public VendorSearchMap VendorMap { get; }
+            public Mobile Clicker { get; }
 
             public OpenMapEntry(Mobile from, VendorSearchMap map)
                 : base(3006150, 1) // Open Map
@@ -297,8 +298,8 @@ namespace Server.Items
 
         public class TeleportEntry : ContextMenuEntry
         {
-            private VendorSearchMap VendorMap { get; set; }
-            private Mobile Clicker { get; set; }
+            private VendorSearchMap VendorMap { get; }
+            private Mobile Clicker { get; }
 
             public TeleportEntry(Mobile from, VendorSearchMap map)
                 : base(1154558, -1) // Teleport To Vendor
@@ -323,8 +324,8 @@ namespace Server.Items
 
         public class ReturnTeleportEntry : ContextMenuEntry
         {
-            private VendorSearchMap VendorMap { get; set; }
-            private Mobile Clicker { get; set; }
+            private VendorSearchMap VendorMap { get; }
+            private Mobile Clicker { get; }
 
             public ReturnTeleportEntry(Mobile from, VendorSearchMap map)
                 : base(1154636, -1) // Return to Previous Location
@@ -344,9 +345,9 @@ namespace Server.Items
 
         public class OpenContainerEntry : ContextMenuEntry
         {
-            private VendorSearchMap VendorMap { get; set; }
-            private Mobile Clicker { get; set; }
-            private Container Container { get; set; }
+            private VendorSearchMap VendorMap { get; }
+            private Mobile Clicker { get; }
+            private Container Container { get; }
 
             public OpenContainerEntry(Mobile from, VendorSearchMap map)
                 : base(1154699, -1) // Open Container Containing Item
@@ -362,7 +363,7 @@ namespace Server.Items
 
             private bool IsAccessible()
             {
-                if (Container == null || VendorMap.IsAuction)
+                if (Container == null || VendorMap.IsAuction || VendorMap.Vendor == null || Container.RootParent != VendorMap.Vendor)
                     return false;
 
                 if (!Container.IsAccessibleTo(Clicker))
@@ -376,7 +377,10 @@ namespace Server.Items
 
             public override void OnClick()
             {
-                RecurseOpen(Container, Clicker);
+                if (IsAccessible())
+                {
+                    RecurseOpen(Container, Clicker);
+                }
             }
 
             private static void RecurseOpen(Container c, Mobile from)
@@ -390,13 +394,13 @@ namespace Server.Items
 
         public VendorSearchMap(Serial serial)
             : base(serial)
-		{
-		}
+        {
+        }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public abstract class BaseGranite : Item, ICommodity
@@ -9,7 +7,7 @@ namespace Server.Items
             : base(0x1779)
         {
             Hue = CraftResources.GetHue(resource);
-            Stackable = Core.ML;
+            Stackable = true;
 
             m_Resource = resource;
         }
@@ -19,8 +17,8 @@ namespace Server.Items
         {
         }
 
-        TextDefinition ICommodity.Description { get { return LabelNumber; } }
-        bool ICommodity.IsDeedable { get { return true; } }
+        TextDefinition ICommodity.Description => LabelNumber;
+        bool ICommodity.IsDeedable => true;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
@@ -35,25 +33,13 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
-        public override double DefaultWeight
-        {
-            get
-            {
-                return Core.ML ? 1.0 : 10.0;
-            }// Pub 57
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1044607;
-            }
-        }// high quality granite
+        public override double DefaultWeight => 1.0;
+        public override int LabelNumber => 1044607;// high quality granite
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
             writer.Write((int)m_Resource);
         }
@@ -64,7 +50,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
                 case 0:
@@ -73,9 +59,6 @@ namespace Server.Items
                         break;
                     }
             }
-			
-            if (version < 1)
-                Stackable = Core.ML;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -121,7 +104,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -159,7 +142,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -197,7 +180,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -235,7 +218,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -273,7 +256,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -311,7 +294,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -349,7 +332,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -387,7 +370,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -425,7 +408,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

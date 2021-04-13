@@ -1,5 +1,5 @@
-using System;
 using Server.Targeting;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Spells.First
@@ -44,28 +44,22 @@ namespace Server.Spells.First
             }
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.First;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.First;
         public override void OnCast()
         {
-            this.Caster.Target = new InternalTarget(this);
+            Caster.Target = new InternalTarget(this);
         }
 
         public void Target(Mobile m)
         {
-            if (!this.Caster.CanSee(m))
+            if (!Caster.CanSee(m))
             {
-                this.Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (this.CheckHSequence(m))
+            else if (CheckHSequence(m))
             {
-                SpellHelper.Turn(this.Caster, m);
-                SpellHelper.CheckReflect((int)this.Circle, this.Caster, ref m);
+                SpellHelper.Turn(Caster, m);
+                SpellHelper.CheckReflect(this, Caster, ref m);
 
                 if (Mysticism.StoneFormSpell.CheckImmunity(m))
                 {
@@ -94,10 +88,10 @@ namespace Server.Spells.First
 
                     if (-newOffset < oldOffset)
                     {
-                        SpellHelper.AddStatCurse(this.Caster, m, StatType.Dex, false, newOffset);
+                        SpellHelper.AddStatCurse(Caster, m, StatType.Dex, false, newOffset);
 
-                        int percentage = (int)(SpellHelper.GetOffsetScalar(this.Caster, m, true) * 100);
-                        TimeSpan length = SpellHelper.GetDuration(this.Caster, m);
+                        int percentage = (int)(SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
+                        TimeSpan length = SpellHelper.GetDuration(Caster, m);
                         BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Clumsy, 1075831, length, m, percentage.ToString()));
 
                         if (m_Table.ContainsKey(m))
@@ -111,29 +105,29 @@ namespace Server.Spells.First
                 }
             }
 
-            this.FinishSequence();
+            FinishSequence();
         }
 
         private class InternalTarget : Target
         {
             private readonly ClumsySpell m_Owner;
             public InternalTarget(ClumsySpell owner)
-                : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
+                : base(10, false, TargetFlags.Harmful)
             {
-                this.m_Owner = owner;
+                m_Owner = owner;
             }
 
             protected override void OnTarget(Mobile from, object o)
             {
                 if (o is Mobile)
                 {
-                    this.m_Owner.Target((Mobile)o);
+                    m_Owner.Target((Mobile)o);
                 }
             }
 
             protected override void OnTargetFinish(Mobile from)
             {
-                this.m_Owner.FinishSequence();
+                m_Owner.FinishSequence();
             }
         }
     }

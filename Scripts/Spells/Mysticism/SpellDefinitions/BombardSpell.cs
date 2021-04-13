@@ -1,16 +1,15 @@
-using System;
-using Server.Mobiles;
 using Server.Targeting;
+using System;
 
 namespace Server.Spells.Mysticism
 {
     public class BombardSpell : MysticSpell
     {
-        public override SpellCircle Circle { get { return SpellCircle.Sixth; } }
-        public override bool DelayedDamage { get { return true; } }
-        public override bool DelayedDamageStacking { get { return false; } }
+        public override SpellCircle Circle => SpellCircle.Sixth;
+        public override bool DelayedDamage => true;
+        public override bool DelayedDamageStacking => false;
 
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Bombard", "Corp Por Ylem",
                 230,
                 9022,
@@ -42,15 +41,15 @@ namespace Server.Spells.Mysticism
 
                 SpellHelper.Turn(Caster, target);
 
-                if (Core.SA && HasDelayContext(target))
+                if (HasDelayContext(target))
                 {
                     DoHurtFizzle();
                     return;
                 }
 
-                if (SpellHelper.CheckReflect((int)Circle, ref source, ref target))
+                if (SpellHelper.CheckReflect(this, ref source, ref target))
                 {
-                    Server.Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
+                    Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
                     {
                         source.MovingEffect(target, 0x1363, 12, 1, false, true, 0, 0);
                         source.PlaySound(0x64B);
@@ -60,7 +59,7 @@ namespace Server.Spells.Mysticism
                 Caster.MovingEffect(d, 0x1363, 12, 1, false, true, 0, 0);
                 Caster.PlaySound(0x64B);
 
-                SpellHelper.Damage(this, target, (int)GetNewAosDamage(40, 1, 5, target), 100, 0, 0, 0, 0);
+                SpellHelper.Damage(this, target, GetNewAosDamage(40, 1, 5, target), 100, 0, 0, 0, 0);
 
                 if (target is Mobile)
                 {
@@ -68,7 +67,7 @@ namespace Server.Spells.Mysticism
                     {
                         if (!CheckResisted((Mobile)target))
                         {
-                            int secs = (int)((GetDamageSkill(this.Caster) / 10) - (GetResistSkill((Mobile)target) / 10));
+                            int secs = (int)((GetDamageSkill(Caster) / 10) - (GetResistSkill((Mobile)target) / 10));
 
                             if (secs < 0)
                                 secs = 0;

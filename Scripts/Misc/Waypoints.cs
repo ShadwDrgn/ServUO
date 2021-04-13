@@ -1,9 +1,7 @@
-using System;
-using Server.Network;
+using Server.Engines.PartySystem;
 using Server.Engines.Quests;
 using Server.Mobiles;
-using System.Collections.Generic;
-using Server.Engines.PartySystem;
+using Server.Network;
 using System.Linq;
 
 namespace Server
@@ -63,7 +61,7 @@ namespace Server
                 RemoveQuesters(m, ns, oldMap);
                 AddQuesters(m);
             }
-            else if(m.Corpse != null)
+            else if (m.Corpse != null)
             {
                 AddCorpse(m);
                 RemoveHealers(m, oldMap);
@@ -94,7 +92,7 @@ namespace Server
             if (m == null || oldMap == null)
                 return;
 
-            foreach (var vendor in BaseVendor.AllVendors.Where(q => q is MondainQuester && !q.Deleted && q.Map == oldMap))
+            foreach (BaseVendor vendor in BaseVendor.AllVendors.Where(q => q is MondainQuester && !q.Deleted && q.Map == oldMap))
             {
                 ns.Send(new RemoveWaypoint(vendor.Serial));
             }
@@ -105,7 +103,7 @@ namespace Server
             if (m == null || m.Map == null || m.Deleted)
                 return;
 
-            foreach (var vendor in BaseVendor.AllVendors.Where(q => q is MondainQuester && !q.Deleted && q.Map == m.Map))
+            foreach (BaseVendor vendor in BaseVendor.AllVendors.Where(q => q is MondainQuester && !q.Deleted && q.Map == m.Map))
             {
                 Create(m, vendor, WaypointType.QuestGiver);
             }
@@ -116,7 +114,7 @@ namespace Server
             if (m == null || m.Map == null || m.Deleted)
                 return;
 
-            foreach (var healer in BaseVendor.AllVendors.OfType<BaseHealer>().Where(h => h != null && !h.Deleted && h.Map == m.Map))
+            foreach (BaseHealer healer in BaseVendor.AllVendors.OfType<BaseHealer>().Where(h => h != null && !h.Deleted && h.Map == m.Map))
             {
                 Create(m, healer, WaypointType.Resurrection);
             }
@@ -132,7 +130,7 @@ namespace Server
             if (ns == null)
                 return;
 
-            foreach (var healer in BaseVendor.AllVendors.OfType<BaseHealer>().Where(h => h != null && !h.Deleted && h.Map == oldMap))
+            foreach (BaseHealer healer in BaseVendor.AllVendors.OfType<BaseHealer>().Where(h => h != null && !h.Deleted && h.Map == oldMap))
             {
                 ns.Send(new RemoveWaypoint(healer.Serial));
             }
@@ -144,7 +142,7 @@ namespace Server
 
             if (p != null)
             {
-                foreach (var mob in p.Members.Select(i => i.Mobile).Where(mobile => mobile != m && mobile.NetState != null && mobile.NetState.IsEnhancedClient))
+                foreach (Mobile mob in p.Members.Select(i => i.Mobile).Where(mobile => mobile != m && mobile.NetState != null && mobile.NetState.IsEnhancedClient))
                 {
                     Create(mob, m, WaypointType.PartyMember);
                 }
@@ -181,7 +179,7 @@ namespace Server
         {
             EnsureCapacity(21 + (name.Length * 2));
 
-            m_Stream.Write((int)serial);
+            m_Stream.Write(serial);
 
             m_Stream.Write((ushort)x);
             m_Stream.Write((ushort)y);
@@ -192,10 +190,10 @@ namespace Server
 
             m_Stream.Write((ushort)(ignoreObject ? 1 : 0));
 
-            if(type == WaypointType.Corpse)
-                m_Stream.Write((int)1046414);
+            if (type == WaypointType.Corpse)
+                m_Stream.Write(1046414);
             else
-                m_Stream.Write((int)1062613);
+                m_Stream.Write(1062613);
 
             m_Stream.WriteLittleUniNull(name);
 
@@ -208,7 +206,7 @@ namespace Server
         public RemoveWaypoint(Serial serial)
             : base(0xE6, 5)
         {
-            m_Stream.Write((int)serial);
+            m_Stream.Write(serial);
         }
     }
 }

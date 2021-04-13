@@ -1,14 +1,11 @@
-using System;
-using Server;
 using Server.Engines.Craft;
-using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class WritingDesk : CraftAddon
     {
-        public override BaseAddonDeed Deed { get { return new WritingDeskDeed(Tools.Count > 0 ? Tools[0].UsesRemaining : 0); } }
-        public override CraftSystem CraftSystem { get { return DefInscription.CraftSystem; } }
+        public override BaseAddonDeed Deed => new WritingDeskDeed(Tools.Count > 0 ? Tools[0].UsesRemaining : 0);
+        public override CraftSystem CraftSystem => DefInscription.CraftSystem;
 
         [Constructable]
         public WritingDesk(bool south, int uses)
@@ -34,7 +31,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -47,8 +44,8 @@ namespace Server.Items
 
     public class WritingDeskDeed : CraftAddonDeed
     {
-        public override int LabelNumber { get { return 1157989; } } // Enchanted Writing Desk
-        public override BaseAddon Addon { get { return new WritingDesk(_South, UsesRemaining); } }
+        public override int LabelNumber => 1157989;  // Enchanted Writing Desk
+        public override BaseAddon Addon => new WritingDesk(_South, UsesRemaining);
 
         private bool _South;
 
@@ -83,7 +80,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

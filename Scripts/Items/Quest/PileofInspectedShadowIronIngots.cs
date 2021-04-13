@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class PileofInspectedShadowIronIngots : Item
@@ -8,7 +6,7 @@ namespace Server.Items
         public PileofInspectedShadowIronIngots()
             : base(0x1BEA)
         {
-            this.Hue = 2406;
+            Hue = CraftResources.GetHue(CraftResource.ShadowIron);
         }
 
         public PileofInspectedShadowIronIngots(Serial serial)
@@ -16,18 +14,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1113022;
-            }
-        }//Pile of Inspected Shadow Iron Ingots
+        public override int LabelNumber => 1113022;//Pile of Inspected Shadow Iron Ingots
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

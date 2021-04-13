@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Server.Mobiles
@@ -7,24 +6,9 @@ namespace Server.Mobiles
     {
         private readonly List<GenericBuyInfo> m_BuyInfo = new InternalBuyInfo();
         private readonly IShopSellInfo m_SellInfo = new InternalSellInfo();
-        public SBRancher()
-        {
-        }
 
-        public override IShopSellInfo SellInfo
-        {
-            get
-            {
-                return m_SellInfo;
-            }
-        }
-        public override List<GenericBuyInfo> BuyInfo
-        {
-            get
-            {
-                return m_BuyInfo;
-            }
-        }
+        public override IShopSellInfo SellInfo => m_SellInfo;
+        public override List<GenericBuyInfo> BuyInfo => m_BuyInfo;
 
         public class InternalBuyInfo : List<GenericBuyInfo>
         {
@@ -36,9 +20,6 @@ namespace Server.Mobiles
 
         public class InternalSellInfo : GenericSellInfo
         {
-            public InternalSellInfo()
-            {
-            }
         }
     }
 }

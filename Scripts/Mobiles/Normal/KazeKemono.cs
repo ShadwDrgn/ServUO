@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 
 namespace Server.Mobiles
@@ -54,22 +53,16 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool BleedImmune => true;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich, 3);
-        }      
+        }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

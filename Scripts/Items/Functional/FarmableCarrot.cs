@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class FarmableCarrot : FarmableCrop
@@ -22,9 +20,10 @@ namespace Server.Items
 
         public override Item GetCropObject()
         {
-            Carrot carrot = new Carrot();
-
-            carrot.ItemID = Utility.Random(3191, 2);
+            Carrot carrot = new Carrot
+            {
+                ItemID = Utility.Random(3191, 2)
+            };
 
             return carrot;
         }

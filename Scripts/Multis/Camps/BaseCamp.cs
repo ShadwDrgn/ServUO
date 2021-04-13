@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Multis
 {
@@ -29,16 +29,13 @@ namespace Server.Multis
         [CommandProperty(AccessLevel.GameMaster)]
         public BaseContainer Treasure2 { get; set; }
 
-        public override bool HandlesOnMovement
-        {
-            get { return true; }
-        }
+        public override bool HandlesOnMovement => true;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual TimeSpan DecayDelay { get { return TimeSpan.FromMinutes(30.0); } }
+        public virtual TimeSpan DecayDelay => TimeSpan.FromMinutes(30.0);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Decaying { get { return TimeOfDecay != DateTime.MinValue; } }
+        public bool Decaying => TimeOfDecay != DateTime.MinValue;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool ForceDecay
@@ -67,13 +64,7 @@ namespace Server.Multis
         {
         }
 
-        public virtual int EventRange
-        {
-            get
-            {
-                return 10;
-            }
-        }
+        public virtual int EventRange => 10;
 
         public void CheckAddComponents()
         {
@@ -100,7 +91,7 @@ namespace Server.Multis
                     SetDecayTime();
                 }
             }
-            else if(TimeOfDecay < DateTime.UtcNow)
+            else if (TimeOfDecay < DateTime.UtcNow)
             {
                 Delete();
             }
@@ -121,7 +112,7 @@ namespace Server.Multis
 
             m_Items.Add(item);
 
-            int zavg = this.Map.GetAverageZ(X + xOffset, Y + yOffset);
+            int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
 
             if (!Map.CanFit(X + xOffset, Y + yOffset, zavg, item.ItemData.Height))
             {
@@ -143,7 +134,7 @@ namespace Server.Multis
             if (Map == null)
                 return;
 
-            if(!m_Mobiles.Contains(m))
+            if (!m_Mobiles.Contains(m))
                 m_Mobiles.Add(m);
 
             int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
@@ -171,7 +162,7 @@ namespace Server.Multis
                 //int zavg = Map.GetAverageZ(bc.X, bc.Y);
                 IPoint3D p = bc.Location; //new Point3D(bc.X, bc.Y, zavg);
 
-                Server.Spells.SpellHelper.GetSurfaceTop(ref p);
+                Spells.SpellHelper.GetSurfaceTop(ref p);
 
                 Point3D loc = new Point3D(p);
                 bc.RangeHome = bc.IsPrisoner ? 0 : 6;
@@ -195,12 +186,12 @@ namespace Server.Multis
 
         public override void OnLocationChange(Point3D old)
         {
-            foreach (var item in m_Items)
+            foreach (Item item in m_Items)
             {
                 item.Location = new Point3D(X + (item.X - old.X), Y + (item.Y - old.Y), Z + (item.Z - old.Z));
             }
 
-            foreach (var m in m_Mobiles)
+            foreach (Mobile m in m_Mobiles)
             {
                 m.Location = new Point3D(X + (m.X - old.X), Y + (m.Y - old.Y), Z + (m.Z - old.Z));
                 SetCreature(m as BaseCreature);
@@ -209,12 +200,12 @@ namespace Server.Multis
 
         public override void OnMapChange()
         {
-            foreach (var item in m_Items)
+            foreach (Item item in m_Items)
             {
                 item.Map = Map;
             }
 
-            foreach (var m in m_Mobiles)
+            foreach (Mobile m in m_Mobiles)
             {
                 m.Map = Map;
             }
@@ -253,21 +244,21 @@ namespace Server.Multis
             _Camps.Remove(this);
         }
 
-		protected virtual void AddCampChests()
-		{
-			Treasure1 = new TreasureLevel1();
+        protected virtual void AddCampChests()
+        {
+            Treasure1 = new TreasureLevel1();
             ((TreasureLevel1)Treasure1).Locked = false;
             AddItem(Treasure1, 2, 2, 0);
 
             Treasure2 = new TreasureLevel3();
             AddItem(Treasure2, -2, -2, 0);
-		}
+        }
 
-		public override void Serialize(GenericWriter writer)
+        public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)2); // version
+            writer.Write(2); // version
 
             writer.Write(Prisoner);
             writer.Write(Treasure1);
@@ -284,7 +275,7 @@ namespace Server.Multis
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 2:
                     {

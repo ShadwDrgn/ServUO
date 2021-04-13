@@ -1,14 +1,11 @@
-using System;
-using System.Linq;
-
-using Server;
 using Server.Mobiles;
+using System.Linq;
 
 namespace Server.Items
 {
     public class EtherealSoulbinder : Item
     {
-        public override int LabelNumber { get { return 1159167; } } // ethereal soulbinder
+        public override int LabelNumber => 1159167;  // ethereal soulbinder
 
         public double MaxSoulPoint { get; set; } = 100;
 
@@ -17,18 +14,21 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public double SoulPoint
         {
-            get
-            {
-                return m_SoulPoint;
-            }
+            get { return m_SoulPoint; }
             set
             {
                 if (value < 0)
-                    value = 0;
+                {
+                    m_SoulPoint = 0;
+                }
                 else if (value > MaxSoulPoint)
-                    value = MaxSoulPoint;
-
-                m_SoulPoint += value;
+                {
+                    m_SoulPoint = MaxSoulPoint;
+                }
+                else
+                {
+                    m_SoulPoint = value;
+                }
 
                 SetHue();
                 InvalidateProperties();
@@ -40,9 +40,9 @@ namespace Server.Items
             if (SoulPoint <= 0)
                 Hue = 0;
             else if (SoulPoint <= 1)
-                Hue = 1909; // Meager
+                Hue = 1910; // Meager
             else if (SoulPoint <= 25)
-                Hue = 1917; // Grand
+                Hue = 1916; // Grand
             else if (SoulPoint <= 50)
                 Hue = 1914; // Exalted
             else if (SoulPoint <= 90)
@@ -55,13 +55,13 @@ namespace Server.Items
         {
             if (SoulPoint <= 0)
                 return 1159177; // An Empty Soulbinder
-            else if (SoulPoint <= 33)
+            else if (SoulPoint <= 1)
                 return 1159176; // Meager
-            else if (SoulPoint <= 66)
+            else if (SoulPoint <= 25)
                 return 1159175; // Grand
-            else if (SoulPoint <= 66)
+            else if (SoulPoint <= 50)
                 return 1159174; // Exalted
-            else if (SoulPoint <= 66)
+            else if (SoulPoint <= 90)
                 return 1159173; // Legendary
             else
                 return 1159172; // Mythical
@@ -93,11 +93,11 @@ namespace Server.Items
                 list.Add(1159178, string.Format("#{0}", desc)); // Contains a ~1_TYPE~ Soul
             }
         }
-        
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_SoulPoint);
         }
@@ -105,7 +105,7 @@ namespace Server.Items
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            reader.ReadInt();
 
             m_SoulPoint = reader.ReadDouble();
         }
@@ -117,16 +117,23 @@ namespace Server.Items
 
         public static void CreatureDeath(CreatureDeathEventArgs e)
         {
-            var bc = e.Creature as BaseCreature;
-            var killer = e.Killer;
+            Mobile killer = e.Killer;
 
-            if (bc != null && bc.IsSoulbound && killer is PlayerMobile && killer.Backpack != null)
+            if (killer is BaseCreature kbc && kbc.Controlled && kbc.ControlMaster != null)
             {
-                EtherealSoulbinder es = killer.Backpack.FindItemsByType<EtherealSoulbinder>().Where(x => x.SoulPoint < x.MaxSoulPoint).FirstOrDefault();
+                killer = kbc.ControlMaster;
+            }
+
+            if (e.Creature is BaseCreature bc && bc.IsSoulBound && killer is PlayerMobile && killer.Backpack != null)
+            {
+                EtherealSoulbinder es = killer.Backpack.FindItemsByType<EtherealSoulbinder>().OrderByDescending(x => x.SoulPoint < x.MaxSoulPoint).FirstOrDefault();
 
                 if (es != null)
                 {
-                    es.SoulPoint += bc.HitsMax / 1000;
+                    var hm = bc.HitsMax;
+                    var scaler = hm > 1000 ? 1000 : 100;
+
+                    es.SoulPoint += (double)(hm / scaler) * PotionOfGloriousFortune.GetBonus(killer, PotionEventType.Soulbinder);
                 }
             }
         }

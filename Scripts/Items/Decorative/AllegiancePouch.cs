@@ -1,5 +1,3 @@
-using System;
-using Server;
 using Server.Engines.VeteranRewards;
 
 namespace Server.Items
@@ -15,7 +13,7 @@ namespace Server.Items
             set { m_IsRewardItem = value; }
         }
 
-        public override int LabelNumber { get { return 1113953; } } //Allegiance Pouch
+        public override int LabelNumber => 1113953;  //Allegiance Pouch
 
         [Constructable]
         public AllegiancePouch()
@@ -44,7 +42,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

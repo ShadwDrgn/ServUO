@@ -1,17 +1,13 @@
+using Server.Multis;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Server;
-using Server.Gumps;
-using Server.Multis;
-using Server.Network;
 
 namespace Server.Items
 {
     [Flipable(0x1173, 0x1174)]
     public class AncestralGravestone : Item
     {
-        public override int LabelNumber { get { return 1071096; } } // Ancestral Gravestone
+        public override int LabelNumber => 1071096;  // Ancestral Gravestone
 
         [Constructable]
         public AncestralGravestone()
@@ -55,12 +51,12 @@ namespace Server.Items
             if (_Table == null)
                 _Table = new Dictionary<Mobile, SkillMod>();
 
-            var mod = new DefaultSkillMod(SkillName.SpiritSpeak, true, 5.0);
+            DefaultSkillMod mod = new DefaultSkillMod(SkillName.SpiritSpeak, true, 5.0);
             _Table[m] = mod;
 
             m.AddSkillMod(mod);
             AddToCooldown(m);
-            
+
             Timer.DelayCall(TimeSpan.FromMinutes(Utility.RandomMinMax(5, 40)), ExpireBonus, new object[] { m, mod });
         }
 
@@ -106,7 +102,7 @@ namespace Server.Items
 
             List<Mobile> list = new List<Mobile>(_Cooldown.Keys);
 
-            foreach (var m in list)
+            foreach (Mobile m in list)
             {
                 if (_Cooldown[m] < DateTime.UtcNow)
                 {

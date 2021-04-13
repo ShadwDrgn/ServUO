@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     /// <summary>
@@ -8,34 +6,15 @@ namespace Server.Items
     /// </summary>
     public class MovingShot : WeaponAbility
     {
-        public MovingShot()
-        {
-        }
+        public override int BaseMana => 20;
 
-        public override int BaseMana
-        {
-            get
-            {
-                return 20;
-            }
-        }
-        public override int AccuracyBonus
-        {
-            get
-            {
-                return Core.TOL ? -35 : -25;
-            }
-        }
-        public override bool ValidatesDuringHit
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override int AccuracyBonus => -35;
+
+        public override bool ValidatesDuringHit => false;
+
         public override bool OnBeforeSwing(Mobile attacker, Mobile defender)
         {
-            return (this.Validate(attacker) && this.CheckMana(attacker, true));
+            return (Validate(attacker) && CheckMana(attacker, true));
         }
 
         public override void OnMiss(Mobile attacker, Mobile defender)

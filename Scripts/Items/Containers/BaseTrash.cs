@@ -1,10 +1,8 @@
+using Server.ContextMenus;
 using Server.Engines.Points;
-using System;
+using Server.Mobiles;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Server.ContextMenus;
-using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -19,7 +17,7 @@ namespace Server.Items
 
     public class BaseTrash : Container
     {
-        internal List<CleanupArray> m_Cleanup;        
+        internal List<CleanupArray> m_Cleanup;
 
         public BaseTrash(int itemID)
             : base(itemID)
@@ -42,7 +40,7 @@ namespace Server.Items
             public AppraiseforCleanup(Mobile mobile)
                 : base(1151298, 2) //Appraise for Cleanup
             {
-                this.m_Mobile = mobile;
+                m_Mobile = mobile;
             }
 
             public override void OnClick()
@@ -60,7 +58,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -94,7 +92,7 @@ namespace Server.Items
                     {
                         m_Cleanup.Add(new CleanupArray { mobiles = from, items = list[i], points = checkbagpoint, serials = list[i].Serial });
 
-                        if(!added)
+                        if (!added)
                             added = true;
                     }
                 }

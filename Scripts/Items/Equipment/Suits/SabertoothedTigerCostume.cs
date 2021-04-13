@@ -1,42 +1,34 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-    public class SabertoothedTigerCostume : BaseCostume
+    [TypeAlias("Server.Items.SabertoothedTigerCostume")]
+    public class SabreToothedTigerCostume : BaseCostume
     {
-        public override string CreatureName { get { return "saber-toothed tiger"; } }
+        public override string CreatureName => "sabre-toothed tiger";
 
         [Constructable]
-        public SabertoothedTigerCostume() : base()
+        public SabreToothedTigerCostume()
+            : base()
         {
             CostumeBody = 0x588;
         }
 
-        public override string DefaultName
-        {
-            get
-            {
-                return "a saber-toothed tiger costume";
-            }
-        }
+        public override string DefaultName => "a sabre-toothed tiger costume";
 
-        public SabertoothedTigerCostume(Serial serial) : base(serial)
+        public SabreToothedTigerCostume(Serial serial)
+            : base(serial)
         {
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 }

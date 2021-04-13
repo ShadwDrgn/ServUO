@@ -1,20 +1,21 @@
-using System;
+using Server.ContextMenus;
+using Server.Gumps;
 using Server.Items;
 using Server.Multis;
 using Server.Network;
-using Server.ContextMenus;
+using Server.Targeting;
+using Server.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Server.Gumps;
-using Server.Targeting;
 
 namespace Server.Mobiles
 {
     public class Mannequin : BaseCreature
     {
-        public override bool NoHouseRestrictions { get { return true; } }
-        public override bool ClickTitle { get { return false; } }
-        public override bool IsInvulnerable { get { return true; } }
+        public override bool NoHouseRestrictions => true;
+        public override bool ClickTitle => false;
+        public override bool IsInvulnerable => true;
 
         public Mobile Owner { get; set; }
         public string Description { get; set; }
@@ -45,10 +46,10 @@ namespace Server.Mobiles
 
         public bool IsOwner(Mobile m)
         {
-            if (m.AccessLevel >= AccessLevel.GameMaster)
+            if (m == Owner || m.AccessLevel >= AccessLevel.GameMaster)
                 return true;
 
-            return m == Owner;
+            return AccountHandler.CheckAccount(m, Owner);
         }
 
         public override bool CanBeDamaged()
@@ -95,10 +96,6 @@ namespace Server.Mobiles
             }
         }
 
-        public override void OnAosSingleClick(Mobile from)
-        {
-        }
-
         public override void OnDoubleClick(Mobile from)
         {
             DisplayPaperdollTo(from);
@@ -135,7 +132,7 @@ namespace Server.Mobiles
             }
         }
 
-        private List<Layer> SameLayers = new List<Layer>()
+        private readonly List<Layer> SameLayers = new List<Layer>()
         {
             Layer.FirstValid,
             Layer.OneHanded,
@@ -164,14 +161,14 @@ namespace Server.Mobiles
 
         public static List<ValuedProperty> FindItemsProperty(List<Item> item)
         {
-            var ll = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+            List<Type> ll = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
               .ToList().Where(r => r.FullName.Contains("MannequinProperty") && r.IsClass == true && r.IsAbstract == false).ToList();
 
             List<ValuedProperty> cat = new List<ValuedProperty>();
 
             ll.ForEach(x =>
             {
-                var CI = Activator.CreateInstance(Type.GetType(x.FullName));
+                object CI = Activator.CreateInstance(Type.GetType(x.FullName));
 
                 if (CI is ValuedProperty)
                 {
@@ -187,14 +184,14 @@ namespace Server.Mobiles
 
         public static List<ValuedProperty> FindItemProperty(Item item, bool visible = false)
         {
-            var ll = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+            List<Type> ll = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
               .ToList().Where(r => r.FullName.Contains("MannequinProperty") && r.IsClass == true && r.IsAbstract == false).ToList();
 
             List<ValuedProperty> cat = new List<ValuedProperty>();
 
             ll.ForEach(x =>
             {
-                var CI = Activator.CreateInstance(Type.GetType(x.FullName));
+                object CI = Activator.CreateInstance(Type.GetType(x.FullName));
 
                 if (CI is ValuedProperty)
                 {
@@ -212,7 +209,7 @@ namespace Server.Mobiles
         {
             base.GetContextMenuEntries(from, list);
 
-            if (IsOwner(Owner))
+            if (IsOwner(from))
             {
                 if (from.Alive && from.InRange(this, 2))
                 {
@@ -254,7 +251,7 @@ namespace Server.Mobiles
                     toAdd.AddRange(mobile.Backpack.Items);
                 }
 
-                foreach (var item in toAdd)
+                foreach (Item item in toAdd)
                 {
                     house.DropToMovingCrate(item);
                 }
@@ -274,7 +271,7 @@ namespace Server.Mobiles
 
         private class ViewSuitsEntry : ContextMenuEntry
         {
-            private Mobile _From;
+            private readonly Mobile _From;
             private readonly Mannequin _Mannequin;
 
             public ViewSuitsEntry(Mobile from, Mannequin m)
@@ -292,7 +289,7 @@ namespace Server.Mobiles
 
         private class CompareWithItemInSlotEntry : ContextMenuEntry
         {
-            private Mobile _From;
+            private readonly Mobile _From;
             private readonly Mannequin _Mannequin;
 
             public CompareWithItemInSlotEntry(Mobile from, Mannequin m)
@@ -320,14 +317,21 @@ namespace Server.Mobiles
 
                 protected override void OnTarget(Mobile from, object targeted)
                 {
-                    from.SendGump(new MannequinCompareGump(_Mannequin, (Item)targeted));
+                    if (targeted is Item)
+                        from.SendGump(new MannequinCompareGump(_Mannequin, (Item)targeted));
+                    else
+                    {
+                        // TODO : Action
+                        // This was a temporary crash fix
+                    }
+
                 }
             }
         }
 
         private class ViewSuitsSelectItemEntry : ContextMenuEntry
         {
-            private Mobile _From;
+            private readonly Mobile _From;
             private readonly Mannequin _Mannequin;
 
             public ViewSuitsSelectItemEntry(Mobile from, Mannequin m)
@@ -363,7 +367,7 @@ namespace Server.Mobiles
 
         private class AddDescriptionEntry : ContextMenuEntry
         {
-            private Mobile _From;
+            private readonly Mobile _From;
             private readonly Mannequin _Mannequin;
 
             public AddDescriptionEntry(Mobile from, Mannequin m)
@@ -380,7 +384,7 @@ namespace Server.Mobiles
 
             private class DescriptionGump : Gump
             {
-                private Mannequin _Mannequin;
+                private readonly Mannequin _Mannequin;
 
                 public DescriptionGump(Mannequin mann)
                     : base(0, 0)
@@ -427,7 +431,7 @@ namespace Server.Mobiles
 
         private class CustomizeBodyEntry : ContextMenuEntry
         {
-            private Mobile _From;
+            private readonly Mobile _From;
             private readonly Mobile _Mannequin;
 
             public CustomizeBodyEntry(Mobile from, Mobile m)
@@ -446,7 +450,7 @@ namespace Server.Mobiles
         private class SwitchClothesEntry : ContextMenuEntry
         {
             private readonly Mobile _From;
-            private Mannequin _Mannequin;
+            private readonly Mannequin _Mannequin;
 
             public SwitchClothesEntry(Mobile from, Mannequin m)
                 : base(1151606, 2)
@@ -513,8 +517,8 @@ namespace Server.Mobiles
 
         private class RotateEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public RotateEntry(Mobile from, Mobile m)
                 : base(1151586, 2)
@@ -539,8 +543,8 @@ namespace Server.Mobiles
 
         private class RedeedEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public RedeedEntry(Mobile from, Mobile m)
                 : base(1151601, 2)
@@ -567,8 +571,8 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1); // version
-            
+            writer.Write(1); // version
+
             writer.Write(Description);
             writer.Write(Owner);
         }
@@ -592,16 +596,16 @@ namespace Server.Mobiles
 
                         break;
                     }
-            }            
+            }
         }
     }
 
-    
+
 
     [Flipable(0x14F0, 0x14EF)]
     public class MannequinDeed : Item
     {
-        public override int LabelNumber { get { return 1151602; } } // Mannequin Deed
+        public override int LabelNumber => 1151602;  // Mannequin Deed
 
         [Constructable]
         public MannequinDeed()
@@ -626,7 +630,7 @@ namespace Server.Mobiles
                     if (house.Owner == from || house.IsCoOwner(from))
                     {
                         from.SendLocalizedMessage(1151657); // Where do you wish to place this?
-                        from.Target = new PlaceTarget(this);                       
+                        from.Target = new PlaceTarget(this);
                     }
                     else
                     {
@@ -647,7 +651,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

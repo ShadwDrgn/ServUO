@@ -1,20 +1,18 @@
-﻿using System;
 using Server.Gumps;
 using Server.Network;
-using Server.Mobiles;
 
 namespace Server.Items
 {
     public class SorcerersScroll : Item
     {
-        public override int LabelNumber { get { return 1023637; } } // scroll
+        public override int LabelNumber => 1023637;  // scroll
 
         [Constructable]
         public SorcerersScroll()
-            :base(0x46B2)
+            : base(0x46B2)
         {
-            this.Hue = 33;
-            this.Movable = false;
+            Hue = 33;
+            Movable = false;
         }
 
         public override void AddNameProperties(ObjectPropertyList list)
@@ -26,11 +24,6 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!(from is PlayerMobile))
-                return;
-
-            PlayerMobile mobile = (PlayerMobile)from;
-
             if (!from.HasGump(typeof(SorcerersScrollGump)))
             {
                 from.SendGump(new SorcerersScrollGump(from));
@@ -49,7 +42,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
     }
 
@@ -57,9 +50,9 @@ namespace Server.Items
     {
         public SorcerersScrollGump(Mobile owner) : base(50, 50)
         {
-            this.Closable = true;
-            this.Disposable = true;
-            this.Dragable = true;
+            Closable = true;
+            Disposable = true;
+            Dragable = true;
 
             AddPage(0);
             AddBackground(6, 11, 390, 324, 9380);

@@ -1,5 +1,3 @@
-using System;
-
 using Server.Mobiles;
 
 namespace Server.Engines.SorcerersDungeon
@@ -12,7 +10,6 @@ namespace Server.Engines.SorcerersDungeon
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a stocking serpent";
-
             Body = 0x509;
             BaseSoundID = 0xDB;
             Hue = 1459;
@@ -23,7 +20,7 @@ namespace Server.Engines.SorcerersDungeon
 
             SetHits(8000);
 
-            SetDamage(22, 29);
+            SetDamage(21, 27);
 
             SetDamageType(ResistanceType.Physical, 50);
             SetDamageType(ResistanceType.Cold, 50);
@@ -40,8 +37,8 @@ namespace Server.Engines.SorcerersDungeon
             SetSkill(SkillName.Tactics, 100.0);
             SetSkill(SkillName.Wrestling, 120, 130);
 
-            Fame = 12000;
-            Karma = -12000;
+            Fame = 16000;
+            Karma = -16000;
 
             SetSpecialAbility(SpecialAbility.ViciousBite);
         }
@@ -51,9 +48,10 @@ namespace Server.Engines.SorcerersDungeon
         {
         }
 
-        public override Poison HitPoison { get { return Poison.Lethal; } }
-        public override bool AlwaysMurderer { get { return true; } }
-        public override Poison PoisonImmune { get { return Poison.Lethal; } }
+        public override bool CanFlee => false;
+        public override Poison HitPoison => Poison.Lethal;
+        public override bool AlwaysMurderer => true;
+        public override Poison PoisonImmune => Poison.Lethal;
 
         public override void GenerateLoot()
         {
@@ -63,7 +61,7 @@ namespace Server.Engines.SorcerersDungeon
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

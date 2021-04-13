@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class AncientWildStaff : WildStaff
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public AncientWildStaff()
         {
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073550;
-            }
-        }// ancient wild staff
+        public override int LabelNumber => 1073550;// ancient wild staff
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

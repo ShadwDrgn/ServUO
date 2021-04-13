@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using Server.Mobiles;
-using Server.Items;
 using Server.Engines.Craft;
 
 namespace Server.Items
@@ -79,13 +75,6 @@ namespace Server.Items
                 return null;
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            base.OnSingleClick(from);
-
-            this.LabelTo(from, 1094795, GetTitle()); // An alter service contract (~1_SKILL_NAME~)
-        }
-
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
@@ -118,10 +107,10 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version 
+            writer.Write(0); // version 
 
             writer.Write((int)m_Type);
-            writer.Write((string)m_CrafterName);
+            writer.Write(m_CrafterName);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -131,7 +120,7 @@ namespace Server.Items
             int version = reader.ReadInt();
 
             m_Type = (RepairSkillType)reader.ReadInt();
-            m_CrafterName = (string)reader.ReadString();
+            m_CrafterName = reader.ReadString();
         }
     }
 }

@@ -1,8 +1,6 @@
-using System;
+using Server.Engines.BulkOrders;
 using System.Collections.Generic;
 using System.Linq;
-using Server.Gumps;
-using Server.Engines.BulkOrders;
 
 namespace Server.Items
 {
@@ -27,7 +25,7 @@ namespace Server.Items
         Bloodwood,
         Frostwood,
         Alchemy,
-        Blacksmith, 
+        Blacksmith,
         Cooking,
         Fletching,
         Carpentry,
@@ -43,7 +41,7 @@ namespace Server.Items
         public static void Initialize()
         {
             Infos = new List<CoverInfo>();
- 
+
             Infos.Add(new CoverInfo(CoverType.Normal, 1071097, 0));
             Infos.Add(new CoverInfo(CoverType.DullCopper, 1071101, CraftResources.GetHue(CraftResource.DullCopper)));
             Infos.Add(new CoverInfo(CoverType.ShadowIron, 1071107, CraftResources.GetHue(CraftResource.ShadowIron)));
@@ -97,7 +95,7 @@ namespace Server.Items
             get { return _CoverType; }
             set
             {
-                var current = _CoverType;
+                CoverType current = _CoverType;
 
                 if (current != value)
                 {
@@ -134,7 +132,7 @@ namespace Server.Items
 
         public void InvalidateHue()
         {
-            var info = CoverInfo.Infos.FirstOrDefault(x => x.Type == _CoverType);
+            CoverInfo info = CoverInfo.Infos.FirstOrDefault(x => x.Type == _CoverType);
 
             if (info != null)
             {
@@ -144,7 +142,7 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            var info = CoverInfo.Infos.FirstOrDefault(x => x.Type == _CoverType);
+            CoverInfo info = CoverInfo.Infos.FirstOrDefault(x => x.Type == _CoverType);
 
             if (info != null)
             {
@@ -179,11 +177,11 @@ namespace Server.Items
             if (IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(1071121); // Select the bulk order book you want to replace a cover.
-                from.BeginTarget(-1, false, Server.Targeting.TargetFlags.None, (m, targeted) =>
+                from.BeginTarget(-1, false, Targeting.TargetFlags.None, (m, targeted) =>
                     {
                         if (targeted is BulkOrderBook)
                         {
-                            var bob = (BulkOrderBook)targeted;
+                            BulkOrderBook bob = (BulkOrderBook)targeted;
 
                             if (bob.IsChildOf(m.Backpack))
                             {
@@ -223,7 +221,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1);
+            writer.Write(1);
 
             writer.Write(_UsesRemaining);
             writer.Write((int)_CoverType);
@@ -250,11 +248,11 @@ namespace Server.Items
 
     public class BagOfBulkOrderCovers : Bag
     {
-        public override int LabelNumber { get { return 1071116; } } // Bag of bulk order covers
+        public override int LabelNumber => 1071116;  // Bag of bulk order covers
 
         public BagOfBulkOrderCovers(int start, int end)
         {
-            for(int i = start; i <= end; i++)
+            for (int i = start; i <= end; i++)
             {
                 if (i >= 0 && i < CoverInfo.Infos.Count)
                 {
@@ -272,7 +270,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

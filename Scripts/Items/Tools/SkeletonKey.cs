@@ -1,14 +1,11 @@
-﻿using Server;
-using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class Skeletonkey : Lockpick
     {
-        public override int LabelNumber { get { return 1095522; } }
+        public override int LabelNumber => 1095522;
 
-        public override bool IsSkeletonKey { get { return true; } }
-        public override int SkillBonus { get { return 10; } }
+        public override bool IsSkeletonKey => true;
+        public override int SkillBonus => 10;
 
         private int m_Uses;
 
@@ -43,7 +40,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
             writer.Write(m_Uses);
         }
 

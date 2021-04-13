@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class WillowTreeAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed { get { return new WillowTreeDeed(); } }
+        public override BaseAddonDeed Deed => new WillowTreeDeed();
 
         [Constructable]
         public WillowTreeAddon()
@@ -34,8 +32,8 @@ namespace Server.Items
 
     public class WillowTreeDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon { get { return new WillowTreeAddon(); } }
-        public override int LabelNumber { get { return 1071105; } } // Willow Tree
+        public override BaseAddon Addon => new WillowTreeAddon();
+        public override int LabelNumber => 1071105;  // Willow Tree
 
         [Constructable]
         public WillowTreeDeed()

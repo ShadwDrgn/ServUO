@@ -1,20 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Server;
 using Server.Gumps;
 using Server.Network;
+using System.Linq;
 
 namespace Server.Items
 {
     public class CrystalBallOfKnowledge : Item
     {
-        private static SkillName[] _ExcludedSkills =
+        private static readonly SkillName[] _ExcludedSkills =
         {
             SkillName.Meditation, SkillName.Focus
         };
 
-        public override int LabelNumber { get { return 1112568; } } // Crystal Ball of Knowledge
+        public override int LabelNumber => 1112568;  // Crystal Ball of Knowledge
 
         private bool m_Active;
 
@@ -147,9 +144,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
-            writer.Write((bool)m_Active);
+            writer.Write(m_Active);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -163,7 +160,7 @@ namespace Server.Items
 
         public class ToggleActivationGump : Gump
         {
-            private CrystalBallOfKnowledge m_Ball;
+            private readonly CrystalBallOfKnowledge m_Ball;
 
             public ToggleActivationGump(CrystalBallOfKnowledge ball)
                 : base(150, 200)

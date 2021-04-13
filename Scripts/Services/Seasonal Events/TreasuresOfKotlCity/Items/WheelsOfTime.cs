@@ -1,7 +1,6 @@
-using System;
-using Server;
 using Server.Items;
 using Server.Network;
+using System;
 
 namespace Server.Engines.TreasuresOfKotlCity
 {
@@ -20,7 +19,7 @@ namespace Server.Engines.TreasuresOfKotlCity
 
         public Timer Timer { get; set; }
 
-        public override int LabelNumber { get { return 1157032; } } // Wheels of Time
+        public override int LabelNumber => 1157032;  // Wheels of Time
 
         public WheelsOfTime()
             : base(0x9CEF)
@@ -37,7 +36,7 @@ namespace Server.Engines.TreasuresOfKotlCity
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!from.InRange(this.GetWorldLocation(), 1))
+            if (!from.InRange(GetWorldLocation(), 1))
             {
                 from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
@@ -47,7 +46,7 @@ namespace Server.Engines.TreasuresOfKotlCity
             }
             else
             {
-                from.PrivateOverheadMessage(Server.Network.MessageType.Regular, 1154, 1157020, from.NetState);
+                from.PrivateOverheadMessage(MessageType.Regular, 1154, 1157020, from.NetState);
                 from.PlaySound(0x0FF);
 
                 ActivateTimeWarp();
@@ -87,7 +86,7 @@ namespace Server.Engines.TreasuresOfKotlCity
             {
                 KotlBattleSimulator.Instance.EndSimulation();
             }
-            
+
             if (RockBarrier != null && RockBarrier.Location != RockBarrierLocation)
             {
                 RockBarrier.MoveToWorld(RockBarrierLocation, Map.TerMur);

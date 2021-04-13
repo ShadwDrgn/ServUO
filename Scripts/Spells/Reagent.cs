@@ -1,11 +1,11 @@
-using System;
 using Server.Items;
+using System;
 
 namespace Server.Spells
 {
     public class Reagent
     {
-        private static readonly Type[] m_Types = new Type[17]
+        private static readonly Type[] m_Types = 
         {
             typeof(BlackPearl),
             typeof(Bloodmoss),
@@ -23,7 +23,7 @@ namespace Server.Spells
             typeof(Bone),
             typeof(DragonBlood),
             typeof(FertileDirt),
-            typeof(DaemonBone)
+            typeof(DaemonBone),
         };
         public static Type BlackPearl
         {
@@ -212,12 +212,6 @@ namespace Server.Spells
                 m_Types[16] = value;
             }
         }
-        public Type[] Types
-        {
-            get
-            {
-                return m_Types;
-            }
-        }
+        public Type[] Types => m_Types;
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
 using Server.Mobiles;
-using System.Text;
-using Server;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -43,19 +41,27 @@ namespace Server.Items
 
             protected override void OnTick()
             {
-                BaseThieveConsumable.RemoveEffect(pm,effect);
+                RemoveEffect(pm, effect);
             }
 
             public InternalTimer(PlayerMobile p, ThieveConsumableEffect e, TimeSpan delay)
                 : base(delay)
             {
                 pm = p;
-                effect = e; 
+                effect = e;
             }
         }
 
-        public   TimeSpan m_EffectDuration;
-        protected  ThieveConsumableEffect m_EffectType;
+        public TimeSpan m_EffectDuration;
+        protected ThieveConsumableEffect m_EffectType;
+
+        public override void OnDoubleClick(Mobile m)
+        {
+            if (m is PlayerMobile && IsChildOf(m.Backpack))
+            {
+                OnUse((PlayerMobile)m);
+            }
+        }
 
         protected virtual void OnUse(PlayerMobile by)
         {
@@ -66,21 +72,21 @@ namespace Server.Items
 
             if (m_EffectDuration == TimeSpan.Zero)
             {
-                m_EffectDuration = TimeSpan.FromMinutes(30); 
+                m_EffectDuration = TimeSpan.FromMinutes(30);
             }
 
-            InternalTimer t = new InternalTimer(pm,m_EffectType,m_EffectDuration);
-            t.Start(); 
+            InternalTimer t = new InternalTimer(pm, m_EffectType, m_EffectDuration);
+            t.Start();
 
-            ThieveConsumableInfo info = new ThieveConsumableInfo(t, this.m_EffectType);
-            
+            ThieveConsumableInfo info = new ThieveConsumableInfo(t, m_EffectType);
+
             if (EffectTable.ContainsKey(pm))
             {
-                RemoveEffect(pm, EffectTable[pm].Effect); 
+                RemoveEffect(pm, EffectTable[pm].Effect);
             }
-                
+
             EffectTable.Add(pm, info);
-            this.Consume(); 
+            Consume();
         }
 
         protected static void RemoveEffect(PlayerMobile pm, ThieveConsumableEffect effectType)
@@ -115,7 +121,7 @@ namespace Server.Items
             }
         }
 
-        private static Dictionary<PlayerMobile, ThieveConsumableInfo> EffectTable = new Dictionary<PlayerMobile, ThieveConsumableInfo>();
+        private static readonly Dictionary<PlayerMobile, ThieveConsumableInfo> EffectTable = new Dictionary<PlayerMobile, ThieveConsumableInfo>();
 
         public static bool CanUse(PlayerMobile pm, BaseThieveConsumable consum)
         {
@@ -131,21 +137,12 @@ namespace Server.Items
 
         public static bool IsUnderThieveConsumableEffect(PlayerMobile pm, ThieveConsumableEffect eff)
         {
-            if (EffectTable.ContainsKey(pm))
+            if (EffectTable.ContainsKey(pm) && EffectTable[pm].Effect == eff)
             {
-                if (EffectTable[pm].Effect == eff)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public static ThieveConsumableEffect CheckThieveConsumable(PlayerMobile pm)
@@ -170,10 +167,10 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write((int)m_EffectType);
-            writer.Write(m_EffectDuration); 
+            writer.Write(m_EffectDuration);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -183,7 +180,7 @@ namespace Server.Items
             int version = reader.ReadInt();
 
             m_EffectType = (ThieveConsumableEffect)reader.ReadInt();
-            m_EffectDuration = reader.ReadTimeSpan(); 
+            m_EffectDuration = reader.ReadTimeSpan();
         }
     }
 }

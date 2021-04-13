@@ -1,5 +1,4 @@
-﻿using System;
-using Server.Engines.Quests;
+﻿using Server.Engines.Quests;
 using Server.Mobiles;
 using Server.Network;
 
@@ -37,7 +36,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer) // Default Serialize method
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader) // Default Deserialize method

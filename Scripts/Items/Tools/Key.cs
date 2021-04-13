@@ -1,8 +1,7 @@
-using System;
-using Server.Network;
+using Server.Engines.Craft;
 using Server.Prompts;
 using Server.Targeting;
-using Server.Engines.Craft;
+using System;
 
 namespace Server.Items
 {
@@ -40,7 +39,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ItemQuality Quality { get { return _Quality; } set { _Quality = value; InvalidateProperties(); } }
 
-        public bool PlayerConstructed { get { return true; } }
+        public bool PlayerConstructed => true;
 
         [Constructable]
         public Key()
@@ -206,18 +205,18 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)3); // version
+            writer.Write(3); // version
 
             writer.Write((int)_Resource);
             writer.Write(_Crafter);
             writer.Write((int)_Quality);
 
-            writer.Write((int)m_MaxRange);
+            writer.Write(m_MaxRange);
 
-            writer.Write((Item)m_Link);
+            writer.Write(m_Link);
 
-            writer.Write((string)m_Description);
-            writer.Write((uint)m_KeyVal);
+            writer.Write(m_Description);
+            writer.Write(m_KeyVal);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -226,7 +225,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 3:
                     {
@@ -315,7 +314,7 @@ namespace Server.Items
         {
             if (_Resource > CraftResource.Iron)
             {
-                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), String.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
+                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), string.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
             }
             else
             {
@@ -339,21 +338,6 @@ namespace Server.Items
             }
 
             return quality;
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            base.OnSingleClick(from);
-
-            string desc;
-
-            if (m_KeyVal == 0)
-                desc = "(blank)";
-            else if ((desc = m_Description) == null || (desc = desc.Trim()).Length <= 0)
-                desc = "";
-
-            if (desc.Length > 0)
-                from.Send(new UnicodeMessage(Serial, ItemID, MessageType.Regular, 0x3B2, 3, "ENU", "", desc));
         }
 
         public bool UseOn(Mobile from, ILockable o)
@@ -410,7 +394,7 @@ namespace Server.Items
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc { get { return 501665; } }
+            public override int MessageCliloc => 501665;
             private readonly Key m_Key;
             public RenamePrompt(Key key)
             {

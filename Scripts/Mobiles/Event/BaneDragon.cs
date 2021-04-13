@@ -1,5 +1,5 @@
-using System;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
@@ -69,13 +69,15 @@ namespace Server.Mobiles
             ControlSlots = 3;
             MinTameSkill = 107.1;
 
-            PowerLevel = 10;
+            PowerLevel = 5;
             _NextSpecial = DateTime.UtcNow;
         }
 
-        public override Poison HitPoison { get { return Poison.Lethal; } }
-        public override bool AlwaysMurderer { get { return true; } }
-        public override FoodType FavoriteFood { get { return FoodType.BlackrockStew; } }
+		public override bool SubdueBeforeTame => true;
+        public override bool StatLossAfterTame => false;
+        public override Poison HitPoison => Poison.Lethal;
+        public override bool AlwaysMurderer => !Controlled;
+        public override FoodType FavoriteFood => FoodType.BlackrockStew;
 
         public override bool CheckFeed(Mobile from, Item dropped)
         {
@@ -111,7 +113,7 @@ namespace Server.Mobiles
             {
                 DoSpecial(from);
 
-                _NextSpecial = DateTime.UtcNow + TimeSpan.FromSeconds((double)Utility.RandomMinMax(15, 30) * (double)(11.0 - PowerLevel));
+                _NextSpecial = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(15, 30) * (11.0 - PowerLevel));
             }
         }
 
@@ -140,8 +142,8 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
+            writer.Write(1); // version
 
-            writer.Write((int)1); // version
             writer.Write(PowerLevel);
             writer.Write(PowerDecay);
         }
@@ -149,7 +151,6 @@ namespace Server.Mobiles
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
 
             switch (version)

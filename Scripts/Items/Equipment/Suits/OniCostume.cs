@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class OniCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "oni"; } }
+    public class OniCostume : BaseCostume
+    {
+        public override string CreatureName => "oni";
 
         [Constructable]
-		public OniCostume() : base( )
-		{
-            this.CostumeBody = 241;
-		}
-		
-		public override int LabelNumber
+        public OniCostume() : base()
         {
-            get
-            {
-                return 1114242;
-            }
-        }// oni costume
+            CostumeBody = 241;
+        }
 
-		public OniCostume( Serial serial ) : base( serial )
-		{
-		}
+        public override int LabelNumber => 1114242;// oni costume
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public OniCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

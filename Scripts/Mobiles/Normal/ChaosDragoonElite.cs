@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -84,33 +83,45 @@ namespace Server.Mobiles
             melee.Movable = false;
             AddItem(melee);
 
-            DragonChest Tunic = new DragonChest();
-            Tunic.Resource = res;
-            Tunic.Movable = false;
+            DragonChest Tunic = new DragonChest
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(Tunic);
 
-            DragonLegs Legs = new DragonLegs();
-            Legs.Resource = res;
-            Legs.Movable = false;
+            DragonLegs Legs = new DragonLegs
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(Legs);
 
-            DragonArms Arms = new DragonArms();
-            Arms.Resource = res;
-            Arms.Movable = false;
+            DragonArms Arms = new DragonArms
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(Arms);
 
-            DragonGloves Gloves = new DragonGloves();
-            Gloves.Resource = res;
-            Gloves.Movable = false;
+            DragonGloves Gloves = new DragonGloves
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(Gloves);
 
-            DragonHelm Helm = new DragonHelm();
-            Helm.Resource = res;
-            Helm.Movable = false;
+            DragonHelm Helm = new DragonHelm
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(Helm);
 
-            ChaosShield shield = new ChaosShield();
-            shield.Movable = false;
+            ChaosShield shield = new ChaosShield
+            {
+                Movable = false
+            };
             AddItem(shield);
 
             AddItem(new Boots(0x455));
@@ -170,9 +181,11 @@ namespace Server.Mobiles
                     break;
             }
 
-            SwampDragon mt = new SwampDragon();
-            mt.HasBarding = true;
-            mt.BardingResource = res;
+            SwampDragon mt = new SwampDragon
+            {
+                HasBarding = true,
+                BardingResource = res
+            };
             mt.BardingHP = mt.BardingMaxHP;
             mt.Rider = this;
 
@@ -184,41 +197,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AutoDispel
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ShowFameTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool AutoDispel => true;
+        public override bool CanRummageCorpses => true;
+        public override bool AlwaysMurderer => true;
+        public override bool ShowFameTitle => false;
         public override int GetIdleSound()
         {
             return 0x2CE;
@@ -269,7 +251,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

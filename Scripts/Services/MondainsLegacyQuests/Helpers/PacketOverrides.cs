@@ -1,21 +1,21 @@
-using System;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using Server.Items;
+using System;
 
 namespace Server.Engines.Quests
 {
     public sealed class HeritagePacket : Packet
     {
-        public static readonly Packet Close = Packet.SetStatic(new HeritagePacket(false, 0xFF));
+        public static readonly Packet Close = SetStatic(new HeritagePacket(false, 0xFF));
         public HeritagePacket(bool female, short type)
             : base(0xBF)
         {
-            this.EnsureCapacity(7);
-			
-            this.m_Stream.Write((short)0x2A);
-            this.m_Stream.Write((byte)(female ? 1 : 0));
-            this.m_Stream.Write((byte)type);
+            EnsureCapacity(7);
+
+            m_Stream.Write((short)0x2A);
+            m_Stream.Write((byte)(female ? 1 : 0));
+            m_Stream.Write((byte)type);
         }
     }
 
@@ -23,21 +23,21 @@ namespace Server.Engines.Quests
     {
         public static void Initialize()
         {
-            Timer.DelayCall(TimeSpan.Zero, new TimerCallback(Override));
+            Timer.DelayCall(TimeSpan.Zero, Override);
         }
 
         public static void Override()
         {
-            PacketHandlers.RegisterEncoded(0x32, true, new OnEncodedPacketReceive(QuestButton)); 
-            PacketHandlers.RegisterExtended(0x2A, true, new OnPacketReceive(HeritageTransform)); 
+            PacketHandlers.RegisterEncoded(0x32, true, QuestButton);
+            PacketHandlers.RegisterExtended(0x2A, true, HeritageTransform);
         }
 
-        public static void QuestButton(NetState state, IEntity e, EncodedReader reader) 
+        public static void QuestButton(NetState state, IEntity e, EncodedReader reader)
         {
             if (state.Mobile is PlayerMobile)
             {
                 PlayerMobile from = (PlayerMobile)state.Mobile;
-				
+
                 from.CloseGump(typeof(MondainQuestGump));
                 from.SendGump(new MondainQuestGump(from));
             }
@@ -46,7 +46,7 @@ namespace Server.Engines.Quests
         public static void HeritageTransform(NetState state, PacketReader reader)
         {
             Mobile m = state.Mobile;
-			
+
             if (reader.Size == 5)
             {
                 m.SendLocalizedMessage(1073645); // You may try this again later...	
@@ -71,7 +71,7 @@ namespace Server.Engines.Quests
                 }
                 else if (RaceChangeToken.IsPending(m))
                 {
-                    var race = RaceChangeToken.GetPendingRace(m);
+                    Race race = RaceChangeToken.GetPendingRace(m);
 
                     if (race != null)
                     {
@@ -84,7 +84,7 @@ namespace Server.Engines.Quests
                     }
                 }
 
-                if(proceed)
+                if (proceed)
                 {
                     m.Hue = reader.ReadUInt16();
                     m.HairItemID = reader.ReadUInt16();

@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Items;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -10,7 +9,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public PackHorse()
-            : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "a pack horse";
             Body = 291;
@@ -41,8 +40,6 @@ namespace Server.Mobiles
             Fame = 0;
             Karma = 200;
 
-            VirtualArmor = 16;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 29.1;
@@ -52,35 +49,19 @@ namespace Server.Mobiles
             if (pack != null)
                 pack.Delete();
 
-            pack = new StrongBackpack();
-            pack.Movable = false;
+            pack = new StrongBackpack
+            {
+                Movable = false
+            };
 
             AddItem(pack);
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 3;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
-            }
-        }
+        public override int Meat => 3;
+        public override int Hides => 10;
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
 
-        public override bool CanAutoStable { get { return (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable; } }
+        public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;
 
         public PackHorse(Serial serial)
             : base(serial)
@@ -88,16 +69,6 @@ namespace Server.Mobiles
         }
 
         #region Pack Animal Methods
-        public override bool OnBeforeDeath()
-        {
-            if (!base.OnBeforeDeath())
-                return false;
-
-            PackAnimal.CombineBackpacks(this);
-
-            return true;
-        }
-
         public override DeathMoveResult GetInventoryMoveResultFor(Item item)
         {
             return DeathMoveResult.MoveToCorpse;
@@ -153,7 +124,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -202,32 +173,6 @@ namespace Server.Mobiles
                 return true;
 
             return false;
-        }
-
-        public static void CombineBackpacks(BaseCreature animal)
-        {
-            if (Core.AOS)
-                return;
-
-            if (animal.IsBonded || animal.IsDeadPet)
-                return;
-
-            Container pack = animal.Backpack;
-
-            if (pack != null)
-            {
-                Container newPack = new Backpack();
-
-                for (int i = pack.Items.Count - 1; i >= 0; --i)
-                {
-                    if (i >= pack.Items.Count)
-                        continue;
-
-                    newPack.DropItem(pack.Items[i]);
-                }
-
-                pack.DropItem(newPack);
-            }
         }
 
         public static void TryPackOpen(BaseCreature animal, Mobile from)

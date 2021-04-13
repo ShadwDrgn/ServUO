@@ -1,10 +1,10 @@
+using Server.Accounting;
+using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Mail;
-using Server.Accounting;
-using Server.Network;
 
 namespace Server.Misc
 {
@@ -17,7 +17,7 @@ namespace Server.Misc
         public static void Initialize()
         {
             if (Enabled) // If enabled, register our crash event handler
-                EventSink.Crashed += new CrashedEventHandler(CrashGuard_OnCrash);
+                EventSink.Crashed += CrashGuard_OnCrash;
         }
 
         public static void CrashGuard_OnCrash(CrashedEventArgs e)
@@ -30,9 +30,7 @@ namespace Server.Misc
             if (SaveBackup)
                 Backup();
 
-            /*if ( Core.Service )
-            e.Close = true;
-            else */ if (RestartServer)
+            if (RestartServer)
                 Restart(e);
         }
 
@@ -40,11 +38,12 @@ namespace Server.Misc
         {
             Console.Write("Crash: Sending email...");
 
-            MailMessage message = new MailMessage(Email.FromAddress, Email.CrashAddresses);
+            MailMessage message = new MailMessage(Email.FromAddress, Email.CrashAddresses)
+            {
+                Subject = "Automated ServUO Crash Report",
 
-            message.Subject = "Automated ServUO Crash Report";
-
-            message.Body = "Automated ServUO Crash Report. See attachment for details.";
+                Body = "Automated ServUO Crash Report. See attachment for details."
+            };
 
             message.Attachments.Add(new Attachment(filePath));
 
@@ -60,8 +59,9 @@ namespace Server.Misc
             {
                 return Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
                 return "";
             }
         }
@@ -114,8 +114,9 @@ namespace Server.Misc
                 if (File.Exists(originPath))
                     File.Copy(originPath, backupPath);
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
             }
         }
 
@@ -128,8 +129,8 @@ namespace Server.Misc
                 string timeStamp = GetTimeStamp();
 
                 string root = GetRoot();
-                string rootBackup = Combine(root, String.Format("Backups/Crashed/{0}/", timeStamp));
-                string rootOrigin = Combine(root, String.Format("Saves/"));
+                string rootBackup = Combine(root, string.Format("Backups/Crashed/{0}/", timeStamp));
+                string rootOrigin = Combine(root, string.Format("Saves/"));
 
                 // Create new directories
                 CreateDirectory(rootBackup);
@@ -171,7 +172,7 @@ namespace Server.Misc
             try
             {
                 string timeStamp = GetTimeStamp();
-                string fileName = String.Format("Crash {0}.log", timeStamp);
+                string fileName = string.Format("Crash {0}.log", timeStamp);
 
                 string root = GetRoot();
                 string filePath = Combine(root, fileName);
@@ -192,16 +193,18 @@ namespace Server.Misc
                     {
                         op.WriteLine("Mobiles: {0}", World.Mobiles.Count);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Diagnostics.ExceptionLogging.LogException(ex);
                     }
 
                     try
                     {
                         op.WriteLine("Items: {0}", World.Items.Count);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Diagnostics.ExceptionLogging.LogException(ex);
                     }
 
                     op.WriteLine("Exception:");
@@ -256,7 +259,7 @@ namespace Server.Misc
         {
             DateTime now = DateTime.UtcNow;
 
-            return String.Format("{0}-{1}-{2}-{3}-{4}-{5}",
+            return string.Format("{0}-{1}-{2}-{3}-{4}-{5}",
                 now.Day,
                 now.Month,
                 now.Year,

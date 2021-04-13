@@ -1,4 +1,3 @@
-using System;
 using Server.Multis;
 using Server.Prompts;
 using Server.Regions;
@@ -15,7 +14,7 @@ namespace Server.Items
     [Flipable(0x1f14, 0x1f15, 0x1f16, 0x1f17)]
     public class RecallRune : Item
     {
-        public override int LabelNumber { get { return Type == RecallRuneType.Normal ? 1060577 : Type == RecallRuneType.Shop ? 1151508 : 1149570; } } // Recall Rune - Shop Recall Rune - Ship Recall Rune
+        public override int LabelNumber => Type == RecallRuneType.Normal ? 1060577 : Type == RecallRuneType.Shop ? 1151508 : 1149570;  // Recall Rune - Shop Recall Rune - Ship Recall Rune
 
         private const string RuneFormat = "a recall rune for {0}";
         private string m_Description;
@@ -136,15 +135,15 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)2); // version
+            writer.Write(2); // version
 
             writer.Write((int)Type);
-            writer.Write((Item)m_Galleon);
-            writer.Write((Item)m_House);
-            writer.Write((string)m_Description);
-            writer.Write((bool)m_Marked);
-            writer.Write((Point3D)Target);
-            writer.Write((Map)m_TargetMap);
+            writer.Write(m_Galleon);
+            writer.Write(m_House);
+            writer.Write(m_Description);
+            writer.Write(m_Marked);
+            writer.Write(Target);
+            writer.Write(m_TargetMap);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -197,62 +196,51 @@ namespace Server.Items
 
             bool setDesc = false;
 
-            if (Core.AOS)
+            m_Galleon = BaseBoat.FindBoatAt(m) as BaseGalleon;
+
+            if (m_Galleon != null)
             {
-                m_Galleon = BaseBoat.FindBoatAt(m) as BaseGalleon;
-
-                if (m_Galleon != null)
-                {
-                    Type = RecallRuneType.Ship;
-                }
-                else
-                {
-                    m_House = BaseHouse.FindHouseAt(m);
-
-                    if (m_House == null)
-                    {
-                        Target = m.Location;
-                        m_TargetMap = m.Map;
-
-                        Type = RecallRuneType.Normal;
-                    }
-                    else
-                    {
-                        HouseSign sign = m_House.Sign;
-
-                        if (sign != null)
-                            m_Description = sign.Name;
-                        else
-                            m_Description = null;
-
-                        if (m_Description == null || (m_Description = m_Description.Trim()).Length == 0)
-                            m_Description = "an unnamed house";
-
-                        setDesc = true;
-
-                        int x = m_House.BanLocation.X;
-                        int y = m_House.BanLocation.Y + 2;
-                        int z = m_House.BanLocation.Z;
-
-                        Map map = m_House.Map;
-
-                        if (map != null && !map.CanFit(x, y, z, 16, false, false))
-                            z = map.GetAverageZ(x, y);
-
-                        Target = new Point3D(x, y, z);
-                        m_TargetMap = map;
-
-                        Type = RecallRuneType.Shop;
-                    }
-                }
+                Type = RecallRuneType.Ship;
             }
             else
             {
-                m_House = null;
-                Target = m.Location;
-                m_TargetMap = m.Map;
+                m_House = BaseHouse.FindHouseAt(m);
 
-                Type = RecallRuneType.Normal;
+                if (m_House == null)
+                {
+                    Target = m.Location;
+                    m_TargetMap = m.Map;
+
+                    Type = RecallRuneType.Normal;
+                }
+                else
+                {
+                    HouseSign sign = m_House.Sign;
+
+                    if (sign != null)
+                        m_Description = sign.Name;
+                    else
+                        m_Description = null;
+
+                    if (m_Description == null || (m_Description = m_Description.Trim()).Length == 0)
+                        m_Description = "an unnamed house";
+
+                    setDesc = true;
+
+                    int x = m_House.BanLocation.X;
+                    int y = m_House.BanLocation.Y + 2;
+                    int z = m_House.BanLocation.Z;
+
+                    Map map = m_House.Map;
+
+                    if (map != null && !map.CanFit(x, y, z, 16, false, false))
+                        z = map.GetAverageZ(x, y);
+
+                    Target = new Point3D(x, y, z);
+                    m_TargetMap = map;
+
+                    Type = RecallRuneType.Shop;
+                }
             }
 
             if (!setDesc)
@@ -420,7 +408,7 @@ namespace Server.Items
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc { get { return 501804; } }
+            public override int MessageCliloc => 501804;
             private readonly RecallRune m_Rune;
 
             public RenamePrompt(RecallRune rune)

@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class GoreFiendCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "gore fiend"; } }
+    public class GoreFiendCostume : BaseCostume
+    {
+        public override string CreatureName => "gore fiend";
 
         [Constructable]
-		public GoreFiendCostume() : base( )
-		{
-            this.CostumeBody = 305;
-		}
-		
-		public override int LabelNumber
+        public GoreFiendCostume() : base()
         {
-            get
-            {
-                return 1114227;
-            }
-        }// gore fiend costume
+            CostumeBody = 305;
+        }
 
-		public GoreFiendCostume( Serial serial ) : base( serial )
-		{
-		}
+        public override int LabelNumber => 1114227;// gore fiend costume
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public GoreFiendCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

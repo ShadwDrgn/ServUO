@@ -1,103 +1,51 @@
 #region References
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
 using System;
 using System.Collections.Generic;
-
-using Server.Items;
-using Server.Network;
-using Server.Spells;
-using Server.Mobiles;
 #endregion
 
 namespace Server.SkillHandlers
 {
-	internal class SpiritSpeak
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[32].Callback = OnUse;
-		}
+    internal class SpiritSpeak
+    {
+        public static void Initialize()
+        {
+            SkillInfo.Table[32].Callback = OnUse;
+        }
 
-        public static Dictionary<Mobile, Timer> _Table;
+        public static Dictionary<Mobile, Timer> Table;
 
-		public static TimeSpan OnUse(Mobile m)
-		{
-			if (Core.AOS)
-			{
-                if (m.Spell != null && m.Spell.IsCasting)
-                {
-                    m.SendLocalizedMessage(502642); // You are already casting a spell.
-                }
-                else if (BeginSpiritSpeak(m))
-                {
-                    return TimeSpan.FromSeconds(5.0);
-                }
+        public static TimeSpan OnUse(Mobile m)
+        {
+            if (m.Spell != null && m.Spell.IsCasting)
+            {
+                m.SendLocalizedMessage(502642); // You are already casting a spell.
+            }
+            else if (BeginSpiritSpeak(m))
+            {
+                return TimeSpan.FromSeconds(5.0);
+            }
 
-				return TimeSpan.Zero;
-			}
-
-			m.RevealingAction();
-
-			if (m.CheckSkill(SkillName.SpiritSpeak, 0, 100))
-			{
-				if (!m.CanHearGhosts)
-				{
-					Timer t = new SpiritSpeakTimer(m);
-					double secs = m.Skills[SkillName.SpiritSpeak].Base / 50;
-					secs *= 90;
-					if (secs < 15)
-					{
-						secs = 15;
-					}
-
-					t.Delay = TimeSpan.FromSeconds(secs); //15seconds to 3 minutes
-					t.Start();
-					m.CanHearGhosts = true;
-				}
-
-				m.PlaySound(0x24A);
-				m.SendLocalizedMessage(502444); //You contact the neitherworld.
-			}
-			else
-			{
-				m.SendLocalizedMessage(502443); //You fail to contact the neitherworld.
-				m.CanHearGhosts = false;
-			}
-
-			return TimeSpan.FromSeconds(1.0);
-		}
-
-		private class SpiritSpeakTimer : Timer
-		{
-			private readonly Mobile m_Owner;
-
-			public SpiritSpeakTimer(Mobile m)
-				: base(TimeSpan.FromMinutes(2.0))
-			{
-				m_Owner = m;
-				Priority = TimerPriority.FiveSeconds;
-			}
-
-			protected override void OnTick()
-			{
-				m_Owner.CanHearGhosts = false;
-				m_Owner.SendLocalizedMessage(502445); //You feel your contact with the neitherworld fading.
-			}
-		}
+            return TimeSpan.Zero;
+        }
 
         public static bool BeginSpiritSpeak(Mobile m)
         {
-            if (_Table == null || !_Table.ContainsKey(m))
+            if (Table == null || !Table.ContainsKey(m))
             {
+                m.RevealingAction();
                 m.Freeze(TimeSpan.FromSeconds(1));
 
                 m.Animate(AnimationType.Spell, 1);
                 m.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1062074, "", false); // Anh Mi Sah Ko
                 m.PlaySound(0x24A);
 
-                if (_Table == null)
-                    _Table = new Dictionary<Mobile, Timer>();
+                if (Table == null)
+                    Table = new Dictionary<Mobile, Timer>();
 
-                _Table[m] = new SpiritSpeakTimerNew(m);
+                Table[m] = new SpiritSpeakTimerNew(m);
                 return true;
             }
 
@@ -106,30 +54,27 @@ namespace Server.SkillHandlers
 
         public static bool IsInSpiritSpeak(Mobile m)
         {
-            return _Table != null && _Table.ContainsKey(m);
+            return Table != null && Table.ContainsKey(m);
         }
 
         public static void Remove(Mobile m)
         {
-            if (_Table != null && _Table.ContainsKey(m))
+            if (Table != null && Table.ContainsKey(m))
             {
-                if(_Table[m] != null)
-                    _Table[m].Stop();
+                if (Table[m] != null)
+                    Table[m].Stop();
 
                 m.SendSpeedControl(SpeedControlType.Disable);
-                _Table.Remove(m);
+                Table.Remove(m);
 
-                if (_Table.Count == 0)
-                    _Table = null;
+                if (Table.Count == 0)
+                    Table = null;
             }
         }
 
         public static void CheckDisrupt(Mobile m)
         {
-            if (!Core.AOS)
-                return;
-
-            if (_Table != null && _Table.ContainsKey(m))
+            if (Table != null && Table.ContainsKey(m))
             {
                 if (m is PlayerMobile)
                 {
@@ -147,7 +92,7 @@ namespace Server.SkillHandlers
 
         private class SpiritSpeakTimerNew : Timer
         {
-            public Mobile Caster { get; set; }
+            public Mobile Caster { get; }
 
             public SpiritSpeakTimerNew(Mobile m)
                 : base(TimeSpan.FromSeconds(1))
@@ -169,12 +114,13 @@ namespace Server.SkillHandlers
                         toChannel = (Corpse)objs;
                         break;
                     }
-                    else if (objs is Server.Engines.Khaldun.SageHumbolt)
+
+                    if (objs is Engines.Khaldun.SageHumbolt)
                     {
-                        if (((Server.Engines.Khaldun.SageHumbolt)objs).OnSpiritSpeak(Caster))
+                        if (((Engines.Khaldun.SageHumbolt)objs).OnSpiritSpeak(Caster))
                         {
                             eable.Free();
-                            SpiritSpeak.Remove(Caster);
+                            Remove(Caster);
                             Stop();
                             return;
                         }
@@ -234,9 +180,9 @@ namespace Server.SkillHandlers
                     }
                 }
 
-                SpiritSpeak.Remove(Caster);
+                Remove(Caster);
                 Stop();
             }
         }
-	}
+    }
 }

@@ -1,38 +1,37 @@
-using Server;
-using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Services.TownCryer;
+using System;
 
 namespace Server.Engines.Quests
 {
     public class APleaFromMinocQuest : BaseQuest
     {
         /* A Plea from Minoc */
-        public override object Title { get { return 1158259; } }
+        public override object Title => 1158259;
 
         /*The Governor of Minoc has made a plea to any and all of those willing and able to come to defense of the City. 
          * Cora the Sorcerers has overtaken the Dungeon Covetous and corrupted the creatures that reside within. You hear 
          * rumors the Governor has authorized the Sheriff of Minoc to bestow great fortune and fame to those who sacrifice
          * in the name of the city.*/
-        public override object Description { get { return 1158260; } }
+        public override object Description => 1158260;
 
         /* You decide against accepting the quest. */
-        public override object Refuse { get { return 1158130; } }
+        public override object Refuse => 1158130;
 
         /* Visit the Skara Brae Ranger's Guild and participate in the Huntmaster's Challenge */
-        public override object Uncomplete { get { return 1158261; } }
+        public override object Uncomplete => 1158261;
 
         /* You have braved the wilds of Britannia and slayed a mighty beast! You have meticulously documented your kill 
          * and submitted it to the Ranger's Guild for evaluation. If luck was on your side you may indeed have 
          * the largest quarry for the month...or maybe not. Alas, your bravery has earned you the well deserved title
          * of Hunter! May you go fearlessly into the wilderness in search of your next big kill! Well done! */
-        public override object Complete { get { return 1158378; } }
+        public override object Complete => 1158378;
 
-        public override int CompleteMessage { get { return 1156585; } } // You've completed a quest!
+        public override int CompleteMessage => 1156585;  // You've completed a quest!
 
-        public override int AcceptSound { get { return 0x2E8; } }
-        public override bool DoneOnce { get { return true; } }
+        public override int AcceptSound => 0x2E8;
+        public override bool DoneOnce => true;
 
         public APleaFromMinocQuest()
         {
@@ -44,14 +43,14 @@ namespace Server.Engines.Quests
         public void CompleteQuest()
         {
             OnCompleted();
-            Objectives[0].CurProgress++;
+            Objectives[0].Complete();
             TownCryerSystem.CompleteQuest(Owner, 1158275, 1158276, 0x65B);
             GiveRewards();
         }
 
         private class InternalObjective : BaseObjective
         {
-            public override object ObjectiveDescription { get { return Quest.Uncomplete; } }
+            public override object ObjectiveDescription => Quest.Uncomplete;
 
             public InternalObjective()
                 : base(1)
@@ -62,7 +61,7 @@ namespace Server.Engines.Quests
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
             }
 
             public override void Deserialize(GenericReader reader)
@@ -77,7 +76,7 @@ namespace Server.Engines.Quests
     public class ClearingCovetousQuest : BaseQuest
     {
         /* Clearing Covetous */
-        public override object Title { get { return 1158263; } }
+        public override object Title => 1158263;
 
         /*That's right, I'm the Sheriff of Minoc, what can I help you with citizen? What you read in the Town Cryer is true,
          * Covetous has become quite dangerous. It seems a vile Sorcerers called Cora has overtaken the dungeon and corrupted 
@@ -87,13 +86,13 @@ namespace Server.Engines.Quests
          * they pool their resources. None the less, the Governor has authorized me to deputize any and all who sacrifice
          * on behalf of Minoc and attempt to cleanse Covetous. As you know the mountain is a key strategic resource to 
          * valuable ore that is vital to Minoc's economy. Prove yourself to the City and you shall not soon be forgotten...*/
-        public override object Description { get { return 1158264; } }
+        public override object Description => 1158264;
 
         /* You decide against accepting the quest. */
-        public override object Refuse { get { return 1158130; } }
+        public override object Refuse => 1158130;
 
         /* Go to the dungeon Covetous Level 1 and defeat the creatures within! */
-        public override object Uncomplete { get { return 1158266; } }
+        public override object Uncomplete => 1158266;
 
         /* Indeed, you have proven yourself, and with your clearing of the creatures in the upper levels of Covetous Mountain our 
          * miners can once again return to their normal operations, ensuring the lifeblood of our city is one again flowing. You 
@@ -103,11 +102,11 @@ namespace Server.Engines.Quests
          * Pool. Defend the Void Pool at all costs and sacrifice for Minoc. Do this and you will no doubt be remembered a hero. */
         //public override object Complete { get { return 1158268; } }
 
-        public override int CompleteMessage { get { return 1158267; } } // You've cleared enough creatures to allow the miners of 
-                                                                        // Minoc to return to their mining operations. Return to the Sheriff and report the news.
+        public override int CompleteMessage => 1158267;  // You've cleared enough creatures to allow the miners of 
+                                                         // Minoc to return to their mining operations. Return to the Sheriff and report the news.
 
-        public override int AcceptSound { get { return 0x2E8; } }
-        public override bool DoneOnce { get { return true; } }
+        public override int AcceptSound => 0x2E8;
+        public override bool DoneOnce => true;
 
         public ClearingCovetousQuest()
         {
@@ -138,7 +137,7 @@ namespace Server.Engines.Quests
     public class AForcedSacraficeQuest : BaseQuest
     {
         /* A Forced Sacrifice */
-        public override object Title { get { return 1158271; } }
+        public override object Title => 1158271;
 
         /* Indeed, you have proven yourself, and with your clearing of the creatures in the upper levels of Covetous Mountain our 
          * miners can once again return to their normal operations, ensuring the lifeblood of our city is one again flowing. You 
@@ -146,22 +145,22 @@ namespace Server.Engines.Quests
          * Cora's power at bay with something called the Void Pool. The magics prevent Cora herself from destroying it, but her 
          * minions are not bound by that restriction. Only blade and spell can defeat her forces as they try to destroy the Void 
          * Pool. Defend the Void Pool at all costs and sacrifice for Minoc. Do this and you will no doubt be remembered a hero. */
-        public override object Description { get { return 1158268; } }
+        public override object Description => 1158268;
 
         /* You decide against accepting the quest. */
-        public override object Refuse { get { return 1158130; } }
+        public override object Refuse => 1158130;
 
         /* Go to the Void Pool located in Level 2 of Covetous and defend it from Cora's armies! */
-        public override object Uncomplete { get { return 1158269; } }
+        public override object Uncomplete => 1158269;
 
         //public override object Complete { get { return 1158268; } }
 
         /*You have defended the void pool until your last breath, your sacrifice for Minoc will not be soon forgotten! Return to
          * the Sheriff of Minoc and report the news!*/
-        public override int CompleteMessage { get { return 1158270; } }
+        public override int CompleteMessage => 1158270;
 
-        public override int AcceptSound { get { return 0x2E8; } }
-        public override bool DoneOnce { get { return true; } }
+        public override int AcceptSound => 0x2E8;
+        public override bool DoneOnce => true;
 
         public AForcedSacraficeQuest()
         {
@@ -180,7 +179,7 @@ namespace Server.Engines.Quests
 
         private class InternalObjective : BaseObjective
         {
-            public override object ObjectiveDescription { get { return Quest.Uncomplete; } }
+            public override object ObjectiveDescription => Quest.Uncomplete;
 
             public InternalObjective()
                 : base(1)
@@ -191,7 +190,7 @@ namespace Server.Engines.Quests
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
             }
 
             public override void Deserialize(GenericReader reader)
@@ -206,31 +205,31 @@ namespace Server.Engines.Quests
     public class AForcedSacraficeQuest2 : BaseQuest
     {
         /* A Forced Sacrifice */
-        public override object Title { get { return 1158271; } }
+        public override object Title => 1158271;
 
         /* Despite your failure in protecting the void pool, your efforts have allowed the mages of the Lycaeum to use their
          * magics and bind the void pool in an infinite time loop, forever sealing Cora within the dungeon. This is only a
          * stopgap measure, however, and Cora cannot be allowed to continue her twisted craft. Now comes the ultimate test,
          * you must venture to the deepest level of Dungeon Covetous and slay Cora. It is the only way. Take this, it is all 
          * the city can offer you in an effort to slay Cora. The City is counting on you. */
-        public override object Description { get { return 1158272; } }
+        public override object Description => 1158272;
 
         /* You decide against accepting the quest. */
-        public override object Refuse { get { return 1158130; } }
+        public override object Refuse => 1158130;
 
         /* Go to the furthest depths of Covetous and slay Cora! */
-        public override object Uncomplete { get { return 1158273; } }
+        public override object Uncomplete => 1158273;
 
         /*You have slayed the vile sorceress Cora! A powerful mage as she was, her armies will no doubt attempt
         * to resurrect their general - for now though Minoc is safe. The economic future of Minoc has been 
         * secured and for your efforts you are hereby bestowed a great honor!*/
-        public override object Complete { get { return 1158281; } }
+        public override object Complete => 1158281;
 
         /*You have slayed the sorceress Cora!  Return to the Sheriff of Minoc and report the news!*/
-        public override int CompleteMessage { get { return 1158274; } }
+        public override int CompleteMessage => 1158274;
 
-        public override int AcceptSound { get { return 0x2E8; } }
-        public override bool DoneOnce { get { return true; } }
+        public override int AcceptSound => 0x2E8;
+        public override bool DoneOnce => true;
 
         public AForcedSacraficeQuest2()
         {
@@ -254,35 +253,32 @@ namespace Server.Engines.Quests
             TownCryerSystem.CompleteQuest(Owner, 1158280, 1158281, 0x623);
             GiveRewards();
 
-            Server.Engines.Points.PointsSystem.VoidPool.AwardPoints(Owner, 2000, false, false);
+            Points.PointsSystem.VoidPool.AwardPoints(Owner, 2000, false, false);
             Owner.SendLocalizedMessage(1158282); // For your accomplishments you have been awarded a bonus 2000 Covetous points! Visit Vela in the Town of Cove to redeem them!
         }
     }
 
     public class SheriffOfMinoc : MondainQuester
     {
-        public override Type[] Quests { get { return new Type[] { typeof(ToolsOfTheTradeQuest) }; } }
+        public override Type[] Quests => new Type[] { typeof(ToolsOfTheTradeQuest) };
 
         public static SheriffOfMinoc TramInstance { get; set; }
         public static SheriffOfMinoc FelInstance { get; set; }
 
         public static void Initialize()
         {
-            if (Core.TOL)
+            if (TramInstance == null)
             {
-                if (TramInstance == null)
-                {
-                    TramInstance = new SheriffOfMinoc();
-                    TramInstance.MoveToWorld(new Point3D(2462, 439, 15), Map.Trammel);
-                    TramInstance.Direction = Direction.South;
-                }
+                TramInstance = new SheriffOfMinoc();
+                TramInstance.MoveToWorld(new Point3D(2462, 439, 15), Map.Trammel);
+                TramInstance.Direction = Direction.South;
+            }
 
-                if (FelInstance == null)
-                {
-                    FelInstance = new SheriffOfMinoc();
-                    FelInstance.MoveToWorld(new Point3D(2462, 439, 15), Map.Felucca);
-                    FelInstance.Direction = Direction.South;
-                }
+            if (FelInstance == null)
+            {
+                FelInstance = new SheriffOfMinoc();
+                FelInstance.MoveToWorld(new Point3D(2462, 439, 15), Map.Felucca);
+                FelInstance.Direction = Direction.South;
             }
         }
 
@@ -323,7 +319,7 @@ namespace Server.Engines.Quests
         {
             if (m is PlayerMobile)
             {
-                var pm = m as PlayerMobile;
+                PlayerMobile pm = m as PlayerMobile;
 
                 if (QuestHelper.CheckDoneOnce(pm, typeof(APleaFromMinocQuest), this, false))
                 {
@@ -384,9 +380,9 @@ namespace Server.Engines.Quests
 
         private bool CheckProgress(PlayerMobile pm)
         {
-            foreach (var t in _Quests)
+            foreach (Type t in _Quests)
             {
-                var quest = QuestHelper.GetQuest(pm, t);
+                BaseQuest quest = QuestHelper.GetQuest(pm, t);
 
                 if (quest != null && !quest.Completed)
                 {
@@ -399,7 +395,7 @@ namespace Server.Engines.Quests
             return false;
         }
 
-        private Type[] _Quests = { typeof(ClearingCovetousQuest), typeof(AForcedSacraficeQuest), typeof(AForcedSacraficeQuest2) }; 
+        private readonly Type[] _Quests = { typeof(ClearingCovetousQuest), typeof(AForcedSacraficeQuest), typeof(AForcedSacraficeQuest2) };
 
         public SheriffOfMinoc(Serial serial)
             : base(serial)
@@ -410,7 +406,7 @@ namespace Server.Engines.Quests
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -428,11 +424,6 @@ namespace Server.Engines.Quests
             {
                 FelInstance = this;
             }
-
-            if (!Core.TOL)
-            {
-                Delete();
-            }
         }
-    } 
+    }
 }

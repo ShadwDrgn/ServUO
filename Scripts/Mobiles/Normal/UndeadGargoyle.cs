@@ -1,5 +1,4 @@
 /* Based on Gargoyle, still no infos on Undead Gargoyle... Have to get also the correct body ID */
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -43,11 +42,6 @@ namespace Server.Mobiles
 
             Fame = 3500;
             Karma = -3500;
-
-            VirtualArmor = 32;
-
-            if (0.025 > Utility.RandomDouble())
-                PackItem(new GargoylesPickaxe());
         }
 
         public UndeadGargoyle(Serial serial)
@@ -55,31 +49,20 @@ namespace Server.Mobiles
         {
         }
 
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int TreasureMapLevel => 1;
+        public override int Meat => 1;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.Gems, Utility.RandomMinMax(1, 4));
+            AddLoot(LootPack.LootItem<GargoylesPickaxe>(2.5));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

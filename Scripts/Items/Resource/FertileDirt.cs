@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class FertileDirt : Item
@@ -10,13 +8,7 @@ namespace Server.Items
         {
         }
 
-        public override double DefaultWeight
-        {
-            get
-            {
-                return 0.1;
-            }
-        }
+        public override double DefaultWeight => 0.1;
 
         [Constructable]
         public FertileDirt(int amount)
@@ -35,7 +27,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

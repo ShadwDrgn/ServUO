@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class RuneCarvingKnife : AssassinSpike
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public RuneCarvingKnife()
         {
@@ -21,13 +19,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1072915;
-            }
-        }// Rune Carving Knife
+        public override int LabelNumber => 1072915;// Rune Carving Knife
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

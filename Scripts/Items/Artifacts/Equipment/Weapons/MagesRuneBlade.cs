@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class MagesRuneBlade : RuneBlade
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public MagesRuneBlade()
         {
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073538;
-            }
-        }// mage's rune blade
+        public override int LabelNumber => 1073538;// mage's rune blade
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Server;
+using Server.ContextMenus;
+using Server.Engines.Astronomy;
+using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
-using Server.Gumps;
-using Server.Engines.Astronomy;
-using Server.ContextMenus;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -42,11 +39,11 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public TimeCoordinate TimeCoordinate { get { return AstronomySystem.GetTimeCoordinate(this); } }
+        public TimeCoordinate TimeCoordinate => AstronomySystem.GetTimeCoordinate(this);
 
         public DateTime LastUse { get; set; }
 
-        public override int LabelNumber { get { return 1125284; } }
+        public override int LabelNumber => 1125284;
 
         [Constructable]
         public PersonalTelescope()
@@ -67,7 +64,7 @@ namespace Server.Items
 
             if (m.InRange(Location, 2))
             {
-                var house = BaseHouse.FindHouseAt(this);
+                BaseHouse house = BaseHouse.FindHouseAt(this);
 
                 if (house != null && house.HasSecureAccess(m, Level))
                 {
@@ -85,7 +82,7 @@ namespace Server.Items
             }
             else
             {
-                m.LocalOverheadMessage(Server.Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                m.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
         }
 
@@ -93,7 +90,7 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (!String.IsNullOrEmpty(_DisplayName))
+            if (!string.IsNullOrEmpty(_DisplayName))
             {
                 list.Add(1158477, _DisplayName); // <BASEFONT COLOR=#FFD24D>From the personal study of ~1_NAME~<BASEFONT COLOR=#FFFFFF>
             }
@@ -146,7 +143,7 @@ namespace Server.Items
             }
         }
 
-        private static string[] _Names =
+        private static readonly string[] _Names =
         {
             "Adranath", "Aeluva the Arcanist", "Aesthyron", "Anon", "Balaki", "Clanin", "Dexter", "Doctor Spector", "Dryus Doost",
             "Gilform", "Grizelda the Hag", "Hawkwind", "Heigel of Moonglow", "Intanya", "Juo'Nar", "King Blackthorn", "Koole the Arcanist",
@@ -241,7 +238,7 @@ namespace Server.Items
 
         private void RenderConstellation()
         {
-            foreach (var pos in Constellation.StarPositions)
+            foreach (ConstellationInfo.StarPosition pos in Constellation.StarPositions)
             {
                 AddImage(pos.X, pos.Y, pos.ImageID);
             }
@@ -344,7 +341,7 @@ namespace Server.Items
                     User.SendSound(0x4A);
                     break;
                 case 70000: // View Coord
-                    if (Tele.RA > AstronomySystem.MaxRA || Tele.DEC > (double)AstronomySystem.MaxDEC)
+                    if (Tele.RA > AstronomySystem.MaxRA || Tele.DEC > AstronomySystem.MaxDEC)
                     {
                         User.SendLocalizedMessage(1158488); // You have entered invalid coordinates.
                         User.SendSound(81);
@@ -355,7 +352,7 @@ namespace Server.Items
                         Constellation = null;
                         ImageID = AstronomySystem.RandomSkyImage(User);
 
-                        var timeCoord = Tele.TimeCoordinate;
+                        TimeCoordinate timeCoord = Tele.TimeCoordinate;
 
                         if (timeCoord == TimeCoordinate.Day)
                         {
@@ -363,7 +360,7 @@ namespace Server.Items
                         }
                         else
                         {
-                            var constellation = AstronomySystem.GetConstellation(timeCoord, Tele.RA, Tele.DEC);
+                            ConstellationInfo constellation = AstronomySystem.GetConstellation(timeCoord, Tele.RA, Tele.DEC);
 
                             if (constellation != null)
                             {

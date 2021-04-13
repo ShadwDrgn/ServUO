@@ -1,7 +1,6 @@
 #region References
 using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
 using System.Threading;
 
 using Server.Diagnostics;
@@ -16,18 +15,18 @@ namespace Server.Network
 		private readonly Queue<NetState> m_Throttled;
 
 		public Listener[] Listeners { get; set; }
-		
+
 		public MessagePump()
 		{
 			var ipep = Listener.EndPoints;
 
 			Listeners = new Listener[ipep.Length];
 
-			bool success = false;
+			var success = false;
 
 			do
 			{
-				for (int i = 0; i < ipep.Length; i++)
+				for (var i = 0; i < ipep.Length; i++)
 				{
 					Listeners[i] = new Listener(ipep[i]);
 
@@ -56,7 +55,7 @@ namespace Server.Network
 
 			Listeners = new Listener[old.Length + 1];
 
-			for (int i = 0; i < old.Length; ++i)
+			for (var i = 0; i < old.Length; ++i)
 			{
 				Listeners[i] = old[i];
 			}
@@ -66,17 +65,17 @@ namespace Server.Network
 
 		private void CheckListener()
 		{
-			foreach (Listener l in Listeners)
+			foreach (var l in Listeners)
 			{
 				var accepted = l.Slice();
 
-				foreach (Socket s in accepted)
+				foreach (var s in accepted)
 				{
-					NetState ns = new NetState(s, this);
+					var ns = new NetState(s, this);
 
 					ns.Start();
 
-                    if (ns.Running && Display(ns))
+					if (ns.Running && Display(ns))
 					{
 						Utility.PushColor(ConsoleColor.Green);
 						Console.WriteLine("Client: {0}: Connected. [{1} Online]", ns, NetState.Instances.Count);
@@ -86,27 +85,27 @@ namespace Server.Network
 			}
 		}
 
-        public static bool Display(NetState ns)
-        {
-            if (ns == null)
-                return false;
+		public static bool Display(NetState ns)
+		{
+			if (ns == null)
+				return false;
 
-            string state = ns.ToString();
+			var state = ns.ToString();
 
-            foreach (var str in _NoDisplay)
-            {
-                if (str == state)
-                    return false;
-            }
+			foreach (var str in _NoDisplay)
+			{
+				if (str == state)
+					return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        private static string[] _NoDisplay =
-        {
-            "192.99.10.155",
-            "192.99.69.21",
-        };
+		private static readonly string[] _NoDisplay =
+		{
+			"192.99.10.155",
+			"192.99.69.21",
+		};
 
 		public void OnReceive(NetState ns)
 		{
@@ -129,7 +128,7 @@ namespace Server.Network
 
 			while (m_WorkingQueue.Count > 0)
 			{
-				NetState ns = m_WorkingQueue.Dequeue();
+				var ns = m_WorkingQueue.Dequeue();
 
 				if (ns.Running)
 				{
@@ -158,14 +157,14 @@ namespace Server.Network
 				ns.Seeded = true;
 				return true;
 			}
-			
+
 			if (buffer.Length >= 4)
 			{
 				var m_Peek = new byte[4];
 
 				buffer.Dequeue(m_Peek, 0, 4);
 
-				uint seed = (uint)((m_Peek[0] << 24) | (m_Peek[1] << 16) | (m_Peek[2] << 8) | m_Peek[3]);
+				var seed = (uint)((m_Peek[0] << 24) | (m_Peek[1] << 16) | (m_Peek[2] << 8) | m_Peek[3]);
 
 				if (seed == 0)
 				{
@@ -195,7 +194,7 @@ namespace Server.Network
 				Utility.PushColor(ConsoleColor.Red);
 				Console.WriteLine("Client: {0}: Encrypted Client Unsupported", ns);
 				Utility.PopColor();
-				
+
 				ns.Dispose();
 
 				return true;
@@ -206,7 +205,7 @@ namespace Server.Network
 
 		public void HandleReceive(NetState ns)
 		{
-			ByteQueue buffer = ns.Buffer;
+			var buffer = ns.Buffer;
 
 			if (buffer == null || buffer.Length <= 0)
 			{
@@ -220,7 +219,7 @@ namespace Server.Network
 					return;
 				}
 
-				int length = buffer.Length;
+				var length = buffer.Length;
 
 				while (length > 0 && ns.Running)
 				{
@@ -231,7 +230,7 @@ namespace Server.Network
 						return;
 					}
 
-					PacketHandler handler = ns.GetHandler(packetID);
+					var handler = ns.GetHandler(packetID);
 
 					if (handler == null)
 					{
@@ -241,7 +240,7 @@ namespace Server.Network
 						return;
 					}
 
-					int packetLength = handler.Length;
+					var packetLength = handler.Length;
 
 					if (packetLength <= 0)
 					{
@@ -289,22 +288,21 @@ namespace Server.Network
 						}
 					}
 
-					ThrottlePacketCallback throttler = handler.ThrottleCallback;
+					var throttler = handler.ThrottleCallback;
 
 					if (throttler != null)
 					{
-						bool drop;
 
-						if (!throttler(ns, out drop))
+						if (!throttler(ns, out var drop))
 						{
 							if (!drop)
 							{
 								m_Throttled.Enqueue(ns);
 							}
-                            else
-                            {
-                                buffer.Dequeue(new byte[packetLength], 0, packetLength);
-                            }
+							else
+							{
+								buffer.Dequeue(new byte[packetLength], 0, packetLength);
+							}
 
 							return;
 						}
@@ -337,7 +335,7 @@ namespace Server.Network
 
 					if (packetBuffer != null && packetBuffer.Length > 0 && packetLength > 0)
 					{
-						PacketReader r = new PacketReader(packetBuffer, packetLength, handler.Length != 0);
+						var r = new PacketReader(packetBuffer, packetLength, handler.Length != 0);
 
 						handler.OnReceive(ns, r);
 

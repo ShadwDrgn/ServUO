@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Server.Mobiles;
+using System;
 using System.Collections.Generic;
-using Server;
-using Server.Mobiles;
 
 namespace Server.Items
 {
     [TypeAlias("drNO.ThieveItems.ManaDraught")]
     public class ManaDraught : Item
     {
-        private static Dictionary<PlayerMobile, DateTime> DaughtUsageList = new Dictionary<PlayerMobile, DateTime>();
+        private static readonly Dictionary<PlayerMobile, DateTime> DaughtUsageList = new Dictionary<PlayerMobile, DateTime>();
         private static TimeSpan Cooldown = TimeSpan.FromMinutes(10);
 
-        public override int LabelNumber { get { return 1094938; } } // Mana Draught
+        public override int LabelNumber => 1094938;  // Mana Draught
 
-        [Constructable] 
+        [Constructable]
         public ManaDraught()
             : base(0xFFB)
         {
@@ -64,7 +63,7 @@ namespace Server.Items
             }
             else
             {
-                by.SendLocalizedMessage(1079263, ((int)((DaughtUsageList[by] + Cooldown)-DateTime.Now).TotalSeconds).ToString());
+                by.SendLocalizedMessage(1079263, ((int)((DaughtUsageList[by] + Cooldown) - DateTime.Now).TotalSeconds).ToString());
             }
         }
 
@@ -81,7 +80,7 @@ namespace Server.Items
             toHeal = Math.Min(toHeal, diff);
 
             pm.Mana += toHeal;
-            this.Consume();
+            Consume();
             if (!DaughtUsageList.ContainsKey(pm))
             {
                 DaughtUsageList.Add(pm, DateTime.Now);
@@ -90,7 +89,7 @@ namespace Server.Items
             {
                 DaughtUsageList[pm] = DateTime.Now;
             }
-            
+
             pm.SendLocalizedMessage(1095128);//The sour draught instantly restores some of your mana!
         }
 
@@ -104,7 +103,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

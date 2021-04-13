@@ -1,19 +1,15 @@
-using System;
-using Server;
-using Server.Items;
 using Server.Gumps;
-using System.Collections.Generic;
-using Server.ContextMenus;
-using Server.Engines.Points;
+using Server.Items;
 using Server.Mobiles;
+using System.Collections.Generic;
 
 namespace Server.Engines.TreasuresOfDoom
 {
     public class Owain : BaseVendor
     {
         protected readonly List<SBInfo> m_SBInfos = new List<SBInfo>();
-        protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
-        public override bool IsActiveVendor { get { return false; } }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
+        public override bool IsActiveVendor => false;
 
         public static Owain Instance { get; set; }
         public static readonly Point3D SpawnLocation = new Point3D(86, 223, -1);

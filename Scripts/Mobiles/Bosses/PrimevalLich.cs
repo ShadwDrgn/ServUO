@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
 using Server.Engines.CannedEvil;
 using Server.Items;
-using System.Collections.Generic;
 using Server.Network;
-using System.Linq;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -55,8 +54,6 @@ namespace Server.Mobiles
             Fame = 28000;
             Karma = -28000;
 
-            VirtualArmor = 80;
-
             m_Timer = new TeleportTimer(this);
             m_Timer.Start();
         }
@@ -71,42 +68,18 @@ namespace Server.Mobiles
         public override int GetHurtSound() { return 0x620; }
         public override int GetIdleSound() { return 0x621; }
 
-        public override bool CanRummageCorpses { get { return true; } }
-        public override bool BleedImmune { get { return true; } }
-        public override Poison PoisonImmune { get { return Poison.Lethal; } }
-        public override bool ShowFameTitle { get { return false; } }
-        public override bool ClickTitle { get { return false; } }
+        public override bool CanRummageCorpses => true;
+        public override bool BleedImmune => true;
+        public override Poison PoisonImmune => Poison.Lethal;
+        public override bool ShowFameTitle => false;
+        public override bool ClickTitle => false;
 
-        public override ChampionSkullType SkullType { get { return ChampionSkullType.None; } }
+        public override ChampionSkullType SkullType => ChampionSkullType.None;
 
-        public override Type[] UniqueList
-        {
-            get
-            {
-                return new Type[] { typeof(BansheesCall), typeof(CastOffZombieSkin), typeof(ChannelersDefender), typeof(LightsRampart) };
-            }
-        }
-        public override Type[] SharedList
-        {
-            get
-            {
-                return new Type[] { typeof(TokenOfHolyFavor), typeof(TheMostKnowledgePerson), typeof(LieutenantOfTheBritannianRoyalGuard), typeof(ProtectoroftheBattleMage) };
-            }
-        }
-        public override Type[] DecorativeList
-        {
-            get
-            {
-                return new Type[] { typeof(MummifiedCorpse) };
-            }
-        }
-        public override MonsterStatuetteType[] StatueTypes
-        {
-            get
-            {
-                return new MonsterStatuetteType[] { };
-            }
-        }        
+        public override Type[] UniqueList => new[] { typeof(BansheesCall), typeof(CastOffZombieSkin), typeof(ChannelersDefender), typeof(LightsRampart) };
+        public override Type[] SharedList => new[] { typeof(TokenOfHolyFavor), typeof(TheMostKnowledgePerson), typeof(LieutenantOfTheBritannianRoyalGuard), typeof(ProtectoroftheBattleMage) };
+        public override Type[] DecorativeList => new[] { typeof(MummifiedCorpse) };
+        public override MonsterStatuetteType[] StatueTypes => new MonsterStatuetteType[] { };
 
         public override void GenerateLoot()
         {
@@ -125,8 +98,8 @@ namespace Server.Mobiles
         public void ChangeCombatant()
         {
             ForceReacquire();
-            BeginFlee(TimeSpan.FromSeconds(2.5));
-        }       
+            ForceFleeUntil = DateTime.UtcNow + TimeSpan.FromSeconds(2.5);
+        }
 
         public override void OnThink()
         {
@@ -172,7 +145,7 @@ namespace Server.Mobiles
         #region Blast Radius
         private static readonly int BlastRange = 16;
 
-        private static readonly double[] BlastChance = new double[]
+        private static readonly double[] BlastChance = new[]
             {
                 0.0, 0.0, 0.05, 0.95, 0.95, 0.95, 0.05, 0.95, 0.95,
                 0.95, 0.05, 0.95, 0.95, 0.95, 0.05, 0.95, 0.95
@@ -193,14 +166,12 @@ namespace Server.Mobiles
 
                     if (dist <= BlastRange && BlastChance[dist] > Utility.RandomDouble())
                     {
-                        Timer.DelayCall(TimeSpan.FromSeconds(0.1 * dist), new TimerCallback(
-                            delegate
-                            {
-                                int hue = Utility.RandomList(90, 95);
+                        Timer.DelayCall(TimeSpan.FromSeconds(0.1 * dist), delegate
+                        {
+                            int hue = Utility.RandomList(90, 95);
 
-                                Effects.SendPacket(loc, Map, new HuedEffect(EffectType.FixedXYZ, Serial.Zero, Serial.Zero, 0x3709, p, p, 20, 30, true, false, hue, 4));
-                            }
-                        ));
+                            Effects.SendPacket(loc, Map, new HuedEffect(EffectType.FixedXYZ, Serial.Zero, Serial.Zero, 0x3709, p, p, 20, 30, true, false, hue, 4));
+                        });
                     }
                 }
             }
@@ -275,9 +246,9 @@ namespace Server.Mobiles
         #region Teleport
         private class TeleportTimer : Timer
         {
-            private Mobile m_Owner;
+            private readonly Mobile m_Owner;
 
-            private static int[] m_Offsets = new int[]
+            private static readonly int[] m_Offsets = new[]
             {
                 -1, -1,
                 -1,  0,
@@ -359,8 +330,8 @@ namespace Server.Mobiles
 
                     m.Location = to;
 
-                    Server.Spells.SpellHelper.Turn(m_Owner, toTeleport);
-                    Server.Spells.SpellHelper.Turn(toTeleport, m_Owner);
+                    Spells.SpellHelper.Turn(m_Owner, toTeleport);
+                    Spells.SpellHelper.Turn(toTeleport, m_Owner);
 
                     m.ProcessDelta();
 
@@ -376,60 +347,59 @@ namespace Server.Mobiles
         #endregion
 
         #region Unholy Touch
-        private static Dictionary<Mobile, Timer> m_UnholyTouched = new Dictionary<Mobile, Timer>();
+        private static readonly Dictionary<Mobile, Timer> m_UnholyTouched = new Dictionary<Mobile, Timer>();
 
         public void Discord(Mobile target)
         {
             if (Utility.RandomDouble() < 0.9 && !m_UnholyTouched.ContainsKey(target))
             {
-                int scalar = (int)(20 - (target.Skills[SkillName.MagicResist].Value / 10));
+                double scalar = -((20 - (target.Skills[SkillName.MagicResist].Value / 10)) / 100);
 
                 ArrayList mods = new ArrayList();
 
                 if (target.PhysicalResistance > 0)
                 {
-                    mods.Add(new ResistanceMod(ResistanceType.Physical, -(target.PhysicalResistance - scalar)));
+                    mods.Add(new ResistanceMod(ResistanceType.Physical, (int)(target.PhysicalResistance * scalar)));
                 }
 
                 if (target.FireResistance > 0)
                 {
-                    mods.Add(new ResistanceMod(ResistanceType.Fire, -(target.FireResistance - scalar)));
+                    mods.Add(new ResistanceMod(ResistanceType.Fire, (int)(target.FireResistance * scalar)));
                 }
 
                 if (target.ColdResistance > 0)
                 {
-                    mods.Add(new ResistanceMod(ResistanceType.Cold, -(target.ColdResistance - scalar)));
+                    mods.Add(new ResistanceMod(ResistanceType.Cold, (int)(target.ColdResistance * scalar)));
                 }
 
                 if (target.PoisonResistance > 0)
                 {
-                    mods.Add(new ResistanceMod(ResistanceType.Poison, -(target.PoisonResistance - scalar)));
+                    mods.Add(new ResistanceMod(ResistanceType.Poison, (int)(target.PoisonResistance * scalar)));
                 }
 
                 if (target.EnergyResistance > 0)
                 {
-                    mods.Add(new ResistanceMod(ResistanceType.Energy, -(target.EnergyResistance - scalar)));
+                    mods.Add(new ResistanceMod(ResistanceType.Energy, (int)(target.EnergyResistance * scalar)));
                 }
 
                 for (int i = 0; i < target.Skills.Length; ++i)
                 {
                     if (target.Skills[i].Value > 0)
                     {
-                        mods.Add(new DefaultSkillMod((SkillName)i, true, -(target.Skills[i].Value - scalar)));                        
+                        mods.Add(new DefaultSkillMod((SkillName)i, true, target.Skills[i].Value * scalar));
                     }
                 }
-                
+
                 target.PlaySound(0x458);
 
                 ApplyMods(target, mods);
 
-                m_UnholyTouched[target] = Timer.DelayCall(TimeSpan.FromSeconds(30), new TimerCallback(
-                    delegate
-                    {
-                        ClearMods(target, mods);
+                m_UnholyTouched[target] = Timer.DelayCall(TimeSpan.FromSeconds(30), delegate
+                {
+                    ClearMods(target, mods);
 
-                        m_UnholyTouched.Remove(target);
-                    }));
+                    m_UnholyTouched.Remove(target);
+                });
             }
 
             m_NextDiscordTime = DateTime.UtcNow + TimeSpan.FromSeconds(5 + Utility.RandomDouble() * 22);
@@ -477,10 +447,11 @@ namespace Server.Mobiles
 
             for (int i = 0; i < newShadowDwellers; ++i)
             {
-                ShadowDweller shadowdweller = new ShadowDweller();
-
-                shadowdweller.Team = Team;
-                shadowdweller.FightMode = FightMode.Closest;
+                ShadowDweller shadowdweller = new ShadowDweller
+                {
+                    Team = Team,
+                    FightMode = FightMode.Closest
+                };
 
                 bool validLocation = false;
                 Point3D loc = Location;
@@ -505,7 +476,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

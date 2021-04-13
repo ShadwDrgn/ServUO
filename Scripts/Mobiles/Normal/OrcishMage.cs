@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Misc;
 
@@ -11,49 +10,34 @@ namespace Server.Mobiles
         public OrcishMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            this.Name = "an orcish mage";
-            this.Body = 140;
-            this.BaseSoundID = 0x45A;
+            Name = "an orcish mage";
+            Body = 140;
+            BaseSoundID = 0x45A;
 
-            this.SetStr(116, 150);
-            this.SetDex(91, 115);
-            this.SetInt(161, 185);
+            SetStr(116, 150);
+            SetDex(91, 115);
+            SetInt(161, 185);
 
-            this.SetHits(70, 90);
+            SetHits(70, 90);
 
-            this.SetDamage(4, 14);
+            SetDamage(4, 14);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 25, 35);
-            this.SetResistance(ResistanceType.Fire, 30, 40);
-            this.SetResistance(ResistanceType.Cold, 20, 30);
-            this.SetResistance(ResistanceType.Poison, 30, 40);
-            this.SetResistance(ResistanceType.Energy, 30, 40);
+            SetResistance(ResistanceType.Physical, 25, 35);
+            SetResistance(ResistanceType.Fire, 30, 40);
+            SetResistance(ResistanceType.Cold, 20, 30);
+            SetResistance(ResistanceType.Poison, 30, 40);
+            SetResistance(ResistanceType.Energy, 30, 40);
 
-            this.SetSkill(SkillName.EvalInt, 60.1, 72.5);
-            this.SetSkill(SkillName.Magery, 60.1, 72.5);
-            this.SetSkill(SkillName.MagicResist, 60.1, 75.0);
-            this.SetSkill(SkillName.Tactics, 50.1, 65.0);
-            this.SetSkill(SkillName.Wrestling, 40.1, 50.0);
+            SetSkill(SkillName.EvalInt, 60.1, 72.5);
+            SetSkill(SkillName.Magery, 60.1, 72.5);
+            SetSkill(SkillName.MagicResist, 60.1, 75.0);
+            SetSkill(SkillName.Tactics, 50.1, 65.0);
+            SetSkill(SkillName.Wrestling, 40.1, 50.0);
 
-            this.Fame = 3000;
-            this.Karma = -3000;
-
-            this.VirtualArmor = 30;
-
-            this.PackReg(6);
-
-			switch (Utility.Random(8))
-            {
-                case 0: PackItem(new CorpseSkinScroll()); break;
-			}
-
-            if (0.05 > Utility.RandomDouble())
-                this.PackItem(new OrcishKinMask());
-
-            if (0.5 > Utility.RandomDouble())
-                PackItem(new Yeast());
+            Fame = 3000;
+            Karma = -3000;
         }
 
         public OrcishMage(Serial serial)
@@ -61,48 +45,21 @@ namespace Server.Mobiles
         {
         }
 
-        public override InhumanSpeech SpeechType
-        {
-            get
-            {
-                return InhumanSpeech.Orc;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override InhumanSpeech SpeechType => InhumanSpeech.Orc;
+        public override bool CanRummageCorpses => true;
+        public override int TreasureMapLevel => 1;
+        public override int Meat => 1;
 
-        public override TribeType Tribe { get { return TribeType.Orc; } }
+        public override TribeType Tribe => TribeType.Orc;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.SavagesAndOrcs;
-            }
-        }
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.Average);
-            this.AddLoot(LootPack.LowScrolls);
+            AddLoot(LootPack.Average);
+            AddLoot(LootPack.LowScrolls);
+            AddLoot(LootPack.MageryRegs, 6);
+            AddLoot(LootPack.LootItem<CorpseSkinScroll>(12.5));
+            AddLoot(LootPack.LootItem<OrcishKinMask>(5.0));
+            AddLoot(LootPack.LootItem<Yeast>(50.0));
         }
 
         public override bool IsEnemy(Mobile m)
@@ -131,7 +88,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

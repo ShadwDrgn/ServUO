@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class OphidianWarriorCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "ophidian warrior"; } }
+    public class OphidianWarriorCostume : BaseCostume
+    {
+        public override string CreatureName => "ophidian warrior";
 
         [Constructable]
-		public OphidianWarriorCostume() : base( )
-		{
-            this.CostumeBody = 86;
-		}
-
-		public OphidianWarriorCostume( Serial serial ) : base( serial )
-		{
-		}
-		
-		public override int LabelNumber
+        public OphidianWarriorCostume() : base()
         {
-            get
-            {
-                return 1114229;
-            }
-        }// ophidian warrior costume
+            CostumeBody = 86;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public OphidianWarriorCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override int LabelNumber => 1114229;// ophidian warrior costume
 
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

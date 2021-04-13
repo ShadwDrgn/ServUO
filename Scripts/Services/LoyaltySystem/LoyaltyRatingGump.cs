@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Server.Engines.CityLoyalty;
 using Server.Gumps;
 using Server.Mobiles;
-using System.Linq;
 using Server.Network;
-using Server.Engines.CityLoyalty;
+using System.Linq;
 
 namespace Server.Engines.Points
 {
@@ -24,7 +23,7 @@ namespace Server.Engines.Points
 
             int y = 40;
 
-            foreach (var sys in PointsSystem.Systems.Where(sys => sys.ShowOnLoyaltyGump))
+            foreach (PointsSystem sys in PointsSystem.Systems.Where(sys => sys.ShowOnLoyaltyGump))
             {
                 if (sys.Name.Number > 0)
                     AddHtmlLocalized(50, y, 150, 20, sys.Name.Number, false, false);

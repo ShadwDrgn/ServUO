@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("an ancient liche's corpse")]
@@ -43,9 +41,6 @@ namespace Server.Mobiles
 
             Fame = 23000;
             Karma = -23000;
-
-            VirtualArmor = 60;
-            PackNecroReg(100, 200);
         }
 
         public AncientLich(Serial serial)
@@ -53,43 +48,16 @@ namespace Server.Mobiles
         {
         }
 
-        public override TribeType Tribe { get { return TribeType.Undead; } }
-
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
-        public override bool Unprovokable
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 5;
-            }
-        }
+        public override TribeType Tribe => TribeType.Undead;
+		
+        public override bool Unprovokable => true;
+		
+        public override bool BleedImmune => true;
+		
+        public override Poison PoisonImmune => Poison.Lethal;
+		
+        public override int TreasureMapLevel => 5;
+		
         public override int GetIdleSound()
         {
             return 0x19D;
@@ -117,14 +85,15 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.FilthyRich, 3);
-            this.AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.FilthyRich, 3);
+            AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.NecroRegs, 100, 200);
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

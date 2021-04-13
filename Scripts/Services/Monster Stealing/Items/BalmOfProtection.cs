@@ -1,6 +1,4 @@
-﻿using System;
-using Server.Mobiles;
-using Server;
+﻿using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -10,27 +8,27 @@ namespace Server.Items
         public static double HandleDamage(PlayerMobile pm, double damage)
         {
 
-            if (IsUnderThieveConsumableEffect(pm,ThieveConsumableEffect.BalmOfProtectionEffect))
+            if (IsUnderThieveConsumableEffect(pm, ThieveConsumableEffect.BalmOfProtectionEffect))
             {
-                int rnd = 50 + Utility.Random(51); 
+                int rnd = 50 + Utility.Random(51);
 
-                damage = damage- (damage * (rnd / 100.0)); 
-                return damage; 
+                damage = damage - (damage * (rnd / 100.0));
+                return damage;
             }
-            else 
+            else
             {
-                return damage; 
+                return damage;
             }
         }
 
-        public override int LabelNumber { get { return 1094943; } } // Balm of Protection
+        public override int LabelNumber => 1094943;  // Balm of Protection
 
         [Constructable]
         public BalmOfProtection()
             : base(0x1C18)
         {
             m_EffectType = ThieveConsumableEffect.BalmOfProtectionEffect;
-            Hue = 0x499; 
+            Hue = 0x499;
         }
 
         protected override void ApplyEffect(PlayerMobile pm)
@@ -49,7 +47,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

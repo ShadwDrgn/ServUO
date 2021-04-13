@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 using Server.Network;
 
@@ -6,7 +5,7 @@ namespace Server.Items
 {
     public class HairDye : Item
     {
-        public override int LabelNumber { get { return 1041060; } } // Hair Dye
+        public override int LabelNumber => 1041060;  // Hair Dye
 
         [Constructable]
         public HairDye()
@@ -23,7 +22,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -107,7 +106,7 @@ namespace Server.Items
             Mobile m = from.Mobile;
             int[] switches = info.Switches;
 
-            if (!m_HairDye.IsChildOf(m.Backpack)) 
+            if (!m_HairDye.IsChildOf(m.Backpack))
             {
                 m.SendLocalizedMessage(1042010); //You must have the objectin your backpack to use it.
                 return;
@@ -161,27 +160,9 @@ namespace Server.Items
                 m_HueCount = hueCount;
             }
 
-            public string Name
-            {
-                get
-                {
-                    return m_Name;
-                }
-            }
-            public int HueStart
-            {
-                get
-                {
-                    return m_HueStart;
-                }
-            }
-            public int HueCount
-            {
-                get
-                {
-                    return m_HueCount;
-                }
-            }
+            public string Name => m_Name;
+            public int HueStart => m_HueStart;
+            public int HueCount => m_HueCount;
         }
     }
 }

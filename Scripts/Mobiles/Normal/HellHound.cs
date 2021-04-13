@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -40,13 +39,10 @@ namespace Server.Mobiles
             Fame = 3400;
             Karma = -3400;
 
-            VirtualArmor = 30;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 85.5;
 
-            PackItem(new SulfurousAsh(5));
             SetSpecialAbility(SpecialAbility.DragonBreath);
         }
 
@@ -55,37 +51,20 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Meat;
-            }
-        }
-        public override PackInstinct PackInstinct
-        {
-            get
-            {
-                return PackInstinct.Canine;
-            }
-        }
+        public override int Meat => 1;
+        public override FoodType FavoriteFood => FoodType.Meat;
+        public override PackInstinct PackInstinct => PackInstinct.Canine;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
+            AddLoot(LootPack.LootItem<SulfurousAsh>(5));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

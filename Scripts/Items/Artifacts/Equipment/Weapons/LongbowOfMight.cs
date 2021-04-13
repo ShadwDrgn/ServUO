@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class LongbowOfMight : ElvenCompositeLongbow
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public LongbowOfMight()
         {
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073508;
-            }
-        }// longbow of might
+        public override int LabelNumber => 1073508;// longbow of might
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

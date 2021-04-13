@@ -1,16 +1,18 @@
-using System;
-using System.Collections;
-using Server.Targeting;
-using Server.Items;
-using Server.Engines.Harvest;
-using System.Collections.Generic;
 using Server.ContextMenus;
-using Server.Misc;
 using Server.Engines.Craft;
+using Server.Engines.Harvest;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public class FishingPole : Item, ICraftable, IUsesRemaining, IResource, IQuality
+    public interface IBaitable
+    {
+        Type BaitType { get; }
+        bool EnhancedBait { get; }
+    }
+
+    public class FishingPole : Item, IUsesRemaining, IResource, IQuality, IBaitable
     {
         private Type m_BaitType;
         private bool m_EnhancedBait;
@@ -26,7 +28,7 @@ namespace Server.Items
         private AosSkillBonuses m_AosSkillBonuses;
         private CraftResource m_Resource;
         private bool m_PlayerConstructed;
-        
+
         private int m_UsesRemaining;
         private bool m_ShowUsesRemaining;
 
@@ -157,21 +159,21 @@ namespace Server.Items
         public ItemQuality Quality
         {
             get { return m_Quality; }
-            set 
-            { 
+            set
+            {
                 UnscaleUses();
                 m_Quality = value;
                 ScaleUses();
             }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int UsesRemaining
         {
             get { return m_UsesRemaining; }
             set { m_UsesRemaining = value; InvalidateProperties(); }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public bool ShowUsesRemaining
         {
@@ -199,7 +201,7 @@ namespace Server.Items
 
             m_AosAttributes = new AosAttributes(this);
             m_AosSkillBonuses = new AosSkillBonuses(this);
-            
+
             UsesRemaining = 150;
         }
 
@@ -300,7 +302,7 @@ namespace Server.Items
             {
                 Mobile m = from;
 
-                string modName = this.Serial.ToString();
+                string modName = Serial.ToString();
 
                 if (strBonus != 0)
                     m.AddStatMod(new StatMod(StatType.Str, modName + "Str", strBonus, TimeSpan.Zero));
@@ -321,8 +323,7 @@ namespace Server.Items
             {
                 Mobile from = (Mobile)parent;
 
-                if (Core.AOS)
-                    m_AosSkillBonuses.AddTo(from);
+                m_AosSkillBonuses.AddTo(from);
 
                 from.CheckStatTimers();
             }
@@ -334,14 +335,13 @@ namespace Server.Items
             {
                 Mobile m = (Mobile)parent;
 
-                string modName = this.Serial.ToString();
+                string modName = Serial.ToString();
 
                 m.RemoveStatMod(modName + "Str");
                 m.RemoveStatMod(modName + "Dex");
                 m.RemoveStatMod(modName + "Int");
 
-                if (Core.AOS)
-                    m_AosSkillBonuses.Remove();
+                m_AosSkillBonuses.Remove();
 
                 m.CheckStatTimers();
             }
@@ -457,15 +457,15 @@ namespace Server.Items
 
             if (m_HookType > HookType.None && hookCliloc > 0)
             {
-                list.Add(1150885, String.Format("#{0}", hookCliloc)); //special hook: ~1_token~
-                list.Add(1150889, String.Format("#{0}", BaseFishingHook.GetCondition(m_HookUses))); //Hook condition: ~1_val~
+                list.Add(1150885, string.Format("#{0}", hookCliloc)); //special hook: ~1_token~
+                list.Add(1150889, string.Format("#{0}", BaseFishingHook.GetCondition(m_HookUses))); //Hook condition: ~1_val~
             }
 
             if (m_BaitType != null)
             {
                 object label = FishInfo.GetFishLabel(m_BaitType);
                 if (label is int)
-                    list.Add(1116468, String.Format("#{0}", (int)label)); //baited to attract: ~1_val~
+                    list.Add(1116468, string.Format("#{0}", (int)label)); //baited to attract: ~1_val~
                 else if (label is string)
                     list.Add(1116468, (string)label);
 
@@ -495,7 +495,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)4); // version
+            writer.Write(4); // version
 
             writer.Write(m_PlayerConstructed);
             writer.Write(m_LowerStatReq);
@@ -568,18 +568,18 @@ namespace Server.Items
                     break;
             }
 
-            if (Core.AOS && Parent is Mobile)
+            if (Parent is Mobile)
                 m_AosSkillBonuses.AddTo((Mobile)Parent);
 
             int strBonus = m_AosAttributes.BonusStr;
             int dexBonus = m_AosAttributes.BonusDex;
             int intBonus = m_AosAttributes.BonusInt;
 
-            if (this.Parent is Mobile && (strBonus != 0 || dexBonus != 0 || intBonus != 0))
+            if (Parent is Mobile && (strBonus != 0 || dexBonus != 0 || intBonus != 0))
             {
-                Mobile m = (Mobile)this.Parent;
+                Mobile m = (Mobile)Parent;
 
-                string modName = this.Serial.ToString();
+                string modName = Serial.ToString();
 
                 if (strBonus != 0)
                     m.AddStatMod(new StatMod(StatType.Str, modName + "Str", strBonus, TimeSpan.Zero));

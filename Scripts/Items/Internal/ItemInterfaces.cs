@@ -1,6 +1,5 @@
-using System;
-using Server.Mobiles;
 using Server.Engines.Craft;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -13,11 +12,6 @@ namespace Server.Items
     public interface IAccountRestricted
     {
         string Account { get; set; }
-    }
-
-    public interface IVvVItem
-    {
-        bool IsVvVItem { get; set; }
     }
 
     public interface IOwnerRestricted
@@ -68,7 +62,7 @@ namespace Server.Items
     {
         Low,
         Normal,
-        Exceptional,
+        Exceptional
     }
 
     public enum DirectionType
@@ -78,5 +72,11 @@ namespace Server.Items
         East = 2,
         North = 3,
         West = 4
+    }
+
+    public enum ItemSize
+    {
+        Small,
+        Large,
     }
 }

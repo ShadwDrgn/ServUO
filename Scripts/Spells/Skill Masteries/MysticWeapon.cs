@@ -1,10 +1,5 @@
-using System;
-using Server;
-using Server.Spells;
-using Server.Network;
-using Server.Mobiles;
 using Server.Items;
-using System.Collections.Generic;
+using System;
 
 namespace Server.Spells.SkillMasteries
 {
@@ -12,7 +7,7 @@ namespace Server.Spells.SkillMasteries
     {
         public static string ModName = "MysticWeapon";
 
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Mystic Weapon", "Vas Ylem Wis",
                 -1,
                 9002,
@@ -20,11 +15,11 @@ namespace Server.Spells.SkillMasteries
                 Reagent.Bone
             );
 
-        public override double RequiredSkill { get { return 90; } }
-        public override int RequiredMana { get { return 40; } }
-        public override bool PartyEffects { get { return false; } }
+        public override double RequiredSkill => 90;
+        public override int RequiredMana => 40;
+        public override bool PartyEffects => false;
 
-        public override SkillName CastSkill { get { return SkillName.Mysticism; } }
+        public override SkillName CastSkill => SkillName.Mysticism;
         public override SkillName DamageSkill
         {
             get

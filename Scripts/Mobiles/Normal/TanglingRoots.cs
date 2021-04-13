@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-
 using Server.Items;
 using Server.Spells;
 using Server.Spells.Spellweaving;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -41,15 +40,14 @@ namespace Server.Mobiles
 
             Fame = 3000;
             Karma = -3000;
+        }
 
-            VirtualArmor = 18;
-
-            if (0.25 > Utility.RandomDouble())
-                PackItem(new Board(10));
-            else
-                PackItem(new Log(10));
-
-            PackItem(new MandrakeRoot(3));
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.FilthyRich);
+            AddLoot(LootPack.LootItem<LuckyCoin>(2.0));
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(Board), typeof(Log) }, 100.0, 10, false, true));
+            AddLoot(LootPack.LootItem<MandrakeRoot>(3, true));
         }
 
         public TanglingRoots(Serial serial)
@@ -57,12 +55,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override Poison PoisonImmune { get { return Poison.Lesser; } }
-        public override bool DisallowAllMoves { get { return true; } }
-        public override OppositionGroup OppositionGroup { get { return OppositionGroup.FeyAndUndead; } }
+        public override Poison PoisonImmune => Poison.Lesser;
+        public override bool DisallowAllMoves => true;
 
-        private static List<Mobile> m_TangleCooldown = new List<Mobile>();
-        private Dictionary<Mobile, Timer> m_DamageTable = new Dictionary<Mobile, Timer>();
+        private static readonly List<Mobile> m_TangleCooldown = new List<Mobile>();
+        private readonly Dictionary<Mobile, Timer> m_DamageTable = new Dictionary<Mobile, Timer>();
 
         public override void OnMovement(Mobile m, Point3D oldLocation)
         {
@@ -78,14 +75,14 @@ namespace Server.Mobiles
 
                     m_TangleCooldown.Add(m);
 
-                    Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(3, 6)), new TimerStateCallback<Mobile>(Untangle), m);
-                    Timer.DelayCall(TimeSpan.FromSeconds(15.0), new TimerStateCallback<Mobile>(RemoveCooldown), m);
+                    Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(3, 6)), Untangle, m);
+                    Timer.DelayCall(TimeSpan.FromSeconds(15.0), RemoveCooldown, m);
                 }
 
                 if (m.InRange(this, 1) && !m_DamageTable.ContainsKey(m))
                 {
                     // Should start the timer
-                    m_DamageTable[m] = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0), new TimerStateCallback<Mobile>(DoDamage), m);
+                    m_DamageTable[m] = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.0), DoDamage, m);
                 }
             }
         }
@@ -118,29 +115,15 @@ namespace Server.Mobiles
             }
         }
 
-        public override void OnDeath(Container c)
-        {
-            base.OnDeath(c);
-
-            if (Utility.RandomDouble() < 0.02)
-                c.DropItem(new LuckyCoin());
-        }
-
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.FilthyRich);
-        }
-
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

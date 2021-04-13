@@ -1,4 +1,3 @@
-﻿using System;
 using Server.Commands;
 using Server.Gumps;
 using Server.Network;
@@ -7,7 +6,7 @@ namespace Server.Items
 {
     public class JournalScroll : Item
     {
-        public override int LabelNumber { get { return 1023637; } } // scroll
+        public override int LabelNumber => 1023637;  // scroll
 
         [Constructable]
         public JournalScroll() : base(0x46AF)
@@ -30,7 +29,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -45,7 +44,7 @@ namespace Server.Items
     {
         public static void Initialize()
         {
-            CommandSystem.Register("JournalLetter", AccessLevel.GameMaster, new CommandEventHandler(JournalGump_OnCommand));
+            CommandSystem.Register("JournalLetter", AccessLevel.GameMaster, JournalGump_OnCommand);
         }
 
         private static void JournalGump_OnCommand(CommandEventArgs e)
@@ -55,9 +54,9 @@ namespace Server.Items
 
         public JournalGump(Mobile owner) : base(50, 50)
         {
-            this.Closable = true;
-            this.Disposable = true;
-            this.Dragable = true;
+            Closable = true;
+            Disposable = true;
+            Dragable = true;
 
             AddPage(0);
             AddBackground(6, 11, 390, 324, 9380);

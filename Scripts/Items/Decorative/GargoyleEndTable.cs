@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [Furniture]
@@ -9,7 +7,7 @@ namespace Server.Items
         public GargoyleEndTable()
             : base(0x4041)
         {
-            this.Weight = 1.0;
+            Weight = 1.0;
         }
 
         public GargoyleEndTable(Serial serial)
@@ -21,7 +19,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,16 +1,15 @@
-using System;
+using Server.Commands;
+using Server.Engines.Quests;
+using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
+using Server.Multis;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using Server.Engines.Quests;
-using System.Xml;
-using System.Data;
-using Server.Commands;
-using Server.Gumps;
-using Server.Multis;
+using Server.Regions;
 
 /* This script has a purpose, and please adhere to the advice before adding versions.
  * This is used for modifying, removing, adding existing spawners, etc for existing shards,
@@ -28,17 +27,22 @@ namespace Server
         [Flags]
         public enum SpawnerVersion
         {
-            None            = 0x00000000,
-            Initial         = 0x00000001,
-            Sphinx          = 0x00000002,
+            None = 0x00000000,
+            Initial = 0x00000001,
+            Sphinx = 0x00000002,
             IceHoundRemoval = 0x00000004,
-            PaladinAndKrakin= 0x00000008,
+            PaladinAndKrakin = 0x00000008,
             TrinsicPaladins = 0x00000010,
-            HonestyItems    = 0x00000020,
-            TramKhaldun     = 0x00000040,
-            FixAddonDeco    = 0x00000080,
-            LifeStealers    = 0x00000100,
-            LootNerf2       = 0x00000200
+            HonestyItems = 0x00000020,
+            TramKhaldun = 0x00000040,
+            FixAddonDeco = 0x00000080,
+            LifeStealers = 0x00000100,
+            LootNerf2 = 0x00000200,
+            RemoveUnused = 0x00000400,
+            RemoveUnused2 = 0x00000800,
+            RemoveTeleporters = 0x00001000,
+            DestardSpawners = 0x00002000,
+            DoomSpawners    = 0x00004000
         }
 
         public static string FilePath = Path.Combine("Saves/Misc", "SpawnerPresistence.bin");
@@ -46,12 +50,12 @@ namespace Server
         private static bool _FirstRun = true;
 
         private static int _Version;
-        public static int Version { get { return _Version; } }
+        public static int Version => _Version;
 
         public static SpawnerVersion VersionFlag { get; set; }
 
         private static bool _SpawnsConverted;
-        public static bool SpawnsConverted { get { return _SpawnsConverted; } }
+        public static bool SpawnsConverted => _SpawnsConverted;
 
         public static void Configure()
         {
@@ -126,7 +130,7 @@ namespace Server
                 FilePath,
                 writer =>
                 {
-                    writer.Write((int)12);
+                    writer.Write(12);
 
                     writer.Write((int)VersionFlag);
 
@@ -164,6 +168,36 @@ namespace Server
             {
                 case 12:
                 case 11:
+                    if ((VersionFlag & SpawnerVersion.DoomSpawners) == 0)
+                    {
+                        UpdateDoomSpawners();
+                        VersionFlag |= SpawnerVersion.DoomSpawners;
+                    }
+
+                    if ((VersionFlag & SpawnerVersion.DestardSpawners) == 0)
+                    {
+                        UpdateDestardSpawners();
+                        VersionFlag |= SpawnerVersion.DestardSpawners;
+                    }
+
+                    if ((VersionFlag & SpawnerVersion.RemoveTeleporters) == 0)
+                    {
+                        RemoveTeleporters();
+                        VersionFlag |= SpawnerVersion.RemoveTeleporters;
+                    }
+
+                    if ((VersionFlag & SpawnerVersion.RemoveUnused2) == 0)
+                    {
+                        RemoveUnused2();
+                        VersionFlag |= SpawnerVersion.RemoveUnused2;
+                    }
+
+                    if ((VersionFlag & SpawnerVersion.RemoveUnused) == 0)
+                    {
+                        RemoveUnused();
+                        VersionFlag |= SpawnerVersion.RemoveUnused;
+                    }
+
                     if ((VersionFlag & SpawnerVersion.LootNerf2) == 0)
                     {
                         LootNerf2();
@@ -219,7 +253,7 @@ namespace Server
                     }
                     goto case 10;
                 case 10:
-                    if((VersionFlag & SpawnerVersion.Initial) == 0)
+                    if ((VersionFlag & SpawnerVersion.Initial) == 0)
                         VersionFlag |= SpawnerVersion.Initial;
                     break;
                 case 9:
@@ -265,6 +299,85 @@ namespace Server
             Utility.PopColor();
         }
 
+        #region Update Doom Spawners
+        public static void UpdateDoomSpawners()
+        {
+            ReplaceSpawnersByRegionName("Doom", Map.Malas, "doom");
+        }
+        #endregion
+
+        #region Update Destard Spawners
+        public static void UpdateDestardSpawners()
+        {
+            ReplaceSpawnersByRegionName("Destard", Map.Trammel, "Destard");
+            ReplaceSpawnersByRegionName("Destard", Map.Felucca, "Destard");
+        }
+    #endregion
+
+        #region Remove Teleporters
+    public static void RemoveTeleporters()
+        {
+            WeakEntityCollection.Delete("tel");
+            var delCount = 0;
+
+            Timer.DelayCall(TimeSpan.FromSeconds(1), () =>
+            {
+                IPooledEnumerable eable = null;
+                foreach (var reg in Region.Regions.OfType<TeleportRegion>())
+                {
+                    foreach (var rec in reg.Area)
+                    {
+                        eable = reg.Map.GetItemsInBounds(new Rectangle2D(rec.Start.X, rec.Start.Y, rec.Width, rec.Height));
+
+                        foreach (var tele in eable.OfType<Teleporter>())
+                        {
+                            delCount++;
+                            tele.Delete();
+                        }
+                    }
+                }
+
+                ToConsole(string.Format("{0} additional Teleporters deleted.", delCount));
+            });
+        }
+        #endregion
+
+        #region Remove Unused 2
+        public static void RemoveUnused2()
+        {
+            Remove("xmlquestnpc");
+            Remove("HiddenFigure");
+            Remove("JedahEntille");
+            Remove("EnshroudedFigure");
+            Remove("MilitiaFighter");
+            Remove("Seekerofadventure");
+            Remove("Noble");
+            Remove("peasant");
+            Remove("orderguard");
+            Remove("Chaosguard");
+
+            Remove("bridegroom");
+            Remove("merchant");
+            Remove("baseescortable");
+
+        }
+        #endregion
+
+        #region Remove Unused
+        public static void RemoveUnused()
+        {
+            Remove("Emino");
+            Remove("FierceDragon");
+            Remove("HaochisGuardsman");
+            Remove("Mardoth");
+            Remove("DeadlyImp");
+            Remove("Relnia");
+            Remove("Zoel");
+            Remove("Horus");
+            Remove("Haochi");
+        }
+        #endregion
+
         #region Loot Nerf 2
         public static void LootNerf2()
         {
@@ -282,7 +395,7 @@ namespace Server
         #region Addon Decoraction Fix
         public static void FixAddonDeco()
         {
-            var t = typeof(AddonComponent);
+            Type t = typeof(AddonComponent);
 
             Decorate.GenerateRestricted("deco", "Data/Decoration/Britannia", t, true, Map.Trammel, Map.Felucca);
             Decorate.GenerateRestricted("deco", "Data/Decoration/Trammel", t, true, Map.Trammel);
@@ -296,26 +409,26 @@ namespace Server
         #region Tram Khaldun Generation
         public static void GenerateTramKhaldun()
         {
-            var region = Region.Regions.FirstOrDefault(r => r.Map == Map.Felucca && r.Name == "Khaldun");
+            Region region = Region.Regions.FirstOrDefault(r => r.Map == Map.Felucca && r.Name == "Khaldun");
 
             if (region != null)
             {
                 int spawners = 0;
                 int teleporters = 0;
 
-                foreach (var spawner in region.GetEnumeratedItems().OfType<XmlSpawner>())
+                foreach (XmlSpawner spawner in region.GetEnumeratedItems().OfType<XmlSpawner>())
                 {
                     CopyAndPlaceItem(spawner, spawner.Location, Map.Trammel);
                     spawners++;
                 }
 
-                foreach (var teleporter in region.GetEnumeratedItems().OfType<Teleporter>())
+                foreach (Teleporter teleporter in region.GetEnumeratedItems().OfType<Teleporter>())
                 {
                     CopyAndPlaceItem(teleporter, teleporter.Location, Map.Trammel);
                     teleporters++;
                 }
 
-                ToConsole(String.Format("Copied {0} khaldun spawners, {1} teleporters and placed in trammel!", spawners, teleporters));
+                ToConsole(string.Format("Copied {0} khaldun spawners, {1} teleporters and placed in trammel!", spawners, teleporters));
             }
             else
             {
@@ -324,16 +437,16 @@ namespace Server
 
             Decorate.GenerateFromFile("deco", Path.Combine("Data/Decoration/Trammel", "khaldun.cfg"), Map.Trammel);
 
-            var entAddon = new KhaldunEntranceAddon();
+            KhaldunEntranceAddon entAddon = new KhaldunEntranceAddon();
             entAddon.MoveToWorld(new Point3D(6013, 3785, 18), Map.Trammel);
 
-            var campAddon = new KhaldunCampAddon();
+            KhaldunCampAddon campAddon = new KhaldunCampAddon();
             campAddon.MoveToWorld(new Point3D(6003, 3772, 24), Map.Trammel);
 
-            var workshop = new KhaldunWorkshop();
+            KhaldunWorkshop workshop = new KhaldunWorkshop();
             workshop.MoveToWorld(new Point3D(6020, 3747, 18), Map.Trammel);
 
-            var tele = new Teleporter(new Point3D(5571, 1299, 0), Map.Trammel);
+            Teleporter tele = new Teleporter(new Point3D(5571, 1299, 0), Map.Trammel);
             tele.MoveToWorld(new Point3D(6011, 3787, 23), Map.Trammel);
 
             tele = new Teleporter(new Point3D(5571, 1299, 0), Map.Trammel);
@@ -352,7 +465,7 @@ namespace Server
         {
             int convert = 0;
 
-            foreach (var item in World.Items.Values.Where(i => i.HonestyItem))
+            foreach (Item item in World.Items.Values.Where(i => i.HonestyItem))
             {
                 if (!item.HasSocket<HonestyItemSocket>())
                 {
@@ -361,7 +474,7 @@ namespace Server
                 }
             }
 
-            ToConsole(String.Format("Converted {0} honesty items and attached Honesty Item Socket!", convert));
+            ToConsole(string.Format("Converted {0} honesty items and attached Honesty Item Socket!", convert));
         }
         #endregion
 
@@ -393,7 +506,7 @@ namespace Server
         #region Version 11
         public static void AddSphinx()
         {
-            Server.Engines.GenerateForgottenPyramid.Generate(null);
+            Engines.GenerateForgottenPyramid.Generate(null);
             ToConsole("Generated Fortune Sphinx.");
         }
         #endregion
@@ -454,13 +567,13 @@ namespace Server
             Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
                 {
                     int count = 0;
-                    foreach (var item in World.Items.Values.Where(i => i.HonestyItem && !ItemFlags.GetTaken(i)))
+                    foreach (Item item in World.Items.Values.Where(i => i.HonestyItem && !ItemFlags.GetTaken(i)))
                     {
                         RunicReforging.GenerateRandomItem(item, 0, 100, 1000);
                         count++;
                     }
 
-                    ToConsole(String.Format("Honesty items given magical properties: {0}", count.ToString()));
+                    ToConsole(string.Format("Honesty items given magical properties: {0}", count.ToString()));
                 });
         }
         #endregion
@@ -480,14 +593,14 @@ namespace Server
             {
                 if (spawner is XmlSpawner)
                 {
-                    var s = spawner as XmlSpawner;
+                    XmlSpawner s = spawner as XmlSpawner;
 
                     s.MinDelay = TimeSpan.FromMinutes(5);
                     s.MaxDelay = TimeSpan.FromMinutes(10);
                 }
                 else if (spawner is Spawner)
                 {
-                    var s = spawner as Spawner;
+                    Spawner s = spawner as Spawner;
 
                     s.MinDelay = TimeSpan.FromMinutes(5);
                     s.MaxDelay = TimeSpan.FromMinutes(10);
@@ -516,7 +629,7 @@ namespace Server
 
             QuestQuesterTypes = new Dictionary<Type, Type[]>();
 
-            foreach (var quester in World.Mobiles.Values.OfType<MondainQuester>())
+            foreach (MondainQuester quester in World.Mobiles.Values.OfType<MondainQuester>())
             {
                 Type t = quester.GetType();
 
@@ -529,7 +642,7 @@ namespace Server
                     QuestQuesterTypes[t] = quests;
             }
 
-            foreach (var item in World.Items.Values.OfType<BaseQuestItem>())
+            foreach (BaseQuestItem item in World.Items.Values.OfType<BaseQuestItem>())
             {
                 Type t = item.GetType();
 
@@ -544,16 +657,16 @@ namespace Server
 
             int count = 0;
 
-            foreach (var pm in World.Mobiles.Values.OfType<PlayerMobile>())
+            foreach (PlayerMobile pm in World.Mobiles.Values.OfType<PlayerMobile>())
             {
-                foreach (var quest in pm.Quests.Where(q => q.QuesterType == null))
+                foreach (BaseQuest quest in pm.Quests.Where(q => q.QuesterType == null))
                 {
-                    foreach (var kvp in QuestQuesterTypes)
+                    foreach (KeyValuePair<Type, Type[]> kvp in QuestQuesterTypes)
                     {
                         if (quest.QuesterType != null)
                             break;
 
-                        foreach (var type in kvp.Value)
+                        foreach (Type type in kvp.Value)
                         {
                             if (type == quest.GetType())
                             {
@@ -566,7 +679,7 @@ namespace Server
                 }
             }
 
-            ToConsole(String.Format("Quester Re-assignment: {0} quests re-assigned quester type. Some quester types may still be null. These quests will need to be quit.", count.ToString()), ConsoleColor.DarkRed);
+            ToConsole(string.Format("Quester Re-assignment: {0} quests re-assigned quester type. Some quester types may still be null. These quests will need to be quit.", count.ToString()), ConsoleColor.DarkRed);
         }
 
         /// <summary>
@@ -580,7 +693,7 @@ namespace Server
 
             List<XmlSpawner> spawners = World.Items.Values.OfType<XmlSpawner>().Where(s => s.SmartSpawning).ToList();
 
-            foreach (var spawner in spawners)
+            foreach (XmlSpawner spawner in spawners)
             {
                 if (CheckSmartSpawn(spawner, check, subclasses))
                     count++;
@@ -588,16 +701,16 @@ namespace Server
 
             ColUtility.Free(spawners);
 
-            ToConsole(String.Format("Smart Spawn Removal: {0} spawners [type {1}] smart spawning disabled.", count.ToString(), check.Name));
+            ToConsole(string.Format("Smart Spawn Removal: {0} spawners [type {1}] smart spawning disabled.", count.ToString(), check.Name));
         }
 
         private static bool CheckSmartSpawn(XmlSpawner spawner, Type check, bool subclasses)
         {
-            foreach (var obj in spawner.SpawnObjects)
+            foreach (XmlSpawner.SpawnObject obj in spawner.SpawnObjects)
             {
                 if (obj.TypeName != null)
                 {
-                    var t = ScriptCompiler.FindTypeByName(BaseXmlSpawner.ParseObjectType(obj.TypeName));
+                    Type t = ScriptCompiler.FindTypeByName(BaseXmlSpawner.ParseObjectType(obj.TypeName));
 
                     if (t != null && (t == check || (subclasses && t.IsSubclassOf(check))))
                     {
@@ -623,9 +736,9 @@ namespace Server
         {
             List<XmlSpawner> toDelete = new List<XmlSpawner>();
 
-            foreach (var spawner in World.Items.Values.OfType<XmlSpawner>())
+            foreach (XmlSpawner spawner in World.Items.Values.OfType<XmlSpawner>())
             {
-                foreach (var obj in spawner.SpawnObjects)
+                foreach (XmlSpawner.SpawnObject obj in spawner.SpawnObjects)
                 {
                     if (obj == null || obj.TypeName == null)
                         continue;
@@ -641,12 +754,12 @@ namespace Server
                 }
             }
 
-            foreach (var spawner in toDelete)
+            foreach (XmlSpawner spawner in toDelete)
             {
                 spawner.Delete();
             }
 
-            ToConsole(String.Format("Spawner Deletion: deleted {0} spawners containing -{1}-.", toDelete.Count.ToString(), current));
+            ToConsole(string.Format("Spawner Deletion: deleted {0} spawners containing -{1}-.", toDelete.Count.ToString(), current));
 
             ColUtility.Free(toDelete);
         }
@@ -661,13 +774,13 @@ namespace Server
         {
             int count = 0;
 
-            foreach (var spawner in World.Items.Values.OfType<ISpawner>())
+            foreach (ISpawner spawner in World.Items.Values.OfType<ISpawner>())
             {
                 if (Replace(spawner, current, replace, check))
                     count++;
             }
 
-            ToConsole(String.Format("Spawn Replacement: {0} spawners replaced [{1} replaced with {2}].", count.ToString(), current, replace));
+            ToConsole(string.Format("Spawn Replacement: {0} spawners replaced [{1} replaced with {2}].", count.ToString(), current, replace));
         }
 
         /// <summary>
@@ -681,13 +794,13 @@ namespace Server
         {
             int count = 0;
 
-            foreach (var spawner in World.Items.Values.OfType<ISpawner>().Where(s => s is Item && ((Item)s).Name != null && ((Item)s).Name.ToLower().IndexOf(name.ToLower()) >= 0))
+            foreach (ISpawner spawner in World.Items.Values.OfType<ISpawner>().Where(s => s is Item && ((Item)s).Name != null && ((Item)s).Name.ToLower().IndexOf(name.ToLower()) >= 0))
             {
                 if (Replace(spawner, current, replace, check))
                     count++;
             }
 
-            ToConsole(String.Format("Spawn Replacement: {0} spawners named {1} replaced [{2} replaced with {3}].", count.ToString(), name, current, replace));
+            ToConsole(string.Format("Spawn Replacement: {0} spawners named {1} replaced [{2} replaced with {3}].", count.ToString(), name, current, replace));
         }
 
         public static bool Replace(ISpawner spwner, string current, string replace, string check)
@@ -698,7 +811,7 @@ namespace Server
             {
                 XmlSpawner spawner = (XmlSpawner)spwner;
 
-                foreach (var obj in spawner.SpawnObjects)
+                foreach (XmlSpawner.SpawnObject obj in spawner.SpawnObjects)
                 {
                     if (obj == null || obj.TypeName == null)
                         continue;
@@ -708,7 +821,7 @@ namespace Server
 
                     if (typeName != null && typeName.IndexOf(lookingFor) >= 0)
                     {
-                        if (String.IsNullOrEmpty(check) || typeName.IndexOf(check) < 0)
+                        if (string.IsNullOrEmpty(check) || typeName.IndexOf(check) < 0)
                         {
                             obj.TypeName = typeName.Replace(lookingFor, replace);
 
@@ -722,16 +835,16 @@ namespace Server
             {
                 Spawner spawner = (Spawner)spwner;
 
-                for(int i = 0; i < spawner.SpawnObjects.Count; i++)
+                for (int i = 0; i < spawner.SpawnObjects.Count; i++)
                 {
-                    var so = spawner.SpawnObjects[i];
+                    SpawnObject so = spawner.SpawnObjects[i];
 
                     string typeName = so.SpawnName.ToLower();
                     string lookingFor = current.ToLower();
 
                     if (typeName != null && typeName.IndexOf(lookingFor) >= 0)
                     {
-                        if (String.IsNullOrEmpty(check) || typeName.IndexOf(check) < 0)
+                        if (string.IsNullOrEmpty(check) || typeName.IndexOf(check) < 0)
                         {
                             so.SpawnName = typeName.Replace(lookingFor, replace);
 
@@ -754,9 +867,9 @@ namespace Server
             int count = 0;
             int deleted = 0;
 
-            var list = new List<XmlSpawner>(World.Items.Values.OfType<XmlSpawner>());
+            List<XmlSpawner> list = new List<XmlSpawner>(World.Items.Values.OfType<XmlSpawner>());
 
-            foreach (var spawner in list)
+            foreach (XmlSpawner spawner in list)
             {
                 if (predicate == null || predicate(spawner))
                 {
@@ -765,14 +878,14 @@ namespace Server
             }
 
             ColUtility.Free(list);
-            ToConsole(String.Format("Spawn Removal: {0} spawn lines removed containing -{1}-. [{2} deleted].", count.ToString(), toRemove, deleted));
+            ToConsole(string.Format("Spawn Removal: {0} spawn lines removed containing -{1}-. [{2} deleted].", count.ToString(), toRemove, deleted));
         }
 
         public static int Remove(XmlSpawner spawner, string toRemove, ref int deleted)
         {
             List<XmlSpawner.SpawnObject> remove = new List<XmlSpawner.SpawnObject>();
 
-            foreach (var obj in spawner.SpawnObjects)
+            foreach (XmlSpawner.SpawnObject obj in spawner.SpawnObjects)
             {
                 if (obj == null || obj.TypeName == null)
                     continue;
@@ -788,11 +901,11 @@ namespace Server
 
             int count = remove.Count;
 
-            foreach (var obj in remove)
+            foreach (XmlSpawner.SpawnObject obj in remove)
             {
                 spawner.RemoveSpawnObject(obj);
 
-                foreach (var e in obj.SpawnedObjects.OfType<IEntity>())
+                foreach (IEntity e in obj.SpawnedObjects.OfType<IEntity>())
                 {
                     e.Delete();
                     deleted++;
@@ -883,8 +996,8 @@ namespace Server
 
             if (action != null)
             {
-                List<ISpawner> list = World.Items.Values.OfType<ISpawner>().Where(s => 
-                    nameCheck == null ||  (s is Item && ((Item)s).Name != null && ((Item)s).Name.ToLower().IndexOf(nameCheck.ToLower()) >= 0)).ToList();
+                List<ISpawner> list = World.Items.Values.OfType<ISpawner>().Where(s =>
+                    nameCheck == null || (s is Item && ((Item)s).Name != null && ((Item)s).Name.ToLower().IndexOf(nameCheck.ToLower()) >= 0)).ToList();
 
                 foreach (ISpawner spawner in list)
                 {
@@ -895,7 +1008,7 @@ namespace Server
                 ColUtility.Free(list);
             }
 
-            ToConsole(String.Format("Spawner Action: Performed action to {0} spawners{1}", 
+            ToConsole(string.Format("Spawner Action: Performed action to {0} spawners{1}",
                 count.ToString(), lineCheck != null ? " containing " + lineCheck + "." : typeCheck != null ? " containing " + typeCheck.Name + "." : "."));
         }
 
@@ -906,7 +1019,7 @@ namespace Server
             if (list == null)
                 return false;
 
-            foreach (var str in list)
+            foreach (string str in list)
             {
                 if (string.IsNullOrEmpty(str))
                     continue;
@@ -980,21 +1093,21 @@ namespace Server
 
                 if (!File.Exists(path))
                 {
-                    ToConsole(String.Format("Cannot proceed. {0} does not exist.", file), ConsoleColor.Red);
+                    ToConsole(string.Format("Cannot proceed. {0} does not exist.", file), ConsoleColor.Red);
                     return;
                 }
             }
 
-            foreach (var r in Region.Regions.Where(reg => reg.Map == map && reg.Name == region))
+            foreach (Region r in Region.Regions.Where(reg => reg.Map == map && reg.Name == region))
             {
                 List<Item> list = r.GetEnumeratedItems().Where(i => i is XmlSpawner || i is Spawner).ToList();
 
-                foreach (var item in list)
+                foreach (Item item in list)
                 {
                     item.Delete();
                 }
 
-                ToConsole(String.Format("Deleted {0} Spawners in {1}.", list.Count, region));
+                ToConsole(string.Format("Deleted {0} Spawners in {1}.", list.Count, region));
                 ColUtility.Free(list);
             }
 
@@ -1014,7 +1127,7 @@ namespace Server
 
                 if (!File.Exists(path))
                 {
-                    ToConsole(String.Format("Cannot proceed. {0} does not exist.", file), ConsoleColor.Red);
+                    ToConsole(string.Format("Cannot proceed. {0} does not exist.", file), ConsoleColor.Red);
                     return;
                 }
             }
@@ -1024,16 +1137,16 @@ namespace Server
 
             foreach (Item item in eable)
             {
-                if(item is XmlSpawner || item is Spawner)
+                if (item is XmlSpawner || item is Spawner)
                 {
                     list.Add(item);
                 }
             }
 
-            foreach (var item in list)
+            foreach (Item item in list)
                 item.Delete();
 
-            ToConsole(String.Format("Deleted {0} Spawners in {1}.", list.Count, map.ToString()));
+            ToConsole(string.Format("Deleted {0} Spawners in {1}.", list.Count, map.ToString()));
 
             ColUtility.Free(list);
             eable.Free();
@@ -1054,7 +1167,7 @@ namespace Server
 
             XmlSpawner.XmlLoadFromFile(filename, SpawnerPrefix, null, Point3D.Zero, map, false, 0, false, out processedmaps, out processedspawners);
 
-            ToConsole(String.Format("Created {0} spawners from {1} with -{2}- prefix.", processedspawners, location, SpawnerPrefix == string.Empty ? "NO" : SpawnerPrefix));
+            ToConsole(string.Format("Created {0} spawners from {1} with -{2}- prefix.", processedspawners, location, SpawnerPrefix == string.Empty ? "NO" : SpawnerPrefix));
         }
 
         #region XmlSpawner to Spawner Conversion
@@ -1062,7 +1175,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (System.IO.Directory.Exists(filename) == true)
+            if (Directory.Exists(filename) == true)
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1072,22 +1185,28 @@ namespace Server
                     files = new List<string>(Directory.GetFiles(filename, "*.xml"));
                     dirs = Directory.GetDirectories(filename);
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    Diagnostics.ExceptionLogging.LogException(e);
+                }
 
                 if (dirs != null && dirs.Length > 0)
                 {
-                    foreach (var dir in dirs)
+                    foreach (string dir in dirs)
                     {
                         try
                         {
                             string[] dirFiles = Directory.GetFiles(dir, "*.xml");
                             files.AddRange(dirFiles);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
                     }
                 }
 
-                ToConsole(String.Format("Found {0} Xmlspawner files for conversion.", files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
+                ToConsole(string.Format("Found {0} Xmlspawner files for conversion.", files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
 
                 if (files != null && files.Count > 0)
                 {
@@ -1103,11 +1222,14 @@ namespace Server
                         {
                             fs = File.Open(file, FileMode.Open, FileAccess.Read);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
 
                         if (fs == null)
                         {
-                            ToConsole(String.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1120,7 +1242,7 @@ namespace Server
                         catch
                         {
                             fs.Close();
-                            ToConsole(String.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1136,7 +1258,10 @@ namespace Server
                                     {
                                         id = (string)dr["UniqueId"];
                                     }
-                                    catch { }
+                                    catch (Exception e)
+                                    {
+                                        Diagnostics.ExceptionLogging.LogException(e);
+                                    }
 
                                     bool convert = id != null && ConvertSpawner(id, dr);
 
@@ -1150,7 +1275,10 @@ namespace Server
                                             loc = new Point3D(int.Parse((string)dr["CentreX"]), int.Parse((string)dr["CentreY"]), int.Parse((string)dr["CentreZ"]));
                                             spawnMap = Map.Parse((string)dr["Map"]);
                                         }
-                                        catch{}
+                                        catch (Exception e)
+                                        {
+                                            Diagnostics.ExceptionLogging.LogException(e);
+                                        }
 
                                         if (loc != Point3D.Zero && spawnMap != null && spawnMap != Map.Internal)
                                         {
@@ -1176,16 +1304,16 @@ namespace Server
                     }
 
                     if (converted > 0)
-                        ToConsole(String.Format("Converted {0} XmlSpawners to standard spawners.", converted), ConsoleColor.Green);
+                        ToConsole(string.Format("Converted {0} XmlSpawners to standard spawners.", converted), ConsoleColor.Green);
 
                     if (failed > 0)
-                        ToConsole(String.Format("Failed to convert {0} XmlSpawners to standard spawners. {1} kept due to XmlSpawner Functionality", failed, keep), ConsoleColor.Red);
+                        ToConsole(string.Format("Failed to convert {0} XmlSpawners to standard spawners. {1} kept due to XmlSpawner Functionality", failed, keep), ConsoleColor.Red);
 
                     _SpawnsConverted = true;
                 }
                 else
                 {
-                    ToConsole(String.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
+                    ToConsole(string.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
                 }
             }
         }
@@ -1229,7 +1357,7 @@ namespace Server
 
                 for (int i = 0; i < spawner.SpawnObjects.Length; i++)
                 {
-                    var obj = spawner.SpawnObjects[i];
+                    XmlSpawner.SpawnObject obj = spawner.SpawnObjects[i];
 
                     if (obj == null || obj.TypeName == null)
                         continue;
@@ -1248,10 +1376,11 @@ namespace Server
                                                  spawner.MaxDelay,
                                                  spawner.Team,
                                                  spawner.SpawnRange,
-                                                 spawns.ToList());
-
-                newSpawner.Group = spawner.Group;
-                newSpawner.Running = spawner.Running;
+                                                 spawns.ToList())
+                {
+                    Group = spawner.Group,
+                    Running = spawner.Running
+                };
 
                 newSpawner.MoveToWorld(spawner.Location, spawner.Map);
                 spawner.Delete();
@@ -1263,11 +1392,11 @@ namespace Server
 
         private static bool HasSpecialXmlSpawnerString(SpawnObject[] spawns)
         {
-            foreach (var obj in spawns)
+            foreach (SpawnObject obj in spawns)
             {
                 if (obj.SpawnName != null)
                 {
-                    foreach (var s in _SpawnerSymbols)
+                    foreach (string s in _SpawnerSymbols)
                     {
                         if (obj.SpawnName.Contains(s))
                             return true;
@@ -1278,7 +1407,7 @@ namespace Server
             return false;
         }
 
-        private static string[] _SpawnerSymbols =
+        private static readonly string[] _SpawnerSymbols =
         {
             "/", "<", ">", ",", "{", "}"
         };
@@ -1287,7 +1416,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (System.IO.Directory.Exists(filename) == true)
+            if (Directory.Exists(filename) == true)
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1297,22 +1426,28 @@ namespace Server
                     files = new List<string>(Directory.GetFiles(filename, "*.xml"));
                     dirs = Directory.GetDirectories(filename);
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    Diagnostics.ExceptionLogging.LogException(e);
+                }
 
                 if (dirs != null && dirs.Length > 0)
                 {
-                    foreach (var dir in dirs)
+                    foreach (string dir in dirs)
                     {
                         try
                         {
                             string[] dirFiles = Directory.GetFiles(dir, "*.xml");
                             files.AddRange(dirFiles);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
                     }
                 }
 
-                ToConsole(String.Format("Found {0} Xmlspawner files for removal.", files == null ? 0 : files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
+                ToConsole(string.Format("Found {0} Xmlspawner files for removal.", files == null ? 0 : files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
                 ToConsole("Deleting spawners...", ConsoleColor.Cyan);
                 long start = Core.TickCount;
 
@@ -1329,11 +1464,14 @@ namespace Server
                         {
                             fs = File.Open(file, FileMode.Open, FileAccess.Read);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
 
                         if (fs == null)
                         {
-                            ToConsole(String.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1346,7 +1484,7 @@ namespace Server
                         catch
                         {
                             fs.Close();
-                            ToConsole(String.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1362,7 +1500,10 @@ namespace Server
                                     {
                                         id = (string)dr["UniqueId"];
                                     }
-                                    catch { }
+                                    catch (Exception e)
+                                    {
+                                        Diagnostics.ExceptionLogging.LogException(e);
+                                    }
 
                                     if (DeleteSpawner(id))
                                     {
@@ -1379,11 +1520,11 @@ namespace Server
                         fs.Close();
                     }
 
-                    ToConsole(String.Format("Deleted {0} XmlSpawners [{2} no id] in {3} seconds.", deletedxml, nospawner, ((Core.TickCount - start) / 1000).ToString()), ConsoleColor.Cyan);
+                    ToConsole(string.Format("Deleted {0} XmlSpawners [{1} no id] in {2} seconds.", deletedxml, nospawner, ((Core.TickCount - start) / 1000).ToString()), ConsoleColor.Cyan);
                 }
                 else
                 {
-                    ToConsole(String.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
+                    ToConsole(string.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
                 }
             }
         }
@@ -1397,7 +1538,7 @@ namespace Server
         /// <param name="filename"></param>
         public static void RemoveSpawnsFromXmlFile(string directory, string filename)
         {
-            if (System.IO.Directory.Exists(directory) == true)
+            if (Directory.Exists(directory) == true)
             {
                 List<string> files = null;
 
@@ -1405,9 +1546,12 @@ namespace Server
                 {
                     files = new List<string>(Directory.GetFiles(directory, filename + ".xml"));
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    Diagnostics.ExceptionLogging.LogException(e);
+                }
 
-                ToConsole(String.Format("Found {0} Xmlspawner files for removal.", files == null ? "0" : files.Count.ToString()), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
+                ToConsole(string.Format("Found {0} Xmlspawner files for removal.", files == null ? "0" : files.Count.ToString()), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
                 ToConsole("Deleting spawners...", ConsoleColor.Cyan);
 
                 if (files != null && files.Count > 0)
@@ -1422,11 +1566,14 @@ namespace Server
                         {
                             fs = File.Open(file, FileMode.Open, FileAccess.Read);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
 
                         if (fs == null)
                         {
-                            ToConsole(String.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1439,7 +1586,7 @@ namespace Server
                         catch
                         {
                             fs.Close();
-                            ToConsole(String.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1455,7 +1602,10 @@ namespace Server
                                     {
                                         id = (string)dr["UniqueId"];
                                     }
-                                    catch { }
+                                    catch (Exception e)
+                                    {
+                                        Diagnostics.ExceptionLogging.LogException(e);
+                                    }
 
                                     if (DeleteSpawner(id))
                                     {
@@ -1468,11 +1618,11 @@ namespace Server
                         fs.Close();
                     }
 
-                    ToConsole(String.Format("Deleted {0} XmlSpawners from {1}/{2}.xml.", deletedxml, directory, filename), ConsoleColor.Cyan);
+                    ToConsole(string.Format("Deleted {0} XmlSpawners from {1}/{2}.xml.", deletedxml, directory, filename), ConsoleColor.Cyan);
                 }
                 else
                 {
-                    ToConsole(String.Format("File Not Found: {0}", filename), ConsoleColor.Red);
+                    ToConsole(string.Format("File Not Found: {0}", filename), ConsoleColor.Red);
                 }
             }
         }
@@ -1486,7 +1636,7 @@ namespace Server
         {
             string filename = "Spawns";
 
-            if (System.IO.Directory.Exists(filename) == true)
+            if (Directory.Exists(filename) == true)
             {
                 List<string> files = null;
                 string[] dirs = null;
@@ -1496,22 +1646,28 @@ namespace Server
                     files = new List<string>(Directory.GetFiles(filename, "*.xml"));
                     dirs = Directory.GetDirectories(filename);
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    Diagnostics.ExceptionLogging.LogException(e);
+                }
 
                 if (dirs != null && dirs.Length > 0)
                 {
-                    foreach (var dir in dirs)
+                    foreach (string dir in dirs)
                     {
                         try
                         {
                             string[] dirFiles = Directory.GetFiles(dir, "*.xml");
                             files.AddRange(dirFiles);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
                     }
                 }
 
-                ToConsole(String.Format("Found {0} Xmlspawner files for conversion.", files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
+                ToConsole(string.Format("Found {0} Xmlspawner files for conversion.", files.Count), files != null && files.Count > 0 ? ConsoleColor.Green : ConsoleColor.Red);
                 ToConsole("Deleting spawners...", ConsoleColor.Cyan);
                 long start = Core.TickCount;
 
@@ -1528,11 +1684,14 @@ namespace Server
                         {
                             fs = File.Open(file, FileMode.Open, FileAccess.Read);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Diagnostics.ExceptionLogging.LogException(e);
+                        }
 
                         if (fs == null)
                         {
-                            ToConsole(String.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Unable to open {0} for loading", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1545,7 +1704,7 @@ namespace Server
                         catch
                         {
                             fs.Close();
-                            ToConsole(String.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
+                            ToConsole(string.Format("Error reading xml file {0}", filename), ConsoleColor.Red);
                             continue;
                         }
 
@@ -1561,7 +1720,10 @@ namespace Server
                                     {
                                         id = (string)dr["UniqueId"];
                                     }
-                                    catch { }
+                                    catch (Exception e)
+                                    {
+                                        Diagnostics.ExceptionLogging.LogException(e);
+                                    }
 
                                     if (DeleteSpawner(id))
                                     {
@@ -1595,13 +1757,16 @@ namespace Server
                                                 eable.Free();
                                             }
                                         }
-                                        catch { }
+                                        catch (Exception e)
+                                        {
+                                            Diagnostics.ExceptionLogging.LogException(e);
+                                        }
 
                                         if (!deleted)
                                         {
                                             nodelelete++;
 
-                                            ToConsole(String.Format("Failed to Delete: {0} in {1}", (string)dr["Name"], file));
+                                            ToConsole(string.Format("Failed to Delete: {0} in {1}", (string)dr["Name"], file));
                                         }
                                     }
                                 }
@@ -1611,11 +1776,11 @@ namespace Server
                         fs.Close();
                     }
 
-                    ToConsole(String.Format("Deleted {0} XmlSpawners [{1} failed] in {2} seconds.", deletedxml, nodelelete, ((Core.TickCount - start) / 1000).ToString()), ConsoleColor.Cyan);
+                    ToConsole(string.Format("Deleted {0} XmlSpawners [{1} failed] in {2} seconds.", deletedxml, nodelelete, ((Core.TickCount - start) / 1000).ToString()), ConsoleColor.Cyan);
                 }
                 else
                 {
-                    ToConsole(String.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
+                    ToConsole(string.Format("Directory Not Found: {0}", filename), ConsoleColor.Red);
                 }
             }
         }

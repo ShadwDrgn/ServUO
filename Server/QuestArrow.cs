@@ -10,11 +10,11 @@ namespace Server
 		private readonly IPoint3D m_Target;
 		private bool m_Running;
 
-		public Mobile Mobile { get { return m_Mobile; } }
+		public Mobile Mobile => m_Mobile;
 
-		public IPoint3D Target { get { return m_Target; } }
+		public IPoint3D Target => m_Target;
 
-		public bool Running { get { return m_Running; } }
+		public bool Running => m_Running;
 
 		public void Update()
 		{
@@ -28,27 +28,20 @@ namespace Server
 				return;
 			}
 
-			NetState ns = m_Mobile.NetState;
+			var ns = m_Mobile.NetState;
 
 			if (ns == null)
 			{
 				return;
 			}
 
-			if (ns.HighSeas)
+			if (m_Target is IEntity)
 			{
-				if (m_Target is IEntity)
-				{
-					ns.Send(new SetArrowHS(x, y, ((IEntity)m_Target).Serial));
-				}
-				else
-				{
-					ns.Send(new SetArrowHS(x, y, Serial.MinusOne));
-				}
+				ns.Send(new SetArrow(x, y, ((IEntity)m_Target).Serial));
 			}
 			else
 			{
-				ns.Send(new SetArrow(x, y));
+				ns.Send(new SetArrow(x, y, Serial.MinusOne));
 			}
 		}
 
@@ -66,24 +59,17 @@ namespace Server
 
 			m_Mobile.ClearQuestArrow();
 
-			NetState ns = m_Mobile.NetState;
+			var ns = m_Mobile.NetState;
 
 			if (ns != null)
 			{
-				if (ns.HighSeas)
+				if (m_Target is IEntity)
 				{
-					if (m_Target is IEntity)
-					{
-						ns.Send(new CancelArrowHS(x, y, ((IEntity)m_Target).Serial));
-					}
-					else
-					{
-						ns.Send(new CancelArrowHS(x, y, Serial.MinusOne));
-					}
+					ns.Send(new CancelArrow(x, y, ((IEntity)m_Target).Serial));
 				}
 				else
 				{
-					ns.Send(new CancelArrow());
+					ns.Send(new CancelArrow(x, y, Serial.MinusOne));
 				}
 			}
 

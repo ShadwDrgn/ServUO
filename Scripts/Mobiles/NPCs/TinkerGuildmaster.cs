@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Items;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -21,18 +20,12 @@ namespace Server.Mobiles
         {
         }
 
-        public override NpcGuild NpcGuild
-        {
-            get
-            {
-                return NpcGuild.TinkersGuild;
-            }
-        }
+        public override NpcGuild NpcGuild => NpcGuild.TinkersGuild;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -46,7 +39,7 @@ namespace Server.Mobiles
         {
             base.AddCustomContextEntries(from, list);
 
-            if (Core.ML && from.Alive)
+            if (from.Alive)
             {
                 list.Add(new RechargeEntry(from, this));
             }
@@ -71,7 +64,7 @@ namespace Server.Mobiles
 
             public override void OnClick()
             {
-                if (!Core.ML || m_Vendor == null || m_Vendor.Deleted)
+                if (m_Vendor == null || m_Vendor.Deleted)
                     return;
 
                 if (Tool != null)

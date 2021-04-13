@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
-using Server.Misc;
 using Server.Mobiles;
-using Server.Network;
+using System.Collections.Generic;
 
 namespace Server.Engines.Quests.Hag
 {
@@ -13,11 +10,11 @@ namespace Server.Engines.Quests.Hag
         public HagApprenticeCorpse()
             : base(GetOwner(), GetEquipment())
         {
-            this.Direction = Direction.South;
+            Direction = Direction.South;
 
-            foreach (Item item in this.EquipItems)
+            foreach (Item item in EquipItems)
             {
-                this.DropItem(item);
+                DropItem(item);
             }
         }
 
@@ -31,16 +28,9 @@ namespace Server.Engines.Quests.Hag
             list.Add("a charred corpse");
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            int hue = Notoriety.GetHue(NotorietyHandlers.CorpseNotoriety(from, this));
-
-            from.Send(new AsciiMessage(this.Serial, this.ItemID, MessageType.Label, hue, 3, "", "a charred corpse"));
-        }
-
         public override void Open(Mobile from, bool checkSelfLoot)
         {
-            if (!from.InRange(this.GetWorldLocation(), 2))
+            if (!from.InRange(GetWorldLocation(), 2))
                 return;
 
             PlayerMobile player = from as PlayerMobile;
@@ -58,11 +48,11 @@ namespace Server.Engines.Quests.Hag
                         if (obj.Corpse == this)
                         {
                             obj.Complete();
-                            this.Delete();
+                            Delete();
                         }
                         else
                         {
-                            this.SendLocalizedMessageTo(from, 1055047); // You examine the corpse, but it doesn't fit the description of the particular apprentice the Hag tasked you with finding.
+                            SendLocalizedMessageTo(from, 1055047); // You examine the corpse, but it doesn't fit the description of the particular apprentice the Hag tasked you with finding.
                         }
 
                         return;
@@ -70,14 +60,14 @@ namespace Server.Engines.Quests.Hag
                 }
             }
 
-            this.SendLocalizedMessageTo(from, 1055048); // You examine the corpse, but find nothing of interest.
+            SendLocalizedMessageTo(from, 1055048); // You examine the corpse, but find nothing of interest.
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -89,11 +79,12 @@ namespace Server.Engines.Quests.Hag
 
         private static Mobile GetOwner()
         {
-            Mobile apprentice = new Mobile();
-
-            apprentice.Hue = Utility.RandomSkinHue();
-            apprentice.Female = false;
-            apprentice.Body = 0x190;
+            Mobile apprentice = new Mobile
+            {
+                Hue = Utility.RandomSkinHue(),
+                Female = false,
+                Body = 0x190
+            };
 
             apprentice.Delete();
 

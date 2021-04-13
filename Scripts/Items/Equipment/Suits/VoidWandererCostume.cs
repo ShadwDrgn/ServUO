@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class VoidWandererCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "wanderer of the void"; } }
+    public class VoidWandererCostume : BaseCostume
+    {
+        public override string CreatureName => "wanderer of the void";
 
         [Constructable]
-		public VoidWandererCostume() : base( )
-		{
-            this.CostumeBody = 316;
-		}
-		
-		public override int LabelNumber
+        public VoidWandererCostume() : base()
         {
-            get
-            {
-                return 1114286;
-            }
-        }// void wanderer costume
+            CostumeBody = 316;
+        }
 
-		public VoidWandererCostume( Serial serial ) : base( serial )
-		{
-		}
+        public override int LabelNumber => 1114286;// void wanderer costume
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public VoidWandererCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

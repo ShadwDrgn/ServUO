@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public enum DawnsMusicRarity
     {
@@ -15,23 +13,11 @@ namespace Server.Items
         private readonly DawnsMusicRarity m_Rarity;
         public DawnsMusicInfo(int name, DawnsMusicRarity rarity)
         {
-            this.m_Name = name;
-            this.m_Rarity = rarity;
+            m_Name = name;
+            m_Rarity = rarity;
         }
 
-        public int Name
-        {
-            get
-            {
-                return this.m_Name;
-            }
-        }
-        public DawnsMusicRarity Rarity
-        {
-            get
-            {
-                return this.m_Rarity;
-            }
-        }
+        public int Name => m_Name;
+        public DawnsMusicRarity Rarity => m_Rarity;
     }
 }

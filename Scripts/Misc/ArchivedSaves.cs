@@ -1,10 +1,10 @@
 using System;
-using System.IO;
-using System.IO.Compression;
-using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Threading;
 
 namespace Server.Misc
 {
@@ -55,7 +55,7 @@ namespace Server.Misc
 
                 _Enabled = value;
 
-                var dest = _Enabled ? Destination : "Disabled";
+                string dest = _Enabled ? Destination : "Disabled";
 
                 Utility.WriteConsoleColor(ConsoleColor.Cyan, "Archives: {0}", dest);
             }
@@ -139,7 +139,7 @@ namespace Server.Misc
             if (!Core.Crashed && !Core.Closing)
                 return;
 
-            var pending = PendingTasks;
+            int pending = PendingTasks;
 
             if (pending <= 0)
                 return;
@@ -160,14 +160,14 @@ namespace Server.Misc
         {
             Utility.WriteConsoleColor(ConsoleColor.Cyan, "Archives: Packing started...");
 
-            var sw = Stopwatch.StartNew();
+            Stopwatch sw = Stopwatch.StartNew();
 
             try
             {
-                var now = DateTime.Now;
+                DateTime now = DateTime.Now;
 
-                var ampm = now.Hour < 12 ? "AM" : "PM";
-                var hour12 = now.Hour > 12 ? now.Hour - 12 : now.Hour <= 0 ? 12 : now.Hour;
+                string ampm = now.Hour < 12 ? "AM" : "PM";
+                int hour12 = now.Hour > 12 ? now.Hour - 12 : now.Hour <= 0 ? 12 : now.Hour;
 
                 string date;
 
@@ -179,18 +179,27 @@ namespace Server.Misc
                     case MergeType.Minutes: default: date = string.Format("{0}-{1}-{2} {3:D2}-{4:D2} {5}", now.Day, now.Month, now.Year, hour12, now.Minute, ampm); break;
                 }
 
-                var file = string.Format("{0} Saves ({1}).zip", ServerList.ServerName, date);
-                var dest = Path.Combine(Destination, file);
+                string file = string.Format("{0} Saves ({1}).zip", ServerList.ServerName, date);
+                string dest = Path.Combine(Destination, file);
 
                 try { File.Delete(dest); }
-                catch { }
+                catch (Exception e)
+                {
+                    Diagnostics.ExceptionLogging.LogException(e);
+                }
 
                 ZipFile.CreateFromDirectory(source, dest, CompressionLevel.Optimal, false);
             }
-            catch { }
+            catch (Exception e)
+            {
+                Diagnostics.ExceptionLogging.LogException(e);
+            }
 
             try { Directory.Delete(source, true); }
-            catch { }
+            catch (Exception e)
+            {
+                Diagnostics.ExceptionLogging.LogException(e);
+            }
 
             sw.Stop();
 
@@ -208,7 +217,7 @@ namespace Server.Misc
 
             _Sync.Reset();
 
-            var t = _Pack.BeginInvoke(source, EndPack, source);
+            IAsyncResult t = _Pack.BeginInvoke(source, EndPack, source);
 
             lock (_TaskRoot)
                 _Tasks.Add(t);
@@ -231,11 +240,11 @@ namespace Server.Misc
 
             Utility.WriteConsoleColor(ConsoleColor.Cyan, "Archives: Pruning started...");
 
-            var sw = Stopwatch.StartNew();
+            Stopwatch sw = Stopwatch.StartNew();
 
             try
             {
-                var root = new DirectoryInfo(Destination);
+                DirectoryInfo root = new DirectoryInfo(Destination);
 
                 foreach (FileInfo archive in root.GetFiles("*.zip", SearchOption.AllDirectories))
                 {
@@ -244,10 +253,16 @@ namespace Server.Misc
                         if (archive.LastWriteTimeUtc < threshold)
                             archive.Delete();
                     }
-                    catch { }
+                    catch (Exception e)
+                    {
+                        Diagnostics.ExceptionLogging.LogException(e);
+                    }
                 }
             }
-            catch { }
+            catch (Exception e)
+            {
+                Diagnostics.ExceptionLogging.LogException(e);
+            }
 
             sw.Stop();
 
@@ -265,7 +280,7 @@ namespace Server.Misc
 
             _Sync.Reset();
 
-            var t = _Prune.BeginInvoke(threshold, EndPrune, threshold);
+            IAsyncResult t = _Prune.BeginInvoke(threshold, EndPrune, threshold);
 
             lock (_TaskRoot)
                 _Tasks.Add(t);

@@ -1,15 +1,13 @@
-using System;
-
 namespace Server.Items
 {
     public class ScrollBox3 : WoodenBox
     {
-        [Constructable]	
+        [Constructable]
         public ScrollBox3()
             : base()
         {
-            this.Movable = true;
-            this.Hue = 1159;
+            Movable = true;
+            Hue = 1159;
 
             DropItem(new PowerScroll(SkillName.Imbuing, Utility.RandomBool() ? 105.0 : 110.0));
 
@@ -69,18 +67,12 @@ namespace Server.Items
         {
         }
 
-        public override string DefaultName
-        {
-            get
-            {
-                return "Reward Scroll Box";
-            }
-        }
+        public override string DefaultName => "Reward Scroll Box";
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

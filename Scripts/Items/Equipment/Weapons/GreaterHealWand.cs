@@ -1,4 +1,3 @@
-using System;
 using Server.Spells.Fourth;
 
 namespace Server.Items
@@ -7,7 +6,7 @@ namespace Server.Items
     {
         [Constructable]
         public GreaterHealWand()
-            : base(WandEffect.GreaterHealing, 1, Core.ML ? 109 : 5)
+            : base(WandEffect.GreaterHealing, 1, 109)
         {
         }
 
@@ -20,7 +19,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -32,7 +31,7 @@ namespace Server.Items
 
         public override void OnWandUse(Mobile from)
         {
-            this.Cast(new GreaterHealSpell(from, this));
+            Cast(new GreaterHealSpell(from, this));
         }
     }
 }

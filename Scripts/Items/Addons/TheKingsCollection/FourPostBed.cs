@@ -1,10 +1,11 @@
-using System;
 using Server.Gumps;
 
 namespace Server.Items
 {
-    public class FourPostBedAddon : BaseAddon, IDyable
+    public class FourPostBedAddon : BaseAddon
     {
+        public override BaseAddonDeed Deed => new FourPostBedDeed();
+
         [Constructable]
         public FourPostBedAddon(DirectionType type)
         {
@@ -29,26 +30,15 @@ namespace Server.Items
             }
         }
 
-        public virtual bool Dye(Mobile from, DyeTub sender)
-        {
-            if (Deleted)
-                return false;
-
-            Hue = sender.DyedHue;
-            return true;
-        }
-
         public FourPostBedAddon(Serial serial)
             : base(serial)
         {
         }
-
-        public override BaseAddonDeed Deed { get { return new FourPostBedDeed(); } }
-
+       
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -58,9 +48,10 @@ namespace Server.Items
         }
     }
 
+    [Furniture]
     public class FourPostBedDeed : BaseAddonDeed, IRewardOption
     {
-        public override int LabelNumber { get { return 1154131; } } // Four Post Bed
+        public override int LabelNumber => 1154131;  // Four Post Bed
 
         private DirectionType _Direction;
 
@@ -103,12 +94,12 @@ namespace Server.Items
                 base.OnDoubleClick(from);
         }
 
-        public override BaseAddon Addon { get { return new FourPostBedAddon(_Direction); } }
+        public override BaseAddon Addon => new FourPostBedAddon(_Direction);
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

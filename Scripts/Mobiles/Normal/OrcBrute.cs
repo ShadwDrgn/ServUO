@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -38,21 +37,6 @@ namespace Server.Mobiles
 
             Fame = 15000;
             Karma = -15000;
-
-            VirtualArmor = 50;
-
-            Item ore = new ShadowIronOre(25);
-            ore.ItemID = 0x19B9;
-            PackItem(ore);
-            PackItem(new IronIngot(10));
-
-            if (0.05 > Utility.RandomDouble())
-                PackItem(new OrcishKinMask());
-
-            if (0.2 > Utility.RandomDouble())
-                PackItem(new BolaBall());
-
-            PackItem(new Yeast());
         }
 
         public OrcBrute(Serial serial)
@@ -60,55 +44,23 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override Poison PoisonImmune => Poison.Lethal;
+        public override int Meat => 2;
 
-        public override TribeType Tribe { get { return TribeType.Orc; } }
+        public override TribeType Tribe => TribeType.Orc;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.SavagesAndOrcs;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool AutoDispel
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool CanRummageCorpses => true;
+        public override bool AutoDispel => true;
+
         public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
+            AddLoot(LootPack.LootItem<ShadowIronOre>(25));
+            AddLoot(LootPack.LootItem<IronIngot>(10));
+            AddLoot(LootPack.LootItem<OrcishKinMask>(5.0));
+            AddLoot(LootPack.LootItem<BolaBall>(20.0));
+            AddLoot(LootPack.LootItem<Yeast>());
         }
 
         public override bool IsEnemy(Mobile m)
@@ -134,12 +86,16 @@ namespace Server.Mobiles
             }
         }
 
-        public override void OnDamagedBySpell(Mobile caster)
+        public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
         {
-            if (caster == this || Controlled || Summoned)
-                return;
+            int damage = base.Damage(amount, from, informMount, checkDisrupt);
 
-            SpawnOrcLord(caster);
+            if (from != null && from != this && !Controlled && !Summoned && Utility.RandomDouble() <= 0.2)
+            {
+                SpawnOrcLord(from);
+            }
+
+            return damage;
         }
 
         public void SpawnOrcLord(Mobile target)
@@ -162,9 +118,10 @@ namespace Server.Mobiles
 
             if (orcs < 10)
             {
-                BaseCreature orc = new SpawnedOrcishLord();
-
-                orc.Team = Team;
+                BaseCreature orc = new SpawnedOrcishLord
+                {
+                    Team = Team
+                };
 
                 Point3D loc = target.Location;
                 bool validLocation = false;
@@ -190,7 +147,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,9 +1,10 @@
-using System;
+using Server.Engines.CityLoyalty;
 using Server.Gumps;
-using Server.Network;
-using System.Linq;
 using Server.Mobiles;
+using Server.Network;
 using Server.Spells;
+using System;
+using System.Linq;
 
 namespace Server.Menus.Questions
 {
@@ -17,20 +18,8 @@ namespace Server.Menus.Questions
             m_Locations = locations;
         }
 
-        public int Name
-        {
-            get
-            {
-                return m_Name;
-            }
-        }
-        public Point3D[] Locations
-        {
-            get
-            {
-                return m_Locations;
-            }
-        }
+        public int Name => m_Name;
+        public Point3D[] Locations => m_Locations;
     }
 
     public class StuckMenu : Gump
@@ -198,14 +187,14 @@ namespace Server.Menus.Questions
         {
             StopClose();
 
-            if (Factions.Sigil.ExistsOn(m_Mobile))
-            {
-                m_Mobile.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
-            }
-            else if (info.ButtonID == 0)
+            if (info.ButtonID == 0)
             {
                 if (m_Mobile == m_Sender)
                     m_Mobile.SendLocalizedMessage(1010588); // You choose not to go to any city.
+            }
+            else if (CityTradeSystem.HasTrade(m_Mobile))
+            {
+                m_Mobile.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
             }
             else
             {
@@ -243,8 +232,6 @@ namespace Server.Menus.Questions
                 m_Mobile.SendLocalizedMessage(1010589); // You will be teleported within the next two minutes.
 
                 new TeleportTimer(m_Mobile, entry, TimeSpan.FromSeconds(10.0 + (Utility.RandomDouble() * 110.0))).Start();
-
-                m_Mobile.UsedStuckMenu();
             }
             else
             {
@@ -299,7 +286,7 @@ namespace Server.Menus.Questions
                 Map fromMap = m_Mobile.LogoutMap;
                 Point3D fromLoc = m_Mobile.LogoutLocation;
 
-                var move = fromMap.GetMobilesInRange(fromLoc, 3).Where(m => m is BaseCreature).Cast<BaseCreature>()
+                System.Collections.Generic.List<BaseCreature> move = fromMap.GetMobilesInRange(fromLoc, 3).Where(m => m is BaseCreature).Cast<BaseCreature>()
                     .Where(pet => pet.Controlled && pet.ControlMaster == m_Mobile && pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come).ToList();
 
                 move.ForEach(x => x.MoveToWorld(dest, destMap));
@@ -311,16 +298,16 @@ namespace Server.Menus.Questions
                 {
                     m_Mobile.Frozen = true;
                 }
+				else if (CityTradeSystem.HasTrade(m_Mobile))
+				{
+					m_Mobile.Frozen = false;
+                    Stop();
+					m_Mobile.SendLocalizedMessage(1151733); // You cannot do that while carrying a Trade Order.
+				}
                 else
                 {
                     m_Mobile.Frozen = false;
                     Stop();
-
-                    if (Factions.Sigil.ExistsOn(m_Mobile))
-                    {
-                        m_Mobile.SendLocalizedMessage(1061632); // You can't do that while carrying the sigil.
-                        return;
-                    }
 
                     int idx = Utility.Random(m_Destination.Locations.Length);
                     Point3D dest = m_Destination.Locations[idx];
@@ -342,7 +329,7 @@ namespace Server.Menus.Questions
 
                     if (m_Mobile.Map != Map.Internal)
                     {
-                        Mobiles.BaseCreature.TeleportPets(m_Mobile, dest, destMap);
+                        BaseCreature.TeleportPets(m_Mobile, dest, destMap);
                         m_Mobile.MoveToWorld(dest, destMap);
                     }
                     else

@@ -1,12 +1,10 @@
-using System;
-
 namespace Server.Engines.PartySystem
 {
     public class PartyCommandHandlers : PartyCommands
     {
         public static void Initialize()
         {
-            PartyCommands.Handler = new PartyCommandHandlers();
+            Handler = new PartyCommandHandlers();
         }
 
         public override void OnAdd(Mobile from)

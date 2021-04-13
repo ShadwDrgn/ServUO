@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -36,12 +35,6 @@ namespace Server.Mobiles
             Fame = 500;
             Karma = 1500;
 
-            VirtualArmor = 24;
-            PackItem(new Log(Utility.RandomMinMax(23, 34)));
-
-            if (0.05 > Utility.RandomDouble())
-                PackItem(new TreefellowWood());
-
             SetWeaponAbility(WeaponAbility.Dismount);
         }
 
@@ -50,20 +43,7 @@ namespace Server.Mobiles
         {
         }
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool BleedImmune => true;
 
         public override int GetIdleSound()
         {
@@ -83,12 +63,14 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
+            AddLoot(LootPack.LootItem<TreefellowWood>(5.0));
+            AddLoot(LootPack.LootItem<Log>(23, 34));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

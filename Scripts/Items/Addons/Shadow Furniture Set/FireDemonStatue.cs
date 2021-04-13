@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [FlipableAddon(Direction.South, Direction.East)]
@@ -16,7 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed { get { return new FireDemonStatueDeed(); } }
+        public override BaseAddonDeed Deed => new FireDemonStatueDeed();
 
         public virtual void Flip(Mobile from, Direction direction)
         {
@@ -34,7 +32,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -46,9 +44,9 @@ namespace Server.Items
 
     public class FireDemonStatueDeed : BaseAddonDeed
     {
-        public override int LabelNumber { get { return 1076674; } } // Fire Demon Statue
+        public override int LabelNumber => 1076674;  // Fire Demon Statue
 
-        public override bool ExcludeDeedHue { get { return true; } }
+        public override bool ExcludeDeedHue => true;
 
         [Constructable]
         public FireDemonStatueDeed()
@@ -62,13 +60,13 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon { get { return new FireDemonStatueAddon(); } }
+        public override BaseAddon Addon => new FireDemonStatueAddon();
 
-        
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

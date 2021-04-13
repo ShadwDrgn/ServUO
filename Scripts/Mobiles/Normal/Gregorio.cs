@@ -1,22 +1,21 @@
-using System;
 using Server.Engines.Quests;
 using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Gregorio : BaseCreature
-    { 
+    {
         [Constructable]
         public Gregorio()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
-        { 
+        {
             Race = Race.Human;
             Name = "Gregorio";
             Title = "the brigand";
-			
+
             InitBody();
             InitOutfit();
-			
+
             SetStr(86, 100);
             SetDex(81, 95);
             SetInt(61, 75);
@@ -32,9 +31,7 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.MagicResist, 25.0, 50.0);
             SetSkill(SkillName.Tactics, 80.0, 100.0);
-            SetSkill(SkillName.Wrestling, 80.0, 100.0);	
-			
-            PackGold(50, 150);
+            SetSkill(SkillName.Wrestling, 80.0, 100.0);
         }
 
         public Gregorio(Serial serial)
@@ -42,15 +39,12 @@ namespace Server.Mobiles
         {
         }
 
-        /*public override bool InitialInnocent
-        {
-            get
-            {
-                return true;
-            }
-        }*/
+        public override bool AlwaysMurderer => true;
 
-        public override bool AlwaysMurderer { get { return true; } }
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.LootGold(50, 150));
+        }
 
         public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
         {
@@ -59,7 +53,7 @@ namespace Server.Mobiles
 
             if (from is PlayerMobile)
             {
-                var pm = (PlayerMobile)from;
+                PlayerMobile pm = (PlayerMobile)from;
 
                 BaseQuest quest = QuestHelper.GetQuest(pm, typeof(GuiltyQuest));
 
@@ -80,7 +74,7 @@ namespace Server.Mobiles
 
             if (from is PlayerMobile)
             {
-                var pm = (PlayerMobile)from;
+                PlayerMobile pm = (PlayerMobile)from;
 
                 BaseQuest quest = QuestHelper.GetQuest(pm, typeof(GuiltyQuest));
 
@@ -97,10 +91,10 @@ namespace Server.Mobiles
         public void InitBody()
         {
             InitStats(100, 100, 25);
-				
+
             Hue = 0x8412;
-            Female = false;		
-			
+            Female = false;
+
             HairItemID = 0x203C;
             HairHue = 0x47A;
             FacialHairItemID = 0x204D;
@@ -108,7 +102,7 @@ namespace Server.Mobiles
         }
 
         public void InitOutfit()
-        { 
+        {
             AddItem(new Sandals(0x75E));
             AddItem(new Shirt());
             AddItem(new ShortPants(0x66C));
@@ -119,14 +113,12 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-	
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-	
             int version = reader.ReadInt();
         }
     }

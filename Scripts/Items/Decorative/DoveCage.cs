@@ -1,11 +1,9 @@
-using System;
-
 namespace Server.Items
 {
-    [FlipableAttribute(0xA4B2, 0xA4B1)]
+    [Flipable(0xA4B2, 0xA4B1)]
     public class DoveCage : Item, IDyable
     {
-        public override int LabelNumber { get { return 1126185; } } // cage
+        public override int LabelNumber => 1126185;  // cage
 
         private string _DisplayName;
 
@@ -19,7 +17,7 @@ namespace Server.Items
             _DisplayName = _Names[Utility.Random(_Names.Length)];
         }
 
-        private static string[] _Names =
+        private static readonly string[] _Names =
         {
             "White-Winged", "Jobi", "Golden Heart", "White-Tipped", "Collared", "Common Ground", "Ruddy Quail", "Thick-Billed Ground", "Celebes Quail", "Dragon Turtle",
             "Crested Quail", "HeartWood", "Grey-Fronted", "Bronzewing", "Grey-Headed", "Brown Cuckoo", "Red Dragon Turtle", "Rock", "Namaqua", "Laughing", "Bar Shoulder",
@@ -66,7 +64,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(_DisplayName);
         }

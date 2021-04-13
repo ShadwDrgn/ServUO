@@ -1,13 +1,11 @@
-using System;
-using Server;
+using Server.Commands;
 using Server.Items;
 using Server.Mobiles;
-using Server.Commands;
 
 namespace Server.Engines.ResortAndCasino
 {
-	public static class FireCasinoGenerator
-	{
+    public static class FireCasinoGenerator
+    {
         public static readonly string EntityName = "casino";
 
         public static void Initialize()
@@ -55,7 +53,7 @@ namespace Server.Engines.ResortAndCasino
             WeakEntityCollection.Add(EntityName, mob);
             mob.MoveToWorld(list[7], map);
 
-            var xmlspawner = new XmlSpawner(8, 1, 2, 0, 25, "CasinoWaitress");
+            XmlSpawner xmlspawner = new XmlSpawner(8, 1, 2, 0, 25, "CasinoWaitress");
             WeakEntityCollection.Add(EntityName, xmlspawner);
             xmlspawner.MoveToWorld(list[8], map);
             xmlspawner.MaxCount = 8;
@@ -68,7 +66,7 @@ namespace Server.Engines.ResortAndCasino
 
         private static Point3D[] GetTramPoints()
         {
-            return new Point3D[] 
+            return new Point3D[]
             {
                 new Point3D(4062, 3313, 1),
                 new Point3D(4050, 3332, 0),
@@ -87,9 +85,9 @@ namespace Server.Engines.ResortAndCasino
 
         private static Point3D[] GetMalasPoints()
         {
-            var list = GetTramPoints();
+            Point3D[] list = GetTramPoints();
 
-            return new Point3D[] 
+            return new Point3D[]
             {
                 new Point3D(list[0].X - _MalasXOffset, list[0].Y - _MalasYOffset, list[0].Z - _MalasZOffset),
                 new Point3D(list[1].X - _MalasXOffset, list[1].Y - _MalasYOffset, list[1].Z - _MalasZOffset),
@@ -114,5 +112,5 @@ namespace Server.Engines.ResortAndCasino
         {
             WeakEntityCollection.Delete(EntityName);
         }
-	}
+    }
 }

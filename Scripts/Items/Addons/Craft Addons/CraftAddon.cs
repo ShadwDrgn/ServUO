@@ -1,14 +1,13 @@
-using System;
-using Server;
 using Server.Engines.Craft;
-using System.Collections.Generic;
 using Server.Multis;
-using System.Linq;
 using Server.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Items
 {
-    public abstract class CraftAddon : BaseAddon, Server.Gumps.ISecurable
+    public abstract class CraftAddon : BaseAddon, Gumps.ISecurable
     {
         public List<AddonToolComponent> Tools { get; set; }
 
@@ -39,7 +38,7 @@ namespace Server.Items
             }
         }
 
-        public override BaseAddonDeed Deed { get { return null; } }
+        public override BaseAddonDeed Deed => null;
 
         [Constructable]
         public CraftAddon()
@@ -79,7 +78,7 @@ namespace Server.Items
                     {
                         Point3D wall = c.WallPosition;
 
-                        if (!BaseAddon.IsWall(p3D.X + wall.X, p3D.Y + wall.Y, p3D.Z + wall.Z, map))
+                        if (!IsWall(p3D.X + wall.X, p3D.Y + wall.Y, p3D.Z + wall.Z, map))
                             return AddonFitResult.NoWall;
                     }
                 }
@@ -145,7 +144,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write((int)Level);
 
@@ -177,7 +176,7 @@ namespace Server.Items
 
         public class ToolDropComponent : LocalizedAddonComponent
         {
-            public override bool ForceShowProperties { get { return true; } }
+            public override bool ForceShowProperties => true;
 
             public ToolDropComponent(int id, int cliloc)
                 : base(id, cliloc)
@@ -193,7 +192,7 @@ namespace Server.Items
                 {
                     if (dropped is ITool && !(dropped is BaseRunicTool))
                     {
-                        var tool = dropped as ITool;
+                        ITool tool = dropped as ITool;
 
                         if (tool.CraftSystem == addon.CraftSystem)
                         {
@@ -251,7 +250,7 @@ namespace Server.Items
             public override void Serialize(GenericWriter writer)
             {
                 base.Serialize(writer);
-                writer.Write((int)0);
+                writer.Write(0);
             }
 
             public override void Deserialize(GenericReader reader)

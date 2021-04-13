@@ -1,7 +1,7 @@
-using System;
-using Server.Items;
-using System.Collections.Generic;
 using Server.Engines.Quests;
+using Server.Items;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Mobiles
@@ -68,12 +68,12 @@ namespace Server.Mobiles
             AddItem(item);
         }
 
-        public override bool ClickTitle { get { return false; } }
-        public override bool AlwaysMurderer { get { return true; } }
+        public override bool ClickTitle => false;
+        public override bool AlwaysMurderer => true;
 
         public override void OnDeath(Container c)
         {
-            List<DamageStore> rights = GetLootingRights();            
+            List<DamageStore> rights = GetLootingRights();
 
             foreach (Mobile m in rights.Select(x => x.m_Mobile).Distinct())
             {
@@ -83,8 +83,8 @@ namespace Server.Mobiles
 
                     if (pm.ExploringTheDeepQuest == ExploringTheDeepQuestChain.CollectTheComponent)
                     {
-						Item item = new MercutiosCutlass();
-						
+                        Item item = new MercutiosCutlass();
+
                         if (m.Backpack == null || !m.Backpack.TryDropItem(m, item, false))
                         {
                             m.BankBox.DropItem(item);
@@ -106,9 +106,11 @@ namespace Server.Mobiles
             if (Instances != null && Instances.Count > 0)
                 return null;
 
-            MercutioTheUnsavory creature = new MercutioTheUnsavory();
-            creature.Home = platLoc;
-            creature.RangeHome = 4;
+            MercutioTheUnsavory creature = new MercutioTheUnsavory
+            {
+                Home = platLoc,
+                RangeHome = 4
+            };
             creature.MoveToWorld(platLoc, platMap);
 
             return creature;
@@ -119,16 +121,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.Average);
-        }
-
         public class InternalSelfDeleteTimer : Timer
         {
-            private MercutioTheUnsavory Mare;
+            private readonly MercutioTheUnsavory Mare;
 
-            public InternalSelfDeleteTimer(Mobile p) : base(TimeSpan.FromMinutes(60))
+            public InternalSelfDeleteTimer(Mobile p) : base(TimeSpan.FromMinutes(10))
             {
                 Priority = TimerPriority.FiveSeconds;
                 Mare = ((MercutioTheUnsavory)p);
@@ -194,9 +191,10 @@ namespace Server.Mobiles
 
                 for (int i = 0; i < newBrigands; ++i)
                 {
-                    BaseCreature brigand = new Brigand();
-
-                    brigand.Team = Team;
+                    BaseCreature brigand = new Brigand
+                    {
+                        Team = Team
+                    };
 
                     bool validLocation = false;
                     Point3D loc = Location;
@@ -223,7 +221,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 

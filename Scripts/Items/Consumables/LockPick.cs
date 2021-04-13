@@ -1,7 +1,6 @@
+using Server.Targeting;
 using System;
 using System.Linq;
-
-using Server.Targeting;
 
 namespace Server.Items
 {
@@ -15,11 +14,11 @@ namespace Server.Items
         void LockPick(Mobile from);
     }
 
-    [FlipableAttribute(0x14fc, 0x14fb)]
+    [Flipable(0x14fc, 0x14fb)]
     public class Lockpick : Item
     {
-        public virtual bool IsSkeletonKey { get { return false; } }
-        public virtual int SkillBonus { get { return 0; } }
+        public virtual bool IsSkeletonKey => false;
+        public virtual int SkillBonus => 0;
 
         [Constructable]
         public Lockpick()
@@ -44,7 +43,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -156,7 +155,7 @@ namespace Server.Items
 
                 if (item is TreasureMapChest)
                 {
-                    var chest = (TreasureMapChest)item;
+                    TreasureMapChest chest = (TreasureMapChest)item;
 
                     if (TreasureMapInfo.NewSystem)
                     {
@@ -182,7 +181,7 @@ namespace Server.Items
 
         private class InternalTarget : Target
         {
-            private Lockpick m_Item;
+            private readonly Lockpick m_Item;
 
             public InternalTarget(Lockpick item)
                 : base(1, false, TargetFlags.None)

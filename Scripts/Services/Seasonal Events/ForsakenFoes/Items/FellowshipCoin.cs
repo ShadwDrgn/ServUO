@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 using Server.Network;
 
@@ -6,8 +5,8 @@ namespace Server.Items
 {
     public class FellowshipCoin : Item
     {
-        public override int LabelNumber { get { return 1159036; } } // The Fellowship Coin
-        
+        public override int LabelNumber => 1159036;  // The Fellowship Coin
+
         [Constructable]
         public FellowshipCoin()
             : base(0x2F60)
@@ -50,7 +49,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

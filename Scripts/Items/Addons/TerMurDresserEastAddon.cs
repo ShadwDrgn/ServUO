@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class TerMurDresserEastAddon : BaseAddon
@@ -7,8 +5,8 @@ namespace Server.Items
         [Constructable]
         public TerMurDresserEastAddon()
         {
-            this.AddComponent(new AddonComponent(0x402E), 0, 0, 0);
-            this.AddComponent(new AddonComponent(0x402D), 0, -1, 0);
+            AddComponent(new AddonComponent(0x402E), 0, 0, 0);
+            AddComponent(new AddonComponent(0x402D), 0, -1, 0);
         }
 
         public TerMurDresserEastAddon(Serial serial)
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new TerMurDresserEastDeed();
-            }
-        }
+        public override BaseAddonDeed Deed => new TerMurDresserEastDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -50,20 +42,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new TerMurDresserEastAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1111784;
-            }
-        }// Ter-Mur style dresser (east)
+        public override BaseAddon Addon => new TerMurDresserEastAddon();
+        public override int LabelNumber => 1111784;// Ter-Mur style dresser (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

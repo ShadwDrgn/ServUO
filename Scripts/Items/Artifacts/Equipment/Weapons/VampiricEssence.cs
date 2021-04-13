@@ -1,17 +1,15 @@
-using System;
-
 namespace Server.Items
 {
     public class VampiricEssence : Cutlass
-	{
-		public override bool IsArtifact { get { return true; } }
-		public override int LabelNumber { get { return 1113873; } } // Vampiric Essence
-		
+    {
+        public override bool IsArtifact => true;
+        public override int LabelNumber => 1113873;  // Vampiric Essence
+
         [Constructable]
         public VampiricEssence()
         {
             Hue = 39;
-            WeaponAttributes.HitLeechHits = 100;			
+            WeaponAttributes.HitLeechHits = 100;
             WeaponAttributes.HitHarm = 50;
             Attributes.WeaponSpeed = 20;
             Attributes.WeaponDamage = 50;
@@ -24,25 +22,13 @@ namespace Server.Items
         {
         }
 
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

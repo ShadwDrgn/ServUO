@@ -8,7 +8,7 @@ namespace Server.Items
         [Constructable]
         public SpinningwheelSouthAddon()
         {
-            this.AddComponent(new AddonComponent(0x1015), 0, 0, 0);
+            AddComponent(new AddonComponent(0x1015), 0, 0, 0);
         }
 
         public SpinningwheelSouthAddon(Serial serial)
@@ -16,25 +16,13 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new SpinningwheelSouthDeed();
-            }
-        }
-        public bool Spinning
-        {
-            get
-            {
-                return this.m_Timer != null;
-            }
-        }
+        public override BaseAddonDeed Deed => new SpinningwheelSouthDeed();
+        public bool Spinning => m_Timer != null;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -46,7 +34,7 @@ namespace Server.Items
 
         public override void OnComponentLoaded(AddonComponent c)
         {
-            switch ( c.ItemID )
+            switch (c.ItemID)
             {
                 case 0x1016:
                 case 0x101A:
@@ -59,12 +47,12 @@ namespace Server.Items
 
         public void BeginSpin(SpinCallback callback, Mobile from, int hue)
         {
-            this.m_Timer = new SpinTimer(this, callback, from, hue);
-            this.m_Timer.Start();
+            m_Timer = new SpinTimer(this, callback, from, hue);
+            m_Timer.Start();
 
-            foreach (AddonComponent c in this.Components)
+            foreach (AddonComponent c in Components)
             {
-                switch ( c.ItemID )
+                switch (c.ItemID)
                 {
                     case 0x1015:
                     case 0x1019:
@@ -78,14 +66,14 @@ namespace Server.Items
 
         public void EndSpin(SpinCallback callback, Mobile from, int hue)
         {
-            if (this.m_Timer != null)
-                this.m_Timer.Stop();
+            if (m_Timer != null)
+                m_Timer.Stop();
 
-            this.m_Timer = null;
+            m_Timer = null;
 
-            foreach (AddonComponent c in this.Components)
+            foreach (AddonComponent c in Components)
             {
-                switch ( c.ItemID )
+                switch (c.ItemID)
                 {
                     case 0x1016:
                     case 0x101A:
@@ -107,18 +95,18 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly int m_Hue;
             public SpinTimer(SpinningwheelSouthAddon wheel, SpinCallback callback, Mobile from, int hue)
-                : base(TimeSpan.FromSeconds(3.0))
+                : base(TimeSpan.FromSeconds(6.0))
             {
-                this.m_Wheel = wheel;
-                this.m_Callback = callback;
-                this.m_From = from;
-                this.m_Hue = hue;
-                this.Priority = TimerPriority.TwoFiftyMS;
+                m_Wheel = wheel;
+                m_Callback = callback;
+                m_From = from;
+                m_Hue = hue;
+                Priority = TimerPriority.TwoFiftyMS;
             }
 
             protected override void OnTick()
             {
-                this.m_Wheel.EndSpin(this.m_Callback, this.m_From, this.m_Hue);
+                m_Wheel.EndSpin(m_Callback, m_From, m_Hue);
             }
         }
     }
@@ -135,25 +123,13 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new SpinningwheelSouthAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1044342;
-            }
-        }// spining wheel (south)
+        public override BaseAddon Addon => new SpinningwheelSouthAddon();
+        public override int LabelNumber => 1044342;// spining wheel (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

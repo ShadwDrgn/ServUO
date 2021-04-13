@@ -1,7 +1,5 @@
-using System;
-using Server;
-using Server.Network;
 using Server.Items;
+using Server.Network;
 
 namespace Server.Engines.TreasuresOfKotlCity
 {
@@ -17,13 +15,13 @@ namespace Server.Engines.TreasuresOfKotlCity
 
             KeyValue = Key.RandomValue();
 
-            if(Instance == null)
+            if (Instance == null)
                 Instance = this;
         }
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!from.InRange(this.GetWorldLocation(), 2))
+            if (!from.InRange(GetWorldLocation(), 2))
             {
                 from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             }
@@ -53,7 +51,7 @@ namespace Server.Engines.TreasuresOfKotlCity
             base.Deserialize(reader);
             int version = reader.ReadInt();
 
-            if(Instance == null)
+            if (Instance == null)
                 Instance = this;
         }
     }

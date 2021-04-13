@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -10,30 +9,26 @@ namespace Server.Mobiles
         public Bogle()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            this.Name = "a bogle";
-            this.Body = 153;
-            this.BaseSoundID = 0x482;
+            Name = "a bogle";
+            Body = 153;
+            BaseSoundID = 0x482;
 
-            this.SetStr(76, 100);
-            this.SetDex(76, 95);
-            this.SetInt(36, 60);
+            SetStr(76, 100);
+            SetDex(76, 95);
+            SetInt(36, 60);
 
-            this.SetHits(46, 60);
+            SetHits(46, 60);
 
-            this.SetDamage(7, 11);
+            SetDamage(7, 11);
 
-            this.SetSkill(SkillName.EvalInt, 55.1, 70.0);
-            this.SetSkill(SkillName.Magery, 55.1, 70.0);
-            this.SetSkill(SkillName.MagicResist, 55.1, 70.0);
-            this.SetSkill(SkillName.Tactics, 45.1, 60.0);
-            this.SetSkill(SkillName.Wrestling, 45.1, 55.0);
+            SetSkill(SkillName.EvalInt, 55.1, 70.0);
+            SetSkill(SkillName.Magery, 55.1, 70.0);
+            SetSkill(SkillName.MagicResist, 55.1, 70.0);
+            SetSkill(SkillName.Tactics, 45.1, 60.0);
+            SetSkill(SkillName.Wrestling, 45.1, 55.0);
 
-            this.Fame = 4000;
-            this.Karma = -4000;
-
-            this.VirtualArmor = 28;
-            this.PackItem(Loot.RandomWeapon());
-            this.PackItem(new Bone());
+            Fame = 4000;
+            Karma = -4000;
         }
 
         public Bogle(Serial serial)
@@ -41,39 +36,21 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
+        public override bool BleedImmune => true;
+        public override Poison PoisonImmune => Poison.Lethal;
 
-        public override TribeType Tribe { get { return TribeType.Undead; } }
+        public override TribeType Tribe => TribeType.Undead;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.Meager);
+            AddLoot(LootPack.Meager);
+            AddLoot(LootPack.LootItem<Bone>());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

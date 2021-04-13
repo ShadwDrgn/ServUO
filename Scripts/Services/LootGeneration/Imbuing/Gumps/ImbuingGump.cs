@@ -1,10 +1,10 @@
-using System;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
-using Server.Items;
-using System.Collections.Generic;
-using Server.Targeting;
 using Server.SkillHandlers;
+using Server.Targeting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Gumps
@@ -84,7 +84,7 @@ namespace Server.Gumps
                     {
                         Item item = context.LastImbued;
                         int mod = context.Imbue_Mod;
-                        int modint = context.Imbue_ModInt;        
+                        int modint = context.Imbue_ModInt;
 
                         if (item == null || mod < 0 || modint == 0)
                         {
@@ -106,7 +106,7 @@ namespace Server.Gumps
                         Item item = context.LastImbued;
                         int mod = context.Imbue_Mod;
                         int modint = context.Imbue_ModInt;
-                        
+
                         if (context.LastImbued == null)
                         {
                             User.SendLocalizedMessage(1113572); // You haven't imbued anything yet!
@@ -185,7 +185,7 @@ namespace Server.Gumps
                 else if (m is PlayerMobile && Imbuing.CanUnravelItem(m, item))
                 {
                     m.BeginAction(typeof(Imbuing));
-                    BaseGump.SendGump(new UnravelGump((PlayerMobile)m, item));
+                    SendGump(new UnravelGump((PlayerMobile)m, item));
                 }
             }
 
@@ -196,7 +196,7 @@ namespace Server.Gumps
 
             private class UnravelGump : BaseGump
             {
-                private Item m_Item;
+                private readonly Item m_Item;
 
                 public UnravelGump(PlayerMobile pm, Item item)
                     : base(pm, 60, 36)
@@ -225,12 +225,12 @@ namespace Server.Gumps
                 }
 
                 public override void OnResponse(RelayInfo info)
-                {                    
+                {
                     User.EndAction(typeof(Imbuing));
 
                     if (info.ButtonID == 0 || m_Item.Deleted)
                         return;
-                    
+
                     if (Imbuing.CanUnravelItem(User, m_Item) && Imbuing.UnravelItem(User, m_Item))
                     {
                         Effects.SendPacket(User, User.Map, new GraphicalEffect(EffectType.FixedFrom, User.Serial, Server.Serial.Zero, 0x375A, User.Location, User.Location, 1, 17, true, false));
@@ -274,7 +274,7 @@ namespace Server.Gumps
                     if (unraveled)
                     {
                         m.BeginAction(typeof(Imbuing));
-                        BaseGump.SendGump(new UnravelContainerGump((PlayerMobile)m, cont));
+                        SendGump(new UnravelContainerGump((PlayerMobile)m, cont));
                     }
                     else
                     {
@@ -296,13 +296,13 @@ namespace Server.Gumps
                     Imbuing.CanUnravelItem(User, y, true);
                 });
 
-                User.SendLocalizedMessage(1111814, String.Format("{0}\t{1}", 0, c.Items.Count)); // Unraveled: ~1_COUNT~/~2_NUM~ items
-            }            
+                User.SendLocalizedMessage(1111814, string.Format("{0}\t{1}", 0, c.Items.Count)); // Unraveled: ~1_COUNT~/~2_NUM~ items
+            }
 
             private class UnravelContainerGump : BaseGump
             {
-                private Container m_Container;
-                private List<Item> m_List;
+                private readonly Container m_Container;
+                private readonly List<Item> m_List;
 
                 public UnravelContainerGump(PlayerMobile pm, Container c)
                     : base(pm, 25, 50)
@@ -360,7 +360,7 @@ namespace Server.Gumps
                         User.SendLocalizedMessage(1072223); // An item has been placed in your backpack.
                     }
 
-                    User.SendLocalizedMessage(1111814, String.Format("{0}\t{1}", count, m_List.Count));
+                    User.SendLocalizedMessage(1111814, string.Format("{0}\t{1}", count, m_List.Count));
 
                     ColUtility.Free(m_List);
                 }
@@ -384,9 +384,9 @@ namespace Server.Gumps
                     m.SendLocalizedMessage(1079576); // You cannot imbue this item.
                     return;
                 }
-                
+
                 ImbuingContext context = Imbuing.GetContext(m);
-                var itemType = ItemPropertyInfo.GetItemType(item);
+                ItemType itemType = ItemPropertyInfo.GetItemType(item);
 
                 if (itemType == ItemType.Invalid)
                 {
@@ -414,7 +414,7 @@ namespace Server.Gumps
                     context.ImbMenu_Cat = 1;
 
                 m.CloseGump(typeof(ImbuingGump));
-                BaseGump.SendGump(new ImbueSelectGump((PlayerMobile)m, item));
+                SendGump(new ImbueSelectGump((PlayerMobile)m, item));
             }
         }
 
@@ -439,8 +439,8 @@ namespace Server.Gumps
                 {
                     m.SendLocalizedMessage(1079576); // You cannot imbue this item.
                     return;
-                }                    
-                
+                }
+
                 ImbuingContext context = Imbuing.GetContext(m);
 
                 int mod = context.Imbue_Mod;

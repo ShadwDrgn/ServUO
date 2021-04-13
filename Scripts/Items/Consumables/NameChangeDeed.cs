@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 using Server.Misc;
 using Server.Network;
@@ -11,7 +10,7 @@ namespace Server.Items
         public NameChangeDeed()
             : base(0x14F0)
         {
-            this.LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
         }
 
         public NameChangeDeed(Serial serial)
@@ -19,18 +18,12 @@ namespace Server.Items
         {
         }
 
-        public override string DefaultName
-        {
-            get
-            {
-                return "a name change deed";
-            }
-        }
+        public override string DefaultName => "a name change deed";
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -42,7 +35,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (this.RootParent == from)
+            if (RootParent == from)
             {
                 from.CloseGump(typeof(NameChangeDeedGump));
                 from.SendGump(new NameChangeDeedGump(this));
@@ -53,7 +46,7 @@ namespace Server.Items
     }
     public class NameChangeDeedGump : Gump
     {
-        Item m_Sender;
+        readonly Item m_Sender;
 
         public void AddBlackAlpha(int x, int y, int width, int height)
         {
@@ -69,24 +62,24 @@ namespace Server.Items
 
         public string Center(string text)
         {
-            return String.Format("<CENTER>{0}</CENTER>", text);
+            return string.Format("<CENTER>{0}</CENTER>", text);
         }
 
         public string Color(string text, int color)
         {
-            return String.Format("<BASEFONT COLOR=#{0:X6}>{1}</BASEFONT>", color, text);
+            return string.Format("<BASEFONT COLOR=#{0:X6}>{1}</BASEFONT>", color, text);
         }
 
         public void AddButtonLabeled(int x, int y, int buttonID, string text)
         {
             AddButton(x, y - 1, 4005, 4007, buttonID, GumpButtonType.Reply, 0);
-            AddHtml(x + 35, y, 240, 20, this.Color(text, 0xFFFFFF), false, false);
+            AddHtml(x + 35, y, 240, 20, Color(text, 0xFFFFFF), false, false);
         }
 
         public NameChangeDeedGump(Item sender)
             : base(50, 50)
         {
-            this.m_Sender = sender;
+            m_Sender = sender;
 
             Closable = true;
             Dragable = true;
@@ -94,19 +87,19 @@ namespace Server.Items
 
             AddPage(0);
 
-            this.AddBlackAlpha(10, 120, 250, 85);
-            AddHtml(10, 125, 250, 20, this.Color(this.Center("Name Change Deed"), 0xFFFFFF), false, false);
+            AddBlackAlpha(10, 120, 250, 85);
+            AddHtml(10, 125, 250, 20, Color(Center("Name Change Deed"), 0xFFFFFF), false, false);
 
             AddLabel(73, 15, 1152, "");
             AddLabel(20, 150, 0x480, "New Name:");
-            this.AddTextField(100, 150, 150, 20, 0);
+            AddTextField(100, 150, 150, 20, 0);
 
-            this.AddButtonLabeled(75, 180, 1, "Submit");
+            AddButtonLabeled(75, 180, 1, "Submit");
         }
 
         public override void OnResponse(NetState sender, RelayInfo info)
         {
-            if (this.m_Sender == null || this.m_Sender.Deleted || info.ButtonID != 1 || this.m_Sender.RootParent != sender.Mobile)
+            if (m_Sender == null || m_Sender.Deleted || info.ButtonID != 1 || m_Sender.RootParent != sender.Mobile)
                 return;
 
             Mobile m = sender.Mobile;
@@ -124,8 +117,8 @@ namespace Server.Items
             {
                 m.RawName = newName;
                 m.SendMessage("Your name has been changed!");
-                m.SendMessage(String.Format("You are now known as {0}", newName));
-                this.m_Sender.Delete();
+                m.SendMessage(string.Format("You are now known as {0}", newName));
+                m_Sender.Delete();
             }
         }
     }

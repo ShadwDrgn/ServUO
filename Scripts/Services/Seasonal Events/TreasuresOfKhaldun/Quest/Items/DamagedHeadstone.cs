@@ -1,12 +1,8 @@
-using System;
-
-using Server;
-using Server.Mobiles;
-using Server.Items;
-using Server.Network;
-using Server.Gumps;
-using Server.SkillHandlers;
 using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
+using Server.SkillHandlers;
 
 // 1158607 => brit
 // 1158608 => vesper
@@ -17,7 +13,7 @@ namespace Server.Engines.Khaldun
 {
     public class DamagedHeadstone : Item, IForensicTarget
     {
-        public override int LabelNumber { get { return 1158561; } } // damaged headstone
+        public override int LabelNumber => 1158561;  // damaged headstone
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int GumpLocalization { get; private set; }
@@ -34,7 +30,7 @@ namespace Server.Engines.Khaldun
             if (!m.Player)
                 return;
 
-            var quest = QuestHelper.GetQuest<GoingGumshoeQuest2>((PlayerMobile)m);
+            GoingGumshoeQuest2 quest = QuestHelper.GetQuest<GoingGumshoeQuest2>((PlayerMobile)m);
 
             if (quest != null)
             {
@@ -43,7 +39,7 @@ namespace Server.Engines.Khaldun
 
                 m.SendSound(quest.UpdateSound);
 
-                var gump = new Gump(50, 50);
+                Gump gump = new Gump(50, 50);
 
                 gump.AddImage(0, 0, 0x66);
                 gump.AddHtmlLocalized(47, 60, 146, 160, GumpLocalization, false, false);
@@ -88,7 +84,7 @@ namespace Server.Engines.Khaldun
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(GumpLocalization);
         }

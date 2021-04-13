@@ -1,9 +1,6 @@
-using System;
-using Server;
-using Server.Mobiles;
 using Server.Regions;
-using System.Xml;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Server.Engines.NewMagincia
 {
@@ -39,7 +36,7 @@ namespace Server.Engines.NewMagincia
                 }
             }
 
-            return MaginciaLottoSystem.IsFreeHousingZone(p, this.Map);
+            return MaginciaLottoSystem.IsFreeHousingZone(p, Map);
         }
     }
 }

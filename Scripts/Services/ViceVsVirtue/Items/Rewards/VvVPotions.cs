@@ -1,9 +1,6 @@
-using Server;
-using System;
 using Server.Items;
-using Server.Mobiles;
+using System;
 using System.Collections.Generic;
-using Server.Factions;
 
 namespace Server.Engines.VvV
 {
@@ -27,13 +24,7 @@ namespace Server.Engines.VvV
         [CommandProperty(AccessLevel.GameMaster)]
         public int Charges { get { return _Charges; } set { _Charges = value; if (_Charges <= 0) Delete(); else InvalidateProperties(); } }
 
-        public override double DefaultWeight
-        {
-            get
-            {
-                return 10 + _Charges * 1.8;
-            }
-        }
+        public override double DefaultWeight => 10 + _Charges * 1.8;
 
         [Constructable]
         public VvVPotionKeg(PotionType type)
@@ -72,7 +63,7 @@ namespace Server.Engines.VvV
         {
             if (IsChildOf(m.Backpack))
             {
-                if (!ViceVsVirtueSystem.IsVvV(m))
+                if (m.AccessLevel < AccessLevel.Counselor && !ViceVsVirtueSystem.IsVvV(m))
                 {
                     m.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                 }
@@ -116,7 +107,7 @@ namespace Server.Engines.VvV
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
-            
+
             list.Add(1155569, Charges.ToString()); // Potions: ~1_val~
             list.Add(1154937); // VvV Item
         }
@@ -145,23 +136,10 @@ namespace Server.Engines.VvV
         }
     }
 
-    public abstract class VvVPotion : Item, IFactionItem
+    public abstract class VvVPotion : Item
     {
-        #region Factions
-        private FactionItem m_FactionState;
-
-        public FactionItem FactionItemState
-        {
-            get { return m_FactionState; }
-            set
-            {
-                m_FactionState = value;
-            }
-        }
-        #endregion
-
-        public virtual TimeSpan CooldownDuration { get { return TimeSpan.MinValue; } }
-        public virtual PotionType CooldownType { get { return PotionType.None; } }
+        public virtual TimeSpan CooldownDuration => TimeSpan.MinValue;
+        public virtual PotionType CooldownType => PotionType.None;
 
         public static Dictionary<Mobile, Dictionary<PotionType, DateTime>> _Cooldown = new Dictionary<Mobile, Dictionary<PotionType, DateTime>>();
 
@@ -233,10 +211,7 @@ namespace Server.Engines.VvV
         {
             base.GetProperties(list);
 
-            if (!FactionEquipment.AddFactionProperties(this, list))
-            {
-                list.Add(1154937); // VvV Item
-            }
+            list.Add(1154937); // VvV Item
         }
 
         public bool IsInCooldown(Mobile m, ref DateTime dt)
@@ -275,6 +250,9 @@ namespace Server.Engines.VvV
 
         public void AddToCooldown(Mobile m)
         {
+            if (m.AccessLevel >= AccessLevel.Counselor)
+                return;
+
             if (!_Cooldown.ContainsKey(m))
                 _Cooldown[m] = new Dictionary<PotionType, DateTime>();
 
@@ -290,12 +268,9 @@ namespace Server.Engines.VvV
             {
                 DateTime dt = DateTime.UtcNow;
 
-                if (ViceVsVirtueSystem.Enabled && !ViceVsVirtueSystem.IsVvV(m))
+                if (m.AccessLevel < AccessLevel.Counselor && ViceVsVirtueSystem.Enabled && !ViceVsVirtueSystem.IsVvV(m))
                 {
                     m.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
-                }
-                else if (Server.Factions.Settings.Enabled && !FactionEquipment.CanUse(this, m))
-                {
                 }
                 else if (!BasePotion.HasFreeHand(m))
                 {
@@ -346,7 +321,7 @@ namespace Server.Engines.VvV
                 AddToCooldown(m);
             }
 
-            Timer.DelayCall<Mobile>(TimeSpan.FromMilliseconds(500), DrinkEffects, m);
+            Timer.DelayCall(TimeSpan.FromMilliseconds(500), DrinkEffects, m);
         }
 
         public virtual void DrinkEffects(Mobile m)
@@ -373,7 +348,7 @@ namespace Server.Engines.VvV
 
     public class AntiParalysisPotion : VvVPotion
     {
-        public override PotionType CooldownType { get { return PotionType.AntiParalysis; } }
+        public override PotionType CooldownType => PotionType.AntiParalysis;
 
         [Constructable]
         public AntiParalysisPotion()
@@ -426,8 +401,8 @@ namespace Server.Engines.VvV
 
     public class SupernovaPotion : VvVPotion
     {
-        public override TimeSpan CooldownDuration { get { return TimeSpan.FromMinutes(2); } }
-        public override PotionType CooldownType { get { return PotionType.Supernova; } }
+        public override TimeSpan CooldownDuration => TimeSpan.FromMinutes(2);
+        public override PotionType CooldownType => PotionType.Supernova;
 
         [Constructable]
         public SupernovaPotion()
@@ -437,8 +412,8 @@ namespace Server.Engines.VvV
 
         public override void Use(Mobile m)
         {
-            Effects.SendMovingEffect(m, new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z + 25), m.Map), this.ItemID, 3, 0, false, false, this.Hue, 0);
-            
+            Effects.SendMovingEffect(m, new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z + 25), m.Map), ItemID, 3, 0, false, false, Hue, 0);
+
             int count = 5;
 
             Timer.DelayCall(TimeSpan.FromSeconds(1), () =>
@@ -449,9 +424,9 @@ namespace Server.Engines.VvV
                     {
                         Timer.DelayCall(TimeSpan.FromMilliseconds(i * 170), index =>
                             {
-                                Server.Misc.Geometry.Circle2D(m.Location, m.Map, index, (pnt, map) =>
+                                Misc.Geometry.Circle2D(m.Location, m.Map, index, (pnt, map) =>
                                 {
-                                    Effects.SendLocationEffect(pnt, map, 0x3709, 30, 10, 0, 5);
+                                    Effects.SendLocationEffect(pnt, map, 0x3709, 30, 10, 1458, 5);
                                 });
                             }, i);
                     }
@@ -463,7 +438,7 @@ namespace Server.Engines.VvV
 
                     foreach (Mobile mob in eable)
                     {
-                        if (mob != m && Server.Spells.SpellHelper.ValidIndirectTarget(m, mob) && m.CanBeHarmful(mob, false))
+                        if (mob != m && Spells.SpellHelper.ValidIndirectTarget(m, mob) && m.CanBeHarmful(mob, false))
                         {
                             m.DoHarmful(mob);
                             AOS.Damage(mob, m, Utility.RandomMinMax(40, 60), 0, 100, 0, 0, 0);
@@ -502,8 +477,8 @@ namespace Server.Engines.VvV
 
     public class StatLossRemovalPotion : VvVPotion
     {
-        public override TimeSpan CooldownDuration { get { return TimeSpan.FromMinutes(20); } }
-        public override PotionType CooldownType { get { return PotionType.StatLossRemoval; } }
+        public override TimeSpan CooldownDuration => TimeSpan.FromMinutes(20);
+        public override PotionType CooldownType => PotionType.StatLossRemoval;
 
         [Constructable]
         public StatLossRemovalPotion()
@@ -513,7 +488,7 @@ namespace Server.Engines.VvV
 
         public override bool CheckUse(Mobile m)
         {
-            if (!Server.Factions.Faction.InSkillLoss(m))
+            if (!ViceVsVirtueSystem.InSkillLoss(m))
             {
                 m.SendLocalizedMessage(1155542); // You are not currently under the effects of stat loss.
                 return false;
@@ -525,7 +500,7 @@ namespace Server.Engines.VvV
         public override void Use(Mobile m)
         {
             m.SendLocalizedMessage(1155540); // You feel the effects of your stat loss fade.
-            Server.Factions.Faction.ClearSkillLoss(m);
+            ViceVsVirtueSystem.ClearSkillLoss(m);
 
             Consume();
         }
@@ -557,8 +532,8 @@ namespace Server.Engines.VvV
 
     public class GreaterStaminaPotion : VvVPotion
     {
-        public override TimeSpan CooldownDuration { get { return TimeSpan.FromSeconds(10); } }
-        public override PotionType CooldownType { get { return PotionType.GreaterStamina; } }
+        public override TimeSpan CooldownDuration => TimeSpan.FromSeconds(10);
+        public override PotionType CooldownType => PotionType.GreaterStamina;
 
         [Constructable]
         public GreaterStaminaPotion()

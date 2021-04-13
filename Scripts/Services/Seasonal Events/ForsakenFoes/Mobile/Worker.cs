@@ -1,8 +1,7 @@
-using System;
-using Server.Items;
-using Server.Gumps;
-using Server.Mobiles;
 using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
 using System.Collections.Generic;
 using System.IO;
 
@@ -25,7 +24,7 @@ namespace Server.Engines.Fellowship
     {
         public static string FilePath = Path.Combine("Saves/Misc", "FellowshipChain.bin");
         public static Dictionary<Mobile, FellowshipChain> FellowshipChainList = new Dictionary<Mobile, FellowshipChain>();
-        
+
         public static void Configure()
         {
             EventSink.WorldSave += OnSave;
@@ -38,11 +37,11 @@ namespace Server.Engines.Fellowship
                 FilePath,
                 writer =>
                 {
-                    writer.Write((int)0);
+                    writer.Write(0);
 
                     writer.Write(FellowshipChainList.Count);
 
-                    foreach (var chain in FellowshipChainList)
+                    foreach (KeyValuePair<Mobile, FellowshipChain> chain in FellowshipChainList)
                     {
                         writer.Write(chain.Key);
                         writer.Write((int)chain.Value);
@@ -125,7 +124,18 @@ namespace Server.Engines.Fellowship
 
                     if (FellowshipChainList[from] == FellowshipChain.Eight)
                     {
-                        from.AddToBackpack(new FellowshipMedallion());
+                        Item medallion;
+
+                        if (from.Race == Race.Gargoyle)
+                        {
+                            medallion = new GargishFellowshipMedallion();
+                        }
+                        else
+                        {
+                            medallion = new FellowshipMedallion();
+                        }
+
+                        from.AddToBackpack(medallion);
                     }
                 }
                 else

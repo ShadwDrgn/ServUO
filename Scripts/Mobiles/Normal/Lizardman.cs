@@ -1,4 +1,3 @@
-using System;
 using Server.Misc;
 
 namespace Server.Mobiles
@@ -35,8 +34,6 @@ namespace Server.Mobiles
 
             Fame = 1500;
             Karma = -1500;
-
-            VirtualArmor = 28;
         }
 
         public Lizardman(Serial serial)
@@ -44,48 +41,12 @@ namespace Server.Mobiles
         {
         }
 
-		public override int TreasureMapLevel
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override InhumanSpeech SpeechType
-        {
-            get
-            {
-                return InhumanSpeech.Lizardman;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 12;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Spined;
-            }
-        }
+        public override int TreasureMapLevel => 1;
+        public override InhumanSpeech SpeechType => InhumanSpeech.Lizardman;
+        public override bool CanRummageCorpses => true;
+        public override int Meat => 1;
+        public override int Hides => 12;
+        public override HideType HideType => HideType.Spined;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
@@ -94,7 +55,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

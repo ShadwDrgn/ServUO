@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class Sapphire : Item, IGem
@@ -14,8 +12,8 @@ namespace Server.Items
         public Sapphire(int amount)
             : base(0xF11)
         {
-            this.Stackable = true;
-            this.Amount = amount;
+            Stackable = true;
+            Amount = amount;
         }
 
         public Sapphire(Serial serial)
@@ -23,18 +21,12 @@ namespace Server.Items
         {
         }
 
-        public override double DefaultWeight
-        {
-            get
-            {
-                return 0.1;
-            }
-        }
+        public override double DefaultWeight => 0.1;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)

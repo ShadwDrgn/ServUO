@@ -1,25 +1,26 @@
+using Server.ContextMenus;
+using Server.Gumps;
+using Server.Multis;
+using Server.Network;
 using System;
 using System.Collections.Generic;
-using Server.Multis;
-using Server.ContextMenus;
-using Server.Network;
 
 namespace Server.Items
 {
     [Furniture]
-    [FlipableAttribute(0x9F1C, 0x9F1D)]
-    public class JewelryBox : Container, IDyable
+    [Flipable(0x9F1C, 0x9F1D)]
+    public class JewelryBox : Container, IDyable, ISecurable
     {
-		public override int LabelNumber { get { return 1157694; } } // Jewelry Box
+        public override int LabelNumber => 1157694;  // Jewelry Box
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SecureLevel Level { get; set; }
 
         public JewelryBoxFilter Filter { get; set; }
 
-        public override int DefaultMaxItems { get { return 500; } }
+        public override int DefaultMaxItems => 500;
 
-        public bool IsFull { get { return DefaultMaxItems <= Items.Count; } }
+        public bool IsFull => DefaultMaxItems <= Items.Count;
 
         [Constructable]
         public JewelryBox()
@@ -27,7 +28,7 @@ namespace Server.Items
         {
             Weight = 10.0;
             Filter = new JewelryBoxFilter();
-            Level = SecureLevel.CoOwners;            
+            Level = SecureLevel.CoOwners;
         }
 
         public bool Dye(Mobile from, DyeTub sender)
@@ -98,7 +99,7 @@ namespace Server.Items
         }
 
 
-        private Type[] _AcceptList =
+        private readonly Type[] _AcceptList =
         {
             typeof(BaseRing), typeof(BaseBracelet), typeof(BaseNecklace), typeof(BaseEarrings), typeof(BaseTalisman)
         };
@@ -132,7 +133,7 @@ namespace Server.Items
             }
         }
 
-        public override bool DisplaysContent { get { return false; } }
+        public override bool DisplaysContent => false;
 
         public override int GetTotal(TotalType type)
         {
@@ -155,7 +156,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write((int)Level);
             Filter.Serialize(writer);

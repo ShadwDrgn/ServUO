@@ -1,9 +1,6 @@
-using System;
-using Server.Network;
-
 namespace Server.Items
 {
-    [FlipableAttribute(0x1766, 0x1768)]
+    [Flipable(0x1766, 0x1768)]
     public class Cloth : Item, IScissorable, IDyable, ICommodity
     {
         [Constructable]
@@ -16,8 +13,8 @@ namespace Server.Items
         public Cloth(int amount)
             : base(0x1766)
         {
-            this.Stackable = true;
-            this.Amount = amount;
+            Stackable = true;
+            Amount = amount;
         }
 
         public Cloth(Serial serial)
@@ -25,33 +22,15 @@ namespace Server.Items
         {
         }
 
-        public override double DefaultWeight
-        {
-            get
-            {
-                return 0.1;
-            }
-        }
-        TextDefinition ICommodity.Description
-        {
-            get
-            {
-                return this.LabelNumber;
-            }
-        }
-        bool ICommodity.IsDeedable
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override double DefaultWeight => 0.1;
+        TextDefinition ICommodity.Description => LabelNumber;
+        bool ICommodity.IsDeedable => true;
         public bool Dye(Mobile from, DyeTub sender)
         {
-            if (this.Deleted)
+            if (Deleted)
                 return false;
 
-            this.Hue = sender.DyedHue;
+            Hue = sender.DyedHue;
 
             return true;
         }
@@ -60,7 +39,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -70,16 +49,9 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            int number = (this.Amount == 1) ? 1049124 : 1049123;
-
-            from.Send(new MessageLocalized(this.Serial, this.ItemID, MessageType.Regular, 0x3B2, 3, number, "", this.Amount.ToString()));
-        }
-
         public bool Scissor(Mobile from, Scissors scissors)
         {
-            if (this.Deleted || !from.CanSee(this))
+            if (Deleted || !from.CanSee(this))
                 return false;
 
             base.ScissorHelper(from, new Bandage(), 1);
@@ -90,7 +62,7 @@ namespace Server.Items
 
     public class CutUpCloth : Item
     {
-        public override int LabelNumber { get { return 1044458; } } // cut-up cloth
+        public override int LabelNumber => 1044458;  // cut-up cloth
 
         [Constructable]
         public CutUpCloth()
@@ -107,7 +79,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -133,7 +105,7 @@ namespace Server.Items
 
     public class CombineCloth : Item
     {
-        public override int LabelNumber { get { return 1044459; } } // combine cloth
+        public override int LabelNumber => 1044459;  // combine cloth
 
         [Constructable]
         public CombineCloth()
@@ -150,7 +122,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -210,9 +182,11 @@ namespace Server.Items
 
             for (int i = 0; i < hues.Length; i++)
             {
-                Cloth cloth = new Cloth();
-                cloth.Hue = hues[i];
-                cloth.Amount = amounts[i];
+                Cloth cloth = new Cloth
+                {
+                    Hue = hues[i],
+                    Amount = amounts[i]
+                };
 
                 if (cloth.Amount > 0)
                     backpack.DropItem(cloth);

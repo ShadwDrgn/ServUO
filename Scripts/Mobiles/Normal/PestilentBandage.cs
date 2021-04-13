@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -6,13 +5,7 @@ namespace Server.Mobiles
     [CorpseName("a pestilent bandage corpse")]
     public class PestilentBandage : BaseCreature
     {
-        // Neither Stratics nor UOGuide have much description 
-        // beyond being a "Grey Mummy". BodyValue, Sound and 
-        // Hue are all guessed until they can be verified.
-        // Loot and Fame/Karma are also guesses at this point.
-        //
-        // They also apparently have a Poison Attack, which I've stolen from Yamandons.
-        public override double HealChance { get { return 1.0; } }
+        public override double HealChance => 1.0;
 
         [Constructable]
         public PestilentBandage()
@@ -20,8 +13,8 @@ namespace Server.Mobiles
         {
             Name = "a pestilent bandage";
             Body = 154;
-            Hue = 0x515; 
-            BaseSoundID = 471; 
+            Hue = 0x515;
+            BaseSoundID = 471;
 
             SetStr(691, 740);
             SetDex(141, 180);
@@ -50,10 +43,6 @@ namespace Server.Mobiles
             Fame = 20000;
             Karma = -20000;
 
-            // VirtualArmor = 28; // Don't know what it should be
-
-            PackItem(new Bandage(5));  // How many?
-
             SetAreaEffect(AreaEffect.PoisonBreath);
         }
 
@@ -62,22 +51,17 @@ namespace Server.Mobiles
         {
         }
 
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
+        public override Poison HitPoison => Poison.Lethal;
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Rich);  // Need to verify
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.LootItem<Bandage>(5, true));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

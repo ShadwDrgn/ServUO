@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Engines.Quests.Doom
 {
@@ -33,13 +33,7 @@ namespace Server.Engines.Quests.Doom
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1050018;
-            }
-        }// bell of the dead
+        public override int LabelNumber => 1050018;// bell of the dead
         [CommandProperty(AccessLevel.GameMaster, AccessLevel.Administrator)]
         public Chyloth Chyloth
         {
@@ -82,7 +76,7 @@ namespace Server.Engines.Quests.Doom
             if (Instances == null)
                 return;
 
-            var bell = Instances.FirstOrDefault(x => x.Dragon == dragon);
+            BellOfTheDead bell = Instances.FirstOrDefault(x => x.Dragon == dragon);
 
             if (bell != null)
             {
@@ -141,9 +135,10 @@ namespace Server.Engines.Quests.Doom
                 Effects.SendLocationParticles(EffectItem.Create(loc, Map, EffectItem.DefaultDuration), 0x3728, 10, 10, 0, 0, 2023, 0);
                 Effects.PlaySound(loc, Map, 0x1FE);
 
-                m_Chyloth = new Chyloth();
-
-                m_Chyloth.Direction = (Direction)(7 & (4 + (int)from.GetDirectionTo(loc)));
+                m_Chyloth = new Chyloth
+                {
+                    Direction = (Direction)(7 & (4 + (int)from.GetDirectionTo(loc)))
+                };
                 m_Chyloth.MoveToWorld(loc, Map);
 
                 m_Chyloth.Bell = this;
@@ -157,10 +152,10 @@ namespace Server.Engines.Quests.Doom
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
-            writer.Write((Mobile)m_Chyloth);
-            writer.Write((Mobile)m_Dragon);
+            writer.Write(m_Chyloth);
+            writer.Write(m_Dragon);
         }
 
         public override void Deserialize(GenericReader reader)

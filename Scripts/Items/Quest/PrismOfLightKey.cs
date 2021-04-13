@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class PrismOfLightKey : MasterKey
@@ -14,18 +12,12 @@ namespace Server.Items
         {
         }
 
-        public override int Lifespan
-        {
-            get
-            {
-                return 480;
-            }
-        }
+        public override int Lifespan => 480;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -39,7 +31,7 @@ namespace Server.Items
         {
             if (from.Region != null && from.Region.IsPartOf("Prism of Light"))
                 return base.CanOfferConfirmation(from);
-				
+
             return false;
         }
     }

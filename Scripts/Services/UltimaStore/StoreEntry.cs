@@ -1,5 +1,5 @@
-using System;
 using Server.Items;
+using System;
 
 namespace Server.Engines.UOStore
 {
@@ -15,7 +15,7 @@ namespace Server.Engines.UOStore
         public StoreCategory Category { get; private set; }
         public Func<Mobile, StoreEntry, Item> Constructor { get; private set; }
 
-        public int Cost { get { return (int)Math.Ceiling(Price * Configuration.CostMultiplier); } }
+        public int Cost => (int)Math.Ceiling(Price * Configuration.CostMultiplier);
 
         public StoreEntry(Type itemType, TextDefinition name, int tooltip, int itemID, int gumpID, int hue, int cost, StoreCategory cat, Func<Mobile, StoreEntry, Item> constructor = null)
             : this(itemType, new[] { name }, tooltip, itemID, gumpID, hue, cost, cat, constructor)
@@ -69,7 +69,7 @@ namespace Server.Engines.UOStore
                 }
                 else if (item.LabelNumber > 0 || item.Name != null)
                 {
-                    var name = item.LabelNumber > 0 ? ("#" + item.LabelNumber) : item.Name;
+                    string name = item.LabelNumber > 0 ? ("#" + item.LabelNumber) : item.Name;
 
                     // Your purchase of ~1_ITEM~ has been placed in your backpack.
                     m.SendLocalizedMessage(1156844, name);
@@ -88,8 +88,8 @@ namespace Server.Engines.UOStore
                 return true;
             }
 
-            Utility.WriteConsoleColor(ConsoleColor.Red, String.Format("[Ultima Store Warning]: {0} failed to construct.", ItemType.Name));
-            
+            Utility.WriteConsoleColor(ConsoleColor.Red, string.Format("[Ultima Store Warning]: {0} failed to construct.", ItemType.Name));
+
             return false;
         }
     }

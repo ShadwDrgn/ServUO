@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [Furniture]
@@ -10,7 +8,7 @@ namespace Server.Items
         public FancyWoodenChairCushion()
             : base(0xB4F)
         {
-            this.Weight = 20.0;
+            Weight = 20.0;
         }
 
         public FancyWoodenChairCushion(Serial serial)
@@ -21,18 +19,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (this.Weight == 6.0)
-                this.Weight = 20.0;
         }
     }
 
@@ -44,7 +37,7 @@ namespace Server.Items
         public WoodenChairCushion()
             : base(0xB53)
         {
-            this.Weight = 20.0;
+            Weight = 20.0;
         }
 
         public WoodenChairCushion(Serial serial)
@@ -55,18 +48,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (this.Weight == 6.0)
-                this.Weight = 20.0;
         }
     }
 
@@ -78,7 +66,7 @@ namespace Server.Items
         public WoodenChair()
             : base(0xB57)
         {
-            this.Weight = 20.0;
+            Weight = 20.0;
         }
 
         public WoodenChair(Serial serial)
@@ -89,18 +77,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (this.Weight == 6.0)
-                this.Weight = 20.0;
         }
     }
 
@@ -112,7 +95,7 @@ namespace Server.Items
         public BambooChair()
             : base(0xB5B)
         {
-            this.Weight = 20.0;
+            Weight = 20.0;
         }
 
         public BambooChair(Serial serial)
@@ -123,18 +106,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (this.Weight == 6.0)
-                this.Weight = 20.0;
         }
     }
 
@@ -147,7 +125,7 @@ namespace Server.Items
         public StoneChair()
             : base(0x1218)
         {
-            this.Weight = 1.0;
+            Weight = 1.0;
         }
 
         public StoneChair(Serial serial)
@@ -158,14 +136,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -179,7 +155,7 @@ namespace Server.Items
         public OrnateElvenChair()
             : base(0x2DE3)
         {
-            this.Weight = 1.0;
+            Weight = 1.0;
         }
 
         public OrnateElvenChair(Serial serial)
@@ -190,14 +166,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadEncodedInt();
         }
     }
@@ -221,14 +195,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadEncodedInt();
         }
     }
@@ -252,14 +224,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadEncodedInt();
         }
     }
@@ -268,7 +238,7 @@ namespace Server.Items
     [Flipable(0x4023, 0x4024)]
     public class TerMurStyleChair : CraftableFurniture
     {
-        public override int LabelNumber { get { return 1095291; } } // Ter-Mur style chair
+        public override int LabelNumber => 1095291;  // Ter-Mur style chair
 
         [Constructable]
         public TerMurStyleChair()
@@ -285,7 +255,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

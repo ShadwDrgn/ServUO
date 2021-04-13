@@ -1,4 +1,3 @@
-using System;
 using System.Xml;
 
 namespace Server.Regions
@@ -13,21 +12,15 @@ namespace Server.Regions
         public NoHousingRegion(XmlElement xml, Map map, Region parent)
             : base(xml, map, parent)
         {
-            ReadBoolean(xml["smartNoHousing"], "active", ref this.m_SmartChecking, false);
+            ReadBoolean(xml["smartNoHousing"], "active", ref m_SmartChecking, false);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool SmartChecking
-        {
-            get
-            {
-                return this.m_SmartChecking;
-            }
-        }
+        public bool SmartChecking => m_SmartChecking;
 
         public override bool AllowHousing(Mobile from, Point3D p)
         {
-            return this.m_SmartChecking;
+            return m_SmartChecking;
         }
     }
 }

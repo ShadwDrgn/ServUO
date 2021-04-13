@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -36,13 +35,9 @@ namespace Server.Mobiles
             Fame = 600;
             Karma = -600;
 
-            VirtualArmor = 16;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 59.1;
-
-            PackItem(new SpidersSilk(5));
         }
 
         public GiantSpider(Serial serial)
@@ -50,54 +45,26 @@ namespace Server.Mobiles
         {
         }
 
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Meat;
-            }
-        }
-        public override PackInstinct PackInstinct
-        {
-            get
-            {
-                return PackInstinct.Arachnid;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Regular;
-            }
-        }
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Regular;
-            }
-        }
+        public override FoodType FavoriteFood => FoodType.Meat;
+        public override PackInstinct PackInstinct => PackInstinct.Arachnid;
+        public override Poison PoisonImmune => Poison.Regular;
+        public override Poison HitPoison => Poison.Regular;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
+            AddLoot(LootPack.LootItem<SpidersSilk>(5, true));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-
-            if (version == 0 && (AbilityProfile == null || AbilityProfile.MagicalAbility == MagicalAbility.None))
-            {
-                SetMagicalAbility(MagicalAbility.Poisoning);
-            }
         }
     }
 }

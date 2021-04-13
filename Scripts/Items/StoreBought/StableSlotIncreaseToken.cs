@@ -1,9 +1,8 @@
-﻿using System;
-using Server;
-using Server.Mobiles;
-using Server.Accounting;
+﻿using Server.Accounting;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Network;
+using System;
 
 namespace Server.Items
 {
@@ -12,10 +11,10 @@ namespace Server.Items
         public const int SlotIncrease = 3;
         public const int MaxPerChar = 21;
 
-        public override int LabelNumber { get { return 1070997; } } // A promotional token
-        public TextDefinition ItemName { get { return 1157618; } } // your Stable Slot Increase (Account-Bound)
+        public override int LabelNumber => 1070997;  // A promotional token
+        public TextDefinition ItemName => 1157618;  // your Stable Slot Increase (Account-Bound)
 
-        public Type GumpType { get { return typeof(StableSlotIncreaseToken.InternalGump); } }
+        public Type GumpType => typeof(InternalGump);
 
         [CommandProperty(AccessLevel.GameMaster)]
         public string Account { get; set; }
@@ -87,7 +86,7 @@ namespace Server.Items
 
         private class InternalGump : Gump
         {
-            private StableSlotIncreaseToken m_Token;
+            private readonly StableSlotIncreaseToken m_Token;
 
             public InternalGump(StableSlotIncreaseToken token)
                 : base(10, 10)

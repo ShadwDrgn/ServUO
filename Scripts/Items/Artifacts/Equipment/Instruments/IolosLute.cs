@@ -1,10 +1,10 @@
-using System;
-
 namespace Server.Items
 {
     public class IolosLute : Lute
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override int LabelNumber => 1063479; // Iolo's Lute
+        public override bool IsArtifact => true;
+
         [Constructable]
         public IolosLute()
         {
@@ -17,40 +17,20 @@ namespace Server.Items
             : base(serial)
         {
         }
+        
+        public override int InitMinUses => 1600;
+        public override int InitMaxUses => 1600;
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1063479;
-            }
-        }
-        public override int InitMinUses
-        {
-            get
-            {
-                return 1600;
-            }
-        }
-        public override int InitMaxUses
-        {
-            get
-            {
-                return 1600;
-            }
-        }
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 }

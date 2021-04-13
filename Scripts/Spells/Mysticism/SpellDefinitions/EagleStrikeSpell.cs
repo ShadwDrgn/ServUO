@@ -1,19 +1,15 @@
-using System;
-using Server;
-using Server.Items;
-using Server.Mobiles;
-using Server.Spells;
 using Server.Targeting;
+using System;
 
 namespace Server.Spells.Mysticism
 {
     public class EagleStrikeSpell : MysticSpell
     {
-        public override SpellCircle Circle { get { return SpellCircle.Third; } }
-        public override bool DelayedDamage { get { return true; } }
-        public override bool DelayedDamageStacking { get { return false; } }
+        public override SpellCircle Circle => SpellCircle.Third;
+        public override bool DelayedDamage => true;
+        public override bool DelayedDamageStacking => false;
 
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Eagle Strike", "Kal Por Xen",
                 230,
                 9022,
@@ -45,13 +41,13 @@ namespace Server.Spells.Mysticism
 
                 SpellHelper.Turn(Caster, target);
 
-                if (Core.SA && HasDelayContext(target))
+                if (HasDelayContext(target))
                 {
                     DoHurtFizzle();
                     return;
                 }
 
-                if (SpellHelper.CheckReflect((int)Circle, ref source, ref target))
+                if (SpellHelper.CheckReflect(this, ref source, ref target))
                 {
                     Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
                     {
@@ -68,7 +64,7 @@ namespace Server.Spells.Mysticism
                     Caster.PlaySound(0x64D);
                 });
 
-                SpellHelper.Damage(this, target, (int)GetNewAosDamage(19, 1, 5, target), 0, 0, 0, 0, 100);
+                SpellHelper.Damage(this, target, GetNewAosDamage(19, 1, 5, target), 0, 0, 0, 0, 100);
             }
 
             FinishSequence();

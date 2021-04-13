@@ -12,7 +12,7 @@ namespace Server.Network
 
 		private byte[] m_Buffer;
 
-		public int Length { get { return m_Size; } }
+		public int Length => m_Size;
 
 		public ByteQueue()
 		{
@@ -86,7 +86,7 @@ namespace Server.Network
 			}
 			else
 			{
-				int rightLength = (m_Buffer.Length - m_Head);
+				var rightLength = m_Buffer.Length - m_Head;
 
 				if (rightLength >= size)
 				{
@@ -120,7 +120,7 @@ namespace Server.Network
 
 			if (m_Head < m_Tail)
 			{
-				int rightLength = (m_Buffer.Length - m_Tail);
+				var rightLength = m_Buffer.Length - m_Tail;
 
 				if (rightLength >= size)
 				{

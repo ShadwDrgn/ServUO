@@ -1,4 +1,3 @@
-using System;
 using Server.Gumps;
 using Server.Mobiles;
 using System.Linq;
@@ -65,7 +64,7 @@ namespace Server.Items
             {
                 m_Type = value;
 
-                var info = m_Table.FirstOrDefault(x => x.Type == m_Type);
+                HairDyeInfo info = m_Table.FirstOrDefault(x => x.Type == m_Type);
 
                 if (info != null)
                 {
@@ -80,7 +79,7 @@ namespace Server.Items
             }
         }
 
-        public override int LabelNumber { get { return 1071387; } } // Natural Hair Dye
+        public override int LabelNumber => 1071387;  // Natural Hair Dye
 
         public override void GetProperties(ObjectPropertyList list)
         {
@@ -106,7 +105,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.WriteEncodedInt((int)m_Type);
         }
@@ -120,8 +119,8 @@ namespace Server.Items
             Type = (HairDyeType)reader.ReadEncodedInt();
         }
 
-        public static HairDyeInfo[] Table { get { return m_Table; } }
-        private static HairDyeInfo[] m_Table =
+        public static HairDyeInfo[] Table => m_Table;
+        private static readonly HairDyeInfo[] m_Table =
         {
             // Hue, Label
             new HairDyeInfo( HairDyeType.None, 0, -1 ),
@@ -189,18 +188,18 @@ namespace Server.Items
             {
                 if (!Dye.Deleted && Dye.IsChildOf(User.Backpack))
                 {
-					if (User.HairItemID !=0)
-					{
-						User.HairHue = Hue;
+                    if (User.HairItemID != 0)
+                    {
+                        User.HairHue = Hue;
 
-						User.SendLocalizedMessage(501199);  // You dye your hair
-						Dye.Delete();
-						User.PlaySound(0x4E);
-					}
-					else
-					{
-						User.SendLocalizedMessage(502623); // You have no hair to dye and you cannot use this.
-					}
+                        User.SendLocalizedMessage(501199);  // You dye your hair
+                        Dye.Delete();
+                        User.PlaySound(0x4E);
+                    }
+                    else
+                    {
+                        User.SendLocalizedMessage(502623); // You have no hair to dye and you cannot use this.
+                    }
                 }
                 else
                 {

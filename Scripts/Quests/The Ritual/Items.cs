@@ -1,17 +1,15 @@
-using System;
-
-using Server.Mobiles;
-using Server.Engines.Quests;
-using Server.Spells;
 using Server.Items;
+using Server.Mobiles;
+using Server.Spells;
+using System;
 
 namespace Server.Engines.Quests.RitualQuest
 {
     public class DreamSerpentScale : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1151167; } } // Dream Serpent Scales
-        public override int Lifespan { get { return 86400; } }
-        public override bool HiddenQuestItemHue { get { return true; } }
+        public override int LabelNumber => 1151167;  // Dream Serpent Scales
+        public override int Lifespan => 86400;
+        public override bool HiddenQuestItemHue => true;
 
         public DreamSerpentScale()
             : base(0x1F13)
@@ -55,8 +53,8 @@ namespace Server.Engines.Quests.RitualQuest
 
     public class DreamSerpentCharm : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1151187; } } // Dream Serpent Charm
-        public override int Lifespan { get { return 86400; } }
+        public override int LabelNumber => 1151187;  // Dream Serpent Charm
+        public override int Lifespan => 86400;
 
         public DreamSerpentCharm()
             : base(6463)
@@ -75,11 +73,11 @@ namespace Server.Engines.Quests.RitualQuest
         {
             if (_NextUse > DateTime.UtcNow)
             {
-                m.SendLocalizedMessage(1072529, String.Format("{0}\t{1}", ((int)(_NextUse - DateTime.UtcNow).TotalSeconds).ToString(), "seconds"));
+                m.SendLocalizedMessage(1072529, string.Format("{0}\t{1}", ((int)(_NextUse - DateTime.UtcNow).TotalSeconds).ToString(), "seconds"));
             }
             else if (m is PlayerMobile)
             {
-                var quest = QuestHelper.GetQuest<CatchMeIfYouCanQuest>((PlayerMobile)m);
+                CatchMeIfYouCanQuest quest = QuestHelper.GetQuest<CatchMeIfYouCanQuest>((PlayerMobile)m);
 
                 if (quest != null && SpellHelper.CheckCanTravel(m) && _Timer == null && WarpBounds.Contains(m.Location))
                 {
@@ -123,7 +121,7 @@ namespace Server.Engines.Quests.RitualQuest
 
             if (!completeQuest && m is PlayerMobile)
             {
-                var quest = QuestHelper.GetQuest<CatchMeIfYouCanQuest>((PlayerMobile)m);
+                CatchMeIfYouCanQuest quest = QuestHelper.GetQuest<CatchMeIfYouCanQuest>((PlayerMobile)m);
 
                 quest.Objectives[0].CurProgress = 0;
             }
@@ -148,9 +146,9 @@ namespace Server.Engines.Quests.RitualQuest
 
     public class SoulbinderTear : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1151170; } } // Soulbinder's Tears
-        public override int Lifespan { get { return 86400; } }
-        public override bool HiddenQuestItemHue { get { return true; } }
+        public override int LabelNumber => 1151170;  // Soulbinder's Tears
+        public override int Lifespan => 86400;
+        public override bool HiddenQuestItemHue => true;
 
         public SoulbinderTear()
             : base(0xE2A)
@@ -194,9 +192,9 @@ namespace Server.Engines.Quests.RitualQuest
 
     public class PristineCrystalLotus : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1151169; } } // Pristine Crystal Lotus
-        public override int Lifespan { get { return 86400; } }
-        public override bool HiddenQuestItemHue { get { return true; } }
+        public override int LabelNumber => 1151169;  // Pristine Crystal Lotus
+        public override int Lifespan => 86400;
+        public override bool HiddenQuestItemHue => true;
 
         public PristineCrystalLotus()
             : base(0x283B)
@@ -248,11 +246,11 @@ namespace Server.Engines.Quests.RitualQuest
             }
         }
 
-        private static int[] m_Contents = new int[42];
+        private static readonly int[] m_Contents = new int[42];
 
-        public override object Title { get { return 1151164; } } // Chronicle of the Gargoyle Queen Vol. II
-        public override object Author { get { return "Queen Zhah"; } }
-        public override int[] Contents { get { return m_Contents; } }
+        public override object Title => 1151164;  // Chronicle of the Gargoyle Queen Vol. II
+        public override object Author => "Queen Zhah";
+        public override int[] Contents => m_Contents;
 
         [Constructable]
         public ChronicleOfTheGargoyleQueen2()
@@ -268,7 +266,7 @@ namespace Server.Engines.Quests.RitualQuest
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -280,7 +278,7 @@ namespace Server.Engines.Quests.RitualQuest
 
     public class TerMurSnowglobe : Item
     {
-        public override int LabelNumber { get { return 1151172; } } // Ter Mur Snowglobe
+        public override int LabelNumber => 1151172;  // Ter Mur Snowglobe
 
         public TerMurSnowglobe()
             : base(0xE2F)

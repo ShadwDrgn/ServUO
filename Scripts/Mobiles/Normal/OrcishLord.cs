@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Misc;
 
@@ -11,63 +10,33 @@ namespace Server.Mobiles
         public OrcishLord()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            this.Name = "an orcish lord";
-            this.Body = 138;
-            this.BaseSoundID = 0x45A;
+            Name = "an orcish lord";
+            Body = 138;
+            BaseSoundID = 0x45A;
 
-            this.SetStr(147, 215);
-            this.SetDex(91, 115);
-            this.SetInt(61, 85);
+            SetStr(147, 215);
+            SetDex(91, 115);
+            SetInt(61, 85);
 
-            this.SetHits(95, 123);
+            SetHits(95, 123);
 
-            this.SetDamage(4, 14);
+            SetDamage(4, 14);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 25, 35);
-            this.SetResistance(ResistanceType.Fire, 30, 40);
-            this.SetResistance(ResistanceType.Cold, 20, 30);
-            this.SetResistance(ResistanceType.Poison, 30, 40);
-            this.SetResistance(ResistanceType.Energy, 30, 40);
+            SetResistance(ResistanceType.Physical, 25, 35);
+            SetResistance(ResistanceType.Fire, 30, 40);
+            SetResistance(ResistanceType.Cold, 20, 30);
+            SetResistance(ResistanceType.Poison, 30, 40);
+            SetResistance(ResistanceType.Energy, 30, 40);
 
-            this.SetSkill(SkillName.MagicResist, 70.1, 85.0);
-            this.SetSkill(SkillName.Swords, 60.1, 85.0);
-            this.SetSkill(SkillName.Tactics, 75.1, 90.0);
-            this.SetSkill(SkillName.Wrestling, 60.1, 85.0);
+            SetSkill(SkillName.MagicResist, 70.1, 85.0);
+            SetSkill(SkillName.Swords, 60.1, 85.0);
+            SetSkill(SkillName.Tactics, 75.1, 90.0);
+            SetSkill(SkillName.Wrestling, 60.1, 85.0);
 
-            this.Fame = 2500;
-            this.Karma = -2500;
-
-            switch ( Utility.Random(5) )
-            {
-                case 0:
-                    this.PackItem(new Lockpick());
-                    break;
-                case 1:
-                    this.PackItem(new MortarPestle());
-                    break;
-                case 2:
-                    this.PackItem(new Bottle());
-                    break;
-                case 3:
-                    this.PackItem(new RawRibs());
-                    break;
-                case 4:
-                    this.PackItem(new Shovel());
-                    break;
-            }
-
-            this.PackItem(new RingmailChest());
-
-            if (0.3 > Utility.RandomDouble())
-                this.PackItem(Loot.RandomPossibleReagent());
-
-            if (0.2 > Utility.RandomDouble())
-                this.PackItem(new BolaBall());
-
-            if (0.5 > Utility.RandomDouble())
-                PackItem(new Yeast());
+            Fame = 2500;
+            Karma = -2500;
         }
 
         public OrcishLord(Serial serial)
@@ -75,49 +44,22 @@ namespace Server.Mobiles
         {
         }
 
-        public override InhumanSpeech SpeechType
-        {
-            get
-            {
-                return InhumanSpeech.Orc;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override InhumanSpeech SpeechType => InhumanSpeech.Orc;
+        public override bool CanRummageCorpses => true;
+        public override int TreasureMapLevel => 1;
+        public override int Meat => 1;
 
-        public override TribeType Tribe { get { return TribeType.Orc; } }
+        public override TribeType Tribe => TribeType.Orc;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.SavagesAndOrcs;
-            }
-        }
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.Meager);
-            this.AddLoot(LootPack.Average);
-            // TODO: evil orc helm
+            AddLoot(LootPack.Meager);
+            AddLoot(LootPack.Average);
+
+            AddLoot(LootPack.LootItem<RingmailChest>());
+            AddLoot(LootPack.MageryRegs, 30.0);
+            AddLoot(LootPack.LootItem<BolaBall>(20.0));
+            AddLoot(LootPack.LootItem<Yeast>(50.0));
         }
 
         public override bool IsEnemy(Mobile m)
@@ -146,7 +88,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

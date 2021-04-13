@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -8,24 +7,9 @@ namespace Server.Mobiles
     {
         private readonly List<GenericBuyInfo> m_BuyInfo = new InternalBuyInfo();
         private readonly IShopSellInfo m_SellInfo = new InternalSellInfo();
-        public SBSwordWeapon()
-        {
-        }
 
-        public override IShopSellInfo SellInfo
-        {
-            get
-            {
-                return m_SellInfo;
-            }
-        }
-        public override List<GenericBuyInfo> BuyInfo
-        {
-            get
-            {
-                return m_BuyInfo;
-            }
-        }
+        public override IShopSellInfo SellInfo => m_SellInfo;
+        public override List<GenericBuyInfo> BuyInfo => m_BuyInfo;
 
         public class InternalBuyInfo : List<GenericBuyInfo>
         {
@@ -40,15 +24,12 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(VikingSword), 55, 20, 0x13B9, 0));
                 Add(new GenericBuyInfo(typeof(Scimitar), 36, 20, 0x13B6, 0));
 
-                if (Core.AOS)
-                {
-                    Add(new GenericBuyInfo(typeof(BoneHarvester), 35, 20, 0x26BB, 0));
-                    Add(new GenericBuyInfo(typeof(CrescentBlade), 37, 20, 0x26C1, 0));
-                    Add(new GenericBuyInfo(typeof(DoubleBladedStaff), 35, 20, 0x26BF, 0));
-                    Add(new GenericBuyInfo(typeof(Lance), 34, 20, 0x26C0, 0));
-                    Add(new GenericBuyInfo(typeof(Pike), 39, 20, 0x26BE, 0));
-                    Add(new GenericBuyInfo(typeof(Scythe), 39, 20, 0x26BA, 0));
-                }
+                Add(new GenericBuyInfo(typeof(BoneHarvester), 35, 20, 0x26BB, 0));
+                Add(new GenericBuyInfo(typeof(CrescentBlade), 37, 20, 0x26C1, 0));
+                Add(new GenericBuyInfo(typeof(DoubleBladedStaff), 35, 20, 0x26BF, 0));
+                Add(new GenericBuyInfo(typeof(Lance), 34, 20, 0x26C0, 0));
+                Add(new GenericBuyInfo(typeof(Pike), 39, 20, 0x26BE, 0));
+                Add(new GenericBuyInfo(typeof(Scythe), 39, 20, 0x26BA, 0));
             }
         }
 
@@ -65,17 +46,14 @@ namespace Server.Mobiles
                 Add(typeof(ThinLongsword), 13);
                 Add(typeof(VikingSword), 27);
 
-                if (Core.AOS)
-                {
-                    Add(typeof(Scythe), 19);
-                    Add(typeof(BoneHarvester), 17);
-                    Add(typeof(Scepter), 18);
-                    Add(typeof(BladedStaff), 16);
-                    Add(typeof(Pike), 19);
-                    Add(typeof(DoubleBladedStaff), 17);
-                    Add(typeof(Lance), 17);
-                    Add(typeof(CrescentBlade), 18);
-                }
+                Add(typeof(Scythe), 19);
+                Add(typeof(BoneHarvester), 17);
+                Add(typeof(Scepter), 18);
+                Add(typeof(BladedStaff), 16);
+                Add(typeof(Pike), 19);
+                Add(typeof(DoubleBladedStaff), 17);
+                Add(typeof(Lance), 17);
+                Add(typeof(CrescentBlade), 18);
             }
         }
     }

@@ -1,8 +1,8 @@
-using System;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
+using System;
 
 namespace Server.Spells.Seventh
 {
@@ -22,13 +22,7 @@ namespace Server.Spells.Seventh
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.Seventh;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.Seventh;
         public override void OnCast()
         {
             Caster.Target = new InternalTarget(this);
@@ -74,10 +68,7 @@ namespace Server.Spells.Seventh
 
                 TimeSpan duration;
 
-                if (Core.AOS)
-                    duration = TimeSpan.FromSeconds((15 + (Caster.Skills.Magery.Fixed / 5)) / 7);
-                else
-                    duration = TimeSpan.FromSeconds(Caster.Skills[SkillName.Magery].Value * 0.28 + 2.0); // (28% of magery) + 2.0 seconds
+                duration = TimeSpan.FromSeconds((15 + (Caster.Skills.Magery.Fixed / 5)) / 7);
 
                 Point3D pnt = new Point3D(p);
                 int itemID = eastToWest ? 0x3946 : 0x3956;
@@ -87,7 +78,7 @@ namespace Server.Spells.Seventh
 
                 for (int i = 1; i <= 2; ++i)
                 {
-                    Timer.DelayCall<int>(TimeSpan.FromMilliseconds(i * 300), index =>
+                    Timer.DelayCall(TimeSpan.FromMilliseconds(i * 300), index =>
                     {
                         Point3D point = new Point3D(eastToWest ? pnt.X + index : pnt.X, eastToWest ? pnt.Y : pnt.Y + index, pnt.Z);
                         SpellHelper.AdjustField(ref point, Caster.Map, 16, false);
@@ -138,18 +129,12 @@ namespace Server.Spells.Seventh
                 m_Timer.Start();
             }
 
-            public override bool BlocksFit
-            {
-                get
-                {
-                    return true;
-                }
-            }
+            public override bool BlocksFit => true;
             public override void Serialize(GenericWriter writer)
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
             }
 
             public override void Deserialize(GenericReader reader)
@@ -205,7 +190,7 @@ namespace Server.Spells.Seventh
             private readonly EnergyFieldSpell m_Owner;
 
             public InternalTarget(EnergyFieldSpell owner)
-                : base(Core.TOL ? 15 : Core.ML ? 10 : 12, true, TargetFlags.None)
+                : base(15, true, TargetFlags.None)
             {
                 m_Owner = owner;
             }

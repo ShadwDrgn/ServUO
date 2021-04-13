@@ -1,6 +1,5 @@
-using Server;
-using System;
 using Server.Guilds;
+using System;
 
 namespace Server.Services.TownCryer
 {
@@ -15,13 +14,13 @@ namespace Server.Services.TownCryer
         public DateTime Expires { get; private set; }
         public string EventLocation { get; set; }
 
-        public bool Expired { get { return DateTime.Now + TimeSpan.FromDays(32) < DateTime.Now; } }
+        public bool Expired => DateTime.Now + TimeSpan.FromDays(32) < DateTime.Now;
 
         public TownCryerGuildEntry(Mobile m, DateTime eventTime, string eventLocation, string title, string body)
         {
             Guild = m.Guild as Guild;
             Title = title;
-            FullTitle = String.Format("{0}-{1} [{2}] {3}", eventTime.Month, eventTime.Day, Guild.Abbreviation, title);
+            FullTitle = string.Format("{0}-{1} [{2}] {3}", eventTime.Month, eventTime.Day, Guild.Abbreviation, title);
             Body = body;
             Author = m.Name;
             EventTime = eventTime;

@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public abstract class BaseHides : Item, ICommodity
     {
-        protected virtual CraftResource DefaultResource { get { return CraftResource.RegularLeather; } }
+        protected virtual CraftResource DefaultResource => CraftResource.RegularLeather;
 
         private CraftResource m_Resource;
         public BaseHides(CraftResource resource)
@@ -15,12 +13,12 @@ namespace Server.Items
         public BaseHides(CraftResource resource, int amount)
             : base(0x1079)
         {
-            this.Stackable = true;
-            this.Weight = 5.0;
-            this.Amount = amount;
-            this.Hue = CraftResources.GetHue(resource);
+            Stackable = true;
+            Weight = 5.0;
+            Amount = amount;
+            Hue = CraftResources.GetHue(resource);
 
-            this.m_Resource = resource;
+            m_Resource = resource;
         }
 
         public BaseHides(Serial serial)
@@ -33,45 +31,33 @@ namespace Server.Items
         {
             get
             {
-                return this.m_Resource;
+                return m_Resource;
             }
             set
             {
-                this.m_Resource = value;
-                this.InvalidateProperties();
+                m_Resource = value;
+                InvalidateProperties();
             }
         }
         public override int LabelNumber
         {
             get
             {
-                if (this.m_Resource >= CraftResource.SpinedLeather && this.m_Resource <= CraftResource.BarbedLeather)
-                    return 1049687 + (int)(this.m_Resource - CraftResource.SpinedLeather);
+                if (m_Resource >= CraftResource.SpinedLeather && m_Resource <= CraftResource.BarbedLeather)
+                    return 1049687 + (m_Resource - CraftResource.SpinedLeather);
 
                 return 1047023;
             }
         }
-        TextDefinition ICommodity.Description
-        {
-            get
-            {
-                return this.LabelNumber;
-            }
-        }
-        bool ICommodity.IsDeedable
-        {
-            get
-            {
-                return true;
-            }
-        }
+        TextDefinition ICommodity.Description => LabelNumber;
+        bool ICommodity.IsDeedable => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
-            writer.Write((int)this.m_Resource);
+            writer.Write((int)m_Resource);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -80,22 +66,22 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 2: // Reset from Resource System
-                    this.m_Resource = this.DefaultResource;
+                    m_Resource = DefaultResource;
                     reader.ReadString();
                     break;
                 case 1:
                     {
-                        this.m_Resource = (CraftResource)reader.ReadInt();
+                        m_Resource = (CraftResource)reader.ReadInt();
                         break;
                     }
                 case 0:
                     {
                         OreInfo info = new OreInfo(reader.ReadInt(), reader.ReadInt(), reader.ReadString());
 
-                        this.m_Resource = CraftResources.GetFromOreInfo(info);
+                        m_Resource = CraftResources.GetFromOreInfo(info);
                         break;
                     }
             }
@@ -103,8 +89,8 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            if (this.Amount > 1)
-                list.Add(1050039, "{0}\t#{1}", this.Amount, 1024216); // ~1_NUMBER~ ~2_ITEMNAME~
+            if (Amount > 1)
+                list.Add(1050039, "{0}\t#{1}", Amount, 1024216); // ~1_NUMBER~ ~2_ITEMNAME~
             else
                 list.Add(1024216); // pile of hides
         }
@@ -113,19 +99,19 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (!CraftResources.IsStandard(this.m_Resource))
+            if (!CraftResources.IsStandard(m_Resource))
             {
-                int num = CraftResources.GetLocalizationNumber(this.m_Resource);
+                int num = CraftResources.GetLocalizationNumber(m_Resource);
 
                 if (num > 0)
                     list.Add(num);
                 else
-                    list.Add(CraftResources.GetName(this.m_Resource));
+                    list.Add(CraftResources.GetName(m_Resource));
             }
         }
     }
 
-    [FlipableAttribute(0x1079, 0x1078)]
+    [Flipable(0x1079, 0x1078)]
     public class Hides : BaseHides, IScissorable
     {
         [Constructable]
@@ -149,7 +135,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -161,10 +147,10 @@ namespace Server.Items
 
         public bool Scissor(Mobile from, Scissors scissors)
         {
-            if (this.Deleted || !from.CanSee(this))
+            if (Deleted || !from.CanSee(this))
                 return false;
 
-            if (Core.AOS && !this.IsChildOf(from.Backpack))
+            if (!IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(502437); // Items you wish to cut must be in your backpack
                 return false;
@@ -175,10 +161,10 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0x1079, 0x1078)]
+    [Flipable(0x1079, 0x1078)]
     public class SpinedHides : BaseHides, IScissorable
     {
-        protected override CraftResource DefaultResource { get { return CraftResource.SpinedLeather; } }
+        protected override CraftResource DefaultResource => CraftResource.SpinedLeather;
 
         [Constructable]
         public SpinedHides()
@@ -201,7 +187,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -213,10 +199,10 @@ namespace Server.Items
 
         public bool Scissor(Mobile from, Scissors scissors)
         {
-            if (this.Deleted || !from.CanSee(this))
+            if (Deleted || !from.CanSee(this))
                 return false;
 
-            if (Core.AOS && !this.IsChildOf(from.Backpack))
+            if (!IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(502437); // Items you wish to cut must be in your backpack
                 return false;
@@ -228,10 +214,10 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0x1079, 0x1078)]
+    [Flipable(0x1079, 0x1078)]
     public class HornedHides : BaseHides, IScissorable
     {
-        protected override CraftResource DefaultResource { get { return CraftResource.HornedLeather; } }
+        protected override CraftResource DefaultResource => CraftResource.HornedLeather;
 
         [Constructable]
         public HornedHides()
@@ -254,7 +240,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -266,25 +252,25 @@ namespace Server.Items
 
         public bool Scissor(Mobile from, Scissors scissors)
         {
-            if (this.Deleted || !from.CanSee(this))
+            if (Deleted || !from.CanSee(this))
                 return false;
 
-            if (Core.AOS && !this.IsChildOf(from.Backpack))
+            if (!IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(502437); // Items you wish to cut must be in your backpack
                 return false;
             }
-			
+
             base.ScissorHelper(from, new HornedLeather(), 1);
 
             return true;
         }
     }
 
-    [FlipableAttribute(0x1079, 0x1078)]
+    [Flipable(0x1079, 0x1078)]
     public class BarbedHides : BaseHides, IScissorable
     {
-        protected override CraftResource DefaultResource { get { return CraftResource.BarbedLeather; } }
+        protected override CraftResource DefaultResource => CraftResource.BarbedLeather;
 
         [Constructable]
         public BarbedHides()
@@ -307,7 +293,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -319,10 +305,10 @@ namespace Server.Items
 
         public bool Scissor(Mobile from, Scissors scissors)
         {
-            if (this.Deleted || !from.CanSee(this))
+            if (Deleted || !from.CanSee(this))
                 return false;
 
-            if (Core.AOS && !this.IsChildOf(from.Backpack))
+            if (!IsChildOf(from.Backpack))
             {
                 from.SendLocalizedMessage(502437); // Items you wish to cut must be in your backpack
                 return false;

@@ -1,11 +1,8 @@
-using System;
-using Server.Mobiles;
-
 namespace Server.Items
 {
     public class EthologistTitleDeed : BaseRewardTitleDeed
     {
-        public override TextDefinition Title { get { return 1157594; } } // Ethologist
+        public override TextDefinition Title => 1157594;  // Ethologist
 
         [Constructable]
         public EthologistTitleDeed()
@@ -20,7 +17,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

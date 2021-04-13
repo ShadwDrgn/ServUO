@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class SAStoneWall2South : DamageableItem
@@ -8,10 +6,10 @@ namespace Server.Items
         public SAStoneWall2South()
             : base(88, 631)
         {
-            this.Name = "Stone Wall";
+            Name = "Stone Wall";
 
-            this.Level = ItemLevel.VeryEasy;
-            this.Movable = false;
+            Level = ItemLevel.VeryEasy;
+            Movable = false;
         }
 
         public SAStoneWall2South(Serial serial)
@@ -23,7 +21,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); //version
+            writer.Write(0); //version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -40,10 +38,10 @@ namespace Server.Items
         public SAStoneWall2East()
             : base(87, 636)
         {
-            this.Name = "Stone Wall";
+            Name = "Stone Wall";
 
-            this.Level = ItemLevel.VeryEasy;
-            this.Movable = false;
+            Level = ItemLevel.VeryEasy;
+            Movable = false;
         }
 
         public SAStoneWall2East(Serial serial)
@@ -55,7 +53,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); //version
+            writer.Write(0); //version
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Server.Items;
 using Server.ContextMenus;
 using Server.Engines.Harvest;
-using Server.Regions;
+using Server.Items;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -48,10 +47,6 @@ namespace Server.Mobiles
             Tamable = true;
             MinTameSkill = 71.1;
             ControlSlots = 4;
-
-            VirtualArmor = 38;
-
-            m_MiningTimer = Timer.DelayCall(MiningInterval, MiningInterval, DoMining);
         }
 
         public override void GenerateLoot()
@@ -74,24 +69,21 @@ namespace Server.Mobiles
                 c.DropItem(new UndamagedIronBeetleScale());
         }
 
-        public override bool SubdueBeforeTame { get { return true; } }
-        public override bool StatLossAfterTame { get { return true; } }
+        public override bool SubdueBeforeTame => true;
+        public override bool StatLossAfterTame => true;
 
         public override bool OverrideBondingReqs() { return true; }
 
-        public override double GetControlChance(Mobile m, bool useBaseSkill) 
+        public override double GetControlChance(Mobile m, bool useBaseSkill)
         {
-            if (PetTrainingHelper.Enabled)
-            {
-                var profile = PetTrainingHelper.GetAbilityProfile(this);
+            AbilityProfile profile = PetTrainingHelper.GetAbilityProfile(this);
 
-                if (profile != null && profile.HasCustomized())
-                {
-                    return base.GetControlChance(m, useBaseSkill);
-                }
+            if (profile != null && profile.HasCustomized())
+            {
+                return base.GetControlChance(m, useBaseSkill);
             }
 
-            return 1.0; 
+            return 1.0;
         }
 
         public override int GetAngerSound() { return 0x21D; }
@@ -102,9 +94,10 @@ namespace Server.Mobiles
 
         #region Mining
         private static readonly TimeSpan MiningInterval = TimeSpan.FromSeconds(5.0);
+        private static readonly TimeSpan EatInterval = TimeSpan.FromSeconds(3.0);
 
-        private Timer m_MiningTimer;
         private DateTime m_NextOreEat;
+        private DateTime m_NextMine;
 
         private void GetMiningOffset(Direction d, ref int x, ref int y)
         {
@@ -125,25 +118,21 @@ namespace Server.Mobiles
         {
             base.OnThink();
 
-            if (Owners.Count > 0 || m_NextOreEat > DateTime.UtcNow)
+            if (Owners.Count > 0)
                 return;
 
-            m_NextOreEat = DateTime.UtcNow + TimeSpan.FromSeconds(3.0);
-
-            if (0.5 > Utility.RandomDouble())
+            if (m_NextOreEat < DateTime.UtcNow && Utility.RandomBool())
             {
-                foreach (Item item in Map.GetItemsInRange(Location, 1))
-                {
-                    if (item is BaseOre)
-                    {
-                        // Epic coolness: turn to the ore hue!
-                        Hue = item.Hue;
+                m_NextOreEat = DateTime.UtcNow + EatInterval;
 
-                        item.Delete();
+                DoEat();
+            }
 
-                        return;
-                    }
-                }
+            if (m_NextMine < DateTime.UtcNow)
+            {
+                m_NextMine = DateTime.UtcNow + MiningInterval;
+
+                DoMining();
             }
         }
 
@@ -241,6 +230,25 @@ namespace Server.Mobiles
             }
         }
 
+        public void DoEat()
+        {
+            IPooledEnumerable eable = Map.GetItemsInRange(Location, 1);
+
+            foreach (Item item in eable)
+            {
+                if (item is BaseOre)
+                {
+                    // Epic coolness: turn to the ore hue!
+                    Hue = item.Hue;
+                    item.Delete();
+
+                    break;
+                }
+            }
+
+            eable.Free();
+        }
+
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
@@ -252,8 +260,10 @@ namespace Server.Mobiles
                 if (pm == null)
                     return;
 
-                ContextMenuEntry miningEntry = new ContextMenuEntry(pm.ToggleMiningStone ? 6179 : 6178);
-                miningEntry.Color = 0x421F;
+                ContextMenuEntry miningEntry = new ContextMenuEntry(pm.ToggleMiningStone ? 6179 : 6178)
+                {
+                    Color = 0x421F
+                };
                 list.Add(miningEntry);
 
                 list.Add(new BaseHarvestTool.ToggleMiningStoneEntry(pm, MiningType.OreOnly, 6176));         // Set To Ore
@@ -270,17 +280,13 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            m_MiningTimer = Timer.DelayCall(MiningInterval, MiningInterval, DoMining);
         }
     }
 }

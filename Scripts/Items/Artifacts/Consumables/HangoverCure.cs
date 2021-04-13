@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Engines.Quests.Hag
 {
     public class HangoverCure : Item
     {
-		public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
         private int m_Uses;
         [Constructable]
         public HangoverCure()
@@ -21,34 +19,28 @@ namespace Server.Engines.Quests.Hag
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1055060;
-            }
-        }// Grizelda's Extra Strength Hangover Cure
+        public override int LabelNumber => 1055060;// Grizelda's Extra Strength Hangover Cure
         [CommandProperty(AccessLevel.GameMaster)]
         public int Uses
         {
             get
             {
-                return this.m_Uses;
+                return m_Uses;
             }
             set
             {
-                this.m_Uses = value;
+                m_Uses = value;
             }
         }
         public override void OnDoubleClick(Mobile from)
         {
-            if (!this.IsChildOf(from.Backpack))
+            if (!IsChildOf(from.Backpack))
             {
-                this.SendLocalizedMessageTo(from, 1042038); // You must have the object in your backpack to use it.
+                SendLocalizedMessageTo(from, 1042038); // You must have the object in your backpack to use it.
                 return;
             }
 
-            if (this.m_Uses > 0)
+            if (m_Uses > 0)
             {
                 from.PlaySound(0x2D6);
                 from.SendLocalizedMessage(501206); // An awful taste fills your mouth.
@@ -59,11 +51,11 @@ namespace Server.Engines.Quests.Hag
                     from.SendLocalizedMessage(501204); // You are now sober!
                 }
 
-                this.m_Uses--;
+                m_Uses--;
             }
             else
             {
-                this.Delete();
+                Delete();
                 from.SendLocalizedMessage(501201); // There wasn't enough left to have any effect.
             }
         }
@@ -72,9 +64,9 @@ namespace Server.Engines.Quests.Hag
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
-            writer.WriteEncodedInt(this.m_Uses);
+            writer.WriteEncodedInt(m_Uses);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -83,16 +75,16 @@ namespace Server.Engines.Quests.Hag
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
                     {
-                        this.m_Uses = reader.ReadEncodedInt();
+                        m_Uses = reader.ReadEncodedInt();
                         break;
                     }
                 case 0:
                     {
-                        this.m_Uses = 20;
+                        m_Uses = 20;
                         break;
                     }
             }

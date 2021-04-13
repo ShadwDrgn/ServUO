@@ -1,7 +1,7 @@
-using System;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
+using System;
 
 namespace Server.SkillHandlers
 {
@@ -9,12 +9,12 @@ namespace Server.SkillHandlers
     {
         public static void Initialize()
         {
-            SkillInfo.Table[(int)SkillName.Anatomy].Callback = new SkillUseCallback(OnUse);
+            SkillInfo.Table[(int)SkillName.Anatomy].Callback = OnUse;
         }
 
         public static TimeSpan OnUse(Mobile m)
         {
-            m.Target = new Anatomy.InternalTarget();
+            m.Target = new InternalTarget();
 
             m.SendLocalizedMessage(500321); // Whom shall I examine?
 
@@ -71,7 +71,7 @@ namespace Server.SkillHandlers
                     else if (stmMod < 0)
                         stmMod = 0;
 
-                    if (from.CheckTargetSkill(SkillName.Anatomy, targ, 0, 100))
+                    if (from.CheckTargetSkill(SkillName.Anatomy, targ, 0, from.Skills[SkillName.Anatomy].Cap))
                     {
                         targ.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1038045 + (strMod * 11) + dexMod, from.NetState); // That looks [strong] and [dexterous].
 

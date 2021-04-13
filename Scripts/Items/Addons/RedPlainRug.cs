@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class RedPlainRugAddon : BaseAddon
@@ -8,15 +6,15 @@ namespace Server.Items
         public RedPlainRugAddon()
             : base()
         {
-            this.AddComponent(new LocalizedAddonComponent(0xAC9, 1076588), 1, 1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACA, 1076588), -1, -1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACB, 1076588), -1, 1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACC, 1076588), 1, -1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACD, 1076588), -1, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACE, 1076588), 0, -1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xACF, 1076588), 1, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xAD0, 1076588), 0, 1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0xAC6, 1076588), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xAC9, 1076588), 1, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xACA, 1076588), -1, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xACB, 1076588), -1, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xACC, 1076588), 1, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xACD, 1076588), -1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xACE, 1076588), 0, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xACF, 1076588), 1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD0, 1076588), 0, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAC6, 1076588), 0, 0, 0);
         }
 
         public RedPlainRugAddon(Serial serial)
@@ -24,13 +22,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new RedPlainRugDeed();
-            }
-        }
+        public override BaseAddonDeed Deed => new RedPlainRugDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -52,7 +44,7 @@ namespace Server.Items
         public RedPlainRugDeed()
             : base()
         {
-            this.LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
         }
 
         public RedPlainRugDeed(Serial serial)
@@ -60,20 +52,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new RedPlainRugAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1076588;
-            }
-        }// Red plain rug
+        public override BaseAddon Addon => new RedPlainRugAddon();
+        public override int LabelNumber => 1076588;// Red plain rug
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

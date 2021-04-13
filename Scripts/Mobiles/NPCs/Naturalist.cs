@@ -1,4 +1,3 @@
-using System;
 using Server.Engines.Plants;
 using Server.Items;
 using Server.Mobiles;
@@ -20,23 +19,23 @@ namespace Server.Engines.Quests.Naturalist
 
         public override void InitBody()
         {
-            this.InitStats(100, 100, 25);
+            InitStats(100, 100, 25);
 
-            this.Hue = Utility.RandomSkinHue();
+            Hue = Utility.RandomSkinHue();
 
-            this.Female = false;
-            this.Body = 0x190;
-            this.Name = NameList.RandomName("male");
+            Female = false;
+            Body = 0x190;
+            Name = NameList.RandomName("male");
         }
 
         public override void InitOutfit()
         {
-            this.AddItem(new Tunic(0x598));
-            this.AddItem(new LongPants(0x59B));
-            this.AddItem(new Boots());
+            AddItem(new Tunic(0x598));
+            AddItem(new LongPants(0x59B));
+            AddItem(new Boots());
 
             Utility.AssignRandomHair(this);
-            Utility.AssignRandomFacialHair(this, this.HairHue);
+            Utility.AssignRandomFacialHair(this, HairHue);
         }
 
         public override void OnTalk(PlayerMobile player, bool contextMenu)
@@ -51,7 +50,7 @@ namespace Server.Engines.Quests.Naturalist
                 {
                     if (!study.Completed)
                     {
-                        this.PlaySound(0x41F);
+                        PlaySound(0x41F);
                         qs.AddConversation(new NaturalistDuringStudyConversation());
                     }
                     else
@@ -63,7 +62,7 @@ namespace Server.Engines.Quests.Naturalist
                             Seed reward;
 
                             PlantType type;
-                            switch ( Utility.Random(17) )
+                            switch (Utility.Random(17))
                             {
                                 case 0:
                                     type = PlantType.CampionFlowers;
@@ -123,11 +122,11 @@ namespace Server.Engines.Quests.Naturalist
                                 PlantHue hue;
                                 switch (Utility.Random(3))
                                 {
-                                    case 0: 
-                                        hue = PlantHue.FireRed; 
+                                    case 0:
+                                        hue = PlantHue.FireRed;
                                         break;
-                                    case 1: 
-                                        hue = PlantHue.White; 
+                                    case 1:
+                                        hue = PlantHue.White;
                                         break;
                                     default:
                                         hue = PlantHue.Black;
@@ -139,7 +138,7 @@ namespace Server.Engines.Quests.Naturalist
                             else
                             {
                                 PlantHue hue;
-                                switch ( Utility.Random(3) )
+                                switch (Utility.Random(3))
                                 {
                                     case 0:
                                         hue = PlantHue.Pink;
@@ -159,8 +158,8 @@ namespace Server.Engines.Quests.Naturalist
                             {
                                 obj.Complete();
 
-                                this.PlaySound(0x449);
-                                this.PlaySound(0x41B);
+                                PlaySound(0x449);
+                                PlaySound(0x41B);
 
                                 if (study.StudiedSpecialNest)
                                     qs.AddConversation(new SpecialEndConversation());
@@ -183,12 +182,12 @@ namespace Server.Engines.Quests.Naturalist
 
                 if (player.Quest == null && QuestSystem.CanOfferQuest(player, typeof(StudyOfSolenQuest)))
                 {
-                    this.PlaySound(0x42F);
+                    PlaySound(0x42F);
                     newQuest.SendOffer();
                 }
                 else
                 {
-                    this.PlaySound(0x448);
+                    PlaySound(0x448);
                     newQuest.AddConversation(new DontOfferConversation());
                 }
             }
@@ -198,7 +197,7 @@ namespace Server.Engines.Quests.Naturalist
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

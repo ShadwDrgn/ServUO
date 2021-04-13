@@ -1,17 +1,17 @@
-using System;
 using Server.Gumps;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
     public class TritonStatue : Item, ICreatureStatuette
     {
-        public override int LabelNumber { get { return 1158929; } } // Triton
+        public override int LabelNumber => 1158929;  // Triton
 
-        public Type CreatureType { get { return typeof(Triton); } }
+        public Type CreatureType => typeof(Triton);
 
         [Constructable]
-        public TritonStatue() 
+        public TritonStatue()
             : base(0xA2D8)
         {
             Hue = 2713;
@@ -44,14 +44,14 @@ namespace Server.Mobiles
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
-            
+
             list.Add(1158954); // *Redeemable for a pet*<br>*Requires Grandmaster Taming to Claim Pet*
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -63,7 +63,7 @@ namespace Server.Mobiles
 
     [CorpseName("a triton corpse")]
     public class Triton : BaseCreature
-    {        
+    {
         [Constructable]
         public Triton()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
@@ -105,9 +105,12 @@ namespace Server.Mobiles
             ControlSlots = 2;
             MinTameSkill = 96.0;
 
-            PackItem(new Bandage(11));
-
             SetSpecialAbility(SpecialAbility.Heal);
+        }
+
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.LootItem<Bandage>(11, true));
         }
 
         public Triton(Serial serial)
@@ -115,15 +118,15 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool DeleteOnRelease { get { return true; } }
-        public override int Meat { get { return 3; } }
-        public override int Hides { get { return 10; } }
-        public override FoodType FavoriteFood { get { return FoodType.Meat; } }
+        public override bool DeleteOnRelease => true;
+        public override int Meat => 3;
+        public override int Hides => 10;
+        public override FoodType FavoriteFood => FoodType.Meat;
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

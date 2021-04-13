@@ -1,19 +1,17 @@
-using System;
-using Server.Network;
-using Server.Mobiles;
 using Server.Engines.Quests;
+using Server.Mobiles;
 
 namespace Server.Items
 {
     public class PerfectBlackPearlDecor : Item
     {
-        public override int LabelNumber { get { return 1154257; } } // Perfect Black Pearl
+        public override int LabelNumber => 1154257;  // Perfect Black Pearl
 
         [Constructable]
         public PerfectBlackPearlDecor()
             : base(0xF7A)
         {
-            this.Movable = false;
+            Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -54,7 +52,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -67,15 +65,15 @@ namespace Server.Items
 
     public class PerfectBlackPearl : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1154257; } } // Perfect Black Pearl
+        public override int LabelNumber => 1154257;  // Perfect Black Pearl
 
         [Constructable]
         public PerfectBlackPearl()
             : base(0xF7A)
         {
-            this.Stackable = false;
-            this.LootType = LootType.Blessed;
-            this.Weight = 1;
+            Stackable = false;
+            LootType = LootType.Blessed;
+            Weight = 1;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -85,8 +83,8 @@ namespace Server.Items
             list.Add(1072351); // Quest Item
         }
 
-        public override int Lifespan { get { return 3600; } }
-        public override bool UseSeconds { get { return false; } }
+        public override int Lifespan => 3600;
+        public override bool UseSeconds => false;
 
         public PerfectBlackPearl(Serial serial)
             : base(serial)
@@ -96,7 +94,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -109,13 +107,13 @@ namespace Server.Items
 
     public class BurstingBrimstoneDecor : Item
     {
-        public override int LabelNumber { get { return 1154258; } } // Bursting Brimstone
+        public override int LabelNumber => 1154258;  // Bursting Brimstone
 
         [Constructable]
         public BurstingBrimstoneDecor()
             : base(0xF7F)
         {
-            this.Movable = false;
+            Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -156,7 +154,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -169,15 +167,15 @@ namespace Server.Items
 
     public class BurstingBrimstone : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1154258; } } // Bursting Brimstone
+        public override int LabelNumber => 1154258;  // Bursting Brimstone
 
         [Constructable]
         public BurstingBrimstone()
             : base(0xF7F)
         {
-            this.Stackable = false;
-            this.LootType = LootType.Blessed;
-            this.Weight = 1;
+            Stackable = false;
+            LootType = LootType.Blessed;
+            Weight = 1;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -187,8 +185,8 @@ namespace Server.Items
             list.Add(1072351); // Quest Item
         }
 
-        public override int Lifespan { get { return 3600; } }
-        public override bool UseSeconds { get { return false; } }
+        public override int Lifespan => 3600;
+        public override bool UseSeconds => false;
 
         public BurstingBrimstone(Serial serial)
             : base(serial)
@@ -198,7 +196,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -211,13 +209,13 @@ namespace Server.Items
 
     public class BrightDaemonBloodDecor : Item
     {
-        public override int LabelNumber { get { return 1154259; } } // Bright Daemon Blood
+        public override int LabelNumber => 1154259;  // Bright Daemon Blood
 
         [Constructable]
         public BrightDaemonBloodDecor()
             : base(0xF7D)
         {
-            this.Movable = false;
+            Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -258,7 +256,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -271,15 +269,15 @@ namespace Server.Items
 
     public class BrightDaemonBlood : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1154259; } } // Bright Daemon Blood
+        public override int LabelNumber => 1154259;  // Bright Daemon Blood
 
         [Constructable]
         public BrightDaemonBlood()
             : base(0xF7D)
         {
-            this.Stackable = false;
-            this.LootType = LootType.Blessed;
-            this.Weight = 1;
+            Stackable = false;
+            LootType = LootType.Blessed;
+            Weight = 1;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -289,8 +287,8 @@ namespace Server.Items
             list.Add(1072351); // Quest Item
         }
 
-        public override int Lifespan { get { return 3600; } }
-        public override bool UseSeconds { get { return false; } }
+        public override int Lifespan => 3600;
+        public override bool UseSeconds => false;
 
         public BrightDaemonBlood(Serial serial)
             : base(serial)
@@ -300,7 +298,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -313,13 +311,13 @@ namespace Server.Items
 
     public class MightyMandrakeDecor : Item
     {
-        public override int LabelNumber { get { return 1154260; } } // Mighty Mandrake
+        public override int LabelNumber => 1154260;  // Mighty Mandrake
 
         [Constructable]
         public MightyMandrakeDecor()
             : base(0xF86)
         {
-            this.Movable = false;
+            Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -360,7 +358,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -373,15 +371,15 @@ namespace Server.Items
 
     public class MightyMandrake : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1154260; } } // Mighty Mandrake
+        public override int LabelNumber => 1154260;  // Mighty Mandrake
 
         [Constructable]
         public MightyMandrake()
             : base(0xF86)
         {
-            this.Stackable = false;
-            this.LootType = LootType.Blessed;
-            this.Weight = 1;
+            Stackable = false;
+            LootType = LootType.Blessed;
+            Weight = 1;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -391,8 +389,8 @@ namespace Server.Items
             list.Add(1072351); // Quest Item
         }
 
-        public override int Lifespan { get { return 3600; } }
-        public override bool UseSeconds { get { return false; } }
+        public override int Lifespan => 3600;
+        public override bool UseSeconds => false;
 
         public MightyMandrake(Serial serial)
             : base(serial)
@@ -402,7 +400,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version			
+            writer.Write(0); // version			
         }
 
         public override void Deserialize(GenericReader reader)
@@ -414,13 +412,13 @@ namespace Server.Items
 
     public class BurlyBoneDecor : Item
     {
-        public override int LabelNumber { get { return 1154261; } } // Burly Bone
+        public override int LabelNumber => 1154261;  // Burly Bone
 
         [Constructable]
         public BurlyBoneDecor()
             : base(0xF7E)
         {
-            this.Movable = false;
+            Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -461,7 +459,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 
@@ -474,15 +472,15 @@ namespace Server.Items
 
     public class BurlyBone : BaseDecayingItem
     {
-        public override int LabelNumber { get { return 1154261; } } // Burly Bone
+        public override int LabelNumber => 1154261;  // Burly Bone
 
         [Constructable]
         public BurlyBone()
             : base(0xF7E)
         {
-            this.Stackable = false;
-            this.LootType = LootType.Blessed;
-            this.Weight = 1;
+            Stackable = false;
+            LootType = LootType.Blessed;
+            Weight = 1;
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -492,8 +490,8 @@ namespace Server.Items
             list.Add(1072351); // Quest Item
         }
 
-        public override int Lifespan { get { return 3600; } }
-        public override bool UseSeconds { get { return false; } }
+        public override int Lifespan => 3600;
+        public override bool UseSeconds => false;
 
         public BurlyBone(Serial serial)
             : base(serial)
@@ -503,7 +501,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 

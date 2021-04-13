@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -39,16 +38,16 @@ namespace Server.Mobiles
             Fame = 6000;
             Karma = -6000;
 
-            VirtualArmor = 60;
             CanSwim = true;
             CantWalk = true;
 
-            if (Utility.RandomBool())
-                PackItem(new SulfurousAsh(4));
-            else
-                PackItem(new BlackPearl(4));
-
             SetSpecialAbility(SpecialAbility.DragonBreath);
+        }
+
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.Meager);
+            AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SulfurousAsh), typeof(BlackPearl) }, 100.0, 4, false, true));
         }
 
         public DeepSeaSerpent(Serial serial)
@@ -56,22 +55,17 @@ namespace Server.Mobiles
         {
         }
 
-        public override int TreasureMapLevel { get { return 2; } }
-        public override int Meat { get { return 10; } }
-		public override int Hides { get { return 10; } }
-        public override HideType HideType { get { return HideType.Horned; } }
-        public override int Scales { get { return 8; } }
-        public override ScaleType ScaleType { get { return ScaleType.Blue; } }
-
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.Meager);
-        }
+        public override int TreasureMapLevel => 2;
+        public override int Meat => 10;
+        public override int Hides => 10;
+        public override HideType HideType => HideType.Horned;
+        public override int Scales => 8;
+        public override ScaleType ScaleType => ScaleType.Blue;
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,11 +1,10 @@
-using System;
 using Server.Gumps;
 using Server.Network;
 
 namespace Server.Items
 {
     public enum AnniversaryType
-    {        
+    {
         ShadowItems,
         CrystalItems
     }
@@ -31,7 +30,7 @@ namespace Server.Items
                 return cliloc;
             }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public AnniversaryType Type { get; set; }
 
@@ -67,7 +66,7 @@ namespace Server.Items
                     break;
             }
 
-            list.Add(1070998, String.Format("#{0}", cliloc)); // Use this to redeem<br>your ~1_PROMO~
+            list.Add(1070998, string.Format("#{0}", cliloc)); // Use this to redeem<br>your ~1_PROMO~
         }
 
         public override void OnDoubleClick(Mobile from)

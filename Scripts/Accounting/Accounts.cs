@@ -11,21 +11,15 @@ namespace Server.Accounting
 
         public static void Configure()
         {
-            EventSink.WorldLoad += new WorldLoadEventHandler(Load);
-            EventSink.WorldSave += new WorldSaveEventHandler(Save);
+            EventSink.WorldLoad += Load;
+            EventSink.WorldSave += Save;
         }
 
         static Accounts()
         {
         }
 
-        public static int Count
-        {
-            get
-            {
-                return m_Accounts.Count;
-            }
-        }
+        public static int Count => m_Accounts.Count;
 
         public static ICollection<IAccount> GetAccounts()
         {
@@ -45,7 +39,7 @@ namespace Server.Accounting
         {
             m_Accounts[a.Username] = a;
         }
-		
+
         public static void Remove(string username)
         {
             m_Accounts.Remove(username);
@@ -71,9 +65,10 @@ namespace Server.Accounting
                 {
                     Account acct = new Account(account);
                 }
-                catch
+                catch (Exception e)
                 {
                     Console.WriteLine("Warning: Account instance load failed");
+                    Diagnostics.ExceptionLogging.LogException(e);
                 }
             }
         }
@@ -87,11 +82,12 @@ namespace Server.Accounting
 
             using (StreamWriter op = new StreamWriter(filePath))
             {
-                XmlTextWriter xml = new XmlTextWriter(op);
-
-                xml.Formatting = Formatting.Indented;
-                xml.IndentChar = '\t';
-                xml.Indentation = 1;
+                XmlTextWriter xml = new XmlTextWriter(op)
+                {
+                    Formatting = Formatting.Indented,
+                    IndentChar = '\t',
+                    Indentation = 1
+                };
 
                 xml.WriteStartDocument(true);
 

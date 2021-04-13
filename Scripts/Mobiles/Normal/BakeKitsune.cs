@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
@@ -44,9 +43,6 @@ namespace Server.Mobiles
             ControlSlots = 2;
             MinTameSkill = 80.7;
 
-            if (Utility.RandomDouble() < .25)
-                PackItem(Engines.Plants.Seed.RandomBonsaiSeed());
-
             SetSpecialAbility(SpecialAbility.Rage);
         }
 
@@ -55,62 +51,21 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.BonsaiSeed);
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 5;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 30;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Regular;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Fish;
-            }
-        }
-        public override bool ShowFameTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool PropertyTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override int Meat => 5;
+        public override int Hides => 30;
+        public override HideType HideType => HideType.Regular;
+        public override FoodType FavoriteFood => FoodType.Fish;
+        public override bool ShowFameTitle => false;
+        public override bool ClickTitle => false;
+        public override bool PropertyTitle => false;
 
         public override void OnCombatantChange()
         {
             if (Combatant == null && !IsBodyMod && !Controlled && m_DisguiseTimer == null && Utility.RandomBool())
-                m_DisguiseTimer = Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(15, 30)), new TimerCallback(Disguise));
+                m_DisguiseTimer = Timer.DelayCall(TimeSpan.FromSeconds(Utility.RandomMinMax(15, 30)), Disguise);
         }
 
         public override bool OnBeforeDeath()
@@ -151,41 +106,42 @@ namespace Server.Mobiles
             FacialHairItemID = Race.Human.RandomFacialHair(this);
             FacialHairHue = HairHue;
 
-            switch ( Utility.Random(4) )
+            switch (Utility.Random(4))
             {
                 case 0:
-                    AddItem(new Shoes(Utility.RandomNeutralHue()));
+                    SetWearable(new Shoes(Utility.RandomNeutralHue()));
                     break;
                 case 1:
-                    AddItem(new Boots(Utility.RandomNeutralHue()));
+                    SetWearable(new Boots(Utility.RandomNeutralHue()));
                     break;
                 case 2:
-                    AddItem(new Sandals(Utility.RandomNeutralHue()));
+                    SetWearable(new Sandals(Utility.RandomNeutralHue()));
                     break;
                 case 3:
-                    AddItem(new ThighBoots(Utility.RandomNeutralHue()));
+                    SetWearable(new ThighBoots(Utility.RandomNeutralHue()));
                     break;
             }
 
-            AddItem(new Robe(Utility.RandomNondyedHue()));
+            SetWearable(new Robe(Utility.RandomNondyedHue()));
 
             m_DisguiseTimer = null;
-            m_DisguiseTimer = Timer.DelayCall(TimeSpan.FromSeconds(75), new TimerCallback(RemoveDisguise));
+            m_DisguiseTimer = Timer.DelayCall(TimeSpan.FromSeconds(75), RemoveDisguise);
         }
 
         public void RemoveDisguise()
         {
-            if (!IsBodyMod)
-                return;
-			
             Name = "a bake kitsune";
             Title = null;
-            BodyMod = 0;
-            Hue = 0;
-            HairItemID = 0;
-            HairHue = 0;
-            FacialHairItemID = 0;
-            FacialHairHue = 0;
+
+            if (IsBodyMod)
+            {
+                BodyMod = 0;
+                Hue = 0;
+                HairItemID = 0;
+                HairHue = 0;
+                FacialHairItemID = 0;
+                FacialHairHue = 0;
+            }
 
             DeleteItemOnLayer(Layer.OuterTorso);
             DeleteItemOnLayer(Layer.Shoes);
@@ -202,7 +158,7 @@ namespace Server.Mobiles
         }
 
         #endregion
-        	
+
         public override int GetAngerSound()
         {
             return 0x4DE;
@@ -236,7 +192,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -253,7 +209,7 @@ namespace Server.Mobiles
                 SetResistance(ResistanceType.Energy, 40, 60);
             }
 
-            Timer.DelayCall(TimeSpan.Zero, new TimerCallback(RemoveDisguise));
+            Timer.DelayCall(TimeSpan.Zero, RemoveDisguise);
         }
     }
 }

@@ -1,10 +1,8 @@
-using System;
-
 using Server.Mobiles;
 
 namespace Server.Engines.SorcerersDungeon
 {
-    [CorpseName("a rabid reindeers corpse")]
+    [CorpseName("a rabid reindeer corpse")]
     public class RabidReindeer : BaseCreature
     {
         [Constructable]
@@ -12,7 +10,6 @@ namespace Server.Engines.SorcerersDungeon
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a rabid reindeer";
-
             Body = 0xEA;
             Hue = 2707;
 
@@ -22,7 +19,7 @@ namespace Server.Engines.SorcerersDungeon
 
             SetHits(8000);
 
-            SetDamage(22, 29);
+            SetDamage(21, 27);
 
             SetDamageType(ResistanceType.Physical, 50);
             SetDamageType(ResistanceType.Cold, 50);
@@ -39,14 +36,14 @@ namespace Server.Engines.SorcerersDungeon
             SetSkill(SkillName.Tactics, 100.0);
             SetSkill(SkillName.Wrestling, 120, 130);
 
-            Fame = 12000;
-            Karma = -12000;
+            Fame = 16000;
+            Karma = -16000;
 
             SetSpecialAbility(SpecialAbility.VenomousBite);
         }
 
-        public override int Meat { get { return 6; } }
-        public override int Hides { get { return 15; } }
+        public override int Meat => 6;
+        public override int Hides => 15;
 
         public override int GetAttackSound()
         {
@@ -68,9 +65,10 @@ namespace Server.Engines.SorcerersDungeon
         {
         }
 
-        public override Poison HitPoison { get { return Poison.Lethal; } }
-        public override bool AlwaysMurderer { get { return true; } }
-        public override Poison PoisonImmune { get { return Poison.Lethal; } }
+        public override bool CanFlee => false;
+        public override Poison HitPoison => Poison.Lethal;
+        public override bool AlwaysMurderer => true;
+        public override Poison PoisonImmune => Poison.Lethal;
 
         public override void GenerateLoot()
         {
@@ -80,7 +78,7 @@ namespace Server.Engines.SorcerersDungeon
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

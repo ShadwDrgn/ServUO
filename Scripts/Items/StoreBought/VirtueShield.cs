@@ -1,23 +1,17 @@
-using System;
-using Server.Gumps;
-
 namespace Server.Items
 {
-    public class VirtueShield : BaseShield, Server.Engines.Craft.IRepairable
+    public class VirtueShield : BaseShield, Engines.Craft.IRepairable
     {
-		public Server.Engines.Craft.CraftSystem RepairSystem { get { return Server.Engines.Craft.DefBlacksmithy.CraftSystem; } }	
-        public override int BasePhysicalResistance { get { return 8; } }
-        public override int BaseFireResistance { get { return 8; } }
-        public override int BaseColdResistance { get { return 8; } }
-        public override int BasePoisonResistance { get { return 8; } }
-        public override int BaseEnergyResistance { get { return 8; } }
+        public Engines.Craft.CraftSystem RepairSystem => Engines.Craft.DefBlacksmithy.CraftSystem;
+        public override int BasePhysicalResistance => 8;
+        public override int BaseFireResistance => 8;
+        public override int BaseColdResistance => 8;
+        public override int BasePoisonResistance => 8;
+        public override int BaseEnergyResistance => 8;
 
-        public override bool CanBeWornByGargoyles { get { return true; } }
-        public override int LabelNumber { get { return 1109616; } } // Virtue Shield
-
-        public override int InitMinHits { get { return 255; } }
-        public override int InitMaxHits { get { return 255; } }
-        public override bool IsArtifact { get { return true; } }
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
+        public override bool IsArtifact => true;
 
         [Constructable]
         public VirtueShield()
@@ -25,7 +19,7 @@ namespace Server.Items
         {
             Attributes.SpellChanneling = 1;
             Attributes.DefendChance = 10;
-            
+
             LootType = LootType.Blessed;
         }
 
@@ -51,7 +45,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)

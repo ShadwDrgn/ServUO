@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class FarmableTurnip : FarmableCrop
@@ -22,9 +20,10 @@ namespace Server.Items
 
         public override Item GetCropObject()
         {
-            Turnip turnip = new Turnip();
-
-            turnip.ItemID = Utility.Random(3385, 2);
+            Turnip turnip = new Turnip
+            {
+                ItemID = Utility.Random(3385, 2)
+            };
 
             return turnip;
         }

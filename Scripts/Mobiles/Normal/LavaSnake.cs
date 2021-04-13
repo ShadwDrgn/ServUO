@@ -1,10 +1,8 @@
 using Server.Items;
-using Server.Services;
 
 namespace Server.Mobiles
 {
     [CorpseName("a lava snake corpse")]
-    [TypeAlias("Server.Mobiles.Lavasnake")]
     public class LavaSnake : BaseCreature
     {
         [Constructable]
@@ -39,10 +37,6 @@ namespace Server.Mobiles
             Fame = 600;
             Karma = -600;
 
-            VirtualArmor = 24;
-
-            PackItem(new SulfurousAsh());
-
             SetSpecialAbility(SpecialAbility.DragonBreath);
         }
 
@@ -51,33 +45,26 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool DeathAdderCharmable
-        {
-            get { return true; }
-        }
+        public override bool DeathAdderCharmable => true;
 
-        public override int Meat
-        {
-            get { return 1; }
-        }
+        public override int Meat => 1;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
+            AddLoot(LootPack.LootItem<SulfurousAsh>());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
             writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
-            var version = reader.ReadInt();
+            int version = reader.ReadInt();
         }
     }
 }

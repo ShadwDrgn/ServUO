@@ -1,13 +1,10 @@
 using System;
 
-using Server;
-using Server.Events.Halloween;
-
 namespace Server.Items
 {
     public class ShackledHeartOfThePumpkinKing : Item
     {
-        public override int LabelNumber { get { return 1157653; } } // Shackled Heart of the Pumpkin King
+        public override int LabelNumber => 1157653;  // Shackled Heart of the Pumpkin King
 
         private Timer Timer { get; set; }
 
@@ -34,8 +31,8 @@ namespace Server.Items
 
         private class InternalTimer : Timer
         {
-            public Mobile Owner { get; set; }
-            public ShackledHeartOfThePumpkinKing Heart { get; set; }
+            public Mobile Owner { get; }
+            public ShackledHeartOfThePumpkinKing Heart { get; }
 
             public int Ticks { get; set; }
 
@@ -59,8 +56,10 @@ namespace Server.Items
                 {
                     Owner.PlaySound(0x133);
 
-                    var blood = new Blood();
-                    blood.ItemID = Utility.Random(0x122A, 5);
+                    Blood blood = new Blood
+                    {
+                        ItemID = Utility.Random(0x122A, 5)
+                    };
                     blood.MoveToWorld(Owner.Location, Owner.Map);
                 }
             }
@@ -74,7 +73,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

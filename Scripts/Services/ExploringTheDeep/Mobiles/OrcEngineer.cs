@@ -1,6 +1,6 @@
-using System;
-using Server.Items;
 using Server.Engines.Quests;
+using Server.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -56,17 +56,19 @@ namespace Server.Mobiles
             if (Instances != null && Instances.Count > 0)
                 return null;
 
-            OrcEngineer creature = new OrcEngineer();
-            creature.Home = platLoc;
-            creature.RangeHome = 4;
+            OrcEngineer creature = new OrcEngineer
+            {
+                Home = platLoc,
+                RangeHome = 4
+            };
             creature.MoveToWorld(platLoc, platMap);
 
             return creature;
         }
-        
+
         public class InternalSelfDeleteTimer : Timer
         {
-            private OrcEngineer Mare;
+            private readonly OrcEngineer Mare;
 
             public InternalSelfDeleteTimer(Mobile p) : base(TimeSpan.FromMinutes(10))
             {
@@ -85,7 +87,7 @@ namespace Server.Mobiles
 
         public override void OnDeath(Container c)
         {
-            List<DamageStore> rights = GetLootingRights();            
+            List<DamageStore> rights = GetLootingRights();
 
             foreach (Mobile m in rights.Select(x => x.m_Mobile).Distinct())
             {
@@ -95,8 +97,8 @@ namespace Server.Mobiles
 
                     if (pm.ExploringTheDeepQuest == ExploringTheDeepQuestChain.CollectTheComponent)
                     {
-						Item item = new OrcishSchematics();
-						
+                        Item item = new OrcishSchematics();
+
                         if (m.Backpack == null || !m.Backpack.TryDropItem(m, item, false))
                         {
                             m.BankBox.DropItem(item);
@@ -124,11 +126,16 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
+		
+		public override void GenerateLoot()
+        {
+			// Kept blank to zero out the loot created by it's base class
+        }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
         }
 

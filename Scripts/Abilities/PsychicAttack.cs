@@ -5,11 +5,7 @@ namespace Server.Items
 {
     public class PsychicAttack : WeaponAbility
     {
-        public PsychicAttack()
-        {
-        }
-
-        public override int BaseMana { get { return 30; } }
+        public override int BaseMana => 30;
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
@@ -37,12 +33,12 @@ namespace Server.Items
 
             BuffInfo.RemoveBuff(defender, BuffIcon.PsychicAttack);
 
-            string args = String.Format("{0}\t{1}", m_Registry[defender].SpellDamageMalus, m_Registry[defender].ManaCostMalus);
+            string args = string.Format("{0}\t{1}", m_Registry[defender].SpellDamageMalus, m_Registry[defender].ManaCostMalus);
             BuffInfo.AddBuff(defender, new BuffInfo(BuffIcon.PsychicAttack, 1151296, 1151297, args));
         }
 
-        private static Dictionary<Mobile, PsychicAttackTimer> m_Registry = new Dictionary<Mobile, PsychicAttackTimer>();
-        public static Dictionary<Mobile, PsychicAttackTimer> Registry { get { return m_Registry; } }
+        private static readonly Dictionary<Mobile, PsychicAttackTimer> m_Registry = new Dictionary<Mobile, PsychicAttackTimer>();
+        public static Dictionary<Mobile, PsychicAttackTimer> Registry => m_Registry;
 
         public static void RemoveEffects(Mobile defender)
         {
@@ -59,14 +55,14 @@ namespace Server.Items
 
         public class PsychicAttackTimer : Timer
         {
-            private Mobile m_Defender;
+            private readonly Mobile m_Defender;
             private int m_SpellDamageMalus;
             private int m_ManaCostMalus;
             private bool m_DoneIncrease;
 
             public int SpellDamageMalus { get { return m_SpellDamageMalus; } set { m_SpellDamageMalus = value; m_DoneIncrease = true; } }
             public int ManaCostMalus { get { return m_ManaCostMalus; } set { m_ManaCostMalus = value; m_DoneIncrease = true; } }
-            public bool DoneIncrease { get { return m_DoneIncrease; } }
+            public bool DoneIncrease => m_DoneIncrease;
 
             public PsychicAttackTimer(Mobile defender)
                 : base(TimeSpan.FromSeconds(10))

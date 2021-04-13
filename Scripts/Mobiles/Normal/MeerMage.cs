@@ -1,6 +1,6 @@
+using Server.Items;
 using System;
 using System.Collections;
-using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -43,15 +43,14 @@ namespace Server.Mobiles
             Fame = 8000;
             Karma = 8000;
 
-            VirtualArmor = 16;
-
-			switch (Utility.Random(8))
-            {
-                case 0: PackItem(new StrangleScroll()); break;
-                case 1: PackItem(new WitherScroll()); break;
-			}
-
             m_NextAbilityTime = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
+        }
+
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.FilthyRich);
+            AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(StrangleScroll), typeof(WitherScroll) }, 25.0, 1));
         }
 
         public MeerMage(Serial serial)
@@ -59,41 +58,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AutoDispel
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lethal;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 3;
-            }
-        }
-        public override bool InitialInnocent
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool AutoDispel => true;
+        public override Poison PoisonImmune => Poison.Lethal;
+        public override bool CanRummageCorpses => true;
+        public override int TreasureMapLevel => 3;
+        public override bool InitialInnocent => true;
         public static bool UnderEffect(Mobile m)
         {
             return m_Table.Contains(m);
@@ -111,13 +80,6 @@ namespace Server.Mobiles
                 t.Stop();
                 m_Table.Remove(m);
             }
-        }
-
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.FilthyRich);
-            AddLoot(LootPack.MedScrolls, 2);
-            // TODO: Daemon bone ...
         }
 
         public override int GetHurtSound()
@@ -160,7 +122,7 @@ namespace Server.Mobiles
 
                     if (Utility.RandomDouble() < .1)
                     {
-                        int[][] coord = 
+                        int[][] coord =
                         {
                             new int[] { -4, -6 }, new int[] { 4, -6 }, new int[] { 0, -8 }, new int[] { -5, 5 }, new int[] { 5, 5 }
                         };
@@ -177,7 +139,7 @@ namespace Server.Mobiles
                             if (!combatant.Map.CanSpawnMobile(loc))
                                 continue;
 
-                            switch ( i )
+                            switch (i)
                             {
                                 case 0:
                                     rabid = new EnragedRabbit(this);
@@ -236,14 +198,14 @@ namespace Server.Mobiles
                     if ((count % 4) == 0)
                     {
                         m.LocalOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, "* The swarm of insects bites and stings your flesh! *");
-                        m.NonlocalOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, String.Format("* {0} is stung by a swarm of insects *", m.Name));
+                        m.NonlocalOverheadMessage(Network.MessageType.Emote, m.SpeechHue, true, string.Format("* {0} is stung by a swarm of insects *", m.Name));
                     }
 
                     m.FixedParticles(0x91C, 10, 180, 9539, EffectLayer.Waist);
                     m.PlaySound(0x00E);
                     m.PlaySound(0x1BC);
 
-                    AOS.Damage(m, this, Utility.RandomMinMax(30, 40) - (Core.AOS ? 0 : 10), 100, 0, 0, 0, 0);
+                    AOS.Damage(m, this, Utility.RandomMinMax(30, 40), 100, 0, 0, 0, 0);
 
                     states[1] = count + 1;
 
@@ -256,7 +218,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

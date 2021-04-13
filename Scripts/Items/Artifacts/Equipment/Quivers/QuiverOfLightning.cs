@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class QuiverOfLightning : ElvenQuiver
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public QuiverOfLightning()
             : base()
@@ -17,13 +15,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073112;
-            }
-        }// Quiver of Lightning
+        public override int LabelNumber => 1073112;// Quiver of Lightning
         public override void AlterBowDamage(ref int phys, ref int fire, ref int cold, ref int pois, ref int nrgy, ref int chaos, ref int direct)
         {
             fire = cold = pois = chaos = direct = 0;

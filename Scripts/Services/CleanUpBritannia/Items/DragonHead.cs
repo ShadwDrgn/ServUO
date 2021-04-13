@@ -1,8 +1,7 @@
-﻿using System;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
-using Server.Targeting;
+using System;
 
 namespace Server.Items
 {
@@ -14,7 +13,7 @@ namespace Server.Items
 
     public class DragonHeadAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed { get { return new DragonHeadAddonDeed(); } }
+        public override BaseAddonDeed Deed => new DragonHeadAddonDeed();
 
         public AddonFacing Facing { get; set; }
 
@@ -43,7 +42,7 @@ namespace Server.Items
 
         private class DragonHeadComponent : AddonComponent
         {
-            public override bool NeedsWall { get { return true; } }
+            public override bool NeedsWall => true;
             public override Point3D WallPosition
             {
                 get
@@ -104,11 +103,11 @@ namespace Server.Items
 
     public class DragonHeadAddonDeed : BaseAddonDeed, IRewardOption
     {
-        public override BaseAddon Addon { get { return new DragonHeadAddon(Facing); } }
+        public override BaseAddon Addon => new DragonHeadAddon(Facing);
 
         private AddonFacing Facing { get; set; }
 
-        public override int LabelNumber { get { return 1080209; } } // Dragon Head
+        public override int LabelNumber => 1080209;  // Dragon Head
 
         [Constructable]
         public DragonHeadAddonDeed()
@@ -136,7 +135,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -166,7 +165,7 @@ namespace Server.Items
     [TypeAlias("Server.Items.DragonHead")]
     public class DragonHeadOld : Item, IAddon
     {
-        public override bool IsArtifact { get { return true; } }
+        public override bool IsArtifact => true;
 
         [Constructable]
         public DragonHeadOld()
@@ -186,27 +185,10 @@ namespace Server.Items
         {
         }
 
-        public override bool ForceShowProperties
-        {
-            get
-            {
-                return ObjectPropertyList.Enabled;
-            }
-        }
-        public Item Deed
-        {
-            get
-            {
-                return new DragonHeadAddonDeed();
-            }
-        }
-        public bool FacingEast
-        {
-            get
-            {
-                return ItemID == 0x2235;
-            }
-        }
+        public override bool ForceShowProperties => true;
+
+        public Item Deed => new DragonHeadAddonDeed();
+        public bool FacingEast => ItemID == 0x2235;
 
         void IChopable.OnChop(Mobile user)
         {
@@ -260,7 +242,7 @@ namespace Server.Items
     [TypeAlias("Server.Items.DragonHeadDeed")]
     public class DragonHeadDeedOld : Item
     {
-        public override int LabelNumber { get { return 1028756; } } // dragon head
+        public override int LabelNumber => 1028756;  // dragon head
 
         [Constructable]
         public DragonHeadDeedOld()
@@ -297,14 +279,14 @@ namespace Server.Items
 
             if (c != null)
             {
-                var deed = new DragonHeadAddonDeed();
+                DragonHeadAddonDeed deed = new DragonHeadAddonDeed();
                 c.DropItem(deed);
             }
             else if (Parent == null)
             {
-                Server.Multis.BaseHouse house = Server.Multis.BaseHouse.FindHouseAt(this);
+                BaseHouse house = BaseHouse.FindHouseAt(this);
 
-                var deed = new DragonHeadAddonDeed();
+                DragonHeadAddonDeed deed = new DragonHeadAddonDeed();
                 deed.MoveToWorld(Location, Map);
 
                 deed.IsLockedDown = IsLockedDown;

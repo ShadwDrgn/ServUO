@@ -1,8 +1,5 @@
-using Server;
-using System;
-using System.Collections.Generic;
-using Server.Mobiles;
 using Server.Gumps;
+using Server.Mobiles;
 
 namespace Server.Services.TownCryer
 {
@@ -32,9 +29,11 @@ namespace Server.Services.TownCryer
         {
             if (info.ButtonID == 0)
             {
-                var gump = new TownCryerGump(User, Cryer);
-                gump.Category = TownCryerGump.GumpCategory.City;
-                BaseGump.SendGump(gump);
+                TownCryerGump gump = new TownCryerGump(User, Cryer)
+                {
+                    Category = TownCryerGump.GumpCategory.City
+                };
+                SendGump(gump);
             }
         }
     }

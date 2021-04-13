@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public interface ICaddelliteTool
@@ -8,7 +6,7 @@ namespace Server.Items
 
     public class CaddellitePickaxe : Pickaxe, ICaddelliteTool
     {
-        public override int LabelNumber { get { return 1158689; } } // Caddellite Pickaxe
+        public override int LabelNumber => 1158689;  // Caddellite Pickaxe
 
         [Constructable]
         public CaddellitePickaxe()
@@ -26,12 +24,12 @@ namespace Server.Items
 
             list.Add(1158692); // * Can Harvest Caddellite Infused Resources in the Lost Lands *
         }
-        
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -44,7 +42,7 @@ namespace Server.Items
 
     public class CaddelliteHatchet : Hatchet, ICaddelliteTool
     {
-        public override int LabelNumber { get { return 1158690; } } // Caddellite Hatchet
+        public override int LabelNumber => 1158690;  // Caddellite Hatchet
 
         [Constructable]
         public CaddelliteHatchet()
@@ -67,7 +65,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -80,7 +78,7 @@ namespace Server.Items
 
     public class CaddelliteFishingPole : FishingPole, ICaddelliteTool
     {
-        public override int LabelNumber { get { return 1158691; } } // Caddellite Fishing Pole
+        public override int LabelNumber => 1158691;  // Caddellite Fishing Pole
 
         [Constructable]
         public CaddelliteFishingPole()
@@ -103,7 +101,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,14 +1,11 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a bull frog corpse")]
-    [TypeAlias("Server.Mobiles.Bullfrog")]
     public class BullFrog : BaseCreature
     {
         [Constructable]
         public BullFrog()
-            : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "a bull frog";
             Body = 81;
@@ -35,8 +32,6 @@ namespace Server.Mobiles
             Fame = 350;
             Karma = 0;
 
-            VirtualArmor = 6;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 23.1;
@@ -47,27 +42,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 4;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Fish | FoodType.Meat;
-            }
-        }
+        public override int Meat => 1;
+        public override int Hides => 4;
+        public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
@@ -76,14 +53,12 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

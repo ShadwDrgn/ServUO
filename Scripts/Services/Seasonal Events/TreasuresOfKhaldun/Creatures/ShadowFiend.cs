@@ -1,5 +1,5 @@
-using System;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
@@ -17,8 +17,10 @@ namespace Server.Mobiles
             Hue = 2051;
 
             // this to allow shadow fiend to loot from corpses
-            Backpack backpack = new Backpack();
-            backpack.Movable = false;
+            Backpack backpack = new Backpack
+            {
+                Movable = false
+            };
             AddItem(backpack);
 
             SetStr(300, 400);
@@ -53,7 +55,7 @@ namespace Server.Mobiles
             m_Timer.Start();
         }
 
-        public override void OnBeforeDamage(Mobile from, ref int totalDamage, Server.DamageType type)
+        public override void OnBeforeDamage(Mobile from, ref int totalDamage, DamageType type)
         {
             if (Region.IsPartOf("Khaldun") && IsChampionSpawn && !Caddellite.CheckDamage(from, type))
             {
@@ -68,20 +70,8 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool DeleteCorpseOnDeath
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool DeleteCorpseOnDeath => true;
+        public override bool CanRummageCorpses => true;
         public override int GetIdleSound()
         {
             return 0x37A;
@@ -119,7 +109,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

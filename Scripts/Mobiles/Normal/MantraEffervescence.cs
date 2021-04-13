@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a mantra effervescence corpse")]
@@ -38,7 +36,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Meditation, 90.0, 100.0);
 
             SetSkill(SkillName.Spellweaving, 90.0, 96.0);
-			
+
             Fame = 6500;
             Karma = -6500;
 
@@ -59,14 +57,12 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

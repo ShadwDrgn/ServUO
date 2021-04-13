@@ -1,7 +1,6 @@
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +8,7 @@ namespace Server.Items
 {
     public class HolidaysSign : Item, IFlipable
     {
-        public override int LabelNumber { get { return 1024759; } } // sign
+        public override int LabelNumber => 1024759;  // sign
 
         public int GumpID { get; set; }
 
@@ -40,7 +39,7 @@ namespace Server.Items
                 g.AddImage(0, 0, GumpID);
 
                 m.SendGump(g);
-            }            
+            }
         }
 
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
@@ -65,7 +64,7 @@ namespace Server.Items
             {1673,"Happy Holidays"},
             {1674,"Merry Christmas"},
             {1675,"Seasons Greetings"},
-            {1676,"Happy Hanukkah"},            
+            {1676,"Happy Hanukkah"},
         };
 
         private class ChangeSignText : ContextMenuEntry
@@ -87,7 +86,7 @@ namespace Server.Items
                 else
                     Sign.GumpID++;
 
-                _From.SendLocalizedMessage(1158830, String.Format("{0}", SingType.ToList().Find(x => x.Key == Sign.GumpID).Value)); // The sign text has been set to: ~1_TEXT~
+                _From.SendLocalizedMessage(1158830, string.Format("{0}", SingType.ToList().Find(x => x.Key == Sign.GumpID).Value)); // The sign text has been set to: ~1_TEXT~
             }
         }
 
@@ -120,9 +119,9 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
-            writer.Write((int)GumpID);
+            writer.Write(GumpID);
         }
 
         public override void Deserialize(GenericReader reader)

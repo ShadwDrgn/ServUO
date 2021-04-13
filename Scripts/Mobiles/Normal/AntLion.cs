@@ -1,5 +1,5 @@
-using System;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
@@ -42,16 +42,25 @@ namespace Server.Mobiles
 
             Fame = 4500;
             Karma = -4500;
+           
+            SetSpecialAbility(SpecialAbility.DragonBreath);
+        }
 
-            VirtualArmor = 45;
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.Average, 2);
+            AddLoot(LootPack.PeculiarSeed3);
+            AddLoot(LootPack.Bones);
+            AddLoot(LootPack.LootItem<Bone>(100.0, 3, false, true));
+            AddLoot(LootPack.LootItem<FertileDirt>(100.0, Utility.RandomMinMax(1, 5), false, true));
 
-            PackItem(new Bone(3));
-            PackItem(new FertileDirt(Utility.RandomMinMax(1, 5)));
+            AddLoot(LootPack.LootItemCallback(RandomOre, 100.0, Utility.RandomMinMax(1, 10), false, true));
+            AddLoot(LootPack.LootItemCallback(RandomSkeleton, 7.0, 1, false, true));
+        }
 
-            if (Core.ML && Utility.RandomDouble() < .33)
-                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(3));
-
-            Item orepile = null; /* no trust, no love :( */
+        private Item RandomOre(IEntity e)
+        {
+            Item orepile = null;
 
             switch (Utility.Random(4))
             {
@@ -69,23 +78,20 @@ namespace Server.Mobiles
                     break;
             }
 
-            orepile.Amount = Utility.RandomMinMax(1, 10);
             orepile.ItemID = 0x19B9;
-            PackItem(orepile);
 
-            PackBones();
-			
-			if ( 0.07 >= Utility.RandomDouble() )
-			{
-				switch ( Utility.Random( 3 ) )
-				{
-					case 0: PackItem( new UnknownBardSkeleton() ); break;
-					case 1: PackItem( new UnknownMageSkeleton() ); break;
-					case 2: PackItem( new UnknownRogueSkeleton() ); break;
-				}
-			}
+            return orepile;
+        }
 
-            SetSpecialAbility(SpecialAbility.DragonBreath);
+        private Item RandomSkeleton(IEntity e)
+        {
+            switch (Utility.Random(3))
+            {
+                default:
+                case 0: return new UnknownBardSkeleton();
+                case 1: return new UnknownMageSkeleton();
+                case 2: return new UnknownRogueSkeleton();
+            }
         }
 
         public override void OnThink()
@@ -94,7 +100,7 @@ namespace Server.Mobiles
 
             if (!(Combatant is Mobile))
                 return;
-            
+
             Mobile combatant = Combatant as Mobile;
 
             if (_NextTunnel < DateTime.UtcNow && combatant.InRange(Location, 10))
@@ -106,7 +112,7 @@ namespace Server.Mobiles
 
         private void DoTunnel(Mobile combatant)
         {
-            PublicOverheadMessage(Server.Network.MessageType.Regular, 0x3B3, false, "* The ant lion begins tunneling into the ground *");
+            PublicOverheadMessage(Network.MessageType.Regular, 0x3B3, false, "* The ant lion begins tunneling into the ground *");
             Effects.SendTargetParticles(this, 0x36B0, 20, 10, 1734, 0, 5044, EffectLayer.Head, 0);
 
             Frozen = true;
@@ -161,7 +167,7 @@ namespace Server.Mobiles
         {
             if (_Tunneling && !Hidden && 0.25 > Utility.RandomDouble())
             {
-                PublicOverheadMessage(Server.Network.MessageType.Regular, 0x3B3, false, "* You interrupt the ant lion's digging! *");
+                PublicOverheadMessage(Network.MessageType.Regular, 0x3B3, false, "* You interrupt the ant lion's digging! *");
 
                 Frozen = false;
                 Hidden = false;
@@ -178,8 +184,8 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		
-		public override void OnGotMeleeAttack(Mobile attacker)
+
+        public override void OnGotMeleeAttack(Mobile attacker)
         {
             if (attacker.Weapon is BaseRanged)
                 BeginAcidBreath();
@@ -200,7 +206,6 @@ namespace Server.Mobiles
         public void BeginAcidBreath()
         {
             PlayerMobile m = Combatant as PlayerMobile;
-            // Mobile m = Combatant;
 
             if (m == null || m.Deleted || !m.Alive || !Alive || m_NextAcidBreath > DateTime.Now || !CanBeHarmful(m))
                 return;
@@ -209,7 +214,7 @@ namespace Server.Mobiles
             MovingEffect(m, 0x36D4, 1, 0, false, false, 0x3F, 0);
 
             TimeSpan delay = TimeSpan.FromSeconds(GetDistanceToSqrt(m) / 5.0);
-            Timer.DelayCall<Mobile>(delay, new TimerStateCallback<Mobile>(EndAcidBreath), m);
+            Timer.DelayCall(delay, new TimerStateCallback<Mobile>(EndAcidBreath), m);
 
             m_NextAcidBreath = DateTime.Now + TimeSpan.FromSeconds(5);
         }
@@ -231,16 +236,11 @@ namespace Server.Mobiles
         public override int GetAttackSound() { return 0x164; }
         public override int GetHurtSound() { return 0x187; }
         public override int GetDeathSound() { return 0x1BA; }
-        
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.Average, 2);
-        }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -254,7 +254,7 @@ namespace Server.Mobiles
 
         private class InternalItem : Item
         {
-            public override int LabelNumber { get { return 1027025; } }
+            public override int LabelNumber => 1027025;
 
             public InternalItem(int id)
                 : base(id)
@@ -271,7 +271,7 @@ namespace Server.Mobiles
             public override void Serialize(GenericWriter writer)
             {
                 base.Serialize(writer);
-                writer.Write((int)0);
+                writer.Write(0);
             }
 
             public override void Deserialize(GenericReader reader)

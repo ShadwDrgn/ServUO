@@ -1,6 +1,3 @@
-using System;
-using Server.Items;
-
 namespace Server.Mobiles
 {
     [CorpseName("a rotting corpse")]
@@ -34,10 +31,6 @@ namespace Server.Mobiles
 
             Fame = 600;
             Karma = -600;
-
-            VirtualArmor = 18;
-
-            PackBodyPartOrBones();
         }
 
         public Zombie(Serial serial)
@@ -45,49 +38,31 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Regular;
-            }
-        }
+        public override bool BleedImmune => true;
+		
+        public override Poison PoisonImmune => Poison.Regular;
+		
+        public override TribeType Tribe => TribeType.Undead;
 
-        public override TribeType Tribe { get { return TribeType.Undead; } }
-
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
         }
-        
+
         public override bool IsEnemy(Mobile m)
         {
-            if(Region.IsPartOf("Haven Island"))
+            if (Region.IsPartOf("Haven Island"))
             {
                 return false;
             }
-            
+
             return base.IsEnemy(m);
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

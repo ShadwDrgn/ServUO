@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -8,14 +7,14 @@ namespace Server.Mobiles
         [Constructable]
         public EvilWanderingHealer()
         {
-            this.Title = (Core.AOS) ? "the Priest Of Mondain" : "the evil wandering healer";
-            this.Karma = -10000;
+            Title = "the Priest Of Mondain";
+            Karma = -10000;
 
-            this.AddItem(new GnarledStaff());
+            AddItem(new GnarledStaff());
 
-            this.SetSkill(SkillName.Camping, 80.0, 100.0);
-            this.SetSkill(SkillName.Forensics, 80.0, 100.0);
-            this.SetSkill(SkillName.SpiritSpeak, 80.0, 100.0);
+            SetSkill(SkillName.Camping, 80.0, 100.0);
+            SetSkill(SkillName.Forensics, 80.0, 100.0);
+            SetSkill(SkillName.SpiritSpeak, 80.0, 100.0);
         }
 
         public EvilWanderingHealer(Serial serial)
@@ -23,27 +22,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool CanTeach
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }// Do not display title in OnSingleClick
+        public override bool CanTeach => true;
+        public override bool AlwaysMurderer => true;
+        public override bool ClickTitle => false;// Do not display title in OnSingleClick
         public override bool CheckTeach(SkillName skill, Mobile from)
         {
             if (!base.CheckTeach(skill, from))
@@ -58,28 +39,28 @@ namespace Server.Mobiles
 
         public override bool CheckResurrect(Mobile m)
         {
-            if (Core.AOS && m.Criminal)
+            if (m.Criminal)
             {
-                this.Say(501222); // Thou art a criminal.  I shall not resurrect thee.
+                Say(501222); // Thou art a criminal.  I shall not resurrect thee.
                 return false;
             }
 
             return true;
         }
 
-		public override void OnDeath(Container c)
-		{
-			base.OnDeath(c);
+        public override void OnDeath(Container c)
+        {
+            base.OnDeath(c);
 
-			if (Core.ML && Utility.RandomDouble() <= 0.25)
-				c.AddItem(Loot.Construct(typeof(MapFragment)));
-		}
+            if (Utility.RandomDouble() <= 0.25)
+                c.AddItem(Loot.Construct(typeof(MapFragment)));
+        }
 
-		public override void Serialize(GenericWriter writer)
+        public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -87,9 +68,6 @@ namespace Server.Mobiles
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
-
-            if (version < 1 && this.Title == "the wandering healer" && Core.AOS)
-                this.Title = "the priest of Mondain";
         }
     }
 }

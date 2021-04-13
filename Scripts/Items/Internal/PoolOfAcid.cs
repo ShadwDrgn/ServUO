@@ -1,6 +1,6 @@
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
-using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -12,7 +12,7 @@ namespace Server.Items
         private readonly DateTime m_Created;
         private readonly Timer m_Timer;
         private bool m_Drying;
-		
+
         [Constructable]
         public PoolOfAcid()
             : this(TimeSpan.FromSeconds(10.0), 2, 5)
@@ -29,7 +29,7 @@ namespace Server.Items
             m_MaxDamage = maxDamage;
             m_Created = DateTime.UtcNow;
             m_Duration = duration;
-            m_Timer = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1), new TimerCallback(OnTick));
+            m_Timer = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1), OnTick);
         }
 
         public PoolOfAcid(Serial serial)
@@ -37,28 +37,22 @@ namespace Server.Items
         {
         }
 
-        public override string DefaultName
-        {
-            get
-            {
-                return "a pool of acid";
-            }
-        }
+        public override string DefaultName => "a pool of acid";
         public override void OnAfterDelete()
         {
-            if (this.m_Timer != null)
-                this.m_Timer.Stop();
+            if (m_Timer != null)
+                m_Timer.Stop();
         }
 
         public override bool OnMoveOver(Mobile m)
         {
-            this.Damage(m);
+            Damage(m);
             return true;
         }
 
         public void Damage(Mobile m)
         {
-            m.Damage(Utility.RandomMinMax(this.m_MinDamage, this.m_MaxDamage));
+            m.Damage(Utility.RandomMinMax(m_MinDamage, m_MaxDamage));
         }
 
         public override void Serialize(GenericWriter writer)
@@ -73,18 +67,18 @@ namespace Server.Items
         private void OnTick()
         {
             DateTime now = DateTime.UtcNow;
-            TimeSpan age = now - this.m_Created;
+            TimeSpan age = now - m_Created;
 
-            if (age > this.m_Duration)
+            if (age > m_Duration)
             {
-                this.Delete();
+                Delete();
             }
             else
             {
-                if (!this.m_Drying && age > (this.m_Duration - age))
+                if (!m_Drying && age > (m_Duration - age))
                 {
-                    this.m_Drying = true;
-                    this.ItemID = 0x122B;
+                    m_Drying = true;
+                    ItemID = 0x122B;
                 }
 
                 List<Mobile> toDamage = new List<Mobile>();
@@ -102,7 +96,7 @@ namespace Server.Items
                 eable.Free();
 
                 for (int i = 0; i < toDamage.Count; i++)
-                    this.Damage(toDamage[i]);
+                    Damage(toDamage[i]);
             }
         }
     }

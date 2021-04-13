@@ -1,5 +1,3 @@
-using System;
-using Server.Items;
 using Server.Mobiles;
 
 namespace Server.Engines.Quests.Samurai
@@ -34,8 +32,6 @@ namespace Server.Engines.Quests.Samurai
 
             Fame = 200;
             Karma = -200;
-
-            PackBodyPartOrBones();
         }
 
         public CursedSoul(Serial serial)
@@ -46,14 +42,12 @@ namespace Server.Engines.Quests.Samurai
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
             writer.WriteEncodedInt(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadEncodedInt();
         }
     }

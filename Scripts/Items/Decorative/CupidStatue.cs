@@ -1,11 +1,9 @@
-using System;
-
 namespace Server.Items
 {
     [Flipable(0x4F7C, 0x4F7D)]
     public class CupidStatue : Item
     {
-        public override int LabelNumber { get { return 1099220; } } // cupid statue
+        public override int LabelNumber => 1099220;  // cupid statue
 
         [Constructable]
         public CupidStatue()
@@ -23,7 +21,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

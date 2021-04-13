@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class LoomSouthAddon : BaseAddon, ILoom
@@ -17,13 +15,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new LoomSouthDeed();
-            }
-        }
+        public override BaseAddonDeed Deed => new LoomSouthDeed();
         public int Phase
         {
             get
@@ -39,9 +31,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
-            writer.Write((int)m_Phase);
+            writer.Write(m_Phase);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -50,7 +42,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
                     {
@@ -73,25 +65,13 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new LoomSouthAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1044344;
-            }
-        }// loom (south)
+        public override BaseAddon Addon => new LoomSouthAddon();
+        public override int LabelNumber => 1044344;// loom (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

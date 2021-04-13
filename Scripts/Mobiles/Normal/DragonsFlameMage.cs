@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -51,8 +50,6 @@ namespace Server.Mobiles
 
             Fame = 13000;
             Karma = -13000;
-
-            VirtualArmor = 58;
         }
 
         public DragonsFlameMage(Serial serial)
@@ -60,12 +57,12 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AlwaysMurderer { get { return true; } }
-        public override bool ShowFameTitle { get { return false; } }
+        public override bool AlwaysMurderer => true;
+        public override bool ShowFameTitle => false;
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.AosFilthyRich, 4);
+            AddLoot(LootPack.FilthyRich, 4);
         }
 
         public override void AlterSpellDamageFrom(Mobile from, ref int damage)
@@ -79,13 +76,13 @@ namespace Server.Mobiles
             base.OnDeath(c);
 
             if (Utility.RandomDouble() < 0.3)
-                c.DropItem(new DragonFlameSectBadge());      
+                c.DropItem(new DragonFlameSectBadge());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

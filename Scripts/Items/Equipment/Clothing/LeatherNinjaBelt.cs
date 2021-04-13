@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Mobiles;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
-    [FlipableAttribute(0x2790, 0x27DB)]
+    [Flipable(0x2790, 0x27DB)]
     public class LeatherNinjaBelt : BaseWaist, IDyable, INinjaWeapon
     {
         private int m_UsesRemaining;
@@ -25,76 +25,16 @@ namespace Server.Items
         {
         }
 
-        public override CraftResource DefaultResource
-        {
-            get
-            {
-                return CraftResource.RegularLeather;
-            }
-        }
-        public virtual int WrongAmmoMessage
-        {
-            get
-            {
-                return 1063301;
-            }
-        }//You can only place shuriken in a ninja belt.
-        public virtual int NoFreeHandMessage
-        {
-            get
-            {
-                return 1063299;
-            }
-        }//You must have a free hand to throw shuriken.
-        public virtual int EmptyWeaponMessage
-        {
-            get
-            {
-                return 1063297;
-            }
-        }//You have no shuriken in your ninja belt!
-        public virtual int RecentlyUsedMessage
-        {
-            get
-            {
-                return 1063298;
-            }
-        }//You cannot throw another shuriken yet.
-        public virtual int FullWeaponMessage
-        {
-            get
-            {
-                return 1063302;
-            }
-        }//You cannot add any more shuriken.
-        public virtual int WeaponMinRange
-        {
-            get
-            {
-                return 2;
-            }
-        }
-        public virtual int WeaponMaxRange
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public virtual int WeaponDamage
-        {
-            get
-            {
-                return Utility.RandomMinMax(3, 5);
-            }
-        }
-        public virtual Type AmmoType
-        {
-            get
-            {
-                return typeof(Shuriken);
-            }
-        }
+        public override CraftResource DefaultResource => CraftResource.RegularLeather;
+        public virtual int WrongAmmoMessage => 1063301;//You can only place shuriken in a ninja belt.
+        public virtual int NoFreeHandMessage => 1063299;//You must have a free hand to throw shuriken.
+        public virtual int EmptyWeaponMessage => 1063297;//You have no shuriken in your ninja belt!
+        public virtual int RecentlyUsedMessage => 1063298;//You cannot throw another shuriken yet.
+        public virtual int FullWeaponMessage => 1063302;//You cannot add any more shuriken.
+        public virtual int WeaponMinRange => 2;
+        public virtual int WeaponMaxRange => 10;
+        public virtual int WeaponDamage => Utility.RandomMinMax(3, 5);
+        public virtual Type AmmoType => typeof(Shuriken);
         [CommandProperty(AccessLevel.GameMaster)]
         public int UsesRemaining
         {
@@ -148,14 +88,7 @@ namespace Server.Items
         {
             if (from.Body.IsHuman)
             {
-                if (Core.SA)
-                {
-                    from.Animate(AnimationType.Attack, 4);
-                }
-                else
-                {
-                    from.Animate(from.Mounted ? 26 : 9, 7, 1, true, false, 0);
-                }                
+                from.Animate(AnimationType.Attack, 4);
             }
 
             from.PlaySound(0x23A);
@@ -202,12 +135,12 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
 
-            writer.Write((int)m_UsesRemaining);
+            writer.Write(m_UsesRemaining);
 
             Poison.Serialize(m_Poison, writer);
-            writer.Write((int)m_PoisonCharges);
+            writer.Write(m_PoisonCharges);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -216,7 +149,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 0:
                     {

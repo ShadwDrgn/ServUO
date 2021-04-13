@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [Flipable(0x105B, 0x105C)]
@@ -15,9 +13,9 @@ namespace Server.Items
         public Axle(int amount)
             : base(0x105B)
         {
-            this.Stackable = true;
-            this.Amount = amount;
-            this.Weight = 1.0;
+            Stackable = true;
+            Amount = amount;
+            Weight = 1.0;
         }
 
         public Axle(Serial serial)
@@ -29,7 +27,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

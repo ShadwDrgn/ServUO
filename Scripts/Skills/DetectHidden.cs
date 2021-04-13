@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Server.Factions;
+using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
-using Server.Targeting;
-using Server.Engines.VvV;
-using Server.Items;
-using Server.Spells;
 using Server.Network;
+using Server.Targeting;
+using Server.Spells;
+
+using System;
+using System.Linq;
 
 namespace Server.Items
 {
@@ -29,7 +26,7 @@ namespace Server.SkillHandlers
     {
         public static void Initialize()
         {
-            SkillInfo.Table[(int)SkillName.DetectHidden].Callback = new SkillUseCallback(OnUse);
+            SkillInfo.Table[(int)SkillName.DetectHidden].Callback = OnUse;
         }
 
         public static TimeSpan OnUse(Mobile src)
@@ -84,13 +81,13 @@ namespace Server.SkillHandlers
                         {
                             double ss = srcSkill + Utility.Random(21) - 10;
                             double ts = trg.Skills[SkillName.Hiding].Value + Utility.Random(21) - 10;
-                            double shadow = Server.Spells.SkillMasteries.ShadowSpell.GetDifficultyFactor(trg);
+                            double shadow = Spells.SkillMasteries.ShadowSpell.GetDifficultyFactor(trg);
                             bool houseCheck = inHouse && house.IsInside(trg);
 
                             if (src.AccessLevel >= trg.AccessLevel && (ss >= ts || houseCheck) && Utility.RandomDouble() > shadow)
                             {
-                               if ((trg is ShadowKnight && (trg.X != p.X || trg.Y != p.Y)) ||
-                                    (!houseCheck && !CanDetect(src, trg)))
+                                if ((trg is ShadowKnight && (trg.X != p.X || trg.Y != p.Y)) ||
+                                     (!houseCheck && !CanDetect(src, trg, true)))
                                     continue;
 
                                 trg.RevealingAction();
@@ -107,7 +104,7 @@ namespace Server.SkillHandlers
 
                     foreach (Item item in itemsInRange)
                     {
-                        if (item is LibraryBookcase && Server.Engines.Khaldun.GoingGumshoeQuest3.CheckBookcase(src, item))
+                        if (item is LibraryBookcase && Engines.Khaldun.GoingGumshoeQuest3.CheckBookcase(src, item))
                         {
                             foundAnyone = true;
                         }
@@ -154,7 +151,7 @@ namespace Server.SkillHandlers
 
             foreach (Mobile m in eable)
             {
-                if (m == null || m == src || m is ShadowKnight || !CanDetect(src, m))
+                if (m == null || m == src || m is ShadowKnight || !CanDetect(src, m, false))
                     continue;
 
                 double ts = (m.Skills[SkillName.Hiding].Value + m.Skills[SkillName.Stealth].Value) / 2;
@@ -184,27 +181,44 @@ namespace Server.SkillHandlers
             eable.Free();
         }
 
-        public static bool CanDetect(Mobile src, Mobile target)
+        public static bool CanDetect(Mobile src, Mobile target, bool direct)
         {
-            if (src.Map == null || target.Map == null || !src.CanBeHarmful(target, false))
+            if (src.Map == null || target.Map == null || !src.CanBeHarmful(target, false, false, true))
+            {
                 return false;
+            }
 
             // No invulnerable NPC's
             if (src.Blessed || (src is BaseCreature && ((BaseCreature)src).IsInvulnerable))
+            {
                 return false;
+            }
 
             if (target.Blessed || (target is BaseCreature && ((BaseCreature)target).IsInvulnerable))
+            {
                 return false;
+            }
+
+            SpellHelper.CheckResponsible(ref src);
+            SpellHelper.CheckResponsible(ref target);
+
+            if (src.Map.Rules == MapRules.FeluccaRules && direct)
+            {
+                return !SpellHelper.IsGuildAllyOrParty(src, target);
+            }
 
             // pet owner, guild/alliance, party
-            if (!Server.Spells.SpellHelper.ValidIndirectTarget(target, src))
+            if (!SpellHelper.ValidIndirectTarget(target, src))
+            {
                 return false;
+            }
 
             // Checked aggressed/aggressors
             if (src.Aggressed.Any(x => x.Defender == target) || src.Aggressors.Any(x => x.Attacker == target))
+            {
                 return true;
+            }
 
-            // In Fel or Follow the same rules as indirect spells such as wither
             return src.Map.Rules == MapRules.FeluccaRules;
         }
     }

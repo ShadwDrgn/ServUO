@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a pig corpse")]
@@ -7,37 +5,35 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Pig()
-            : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            this.Name = "a pig";
-            this.Body = 0xCB;
-            this.BaseSoundID = 0xC4;
+            Name = "a pig";
+            Body = 0xCB;
+            BaseSoundID = 0xC4;
 
-            this.SetStr(20);
-            this.SetDex(20);
-            this.SetInt(5);
+            SetStr(20);
+            SetDex(20);
+            SetInt(5);
 
-            this.SetHits(12);
-            this.SetMana(0);
+            SetHits(12);
+            SetMana(0);
 
-            this.SetDamage(2, 4);
+            SetDamage(2, 4);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 10, 15);
+            SetResistance(ResistanceType.Physical, 10, 15);
 
-            this.SetSkill(SkillName.MagicResist, 5.0);
-            this.SetSkill(SkillName.Tactics, 5.0);
-            this.SetSkill(SkillName.Wrestling, 5.0);
+            SetSkill(SkillName.MagicResist, 5.0);
+            SetSkill(SkillName.Tactics, 5.0);
+            SetSkill(SkillName.Wrestling, 5.0);
 
-            this.Fame = 150;
-            this.Karma = 0;
+            Fame = 150;
+            Karma = 0;
 
-            this.VirtualArmor = 12;
-
-            this.Tamable = true;
-            this.ControlSlots = 1;
-            this.MinTameSkill = 11.1;
+            Tamable = true;
+            ControlSlots = 1;
+            MinTameSkill = 11.1;
         }
 
         public Pig(Serial serial)
@@ -45,31 +41,17 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
-            }
-        }
+        public override int Meat => 1;
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

@@ -1,6 +1,6 @@
-using System;
 using Server.Items;
 using Server.Targeting;
+using System;
 
 namespace Server.Engines.Craft
 {
@@ -13,10 +13,6 @@ namespace Server.Engines.Craft
 
     public class Resmelt
     {
-        public Resmelt()
-        {
-        }
-
         public static void Do(Mobile from, CraftSystem craftSystem, ITool tool)
         {
             int num = craftSystem.CanCraft(from, tool, null);
@@ -52,7 +48,7 @@ namespace Server.Engines.Craft
                     if (num == 1044267)
                     {
                         bool anvil, forge;
-			
+
                         DefBlacksmithy.CheckAnvilAndForge(from, 2, out anvil, out forge);
 
                         if (!anvil)
@@ -60,7 +56,7 @@ namespace Server.Engines.Craft
                         else if (!forge)
                             num = 1044265; // You must be near a forge.
                     }
-					
+
                     from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, num));
                 }
                 else
@@ -85,7 +81,7 @@ namespace Server.Engines.Craft
                         isStoreBought = false;
                     }
 
-                    switch ( result )
+                    switch (result)
                     {
                         default:
                         case SmeltResult.Invalid:
@@ -98,7 +94,7 @@ namespace Server.Engines.Craft
                             message = isStoreBought ? 500418 : 1044270;
                             break; // You melt the item down into ingots.
                     }
-					
+
                     from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, message));
                 }
             }
@@ -107,9 +103,6 @@ namespace Server.Engines.Craft
             {
                 try
                 {
-                    if (Ethics.Ethic.IsImbued(item))
-                        return SmeltResult.Invalid;
-
                     if (CraftResources.GetType(resource) != CraftResourceType.Metal)
                         return SmeltResult.Invalid;
 
@@ -130,7 +123,7 @@ namespace Server.Engines.Craft
 
                     double difficulty = 0.0;
 
-                    switch ( resource )
+                    switch (resource)
                     {
                         case CraftResource.DullCopper:
                             difficulty = 65.0;
@@ -167,7 +160,7 @@ namespace Server.Engines.Craft
                     Item ingot = (Item)Activator.CreateInstance(resourceType);
 
                     if (item is DragonBardingDeed || (item is BaseArmor && ((BaseArmor)item).PlayerConstructed) || (item is BaseWeapon && ((BaseWeapon)item).PlayerConstructed) || (item is BaseClothing && ((BaseClothing)item).PlayerConstructed))
-                        ingot.Amount = (int)((double)craftResource.Amount * .66);
+                        ingot.Amount = (int)(craftResource.Amount * .66);
                     else
                         ingot.Amount = 1;
 
@@ -178,8 +171,9 @@ namespace Server.Engines.Craft
                     from.PlaySound(0x240);
                     return SmeltResult.Success;
                 }
-                catch
+                catch (Exception e)
                 {
+                    Diagnostics.ExceptionLogging.LogException(e);
                 }
 
                 return SmeltResult.Invalid;

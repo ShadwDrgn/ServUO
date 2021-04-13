@@ -1,20 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Server.Engines.PartySystem;
 using Server.Items;
 using Server.Spells.First;
 using Server.Spells.Fourth;
 using Server.Spells.Necromancy;
 using Server.Targeting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Spells.Mysticism
 {
     public class CleansingWindsSpell : MysticSpell
     {
-        public override SpellCircle Circle { get { return SpellCircle.Sixth; } }
+        public override SpellCircle Circle => SpellCircle.Sixth;
 
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
             "Cleansing Winds", "In Vas Mani Hur",
             230,
             9022,
@@ -36,7 +35,7 @@ namespace Server.Spells.Mysticism
 
         public void OnTarget(object o)
         {
-            var targeted = o as Mobile;
+            Mobile targeted = o as Mobile;
 
             if (targeted == null)
                 return;
@@ -50,16 +49,16 @@ namespace Server.Spells.Mysticism
 
                 Caster.PlaySound(0x64C);
 
-                var targets = new List<Mobile> { targeted };
+                List<Mobile> targets = new List<Mobile> { targeted };
                 targets.AddRange(FindAdditionalTargets(targeted).Take(3)); // This effect can hit up to 3 additional players beyond the primary target.
 
                 double primarySkill = Caster.Skills[CastSkill].Value;
                 double secondarySkill = Caster.Skills[DamageSkill].Value;
 
-                var toHeal = (int)((primarySkill + secondarySkill) / 4.0) + Utility.RandomMinMax(-3, 3);
+                int toHeal = (int)((primarySkill + secondarySkill) / 4.0) + Utility.RandomMinMax(-3, 3);
                 toHeal /= targets.Count; // The effectiveness of the spell is reduced by the number of targets affected.
 
-                foreach (var target in targets)
+                foreach (Mobile target in targets)
                 {
                     // WARNING: This spell will flag the caster as a criminal if a criminal or murderer party member is close enough
                     // to the target to receive the benefits from the area of effect.
@@ -92,13 +91,13 @@ namespace Server.Spells.Mysticism
                         toHealMod = 0;
                     }
 
-                    var curseLevel = RemoveCurses(target);
+                    int curseLevel = RemoveCurses(target);
 
                     if (toHealMod > 0 && curseLevel > 0)
                     {
                         // Each Curse reduces healing by 3 points + 1% per curse level.
                         toHealMod = toHealMod - (curseLevel * 3);
-                        toHealMod = toHealMod - (int)((double)toHealMod * ((double)curseLevel / 100.0));
+                        toHealMod = toHealMod - (int)(toHealMod * (curseLevel / 100.0));
                     }
 
                     if (toHealMod > 0)
@@ -113,14 +112,14 @@ namespace Server.Spells.Mysticism
         {
             m.FixedParticles(0x3709, 1, 30, 9963, 13, 3, EffectLayer.Head);
 
-            var from = new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z - 10), m.Map);
-            var to = new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z + 50), m.Map);
+            Entity from = new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z - 10), m.Map);
+            Entity to = new Entity(Serial.Zero, new Point3D(m.X, m.Y, m.Z + 50), m.Map);
             Effects.SendMovingParticles(from, to, 0x2255, 1, 0, false, false, 13, 3, 9501, 1, 0, EffectLayer.Head, 0x100);
         }
 
         private IEnumerable<Mobile> FindAdditionalTargets(Mobile targeted)
         {
-            var casterParty = Party.Get(Caster);
+            Party casterParty = Party.Get(Caster);
 
             if (casterParty == null)
                 yield break;

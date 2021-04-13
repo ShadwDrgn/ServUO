@@ -1,12 +1,9 @@
-﻿using Server;
-using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class CreepingVine : Item
     {
-		public override bool IsArtifact { get { return true; } }
-        public override int LabelNumber { get { return 1112401; } }
+        public override bool IsArtifact => true;
+        public override int LabelNumber => 1112401;
 
         [Constructable]
         public CreepingVine()
@@ -22,7 +19,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

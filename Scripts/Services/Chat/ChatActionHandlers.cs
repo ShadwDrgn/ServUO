@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Engines.Chat
 {
     public class ChatActionHandlers
     {
-        private static ChatActionHandler[] m_Handlers;
+        private static readonly ChatActionHandler[] m_Handlers;
 
         static ChatActionHandlers()
         {
@@ -32,8 +30,13 @@ namespace Server.Engines.Chat
 
         public static void ChannelMessage(ChatUser from, Channel channel, string param)
         {
-            channel.SendMessage(57, from, from.GetColorCharacter() + from.Username, string.Format("{{{0}}} {1}", channel.Name, param)); // %1: %2
-            ChatLogging.LogMessage(channel.Name, from.Username, param);
+            if (from.NextMessage < Core.TickCount)
+            {
+                channel.SendMessage(57, from, from.GetColorCharacter() + from.Username, string.Format("{{{0}}} {1}", channel.Name, param)); // %1: %2
+                ChatLogging.LogMessage(channel.Name, from.Username, param);
+
+                from.NextMessage = Core.TickCount + ChatSystem.ChatDelay;
+            }
         }
 
         public static void LeaveChannel(ChatUser from, Channel channel, string param)
@@ -87,7 +90,7 @@ namespace Server.Engines.Chat
 
         private static void CreateAndJoin(ChatUser from, string name)
         {
-            var joined = Channel.FindChannelByName(name);
+            Channel joined = Channel.FindChannelByName(name);
 
             if (joined == null)
             {

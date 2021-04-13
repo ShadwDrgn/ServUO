@@ -1,6 +1,6 @@
+using Server.Accounting;
 using System;
 using System.Collections;
-using Server.Accounting;
 
 namespace Server.Gumps
 {
@@ -15,32 +15,32 @@ namespace Server.Gumps
         public BanDurationGump(ArrayList list)
             : base((640 - 500) / 2, (480 - 305) / 2)
         {
-            this.m_List = list;
+            m_List = list;
 
             int width = 500;
             int height = 305;
 
-            this.AddPage(0);
+            AddPage(0);
 
-            this.AddBackground(0, 0, width, height, 5054);
+            AddBackground(0, 0, width, height, 5054);
 
             //AddImageTiled( 10, 10, width - 20, 20, 2624 );
             //AddAlphaRegion( 10, 10, width - 20, 20 );
-            this.AddHtml(10, 10, width - 20, 20, "<CENTER>Ban Duration</CENTER>", false, false);
+            AddHtml(10, 10, width - 20, 20, "<CENTER>Ban Duration</CENTER>", false, false);
 
             //AddImageTiled( 10, 40, width - 20, height - 50, 2624 );
             //AddAlphaRegion( 10, 40, width - 20, height - 50 );
 
-            this.AddButtonLabeled(15, 45, 1, "Infinite");
-            this.AddButtonLabeled(15, 65, 2, "From D:H:M:S");
+            AddButtonLabeled(15, 45, 1, "Infinite");
+            AddButtonLabeled(15, 65, 2, "From D:H:M:S");
 
-            this.AddInput(3, 0, "Days");
-            this.AddInput(4, 1, "Hours");
-            this.AddInput(5, 2, "Minutes");
-            this.AddInput(6, 3, "Seconds");
+            AddInput(3, 0, "Days");
+            AddInput(4, 1, "Hours");
+            AddInput(5, 2, "Minutes");
+            AddInput(6, 3, "Seconds");
 
-            this.AddHtml(170, 45, 240, 20, "Comments:", false, false);
-            this.AddTextField(170, 65, 315, height - 80, 10);
+            AddHtml(170, 45, 240, 20, "Comments:", false, false);
+            AddTextField(170, 65, 315, height - 80, 10);
         }
 
         public static ArrayList MakeList(object obj)
@@ -52,14 +52,14 @@ namespace Server.Gumps
 
         public void AddButtonLabeled(int x, int y, int buttonID, string text)
         {
-            this.AddButton(x, y - 1, 4005, 4007, buttonID, GumpButtonType.Reply, 0);
-            this.AddHtml(x + 35, y, 240, 20, text, false, false);
+            AddButton(x, y - 1, 4005, 4007, buttonID, GumpButtonType.Reply, 0);
+            AddHtml(x + 35, y, 240, 20, text, false, false);
         }
 
         public void AddTextField(int x, int y, int width, int height, int index)
         {
-            this.AddBackground(x - 2, y - 2, width + 4, height + 4, 0x2486);
-            this.AddTextEntry(x + 2, y + 2, width - 4, height - 4, 0, index, "");
+            AddBackground(x - 2, y - 2, width + 4, height + 4, 0x2486);
+            AddTextEntry(x + 2, y + 2, width - 4, height - 4, 0, index, "");
         }
 
         public void AddInput(int bid, int idx, string name)
@@ -67,11 +67,11 @@ namespace Server.Gumps
             int x = 15;
             int y = 95 + (idx * 50);
 
-            this.AddButtonLabeled(x, y, bid, name);
-            this.AddTextField(x + 35, y + 20, 100, 20, idx);
+            AddButtonLabeled(x, y, bid, name);
+            AddTextField(x + 35, y + 20, 100, 20, idx);
         }
 
-        public override void OnResponse(Server.Network.NetState sender, RelayInfo info)
+        public override void OnResponse(Network.NetState sender, RelayInfo info)
         {
             Mobile from = sender.Mobile;
 
@@ -88,15 +88,13 @@ namespace Server.Gumps
             TimeSpan duration;
             bool shouldSet;
 
-            string fromString = from.ToString();
-
-            switch ( info.ButtonID )
+            switch (info.ButtonID)
             {
                 case 0:
                     {
-                        for (int i = 0; i < this.m_List.Count; ++i)
+                        for (int i = 0; i < m_List.Count; ++i)
                         {
-                            Account a = (Account)this.m_List[i];
+                            Account a = (Account)m_List[i];
 
                             a.SetUnspecifiedBan(from);
                         }
@@ -121,8 +119,9 @@ namespace Server.Gumps
 
                                 break;
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Diagnostics.ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -142,8 +141,9 @@ namespace Server.Gumps
 
                                 break;
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Diagnostics.ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -163,8 +163,9 @@ namespace Server.Gumps
 
                                 break;
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Diagnostics.ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -184,8 +185,9 @@ namespace Server.Gumps
 
                                 break;
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Diagnostics.ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -205,8 +207,9 @@ namespace Server.Gumps
 
                                 break;
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Diagnostics.ExceptionLogging.LogException(e);
                             }
                         }
 
@@ -222,7 +225,7 @@ namespace Server.Gumps
             if (shouldSet)
             {
                 string comment = null;
-				
+
                 if (c != null)
                 {
                     comment = c.Text.Trim();
@@ -231,14 +234,14 @@ namespace Server.Gumps
                         comment = null;
                 }
 
-                for (int i = 0; i < this.m_List.Count; ++i)
+                for (int i = 0; i < m_List.Count; ++i)
                 {
-                    Account a = (Account)this.m_List[i];
+                    Account a = (Account)m_List[i];
 
                     a.SetBanTags(from, DateTime.UtcNow, duration);
 
                     if (comment != null)
-                        a.Comments.Add(new AccountComment(from.RawName, String.Format("Duration: {0}, Comment: {1}", ((duration == TimeSpan.MaxValue) ? "Infinite" : duration.ToString()), comment)));
+                        a.Comments.Add(new AccountComment(from.RawName, string.Format("Duration: {0}, Comment: {1}", ((duration == TimeSpan.MaxValue) ? "Infinite" : duration.ToString()), comment)));
                 }
 
                 if (duration == TimeSpan.MaxValue)
@@ -249,7 +252,7 @@ namespace Server.Gumps
             else
             {
                 from.SendMessage("Time values were improperly formatted.");
-                from.SendGump(new BanDurationGump(this.m_List));
+                from.SendGump(new BanDurationGump(m_List));
             }
         }
     }

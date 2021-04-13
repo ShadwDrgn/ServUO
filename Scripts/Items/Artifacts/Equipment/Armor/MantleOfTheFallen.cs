@@ -1,16 +1,25 @@
-using System;
+using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    public class MantleOfTheFallen : GargishClothChest
-	{
-		public override bool IsArtifact { get { return true; } }
-		public override int LabelNumber { get { return 1113819; } }// Mantle of the Fallen
-		
+    public class MantleOfTheFallen : GargishClothChest, IRepairable
+    {
+        public CraftSystem RepairSystem => DefTailoring.CraftSystem;
+
+        public override bool IsArtifact => true;
+        public override int LabelNumber => 1113819; // Mantle of the Fallen
+        public override int BasePhysicalResistance => 5;
+        public override int BaseFireResistance => 8;
+        public override int BaseColdResistance => 11;
+        public override int BasePoisonResistance => 12;
+        public override int BaseEnergyResistance => 8;
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
+
         [Constructable]
-        public MantleOfTheFallen() 
+        public MantleOfTheFallen()
         {
-            Hue = 1512;			
+            Hue = 1512;
             Attributes.LowerRegCost = 25;
             Attributes.BonusInt = 8;
             Attributes.BonusMana = 8;
@@ -24,59 +33,10 @@ namespace Server.Items
         {
         }
 
-        public override int BasePhysicalResistance
-        {
-            get
-            {
-                return 5;
-            }
-        }
-        public override int BaseFireResistance
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int BaseColdResistance
-        {
-            get
-            {
-                return 11;
-            }
-        }
-        public override int BasePoisonResistance
-        {
-            get
-            {
-                return 12;
-            }
-        }
-        public override int BaseEnergyResistance
-        {
-            get
-            {
-                return 8;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }      
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Server;
 using Server.Targeting;
+using System;
+using System.Linq;
 
 namespace Server.Spells.Mysticism
 {
     public class MassSleepSpell : MysticSpell
     {
-        public override SpellCircle Circle { get { return SpellCircle.Fifth; } }
+        public override SpellCircle Circle => SpellCircle.Fifth;
 
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Mass Sleep", "Vas Zu",
                 230,
                 9022,
@@ -31,7 +28,7 @@ namespace Server.Spells.Mysticism
 
         public class InternalTarget : Target
         {
-            private MassSleepSpell m_Owner;
+            private readonly MassSleepSpell m_Owner;
 
             public InternalTarget(MassSleepSpell owner)
                 : base(10, true, TargetFlags.None)
@@ -64,7 +61,7 @@ namespace Server.Spells.Mysticism
                 if (map == null)
                     return;
 
-                foreach (var m in AcquireIndirectTargets(p, 3).OfType<Mobile>())
+                foreach (Mobile m in AcquireIndirectTargets(p, 3).OfType<Mobile>())
                 {
                     double duration = ((Caster.Skills[CastSkill].Value + Caster.Skills[DamageSkill].Value) / 20) + 3;
                     duration -= GetResistSkill(m) / 10;

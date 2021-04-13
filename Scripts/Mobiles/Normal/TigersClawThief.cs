@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -27,19 +26,23 @@ namespace Server.Mobiles
 
             Item item;
 
-            item = new StuddedGloves();
-            item.Hue = 0x69;
+            item = new StuddedGloves
+            {
+                Hue = 0x69
+            };
             AddItem(item);
 
-            item = new LeatherNinjaPants();
-            item.Hue = 0x51D;
+            item = new LeatherNinjaPants
+            {
+                Hue = 0x51D
+            };
             AddItem(item);
 
-            item = new LightPlateJingasa();
-            item.Hue = 0x51D;
+            item = new LightPlateJingasa
+            {
+                Hue = 0x51D
+            };
             AddItem(item);
-
-            // TODO quest items
 
             SetStr(340, 360);
             SetDex(400, 415);
@@ -69,8 +72,6 @@ namespace Server.Mobiles
 
             Fame = 13000;
             Karma = -13000;
-
-            VirtualArmor = 58;
         }
 
         public TigersClawThief(Serial serial)
@@ -78,12 +79,12 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AlwaysMurderer { get { return true; } }
-        public override bool ShowFameTitle { get { return false; } }
+        public override bool AlwaysMurderer => true;
+        public override bool ShowFameTitle => false;
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.AosFilthyRich, 4);
+            AddLoot(LootPack.FilthyRich, 4);
         }
 
         public override void OnDeath(Container c)
@@ -97,7 +98,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

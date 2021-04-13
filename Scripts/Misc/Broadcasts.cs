@@ -6,8 +6,8 @@ namespace Server.Misc
     {
         public static void Initialize()
         {
-            EventSink.Crashed += new CrashedEventHandler(EventSink_Crashed);
-            EventSink.Shutdown += new ShutdownEventHandler(EventSink_Shutdown);
+            EventSink.Crashed += EventSink_Crashed;
+            EventSink.Shutdown += EventSink_Shutdown;
         }
 
         public static void EventSink_Crashed(CrashedEventArgs e)
@@ -16,8 +16,9 @@ namespace Server.Misc
             {
                 World.Broadcast(0x35, true, "The server has crashed.");
             }
-            catch
+            catch (Exception ex)
             {
+                Diagnostics.ExceptionLogging.LogException(ex);
             }
         }
 
@@ -27,8 +28,9 @@ namespace Server.Misc
             {
                 World.Broadcast(0x35, true, "The server has shut down.");
             }
-            catch
+            catch (Exception ex)
             {
+                Diagnostics.ExceptionLogging.LogException(ex);
             }
         }
     }

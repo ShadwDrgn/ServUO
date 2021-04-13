@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class PileofInspectedAgapiteIngots : Item
@@ -8,9 +6,7 @@ namespace Server.Items
         public PileofInspectedAgapiteIngots()
             : base(0x1BEA)
         {
-            this.Name = "Pile of Inspected Agapite Ingots";
-
-            this.Hue = 2425;
+            Hue = CraftResources.GetHue(CraftResource.Agapite);
         }
 
         public PileofInspectedAgapiteIngots(Serial serial)
@@ -18,18 +14,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1113770;
-            }
-        }//Essence Box
+        public override int LabelNumber => 1113028; //P ile of Inspected Agapite Ingots
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

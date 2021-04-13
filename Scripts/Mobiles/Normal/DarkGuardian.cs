@@ -1,5 +1,3 @@
-using System;
-using Server;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -43,9 +41,6 @@ namespace Server.Mobiles
 
             Fame = 5000;
             Karma = -5000;
-
-            VirtualArmor = 50;
-            PackNecroReg(15, 25);
         }
 
         public DarkGuardian(Serial serial)
@@ -57,17 +52,18 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.NecroRegs, 15, 25);
+            AddLoot(LootPack.LootItemCallback(DropTreasureMap));
         }
 
-        public override OppositionGroup OppositionGroup
+        private Item DropTreasureMap(IEntity e)
         {
-            get { return OppositionGroup.FeyAndUndead; }
+            return new TreasureMap(Utility.RandomList(0, 0, 0, 1), e.Map, Spells.SpellHelper.IsEodon(e.Map, e.Location));
         }
 
-        public override int TreasureMapLevel { get { return Utility.RandomMinMax(1, 3); } }
-        public override bool BleedImmune { get { return true; } }
-        public override Poison PoisonImmune { get { return Poison.Lethal; } }
-        public override bool Unprovokable { get { return true; } }
+        public override bool BleedImmune => true;
+        public override Poison PoisonImmune => Poison.Lethal;
+        public override bool Unprovokable => true;
 
         public override void Serialize(GenericWriter writer)
         {

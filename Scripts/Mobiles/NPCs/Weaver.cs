@@ -1,50 +1,32 @@
+using Server.Engines.BulkOrders;
 using System;
 using System.Collections.Generic;
-using Server.Engines.BulkOrders;
 
 namespace Server.Mobiles
 {
     public class Weaver : BaseVendor
     {
         private readonly List<SBInfo> m_SBInfos = new List<SBInfo>();
-        protected override List<SBInfo> SBInfos
-        {
-            get
-            {
-                return this.m_SBInfos;
-            }
-        }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
-        public override NpcGuild NpcGuild
-        {
-            get
-            {
-                return NpcGuild.TailorsGuild;
-            }
-        }
+        public override NpcGuild NpcGuild => NpcGuild.TailorsGuild;
 
         [Constructable]
         public Weaver()
             : base("the weaver")
         {
-            this.SetSkill(SkillName.Tailoring, 65.0, 88.0);
+            SetSkill(SkillName.Tailoring, 65.0, 88.0);
         }
 
         public override void InitSBInfo()
         {
-            this.m_SBInfos.Add(new SBWeaver());
+            m_SBInfos.Add(new SBWeaver());
         }
 
-        public override VendorShoeType ShoeType
-        {
-            get
-            {
-                return VendorShoeType.Sandals;
-            }
-        }
+        public override VendorShoeType ShoeType => VendorShoeType.Sandals;
 
         #region Bulk Orders
-        public override BODType BODType { get { return BODType.Tailor; } }
+        public override BODType BODType => BODType.Tailor;
 
         public override Item CreateBulkOrder(Mobile from, bool fromContextMenu)
         {
@@ -90,7 +72,7 @@ namespace Server.Mobiles
 
         public override void OnSuccessfulBulkOrderReceive(Mobile from)
         {
-            if (Core.SE && from is PlayerMobile)
+            if (from is PlayerMobile)
                 ((PlayerMobile)from).NextTailorBulkOrder = TimeSpan.Zero;
         }
 
@@ -105,7 +87,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,18 +1,16 @@
+using Server.Network;
+using Server.Prompts;
+using Server.Engines.TreasuresOfDoom;
+
 using System;
 using System.Collections.Generic;
-
-using Server;
-using Server.Mobiles;
-using Server.Prompts;
-using Server.Network;
-using Server.Engines.Points;
 
 namespace Server.Items
 {
     public class DoomPlaque : Item
     {
-        public override int LabelNumber { get { return 1155662; } } // Plaque
-        public override bool ForceShowProperties { get { return true; } }
+        public override int LabelNumber => 1155662;  // Plaque
+        public override bool ForceShowProperties => true;
 
         public Dictionary<Mobile, DateTime> NextMessage { get; set; }
 
@@ -20,7 +18,7 @@ namespace Server.Items
 
         [Constructable]
         public DoomPlaque()
-            : base(0x4B20) 
+            : base(0x4B20)
         {
             Movable = false;
             Hue = 2500;
@@ -34,11 +32,11 @@ namespace Server.Items
             }
         }
 
-        public override bool HandlesOnMovement { get { return true; } }
+        public override bool HandlesOnMovement => true;
 
         public override void OnMovement(Mobile m, Point3D oldLocation)
         {
-            if (PointsSystem.TreasuresOfDoom.InSeason && m.Player && m.InRange(Location, 3) && m.InLOS(this))
+            if (TreasuresOfDoomEvent.Instance.Running && m.Player && m.InRange(Location, 3) && m.InLOS(this))
             {
                 if (NextMessage == null)
                 {
@@ -65,9 +63,9 @@ namespace Server.Items
                 return;
             }
 
-            var list = new List<Mobile>(NextMessage.Keys);
+            List<Mobile> list = new List<Mobile>(NextMessage.Keys);
 
-            foreach (var m in list)
+            foreach (Mobile m in list)
             {
                 if (NextMessage[m] < DateTime.UtcNow)
                 {
@@ -80,11 +78,7 @@ namespace Server.Items
 
         private class DoomPlaquePrompt : Prompt
         {
-            public override int MessageCliloc { get { return 1155661; } }
-
-            public DoomPlaquePrompt()
-            {
-            }
+            public override int MessageCliloc => 1155661;
 
             public override void OnResponse(Mobile from, string text)
             {

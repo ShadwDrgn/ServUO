@@ -1,9 +1,4 @@
-using System;
-using Server;
-using Server.Items;
-using Server.Mobiles;
 using Server.Gumps;
-using Server.Guilds;
 using Server.Network;
 
 namespace Server.Engines.VvV
@@ -38,7 +33,7 @@ namespace Server.Engines.VvV
             if (id == 0)
                 return;
 
-            var city = (VvVCity)id - 1;
+            VvVCity city = (VvVCity)id - 1;
 
             if (ViceVsVirtueSystem.Instance.ExemptCities.Contains(city))
                 ViceVsVirtueSystem.Instance.ExemptCities.Remove(city);

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class Beads : Item
@@ -8,7 +6,7 @@ namespace Server.Items
         public Beads()
             : base(0x108B)
         {
-            this.Weight = 1.0;
+            Weight = 1.0;
         }
 
         public Beads(Serial serial)
@@ -19,7 +17,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

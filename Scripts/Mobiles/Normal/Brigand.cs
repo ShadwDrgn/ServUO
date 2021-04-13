@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -47,7 +46,7 @@ namespace Server.Mobiles
             AddItem(new FancyShirt());
             AddItem(new Bandana());
 
-            switch ( Utility.Random(7))
+            switch (Utility.Random(7))
             {
                 case 0:
                     AddItem(new Longsword());
@@ -80,28 +79,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool ClickTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool ClickTitle => false;
+        public override bool AlwaysMurderer => true;
 
-        public override bool ShowFameTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool ShowFameTitle => false;
 
         public override void OnDeath(Container c)
         {
@@ -119,14 +100,12 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

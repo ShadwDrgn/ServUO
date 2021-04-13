@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class EarringBoxSet : RedVelvetGiftBox
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public EarringBoxSet()
             : base()
@@ -25,7 +23,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -49,7 +47,7 @@ namespace Server.Items
         public EarringsOfProtection(AosElementAttribute element)
             : base(0x1087, Layer.Earrings)
         {
-            Resistances[((AosElementAttribute)element)] = 2;
+            Resistances[element] = 2;
 
             m_Attribute = element;
             LootType = LootType.Blessed;
@@ -63,20 +61,8 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual AosElementAttribute Attribute
-        {
-            get
-            {
-                return m_Attribute;
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return GetItemData(m_Attribute, true);
-            }
-        }
+        public virtual AosElementAttribute Attribute => m_Attribute;
+        public override int LabelNumber => GetItemData(m_Attribute, true);
         public static AosElementAttribute RandomType()
         {
             return GetTypes(Utility.Random(5));
@@ -84,7 +70,7 @@ namespace Server.Items
 
         public static AosElementAttribute GetTypes(int value)
         {
-            switch( value )
+            switch (value)
             {
                 case 0:
                     return AosElementAttribute.Physical;
@@ -101,7 +87,7 @@ namespace Server.Items
 
         public static int GetItemData(AosElementAttribute element, bool label)
         {
-            switch( element )
+            switch (element)
             {
                 case AosElementAttribute.Physical:
                     return (label) ? 1071091 : 0;         // Earring of Protection (Physical)  1071091
@@ -123,7 +109,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
             writer.Write((int)m_Attribute);
         }
 

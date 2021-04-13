@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
 using Server.Mobiles;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Engines.BulkOrders
 {
@@ -20,7 +20,7 @@ namespace Server.Engines.BulkOrders
 
         [Constructable]
         public SmallBOD(int hue, int amountMax, Type type, int number, int graphic, bool requireExeptional, BulkMaterialType material, int graphichue = 0)
-            : base(Core.AOS ? 0x2258 : 0x14EF)
+            : base(0x2258)
         {
             Weight = 1.0;
             Hue = hue; // Blacksmith: 0x44E; Tailoring: 0x483
@@ -36,7 +36,7 @@ namespace Server.Engines.BulkOrders
         }
 
         public SmallBOD()
-            : base(Core.AOS ? 0x2258 : 0x14EF)
+            : base(0x2258)
         {
             Weight = 1.0;
             LootType = LootType.Blessed;
@@ -149,20 +149,8 @@ namespace Server.Engines.BulkOrders
             }
         }
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Complete
-        {
-            get
-            {
-                return (m_AmountCur == m_AmountMax);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1045151;
-            }
-        }// a bulk order deed
+        public bool Complete => (m_AmountCur == m_AmountMax);
+        public override int LabelNumber => 1045151;// a bulk order deed
         public static BulkMaterialType GetRandomMaterial(BulkMaterialType start, double[] chances)
         {
             double random = Utility.RandomDouble();
@@ -180,7 +168,7 @@ namespace Server.Engines.BulkOrders
 
         public static BulkMaterialType GetMaterial(CraftResource resource)
         {
-            switch ( resource )
+            switch (resource)
             {
                 case CraftResource.DullCopper:
                     return BulkMaterialType.DullCopper;
@@ -240,15 +228,15 @@ namespace Server.Engines.BulkOrders
         public override void OnDoubleClick(Mobile from)
         {
             if (IsChildOf(from.Backpack) || InSecureTrade || RootParent is PlayerVendor)
-			{
-				EventSink.InvokeBODUsed(new BODUsedEventArgs(from, this));
-				from.SendGump(new SmallBODGump(from, this));
-			}
+            {
+                EventSink.InvokeBODUsed(new BODUsedEventArgs(from, this));
+                from.SendGump(new SmallBODGump(from, this));
+            }
             else
-			{
-				from.SendLocalizedMessage(1045156); // You must have the deed in your backpack to use it.
-			}
-		}
+            {
+                from.SendLocalizedMessage(1045156); // You must have the deed in your backpack to use it.
+            }
+        }
 
         public override void OnDoubleClickNotAccessible(Mobile from)
         {
@@ -443,7 +431,7 @@ namespace Server.Engines.BulkOrders
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
             writer.Write(m_GraphicHue);
 
@@ -462,7 +450,7 @@ namespace Server.Engines.BulkOrders
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
                     {
@@ -487,12 +475,6 @@ namespace Server.Engines.BulkOrders
                         break;
                     }
             }
-
-            if (Weight == 0.0)
-                Weight = 1.0;
-
-            if (Core.AOS && ItemID == 0x14EF)
-                ItemID = 0x2258;
 
             if (Parent == null && Map == Map.Internal && Location == Point3D.Zero)
                 Delete();

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a crimson drake corpse")]
@@ -7,7 +5,7 @@ namespace Server.Mobiles
     {
         private ElementType m_Type;
 
-        public ElementType ElementType { get { return m_Type; } }
+        public ElementType ElementType => m_Type;
 
         [Constructable]
         public CrimsonDrake()
@@ -81,13 +79,10 @@ namespace Server.Mobiles
             Fame = 5500;
             Karma = -5500;
 
-            VirtualArmor = 46;
-
             Tamable = true;
             ControlSlots = 2;
             MinTameSkill = 85.0;
 
-            PackReg(3);
             SetSpecialAbility(SpecialAbility.DragonBreath);
         }
 
@@ -116,27 +111,28 @@ namespace Server.Mobiles
             }
         }
 
-        public override bool ReacquireOnMovement { get { return !Controlled; } }
-        public override int TreasureMapLevel { get { return 2; } }
-        public override int Meat { get { return 10; } }
-        public override int DragonBlood { get { return 8; } }
-        public override int Hides { get { return 22; } }
-        public override HideType HideType { get { return HideType.Horned; } }
-        public override int Scales { get { return 2; } }
-        public override ScaleType ScaleType { get { return ScaleType.Black; } }
-        public override FoodType FavoriteFood { get { return FoodType.Meat | FoodType.Fish; } }
-        public override bool CanFly { get { return true; } }
+        public override bool ReacquireOnMovement => !Controlled;
+        public override int TreasureMapLevel => 2;
+        public override int Meat => 10;
+        public override int DragonBlood => 8;
+        public override int Hides => 22;
+        public override HideType HideType => HideType.Horned;
+        public override int Scales => 2;
+        public override ScaleType ScaleType => ScaleType.Black;
+        public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
+        public override bool CanFly => true;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.MageryRegs, 3);
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write((int)m_Type);
         }

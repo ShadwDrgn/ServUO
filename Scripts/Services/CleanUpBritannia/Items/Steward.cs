@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
@@ -10,6 +7,9 @@ using Server.Network;
 using Server.Prompts;
 using Server.Spells;
 using Server.Targeting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server.Mobiles
 {
@@ -17,9 +17,9 @@ namespace Server.Mobiles
     {
         private Dictionary<Mobile, DateTime> _Table;
 
-        public override bool NoHouseRestrictions { get { return true; } }
-        public override bool ClickTitle { get { return false; } }
-        public override bool IsInvulnerable { get { return true; } }
+        public override bool NoHouseRestrictions => true;
+        public override bool ClickTitle => false;
+        public override bool IsInvulnerable => true;
 
         private BaseHouse m_House;
         public Mobile Owner { get; set; }
@@ -61,8 +61,10 @@ namespace Server.Mobiles
             Keyword = "";
             _Table = new Dictionary<Mobile, DateTime>();
 
-            Container pack = new StewardBackpack(Owner, this);
-            pack.Movable = false;
+            Container pack = new StewardBackpack(Owner, this)
+            {
+                Movable = false
+            };
             AddItem(pack);
         }
 
@@ -106,10 +108,6 @@ namespace Server.Mobiles
                 return true;
 
             return false;
-        }
-
-        public override void OnAosSingleClick(Mobile from)
-        {
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -200,7 +198,7 @@ namespace Server.Mobiles
         {
             base.GetContextMenuEntries(from, list);
 
-            if (IsOwner(Owner))
+            if (IsOwner(from))
             {
                 if (from.Alive && from.InRange(this, 4))
                     list.Add(new CustomizeBodyEntry(from, this));
@@ -224,8 +222,8 @@ namespace Server.Mobiles
 
         private class RenameEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public RenameEntry(Mobile from, Mobile m)
                 : base(1155203, 2)
@@ -243,7 +241,7 @@ namespace Server.Mobiles
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc { get { return 1062433; } }
+            public override int MessageCliloc => 1062433;
             private readonly Mobile _Mannequin;
 
             public RenamePrompt(Mobile m)
@@ -267,8 +265,8 @@ namespace Server.Mobiles
 
         private class SetKeywordEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public SetKeywordEntry(Mobile from, Mobile m)
                 : base(1153254, 4)
@@ -312,7 +310,7 @@ namespace Server.Mobiles
 
         private static bool ContainsDisallowedSpeech(string text)
         {
-            foreach (var word in ProfanityProtection.Disallowed)
+            foreach (string word in ProfanityProtection.Disallowed)
             {
                 if (text.Contains(word))
                     return true;
@@ -322,8 +320,8 @@ namespace Server.Mobiles
 
         private class OpenBackpackEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public OpenBackpackEntry(Mobile from, Mobile m)
                 : base(3006145, 4)
@@ -341,8 +339,8 @@ namespace Server.Mobiles
 
         private class CustomizeBodyEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public CustomizeBodyEntry(Mobile from, Mobile m)
                 : base(1151585, 4)
@@ -359,8 +357,8 @@ namespace Server.Mobiles
 
         private class SwitchClothesEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Steward _Mannequin;
+            private readonly Mobile _From;
+            private readonly Steward _Mannequin;
 
             public SwitchClothesEntry(Mobile from, Steward m)
                 : base(1151606, 2)
@@ -427,8 +425,8 @@ namespace Server.Mobiles
 
         private class RotateEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public RotateEntry(Mobile from, Mobile m)
                 : base(1151586, 2)
@@ -453,8 +451,8 @@ namespace Server.Mobiles
 
         private class RedeedEntry : ContextMenuEntry
         {
-            private Mobile _From;
-            private Mobile _Mannequin;
+            private readonly Mobile _From;
+            private readonly Mobile _Mannequin;
 
             public RedeedEntry(Mobile from, Mobile m)
                 : base(1151601, 2)
@@ -495,9 +493,9 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
-            writer.Write((Item)House);
+            writer.Write(House);
             writer.Write(Owner);
             writer.Write(Keyword);
         }
@@ -542,7 +540,7 @@ namespace Server.Mobiles
             Layer = Layer.Backpack;
         }
 
-        public override int DefaultMaxWeight { get { return 400; } }
+        public override int DefaultMaxWeight => 400;
 
         public StewardBackpack(Serial serial)
             : base(serial)
@@ -575,7 +573,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
             writer.Write(_Mannequin);
             writer.Write(_Owner);
@@ -605,8 +603,8 @@ namespace Server.Mobiles
 
     public class MannequinGump : Gump
     {
-        private Mobile _From;
-        private Mobile _Mannequin;
+        private readonly Mobile _From;
+        private readonly Mobile _Mannequin;
 
         public MannequinGump(Mobile from, Mobile m)
             : base(50, 50)
@@ -773,7 +771,7 @@ namespace Server.Mobiles
     [Flipable(0x14F0, 0x14EF)]
     public class StewardDeed : Item
     {
-        public override int LabelNumber { get { return 1153344; } } // Steward Deed
+        public override int LabelNumber => 1153344;  // Steward Deed
 
         [Constructable]
         public StewardDeed()
@@ -826,7 +824,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -838,7 +836,7 @@ namespace Server.Mobiles
 
     public class PlaceTarget : Target
     {
-        private Item _Deed;
+        private readonly Item _Deed;
 
         public PlaceTarget(Item deed)
             : base(-1, true, TargetFlags.None)

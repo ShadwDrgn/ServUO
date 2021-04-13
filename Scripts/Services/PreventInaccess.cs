@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Server.Misc
@@ -32,7 +31,7 @@ namespace Server.Misc
             m_MoveHistory = new Dictionary<Mobile, LocationInfo>();
 
             if (Enabled)
-                EventSink.Login += new LoginEventHandler(OnLogin);
+                EventSink.Login += OnLogin;
         }
 
         public static void OnLogin(LoginEventArgs e)
@@ -77,24 +76,12 @@ namespace Server.Misc
             private readonly Map m_Map;
             public LocationInfo(Point3D loc, Map map)
             {
-                this.m_Location = loc;
-                this.m_Map = map;
+                m_Location = loc;
+                m_Map = map;
             }
 
-            public Point3D Location
-            {
-                get
-                {
-                    return this.m_Location;
-                }
-            }
-            public Map Map
-            {
-                get
-                {
-                    return this.m_Map;
-                }
-            }
+            public Point3D Location => m_Location;
+            public Map Map => m_Map;
         }
     }
 }

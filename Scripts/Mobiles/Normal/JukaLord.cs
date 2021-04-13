@@ -1,13 +1,12 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a juka corpse")] 
+    [CorpseName("a juka corpse")]
     public class JukaLord : BaseCreature
     {
-		public override double HealChance { get { return 1.0; } }
-		
+        public override double HealChance => 1.0;
+
         [Constructable]
         public JukaLord()
             : base(AIType.AI_Archer, FightMode.Closest, 10, 3, 0.2, 0.4)
@@ -42,19 +41,6 @@ namespace Server.Mobiles
             Fame = 15000;
             Karma = -15000;
 
-            VirtualArmor = 28;
-
-            Container pack = new Backpack();
-
-            pack.DropItem(new Arrow(Utility.RandomMinMax(25, 35)));
-            pack.DropItem(new Arrow(Utility.RandomMinMax(25, 35)));
-            pack.DropItem(new Bandage(Utility.RandomMinMax(5, 15)));
-            pack.DropItem(new Bandage(Utility.RandomMinMax(5, 15)));
-            pack.DropItem(Loot.RandomGem());
-            pack.DropItem(new ArcaneGem());
-
-            PackItem(pack);
-
             AddItem(new JukaBow());
         }
 
@@ -63,38 +49,28 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override bool AlwaysMurderer => true;
+        public override bool CanRummageCorpses => true;
+        public override int Meat => 1;
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.Rich);
-            this.AddLoot(LootPack.Average);
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.Average);
+            AddLoot(LootPack.LootItemCallback(AddLootContainer));
+        }
+
+        private Item AddLootContainer(IEntity e)
+        {
+            var pack = new Backpack();
+
+            pack.DropItem(new Arrow(Utility.RandomMinMax(25, 35)));
+            pack.DropItem(new Arrow(Utility.RandomMinMax(25, 35)));
+            pack.DropItem(new Bandage(Utility.RandomMinMax(5, 15)));
+            pack.DropItem(new Bandage(Utility.RandomMinMax(5, 15)));
+            pack.DropItem(Loot.RandomGem());
+            pack.DropItem(new ArcaneGem());
+
+            return pack;
         }
 
         public override void OnDamage(int amount, Mobile from, bool willKill)
@@ -109,7 +85,7 @@ namespace Server.Mobiles
                     "{0}!!  You will pay for that!"
                 };
 
-                this.Say(true, String.Format(toSay[Utility.Random(toSay.Length)], from.Name));
+                Say(true, string.Format(toSay[Utility.Random(toSay.Length)], from.Name));
             }
 
             base.OnDamage(amount, from, willKill);
@@ -138,7 +114,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

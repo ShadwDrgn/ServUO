@@ -1,6 +1,6 @@
-using Server.Network;
 using System;
 using System.Collections.Generic;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -11,24 +11,10 @@ namespace Server.Items
     {
         private static readonly Dictionary<Mobile, ExpireTimer> m_Table = new Dictionary<Mobile, ExpireTimer>();
 
-        public ColdWind()
-        {
-        }
+        public override int BaseMana => 20;
 
-        public override int BaseMana
-        {
-            get
-            {
-                return 20;
-            }
-        }
-        public override double DamageScalar
-        {
-            get
-            {
-                return 1.5;
-            }
-        }
+        public override double DamageScalar => 1.5;
+
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
             if (!Validate(attacker) || !CheckMana(attacker, true))

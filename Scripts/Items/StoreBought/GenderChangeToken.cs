@@ -1,16 +1,15 @@
-﻿using System;
-using Server;
+﻿using Server.Gumps;
 using Server.Mobiles;
-using Server.Gumps;
+using System;
 
 namespace Server.Items
 {
     public class GenderChangeToken : Item, IPromotionalToken
     {
-        public override int LabelNumber { get { return 1070997; } } // a promotional token
-        public TextDefinition ItemName { get { return 1075252; } } // gender change
+        public override int LabelNumber => 1070997;  // a promotional token
+        public TextDefinition ItemName => 1075252;  // gender change
 
-        public Type GumpType { get { return typeof(GenderChangeConfirmGump); } }
+        public Type GumpType => typeof(GenderChangeConfirmGump);
 
         [Constructable]
         public GenderChangeToken()
@@ -25,7 +24,7 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(1062334); // This item must be in your backpack to be used.
             }
-            else if (from.IsBodyMod || from.HueMod > 0 || !from.CanBeginAction(typeof(Server.Spells.Fifth.IncognitoSpell)))
+            else if (from.IsBodyMod || from.HueMod > 0 || !from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
             {
                 from.SendLocalizedMessage(1073648); // You may only proceed while in your original state...
             }
@@ -47,7 +46,7 @@ namespace Server.Items
             if (!IsChildOf(from.Backpack))
                 return;
 
-            if (from.IsBodyMod || from.HueMod > 0 || !from.CanBeginAction(typeof(Server.Spells.Fifth.IncognitoSpell)))
+            if (from.IsBodyMod || from.HueMod > 0 || !from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
             {
                 from.SendLocalizedMessage(1073648); // You may only proceed while in your original state...
             }
@@ -174,7 +173,7 @@ namespace Server.Items
         {
             if (info.ButtonID == 1 && Token.IsChildOf(User.Backpack))
             {
-                if (User.IsBodyMod || User.HueMod > 0 || !User.CanBeginAction(typeof(Server.Spells.Fifth.IncognitoSpell)))
+                if (User.IsBodyMod || User.HueMod > 0 || !User.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
                 {
                     User.SendLocalizedMessage(1073648); // You may only proceed while in your original state...
                 }

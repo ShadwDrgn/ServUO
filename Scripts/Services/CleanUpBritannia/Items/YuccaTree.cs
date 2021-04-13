@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class YuccaTree : Item
     {
@@ -8,7 +6,7 @@ namespace Server.Items
         public YuccaTree()
             : base(0x0D37)
         {
-            this.Weight = 10;
+            Weight = 10;
         }
 
         public YuccaTree(Serial serial)
@@ -16,18 +14,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1023383;
-            }
-        }// yucca
+        public override int LabelNumber => 1023383;// yucca
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

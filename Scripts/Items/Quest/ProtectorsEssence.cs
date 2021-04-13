@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class ProtectorsEssence : Item
@@ -15,18 +13,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073159;
-            }
-        }// Protector's Essence
+        public override int LabelNumber => 1073159;// Protector's Essence
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

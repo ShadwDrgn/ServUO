@@ -1,26 +1,23 @@
-using System;
-using System.Collections.Generic;
-
-using Server;
+using Server.Engines.SeasonalEvents;
+using Server.Engines.TreasuresOfKotlCity;
 using Server.Items;
 using Server.Mobiles;
-using Server.Commands;
-using Server.Engines.TreasuresOfKotlCity;
-using Server.Engines.SeasonalEvents;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Engines.Points
 {
     public class KotlCityData : PointsSystem
     {
-        public override PointsType Loyalty { get { return PointsType.TreasuresOfKotlCity; } }
-        public override TextDefinition Name { get { return m_Name; } }
-        public override bool AutoAdd { get { return true; } }
-        public override double MaxPoints { get { return double.MaxValue; } }
-        public override bool ShowOnLoyaltyGump { get { return false; } }
+        public override PointsType Loyalty => PointsType.TreasuresOfKotlCity;
+        public override TextDefinition Name => m_Name;
+        public override bool AutoAdd => true;
+        public override double MaxPoints => double.MaxValue;
+        public override bool ShowOnLoyaltyGump => false;
 
-        private TextDefinition m_Name = null;
+        private readonly TextDefinition m_Name = null;
 
-        public bool Enabled { get { return SeasonalEventSystem.IsActive(EventType.TreasuresOfKotlCity); } }
+        public bool Enabled => SeasonalEventSystem.IsActive(EventType.TreasuresOfKotlCity);
 
         public KotlCityData()
         {
@@ -34,11 +31,11 @@ namespace Server.Engines.Points
 
         public override void ProcessKill(Mobile victim, Mobile damager)
         {
-            var bc = victim as BaseCreature;
+            BaseCreature bc = victim as BaseCreature;
 
             if (!Enabled || bc == null || bc.Controlled || bc.Summoned || !damager.Alive)
                 return;
-                
+
             Region r = bc.Region;
 
             if (damager is PlayerMobile && r.IsPartOf("KotlCity"))

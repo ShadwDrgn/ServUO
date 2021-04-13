@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class BlueSnowflake : Item
@@ -8,8 +6,8 @@ namespace Server.Items
         public BlueSnowflake()
             : base(0x232E)
         {
-            this.Weight = 1.0;
-            this.LootType = LootType.Blessed;
+            Weight = 1.0;
+            LootType = LootType.Blessed;
         }
 
         public BlueSnowflake(Serial serial)
@@ -21,7 +19,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -38,8 +36,8 @@ namespace Server.Items
         public WhiteSnowflake()
             : base(0x232F)
         {
-            this.Weight = 1.0;
-            this.LootType = LootType.Blessed;
+            Weight = 1.0;
+            LootType = LootType.Blessed;
         }
 
         public WhiteSnowflake(Serial serial)
@@ -51,7 +49,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

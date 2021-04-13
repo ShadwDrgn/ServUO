@@ -1,6 +1,6 @@
+using Server.Accounting;
 using System;
 using System.Collections.Generic;
-using Server.Accounting;
 
 namespace Server.Misc
 {
@@ -20,7 +20,7 @@ namespace Server.Misc
 
         public static void Initialize()
         {
-            EventSink.Login += new LoginEventHandler(EventSink_Login);
+            EventSink.Login += EventSink_Login;
         }
 
         private static void EventSink_Login(LoginEventArgs e)
@@ -54,13 +54,7 @@ namespace Server.Misc
 
     public abstract class GiftGiver
     {
-        public virtual TimeSpan MinimumAge
-        {
-            get
-            {
-                return TimeSpan.FromDays(30.0);
-            }
-        }
+        public virtual TimeSpan MinimumAge => TimeSpan.FromDays(30.0);
         public abstract DateTime Start { get; }
         public abstract DateTime Finish { get; }
         public abstract void GiveGift(Mobile mob);
@@ -84,7 +78,7 @@ namespace Server.Misc
 
         protected virtual void DelayGiveGift_Callback(object state)
         {
-            this.GiveGift((Mobile)state);
+            GiveGift((Mobile)state);
         }
     }
 }

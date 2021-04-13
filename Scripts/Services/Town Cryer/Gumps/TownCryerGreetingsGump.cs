@@ -1,16 +1,14 @@
-using Server;
+using Server.Gumps;
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
-using Server.Mobiles;
-using Server.Engines.Quests;
-using Server.Gumps;
 
 namespace Server.Services.TownCryer
 {
     public class TownCryerGreetingsGump : BaseTownCryerGump
     {
         public int Page { get; private set; }
-        public int Pages { get { return TownCryerSystem.GreetingsEntries.Count; } }
+        public int Pages => TownCryerSystem.GreetingsEntries.Count;
 
         public TownCryerGreetingEntry Entry { get; private set; }
 
@@ -24,7 +22,7 @@ namespace Server.Services.TownCryer
         {
             base.AddGumpLayout();
 
-            var list = new List<TownCryerGreetingEntry>(TownCryerSystem.GreetingsEntries);
+            List<TownCryerGreetingEntry> list = new List<TownCryerGreetingEntry>(TownCryerSystem.GreetingsEntries);
             list.Sort();
 
             Entry = list[0];
@@ -40,7 +38,7 @@ namespace Server.Services.TownCryer
             {
                 if (Entry.Title.Number > 0)
                 {
-                    AddHtmlLocalized(78, y, 700, 400, Entry.Title.Number, false, false);
+                    AddHtmlLocalized(78, y, 700, 400, CenterLoc, string.Format("#{0}", Entry.Title.Number), C32216(0x080808), false, false);
                 }
                 else
                 {
@@ -56,11 +54,11 @@ namespace Server.Services.TownCryer
             {
                 AddHtmlLocalized(78, y, 700, 400, Entry.Body1.Number, false, false);
             }
-            else if (!String.IsNullOrEmpty(Entry.Body1.String))
+            else if (!string.IsNullOrEmpty(Entry.Body1.String))
             {
-                var str = Entry.Body1.String;
+                string str = Entry.Body1.String;
 
-                if (!String.IsNullOrEmpty(Entry.Body2))
+                if (!string.IsNullOrEmpty(Entry.Body2))
                 {
                     if (!str.EndsWith("<br>"))
                     {
@@ -70,7 +68,7 @@ namespace Server.Services.TownCryer
                     str += Entry.Body2;
                 }
 
-                if (!String.IsNullOrEmpty(Entry.Body3))
+                if (!string.IsNullOrEmpty(Entry.Body3))
                 {
                     if (!str.EndsWith("<br>"))
                     {
@@ -85,8 +83,8 @@ namespace Server.Services.TownCryer
 
             if (Entry.Expires != DateTime.MinValue)
             {
-                AddHtmlLocalized(50, 550, 200, 20, 1060658, String.Format("{0}\t{1}", "Created", Entry.Created.ToShortDateString()), 0, false, false);
-                AddHtmlLocalized(50, 570, 200, 20, 1060659, String.Format("{0}\t{1}", "Expires", Entry.Expires.ToShortDateString()), 0, false, false);
+                AddHtmlLocalized(50, 550, 200, 20, 1060658, string.Format("{0}\t{1}", "Created", Entry.Created.ToShortDateString()), 0, false, false);
+                AddHtmlLocalized(50, 570, 200, 20, 1060659, string.Format("{0}\t{1}", "Expires", Entry.Expires.ToShortDateString()), 0, false, false);
             }
 
             AddButton(350, 570, 0x605, 0x606, 1, GumpButtonType.Reply, 0);
@@ -94,7 +92,7 @@ namespace Server.Services.TownCryer
             AddButton(430, 570, 0x607, 0x608, 3, GumpButtonType.Reply, 0);
             AddButton(455, 570, 0x603, 0x604, 4, GumpButtonType.Reply, 0);
 
-            AddHtml(395, 570, 35, 20, Center(String.Format("{0}/{1}", (Page + 1).ToString(), Pages.ToString())), false, false);
+            AddHtml(395, 570, 35, 20, Center(string.Format("{0}/{1}", (Page + 1).ToString(), Pages.ToString())), false, false);
 
             AddButton(525, 625, 0x5FF, 0x600, 5, GumpButtonType.Reply, 0);
             AddHtmlLocalized(550, 625, 300, 20, 1158386, false, false); // Close and do not show this version again
@@ -103,11 +101,11 @@ namespace Server.Services.TownCryer
             {
                 if (!string.IsNullOrEmpty(Entry.LinkText))
                 {
-                    AddHtml(50, 490, 745, 40, String.Format("<a href=\"{0}\">{1}</a>", Entry.Link, Entry.LinkText), false, false);
+                    AddHtml(50, 490, 745, 40, string.Format("<a href=\"{0}\">{1}</a>", Entry.Link, Entry.LinkText), false, false);
                 }
                 else
                 {
-                    AddHtml(50, 490, 745, 40, String.Format("<a href=\"{0}\">{1}</a>", Entry.Link, Entry.Link), false, false);
+                    AddHtml(50, 490, 745, 40, string.Format("<a href=\"{0}\">{1}</a>", Entry.Link, Entry.Link), false, false);
                 }
             }
 
@@ -164,7 +162,7 @@ namespace Server.Services.TownCryer
                 case 7:
                     if (Entry != null)
                     {
-                        BaseGump.SendGump(new CreateGreetingEntryGump(User, Cryer, Entry));
+                        SendGump(new CreateGreetingEntryGump(User, Cryer, Entry));
                     }
                     else
                     {
@@ -172,7 +170,7 @@ namespace Server.Services.TownCryer
                     }
                     break;
                 case 8:
-                    BaseGump.SendGump(new CreateGreetingEntryGump(User, Cryer));
+                    SendGump(new CreateGreetingEntryGump(User, Cryer));
                     break;
                 case 9:
                     Refresh();

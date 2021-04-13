@@ -1,8 +1,7 @@
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
@@ -51,7 +50,7 @@ namespace Server.Engines.Quests
 
         public static TimeSpan GetCooldown(TierQuestInfo tierInfo, Type questType)
         {
-            var info = tierInfo.Tiers.FirstOrDefault(i => i.Quests.Any(q => q == questType));
+            TierInfo info = tierInfo.Tiers.FirstOrDefault(i => i.Quests.Any(q => q == questType));
 
             if (info != null)
             {
@@ -63,7 +62,7 @@ namespace Server.Engines.Quests
 
         public static int GetCompleteReq(TierQuestInfo tierInfo, Type questType)
         {
-            var info = tierInfo.Tiers.FirstOrDefault(i => i.Quests.Any(q => q == questType));
+            TierInfo info = tierInfo.Tiers.FirstOrDefault(i => i.Quests.Any(q => q == questType));
 
             if (info != null)
             {
@@ -77,7 +76,7 @@ namespace Server.Engines.Quests
 
         public static void CompleteQuest(PlayerMobile pm, ITierQuest quest)
         {
-            var type = quest.GetType();
+            Type type = quest.GetType();
 
             if (!PlayerTierInfo.ContainsKey(pm))
             {
@@ -103,7 +102,7 @@ namespace Server.Engines.Quests
 
             int completed = 0;
 
-            foreach (var kvp in PlayerTierInfo[pm])
+            foreach (KeyValuePair<Type, int> kvp in PlayerTierInfo[pm])
             {
                 if (questType == kvp.Key)
                 {
@@ -132,16 +131,16 @@ namespace Server.Engines.Quests
 
         public static BaseQuest RandomQuest(PlayerMobile pm, ITierQuester quester)
         {
-            var info = quester.TierInfo;
+            TierQuestInfo info = quester.TierInfo;
 
             if (info != null)
             {
-                var list = new List<Type>();
+                List<Type> list = new List<Type>();
                 int lastTierComplete = 0;
 
-                for(int i = 0; i < info.Tiers.Length; i++)
+                for (int i = 0; i < info.Tiers.Length; i++)
                 {
-                    var tier = info.Tiers[i];
+                    TierInfo tier = info.Tiers[i];
 
                     if (lastTierComplete >= tier.ToComplete)
                     {
@@ -150,7 +149,7 @@ namespace Server.Engines.Quests
 
                     lastTierComplete = 0;
 
-                    foreach (var quest in tier.Quests)
+                    foreach (Type quest in tier.Quests)
                     {
                         lastTierComplete += HasCompleted(pm, quest, info);
                     }
@@ -158,7 +157,7 @@ namespace Server.Engines.Quests
 
                 if (list.Count > 0)
                 {
-                    return QuestHelper.Construct(list[Utility.Random(list.Count)]) as BaseQuest;
+                    return QuestHelper.Construct(list[Utility.Random(list.Count)]);
                 }
             }
 
@@ -171,12 +170,12 @@ namespace Server.Engines.Quests
 
             writer.Write(PlayerTierInfo.Count);
 
-            foreach (var kvp in PlayerTierInfo)
+            foreach (KeyValuePair<PlayerMobile, Dictionary<Type, int>> kvp in PlayerTierInfo)
             {
                 writer.WriteMobile(kvp.Key);
                 writer.Write(kvp.Value.Count);
 
-                foreach (var kvp2 in kvp.Value)
+                foreach (KeyValuePair<Type, int> kvp2 in kvp.Value)
                 {
                     writer.Write(kvp2.Key.FullName);
                     writer.Write(kvp2.Value);
@@ -188,18 +187,18 @@ namespace Server.Engines.Quests
         {
             reader.ReadInt();
 
-            var count = reader.ReadInt();
+            int count = reader.ReadInt();
 
             for (int i = 0; i < count; i++)
             {
-                var pm = reader.ReadMobile<PlayerMobile>();
-                var c = reader.ReadInt();
-                var list = new Dictionary<Type, int>();
+                PlayerMobile pm = reader.ReadMobile<PlayerMobile>();
+                int c = reader.ReadInt();
+                Dictionary<Type, int> list = new Dictionary<Type, int>();
 
                 for (int j = 0; j < c; j++)
                 {
-                    var type = ScriptCompiler.FindTypeByFullName(reader.ReadString());
-                    var completed = reader.ReadInt();
+                    Type type = ScriptCompiler.FindTypeByFullName(reader.ReadString());
+                    int completed = reader.ReadInt();
 
                     list[type] = completed;
                 }

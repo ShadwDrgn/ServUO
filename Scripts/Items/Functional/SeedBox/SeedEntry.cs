@@ -1,7 +1,3 @@
-using System;
-using Server;
-using Server.Engines.Plants;
-
 namespace Server.Engines.Plants
 {
     public class SeedEntry
@@ -28,7 +24,7 @@ namespace Server.Engines.Plants
 
         public void Serialize(GenericWriter writer)
         {
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(Seed);
             writer.Write(Image);

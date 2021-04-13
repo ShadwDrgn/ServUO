@@ -1,8 +1,7 @@
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -13,17 +12,8 @@ namespace Server.Items
     public class Disarm : WeaponAbility
     {
         public static readonly TimeSpan BlockEquipDuration = TimeSpan.FromSeconds(5.0);
-        public Disarm()
-        {
-        }
 
-        public override int BaseMana
-        {
-            get
-            {
-                return 20;
-            }
-        }
+        public override int BaseMana => 20;
 
         public override bool RequiresSecondarySkill(Mobile from)
         {
@@ -37,7 +27,7 @@ namespace Server.Items
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
-            if (!this.Validate(attacker))
+            if (!Validate(attacker))
                 return;
 
             ClearCurrentAbility(attacker);
@@ -60,11 +50,11 @@ namespace Server.Items
             {
                 attacker.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
             }
-            else if (toDisarm == null || toDisarm is BaseShield || toDisarm is Spellbook && !Core.ML)
+            else if (toDisarm == null || toDisarm is BaseShield)
             {
                 attacker.SendLocalizedMessage(1060849); // Your target is already unarmed!
             }
-            else if (this.CheckMana(attacker, true))
+            else if (CheckMana(attacker, true))
             {
                 attacker.SendLocalizedMessage(1060092); // You disarm their weapon!
                 defender.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
@@ -73,8 +63,8 @@ namespace Server.Items
                 defender.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
 
                 pack.DropItem(toDisarm);
-                
-                BuffInfo.AddBuff(defender, new BuffInfo( BuffIcon.NoRearm, 1075637, BlockEquipDuration, defender));
+
+                BuffInfo.AddBuff(defender, new BuffInfo(BuffIcon.NoRearm, 1075637, BlockEquipDuration, defender));
 
                 BaseWeapon.BlockEquip(defender, BlockEquipDuration);
 
@@ -87,12 +77,11 @@ namespace Server.Items
                     });
                 }
 
-                if(Core.SA)
-                    AddImmunity(defender, Core.TOL && attacker.Weapon is Fists ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(15));
+                AddImmunity(defender, attacker.Weapon is Fists ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(15));
             }
         }
 
-        private Type[] _AutoRearms =
+        private readonly Type[] _AutoRearms =
         {
             typeof(BritannianInfantry)
         };
@@ -111,7 +100,7 @@ namespace Server.Items
 
             _Immunity.Add(m);
 
-            Timer.DelayCall<Mobile>(duration, mob =>
+            Timer.DelayCall(duration, mob =>
                 {
                     if (_Immunity != null && _Immunity.Contains(mob))
                         _Immunity.Remove(mob);

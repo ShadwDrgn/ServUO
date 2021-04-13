@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -41,9 +40,6 @@ namespace Server.Mobiles
 
             Fame = 4000;
             Karma = -4000;
-            PackNecroReg(6, 8);
-
-            PackBodyPartOrBones();
 
             SetWeaponAbility(WeaponAbility.BleedAttack);
         }
@@ -53,26 +49,16 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
+        public override bool BleedImmune => true;
+        public override Poison PoisonImmune => Poison.Greater;
+        public override Poison HitPoison => Poison.Greater;
+
+        public override void GenerateLoot()
         {
-            get
-            {
-                return true;
-            }
-        }
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Greater;
-            }
-        }
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Greater;
-            }
+            AddLoot(LootPack.Rich, 2);
+            AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.NecroRegs, 6, 8);
+            AddLoot(LootPack.BodyPartsAndBones);
         }
 
         public override int GetAngerSound()
@@ -99,20 +85,13 @@ namespace Server.Mobiles
         {
             return 0x515;
         }
-		
-		public override int TreasureMapLevel { get { return 3; } }
 
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.Rich, 2);
-            AddLoot(LootPack.MedScrolls, 2);
-            // TODO: Bone Pile
-        }
+        public override int TreasureMapLevel => 3;
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

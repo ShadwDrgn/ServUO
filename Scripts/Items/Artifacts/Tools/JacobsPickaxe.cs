@@ -1,5 +1,4 @@
 using System;
-using Server.Mobiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,16 +6,16 @@ namespace Server.Items
 {
     public class JacobsPickaxe : Pickaxe
     {
-        private static List<JacobsPickaxe> _Instances = new List<JacobsPickaxe>();
+        private static readonly List<JacobsPickaxe> _Instances = new List<JacobsPickaxe>();
 
         public static void Initialize()
         {
-            Timer.DelayCall(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5), new TimerCallback(Tick_Callback));
+            Timer.DelayCall(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5), Tick_Callback);
         }
 
         private static void Tick_Callback()
         {
-            foreach (var pickaxe in _Instances.Where(p => p != null && !p.Deleted))
+            foreach (JacobsPickaxe pickaxe in _Instances.Where(p => p != null && !p.Deleted))
             {
                 int charge = pickaxe.UsesRemaining + 10 > 20 ? 20 - pickaxe.UsesRemaining : 10;
 
@@ -27,7 +26,7 @@ namespace Server.Items
             }
         }
 
-        public override int LabelNumber { get { return 1077758; } } // Jacob's Pickaxe
+        public override int LabelNumber => 1077758;  // Jacob's Pickaxe
 
         [Constructable]
         public JacobsPickaxe()
@@ -70,7 +69,7 @@ namespace Server.Items
 
         public override void Serialize(GenericWriter writer)
         {
-			base.Serialize(writer);
+            base.Serialize(writer);
             writer.WriteEncodedInt(0); // version
         }
 
@@ -78,7 +77,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
             int version = reader.ReadEncodedInt();
-			_Instances.Add(this);
+            _Instances.Add(this);
         }
     }
 }

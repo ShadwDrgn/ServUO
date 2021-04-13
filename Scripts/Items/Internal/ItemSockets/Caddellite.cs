@@ -1,21 +1,13 @@
-using System;
-
-using Server;
-using Server.Mobiles;
 using Server.Engines.Craft;
-using Server.Spells;
-using Server.Engines.Points;
-using Server.Engines.Khaldun;
 using Server.Engines.Harvest;
+using Server.Engines.Khaldun;
+using Server.Mobiles;
+using Server.Spells;
 
 namespace Server.Items
 {
     public class Caddellite : ItemSocket
     {
-        public Caddellite()
-        {
-        }
-
         public override void GetProperties(ObjectPropertyList list)
         {
             if (Owner != null && !(Owner is ICombatEquipment) && !(Owner is Spellbook))
@@ -42,23 +34,36 @@ namespace Server.Items
             }
             else if (from.Player)
             {
-                Item damager = from.FindItemOnLayer(Layer.OneHanded);
+                Item damager;
 
-                if (damager == null)
+                switch (type)
                 {
-                    damager = from.FindItemOnLayer(Layer.TwoHanded);
-                }
+                    case Server.DamageType.Melee:
+                    case Server.DamageType.Ranged:
+                        damager = from.FindItemOnLayer(Layer.OneHanded);
 
-                if (damager != null && damager.HasSocket<Caddellite>())
-                {
-                    switch (type)
-                    {
-                        case Server.DamageType.Melee:
-                        case Server.DamageType.Ranged:
-                            return damager is BaseWeapon;
-                        default:
-                            return damager is Spellbook;
-                    }
+                        if (damager == null || !damager.HasSocket<Caddellite>())
+                        {
+                            damager = from.FindItemOnLayer(Layer.TwoHanded);
+                        }
+
+                        return damager != null && damager.HasSocket<Caddellite>() && damager is BaseWeapon;
+                    default:
+                        damager = from.FindItemOnLayer(Layer.OneHanded);
+
+                        if (damager != null && damager.HasSocket<Caddellite>() && damager is Spellbook)
+                        {
+                            return true;
+                        }
+
+                        damager = from.FindItemOnLayer(Layer.Neck);
+
+                        if (damager == null || !damager.HasSocket<Caddellite>())
+                        {
+                            damager = from.FindItemOnLayer(Layer.Helm);
+                        }
+
+                        return damager != null && damager.HasSocket<Caddellite>();
                 }
             }
 
@@ -67,12 +72,12 @@ namespace Server.Items
 
         public static bool IsCaddellite(Mobile from, Item item)
         {
-            return PointsSystem.Khaldun.InSeason && item is ICaddelliteTool && SpellHelper.IsAnyT2A(from.Map, from.Location);
+            return TreasuresOfKhaldunEvent.Instance.Running && item is ICaddelliteTool && SpellHelper.IsAnyT2A(from.Map, from.Location);
         }
 
         public static void OnHarvest(Mobile from, Item tool, HarvestSystem system, Item resource)
         {
-            if(IsCaddellite(from, tool))
+            if (IsCaddellite(from, tool))
             {
                 if (resource != null)
                 {
@@ -149,8 +154,8 @@ namespace Server.Items
         {
             BaseCreature pet = KhaldunTastyTreat.GetPetUnderEffects(m);
             Caddellite equipped = null;
-            var item = m.FindItemOnLayer(Layer.TwoHanded);
-            
+            Item item = m.FindItemOnLayer(Layer.TwoHanded);
+
             if (item == null)
             {
                 item = m.FindItemOnLayer(Layer.OneHanded);
@@ -168,13 +173,13 @@ namespace Server.Items
             else
             {
                 BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.CaddelliteInfused, 1158662, 1158677,
-                    String.Format("{0}\t{1}\t{2}\t{3}", equipped != null && equipped.Owner is BaseWeapon ? "100" : "0", equipped != null && equipped.Owner is Spellbook ? "100" : "0", pet != null ? pet.Name : "", pet != null ? "100" : "0")));
+                    string.Format("{0}\t{1}\t{2}\t{3}", equipped != null && equipped.Owner is BaseWeapon ? "100" : "0", equipped != null && equipped.Owner is Spellbook ? "100" : "0", pet != null ? pet.Name : "", pet != null ? "100" : "0")));
             }
         }
 
         public static void OnLogin(LoginEventArgs e)
         {
-            var pm = e.Mobile as PlayerMobile;
+            PlayerMobile pm = e.Mobile as PlayerMobile;
 
             if (pm != null)
             {

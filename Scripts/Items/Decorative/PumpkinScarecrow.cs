@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class PumpkinScarecrow : Item
     {
@@ -15,18 +13,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1096947;
-            }
-        }
+        public override int LabelNumber => 1096947;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

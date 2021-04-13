@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
 using Server.Multis;
 using Server.Regions;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -10,8 +9,6 @@ namespace Server.Mobiles
     {
         private readonly List<GenericBuyInfo> m_BuyInfo;
         private readonly IShopSellInfo m_SellInfo = new InternalSellInfo();
-
-
 
         public SBShipwright(Mobile m)
         {
@@ -21,20 +18,8 @@ namespace Server.Mobiles
             }
         }
 
-        public override IShopSellInfo SellInfo
-        {
-            get
-            {
-                return m_SellInfo;
-            }
-        }
-        public override List<GenericBuyInfo> BuyInfo
-        {
-            get
-            {
-                return m_BuyInfo;
-            }
-        }
+        public override IShopSellInfo SellInfo => m_SellInfo;
+        public override List<GenericBuyInfo> BuyInfo => m_BuyInfo;
 
         public class InternalBuyInfo : List<GenericBuyInfo>
         {
@@ -47,7 +32,7 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo("1041209", typeof(LargeBoatDeed), 12927, 20, 0x14F2, 0));
                 Add(new GenericBuyInfo("1041210", typeof(LargeDragonBoatDeed), 12927, 20, 0x14F2, 0));
 
-                if (Core.HS && m.Region is SeaMarketRegion)
+                if (m.Region is SeaMarketRegion || m.Region is TokunoDocksRegion)
                 {
                     Add(new GenericBuyInfo("1116740", typeof(TokunoGalleonDeed), 150002, 20, 0x14F2, 0));
                     Add(new GenericBuyInfo("1116739", typeof(GargishGalleonDeed), 200002, 20, 0x14F2, 0));

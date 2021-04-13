@@ -1,14 +1,12 @@
-using System;
-using Server.Items;
-using Server.Network;
 using Server.Mobiles;
+using Server.Network;
 using System.Globalization;
 
 namespace Server.Gumps
 {
     public class TithingGump : Gump
     {
-        private int MaxTithing = 100000;
+        private readonly int MaxTithing = 100000;
 
         public TithingGump(Mobile from, int offer)
             : base(100, 100)
@@ -110,8 +108,6 @@ namespace Server.Gumps
 
                                 if ((from.TithingPoints + m_Offer) > MaxTithing)
                                     m_Offer = MaxTithing - from.TithingPoints;
-
-                                Container pack = from.Backpack;
 
                                 if (Banker.Withdraw(from, m_Offer, true))
                                 {

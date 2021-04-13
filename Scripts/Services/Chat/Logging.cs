@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Server.Engines.Chat
 {
     public class ChatLogging
     {
-        public static readonly bool Enabled = true;
+        public static bool Enabled => Config.Get("Chat.Logging", false);
 
         private static StreamWriter m_Output;
         private static Dictionary<string, StreamWriter> m_OutputPerChannel;
@@ -16,7 +16,7 @@ namespace Server.Engines.Chat
             if (!Directory.Exists("Logs"))
                 Directory.CreateDirectory("Logs");
 
-            var directory = Path.Combine("Logs", "Chat");
+            string directory = Path.Combine("Logs", "Chat");
 
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
@@ -25,16 +25,18 @@ namespace Server.Engines.Chat
 
             try
             {
-                m_Output = new StreamWriter(Path.Combine(directory, string.Format("{0}.log", DateTime.UtcNow.ToLongDateString())), true);
-
-                m_Output.AutoFlush = true;
+                m_Output = new StreamWriter(Path.Combine(directory, string.Format("{0}.log", DateTime.UtcNow.ToLongDateString())), true)
+                {
+                    AutoFlush = true
+                };
 
                 m_Output.WriteLine("##############################");
                 m_Output.WriteLine("Log started on {0}", DateTime.UtcNow);
                 m_Output.WriteLine();
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
             }
         }
 
@@ -45,7 +47,7 @@ namespace Server.Engines.Chat
 
         public static void WriteLine(string channel, string text)
         {
-            if (!Enabled)
+            if (!Enabled || m_Output == null)
                 return;
 
             try
@@ -54,26 +56,29 @@ namespace Server.Engines.Chat
 
                 StreamWriter channelOutput;
 
-                if (m_OutputPerChannel.ContainsKey(channel))
+                if (m_OutputPerChannel.ContainsKey(channel) && m_OutputPerChannel[channel] != null)
                     channelOutput = m_OutputPerChannel[channel];
                 else
                 {
-                    var path = "Logs";
+                    string path = "Logs";
 
                     AppendPath(ref path, "chat");
                     AppendPath(ref path, "channels");
                     path = Path.Combine(path, string.Format("{0}.log", channel));
 
-                    channelOutput = new StreamWriter(path, true);
-                    channelOutput.AutoFlush = true;
+                    channelOutput = new StreamWriter(path, true)
+                    {
+                        AutoFlush = true
+                    };
 
                     m_OutputPerChannel[channel] = channelOutput;
                 }
 
                 channelOutput.WriteLine("{0}: {1}", DateTime.UtcNow, text);
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
             }
         }
 
@@ -109,8 +114,11 @@ namespace Server.Engines.Chat
         {
             WriteLine(channel, "{0} left the channel.", username);
 
-            if ( m_OutputPerChannel.ContainsKey( channel ) )
-            	m_OutputPerChannel[channel].Dispose();
+            if (m_OutputPerChannel.ContainsKey(channel))
+            {
+                m_OutputPerChannel[channel].Dispose();
+                m_OutputPerChannel.Remove(channel);
+            }     
         }
 
         public static void Log(string channel, string message)

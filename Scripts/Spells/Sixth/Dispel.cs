@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
@@ -19,25 +18,19 @@ namespace Server.Spells.Sixth
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.Sixth;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.Sixth;
         public override void OnCast()
         {
-            this.Caster.Target = new InternalTarget(this);
+            Caster.Target = new InternalTarget(this);
         }
 
         public class InternalTarget : Target
         {
             private readonly DispelSpell m_Owner;
             public InternalTarget(DispelSpell owner)
-                : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
+                : base(10, false, TargetFlags.Harmful)
             {
-                this.m_Owner = owner;
+                m_Owner = owner;
             }
 
             protected override void OnTarget(Mobile from, object o)
@@ -60,7 +53,7 @@ namespace Server.Spells.Sixth
                         SpellHelper.Turn(from, m);
 
                         double dispelChance = (50.0 + ((100 * (from.Skills.Magery.Value - bc.GetDispelDifficulty())) / (bc.DispelFocus * 2))) / 100;
-                        
+
                         //Skill Masteries
                         dispelChance -= ((double)SkillMasteries.MasteryInfo.EnchantedSummoningBonus(bc) / 100);
 
@@ -82,7 +75,7 @@ namespace Server.Spells.Sixth
 
             protected override void OnTargetFinish(Mobile from)
             {
-                this.m_Owner.FinishSequence();
+                m_Owner.FinishSequence();
             }
         }
     }

@@ -36,20 +36,20 @@ namespace Server.Network
 			private byte[] _buffer;
 			private int _length;
 
-			public byte[] Buffer { get { return _buffer; } }
+			public byte[] Buffer => _buffer;
 
-			public int Length { get { return _length; } }
+			public int Length => _length;
 
-			public int Available { get { return (_buffer.Length - _length); } }
+			public int Available => _buffer.Length - _length;
 
-			public bool IsFull { get { return (_length == _buffer.Length); } }
+			public bool IsFull => _length == _buffer.Length;
 
 			private Gram()
 			{ }
 
 			public int Write(byte[] buffer, int offset, int length)
 			{
-				int write = Math.Min(length, Available);
+				var write = Math.Min(length, Available);
 
 				System.Buffer.BlockCopy(buffer, offset, _buffer, _length, write);
 
@@ -73,7 +73,7 @@ namespace Server.Network
 
 		public static int CoalesceBufferSize
 		{
-			get { return m_CoalesceBufferSize; }
+			get => m_CoalesceBufferSize;
 			set
 			{
 				if (m_CoalesceBufferSize == value)
@@ -81,7 +81,7 @@ namespace Server.Network
 					return;
 				}
 
-				BufferPool old = m_UnusedBuffers;
+				var old = m_UnusedBuffers;
 
 				lock (old)
 				{
@@ -105,19 +105,21 @@ namespace Server.Network
 		public static void ReleaseBuffer(byte[] buffer)
 		{
 			lock (m_UnusedBuffers)
+			{
 				if (buffer != null && buffer.Length == m_CoalesceBufferSize)
 				{
 					m_UnusedBuffers.ReleaseBuffer(buffer);
 				}
+			}
 		}
 
 		private readonly Queue<Gram> _pending;
 
 		private Gram _buffered;
 
-		public bool IsFlushReady { get { return (_pending.Count == 0 && _buffered != null); } }
+		public bool IsFlushReady => _pending.Count == 0 && _buffered != null;
 
-		public bool IsEmpty { get { return (_pending.Count == 0 && _buffered == null); } }
+		public bool IsEmpty => _pending.Count == 0 && _buffered == null;
 
 		public SendQueue()
 		{
@@ -126,7 +128,7 @@ namespace Server.Network
 
 		public Gram CheckFlushReady()
 		{
-			Gram gram = _buffered;
+			var gram = _buffered;
 			_pending.Enqueue(_buffered);
 			_buffered = null;
 			return gram;
@@ -177,7 +179,7 @@ namespace Server.Network
 				throw new ArgumentException("Offset and length do not point to a valid segment within the buffer.");
 			}
 
-			int existingBytes = (_pending.Count * m_CoalesceBufferSize) + (_buffered == null ? 0 : _buffered.Length);
+			var existingBytes = (_pending.Count * m_CoalesceBufferSize) + (_buffered == null ? 0 : _buffered.Length);
 
 			if ((existingBytes + length) > PendingCap)
 			{
@@ -194,7 +196,7 @@ namespace Server.Network
 					_buffered = Gram.Acquire();
 				}
 
-				int bytesWritten = _buffered.Write(buffer, offset, length);
+				var bytesWritten = _buffered.Write(buffer, offset, length);
 
 				offset += bytesWritten;
 				length -= bytesWritten;

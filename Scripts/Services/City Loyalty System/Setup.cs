@@ -1,11 +1,7 @@
-using System;
-using Server;
-using Server.Mobiles;
-using Server.Items;
-using System.Collections.Generic;
-using System.Linq;
 using Server.Commands;
-using Server.Regions;
+using Server.Items;
+using System;
+using System.Linq;
 
 namespace Server.Engines.CityLoyalty
 {
@@ -146,7 +142,7 @@ namespace Server.Engines.CityLoyalty
                     }
                     else
                         board.Delete();
-                    
+
                     sys.CanUtilize = true;
 
                     m.SendMessage("{0} setup!", sys.Definition.Name);
@@ -179,7 +175,7 @@ namespace Server.Engines.CityLoyalty
 
                 if (r != null)
                 {
-                    var slim = new SlimTheFence();
+                    SlimTheFence slim = new SlimTheFence();
 
                     if (!HasType(r, slim.GetType()))
                         slim.MoveToWorld(p, Map.Felucca);
@@ -189,7 +185,7 @@ namespace Server.Engines.CityLoyalty
                 else
                     Console.WriteLine("WARNING: {0} Region not found!", name);
             }
-            
+
         }
 
         public static bool HasType(CityLoyaltySystem system, Type t)

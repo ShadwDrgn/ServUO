@@ -1,8 +1,6 @@
-﻿using Server;
+using Server.Engines.Craft;
 using System;
 using System.Collections.Generic;
-using Server.Mobiles;
-using Server.Engines.Craft;
 
 namespace Server.Items
 {
@@ -15,11 +13,11 @@ namespace Server.Items
     [Alterable(typeof(DefTailoring), typeof(GargishRunedSashOfWarding))]
     public class RunedSashOfWarding : BodySash
     {
-        public override bool IsArtifact { get { return true; } }
-        public static Dictionary<Mobile, WardingEffect> Table { get { return m_Table; } }
-        private static Dictionary<Mobile, WardingEffect> m_Table = new Dictionary<Mobile, WardingEffect>();
+        public override bool IsArtifact => true;
+        public static Dictionary<Mobile, WardingEffect> Table => m_Table;
+        private static readonly Dictionary<Mobile, WardingEffect> m_Table = new Dictionary<Mobile, WardingEffect>();
 
-        public override int LabelNumber { get { return 1116231; } }
+        public override int LabelNumber => 1116231;
 
         private int m_Charges;
         private WardingEffect m_Ward;
@@ -30,8 +28,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WardingEffect Ward { get { return m_Ward; } set { m_Ward = value; } }
 
-        public override int InitMinHits { get { return 255; } }
-        public override int InitMaxHits { get { return 255; } }
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
 
         [Constructable]
         public RunedSashOfWarding()
@@ -97,7 +95,7 @@ namespace Server.Items
                     break;
             }
 
-            list.Add(1060639, "{0}\t{1}", this.HitPoints, this.MaxHitPoints); // durability ~1_val~ / ~2_val~
+            list.Add(1060639, "{0}\t{1}", HitPoints, MaxHitPoints); // durability ~1_val~ / ~2_val~
         }
 
         public static bool IsUnderEffects(Mobile from, WardingEffect type)
@@ -124,7 +122,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
             writer.Write(m_Charges);
             writer.Write((int)m_Ward);
         }
@@ -140,9 +138,6 @@ namespace Server.Items
 
     public class GargishRunedSashOfWarding : RunedSashOfWarding
     {
-        public override Race RequiredRace { get { return Race.Gargoyle; } }
-        public override bool CanBeWornByGargoyles { get { return true; } }
-
         [Constructable]
         public GargishRunedSashOfWarding()
         {
@@ -158,7 +153,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

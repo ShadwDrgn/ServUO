@@ -1,7 +1,4 @@
-using Server.Ethics;
-using Server.Factions;
 using Server.Items;
-using Server.Services;
 
 namespace Server.Mobiles
 {
@@ -41,79 +38,7 @@ namespace Server.Mobiles
             Fame = 15000;
             Karma = -15000;
 
-            VirtualArmor = 58;
-
-            switch (Utility.Random(20))
-            {
-                case 0:
-                    PackItem(new LichFormScroll());
-                    break;
-                case 1:
-                    PackItem(new PoisonStrikeScroll());
-                    break;
-                case 2:
-                    PackItem(new StrangleScroll());
-                    break;
-                case 3:
-                    PackItem(new VengefulSpiritScroll());
-                    break;
-                case 4:
-                    PackItem(new WitherScroll());
-                    break;
-            }
-
-
-            ControlSlots = Core.SE ? 4 : 5;
-        }
-
-        public Daemon(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override double DispelDifficulty
-        {
-            get { return 125.0; }
-        }
-
-        public override double DispelFocus
-        {
-            get { return 45.0; }
-        }
-
-        public override Faction FactionAllegiance
-        {
-            get { return Shadowlords.Instance; }
-        }
-
-        public override Ethic EthicAllegiance
-        {
-            get { return Ethic.Evil; }
-        }
-
-        public override bool CanRummageCorpses
-        {
-            get { return true; }
-        }
-
-        public override Poison PoisonImmune
-        {
-            get { return Poison.Regular; }
-        }
-
-        public override int TreasureMapLevel
-        {
-            get { return 4; }
-        }
-
-        public override int Meat
-        {
-            get { return 1; }
-        }
-
-        public override bool CanFly
-        {
-            get { return true; }
+            ControlSlots = 4;
         }
 
         public override void GenerateLoot()
@@ -121,7 +46,27 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(LichFormScroll), typeof(PoisonStrikeScroll), typeof(StrangleScroll), typeof(VengefulSpiritScroll), typeof(WitherScroll) }, 25.0, 1, false, true));
         }
+
+        public Daemon(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override double DispelDifficulty => 125.0;
+
+        public override double DispelFocus => 45.0;
+
+        public override bool CanRummageCorpses => true;
+
+        public override Poison PoisonImmune => Poison.Regular;
+
+        public override int TreasureMapLevel => 4;
+
+        public override int Meat => 1;
+
+        public override bool CanFly => true;
 
         public override void Serialize(GenericWriter writer)
         {
@@ -132,7 +77,7 @@ namespace Server.Mobiles
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            var version = reader.ReadInt();
+            int version = reader.ReadInt();
         }
     }
 }

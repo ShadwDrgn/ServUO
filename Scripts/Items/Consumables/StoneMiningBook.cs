@@ -1,11 +1,10 @@
-using System;
 using Server.Mobiles;
 
 namespace Server.Items
 {
     public class StoneMiningBook : Item
     {
-        public override int LabelNumber { get { return 1153530; } } // Mining For Quality Stone
+        public override int LabelNumber => 1153530;  // Mining For Quality Stone
 
         [Constructable]
         public StoneMiningBook()
@@ -18,7 +17,7 @@ namespace Server.Items
             : base(serial)
         {
         }
-        
+
         public override void OnDoubleClick(Mobile from)
         {
             PlayerMobile pm = from as PlayerMobile;
@@ -53,7 +52,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,11 +1,8 @@
-using System;
-using Server.Mobiles;
-
 namespace Server.Items
 {
     public class NaughtyTitleDeed : BaseRewardTitleDeed
     {
-        public override TextDefinition Title { get { return new TextDefinition(1158797); } } // Naughty
+        public override TextDefinition Title => new TextDefinition(1158797);  // Naughty
 
         [Constructable]
         public NaughtyTitleDeed()
@@ -20,7 +17,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

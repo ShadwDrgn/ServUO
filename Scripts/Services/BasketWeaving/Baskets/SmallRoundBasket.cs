@@ -1,40 +1,35 @@
-using System;
-using Server;
 using Server.Items;
 
-public class SmallRoundBasket : BaseContainer
+namespace Server.Services.BasketWeaving.Baskets
 {
-    [Constructable]
-    public SmallRoundBasket()
-        : base(0x24DD)
+    public class SmallRoundBasket : BaseContainer
     {
-        this.Weight = 1.0; 
-    }
-
-    public SmallRoundBasket(Serial serial)
-        : base(serial)
-    {
-    }
-
-    public override int LabelNumber
-    {
-        get
+        [Constructable]
+        public SmallRoundBasket()
+            : base(0x24DD)
         {
-            return 1112298;
+            Weight = 1.0;
         }
-    }// small round basket
 
-    public override void Serialize(GenericWriter writer)
-    {
-        base.Serialize(writer);
+        public SmallRoundBasket(Serial serial)
+            : base(serial)
+        {
+        }
 
-        writer.Write((int)0); // version
-    }
+        public override int LabelNumber => 1112298;// small round basket
 
-    public override void Deserialize(GenericReader reader)
-    {
-        base.Deserialize(reader);
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-        int version = reader.ReadInt();
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

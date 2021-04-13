@@ -10,7 +10,7 @@ namespace Server.Misc
         /* In order to support emailing, fill in EmailServer and FromAddress:
         * Example:
         *  public static readonly string EmailServer = "mail.domain.com";
-        *  public static readonly string FromAddress = "runuo@domain.com";
+        *  public static readonly string FromAddress = "servuo@domain.com";
         * 
         * If you want to add crash reporting emailing, fill in CrashAddresses:
         * Example:
@@ -66,8 +66,9 @@ namespace Server.Misc
                     _Client.Send(message);
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
                 return false;
             }
 
@@ -76,7 +77,7 @@ namespace Server.Misc
 
         public static void AsyncSend(MailMessage message)
         {
-            ThreadPool.QueueUserWorkItem(new WaitCallback(SendCallback), message);
+            ThreadPool.QueueUserWorkItem(SendCallback, message);
         }
 
         private static void SendCallback(object state)

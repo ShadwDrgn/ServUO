@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -18,8 +17,7 @@ namespace Server.Items
 
             list.Add(new ResurrectEntry(from, item));
 
-            if (Core.AOS)
-                list.Add(new TitheEntry(from));
+            list.Add(new TitheEntry(from));
         }
 
         public static void Resurrect(Mobile m, Item item)
@@ -119,13 +117,7 @@ namespace Server.Items
         {
         }
 
-        public override bool HandlesOnMovement
-        {
-            get
-            {
-                return true;
-            }
-        }// Tell the core that we implement OnMovement
+        public override bool HandlesOnMovement => true;// Tell the core that we implement OnMovement
         [Hue, CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
@@ -181,7 +173,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_Item);
         }
@@ -211,13 +203,7 @@ namespace Server.Items
             {
             }
 
-            public override bool HandlesOnMovement
-            {
-                get
-                {
-                    return true;
-                }
-            }// Tell the core that we implement OnMovement
+            public override bool HandlesOnMovement => true;// Tell the core that we implement OnMovement
             [Hue, CommandProperty(AccessLevel.GameMaster)]
             public override int Hue
             {
@@ -273,7 +259,7 @@ namespace Server.Items
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
 
                 writer.Write(m_Item);
             }
@@ -313,13 +299,7 @@ namespace Server.Items
         {
         }
 
-        public override bool HandlesOnMovement
-        {
-            get
-            {
-                return true;
-            }
-        }// Tell the core that we implement OnMovement
+        public override bool HandlesOnMovement => true;// Tell the core that we implement OnMovement
         [Hue, CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
@@ -375,7 +355,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_Item);
         }
@@ -406,13 +386,7 @@ namespace Server.Items
             {
             }
 
-            public override bool HandlesOnMovement
-            {
-                get
-                {
-                    return true;
-                }
-            }// Tell the core that we implement OnMovement
+            public override bool HandlesOnMovement => true;// Tell the core that we implement OnMovement
             [Hue, CommandProperty(AccessLevel.GameMaster)]
             public override int Hue
             {
@@ -468,7 +442,7 @@ namespace Server.Items
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
 
                 writer.Write(m_Item);
             }
@@ -485,7 +459,7 @@ namespace Server.Items
 
         private class MemorialStone : Item
         {
-            public override int LabelNumber { get { return 1071563; } } // Memorial Stone
+            public override int LabelNumber => 1071563;  // Memorial Stone
 
             [Constructable]
             public MemorialStone()
@@ -499,7 +473,7 @@ namespace Server.Items
             {
             }
 
-            public override bool HandlesOnMovement { get { return true; } }
+            public override bool HandlesOnMovement => true;
 
             public override void OnMovement(Mobile m, Point3D oldLocation)
             {
@@ -522,7 +496,7 @@ namespace Server.Items
             {
                 base.Serialize(writer);
 
-                writer.Write((int)0); // version
+                writer.Write(0); // version
             }
 
             public override void Deserialize(GenericReader reader)

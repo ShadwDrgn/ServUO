@@ -1,9 +1,8 @@
-using System;
-using System.Linq;
-using System.Text;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
+using System;
+using System.Text;
 
 namespace Server.SkillHandlers
 {
@@ -16,7 +15,7 @@ namespace Server.SkillHandlers
     {
         public static void Initialize()
         {
-            SkillInfo.Table[(int)SkillName.Forensics].Callback = new SkillUseCallback(OnUse);
+            SkillInfo.Table[(int)SkillName.Forensics].Callback = OnUse;
         }
 
         public static TimeSpan OnUse(Mobile m)
@@ -70,7 +69,7 @@ namespace Server.SkillHandlers
                                 if (i > 0)
                                     sb.Append(", ");
 
-                                sb.Append(((Mobile)c.Looters[i]).Name);
+                                sb.Append(c.Looters[i].Name);
                             }
 
                             from.SendLocalizedMessage(1042752, sb.ToString());//This body has been distrubed by ~1_PLAYER_NAMES~
@@ -131,7 +130,7 @@ namespace Server.SkillHandlers
                         from.SendLocalizedMessage(501001);//You cannot determain anything useful.
                     }
                 }
-                else if (Core.SA && target is Item)
+                else if (target is Item)
                 {
                     Item item = (Item)target;
 
@@ -139,18 +138,18 @@ namespace Server.SkillHandlers
                     {
                         ((IForensicTarget)item).OnForensicEval(from);
                     }
-                    else  if (skill < 41.0)
+                    else if (skill < 41.0)
                     {
                         from.SendLocalizedMessage(501001);//You cannot determain anything useful.
                         return;
                     }
 
-                    var honestySocket = item.GetSocket<HonestyItemSocket>();
+                    HonestyItemSocket honestySocket = item.GetSocket<HonestyItemSocket>();
 
                     if (honestySocket != null)
                     {
                         if (honestySocket.HonestyOwner == null)
-                            Server.Services.Virtues.HonestyVirtue.AssignOwner(honestySocket);
+                            Services.Virtues.HonestyVirtue.AssignOwner(honestySocket);
 
                         if (from.CheckTargetSkill(SkillName.Forensics, target, 41.0, 100.0))
                         {
@@ -158,7 +157,10 @@ namespace Server.SkillHandlers
 
                             if (from.Skills.Forensics.Value >= 61.0)
                             {
-                                from.SendLocalizedMessage(1151521, String.Format("{0}\t{1}", honestySocket.HonestyOwner.Name, region)); // This item belongs to ~1_val~ who lives in ~2_val~.
+                                if (honestySocket.HonestyOwner != null)
+								{
+                                    from.SendLocalizedMessage(1151521, string.Format("{0}\t{1}", honestySocket.HonestyOwner.Name, region)); // This item belongs to ~1_val~ who lives in ~2_val~.
+								}
                             }
                             else
                             {

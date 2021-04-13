@@ -1,12 +1,9 @@
-﻿using System;
-using Server;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class SnakeSkinBoots : Boots
     {
-        public override int LabelNumber { get { return 1080122; } } // Snake Skin Boots
-		public override bool IsArtifact { get { return true; } }
+        public override int LabelNumber => 1080122;  // Snake Skin Boots
+        public override bool IsArtifact => true;
 
         [Constructable]
         public SnakeSkinBoots()
@@ -24,7 +21,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

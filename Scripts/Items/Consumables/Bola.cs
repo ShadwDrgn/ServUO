@@ -1,8 +1,8 @@
-using System;
 using Server.Mobiles;
 using Server.Network;
-using Server.Targeting;
 using Server.Spells.Ninjitsu;
+using Server.Targeting;
+using System;
 
 namespace Server.Items
 {
@@ -32,43 +32,40 @@ namespace Server.Items
         {
             if (!IsChildOf(from.Backpack))
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1040019, from.NetState); // The bola must be in your pack to use it.
+                PrivateOverheadMessage(MessageType.Regular, 946, 1040019, from.NetState); // The bola must be in your pack to use it.
             }
             else if (!from.CanBeginAction(typeof(Bola)))
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1049624, from.NetState); // // You have to wait a few moments before you can use another bola!
+                PrivateOverheadMessage(MessageType.Regular, 946, 1049624, from.NetState); // // You have to wait a few moments before you can use another bola!
             }
             else if (from.Target is BolaTarget)
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1049631, from.NetState); // This bola is already being used.
+                PrivateOverheadMessage(MessageType.Regular, 946, 1049631, from.NetState); // This bola is already being used.
             }
             else if (from.Mounted)
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1042053, from.NetState); // You can't use this while on a mount!
+                PrivateOverheadMessage(MessageType.Regular, 946, 1042053, from.NetState); // You can't use this while on a mount!
             }
             else if (from.Flying)
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1113414, from.NetState); // You can't use this while flying!
+                PrivateOverheadMessage(MessageType.Regular, 946, 1113414, from.NetState); // You can't use this while flying!
             }
             else if (AnimalForm.UnderTransformation(from))
             {
-                this.PrivateOverheadMessage(MessageType.Regular, 946, 1070902, from.NetState); // You can't use this while in an animal form!
+                PrivateOverheadMessage(MessageType.Regular, 946, 1070902, from.NetState); // You can't use this while in an animal form!
             }
             else
             {
                 EtherealMount.StopMounting(from);
 
-                if (Core.AOS)
-                {
-                    Item one = from.FindItemOnLayer(Layer.OneHanded);
-                    Item two = from.FindItemOnLayer(Layer.TwoHanded);
+                Item one = from.FindItemOnLayer(Layer.OneHanded);
+                Item two = from.FindItemOnLayer(Layer.TwoHanded);
 
-                    if (one != null)
-                        from.AddToBackpack(one);
+                if (one != null)
+                    from.AddToBackpack(one);
 
-                    if (two != null)
-                        from.AddToBackpack(two);
-                }
+                if (two != null)
+                    from.AddToBackpack(two);
 
                 from.Target = new BolaTarget(this);
                 from.LocalOverheadMessage(MessageType.Emote, 201, 1049632); // * You begin to swing the bola...*
@@ -79,7 +76,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -113,7 +110,7 @@ namespace Server.Items
             {
                 from.PrivateOverheadMessage(MessageType.Regular, 946, 1042060, from.NetState); // You cannot see that target!
             }
-            else if (!to.Mounted && !to.Flying && (!Core.ML || !AnimalForm.UnderTransformation(to)))
+            else if (!to.Mounted && !to.Flying && !AnimalForm.UnderTransformation(to))
             {
                 to.PrivateOverheadMessage(MessageType.Regular, 946, 1049628, from.NetState); // You have no reason to throw a bola at that.
             }
@@ -152,14 +149,12 @@ namespace Server.Items
 
         private static bool CheckHit(Mobile to, Mobile from)
         {
-            if (!Core.TOL)
-                return true;
-
             double toChance = Math.Min(45 + BaseArmor.GetRefinedDefenseChance(to),
                                        AosAttributes.GetValue(to, AosAttribute.DefendChance)) + 1;
+
             double fromChance = AosAttributes.GetValue(from, AosAttribute.AttackChance) + 1;
 
-            double hitChance = toChance / (fromChance * 2);
+            double hitChance = fromChance / (toChance * 2);
 
             if (Utility.RandomDouble() < hitChance)
             {
@@ -221,7 +216,7 @@ namespace Server.Items
                     {
                         from.PrivateOverheadMessage(MessageType.Regular, 946, 1070902, from.NetState); // You can't use this while in an animal form!
                     }
-                    else if (!to.Mounted && !to.Flying && (!Core.ML || !AnimalForm.UnderTransformation(to)))
+                    else if (!to.Mounted && !to.Flying && !AnimalForm.UnderTransformation(to))
                     {
                         to.PrivateOverheadMessage(MessageType.Regular, 946, 1049628, from.NetState); // You have no reason to throw a bola at that.
                     }

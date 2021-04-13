@@ -1,4 +1,3 @@
-using System;
 using Server.Engines.VeteranRewards;
 using Server.Gumps;
 using Server.Multis;
@@ -87,7 +86,7 @@ namespace Server.Items
 
     public class MonsterStatuetteInfo
     {
-        public static MonsterStatuetteInfo[] Table { get { return m_Table; } }
+        public static MonsterStatuetteInfo[] Table => m_Table;
 
         private static readonly MonsterStatuetteInfo[] m_Table = new MonsterStatuetteInfo[]
         {
@@ -167,7 +166,7 @@ namespace Server.Items
             /* Goat */              new MonsterStatuetteInfo(1159418, 0x2580, 0x09A),
             /* Ice Fiend */         new MonsterStatuetteInfo(1159419, 0x2587, 0x166),
         };
-        
+
         public MonsterStatuetteInfo(int labelNumber, int itemID, int baseSoundID)
         {
             LabelNumber = labelNumber;
@@ -289,23 +288,11 @@ namespace Server.Items
             }
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return MonsterStatuetteInfo.GetInfo(m_Type).LabelNumber;
-            }
-        }
+        public override int LabelNumber => MonsterStatuetteInfo.GetInfo(m_Type).LabelNumber;
 
-        public override double DefaultWeight { get { return 1.0; } }
+        public override double DefaultWeight => 1.0;
 
-        public override bool HandlesOnMovement
-        {
-            get
-            {
-                return m_TurnedOn && IsLockedDown;
-            }
-        }
+        public override bool HandlesOnMovement => m_TurnedOn && IsLockedDown;
 
         #region IEngraveable
         private string m_EngravedText = string.Empty;
@@ -335,7 +322,7 @@ namespace Server.Items
                 if (sounds.Length > 0)
                 {
                     Effects.PlaySound(Location, Map, sounds[Utility.Random(sounds.Length)]);
-                }                    
+                }
             }
 
             base.OnMovement(m, oldLocation);
@@ -345,7 +332,7 @@ namespace Server.Items
         {
             base.AddNameProperty(list);
 
-            if (!String.IsNullOrEmpty(EngravedText))
+            if (!string.IsNullOrEmpty(EngravedText))
             {
                 list.Add(1072305, Utility.FixHtml(EngravedText)); // Engraved: ~1_INSCRIPTION~
             }
@@ -355,7 +342,7 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (Core.ML && IsRewardItem)
+            if (IsRewardItem)
                 list.Add(RewardSystem.GetRewardYearLabel(this, new object[] { m_Type })); // X Year Veteran Reward
 
             if (m_TurnedOn)
@@ -387,13 +374,13 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
             writer.Write(m_EngravedText);
 
             writer.WriteEncodedInt((int)m_Type);
-            writer.Write((bool)m_TurnedOn);
-            writer.Write((bool)IsRewardItem);
+            writer.Write(m_TurnedOn);
+            writer.Write(IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -401,7 +388,7 @@ namespace Server.Items
             base.Deserialize(reader);
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
                     m_EngravedText = reader.ReadString();
@@ -456,5 +443,5 @@ namespace Server.Items
         }
     }
 }
- 
- 
+
+

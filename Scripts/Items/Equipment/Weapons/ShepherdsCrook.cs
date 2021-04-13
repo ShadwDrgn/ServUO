@@ -1,12 +1,12 @@
-using System;
 using Server.Engines.CannedEvil;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
+using System;
 
 namespace Server.Items
 {
-    [FlipableAttribute(0xE81, 0xE82)]
+    [Flipable(0xE81, 0xE82)]
     public class ShepherdsCrook : BaseStaff
     {
         [Constructable]
@@ -21,104 +21,20 @@ namespace Server.Items
         {
         }
 
-        public override WeaponAbility PrimaryAbility
-        {
-            get
-            {
-                return WeaponAbility.CrushingBlow;
-            }
-        }
-        public override WeaponAbility SecondaryAbility
-        {
-            get
-            {
-                return WeaponAbility.Disarm;
-            }
-        }
-        public override int AosStrengthReq
-        {
-            get
-            {
-                return 20;
-            }
-        }
-        public override int AosMinDamage
-        {
-            get
-            {
-                return 13;
-            }
-        }
-        public override int AosMaxDamage
-        {
-            get
-            {
-                return 16;
-            }
-        }
-        public override int AosSpeed
-        {
-            get
-            {
-                return 40;
-            }
-        }
-        public override float MlSpeed
-        {
-            get
-            {
-                return 2.75f;
-            }
-        }
-        public override int OldStrengthReq
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override int OldMinDamage
-        {
-            get
-            {
-                return 3;
-            }
-        }
-        public override int OldMaxDamage
-        {
-            get
-            {
-                return 12;
-            }
-        }
-        public override int OldSpeed
-        {
-            get
-            {
-                return 30;
-            }
-        }
-        public override int InitMinHits
-        {
-            get
-            {
-                return 31;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 50;
-            }
-        }
+        public override WeaponAbility PrimaryAbility => WeaponAbility.CrushingBlow;
+        public override WeaponAbility SecondaryAbility => WeaponAbility.Disarm;
+        public override int StrengthReq => 20;
+        public override int MinDamage => 13;
+        public override int MaxDamage => 16;
+        public override float Speed => 2.75f;
 
-        public override bool CanBeWornByGargoyles { get { return true; } }
+        public override int InitMinHits => 31;
+        public override int InitMaxHits => 50;
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -144,7 +60,7 @@ namespace Server.Items
                 typeof(LesserHiryu), typeof(Hiryu)
             };
 
-            private ShepherdsCrook m_Crook;
+            private readonly ShepherdsCrook m_Crook;
 
             public HerdingTarget(ShepherdsCrook crook)
                 : base(10, false, TargetFlags.None)
@@ -164,7 +80,7 @@ namespace Server.Items
                         {
                             bc.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502467, from.NetState); // That animal looks tame already.
                         }
-                        else 
+                        else
                         {
                             from.SendLocalizedMessage(502475); // Click where you wish the animal to go.
                             from.Target = new InternalTarget(bc, m_Crook);
@@ -212,8 +128,8 @@ namespace Server.Items
 
             private class InternalTarget : Target
             {
-                private BaseCreature m_Creature;
-                private ShepherdsCrook m_Crook;
+                private readonly BaseCreature m_Creature;
+                private readonly ShepherdsCrook m_Crook;
 
                 public InternalTarget(BaseCreature c, ShepherdsCrook crook)
                     : base(10, true, TargetFlags.None)

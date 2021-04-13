@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -37,33 +36,6 @@ namespace Server.Mobiles
 
             Fame = 3000;
             Karma = -3000;
-
-            VirtualArmor = 40;
-
-            switch ( Utility.Random(6) )
-            {
-                case 0:
-                    PackItem(new PlateArms());
-                    break;
-                case 1:
-                    PackItem(new PlateChest());
-                    break;
-                case 2:
-                    PackItem(new PlateGloves());
-                    break;
-                case 3:
-                    PackItem(new PlateGorget());
-                    break;
-                case 4:
-                    PackItem(new PlateLegs());
-                    break;
-                case 5:
-                    PackItem(new PlateHelm());
-                    break;
-            }
-
-            PackItem(new Scimitar());
-            PackItem(new WoodenShield());
         }
 
         public SkeletalKnight(Serial serial)
@@ -71,33 +43,22 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool BleedImmune => true;
+		
+        public override TribeType Tribe => TribeType.Undead;
 
-        public override TribeType Tribe { get { return TribeType.Undead; } }
-
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.FeyAndUndead;
-            }
-        }
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
+            AddLoot(LootPack.LootItem<Scimitar>());
+            AddLoot(LootPack.LootItem<WoodenShield>());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

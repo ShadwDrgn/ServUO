@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
@@ -11,7 +10,7 @@ namespace Server.SkillHandlers
     {
         public static void Configure()
         {
-            Container.SnoopHandler = new ContainerSnoopHandler(Container_Snoop);
+            Container.SnoopHandler = Container_Snoop;
         }
 
         public static bool CheckSnoopAllowed(Mobile from, Mobile to)
@@ -67,9 +66,9 @@ namespace Server.SkillHandlers
 
                     if (map != null)
                     {
-                        string message = String.Format("You notice {0} peeking into your belongings!", from.Name);
+                        string message = string.Format("You notice {0} peeking into your belongings!", from.Name);
 
-                        root.Send(new AsciiMessage(-1, -1, MessageType.Label, 946, 3, "", message));                        
+                        root.Send(new AsciiMessage(-1, -1, MessageType.Label, 946, 3, "", message));
                     }
                 }
 
@@ -86,7 +85,7 @@ namespace Server.SkillHandlers
                 else
                 {
                     from.SendLocalizedMessage(500210); // You failed to peek into the container.
-					
+
                     if (from.Skills[SkillName.Hiding].Value / 2 < Utility.Random(100))
                         from.RevealingAction();
                 }

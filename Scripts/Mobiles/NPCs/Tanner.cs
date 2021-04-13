@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Server.Mobiles
@@ -10,7 +9,7 @@ namespace Server.Mobiles
         public Tanner()
             : base("the tanner")
         {
-            this.SetSkill(SkillName.Tailoring, 36.0, 68.0);
+            SetSkill(SkillName.Tailoring, 36.0, 68.0);
         }
 
         public Tanner(Serial serial)
@@ -18,30 +17,24 @@ namespace Server.Mobiles
         {
         }
 
-        protected override List<SBInfo> SBInfos
-        {
-            get
-            {
-                return this.m_SBInfos;
-            }
-        }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
         public override void InitSBInfo()
         {
-            if (!this.IsStygianVendor)
+            if (!IsStygianVendor)
             {
-                this.m_SBInfos.Add(new SBTanner());
+                m_SBInfos.Add(new SBTanner());
             }
             else
             {
-                this.m_SBInfos.Add(new SBSATanner());
+                m_SBInfos.Add(new SBSATanner());
             }
         }
 
         public override bool ValidateBought(Mobile buyer, Item item)
         {
-            if (item is Server.Items.TaxidermyKit && buyer.Skills[SkillName.Carpentry].Value < 90.1)
+            if (item is Items.TaxidermyKit && buyer.Skills[SkillName.Carpentry].Value < 90.1)
             {
-                this.SayTo(buyer, 1042603, 0x3B2); // You would not understand how to use the kit.
+                SayTo(buyer, 1042603, 0x3B2); // You would not understand how to use the kit.
                 return false;
             }
 
@@ -52,7 +45,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

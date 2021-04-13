@@ -1,7 +1,6 @@
-using System;
-using Server;
 using Server.Engines.Craft;
 using Server.Gumps;
+using System;
 
 namespace Server.Items
 {
@@ -15,7 +14,7 @@ namespace Server.Items
 
     public class GorgonLense : Item, ICraftable
     {
-        public override int LabelNumber { get { return 1112625; } } //  Gorgon Lense
+        public override int LabelNumber => 1112625;  //  Gorgon Lense
 
         private LenseType m_LenseType;
 
@@ -41,7 +40,7 @@ namespace Server.Items
         public override void OnAfterDuped(Item newItem)
         {
             if (newItem is GorgonLense)
-                ((GorgonLense)newItem).LenseType = this.LenseType;
+                ((GorgonLense)newItem).LenseType = LenseType;
 
             base.OnAfterDuped(newItem);
         }
@@ -66,7 +65,7 @@ namespace Server.Items
                 else if (targeted is BaseArmor)
                 {
                     BaseArmor armor = (BaseArmor)targeted;
-                    if (armor.Layer == Layer.Neck || armor.Layer == Layer.Helm || armor is BaseShield || (armor.RequiredRace == Race.Gargoyle && armor.Layer== Layer.Earrings))
+                    if (armor.Layer == Layer.Neck || armor.Layer == Layer.Helm || armor is BaseShield || (Race.Gargoyle.ValidateEquipment(armor) && armor.Layer == Layer.Earrings))
                     {
                         if (armor.GorgonLenseCharges > 0 && armor.GorgonLenseType != LenseType)
                             from.SendGump(new GorgonLenseWarningGump(this, armor));
@@ -124,11 +123,11 @@ namespace Server.Items
                 from.SendLocalizedMessage(1112594); //You cannot place gorgon lenses on this.
         }
 
-        private class InternalTarget : Server.Targeting.Target
+        private class InternalTarget : Targeting.Target
         {
-            private GorgonLense m_Lense;
+            private readonly GorgonLense m_Lense;
 
-            public InternalTarget(GorgonLense lense) : base(-1, false, Server.Targeting.TargetFlags.None)
+            public InternalTarget(GorgonLense lense) : base(-1, false, Targeting.TargetFlags.None)
             {
                 m_Lense = lense;
             }
@@ -180,7 +179,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)2); // version
+            writer.Write(2); // version
             writer.Write((int)m_LenseType);
         }
 
@@ -200,11 +199,11 @@ namespace Server.Items
 
     public class GorgonLenseWarningGump : BaseConfirmGump
     {
-        public override int TitleNumber { get { return 1112597; } } // Replace active Gorgon Lenses
-        public override int LabelNumber { get { return 1112598; } } // The remaining charges of the active lenses will be lost. Do you wish to proceed?
+        public override int TitleNumber => 1112597;  // Replace active Gorgon Lenses
+        public override int LabelNumber => 1112598;  // The remaining charges of the active lenses will be lost. Do you wish to proceed?
 
-        private GorgonLense m_Lense;
-        private Item m_Item;
+        private readonly GorgonLense m_Lense;
+        private readonly Item m_Item;
 
         public GorgonLenseWarningGump(GorgonLense lense, Item item)
         {

@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Engines.BulkOrders;
 using Server.Items;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -24,27 +24,15 @@ namespace Server.Mobiles
         {
         }
 
-        public override NpcGuild NpcGuild
-        {
-            get
-            {
-                return NpcGuild.TinkersGuild;
-            }
-        }
-        protected override List<SBInfo> SBInfos
-        {
-            get
-            {
-                return m_SBInfos;
-            }
-        }
+        public override NpcGuild NpcGuild => NpcGuild.TinkersGuild;
+        protected override List<SBInfo> SBInfos => m_SBInfos;
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBTinker(this));
         }
 
         #region Bulk Orders
-        public override BODType BODType { get { return BODType.Tinkering; } }
+        public override BODType BODType => BODType.Tinkering;
 
         public override bool IsValidBulkOrder(Item item)
         {
@@ -68,7 +56,7 @@ namespace Server.Mobiles
         {
             base.AddCustomContextEntries(from, list);
 
-            if (Core.ML && from.Alive)
+            if (from.Alive)
             {
                 list.Add(new RechargeEntry(from, this));
             }
@@ -93,7 +81,7 @@ namespace Server.Mobiles
 
             public override void OnClick()
             {
-                if (!Core.ML || m_Vendor == null || m_Vendor.Deleted)
+                if (m_Vendor == null || m_Vendor.Deleted)
                     return;
 
                 if (Tool != null)
@@ -112,7 +100,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

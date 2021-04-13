@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Mobiles
 {
@@ -25,11 +23,11 @@ namespace Server.Mobiles
         public virtual int Cap { get; set; } = 0;
         public virtual int Description { get; set; }
 
-        public virtual bool IsBoolen { get { return false; } }
-        public virtual bool BoolenValue { get { return false; } }
-        public virtual bool AlwaysVisible { get { return false; } }
+        public virtual bool IsBoolen => false;
+        public virtual bool BoolenValue => false;
+        public virtual bool AlwaysVisible => false;
 
-        public virtual bool IsSpriteGraph { get { return false; } }
+        public virtual bool IsSpriteGraph => false;
         public virtual int SpriteH { get; set; }
         public virtual int SpriteW { get; set; }
 

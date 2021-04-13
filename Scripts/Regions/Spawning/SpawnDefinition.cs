@@ -1,22 +1,18 @@
+using Server.Items;
+using Server.Mobiles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Server.Items;
-using Server.Mobiles;
 
 namespace Server.Regions
 {
     public abstract class SpawnDefinition
     {
-        protected SpawnDefinition()
-        {
-        }
-
         public static SpawnDefinition GetSpawnDefinition(XmlElement xml)
         {
-            switch ( xml.Name )
+            switch (xml.Name)
             {
                 case "object":
                     {
@@ -85,17 +81,11 @@ namespace Server.Regions
         private bool m_Init;
         protected SpawnType(Type type)
         {
-            this.m_Type = type;
-            this.m_Init = false;
+            m_Type = type;
+            m_Init = false;
         }
 
-        public Type Type
-        {
-            get
-            {
-                return this.m_Type;
-            }
-        }
+        public Type Type => m_Type;
         public abstract int Height { get; }
         public abstract bool Land { get; }
         public abstract bool Water { get; }
@@ -104,19 +94,19 @@ namespace Server.Regions
             BaseRegion region = entry.Region;
             Map map = region.Map;
 
-            Point3D loc = entry.RandomSpawnLocation(this.Height, this.Land, this.Water);
+            Point3D loc = entry.RandomSpawnLocation(Height, Land, Water);
 
             if (loc == Point3D.Zero)
                 return null;
 
-            return this.Construct(entry, loc, map);
+            return Construct(entry, loc, map);
         }
 
         public override bool CanSpawn(params Type[] types)
         {
             for (int i = 0; i < types.Length; i++)
             {
-                if (types[i] == this.m_Type)
+                if (types[i] == m_Type)
                     return true;
             }
 
@@ -125,11 +115,11 @@ namespace Server.Regions
 
         protected void EnsureInit()
         {
-            if (this.m_Init)
+            if (m_Init)
                 return;
 
-            this.Init();
-            this.m_Init = true;
+            Init();
+            m_Init = true;
         }
 
         protected virtual void Init()
@@ -149,27 +139,21 @@ namespace Server.Regions
         {
         }
 
-        public override int Height
-        {
-            get
-            {
-                return 16;
-            }
-        }
+        public override int Height => 16;
         public override bool Land
         {
             get
             {
-                this.EnsureInit();
-                return this.m_Land;
+                EnsureInit();
+                return m_Land;
             }
         }
         public override bool Water
         {
             get
             {
-                this.EnsureInit();
-                return this.m_Water;
+                EnsureInit();
+                return m_Water;
             }
         }
         public static SpawnMobile Get(Type type)
@@ -187,17 +171,17 @@ namespace Server.Regions
 
         protected override void Init()
         {
-            Mobile mob = (Mobile)Activator.CreateInstance(this.Type);
+            Mobile mob = (Mobile)Activator.CreateInstance(Type);
 
-            this.m_Land = !mob.CantWalk;
-            this.m_Water = mob.CanSwim;
+            m_Land = !mob.CantWalk;
+            m_Water = mob.CanSwim;
 
             mob.Delete();
         }
 
         protected override ISpawnable Construct(SpawnEntry entry, Point3D loc, Map map)
         {
-            Mobile mobile = this.CreateMobile();
+            Mobile mobile = CreateMobile();
 
             BaseCreature creature = mobile as BaseCreature;
 
@@ -219,7 +203,7 @@ namespace Server.Regions
 
         protected virtual Mobile CreateMobile()
         {
-            return (Mobile)Activator.CreateInstance(this.Type);
+            return (Mobile)Activator.CreateInstance(Type);
         }
     }
 
@@ -236,24 +220,12 @@ namespace Server.Regions
         {
             get
             {
-                this.EnsureInit();
-                return this.m_Height;
+                EnsureInit();
+                return m_Height;
             }
         }
-        public override bool Land
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool Water
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool Land => true;
+        public override bool Water => false;
         public static SpawnItem Get(Type type)
         {
             SpawnItem si = (SpawnItem)m_Table[type];
@@ -269,16 +241,16 @@ namespace Server.Regions
 
         protected override void Init()
         {
-            Item item = (Item)Activator.CreateInstance(this.Type);
+            Item item = (Item)Activator.CreateInstance(Type);
 
-            this.m_Height = item.ItemData.Height;
+            m_Height = item.ItemData.Height;
 
             item.Delete();
         }
 
         protected override ISpawnable Construct(SpawnEntry entry, Point3D loc, Map map)
         {
-            Item item = this.CreateItem();
+            Item item = CreateItem();
 
             item.OnBeforeSpawn(loc, map);
             item.MoveToWorld(loc, map);
@@ -289,7 +261,7 @@ namespace Server.Regions
 
         protected virtual Item CreateItem()
         {
-            return (Item)Activator.CreateInstance(this.Type);
+            return (Item)Activator.CreateInstance(Type);
         }
     }
 
@@ -300,32 +272,20 @@ namespace Server.Regions
         public SpawnTreasureChest(int itemID, BaseTreasureChest.TreasureLevel level)
             : base(typeof(BaseTreasureChest))
         {
-            this.m_ItemID = itemID;
-            this.m_Level = level;
+            m_ItemID = itemID;
+            m_Level = level;
         }
 
-        public int ItemID
-        {
-            get
-            {
-                return this.m_ItemID;
-            }
-        }
-        public BaseTreasureChest.TreasureLevel Level
-        {
-            get
-            {
-                return this.m_Level;
-            }
-        }
+        public int ItemID => m_ItemID;
+        public BaseTreasureChest.TreasureLevel Level => m_Level;
         protected override void Init()
         {
-            this.m_Height = TileData.ItemTable[this.m_ItemID & TileData.MaxItemValue].Height;
+            m_Height = TileData.ItemTable[m_ItemID & TileData.MaxItemValue].Height;
         }
 
         protected override Item CreateItem()
         {
-            return new BaseTreasureChest(this.m_ItemID, this.m_Level);
+            return new BaseTreasureChest(m_ItemID, m_Level);
         }
     }
 
@@ -335,24 +295,12 @@ namespace Server.Regions
         private readonly int m_Weight;
         public SpawnGroupElement(SpawnDefinition spawnDefinition, int weight)
         {
-            this.m_SpawnDefinition = spawnDefinition;
-            this.m_Weight = weight;
+            m_SpawnDefinition = spawnDefinition;
+            m_Weight = weight;
         }
 
-        public SpawnDefinition SpawnDefinition
-        {
-            get
-            {
-                return this.m_SpawnDefinition;
-            }
-        }
-        public int Weight
-        {
-            get
-            {
-                return this.m_Weight;
-            }
-        }
+        public SpawnDefinition SpawnDefinition => m_SpawnDefinition;
+        public int Weight => m_Weight;
     }
 
     public class SpawnGroup : SpawnDefinition
@@ -363,12 +311,12 @@ namespace Server.Regions
         private readonly int m_TotalWeight;
         public SpawnGroup(string name, SpawnGroupElement[] elements)
         {
-            this.m_Name = name;
-            this.m_Elements = elements;
+            m_Name = name;
+            m_Elements = elements;
 
-            this.m_TotalWeight = 0;
+            m_TotalWeight = 0;
             for (int i = 0; i < elements.Length; i++)
-                this.m_TotalWeight += elements[i].Weight;
+                m_TotalWeight += elements[i].Weight;
         }
 
         static SpawnGroup()
@@ -418,31 +366,14 @@ namespace Server.Regions
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Could not load SpawnDefinitions.xml: " + ex.Message);
+                Console.WriteLine("Could not load SpawnDefinitions.xml: ");
+                Diagnostics.ExceptionLogging.LogException(ex);
             }
         }
 
-        public static Hashtable Table
-        {
-            get
-            {
-                return m_Table;
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return this.m_Name;
-            }
-        }
-        public SpawnGroupElement[] Elements
-        {
-            get
-            {
-                return this.m_Elements;
-            }
-        }
+        public static Hashtable Table => m_Table;
+        public string Name => m_Name;
+        public SpawnGroupElement[] Elements => m_Elements;
         public static void Register(SpawnGroup group)
         {
             if (m_Table.Contains(group.Name))
@@ -453,11 +384,11 @@ namespace Server.Regions
 
         public override ISpawnable Spawn(SpawnEntry entry)
         {
-            int index = Utility.Random(this.m_TotalWeight);
+            int index = Utility.Random(m_TotalWeight);
 
-            for (int i = 0; i < this.m_Elements.Length; i++)
+            for (int i = 0; i < m_Elements.Length; i++)
             {
-                SpawnGroupElement element = this.m_Elements[i];
+                SpawnGroupElement element = m_Elements[i];
 
                 if (index < element.Weight)
                     return element.SpawnDefinition.Spawn(entry);
@@ -470,9 +401,9 @@ namespace Server.Regions
 
         public override bool CanSpawn(params Type[] types)
         {
-            for (int i = 0; i < this.m_Elements.Length; i++)
+            for (int i = 0; i < m_Elements.Length; i++)
             {
-                if (this.m_Elements[i].SpawnDefinition.CanSpawn(types))
+                if (m_Elements[i].SpawnDefinition.CanSpawn(types))
                     return true;
             }
 

@@ -1,290 +1,225 @@
 #region References
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Server.Engines.Quests;
-using Server.Engines.Quests.Necro;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 #endregion
 
 namespace Server.Mobiles
 {
-	[CorpseName("a horde minion corpse")]
-	public class HordeMinionFamiliar : BaseFamiliar
-	{
-		public override bool DisplayWeight { get { return true; } }
-        public override bool CanAutoStable { get { return Backpack == null || Backpack.Items.Count == 0; } }
+    [CorpseName("a horde minion corpse")]
+    public class HordeMinionFamiliar : BaseFamiliar
+    {
+        public override bool DisplayWeight => true;
+        public override bool CanAutoStable => Backpack == null || Backpack.Items.Count == 0;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public override OrderType ControlOrder
         {
-            get { return m_QuestOverride ? OrderType.None : OrderType.Come; }
+            get { return OrderType.Come; }
             set { }
         }
 
-		public HordeMinionFamiliar()
-		{
-			Name = "a horde minion";
-			Body = 776;
-			BaseSoundID = 0x39D;
-
-			SetStr(100);
-			SetDex(110);
-			SetInt(100);
-
-			SetHits(70);
-			SetStam(110);
-			SetMana(0);
-
-			SetDamage(5, 10);
-
-			SetDamageType(ResistanceType.Physical, 100);
-
-			SetResistance(ResistanceType.Physical, 50, 60);
-			SetResistance(ResistanceType.Fire, 50, 55);
-			SetResistance(ResistanceType.Poison, 25, 30);
-			SetResistance(ResistanceType.Energy, 25, 30);
-
-			SetSkill(SkillName.Wrestling, 70.1, 75.0);
-			SetSkill(SkillName.Tactics, 50.0);
-
-			ControlSlots = 1;
-
-			Container pack = Backpack;
-
-			if (pack != null)
-			{
-				pack.Delete();
-			}
-
-			pack = new Backpack();
-			pack.Movable = false;
-			pack.Weight = 13.0;
-
-			AddItem(pack);
-		}
-
-		private DateTime m_NextPickup;
-        private bool m_QuestOverride;
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool QuestOverride
+        public HordeMinionFamiliar()
         {
-            get { return m_QuestOverride; }
-            set
-            {
-                if (!m_QuestOverride && value)
-                {
-                    Timer.DelayCall(TimeSpan.FromSeconds(30), () =>
-                        {
-                            if (m_QuestOverride)
-                                m_QuestOverride = false;
-                        });
-                }
+            Name = "a horde minion";
+            Body = 776;
+            BaseSoundID = 0x39D;
 
-                m_QuestOverride = value;
+            SetStr(100);
+            SetDex(110);
+            SetInt(100);
+
+            SetHits(70);
+            SetStam(110);
+            SetMana(0);
+
+            SetDamage(5, 10);
+
+            SetDamageType(ResistanceType.Physical, 100);
+
+            SetResistance(ResistanceType.Physical, 50, 60);
+            SetResistance(ResistanceType.Fire, 50, 55);
+            SetResistance(ResistanceType.Poison, 25, 30);
+            SetResistance(ResistanceType.Energy, 25, 30);
+
+            SetSkill(SkillName.Wrestling, 70.1, 75.0);
+            SetSkill(SkillName.Tactics, 50.0);
+
+            ControlSlots = 1;
+
+            Container pack = Backpack;
+
+            if (pack != null)
+            {
+                pack.Delete();
             }
+
+            pack = new Backpack
+            {
+                Movable = false,
+                Weight = 13.0
+            };
+
+            AddItem(pack);
         }
 
-		public override void OnThink()
-		{
-            if (ControlMaster != null && QuestOverride)
+        private DateTime m_NextPickup;
+
+        public override void OnThink()
+        {
+            base.OnThink();
+
+            if (DateTime.UtcNow < m_NextPickup)
             {
-                if (this.X == 1076 && this.Y == 450)
-                {
-                    AIObject.MoveTo(ControlMaster, false, 1);
-
-                    PlayerMobile pm = ControlMaster as PlayerMobile;
-
-                    if (pm != null)
-                    {
-                        QuestSystem qs = pm.Quest;
-
-                        if (qs is DarkTidesQuest)
-                        {
-                            QuestObjective obj = qs.FindObjective(typeof(FetchAbraxusScrollObjective));
-
-                            if (obj != null && !obj.Completed)
-                            {
-                                AddToBackpack(new ScrollOfAbraxus());
-                                obj.Complete();
-
-                                CurrentSpeed = 0.1;
-                                QuestOverride = false;
-                            }
-                        }
-                    }
-                }
-
                 return;
             }
 
-			base.OnThink();
+            m_NextPickup = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(5, 10));
 
-			if (DateTime.UtcNow < m_NextPickup)
-			{
-				return;
-			}
+            Container pack = Backpack;
 
-			m_NextPickup = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(5, 10));
+            if (pack == null)
+            {
+                return;
+            }
 
-			Container pack = Backpack;
+            ArrayList list = new ArrayList();
 
-			if (pack == null)
-			{
-				return;
-			}
+            foreach (Item item in GetItemsInRange(2))
+            {
+                if (item.Movable && item.Stackable)
+                {
+                    list.Add(item);
+                }
+            }
 
-			ArrayList list = new ArrayList();
+            int pickedUp = 0;
 
-			foreach (Item item in GetItemsInRange(2))
-			{
-				if (item.Movable && item.Stackable)
-				{
-					list.Add(item);
-				}
-			}
+            for (int i = 0; i < list.Count; ++i)
+            {
+                Item item = (Item)list[i];
 
-			int pickedUp = 0;
+                if (!pack.CheckHold(this, item, false, true))
+                {
+                    return;
+                }
 
-			for (int i = 0; i < list.Count; ++i)
-			{
-				Item item = (Item)list[i];
+                bool rejected;
+                LRReason reject;
 
-				if (!pack.CheckHold(this, item, false, true))
-				{
-					return;
-				}
+                NextActionTime = Core.TickCount;
 
-				bool rejected;
-				LRReason reject;
+                Lift(item, item.Amount, out rejected, out reject);
 
-				NextActionTime = Core.TickCount;
+                if (rejected)
+                {
+                    continue;
+                }
 
-				Lift(item, item.Amount, out rejected, out reject);
+                Drop(this, Point3D.Zero);
 
-				if (rejected)
-				{
-					continue;
-				}
+                if (++pickedUp == 3)
+                {
+                    break;
+                }
+            }
+        }
 
-				Drop(this, Point3D.Zero);
+        private void ConfirmRelease_Callback(Mobile from, bool okay, object state)
+        {
+            if (okay)
+            {
+                EndRelease(from);
+            }
+        }
 
-				if (++pickedUp == 3)
-				{
-					break;
-				}
-			}
-		}
+        public override void BeginRelease(Mobile from)
+        {
+            Container pack = Backpack;
 
-		private void ConfirmRelease_Callback(Mobile from, bool okay, object state)
-		{
-			if (okay)
-			{
-				EndRelease(from);
-			}
-		}
+            if (pack != null && pack.Items.Count > 0)
+            {
+                from.SendGump(new WarningGump(1060635, 30720, 1061672, 32512, 420, 280, ConfirmRelease_Callback, null));
+            }
+            else
+            {
+                EndRelease(from);
+            }
+        }
 
-		public override void BeginRelease(Mobile from)
-		{
-			Container pack = Backpack;
+        #region Pack Animal Methods
+        public override DeathMoveResult GetInventoryMoveResultFor(Item item)
+        {
+            return DeathMoveResult.MoveToCorpse;
+        }
 
-			if (pack != null && pack.Items.Count > 0)
-			{
-				from.SendGump(new WarningGump(1060635, 30720, 1061672, 32512, 420, 280, ConfirmRelease_Callback, null));
-			}
-			else
-			{
-				EndRelease(from);
-			}
-		}
+        public override bool IsSnoop(Mobile from)
+        {
+            if (PackAnimal.CheckAccess(this, from))
+            {
+                return false;
+            }
 
-		#region Pack Animal Methods
-		public override bool OnBeforeDeath()
-		{
-			if (!base.OnBeforeDeath())
-			{
-				return false;
-			}
+            return base.IsSnoop(from);
+        }
 
-			PackAnimal.CombineBackpacks(this);
+        public override bool OnDragDrop(Mobile from, Item item)
+        {
+            if (CheckFeed(from, item))
+            {
+                return true;
+            }
 
-			return true;
-		}
+            if (PackAnimal.CheckAccess(this, from))
+            {
+                AddToBackpack(item);
+                return true;
+            }
 
-		public override DeathMoveResult GetInventoryMoveResultFor(Item item)
-		{
-			return DeathMoveResult.MoveToCorpse;
-		}
+            return base.OnDragDrop(from, item);
+        }
 
-		public override bool IsSnoop(Mobile from)
-		{
-			if (PackAnimal.CheckAccess(this, from))
-			{
-				return false;
-			}
+        public override bool CheckNonlocalDrop(Mobile from, Item item, Item target)
+        {
+            return PackAnimal.CheckAccess(this, from);
+        }
 
-			return base.IsSnoop(from);
-		}
+        public override bool CheckNonlocalLift(Mobile from, Item item)
+        {
+            return PackAnimal.CheckAccess(this, from);
+        }
 
-		public override bool OnDragDrop(Mobile from, Item item)
-		{
-			if (CheckFeed(from, item))
-			{
-				return true;
-			}
+        public override void OnDoubleClick(Mobile from)
+        {
+            PackAnimal.TryPackOpen(this, from);
+        }
 
-			if (PackAnimal.CheckAccess(this, from))
-			{
-				AddToBackpack(item);
-				return true;
-			}
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
 
-			return base.OnDragDrop(from, item);
-		}
+            PackAnimal.GetContextMenuEntries(this, from, list);
+        }
+        #endregion
 
-		public override bool CheckNonlocalDrop(Mobile from, Item item, Item target)
-		{
-			return PackAnimal.CheckAccess(this, from);
-		}
+        public HordeMinionFamiliar(Serial serial)
+            : base(serial)
+        { }
 
-		public override bool CheckNonlocalLift(Mobile from, Item item)
-		{
-			return PackAnimal.CheckAccess(this, from);
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(0);
+        }
 
-		public override void OnDoubleClick(Mobile from)
-		{
-			PackAnimal.TryPackOpen(this, from);
-		}
-
-		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
-		{
-			base.GetContextMenuEntries(from, list);
-
-			PackAnimal.GetContextMenuEntries(this, from, list);
-		}
-		#endregion
-
-		public HordeMinionFamiliar(Serial serial)
-			: base(serial)
-		{ }
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            reader.ReadInt();
+        }
+    }
 }

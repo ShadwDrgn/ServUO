@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using Server.ContextMenus;
-using Server.Engines.VeteranRewards;
 using Server.Gumps;
-using Server.Mobiles;
-using Server.Network;
 
 namespace Server.Items
-{ 
+{
     public class SkullTiledFloorAddon : BaseAddon
     {
         [Constructable]
         public SkullTiledFloorAddon(bool east)
             : base()
-        { 
+        {
             if (!east)
             {
                 AddComponent(new LocalizedAddonComponent(0xA34F, 1125827), 0, 0, 0);
@@ -45,13 +39,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        { 
-            get
-            { 
-                return new SkullTiledFloorAddonDeed();
-            }
-        }
+        public override BaseAddonDeed Deed => new SkullTiledFloorAddonDeed();
 
         public override void Serialize(GenericWriter writer)
         {
@@ -82,15 +70,9 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber { get { return 1159020; } } // Skull Tiled Floor
+        public override int LabelNumber => 1159020;  // Skull Tiled Floor
 
-        public override BaseAddon Addon
-        { 
-            get
-            {
-                return new SkullTiledFloorAddon(m_East);
-            }
-        }
+        public override BaseAddon Addon => new SkullTiledFloorAddon(m_East);
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -125,7 +107,7 @@ namespace Server.Items
 
         public void OnOptionSelected(Mobile from, int option)
         {
-            switch ( option )
+            switch (option)
             {
                 case 1:
                     m_East = false;

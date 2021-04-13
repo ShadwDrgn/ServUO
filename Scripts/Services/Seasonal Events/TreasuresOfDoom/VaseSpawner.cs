@@ -1,13 +1,7 @@
+using Server.ContextMenus;
+using Server.Items;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
-using Server;
-using Server.Items;
-using Server.Mobiles;
-using Server.Network;
-using Server.Engines.Points;
-using Server.ContextMenus;
 
 namespace Server.Engines.TreasuresOfDoom
 {
@@ -20,15 +14,11 @@ namespace Server.Engines.TreasuresOfDoom
         public static readonly int MinSpawn = 1;
         public static readonly int MaxSpawn = 3;
 
-        public bool UnlinkOnTaming { get { return false; } }
-        public Point3D HomeLocation { get { return Point3D.Zero; } }
-        public int HomeRange { get { return 0; } }
+        public bool UnlinkOnTaming => false;
+        public Point3D HomeLocation => Point3D.Zero;
+        public int HomeRange => 0;
 
         public static VaseSpawner Instance { get; set; }
-
-        public VaseSpawner()
-        {
-        }
 
         public void Remove(ISpawnable spawn)
         {
@@ -68,7 +58,7 @@ namespace Server.Engines.TreasuresOfDoom
                     Vases.Remove(vase);
                 }
 
-                if (PointsSystem.TreasuresOfDoom.InSeason && Vases.Count < VaseCount)
+                if (TreasuresOfDoomEvent.Instance.Running && Vases.Count < VaseCount)
                 {
                     Timer.DelayCall(TimeSpan.FromMinutes(Utility.RandomMinMax(MinSpawn, MaxSpawn)), () =>
                     {
@@ -99,7 +89,7 @@ namespace Server.Engines.TreasuresOfDoom
         {
             for (int i = 0; i < count; i++)
             {
-                var vase = new AncientClayVase(true);
+                AncientClayVase vase = new AncientClayVase(true);
                 ItemFlags.SetStealable(vase, true);
                 vase.Movable = false;
 

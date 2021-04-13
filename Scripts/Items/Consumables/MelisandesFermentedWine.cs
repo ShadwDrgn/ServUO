@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class MelisandesFermentedWine : GreaterExplosionPotion
@@ -7,9 +5,9 @@ namespace Server.Items
         [Constructable]
         public MelisandesFermentedWine()
         {
-            this.Stackable = false;
-            this.ItemID = 0x99B;
-            this.Hue = Utility.RandomList(0xB, 0xF, 0x48D); // TODO update
+            Stackable = false;
+            ItemID = 0x99B;
+            Hue = Utility.RandomList(0xB, 0xF, 0x48D); // TODO update
         }
 
         public MelisandesFermentedWine(Serial serial)
@@ -17,18 +15,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1072114;
-            }
-        }// Melisande's Fermented Wine
-        public override void Drink(Mobile from)
-        {
-            if (MondainsLegacy.CheckML(from))
-                base.Drink(from);
-        }
+        public override int LabelNumber => 1072114;// Melisande's Fermented Wine
 
         public override void GetProperties(ObjectPropertyList list)
         {
@@ -40,14 +27,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

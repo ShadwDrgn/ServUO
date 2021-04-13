@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Multis;
 using Server.Network;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace Server.Items
 {
@@ -61,7 +61,7 @@ namespace Server.Items
         private BookPageInfo[] m_Pages;
         private bool m_Writable;
         private SecureLevel m_SecureLevel;
-		
+
         [CommandProperty(AccessLevel.GameMaster)]
         public string Title
         {
@@ -75,7 +75,7 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
-		
+
         [CommandProperty(AccessLevel.GameMaster)]
         public string Author
         {
@@ -89,7 +89,7 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
-		
+
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Writable
         {
@@ -104,13 +104,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int PagesCount
-        {
-            get
-            {
-                return m_Pages.Length;
-            }
-        }
+        public int PagesCount => m_Pages.Length;
 
         public string BookString
         {
@@ -118,13 +112,7 @@ namespace Server.Items
             set { BuildBookFromString(value); }
         }
 
-        public BookPageInfo[] Pages
-        {
-            get
-            {
-                return m_Pages;
-            }
-        }
+        public BookPageInfo[] Pages => m_Pages;
 
         [Constructable]
         public BaseBook(int itemID)
@@ -181,13 +169,7 @@ namespace Server.Items
             }
         }
 
-        public virtual BookContent DefaultContent
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual BookContent DefaultContent => null;
 
         public void BuildBookFromString(string content)
         {
@@ -282,7 +264,7 @@ namespace Server.Items
             if (content == null || !content.IsMatch(m_Pages))
                 flags |= SaveFlags.Content;
 
-            writer.Write((int)4); // version
+            writer.Write(4); // version
 
             writer.Write((int)m_SecureLevel);
 
@@ -309,7 +291,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 4:
                     {
@@ -391,13 +373,7 @@ namespace Server.Items
             else
                 base.AddNameProperty(list);
         }
-		
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, "{0} by {1}", m_Title, m_Author);
-            LabelTo(from, "[{0} pages]", m_Pages.Length);
-        }
-		
+
         public override void OnDoubleClick(Mobile from)
         {
             if (m_Title == null && m_Author == null && m_Writable == true)
@@ -479,9 +455,9 @@ namespace Server.Items
 
         public static void Initialize()
         {
-            PacketHandlers.Register(0xD4, 0, true, new OnPacketReceive(HeaderChange));
-            PacketHandlers.Register(0x66, 0, true, new OnPacketReceive(ContentChange));
-            PacketHandlers.Register(0x93, 99, true, new OnPacketReceive(OldHeaderChange));
+            PacketHandlers.Register(0xD4, 0, true, HeaderChange);
+            PacketHandlers.Register(0x66, 0, true, ContentChange);
+            PacketHandlers.Register(0x93, 99, true, OldHeaderChange);
         }
 
         public static void OldHeaderChange(NetState state, PacketReader pvSrc)
@@ -539,39 +515,40 @@ namespace Server.Items
 
             int pageCount = pvSrc.ReadUInt16();
 
-            if (pageCount > book.PagesCount)
+            // Older clients handled multpile pages per packet
+            // Newer clients packets are 1 page per packet
+            if (pageCount != 1)
                 return;
 
-            for (int i = 0; i < pageCount; ++i)
+            int index = pvSrc.ReadUInt16();
+
+            if (index >= 1 && index <= book.PagesCount)
             {
-                int index = pvSrc.ReadUInt16();
+                --index;
 
-                if (index >= 1 && index <= book.PagesCount)
+                int lineCount = pvSrc.ReadUInt16();
+
+                if (lineCount <= 10)
                 {
-                    --index;
+                    string[] lines = new string[lineCount];
 
-                    int lineCount = pvSrc.ReadUInt16();
-
-                    if (lineCount <= 8)
+                    for (int j = 0; j < lineCount; ++j)
                     {
-                        string[] lines = new string[lineCount];
-
-                        for (int j = 0; j < lineCount; ++j)
-                            if ((lines[j] = pvSrc.ReadUTF8StringSafe()).Length >= 80)
-                                return;
-
-                        book.Pages[index].Lines = lines;
+                        if ((lines[j] = pvSrc.ReadUTF8StringSafe()).Length >= 80)
+                            return;
                     }
-                    else
-                    {
-                        return;
-                    }
+
+                    book.Pages[index].Lines = lines;
                 }
                 else
                 {
                     return;
                 }
             }
+            else
+            {
+                return;
+            }           
         }
 
         #region ISecurable Members
@@ -598,7 +575,7 @@ namespace Server.Items
         {
             EnsureCapacity(256);
 
-            m_Stream.Write((int)book.Serial);
+            m_Stream.Write(book.Serial);
             m_Stream.Write((ushort)book.PagesCount);
 
             for (int i = 0; i < book.PagesCount; ++i)
@@ -623,7 +600,7 @@ namespace Server.Items
         {
             EnsureCapacity(256);
 
-            m_Stream.Write((int)book.Serial);
+            m_Stream.Write(book.Serial);
             m_Stream.Write((ushort)0x1);
 
             m_Stream.Write((ushort)page);
@@ -652,9 +629,9 @@ namespace Server.Items
 
             EnsureCapacity(15 + titleBuffer.Length + authorBuffer.Length);
 
-            m_Stream.Write((int)book.Serial);
-            m_Stream.Write((bool)true);
-            m_Stream.Write((bool)book.Writable && from.InRange(book.GetWorldLocation(), 1));
+            m_Stream.Write(book.Serial);
+            m_Stream.Write(true);
+            m_Stream.Write(book.Writable && from.InRange(book.GetWorldLocation(), 1));
             m_Stream.Write((ushort)book.PagesCount);
 
             m_Stream.Write((ushort)(titleBuffer.Length + 1));

@@ -1,8 +1,6 @@
-using System;
 using Server.Engines.Craft;
 using Server.Network;
-using Server.ContextMenus;
-using System.Collections.Generic;
+using System;
 
 namespace Server.Items
 {
@@ -67,7 +65,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int UsesRemaining
+        public virtual int UsesRemaining
         {
             get { return m_UsesRemaining; }
             set { m_UsesRemaining = value; InvalidateProperties(); }
@@ -105,7 +103,7 @@ namespace Server.Items
             set { }
         }
 
-        public virtual bool BreakOnDepletion { get { return true; } }
+        public virtual bool BreakOnDepletion => true;
 
         public abstract CraftSystem CraftSystem { get; }
 
@@ -168,7 +166,7 @@ namespace Server.Items
                 return false;
             }
 
-            var num = 0;
+            int num = 0;
 
             bool res;
 
@@ -209,20 +207,13 @@ namespace Server.Items
             return true;
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            DisplayDurabilityTo(from);
-
-            base.OnSingleClick(from);
-        }
-
         public override void OnDoubleClick(Mobile from)
         {
             if (IsChildOf(from.Backpack) || Parent == from)
             {
                 CraftSystem system = CraftSystem;
 
-                if (Core.TOL && m_RepairMode)
+                if (m_RepairMode)
                 {
                     Repair.Do(from, system, this);
                 }
@@ -230,7 +221,7 @@ namespace Server.Items
                 {
                     int num = system.CanCraft(from, this, null);
 
-                    if (num > 0 && (num != 1044267 || !Core.SE)) // Blacksmithing shows the gump regardless of proximity of an anvil and forge after SE
+                    if (num > 0 && num != 1044267) // Blacksmithing shows the gump regardless of proximity of an anvil and forge after SE
                     {
                         from.SendLocalizedMessage(num);
                     }
@@ -250,15 +241,15 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)4); // version
+            writer.Write(4); // version
 
             writer.Write(_PlayerConstructed);
 
             writer.Write((int)_Resource);
             writer.Write(m_RepairMode);
-            writer.Write((Mobile)m_Crafter);
+            writer.Write(m_Crafter);
             writer.Write((int)m_Quality);
-            writer.Write((int)m_UsesRemaining);
+            writer.Write(m_UsesRemaining);
         }
 
         public override void Deserialize(GenericReader reader)

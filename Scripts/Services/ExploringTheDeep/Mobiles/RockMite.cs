@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Mobiles
+﻿namespace Server.Mobiles
 {
     [CorpseName("a rock mite corpse")]
     public class RockMite : BaseCreature
@@ -36,13 +34,11 @@ namespace Server.Mobiles
             SetSkill(SkillName.MagicResist, 88.5, 119.6);
             SetSkill(SkillName.Tactics, 84.9, 112.9);
             SetSkill(SkillName.Wrestling, 82.7, 119.8);
-			SetSkill(SkillName.Parry, 90.0, 100.0);
-			SetSkill(SkillName.DetectHidden, 42.9);
+            SetSkill(SkillName.Parry, 90.0, 100.0);
+            SetSkill(SkillName.DetectHidden, 42.9);
 
             Fame = 3500;
             Karma = -3500;
-
-            VirtualArmor = 40;
 
             SetSpecialAbility(SpecialAbility.TailSwipe);
         }
@@ -87,7 +83,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

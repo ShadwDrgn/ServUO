@@ -1,8 +1,7 @@
-using System;
-using Server;
-using System.Collections.Generic;
-using Server.Mobiles;
 using Server.Items;
+using Server.Mobiles;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Engines.VvV
@@ -39,7 +38,7 @@ namespace Server.Engines.VvV
 
         private DateTime _NextShot;
 
-        public override BaseAddonDeed Deed { get { return null; } }
+        public override BaseAddonDeed Deed => null;
 
         [Constructable]
         public CannonTurret()
@@ -54,7 +53,7 @@ namespace Server.Engines.VvV
             ShotsRemaining = 20;
 
             Base = new CannonBase(this);
-            Base.MoveToWorld(this.Location, this.Map);
+            Base.MoveToWorld(Location, Map);
 
             AddonComponent c = new LocalizedAddonComponent(16918, 1155505);
             AddComponent(c, 0, 0, 3);
@@ -68,7 +67,7 @@ namespace Server.Engines.VvV
             base.OnLocationChange(oldLocation);
 
             if (Base != null && !Base.Deleted)
-                Base.Location = this.Location;
+                Base.Location = Location;
         }
 
         public override void OnMapChange()
@@ -76,7 +75,7 @@ namespace Server.Engines.VvV
             base.OnMapChange();
 
             if (Base != null && !Base.Deleted)
-                Base.Map = this.Map;
+                Base.Map = Map;
         }
 
         public override void Delete()
@@ -89,16 +88,16 @@ namespace Server.Engines.VvV
 
         public void Scan()
         {
-            if (Deleted || this.Map == null || _ShotsRemaining <= 0 || _NoShoot)
+            if (Deleted || Map == null || _ShotsRemaining <= 0 || _NoShoot)
                 return;
 
-            IPooledEnumerable eable = this.Map.GetMobilesInRange(this.Location, ScanRange);
+            IPooledEnumerable eable = Map.GetMobilesInRange(Location, ScanRange);
             List<Mobile> list = new List<Mobile>();
 
             foreach (Mobile m in eable)
             {
-                if (Owner == null || (ViceVsVirtueSystem.IsEnemy(Owner, m) && m.InLOS(this.Location)
-                                                                           && m is PlayerMobile 
+                if (Owner == null || (ViceVsVirtueSystem.IsEnemy(Owner, m) && m.InLOS(Location)
+                                                                           && m is PlayerMobile
                                                                            && m.AccessLevel == AccessLevel.Player))
                 {
                     list.Add(m);
@@ -149,8 +148,8 @@ namespace Server.Engines.VvV
 
             Timer.DelayCall(TimeSpan.FromMilliseconds(250), () =>
             {
-                Point3D p = new Point3D(this.X, this.Y, this.Z + 2);
-                Map map = this.Map;
+                Point3D p = new Point3D(X, Y, Z + 2);
+                Map map = Map;
 
                 switch (Turret.ItemID)
                 {
@@ -182,7 +181,7 @@ namespace Server.Engines.VvV
 
         public class CannonBase : DamageableItem
         {
-            public override int LabelNumber { get { return 1155505; } }
+            public override int LabelNumber => 1155505;
 
             public CannonTurret Turret { get; set; }
 
@@ -268,7 +267,7 @@ namespace Server.Engines.VvV
 
     public class CannonTurretPlans : Item
     {
-        public override int LabelNumber { get { return 1155503; } } // Plans for a Cannon Turret
+        public override int LabelNumber => 1155503;  // Plans for a Cannon Turret
 
         [Constructable]
         public CannonTurretPlans() : base(5630)

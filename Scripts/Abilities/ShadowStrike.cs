@@ -1,32 +1,16 @@
-using System;
-
 namespace Server.Items
 {
     /// <summary>
     /// This powerful ability requires secondary skills to activate.
-    /// Successful use of Shadowstrike deals extra damage to the target — and renders the attacker invisible!
+    /// Successful use of Shadowstrike deals extra damage to the target â€” and renders the attacker invisible!
     /// Only those who are adept at the art of stealth will be able to use this ability.
     /// </summary>
     public class ShadowStrike : WeaponAbility
     {
-        public ShadowStrike()
-        {
-        }
+        public override int BaseMana => 20;
 
-        public override int BaseMana
-        {
-            get
-            {
-                return 20;
-            }
-        }
-        public override double DamageScalar
-        {
-            get
-            {
-                return 1.25;
-            }
-        }
+        public override double DamageScalar => 1.25;
+
         public override bool RequiresSecondarySkill(Mobile from)
         {
             return false;
@@ -49,7 +33,7 @@ namespace Server.Items
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
-            if (!this.Validate(attacker) || !this.CheckMana(attacker, true))
+            if (!Validate(attacker) || !CheckMana(attacker, true))
                 return;
 
             ClearCurrentAbility(attacker);

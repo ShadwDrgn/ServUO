@@ -1,32 +1,30 @@
-using System;
-using System.Collections.Generic;
-
-using Server;
-using Server.Items;
-using Server.Mobiles;
-using Server.Targeting;
-using Server.Engines.Quests.Doom;
 using Server.Accounting;
 using Server.Engines.Craft;
+using Server.Engines.Quests.Doom;
+using Server.Items;
+using Server.Mobiles;
 using Server.SkillHandlers;
+using Server.Targeting;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Engines.Points
 {
     public class CleanUpBritanniaData : PointsSystem
     {
-        public override PointsType Loyalty { get { return PointsType.CleanUpBritannia; } }
-        public override TextDefinition Name { get { return m_Name; } }
-        public override bool AutoAdd { get { return true; } }
-        public override double MaxPoints { get { return double.MaxValue; } }
-        public override bool ShowOnLoyaltyGump { get { return false; } }
+        public override PointsType Loyalty => PointsType.CleanUpBritannia;
+        public override TextDefinition Name => m_Name;
+        public override bool AutoAdd => true;
+        public override double MaxPoints => double.MaxValue;
+        public override bool ShowOnLoyaltyGump => false;
 
-        private TextDefinition m_Name = null;
+        private readonly TextDefinition m_Name = null;
 
         public static bool Enabled { get; set; }
 
         public CleanUpBritanniaData()
         {
-            Enabled = Core.ML;
+            Enabled = true;
 
             if (Enabled)
             {
@@ -53,7 +51,7 @@ namespace Server.Engines.Points
                     points = 2500;
 
                 if (item.Stackable)
-                    points = points * item.Amount;                
+                    points = points * item.Amount;
 
                 return points;
             }
@@ -120,22 +118,15 @@ namespace Server.Engines.Points
                 {
                     TreasureMap tmap = (TreasureMap)item;
 
-                    if (tmap.Level == 1)
-                        points = 50;
-                    else if (tmap.Level == 2)
-                        points = 100;
-                    else if (tmap.Level == 3)
-                        points = 250;
-                    else if (tmap.Level == 4)
-                        points = 500;
-                    else if (tmap.Level == 5)
-                        points = 750;
-                    else if (tmap.Level == 6)
-                        points = 1000;
-                }
-                else if (item is MidnightBracers && item.LootType == LootType.Cursed)
-                {
-                    points = 5000;
+                    switch (tmap.Level)
+                    {
+                        default:
+                        case 0: return 50;
+                        case 1: return 100;
+                        case 2: return 250;
+                        case 3: return 750;
+                        case 4: return 1000;
+                    }
                 }
                 else if (item is MonsterStatuette)
                 {
@@ -210,7 +201,7 @@ namespace Server.Engines.Points
             Entries[typeof(Sapphire)] = 0.30;
             Entries[typeof(StarSapphire)] = 0.30;
             Entries[typeof(Diamond)] = 0.30;
-            Entries[typeof(BlueDiamond)] = 25.0;           
+            Entries[typeof(BlueDiamond)] = 25.0;
             Entries[typeof(FireRuby)] = 25.0;
             Entries[typeof(PerfectEmerald)] = 25.0;
             Entries[typeof(DarkSapphire)] = 25.0;
@@ -590,7 +581,7 @@ namespace Server.Engines.Points
             Entries[typeof(BraceletOfHealth)] = 5500.0;
             Entries[typeof(Aegis)] = 5500.0;
             Entries[typeof(AxeOfTheHeavens)] = 5500.0;
-            Entries[typeof(HelmOfInsight)] = 5500.0;            
+            Entries[typeof(HelmOfInsight)] = 5500.0;
             Entries[typeof(Frostbringer)] = 5500.0;
             Entries[typeof(StaffOfTheMagi)] = 5500.0;
             Entries[typeof(TheDragonSlayer)] = 5500.0;
@@ -603,6 +594,7 @@ namespace Server.Engines.Points
             Entries[typeof(HatOfTheMagi)] = 5500.0;
             Entries[typeof(BladeOfInsanity)] = 5500.0;
             Entries[typeof(JackalsCollar)] = 5500.0;
+			Entries[typeof(SpiritOfTheTotem)] = 5500.0;
 
             //Artifacts
             Entries[typeof(PendantOfTheMagi)] = 35;
@@ -665,7 +657,6 @@ namespace Server.Engines.Points
             Entries[typeof(BagOfSending)] = 250.0;
             Entries[typeof(Cauldron)] = 200.0;
             Entries[typeof(ChampionSkull)] = 1000.0;
-            //Entries[typeof(ChaosShield)] = 2500.0;
             Entries[typeof(ClockworkAssembly)] = 50.0;
             Entries[typeof(ConjurersTrinket)] = 10000.0;
 
@@ -689,7 +680,6 @@ namespace Server.Engines.Points
             Entries[typeof(MedusaDarkScales)] = 200.0;
             Entries[typeof(MedusaLightScales)] = 200.0;
             Entries[typeof(ContestMiniHouseDeed)] = 6500.0;
-            Entries[typeof(Moonstone)] = 5000.0;
             Entries[typeof(MysticsGuard)] = 2500.0;
             Entries[typeof(PowerCrystal)] = 100.0;
             Entries[typeof(PristineDreadHorn)] = 1000.0;
@@ -743,7 +733,7 @@ namespace Server.Engines.Points
 
                 if (system != null && system.CraftItems != null)
                 {
-                    var type = item.GetType();
+                    Type type = item.GetType();
 
                     if (type == typeof(SilverRing))
                     {
@@ -877,7 +867,7 @@ namespace Server.Engines.Points
                 PointsExchange[a.Username] = 0;
                 AwardPoints(m, points, false, false);
 
-                m.SendLocalizedMessage(1158453, String.Format("{0}\t{1}", points.ToString("N0"), ((int)GetPoints(m)).ToString("N0"))); // You have withdrawn ~1_VALUE~ Cleanup Britannia Points.  You now have ~2_VALUE~ points.
+                m.SendLocalizedMessage(1158453, string.Format("{0}\t{1}", points.ToString("N0"), ((int)GetPoints(m)).ToString("N0"))); // You have withdrawn ~1_VALUE~ Cleanup Britannia Points.  You now have ~2_VALUE~ points.
                 return true;
             }
 
@@ -894,7 +884,7 @@ namespace Server.Engines.Points
 
             if (PointsExchange != null)
             {
-                foreach (var kvp in PointsExchange)
+                foreach (KeyValuePair<string, double> kvp in PointsExchange)
                 {
                     writer.Write(kvp.Key);
                     writer.Write(kvp.Value);
@@ -906,7 +896,7 @@ namespace Server.Engines.Points
         {
             base.Deserialize(reader);
 
-            if (this.Version >= 2)
+            if (Version >= 2)
             {
                 int version = reader.ReadInt();
 
@@ -925,7 +915,7 @@ namespace Server.Engines.Points
 
     public class AppraiseforCleanupTarget : Target
     {
-        private Mobile m_Mobile;
+        private readonly Mobile m_Mobile;
 
         public AppraiseforCleanupTarget(Mobile from) : base(-1, true, TargetFlags.None)
         {

@@ -1,11 +1,10 @@
 using System;
-using Server;
 
 namespace Server.Items
 {
     public class GobletOfCelebration : Item
     {
-        public override int LabelNumber { get { return 1075430; } } // Goblet of Celebration
+        public override int LabelNumber => 1075430;  // Goblet of Celebration
 
         private bool m_Full;
         private DateTime m_NextFill;
@@ -32,7 +31,7 @@ namespace Server.Items
                     {
                         m_NextFill = DateTime.Now + TimeSpan.FromDays(1.0);
 
-                        m_FillTimer = Timer.DelayCall(TimeSpan.FromDays(1.0), new TimerCallback(delegate { Full = true; }));
+                        m_FillTimer = Timer.DelayCall(TimeSpan.FromDays(1.0), delegate { Full = true; });
                     }
                 }
             }
@@ -93,7 +92,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_Full);
 
@@ -114,7 +113,7 @@ namespace Server.Items
             {
                 m_NextFill = reader.ReadDateTime();
 
-                m_FillTimer = Timer.DelayCall(m_NextFill - DateTime.Now, new TimerCallback(delegate { Full = true; }));
+                m_FillTimer = Timer.DelayCall(m_NextFill - DateTime.Now, delegate { Full = true; });
             }
         }
     }

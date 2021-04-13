@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class MagekillerAssassinSpike : AssassinSpike
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public MagekillerAssassinSpike()
         {
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073519;
-            }
-        }// magekiller assassin spike
+        public override int LabelNumber => 1073519;// magekiller assassin spike
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

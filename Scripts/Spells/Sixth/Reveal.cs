@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Server.Targeting;
+using System.Collections.Generic;
 
 namespace Server.Spells.Sixth
 {
@@ -17,13 +16,7 @@ namespace Server.Spells.Sixth
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.Sixth;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.Sixth;
         public override void OnCast()
         {
             Caster.Target = new InternalTarget(this);
@@ -51,7 +44,7 @@ namespace Server.Spells.Sixth
 
                     foreach (Mobile m in eable)
                     {
-                        if ((m is Mobiles.ShadowKnight && (m.X != p.X || m.Y != p.Y)) || !SkillHandlers.DetectHidden.CanDetect(Caster, m))
+                        if ((m is Mobiles.ShadowKnight && (m.X != p.X || m.Y != p.Y)) || !SkillHandlers.DetectHidden.CanDetect(Caster, m, true))
                             continue;
 
                         if (m.Hidden && (m.IsPlayer() || Caster.AccessLevel > m.AccessLevel) && CheckDifficulty(Caster, m))
@@ -81,7 +74,7 @@ namespace Server.Spells.Sixth
         private static bool CheckDifficulty(Mobile from, Mobile m)
         {
             // Reveal always reveals vs. invisibility spell 
-            if (!Core.AOS || InvisibilitySpell.HasTimer(m))
+            if (InvisibilitySpell.HasTimer(m))
                 return true;
 
             int magery = from.Skills[SkillName.Magery].Fixed;
@@ -104,7 +97,7 @@ namespace Server.Spells.Sixth
         {
             private readonly RevealSpell m_Owner;
             public InternalTarget(RevealSpell owner)
-                : base(Core.ML ? 10 : 12, true, TargetFlags.None)
+                : base(10, true, TargetFlags.None)
             {
                 m_Owner = owner;
             }

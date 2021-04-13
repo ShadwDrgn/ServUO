@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Network;
 
@@ -11,7 +10,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public HighPlainsBoura()
-            : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "a high plains boura";
             Body = 715;
@@ -42,9 +41,7 @@ namespace Server.Mobiles
             MinTameSkill = 47.1;
 
             Fame = 5000;
-            Karma = -5000; 
-
-            VirtualArmor = 16;
+            Karma = -5000;
 
             SetSpecialAbility(SpecialAbility.TailSwipe);
             SetSpecialAbility(SpecialAbility.ColossalBlow);
@@ -54,33 +51,24 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get { return 10; }
-        }
+        public override int Meat => 10;
 
-        public override int Hides
-        {
-            get { return 22; }
-        }
+        public override int Hides => 22;
 
-        public override int DragonBlood { get { return 8; } }
+        public override int DragonBlood => 8;
 
-        public override HideType HideType
-        {
-            get { return HideType.Horned; }
-        }
+        public override HideType HideType => HideType.Horned;
 
-        public override FoodType FavoriteFood { get { return FoodType.FruitsAndVegies; } }
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
 
-        public override int Fur { get { return GatheredFur ? 0 : 30; } }
-        public override FurType FurType { get { return FurType.Yellow; } }
+        public override int Fur => GatheredFur ? 0 : 30;
+        public override FurType FurType => FurType.Yellow;
 
         public bool Carve(Mobile from, Item item)
         {
             if (!GatheredFur)
             {
-                var fur = new Fur(FurType, Fur);
+                Fur fur = new Fur(FurType, Fur);
 
                 if (from.Backpack == null || !from.Backpack.TryDropItem(from, fur, false))
                 {
@@ -148,7 +136,7 @@ namespace Server.Mobiles
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            var version = reader.ReadInt();
+            int version = reader.ReadInt();
 
             if (version == 1)
                 reader.ReadDeltaTime();

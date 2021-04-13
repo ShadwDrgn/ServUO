@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class BolaBall : Item
@@ -14,10 +12,10 @@ namespace Server.Items
         public BolaBall(int amount)
             : base(0xE73)
         {
-            this.Weight = 4.0;
-            this.Stackable = true;
-            this.Amount = amount;
-            this.Hue = 0x8AC;
+            Weight = 4.0;
+            Stackable = true;
+            Amount = amount;
+            Hue = 0x8AC;
         }
 
         public BolaBall(Serial serial)
@@ -29,7 +27,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

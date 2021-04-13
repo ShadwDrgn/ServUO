@@ -1,24 +1,21 @@
-using System;
-using System.Collections.Generic;
-
-using Server;
 using Server.Items;
 using Server.Mobiles;
-using Server.Engines.SeasonalEvents;
+using Server.Engines.TreasuresOfDoom;
+
+using System;
+using System.Collections.Generic;
 
 namespace Server.Engines.Points
 {
     public class DoomData : PointsSystem
     {
-        public override PointsType Loyalty { get { return PointsType.Doom; } }
-        public override TextDefinition Name { get { return m_Name; } }
-        public override bool AutoAdd { get { return true; } }
-        public override double MaxPoints { get { return double.MaxValue; } }
-        public override bool ShowOnLoyaltyGump { get { return false; } }
+        public override PointsType Loyalty => PointsType.Doom;
+        public override TextDefinition Name => m_Name;
+        public override bool AutoAdd => true;
+        public override double MaxPoints => double.MaxValue;
+        public override bool ShowOnLoyaltyGump => false;
 
-        public bool InSeason { get { return SeasonalEventSystem.IsActive(EventType.TreasuresOfDoom); } }
-
-        private TextDefinition m_Name = null;
+        private readonly TextDefinition m_Name = null;
 
         public DoomData()
         {
@@ -32,9 +29,9 @@ namespace Server.Engines.Points
 
         public override void ProcessKill(Mobile victim, Mobile damager)
         {
-            var bc = victim as BaseCreature;
+            BaseCreature bc = victim as BaseCreature;
 
-            if (!InSeason || bc == null || bc.Controlled || bc.Summoned || !damager.Alive || damager.Deleted || bc.IsChampionSpawn)
+            if (!TreasuresOfDoomEvent.Instance.Running || bc == null || bc.Controlled || bc.Summoned || !damager.Alive || damager.Deleted || bc.IsChampionSpawn)
                 return;
 
             Region r = bc.Region;
@@ -44,10 +41,9 @@ namespace Server.Engines.Points
                 if (!DungeonPoints.ContainsKey(damager))
                     DungeonPoints[damager] = 0;
 
-                int fame = bc.Fame / 2;
                 int luck = Math.Max(0, ((PlayerMobile)damager).RealLuck);
 
-                DungeonPoints[damager] += (int)(fame * (1 + Math.Sqrt(luck) / 100));
+                DungeonPoints[damager] += (int)Math.Max(0, (bc.Fame * (1 + Math.Sqrt(luck) / 100)));
 
                 int x = DungeonPoints[damager];
                 const double A = 0.000863316841;
@@ -84,14 +80,11 @@ namespace Server.Engines.Points
         }
 
         public Dictionary<Mobile, int> DungeonPoints { get; set; }
-        public bool Enabled { get; set; }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(0);
-
-            writer.Write(Enabled);
+            writer.Write(1);
 
             writer.Write(DungeonPoints.Count);
             foreach (KeyValuePair<Mobile, int> kvp in DungeonPoints)
@@ -107,7 +100,10 @@ namespace Server.Engines.Points
 
             int version = reader.ReadInt();
 
-            Enabled = reader.ReadBool();
+            if (version == 0)
+            {
+                reader.ReadBool();
+            }
 
             int count = reader.ReadInt();
             for (int i = 0; i < count; i++)

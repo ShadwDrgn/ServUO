@@ -1,13 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class JewelryBoxFilter
     {
-        public bool IsDefault
-        {
-            get { return (!Ring && !Bracelet && !Earrings && !Necklace && !Talisman); }
-        }
+        public bool IsDefault => (!Ring && !Bracelet && !Earrings && !Necklace && !Talisman);
 
         public void Clear()
         {
@@ -108,17 +103,17 @@ namespace Server.Items
         {
             if (IsDefault)
             {
-                writer.Write((int)0);
+                writer.Write(0);
             }
             else
             {
                 writer.Write(1);
 
-                writer.Write((bool)Ring);
-                writer.Write((bool)Bracelet);
-                writer.Write((bool)Earrings);
-                writer.Write((bool)Necklace);
-                writer.Write((bool)Talisman);
+                writer.Write(Ring);
+                writer.Write(Bracelet);
+                writer.Write(Earrings);
+                writer.Write(Necklace);
+                writer.Write(Talisman);
             }
         }
     }

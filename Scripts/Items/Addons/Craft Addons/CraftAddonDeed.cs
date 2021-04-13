@@ -1,11 +1,3 @@
-using System;
-using Server;
-using Server.Engines.Craft;
-using System.Collections.Generic;
-using Server.Multis;
-using Server.Mobiles;
-using System.Linq;
-
 namespace Server.Items
 {
     public abstract class CraftAddonDeed : BaseAddonDeed
@@ -34,7 +26,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(UsesRemaining);
         }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a slimey corpse")]
@@ -36,8 +34,6 @@ namespace Server.Mobiles
             Fame = 300;
             Karma = -300;
 
-            VirtualArmor = 8;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 23.1;
@@ -48,27 +44,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Lesser;
-            }
-        }
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Lesser;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Meat | FoodType.Fish | FoodType.FruitsAndVegies | FoodType.GrainsAndHay | FoodType.Eggs;
-            }
-        }
+        public override Poison PoisonImmune => Poison.Lesser;
+        public override Poison HitPoison => Poison.Lesser;
+        public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish | FoodType.FruitsAndVegies | FoodType.GrainsAndHay | FoodType.Eggs;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
@@ -89,18 +67,13 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
-
-            if (version == 0 && (AbilityProfile == null || AbilityProfile.MagicalAbility == MagicalAbility.None))
-            {
-                SetMagicalAbility(MagicalAbility.Poisoning);
-            }
         }
     }
 }

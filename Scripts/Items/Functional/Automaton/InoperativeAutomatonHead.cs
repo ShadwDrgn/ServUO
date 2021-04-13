@@ -1,12 +1,9 @@
-using System;
-using Server.Mobiles;
-
 namespace Server.Items
 {
-    [FlipableAttribute(0x9DB1, 0x9DB2)]
+    [Flipable(0x9DB1, 0x9DB2)]
     public class InoperativeAutomatonHead : Item
     {
-        public override int LabelNumber { get { return 1157002; } } // Inoperative Automaton Head
+        public override int LabelNumber => 1157002;  // Inoperative Automaton Head
 
         [Constructable]
         public InoperativeAutomatonHead()
@@ -23,7 +20,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

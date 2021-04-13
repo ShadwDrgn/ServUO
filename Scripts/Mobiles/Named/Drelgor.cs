@@ -1,13 +1,7 @@
 
-using System;
-using Server;
-using System.Collections;
-using System.Collections.Generic;
 using Server.Items;
-using Server.Misc;
-using Server.Regions;
 using Server.Network;
-using Server.Targeting;
+using System;
 
 namespace Server.Mobiles
 {
@@ -15,7 +9,7 @@ namespace Server.Mobiles
     public class Drelgor : BaseCreature
     {
         private bool init = false; //Don't change this.
-        private double msgevery = 1.0; //Recurring message. Change to 0 to disable.
+        private readonly double msgevery = 1.0; //Recurring message. Change to 0 to disable.
         private DateTime m_NextMsgTime;
 
         [Constructable]
@@ -49,39 +43,18 @@ namespace Server.Mobiles
 
             Fame = 3600;
             Karma = -3600;
-
-            VirtualArmor = 40;
-
-            PackItem(new Scimitar());
-            PackItem(new WoodenShield());
-
-            switch (Utility.Random(5))
-            {
-                case 0:
-                    this.PackItem(new BoneArms());
-                    break;
-                case 1:
-                    this.PackItem(new BoneChest());
-                    break;
-                case 2:
-                    this.PackItem(new BoneGloves());
-                    break;
-                case 3:
-                    this.PackItem(new BoneLegs());
-                    break;
-                case 4:
-                    this.PackItem(new BoneHelm());
-                    break;
-            }
         }
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
+            AddLoot(LootPack.LootItem<Scimitar>());
+            AddLoot(LootPack.LootItem<WoodenShield>());
+            AddLoot(LootPack.RandomLootItem(new Type[] { typeof(BoneArms), typeof(BoneChest), typeof(BoneGloves), typeof(BoneLegs), typeof(BoneHelm) }));
         }
 
-        public override bool BleedImmune { get { return true; } }
+        public override bool BleedImmune => true;
 
         #region Start/Stop
         private void Start()
@@ -92,7 +65,7 @@ namespace Server.Mobiles
             init = true;
         }
         #endregion
-        
+
         #region Broadcast Message
         public void BroadcastMessage()
         {
@@ -100,7 +73,7 @@ namespace Server.Mobiles
             {
                 Mobile m = state.Mobile;
 
-                if (m != null && this.Region.Name == "Old Haven Training" && m.Region.Name == "Old Haven Training")
+                if (m != null && Region.Name == "Old Haven Training" && m.Region.Name == "Old Haven Training")
                 {
                     m.SendLocalizedMessage(1077840, "", 34); // // Who dares to defile Haven? I am Drelgor the Impaler! I shall claim your souls as payment for this intrusion!
                     m.PlaySound(0x14);
@@ -130,15 +103,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override OppositionGroup OppositionGroup
-        {
-            get { return OppositionGroup.FeyAndUndead; }
-        }
-
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
             writer.Write(init);
             writer.Write(m_NextMsgTime);
         }

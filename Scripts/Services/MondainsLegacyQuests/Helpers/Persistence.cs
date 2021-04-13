@@ -1,9 +1,6 @@
-using System;
+using Server.Mobiles;
 using System.Collections.Generic;
 using System.IO;
-
-using Server;
-using Server.Mobiles;
 
 namespace Server.Engines.Quests
 {
@@ -18,7 +15,7 @@ namespace Server.Engines.Quests
         {
             if (!QuestData.ContainsKey(pm))
             {
-                QuestData[pm] = new List<BaseQuest>(); 
+                QuestData[pm] = new List<BaseQuest>();
             }
 
             return QuestData[pm];
@@ -70,7 +67,7 @@ namespace Server.Engines.Quests
             {
                 ChainData[pm].Remove(chain);
 
-                if(ChainData[pm].Count == 0)
+                if (ChainData[pm].Count == 0)
                     ChainData.Remove(pm);
             }
         }
@@ -93,14 +90,14 @@ namespace Server.Engines.Quests
                     writer.Write(0);
 
                     writer.Write(QuestData.Count);
-                    foreach (var kvp in QuestData)
+                    foreach (KeyValuePair<PlayerMobile, List<BaseQuest>> kvp in QuestData)
                     {
                         writer.Write(kvp.Key);
                         QuestWriter.Quests(writer, kvp.Value);
                     }
 
                     writer.Write(ChainData.Count);
-                    foreach (var kvp in ChainData)
+                    foreach (KeyValuePair<PlayerMobile, Dictionary<QuestChain, BaseChain>> kvp in ChainData)
                     {
                         writer.Write(kvp.Key);
                         QuestWriter.Chains(writer, kvp.Value);

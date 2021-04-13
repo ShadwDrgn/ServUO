@@ -1,17 +1,15 @@
-using Server;
-using System;
-using Server.Mobiles;
-using Server.Items;
 using Server.Engines.Points;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.Khaldun
 {
     public class KhaldunResearcher : BaseTurnInMobile
     {
-        public override int TitleLocalization { get { return 1158744; } } // Artifacts of the Cult
-        public override int CancelLocalization { get { return 1158675; } }	// Bring me items of the Cult and I will reward you with valuable items.   
-        public override int TurnInLocalization { get { return 1157652; } } // Turn In Artifacts of The Cult	
-        public override int ClaimLocalization { get { return 1155593; } } // Claim Rewards
+        public override int TitleLocalization => 1158744;  // Artifacts of the Cult
+        public override int CancelLocalization => 1158675; 	// Bring me items of the Cult and I will reward you with valuable items.   
+        public override int TurnInLocalization => 1157652;  // Turn In Artifacts of The Cult	
+        public override int ClaimLocalization => 1155593;  // Claim Rewards
 
         public static KhaldunResearcher InstanceTram { get; set; }
         public static KhaldunResearcher InstanceFel { get; set; }
@@ -43,32 +41,46 @@ namespace Server.Engines.Khaldun
             SetWearable(new Necklace());
 
             // QuiverOfInfinityBase
-            Item item = new SeekerOfTheFallenStarTitleDeed();
-            item.Movable = false;
+            Item item = new SeekerOfTheFallenStarTitleDeed
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new ZealotOfKhalAnkurTitleDeed();
-            item.Movable = false;
+            item = new ZealotOfKhalAnkurTitleDeed
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new ProphetTitleDeed();
-            item.Movable = false;
+            item = new ProphetTitleDeed
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new CultistsRitualTome();
-            item.Movable = false;
+            item = new CultistsRitualTome
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new SterlingSilverRing();
-            item.Movable = false;
+            item = new SterlingSilverRing
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new TalonsOfEscaping();
-            item.Movable = false;
+            item = new TalonsOfEscaping
+            {
+                Movable = false
+            };
             PackItem(item);
 
-            item = new BootsOfEscaping();
-            item.Movable = false;
+            item = new BootsOfEscaping
+            {
+                Movable = false
+            };
             PackItem(item);
         }
 

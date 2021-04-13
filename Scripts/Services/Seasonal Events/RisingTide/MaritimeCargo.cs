@@ -1,10 +1,4 @@
-using System;
-
-using Server;
-using Server.Items;
-using Server.Mobiles;
 using Server.Engines.CityLoyalty;
-using Server.Engines.RisingTide;
 
 namespace Server.Items
 {
@@ -27,8 +21,6 @@ namespace Server.Items
         Reagents = 1156,
         Glassware = 1158,
     }
-
-    // 1158907 You recover maritime trade cargo!
 
     [Flipable(0xA2C4, 0xA2C5)]
     public class MaritimeCargo : Item
@@ -97,7 +89,7 @@ namespace Server.Items
 
         private static CargoQuality RandomQuality()
         {
-            var random = Utility.RandomDouble();
+            double random = Utility.RandomDouble();
 
             if (random < 0.05)
             {
@@ -143,7 +135,7 @@ namespace Server.Items
                 case CargoQuality.Grandmaster: amount = Utility.RandomMinMax(100, 200); break;
                 case CargoQuality.Exalted: amount = Utility.RandomMinMax(500, 600); break;
                 case CargoQuality.Legendary: amount = Utility.RandomMinMax(1000, 1100); break;
-                case CargoQuality.Mythical: amount = Utility.RandomMinMax(10000, 15000); break;
+                case CargoQuality.Mythical: amount = Utility.RandomMinMax(10000, 10100); break;
             }
 
             return amount;
@@ -151,14 +143,14 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            list.Add(1158906, String.Format("#{0}", CityLoyaltySystem.GetCityLocalization(_City).ToString())); // Maritime Trade Cargo Destined for ~1_CITY~
+            list.Add(1158906, string.Format("#{0}", CityLoyaltySystem.GetCityLocalization(_City).ToString())); // Maritime Trade Cargo Destined for ~1_CITY~
         }
 
         public override void AddWeightProperty(ObjectPropertyList list)
         {
             base.AddWeightProperty(list);
 
-            list.Add(_CargoQuality < CargoQuality.Mythical ? 1158903 + (int)_CargoQuality : 1158969, String.Format("#{0}", TypeLabel(_CargoType)));
+            list.Add(_CargoQuality < CargoQuality.Mythical ? 1158903 + (int)_CargoQuality : 1158969, string.Format("#{0}", TypeLabel(_CargoType)));
         }
 
         public static int TypeLabel(CargoType type)

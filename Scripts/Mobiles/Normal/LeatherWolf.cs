@@ -1,18 +1,17 @@
+using Server.Items;
 using System;
 using System.Collections.Generic;
-using Server;
-using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("a wolf corpse")]
     public class LeatherWolf : BaseCreature, IRepairableMobile
     {
-        public Type RepairResource { get { return typeof(IronIngot); } }
+        public Type RepairResource => typeof(IronIngot);
 
         private const int MaxFellows = 3;
 
-        private List<Mobile> m_Fellows = new List<Mobile>();
+        private readonly List<Mobile> m_Fellows = new List<Mobile>();
         private Timer m_FellowsTimer;
 
         [Constructable]
@@ -60,7 +59,7 @@ namespace Server.Mobiles
             base.OnDeath(c);
 
             if (!Controlled && 0.2 > Utility.RandomDouble())
-                c.DropItem(new LeatherWolfSkin());         
+                c.DropItem(new LeatherWolfSkin());
         }
 
         public override void OnCombatantChange()
@@ -119,7 +118,7 @@ namespace Server.Mobiles
 
         private class InternalTimer : Timer
         {
-            private LeatherWolf m_Owner;
+            private readonly LeatherWolf m_Owner;
 
             public InternalTimer(LeatherWolf owner)
                 : base(TimeSpan.Zero, TimeSpan.FromSeconds(30.0))
@@ -133,36 +132,12 @@ namespace Server.Mobiles
             }
         }
 
-        public override bool AlwaysMurderer { get { return true; } }
+        public override bool AlwaysMurderer => true;
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override PackInstinct PackInstinct
-        {
-            get
-            {
-                return PackInstinct.Canine;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 7;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Meat;
-            }
-        }
+        public override int Meat => 1;
+        public override PackInstinct PackInstinct => PackInstinct.Canine;
+        public override int Hides => 7;
+        public override FoodType FavoriteFood => FoodType.Meat;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager, 2);
@@ -192,7 +167,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -237,7 +212,7 @@ namespace Server.Mobiles
             Karma = -2500;
         }
 
-        public override PackInstinct PackInstinct { get { return PackInstinct.Canine; } }
+        public override PackInstinct PackInstinct => PackInstinct.Canine;
 
         public LeatherWolfFellow(Serial serial)
             : base(serial)
@@ -248,7 +223,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

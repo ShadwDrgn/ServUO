@@ -1,18 +1,16 @@
+using Server.Engines.SeasonalEvents;
+using Server.Items;
+using Server.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Server;
-using Server.Items;
-using Server.Engines.SeasonalEvents;
-using Server.Spells;
 
 namespace Server.Mobiles
 {
     [CorpseName("the corpse of krampus")]
     public class Krampus : BaseCreature
     {
-        public override bool TeleportsTo { get { return true; } }
+        public override bool TeleportsTo => true;
 
         public List<BaseCreature> SummonedHelpers { get; set; }
         public List<BaseCreature> InitialSpawn { get; set; }
@@ -25,7 +23,7 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public Point3D SpawnLocation { get; set; }
 
-        public bool IsKrampusEncounter { get { return KrampusEncounter.Encounter != null && KrampusEncounter.Encounter.Krampus == this; } }
+        public bool IsKrampusEncounter => KrampusEvent.Instance.Krampus == this;
 
         [Constructable]
         public Krampus()
@@ -88,7 +86,7 @@ namespace Server.Mobiles
             if (target == null || (!initial && InitialSpawn != null && InitialSpawn.Count > 0))
                 return;
 
-            var map = Map;
+            Map map = Map;
 
             if (map == null || TotalSummons() > MaxSummons)
                 return;
@@ -129,7 +127,7 @@ namespace Server.Mobiles
                         spawn.MoveToWorld(p, map);
                         spawn.Home = p;
                         spawn.RangeHome = 5;
-                        spawn.Team = this.Team;
+                        spawn.Team = Team;
                         spawn.SummonMaster = this;
 
                         if (!initial)
@@ -267,7 +265,7 @@ namespace Server.Mobiles
             {
                 if (Utility.RandomBool())
                 {
-                    var target = GetTeleportTarget();
+                    Mobile target = GetTeleportTarget();
 
                     if (target != null)
                     {
@@ -281,9 +279,9 @@ namespace Server.Mobiles
 
                     PlaySound(0x20D);
 
-                    foreach (var m in SpellHelper.AcquireIndirectTargets(this, Location, Map, 10).OfType<Mobile>())
+                    foreach (Mobile m in SpellHelper.AcquireIndirectTargets(this, Location, Map, 10).OfType<Mobile>())
                     {
-                        var range = (int)GetDistanceToSqrt(m);
+                        int range = (int)GetDistanceToSqrt(m);
 
                         if (range < 1) range = 1;
                         if (range > 4) range = 4;
@@ -312,16 +310,16 @@ namespace Server.Mobiles
         {
             if (IsKrampusEncounter)
             {
-                var rights = GetLootingRights();
+                List<DamageStore> rights = GetLootingRights();
 
-                foreach (var ds in rights.Where(s => s.m_Mobile is PlayerMobile && s.m_HasRight))
+                foreach (DamageStore ds in rights.Where(s => s.m_Mobile is PlayerMobile && s.m_HasRight))
                 {
-                    var m = ds.m_Mobile as PlayerMobile;
+                    PlayerMobile m = ds.m_Mobile as PlayerMobile;
                     int ordersComplete = 0;
 
-                    if (KrampusEncounter.Encounter.CompleteTable.ContainsKey(m))
+                    if (KrampusEvent.Instance.CompleteTable.ContainsKey(m))
                     {
-                        ordersComplete = KrampusEncounter.Encounter.CompleteTable[m];
+                        ordersComplete = KrampusEvent.Instance.CompleteTable[m];
                     }
 
                     if (ordersComplete >= 3 || Utility.RandomMinMax(0, 8) <= ordersComplete)
@@ -340,9 +338,9 @@ namespace Server.Mobiles
                             case 7: item = new KrampusCoinPurse(463); break; // minion talons
                             case 8: item = new KrampusCoinPurse(588); break; // minion earrings
                             case 9: item = new KrampusPunishinList(m.Name); break;
-                            case 10: item = new SpikedWhip(); break;
-                            case 11: item = new BarbedWhip(); break;
-                            case 12: item = new BladedWhip(); break;
+                            case 10: item = new RecipeScroll(466); break; // barbed whip
+                            case 11: item = new RecipeScroll(467); break; // spiked whip
+                            case 12: item = new RecipeScroll(468); break; // bladed whip
                         }
 
                         if (item != null)
@@ -367,7 +365,7 @@ namespace Server.Mobiles
 
             if (IsKrampusEncounter)
             {
-                KrampusEncounter.Encounter.OnKrampusKilled();
+                KrampusEvent.Instance.OnKrampusKilled();
             }
 
             if (SummonedHelpers != null)
@@ -386,7 +384,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(SpawnLocation);
 

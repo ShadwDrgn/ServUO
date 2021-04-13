@@ -1,12 +1,9 @@
-using Server;
-using System;
-using Server.Items;
-using Server.Mobiles;
 using Server.Gumps;
+using Server.Items;
+using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
-using Server.Network;
-using System.Collections.Generic;
+using System;
 
 namespace Server.Engines.Distillation
 {
@@ -16,8 +13,8 @@ namespace Server.Engines.Distillation
         private const int LabelColor = 0x7FFF;
         private const int FontColor = 0xFFFFFF;
 
-        private DistillationContext m_Context;
-        private CraftDefinition m_Def;
+        private readonly DistillationContext m_Context;
+        private readonly CraftDefinition m_Def;
 
         public DistillationGump(Mobile from) : base(35, 35)
         {
@@ -77,7 +74,7 @@ namespace Server.Engines.Distillation
                 }
             }
 
-            AddHtmlLocalized(250, 54, 240, 20, 1150735, String.Format("#{0}", DistillationSystem.GetLabel(liquor, false)), LabelColor, false, false); // <center>Ingredients of ~1_NAME~</center>
+            AddHtmlLocalized(250, 54, 240, 20, 1150735, string.Format("#{0}", DistillationSystem.GetLabel(liquor, false)), LabelColor, false, false); // <center>Ingredients of ~1_NAME~</center>
 
             y = 80;
             for (int i = 0; i < m_Def.Ingredients.Length; i++)
@@ -105,7 +102,7 @@ namespace Server.Engines.Distillation
                     int amount = DistillationTarget.GetAmount(from, type, liquor);
                     if (amount > total)
                         amount = total;
-                    AddHtmlLocalized(295, y, 200, 20, 1150733, String.Format("#{0}\t{1}", m_Def.Labels[i], String.Format("{0}/{1}", amount.ToString(), total.ToString())), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
+                    AddHtmlLocalized(295, y, 200, 20, 1150733, string.Format("#{0}\t{1}", m_Def.Labels[i], string.Format("{0}/{1}", amount.ToString(), total.ToString())), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
                 }
 
                 y += 26;
@@ -120,7 +117,7 @@ namespace Server.Engines.Distillation
             AddHtmlLocalized(295, 320, 200, 20, m_Context.Mark ? 1150731 : 1150732, LabelColor, false, false); // Mark Distiller Name - Do Not Mark
 
             AddButton(15, 395, 4005, 4007, 6, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(55, 395, 200, 20, 1150733, String.Format("Label\t{0}", m_Context.Label == null ? "None" : m_Context.Label), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
+            AddHtmlLocalized(55, 395, 200, 20, 1150733, string.Format("Label\t{0}", m_Context.Label == null ? "None" : m_Context.Label), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
 
             AddButton(15, 465, 4005, 4007, 7, GumpButtonType.Reply, 0);
             AddHtmlLocalized(55, 465, 200, 20, 1150771, LabelColor, false, false); // Execute Distillation
@@ -180,7 +177,7 @@ namespace Server.Engines.Distillation
                         {
                             int sel = info.ButtonID - 2000;
 
-                            if(m_Def.Ingredients[0] == typeof(Yeast) && m_Def.Amounts.Length > 0)
+                            if (m_Def.Ingredients[0] == typeof(Yeast) && m_Def.Amounts.Length > 0)
                             {
                                 int amt = m_Def.Amounts[0];
 
@@ -201,7 +198,7 @@ namespace Server.Engines.Distillation
 
         private class LabelPrompt : Prompt
         {
-            private DistillationContext m_Context;
+            private readonly DistillationContext m_Context;
 
             public LabelPrompt(DistillationContext context)
             {
@@ -215,7 +212,7 @@ namespace Server.Engines.Distillation
                 else if (text != null)
                 {
                     text = text.Trim();
-                    if (text.Length > 15 || !Server.Guilds.BaseGuildGump.CheckProfanity(text))
+                    if (text.Length > 15 || !Guilds.BaseGuildGump.CheckProfanity(text))
                         from.SendMessage("That label is unacceptable. Please try again.");
                     else
                         m_Context.Label = text;
@@ -234,8 +231,8 @@ namespace Server.Engines.Distillation
 
         public class DistillationTarget : Target
         {
-            private DistillationContext m_Context;
-            private CraftDefinition m_Def;
+            private readonly DistillationContext m_Context;
+            private readonly CraftDefinition m_Def;
 
             public DistillationTarget(Mobile from, DistillationContext context, CraftDefinition def)
                 : base(-1, false, TargetFlags.None)
@@ -367,11 +364,11 @@ namespace Server.Engines.Distillation
                     }
                     else
                     {
-                        toConsume = (int)((double)toConsume * percentage);
+                        toConsume = (int)(toConsume * percentage);
 
                         if (GetAmount(from, type, m_Def.Liquor) < toConsume)
                             return false;
-                    } 
+                    }
                 }
 
                 return true;
@@ -401,7 +398,7 @@ namespace Server.Engines.Distillation
                     }
                     else if (type == typeof(Pitcher))
                     {
-                        toConsume = (int)((double)toConsume * percentage);
+                        toConsume = (int)(toConsume * percentage);
                         BeverageType bType = m_Def.Liquor == Liquor.Brandy ? BeverageType.Wine : BeverageType.Water;
 
                         Item[] items = pack.FindItemsByType(type);
@@ -422,7 +419,7 @@ namespace Server.Engines.Distillation
                     }
                     else if (type == typeof(PewterBowlOfCorn))
                     {
-                        toConsume = (int)((double)toConsume * percentage);
+                        toConsume = (int)(toConsume * percentage);
 
                         int totalPewter = pack.GetAmount(type);
                         int totalWooden = pack.GetAmount(typeof(WoodenBowlOfCorn));
@@ -438,7 +435,7 @@ namespace Server.Engines.Distillation
                     }
                     else
                     {
-                        toConsume = (int)((double)toConsume * percentage);
+                        toConsume = (int)(toConsume * percentage);
                         pack.ConsumeTotal(type, toConsume);
                     }
                 }
@@ -447,8 +444,8 @@ namespace Server.Engines.Distillation
 
         private class YeastSelectionTarget : Target
         {
-            private int m_Index;
-            private DistillationContext m_Context;
+            private readonly int m_Index;
+            private readonly DistillationContext m_Context;
 
             public YeastSelectionTarget(DistillationContext context, int index)
                 : base(-1, false, TargetFlags.None)

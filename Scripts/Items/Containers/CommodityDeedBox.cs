@@ -1,9 +1,7 @@
-using System;
 using Server.Engines.VeteranRewards;
 
 namespace Server.Items
-{ 
-    [Furniture]
+{
     [Flipable(0x9AA, 0xE7D)]
     public class CommodityDeedBox : BaseContainer, IRewardItem
     {
@@ -12,8 +10,8 @@ namespace Server.Items
         public CommodityDeedBox()
             : base(0x9AA)
         {
-            this.Hue = 0x47;
-            this.Weight = 4.0;
+            Hue = 0x47;
+            Weight = 4.0;
         }
 
         public CommodityDeedBox(Serial serial)
@@ -21,31 +19,19 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1080523;
-            }
-        }// Commodity Deed Box
-        public override int DefaultGumpID
-        {
-            get
-            {
-                return 0x43;
-            }
-        }
+        public override int LabelNumber => 1080523;// Commodity Deed Box
+        public override int DefaultGumpID => 0x43;
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IsRewardItem
         {
             get
             {
-                return this.m_IsRewardItem;
+                return m_IsRewardItem;
             }
             set
             {
-                this.m_IsRewardItem = value;
-                this.InvalidateProperties();
+                m_IsRewardItem = value;
+                InvalidateProperties();
             }
         }
         public static CommodityDeedBox Find(Item deed)
@@ -61,8 +47,8 @@ namespace Server.Items
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
-			
-            if (this.m_IsRewardItem)
+
+            if (m_IsRewardItem)
                 list.Add(1076217); // 1st Year Veteran Reward		
         }
 
@@ -72,7 +58,7 @@ namespace Server.Items
 
             writer.WriteEncodedInt(0); // version
 
-            writer.Write((bool)this.m_IsRewardItem);
+            writer.Write(m_IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -81,7 +67,7 @@ namespace Server.Items
 
             int version = reader.ReadEncodedInt();
 
-            this.m_IsRewardItem = reader.ReadBool();
+            m_IsRewardItem = reader.ReadBool();
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Server.Network;
 using Server.Targeting;
 
@@ -53,19 +52,13 @@ namespace Server.Items
             {
             }
         }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1049082;
-            }
-        }// powder of fortifying
+        public override int LabelNumber => 1049082;// powder of fortifying
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
-            writer.Write((int)m_UsesRemaining);
+            writer.Write(0);
+            writer.Write(m_UsesRemaining);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -74,7 +67,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 0:
                     {
@@ -92,13 +85,6 @@ namespace Server.Items
         public virtual void DisplayDurabilityTo(Mobile m)
         {
             LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            DisplayDurabilityTo(from);
-
-            base.OnSingleClick(from);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -132,7 +118,7 @@ namespace Server.Items
                     bool noGo = false;
                     int antique = 0;
 
-                    if (!Server.Engines.Craft.Repair.AllowsRepair(item, null) || (item is BaseJewel && !CanPOFJewelry))
+                    if (!Engines.Craft.Repair.AllowsRepair(item, null) || (item is BaseJewel && !CanPOFJewelry))
                     {
                         from.SendLocalizedMessage(1049083); // You cannot use the powder on that item.
                         return;
@@ -184,7 +170,7 @@ namespace Server.Items
                             return;
                         }
 
-                        if ((item.IsChildOf(from.Backpack) || (Core.ML && item.Parent == from)) && m_Powder.IsChildOf(from.Backpack))
+                        if ((item.IsChildOf(from.Backpack) || item.Parent == from) && m_Powder.IsChildOf(from.Backpack))
                         {
                             int origMaxHP = wearable.MaxHitPoints;
                             int origCurHP = wearable.HitPoints;

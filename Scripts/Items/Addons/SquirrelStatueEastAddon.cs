@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class SquirrelStatueEastAddon : BaseAddon
@@ -7,7 +5,7 @@ namespace Server.Items
         [Constructable]
         public SquirrelStatueEastAddon()
         {
-            this.AddComponent(new AddonComponent(0x2D10), 0, 0, 0);
+            AddComponent(new AddonComponent(0x2D10), 0, 0, 0);
         }
 
         public SquirrelStatueEastAddon(Serial serial)
@@ -15,13 +13,7 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new SquirrelStatueEastDeed();
-            }
-        }
+        public override BaseAddonDeed Deed => new SquirrelStatueEastDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -49,20 +41,8 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new SquirrelStatueEastAddon();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073398;
-            }
-        }// squirrel statue (east)
+        public override BaseAddon Addon => new SquirrelStatueEastAddon();
+        public override int LabelNumber => 1073398;// squirrel statue (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

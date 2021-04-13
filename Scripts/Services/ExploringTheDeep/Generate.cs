@@ -1,7 +1,6 @@
-using Server;
-using Server.Mobiles;
-using Server.Items;
 using Server.Commands;
+using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Engines.ExploringTheDeep
 {
@@ -38,9 +37,9 @@ namespace Server.Engines.ExploringTheDeep
         {
             #region Gravewater Lake Finish
 
-            CommandSystem.Handle(m, Server.Commands.CommandSystem.Prefix + "XmlLoad Spawns/GravewaterLake.xml");
+            CommandSystem.Handle(m, CommandSystem.Prefix + "XmlLoad Spawns/GravewaterLake.xml");
 
-            CommandSystem.Handle(m, Server.Commands.CommandSystem.Prefix + "GenWinchAssembly");
+            CommandSystem.Handle(m, CommandSystem.Prefix + "GenWinchAssembly");
 
             // StorageLocker
 
@@ -132,10 +131,6 @@ namespace Server.Engines.ExploringTheDeep
 
             ladder = new ShipLadder(new Point3D(6432, 1699, 0), Map.Trammel, 0x08A6);
             ladder.MoveToWorld(new Point3D(6304, 1672, -5), Map.Trammel);
-            WeakEntityCollection.Add(EntityName, ladder);
-
-            ladder = new ShipLadder(new Point3D(6292, 1720, 0), Map.Trammel, 0x08A1);
-            ladder.MoveToWorld(new Point3D(6400, 1656, 0), Map.Trammel);
             WeakEntityCollection.Add(EntityName, ladder);
 
             ladder = new ShipLadder(new Point3D(1699, 1646, -115), Map.Malas, 0x14FA);
@@ -248,7 +243,7 @@ namespace Server.Engines.ExploringTheDeep
             sp.Respawn();
 
             #endregion
-             
+
             #region Custeau Perron House
             door = new CusteauPerronHouseDoor();
             WeakEntityCollection.Add(EntityName, door);
@@ -272,6 +267,14 @@ namespace Server.Engines.ExploringTheDeep
 
             item = new MasterThinkerContoller();
             item.MoveToWorld(new Point3D(1652, 1547, 45), Map.Trammel);
+            WeakEntityCollection.Add(EntityName, item);
+
+            item = new Static(2974);
+            item.MoveToWorld(new Point3D(1648, 1552, 20), Map.Trammel);
+            WeakEntityCollection.Add(EntityName, item);
+
+            item = new CusteauPerronHouseSign();
+            item.MoveToWorld(new Point3D(1648, 1552, 20), Map.Trammel);
             WeakEntityCollection.Add(EntityName, item);
             #endregion
 
@@ -328,7 +331,7 @@ namespace Server.Engines.ExploringTheDeep
             sp.MoveToWorld(new Point3D(122, 10, -28), Map.Ilshenar);
             sp.Respawn();
 
-            CommandSystem.Handle(m, Server.Commands.CommandSystem.Prefix + "GenSorcerersPlate");
+            CommandSystem.Handle(m, CommandSystem.Prefix + "GenSorcerersPlate");
 
             #endregion
 

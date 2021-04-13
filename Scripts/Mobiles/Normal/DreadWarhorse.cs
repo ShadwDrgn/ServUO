@@ -1,11 +1,12 @@
 using System;
-using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("a dread warhorse corpse")]
     public class DreadWarhorse : BaseMount
     {
+        private DateTime _NextTrick;
+
         [Constructable]
         public DreadWarhorse()
             : this("a dread warhorse")
@@ -47,8 +48,6 @@ namespace Server.Mobiles
             Fame = 15000;
             Karma = -15000;
 
-            VirtualArmor = 60;
-
             Tamable = true;
             ControlSlots = 3;
             MinTameSkill = 108.0;
@@ -59,41 +58,12 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 5;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Barbed;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Meat;
-            }
-        }
-        public override bool CanAngerOnTame
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override int Meat => 5;
+        public override int Hides => 10;
+        public override HideType HideType => HideType.Barbed;
+        public override FoodType FavoriteFood => FoodType.Meat;
+        public override bool CanAngerOnTame => true;
+
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
@@ -110,23 +80,69 @@ namespace Server.Mobiles
             return base.GetAngerSound();
         }
 
+        public override void OnSpeech(SpeechEventArgs e)
+        {
+            base.OnSpeech(e);
+
+            if (_NextTrick > DateTime.UtcNow)
+            {
+                return;
+            }
+
+            var m = e.Mobile;
+
+            if (GetMaster() == m && e.Speech.ToLower() == "trick" && !IsDeadBondedPet && !Deleted && Map != null)
+            {
+                _NextTrick = DateTime.UtcNow + TimeSpan.FromSeconds(10);
+
+                e.Handled = true;
+                Map myMap = Map;
+                Point3D p = Location;
+
+                Timer.DelayCall(TimeSpan.FromMilliseconds(350), () =>
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Timer.DelayCall(TimeSpan.FromMilliseconds(i * 250), idx =>
+                        {
+                            Misc.Geometry.Circle2D(p, myMap, idx, (pnt, map) =>
+                            {
+                                Effects.SendLocationEffect(pnt, map, Utility.RandomBool() ? 14000 : 14013, 14, 20, 2018, 0);
+                            });
+
+                            if (idx == 3)
+                            {
+                                var c = 0;
+
+                                for (int j = idx; j > 0; j--)
+                                {
+                                    Timer.DelayCall(TimeSpan.FromMilliseconds(c * 250), idx2 =>
+                                    {
+                                        Misc.Geometry.Circle2D(p, myMap, idx2, (pnt, map) =>
+                                        {
+                                            Effects.SendLocationEffect(pnt, map, Utility.RandomBool() ? 14000 : 14013, 14, 20, 2018, 0);
+                                        });
+                                    }, j);
+
+                                    c++;
+                                }
+                            }
+                        }, i);
+                    }
+                });
+            }
+        }
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
-
-            if (version == 0)
-            {
-                SetDamageType(ResistanceType.Physical, 40);
-            }
         }
     }
 }

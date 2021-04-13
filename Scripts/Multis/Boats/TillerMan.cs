@@ -1,15 +1,14 @@
-using System;
-using Server;
+using Server.ContextMenus;
 using Server.Multis;
 using Server.Network;
-using Server.ContextMenus;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class TillerMan : Item
     {
-        public virtual bool Babbles { get { return true; } }
+        public virtual bool Babbles => true;
         public BaseBoat Boat { get; private set; }
         private DateTime _NextBabble;
 
@@ -42,7 +41,7 @@ namespace Server.Items
 
             if (Boat.IsRowBoat)
                 return;
-            
+
             list.Add(Boat.Status);
             list.Add(1116580 + (int)Boat.DamageTaken); //State: Prisine            
         }
@@ -65,15 +64,7 @@ namespace Server.Items
                 base.AddNameProperty(list);
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            if (Boat != null && Boat.ShipName != null)
-                LabelTo(from, 1042884, Boat.ShipName); // the tiller man of the ~1_SHIP_NAME~
-            else
-                base.OnSingleClick(from);
-        }
-
-        public Mobile Pilot { get { return Boat != null ? Boat.Pilot : null; } }
+        public Mobile Pilot => Boat != null ? Boat.Pilot : null;
 
         public override void OnDoubleClickDead(Mobile m)
         {
@@ -193,8 +184,8 @@ namespace Server.Items
 
         private class EmergencyRepairEntry : ContextMenuEntry
         {
-            private TillerMan m_TillerMan;
-            private Mobile m_From;
+            private readonly TillerMan m_TillerMan;
+            private readonly Mobile m_From;
 
             public EmergencyRepairEntry(TillerMan tillerman, Mobile from)
                 : base(1116589, 5)
@@ -217,15 +208,15 @@ namespace Server.Items
                         m_From.SendLocalizedMessage(1116592, left != TimeSpan.Zero ? left.TotalMinutes.ToString() : "0"); //Your ship is underway with emergency repairs holding for an estimated ~1_TIME~ more minutes.
                     }
                     else if (!g.TryEmergencyRepair(m_From))
-                        m_From.SendLocalizedMessage(1116591, String.Format("{0}\t{1}", BaseGalleon.EmergencyRepairClothCost.ToString(), BaseGalleon.EmergencyRepairWoodCost)); //You need a minimum of ~1_CLOTH~ yards of cloth and ~2_WOOD~ pieces of lumber to effect emergency repairs.
+                        m_From.SendLocalizedMessage(1116591, string.Format("{0}\t{1}", BaseBoat.EmergencyRepairClothCost.ToString(), BaseBoat.EmergencyRepairWoodCost)); //You need a minimum of ~1_CLOTH~ yards of cloth and ~2_WOOD~ pieces of lumber to effect emergency repairs.
                 }
             }
         }
 
         private class ShipRepairEntry : ContextMenuEntry
         {
-            private TillerMan m_TillerMan;
-            private Mobile m_From;
+            private readonly TillerMan m_TillerMan;
+            private readonly Mobile m_From;
 
             public ShipRepairEntry(TillerMan tillerman, Mobile from)
                 : base(1116590, 5)
@@ -250,7 +241,7 @@ namespace Server.Items
 
         private class RenameShipEntry : ContextMenuEntry
         {
-            private TillerMan m_TillerMan;
+            private readonly TillerMan m_TillerMan;
             private readonly Mobile m_From;
 
             public RenameShipEntry(TillerMan tillerman, Mobile from)
@@ -267,29 +258,10 @@ namespace Server.Items
             }
         }
 
-        private class DryDockEntry : ContextMenuEntry
-        {
-            private readonly Mobile m_From;
-            private BaseBoat m_Boat;
-
-            public DryDockEntry(BaseBoat boat, Mobile from)
-                : base(1116520, 12)
-            {
-                m_From = from;
-                m_Boat = boat;
-            }
-
-            public override void OnClick()
-            {
-                if (m_Boat != null && !m_Boat.Contains(m_From))
-                    m_Boat.BeginDryDock(m_From);
-            }
-        }
-
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);//version
+            writer.Write(0);//version
 
             writer.Write(Boat);
         }

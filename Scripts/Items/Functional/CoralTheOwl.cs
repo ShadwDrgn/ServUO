@@ -1,13 +1,12 @@
-using System;
-using Server;
 using Server.Mobiles;
 using Server.Network;
+using System;
 
 namespace Server.Items
 {
-    public class CoralTheOwl : Item, Server.Engines.VeteranRewards.IRewardItem
-	{
-        public override int LabelNumber { get { return 1123603; } } // Coral the Owl
+    public class CoralTheOwl : Item, Engines.VeteranRewards.IRewardItem
+    {
+        public override int LabelNumber => 1123603;  // Coral the Owl
 
         private Timer m_NewsTimer;
 
@@ -24,15 +23,15 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if(IsRewardItem)
+            if (IsRewardItem)
                 list.Add(1076217); // 1st Year Veteran Reward
         }
 
-        public override bool HandlesOnSpeech { get { return true; } }
+        public override bool HandlesOnSpeech => true;
 
         public override void OnSpeech(SpeechEventArgs e)
         {
-            if (IsLockedDown && e.HasKeyword(0x30) && e.Mobile.Alive && e.Mobile.InLOS(this.Location) && e.Mobile.InRange(this, 12)) // *news*
+            if (IsLockedDown && e.HasKeyword(0x30) && e.Mobile.Alive && e.Mobile.InLOS(Location) && e.Mobile.InRange(this, 12)) // *news*
             {
                 TownCrierEntry tce = GlobalTownCrierEntryList.Instance.GetRandomEntry();
 
@@ -69,24 +68,24 @@ namespace Server.Items
             }
         }
 
-		public CoralTheOwl( Serial serial ) : base( serial )
-		{
-		}	
-		
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public CoralTheOwl(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 1 ); // version
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(1); // version
 
             writer.Write(IsRewardItem);
-		}
-		
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        }
 
-			int version = reader.ReadInt();
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
 
             switch (version)
             {
@@ -99,6 +98,6 @@ namespace Server.Items
 
             if (version == 0)
                 IsRewardItem = true;
-		}
-	}
+        }
+    }
 }

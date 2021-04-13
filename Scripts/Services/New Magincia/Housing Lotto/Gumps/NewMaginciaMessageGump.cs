@@ -1,7 +1,6 @@
-using System;
-using Server;
 using Server.Gumps;
 using Server.Mobiles;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Engines.NewMagincia
@@ -11,12 +10,12 @@ namespace Server.Engines.NewMagincia
         public List<NewMaginciaMessage> Messages;
 
         public readonly int LightBlueColor = 0x4AFD;
-        public readonly int GreenColor = 0x4BB7;        
+        public readonly int GreenColor = 0x4BB7;
 
-        public NewMaginciaMessageGump(PlayerMobile from)
+        public NewMaginciaMessageGump(PlayerMobile from, List<NewMaginciaMessage> messages)
             : base(from, 490, 30)
         {
-            Messages = MaginciaLottoSystem.GetMessages(from);            
+            Messages = messages;
         }
 
         public override void AddGumpLayout()
@@ -25,7 +24,7 @@ namespace Server.Engines.NewMagincia
 
             AddBackground(0, 0, 164, 32, 0x24B8);
             AddButton(7, 7, 0x1523, 0x1523, 1, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(37, 7, 120, 18, 1150425, String.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages
+            AddHtmlLocalized(37, 7, 120, 18, 1150425, string.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages
         }
 
         public override void OnResponse(RelayInfo info)
@@ -36,14 +35,14 @@ namespace Server.Engines.NewMagincia
                     {
                         if (Messages.Count != 0)
                         {
-                            SendGump(new NewMaginciaMessageGump(User));
+                            SendGump(new NewMaginciaMessageGump(User, Messages));
                         }
 
                         break;
                     }
                 case 1:
                     {
-                        SendGump(new NewMaginciaMessageListGump(User));
+                        SendGump(new NewMaginciaMessageListGump(User, Messages));
                         break;
                     }
             }
@@ -58,11 +57,11 @@ namespace Server.Engines.NewMagincia
         public bool Widescreen;
         public List<NewMaginciaMessage> Messages;
 
-        public NewMaginciaMessageListGump(PlayerMobile from, bool widescreen = false)
+        public NewMaginciaMessageListGump(PlayerMobile from, List<NewMaginciaMessage> messages, bool widescreen = false)
             : base(from, 490, 30)
         {
             Widescreen = widescreen;
-            Messages = MaginciaLottoSystem.GetMessages(from);            
+            Messages = messages;
         }
 
         public override void AddGumpLayout()
@@ -80,7 +79,7 @@ namespace Server.Engines.NewMagincia
             AddBackground(0, 0, 314 + width, 241 + width, 0x24B8);
             AddButton(7, 7, 0x1523, 0x1523, 0, GumpButtonType.Reply, 0);
             AddButton(290 + width, 7, buttonid, buttonid, 1, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(47, 7, Widescreen ? 460 : 194, 18, 1150425, String.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages   
+            AddHtmlLocalized(47, 7, Widescreen ? 460 : 194, 18, 1150425, string.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages   
 
             int page = 1;
             int y = 0;
@@ -92,12 +91,23 @@ namespace Server.Engines.NewMagincia
                 if (page > 1)
                     AddButton(Widescreen ? 446 : 246, 7, 0x1458, 0x1458, 0, GumpButtonType.Page, page - 1);
 
-                var message = Messages[i];
+                NewMaginciaMessage message = Messages[i];
 
                 if (message == null)
                     continue;
 
-                if (message.Body.Number > 0)
+                if (message.Title != null)
+                {
+                    if (message.Title.Number > 0)
+                    {
+                        AddHtmlLocalized(47, 34 + (y * 32), 260 + width, 16, message.Title.Number, LightBlueColor, false, false);
+                    }
+                    else
+                    {
+                        AddHtml(40, 34 + (y * 32), 260 + width, 16, Color("#94BDEF", message.Title.String), false, false);
+                    }
+                }
+                else if (message.Body.Number > 0)
                 {
                     if (message.Args == null)
                     {
@@ -136,12 +146,12 @@ namespace Server.Engines.NewMagincia
             {
                 case 0:
                     {
-                        SendGump(new NewMaginciaMessageGump(User));
+                        SendGump(new NewMaginciaMessageGump(User, Messages));
                         break;
                     }
                 case 1:
                     {
-                        SendGump(new NewMaginciaMessageListGump(User, Widescreen ? false : true));
+                        SendGump(new NewMaginciaMessageListGump(User, Messages, Widescreen ? false : true));
                         break;
                     }
                 default:
@@ -173,8 +183,6 @@ namespace Server.Engines.NewMagincia
         {
             Messages = messages;
             Message = messages[messageid];
-
-            
         }
 
         public override void AddGumpLayout()
@@ -186,19 +194,42 @@ namespace Server.Engines.NewMagincia
                 AddBackground(0, 0, 414, 341, 0x24B8);
                 AddButton(7, 7, 0x1523, 0x1523, 0, GumpButtonType.Reply, 0);
                 AddButton(390, 7, 0x1519, 0x151A, 1, GumpButtonType.Reply, 0);
-                AddHtmlLocalized(47, 7, 360, 18, 1150425, String.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages
+
+                if (Message.Title != null)
+                {
+                    if (Message.Title.Number != 0)
+                    {
+                        if (!string.IsNullOrEmpty(Message.Args))
+                        {
+                            AddHtmlLocalized(47, 7, 360, 20, Message.Body.Number, Message.Args, GreenColor, false, false);
+                        }
+                        else
+                        {
+                            AddHtmlLocalized(47, 7, 360, 20, Message.Body.Number, GreenColor, false, false);
+                        }
+                    }
+                    else
+                    {
+                        AddHtml(47, 7, 360, 150, Color(C16232(GreenColor), Message.Title.String), false, false);
+                    }
+
+                }
+                else
+                {
+                    AddHtmlLocalized(47, 7, 360, 18, 1150425, string.Format("{0}", Messages.Count), GreenColor, false, false); // ~1_COUNT~ Messages
+                }
 
                 if (Message.Body != null)
                 {
                     if (Message.Body.Number != 0)
                     {
-                        if (Message.Args == null)
+                        if (!string.IsNullOrEmpty(Message.Args))
                         {
-                            AddHtmlLocalized(7, 34, 404, 150, Message.Body.Number, BlueColor, true, true);
+                            AddHtmlLocalized(7, 34, 404, 150, Message.Body.Number, Message.Args, BlueColor, true, true);
                         }
                         else
                         {
-                            AddHtmlLocalized(7, 34, 404, 150, Message.Body.Number, Message.Args, BlueColor, true, true);
+                            AddHtmlLocalized(7, 34, 404, 150, Message.Body.Number, BlueColor, true, true);
                         }
                     }
                     else
@@ -209,7 +240,7 @@ namespace Server.Engines.NewMagincia
 
                 TimeSpan ts = Message.Expires - DateTime.UtcNow;
 
-                AddHtmlLocalized(7, 194, 400, 18, 1150432, String.Format("@{0}@{1}@{2}", ts.Days, ts.Hours, ts.Minutes), GreenColor, false, false); // This message will expire in ~1_DAYS~ days, ~2_HOURS~ hours, and ~3_MIN~ minutes.
+                AddHtmlLocalized(7, 194, 400, 18, 1150432, string.Format("@{0}@{1}@{2}", ts.Days, ts.Hours, ts.Minutes), GreenColor, false, false); // This message will expire in ~1_DAYS~ days, ~2_HOURS~ hours, and ~3_MIN~ minutes.
 
                 AddHtmlLocalized(47, 212, 360, 22, 1150433, EntryColor, false, false); // DELETE NOW
                 AddButton(7, 212, 4005, 4007, 2, GumpButtonType.Reply, 0);
@@ -222,35 +253,29 @@ namespace Server.Engines.NewMagincia
             {
                 case 0:
                     {
-                        SendGump(new NewMaginciaMessageGump(User));
+                        SendGump(new NewMaginciaMessageGump(User, Messages));
 
                         break;
                     }
                 case 1:
                     {
-                        SendGump(new NewMaginciaMessageListGump(User));
+                        SendGump(new NewMaginciaMessageListGump(User, Messages));
                     }
                     break;
                 case 2:
                     {
                         if (Message != null)
                         {
-                            List<NewMaginciaMessage> messages = MaginciaLottoSystem.MessageQueue[User];
-
-                            if (messages == null)
-                            {
-                                MaginciaLottoSystem.MessageQueue.Remove(User);
-                            }
-                            else
-                            {
-                                MaginciaLottoSystem.RemoveMessageFromQueue(User, Message);
-
-                                if (MaginciaLottoSystem.HasMessageInQueue(User))
-                                {
-                                    SendGump(new NewMaginciaMessageListGump(User));
-                                }
-                            }
+                            MaginciaLottoSystem.RemoveMessageFromQueue(User, Message);
                         }
+
+                        var messages = MaginciaLottoSystem.GetMessages(User);
+
+                        if (messages != null)
+                        {
+                            SendGump(new NewMaginciaMessageListGump(User, messages));
+                        }
+
                         break;
                     }
             }

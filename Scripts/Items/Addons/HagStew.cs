@@ -8,10 +8,12 @@ namespace Server.Items
         public HagStew()
         {
             AddonComponent stew;
-            stew = new AddonComponent(2416);
-            stew.Name = "stew";
-            stew.Visible = true;
-            this.AddComponent(stew, 0, 0, -7);      //stew
+            stew = new AddonComponent(2416)
+            {
+                Name = "stew",
+                Visible = true
+            };
+            AddComponent(stew, 0, 0, -7);      //stew
         }
 
         public HagStew(Serial serial)
@@ -21,7 +23,7 @@ namespace Server.Items
 
         public override void OnComponentUsed(AddonComponent stew, Mobile from)
         {
-            if (!from.InRange(this.GetWorldLocation(), 2))
+            if (!from.InRange(GetWorldLocation(), 2))
                 from.SendMessage("You are too far away.");
             else
             {
@@ -41,7 +43,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -57,16 +59,16 @@ namespace Server.Items
             public ShowStew(AddonComponent ac)
                 : base(TimeSpan.FromSeconds(30))
             {
-                this.stew = ac;
-                this.Priority = TimerPriority.OneSecond;
+                stew = ac;
+                Priority = TimerPriority.OneSecond;
             }
 
             protected override void OnTick()
             {
-                if (this.stew.Visible == false)
+                if (stew.Visible == false)
                 {
-                    this.Stop();
-                    this.stew.Visible = true;
+                    Stop();
+                    stew.Visible = true;
                     return;
                 }
             }

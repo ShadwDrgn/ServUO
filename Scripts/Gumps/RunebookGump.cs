@@ -1,12 +1,10 @@
-using Server;
-using System;
-using System.Collections.Generic;
 using Server.Items;
 using Server.Network;
+using Server.Prompts;
+using Server.Spells.Chivalry;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
-using Server.Spells.Chivalry;
-using Server.Prompts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Gumps
@@ -22,7 +20,7 @@ namespace Server.Gumps
             {
                 string desc;
                 if (i < Book.Entries.Count)
-                    desc = GetName(((RunebookEntry)Book.Entries[i]).Description);
+                    desc = GetName(Book.Entries[i].Description);
                 else
                     desc = "Empty";
 
@@ -40,7 +38,7 @@ namespace Server.Gumps
             {
                 if (i < Book.Entries.Count)
                 {
-                    RunebookEntry e = (RunebookEntry)Book.Entries[i];
+                    RunebookEntry e = Book.Entries[i];
 
                     Intern(GetLocation(e), false);
                 }
@@ -159,7 +157,7 @@ namespace Server.Gumps
 
                 if (i < entries.Count)
                 {
-                    hue = GetMapHue(((RunebookEntry)entries[i]).Map);
+                    hue = GetMapHue(entries[i].Map);
                 }
                 else
                 {
@@ -193,7 +191,7 @@ namespace Server.Gumps
                 {
                     if (Book.Entries.ElementAtOrDefault(index) != null)
                     {
-                        RunebookEntry e = (RunebookEntry)Book.Entries[index];
+                        RunebookEntry e = Book.Entries[index];
 
                         // Description label
                         AddLabelCroppedIntern(145 + (half * 160), 60, 115, 17, GetMapHue(e.Map), index + 2);
@@ -216,25 +214,14 @@ namespace Server.Gumps
                         AddLabelIntern(145 + (half * 160), 60, 0, index + 2);
                     }
 
-                    if (Core.AOS)
-                    {
-                        AddButton(135 + (half * 160), 140, 2103, 2104, 50 + index, GumpButtonType.Reply, 0);
-                        AddHtmlLocalized(150 + (half * 160), 136, 110, 20, 1062722, false, false); // Recall
+                    AddButton(135 + (half * 160), 140, 2103, 2104, 50 + index, GumpButtonType.Reply, 0);
+                    AddHtmlLocalized(150 + (half * 160), 136, 110, 20, 1062722, false, false); // Recall
 
-                        AddButton(135 + (half * 160), 158, 2103, 2104, 100 + index, GumpButtonType.Reply, 0);
-                        AddHtmlLocalized(150 + (half * 160), 154, 110, 20, 1062723, false, false); // Gate Travel
+                    AddButton(135 + (half * 160), 158, 2103, 2104, 100 + index, GumpButtonType.Reply, 0);
+                    AddHtmlLocalized(150 + (half * 160), 154, 110, 20, 1062723, false, false); // Gate Travel
 
-                        AddButton(135 + (half * 160), 176, 2103, 2104, 75 + index, GumpButtonType.Reply, 0);
-                        AddHtmlLocalized(150 + (half * 160), 172, 110, 20, 1062724, false, false); // Sacred Journey
-                    }
-                    else
-                    {
-                        AddButton(135 + (half * 160), 140, 2103, 2104, 50 + index, GumpButtonType.Reply, 0);
-                        AddHtmlLocalized(150 + (half * 160), 136, 110, 20, 1062722, false, false); // Recall
-
-                        AddButton(135 + (half * 160), 158, 2103, 2104, 100 + index, GumpButtonType.Reply, 0);
-                        AddHtmlLocalized(150 + (half * 160), 154, 110, 20, 1062723, false, false); // Gate Travel
-                    }
+                    AddButton(135 + (half * 160), 176, 2103, 2104, 75 + index, GumpButtonType.Reply, 0);
+                    AddHtmlLocalized(150 + (half * 160), 172, 110, 20, 1062724, false, false); // Sacred Journey
                 }
             }
         }
@@ -275,7 +262,7 @@ namespace Server.Gumps
 
         private class InternalPrompt : Prompt
         {
-            public override int MessageCliloc { get { return 502414; } } // Please enter a title for the runebook:
+            public override int MessageCliloc => 502414;  // Please enter a title for the runebook:
             private readonly Runebook m_Book;
 
             public InternalPrompt(Runebook book)
@@ -286,7 +273,7 @@ namespace Server.Gumps
 
             public override void OnResponse(Mobile from, string text)
             {
-                if (m_Book.Deleted || !from.InRange(m_Book.GetWorldLocation(), (Core.ML ? 3 : 1)))
+                if (m_Book.Deleted || !from.InRange(m_Book.GetWorldLocation(), 3))
                     return;
 
                 if (m_Book.CheckAccess(from))
@@ -310,7 +297,7 @@ namespace Server.Gumps
             {
                 from.SendLocalizedMessage(502415); // Request cancelled.
 
-                if (!m_Book.Deleted && from.InRange(m_Book.GetWorldLocation(), (Core.ML ? 3 : 1)))
+                if (!m_Book.Deleted && from.InRange(m_Book.GetWorldLocation(), 3))
                 {
                     from.CloseGump(typeof(RunebookGump));
                     from.SendGump(new RunebookGump(from, m_Book));
@@ -337,7 +324,7 @@ namespace Server.Gumps
         {
             Mobile from = state.Mobile;
 
-            if (Book.Deleted || !from.InRange(Book.GetWorldLocation(), (Core.ML ? 3 : 1)) || !Multis.DesignContext.Check(from))
+            if (Book.Deleted || !from.InRange(Book.GetWorldLocation(), 3) || !Multis.DesignContext.Check(from))
             {
                 Book.Openers.Remove(from);
                 return;
@@ -374,7 +361,7 @@ namespace Server.Gumps
                 {
                     if (index >= 0 && index < Book.Entries.Count)
                     {
-                        RunebookEntry e = (RunebookEntry)Book.Entries[index];
+                        RunebookEntry e = Book.Entries[index];
 
                         switch (type)
                         {

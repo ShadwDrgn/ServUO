@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a ridgeback corpse")]
@@ -13,7 +11,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public Ridgeback(string name)
-            : base(name, 187, 0x3EBA, AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(name, 187, 0x3EBA, AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             BaseSoundID = 0x3F3;
 
@@ -51,34 +49,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int Hides
-        {
-            get
-            {
-                return 12;
-            }
-        }
-        public override HideType HideType
-        {
-            get
-            {
-                return HideType.Spined;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
-            }
-        }
+        public override int Meat => 1;
+        public override int Hides => 12;
+        public override HideType HideType => HideType.Spined;
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override bool OverrideBondingReqs()
         {
             return true;
@@ -86,16 +60,12 @@ namespace Server.Mobiles
 
         public override double GetControlChance(Mobile m, bool useBaseSkill)
         {
-            if (PetTrainingHelper.Enabled)
+            AbilityProfile profile = PetTrainingHelper.GetAbilityProfile(this);
+
+            if (profile != null && profile.HasCustomized())
             {
-                var profile = PetTrainingHelper.GetAbilityProfile(this);
-
-                if (profile != null && profile.HasCustomized())
-                {
-                    return base.GetControlChance(m, useBaseSkill);
-                }
+                return base.GetControlChance(m, useBaseSkill);
             }
-
             return 1.0;
         }
 
@@ -103,7 +73,7 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

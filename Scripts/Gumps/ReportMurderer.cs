@@ -1,34 +1,33 @@
-using System;
-using System.Collections.Generic;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Gumps
 {
     public class ReportMurdererGump : Gump
     {
         private readonly List<Mobile> m_Killers;
-        private readonly Mobile m_Victum;
         private int m_Idx;
-        public ReportMurdererGump(Mobile victum, List<Mobile> killers)
-            : this(victum, killers, 0)
+
+        public ReportMurdererGump(List<Mobile> killers)
+            : this(killers, 0)
         {
         }
 
-        private ReportMurdererGump(Mobile victum, List<Mobile> killers, int idx)
+        private ReportMurdererGump(List<Mobile> killers, int idx)
             : base(0, 0)
         {
             m_Killers = killers;
-            m_Victum = victum;
             m_Idx = idx;
             BuildGump();
         }
 
         public static void Initialize()
         {
-            EventSink.PlayerDeath += new PlayerDeathEventHandler(EventSink_PlayerDeath);
+            EventSink.PlayerDeath += EventSink_PlayerDeath;
         }
 
         public static void EventSink_PlayerDeath(PlayerDeathEventArgs e)
@@ -42,7 +41,7 @@ namespace Server.Gumps
             {
                 if (ai.Attacker.Player && ai.CanReportMurder && !ai.Reported)
                 {
-                    if (!Core.SE || !((PlayerMobile)m).RecentlyReported.Contains(ai.Attacker))
+                    if (!((PlayerMobile)m).RecentlyReported.Contains(ai.Attacker))
                     {
                         if (!killers.Contains(ai.Attacker))
                         {
@@ -81,8 +80,6 @@ namespace Server.Gumps
                 Titles.AwardFame(g, fameAward, false);
                 Titles.AwardKarma(g, karmaAward, true);
 
-                Server.Items.XmlQuest.RegisterKill(m, g);
-
                 if (killers.Contains(g))
                 {
                     EventSink.InvokePlayerMurdered(new PlayerMurderedEventArgs(g, m));
@@ -113,7 +110,7 @@ namespace Server.Gumps
         {
             Mobile from = state.Mobile;
 
-            switch ( info.ButtonID )
+            switch (info.ButtonID)
             {
                 case 1:
                     {
@@ -123,11 +120,8 @@ namespace Server.Gumps
                             killer.Kills++;
                             killer.ShortTermMurders++;
 
-                            if (Core.SE)
-                            {
-                                ((PlayerMobile)from).RecentlyReported.Add(killer);
-                                Timer.DelayCall(TimeSpan.FromMinutes(10), new TimerStateCallback(ReportedListExpiry_Callback), new object[] { from, killer });
-                            }
+                            ((PlayerMobile)from).RecentlyReported.Add(killer);
+                            Timer.DelayCall(TimeSpan.FromMinutes(10), new TimerStateCallback(ReportedListExpiry_Callback), new object[] { from, killer });
 
                             if (killer is PlayerMobile)
                             {
@@ -157,7 +151,7 @@ namespace Server.Gumps
 
             m_Idx++;
             if (m_Idx < m_Killers.Count)
-                from.SendGump(new ReportMurdererGump(from, m_Killers, m_Idx));
+                from.SendGump(new ReportMurdererGump(m_Killers, m_Idx));
         }
 
         public static void CheckMurderer(Mobile m)
@@ -194,7 +188,7 @@ namespace Server.Gumps
 
             AddPage(1);
 
-            AddHtml(260, 234, 300, 140, ((Mobile)m_Killers[m_Idx]).Name, false, false); // Player's Name
+            AddHtml(260, 234, 300, 140, m_Killers[m_Idx].Name, false, false); // Player's Name
             AddHtmlLocalized(260, 254, 300, 140, 1049066, false, false); // Would you like to report...
 
             AddButton(260, 300, 0xFA5, 0xFA7, 1, GumpButtonType.Reply, 0);
@@ -217,7 +211,7 @@ namespace Server.Gumps
 
             protected override void OnTick()
             {
-                m_Victim.SendGump(new ReportMurdererGump(m_Victim, m_Killers));
+                m_Victim.SendGump(new ReportMurdererGump(m_Killers));
             }
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -41,8 +40,6 @@ namespace Server.Mobiles
             Fame = 7000;
             Karma = -10000;
 
-            VirtualArmor = 55;
-
             SetWeaponAbility(WeaponAbility.ConcussionBlow);
         }
 
@@ -51,13 +48,7 @@ namespace Server.Mobiles
         {
         }
 
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Deadly;
-            }
-        }
+        public override Poison PoisonImmune => Poison.Deadly;
 
         public override void GenerateLoot()
         {
@@ -67,7 +58,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

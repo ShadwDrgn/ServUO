@@ -1,6 +1,6 @@
-using System;
 using Server.Mobiles;
 using Server.Spells;
+using System;
 
 namespace Server.Items
 {
@@ -10,9 +10,9 @@ namespace Server.Items
         public TribalPaint()
             : base(0x9EC)
         {
-            this.Hue = 2101;
-            this.Weight = 2.0;
-            this.Stackable = Core.ML;
+            Hue = 2101;
+            Weight = 2.0;
+            Stackable = true;
         }
 
         public TribalPaint(Serial serial)
@@ -20,22 +20,12 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1040000;
-            }
-        }// savage kin paint
+        public override int LabelNumber => 1040000;// savage kin paint
         public override void OnDoubleClick(Mobile from)
         {
-            if (this.IsChildOf(from.Backpack))
+            if (IsChildOf(from.Backpack))
             {
-                if (Factions.Sigil.ExistsOn(from))
-                {
-                    from.SendLocalizedMessage(1010465); // You cannot disguise yourself while holding a sigil.
-                }
-                else if (!from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
+                if (!from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
                 {
                     from.SendLocalizedMessage(501698); // You cannot disguise yourself while incognitoed.
                 }
@@ -65,7 +55,7 @@ namespace Server.Items
 
                     from.SendLocalizedMessage(1042537); // You now bear the markings of the savage tribe.  Your body paint will last about a week or you can remove it with an oil cloth.
 
-                    this.Consume();
+                    Consume();
                 }
             }
             else
@@ -78,7 +68,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

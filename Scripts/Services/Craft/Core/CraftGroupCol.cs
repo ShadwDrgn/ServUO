@@ -1,26 +1,20 @@
-using System;
-
 namespace Server.Engines.Craft
 {
     public class CraftGroupCol : System.Collections.CollectionBase
     {
-        public CraftGroupCol()
-        {
-        }
-
         public int Add(CraftGroup craftGroup)
         {
-            return this.List.Add(craftGroup);
+            return List.Add(craftGroup);
         }
 
         public void Remove(int index)
         {
-            if (index > this.Count - 1 || index < 0)
+            if (index > Count - 1 || index < 0)
             {
             }
             else
             {
-                this.List.RemoveAt(index);
+                List.RemoveAt(index);
             }
         }
 
@@ -31,9 +25,9 @@ namespace Server.Engines.Craft
 
         public int SearchFor(TextDefinition groupName)
         {
-            for (int i = 0; i < this.List.Count; i++)
+            for (int i = 0; i < List.Count; i++)
             {
-                CraftGroup craftGroup = (CraftGroup)this.List[i];
+                CraftGroup craftGroup = (CraftGroup)List[i];
 
                 int nameNumber = craftGroup.NameNumber;
                 string nameString = craftGroup.NameString;

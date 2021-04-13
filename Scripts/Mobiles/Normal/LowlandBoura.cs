@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 using Server.Network;
 
@@ -10,7 +9,7 @@ namespace Server.Mobiles
         private bool GatheredFur { get; set; }
 
         [Constructable]
-        public LowlandBoura() : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+        public LowlandBoura() : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "a lowland boura";
             Body = 715;
@@ -43,7 +42,6 @@ namespace Server.Mobiles
             Fame = 5000;
             Karma = -3500;
 
-            VirtualArmor = 16;
             SetSpecialAbility(SpecialAbility.ColossalBlow);
         }
 
@@ -51,19 +49,19 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat { get { return 10; } }
-        public override int Hides { get { return 20; } }
-        public override int DragonBlood { get { return 8; } }
-        public override HideType HideType { get { return HideType.Horned; } }
-        public override FoodType FavoriteFood { get { return FoodType.FruitsAndVegies; } }
-        public override int Fur { get { return GatheredFur ? 0 : 30; } }
-        public override FurType FurType { get { return FurType.Green; } }
+        public override int Meat => 10;
+        public override int Hides => 20;
+        public override int DragonBlood => 8;
+        public override HideType HideType => HideType.Horned;
+        public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
+        public override int Fur => GatheredFur ? 0 : 30;
+        public override FurType FurType => FurType.Green;
 
         public bool Carve(Mobile from, Item item)
         {
             if (!GatheredFur)
             {
-                var fur = new Fur(FurType, Fur);
+                Fur fur = new Fur(FurType, Fur);
 
                 if (from.Backpack == null || !from.Backpack.TryDropItem(from, fur, false))
                 {
@@ -109,12 +107,12 @@ namespace Server.Mobiles
         public override void OnDeath(Container c)
         {
             base.OnDeath(c);
-            
+
             if (Controlled)
                 return;
 
             if (!Controlled)
-            c.DropItem(new BouraSkin());
+                c.DropItem(new BouraSkin());
         }
 
         public override void Serialize(GenericWriter writer)
@@ -127,7 +125,7 @@ namespace Server.Mobiles
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            var version = reader.ReadInt();
+            int version = reader.ReadInt();
 
             if (version == 1)
                 reader.ReadDeltaTime();

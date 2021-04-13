@@ -1,6 +1,4 @@
-﻿using System;
-using Server;
-using Server.Gumps;
+﻿using Server.Gumps;
 
 namespace Server.Items
 {
@@ -12,11 +10,11 @@ namespace Server.Items
 
     public class SpiritualityVirtueTileAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed { get { return new SpiritualityVirtueTileDeed(); } }
+        public override BaseAddonDeed Deed => new SpiritualityVirtueTileDeed();
 
-        private SpiritualityTileType m_SpiritualityTileType;
+        private readonly SpiritualityTileType m_SpiritualityTileType;
 
-        private int offset;
+        private readonly int offset;
 
         [Constructable]
         public SpiritualityVirtueTileAddon(SpiritualityTileType type)
@@ -45,7 +43,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -58,8 +56,8 @@ namespace Server.Items
 
     public class SpiritualityVirtueTileDeed : BaseAddonDeed, IRewardOption
     {
-        public override BaseAddon Addon { get { return new SpiritualityVirtueTileAddon(m_SpiritualityTileType); } }
-        public override int LabelNumber { get { return 1080484; } } // Spirituality Virtue Tile Deed
+        public override BaseAddon Addon => new SpiritualityVirtueTileAddon(m_SpiritualityTileType);
+        public override int LabelNumber => 1080484;  // Spirituality Virtue Tile Deed
 
         private SpiritualityTileType m_SpiritualityTileType;
 
@@ -89,7 +87,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,8 +1,6 @@
-using System;
-
 namespace Server.Items
 {
-    [FlipableAttribute(0xc77, 0xc78)]
+    [Flipable(0xc77, 0xc78)]
     public class Carrot : Food
     {
         [Constructable]
@@ -15,8 +13,8 @@ namespace Server.Items
         public Carrot(int amount)
             : base(amount, 0xc78)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 1;
+            Weight = 1.0;
+            FillFactor = 1;
         }
 
         public Carrot(Serial serial)
@@ -28,7 +26,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -39,7 +37,7 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xc7b, 0xc7c)]
+    [Flipable(0xc7b, 0xc7c)]
     public class Cabbage : Food
     {
         [Constructable]
@@ -52,8 +50,8 @@ namespace Server.Items
         public Cabbage(int amount)
             : base(amount, 0xc7b)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 1;
+            Weight = 1.0;
+            FillFactor = 1;
         }
 
         public Cabbage(Serial serial)
@@ -65,7 +63,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -76,7 +74,7 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xc6d, 0xc6e)]
+    [Flipable(0xc6d, 0xc6e)]
     public class Onion : Food
     {
         [Constructable]
@@ -89,8 +87,8 @@ namespace Server.Items
         public Onion(int amount)
             : base(amount, 0xc6d)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 1;
+            Weight = 1.0;
+            FillFactor = 1;
         }
 
         public Onion(Serial serial)
@@ -102,7 +100,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -113,7 +111,7 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xc70, 0xc71)]
+    [Flipable(0xc70, 0xc71)]
     public class Lettuce : Food
     {
         [Constructable]
@@ -126,8 +124,8 @@ namespace Server.Items
         public Lettuce(int amount)
             : base(amount, 0xc70)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 1;
+            Weight = 1.0;
+            FillFactor = 1;
         }
 
         public Lettuce(Serial serial)
@@ -139,7 +137,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -150,7 +148,7 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xC6A, 0xC6B)]
+    [Flipable(0xC6A, 0xC6B)]
     public class Pumpkin : Food
     {
         [Constructable]
@@ -163,8 +161,8 @@ namespace Server.Items
         public Pumpkin(int amount)
             : base(amount, 0xC6A)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 8;
+            Weight = 1.0;
+            FillFactor = 8;
         }
 
         public Pumpkin(Serial serial)
@@ -176,7 +174,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -187,11 +185,11 @@ namespace Server.Items
 
             if (version < 1)
             {
-                if (this.FillFactor == 4)
-                    this.FillFactor = 8;
+                if (FillFactor == 4)
+                    FillFactor = 8;
 
-                if (this.Weight == 5.0)
-                    this.Weight = 1.0;
+                if (Weight == 5.0)
+                    Weight = 1.0;
             }
         }
     }
@@ -208,8 +206,8 @@ namespace Server.Items
         public SmallPumpkin(int amount)
             : base(amount, 0xC6C)
         {
-            this.Weight = 1.0;
-            this.FillFactor = 8;
+            Weight = 1.0;
+            FillFactor = 8;
         }
 
         public SmallPumpkin(Serial serial)
@@ -221,7 +219,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

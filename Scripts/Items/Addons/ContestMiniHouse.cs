@@ -1,4 +1,3 @@
-using System;
 using Server.Engines.VeteranRewards;
 
 namespace Server.Items
@@ -28,8 +27,10 @@ namespace Server.Items
         {
             get
             {
-                ContestMiniHouseDeed deed = new ContestMiniHouseDeed(Type);
-                deed.IsRewardItem = m_IsRewardItem;
+                ContestMiniHouseDeed deed = new ContestMiniHouseDeed(Type)
+                {
+                    IsRewardItem = m_IsRewardItem
+                };
 
                 return deed;
             }
@@ -50,7 +51,7 @@ namespace Server.Items
             base.Serialize(writer);
             writer.WriteEncodedInt(0); // version
 
-            writer.Write((bool)m_IsRewardItem);
+            writer.Write(m_IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -87,8 +88,10 @@ namespace Server.Items
         {
             get
             {
-                ContestMiniHouse addon = new ContestMiniHouse(Type);
-                addon.IsRewardItem = m_IsRewardItem;
+                ContestMiniHouse addon = new ContestMiniHouse(Type)
+                {
+                    IsRewardItem = m_IsRewardItem
+                };
 
                 return addon;
             }
@@ -116,7 +119,7 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (Core.ML && m_IsRewardItem)
+            if (m_IsRewardItem)
                 list.Add(1076217); // 1st Year Veteran Reward
         }
 
@@ -125,7 +128,7 @@ namespace Server.Items
             base.Serialize(writer);
             writer.WriteEncodedInt(0); // version
 
-            writer.Write((bool)m_IsRewardItem);
+            writer.Write(m_IsRewardItem);
         }
 
         public override void Deserialize(GenericReader reader)

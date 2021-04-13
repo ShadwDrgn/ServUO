@@ -1,11 +1,8 @@
-﻿using System;
-using Server;
-
 namespace Server.Items
 {
     public class UnknownBardSkeleton : BaseContainer
     {
-        public override int DefaultGumpID { get { return 0x9; } }
+        public override int DefaultGumpID => 0x9;
 
         [Constructable]
         public UnknownBardSkeleton()
@@ -57,7 +54,7 @@ namespace Server.Items
 
     public class UnknownRogueSkeleton : BaseContainer
     {
-        public override int DefaultGumpID { get { return 0x9; } }
+        public override int DefaultGumpID => 0x9;
 
         [Constructable]
         public UnknownRogueSkeleton()
@@ -108,7 +105,7 @@ namespace Server.Items
 
     public class UnknownMageSkeleton : BaseContainer
     {
-        public override int DefaultGumpID { get { return 0x9; } }
+        public override int DefaultGumpID => 0x9;
 
         [Constructable]
         public UnknownMageSkeleton()
@@ -138,9 +135,9 @@ namespace Server.Items
             for (int i = 0; i < 3; i++)
             {
                 if (0.25 >= Utility.RandomDouble())
-                    item = Loot.RandomScroll(0, Loot.NecromancyScrollTypes.Length, SpellbookType.Necromancer);
+                    item = Loot.Construct(Loot.NecromancyScrollTypes);
                 else
-                    item = Loot.RandomScroll(0, Loot.RegularScrollTypes.Length, SpellbookType.Regular);
+                    item = Loot.Construct(Loot.MageryScrollTypes);
 
                 item.Amount = Utility.RandomMinMax(1, 2);
                 DropItem(item);

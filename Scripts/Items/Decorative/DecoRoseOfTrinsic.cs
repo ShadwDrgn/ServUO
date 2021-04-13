@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class DecoRoseOfTrinsic : Item
@@ -8,8 +6,8 @@ namespace Server.Items
         public DecoRoseOfTrinsic()
             : base(0x234C)
         {
-            this.Movable = true;
-            this.Stackable = false;
+            Movable = true;
+            Stackable = false;
         }
 
         public DecoRoseOfTrinsic(Serial serial)
@@ -21,7 +19,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

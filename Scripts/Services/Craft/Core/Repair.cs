@@ -1,8 +1,7 @@
-using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using Server.Factions;
+using System;
 
 namespace Server.Engines.Craft
 {
@@ -13,10 +12,6 @@ namespace Server.Engines.Craft
 
     public class Repair
     {
-        public Repair()
-        {
-        }
-
         public static void Do(Mobile from, CraftSystem craftSystem, ITool tool)
         {
             from.Target = new InternalTarget(craftSystem, tool);
@@ -175,12 +170,12 @@ namespace Server.Engines.Craft
                 }
                 else if (m_Addon != null)
                 {
-                    var tool = m_Addon.Tools.Find(x => x.System == m_CraftSystem);
+                    RepairBenchDefinition tool = m_Addon.Tools.Find(x => x.System == m_CraftSystem);
 
                     if (tool.Charges == 0)
                     {
                         from.SendLocalizedMessage(1019073);// This item is out of charges.
-                        m_Addon.Using = false;
+                        m_Addon.User = null;
                         return;
                     }
 
@@ -191,7 +186,7 @@ namespace Server.Engines.Craft
                     value = from.Skills[m_CraftSystem.MainSkill].Base;
                 }
 
-                if (m_CraftSystem is DefTinkering && targeted is IRepairableMobile)
+                if (m_CraftSystem is DefTinkering && targeted is IRepairableMobile && ((IRepairableMobile)targeted).RepairResource != typeof(Bandage))
                 {
                     if (TryRepairMobile(from, (IRepairableMobile)targeted, usingDeed, out toDelete))
                     {
@@ -211,7 +206,7 @@ namespace Server.Engines.Craft
                         if (!CheckDeed(from))
                         {
                             if (m_Addon != null)
-                                m_Addon.Using = false;
+                                m_Addon.User = null;
 
                             return;
                         }
@@ -221,7 +216,7 @@ namespace Server.Engines.Craft
                             from.SendLocalizedMessage(500426); // You can't repair that.
 
                             if (m_Addon != null)
-                                m_Addon.Using = false;
+                                m_Addon.User = null;
 
                             return;
                         }
@@ -241,35 +236,15 @@ namespace Server.Engines.Craft
                         {
                             BaseWeapon weapon = (BaseWeapon)targeted;
                             SkillName skill = m_CraftSystem.MainSkill;
-                            int toWeaken = 0;
-
-                            if (Core.AOS)
-                            {
-                                toWeaken = 1;
-                            }
-                            else if (skill != SkillName.Tailoring)
-                            {
-                                double skillLevel = value;
-
-                                if (skillLevel >= 90.0)
-                                    toWeaken = 1;
-                                else if (skillLevel >= 70.0)
-                                    toWeaken = 2;
-                                else
-                                    toWeaken = 3;
-                            }
+                            int toWeaken = 1;
 
                             if (m_CraftSystem.CraftItems.SearchForSubclass(weapon.GetType()) == null && !CheckSpecial(weapon))
                             {
                                 number = (usingDeed) ? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                             }
-                            else if (!weapon.IsChildOf(from.Backpack) && (!Core.ML || weapon.Parent != from))
+                            else if (!weapon.IsChildOf(from.Backpack) && weapon.Parent != from)
                             {
                                 number = 1044275; // The item must be in your backpack to repair it.
-                            }
-                            else if (!Core.AOS && weapon.PoisonCharges != 0)
-                            {
-                                number = 1005012; // You cannot repair an item while a caustic substance is on it.
                             }
                             else if (weapon.MaxHitPoints <= 0 || weapon.HitPoints == weapon.MaxHitPoints)
                             {
@@ -312,29 +287,13 @@ namespace Server.Engines.Craft
                         {
                             BaseArmor armor = (BaseArmor)targeted;
                             SkillName skill = m_CraftSystem.MainSkill;
-                            int toWeaken = 0;
-
-                            if (Core.AOS)
-                            {
-                                toWeaken = 1;
-                            }
-                            else if (skill != SkillName.Tailoring)
-                            {
-                                double skillLevel = value;
-
-                                if (skillLevel >= 90.0)
-                                    toWeaken = 1;
-                                else if (skillLevel >= 70.0)
-                                    toWeaken = 2;
-                                else
-                                    toWeaken = 3;
-                            }
+                            int toWeaken = 1;
 
                             if (m_CraftSystem.CraftItems.SearchForSubclass(armor.GetType()) == null && !CheckSpecial(armor))
                             {
                                 number = (usingDeed) ? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                             }
-                            else if (!armor.IsChildOf(from.Backpack) && (!Core.ML || armor.Parent != from))
+                            else if (!armor.IsChildOf(from.Backpack) && armor.Parent != from)
                             {
                                 number = 1044275; // The item must be in your backpack to repair it.
                             }
@@ -379,29 +338,13 @@ namespace Server.Engines.Craft
                         {
                             BaseJewel jewel = (BaseJewel)targeted;
                             SkillName skill = m_CraftSystem.MainSkill;
-                            int toWeaken = 0;
-
-                            if (Core.AOS)
-                            {
-                                toWeaken = 1;
-                            }
-                            else if (skill != SkillName.Tailoring)
-                            {
-                                double skillLevel = value;
-
-                                if (skillLevel >= 90.0)
-                                    toWeaken = 1;
-                                else if (skillLevel >= 70.0)
-                                    toWeaken = 2;
-                                else
-                                    toWeaken = 3;
-                            }
+                            int toWeaken = 1;
 
                             if (m_CraftSystem.CraftItems.SearchForSubclass(jewel.GetType()) == null && !CheckSpecial(jewel))
                             {
                                 number = (usingDeed) ? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                             }
-                            else if (!jewel.IsChildOf(from.Backpack))
+                            else if (!jewel.IsChildOf(from.Backpack) && jewel.Parent != from)
                             {
                                 number = 1044275; // The item must be in your backpack to repair it.
                             }
@@ -446,29 +389,13 @@ namespace Server.Engines.Craft
                         {
                             BaseClothing clothing = (BaseClothing)targeted;
                             SkillName skill = m_CraftSystem.MainSkill;
-                            int toWeaken = 0;
-
-                            if (Core.AOS)
-                            {
-                                toWeaken = 1;
-                            }
-                            else if (skill != SkillName.Tailoring)
-                            {
-                                double skillLevel = value;
-
-                                if (skillLevel >= 90.0)
-                                    toWeaken = 1;
-                                else if (skillLevel >= 70.0)
-                                    toWeaken = 2;
-                                else
-                                    toWeaken = 3;
-                            }
+                            int toWeaken = 1;
 
                             if (m_CraftSystem.CraftItems.SearchForSubclass(clothing.GetType()) == null && !CheckSpecial(clothing))
                             {
                                 number = (usingDeed) ? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                             }
-                            else if (!clothing.IsChildOf(from.Backpack) && (!Core.ML || clothing.Parent != from))
+                            else if (!clothing.IsChildOf(from.Backpack) && clothing.Parent != from)
                             {
                                 number = 1044275; // The item must be in your backpack to repair it.
                             }
@@ -513,29 +440,13 @@ namespace Server.Engines.Craft
                         {
                             BaseTalisman talisman = (BaseTalisman)targeted;
                             SkillName skill = m_CraftSystem.MainSkill;
-                            int toWeaken = 0;
-
-                            if (Core.AOS)
-                            {
-                                toWeaken = 1;
-                            }
-                            else if (skill != SkillName.Tailoring)
-                            {
-                                double skillLevel = value;
-
-                                if (skillLevel >= 90.0)
-                                    toWeaken = 1;
-                                else if (skillLevel >= 70.0)
-                                    toWeaken = 2;
-                                else
-                                    toWeaken = 3;
-                            }
+                            int toWeaken = 1;
 
                             if (!(m_CraftSystem is DefTinkering))
                             {
                                 number = (usingDeed) ? 1061136 : 1044277; // That item cannot be repaired. // You cannot repair that item with this type of repair contract.
                             }
-                            else if (!talisman.IsChildOf(from.Backpack) && (!Core.ML || talisman.Parent != from))
+                            else if (!talisman.IsChildOf(from.Backpack) && talisman.Parent != from)
                             {
                                 number = 1044275; // The item must be in your backpack to repair it.
                             }
@@ -624,7 +535,7 @@ namespace Server.Engines.Craft
                 {
                     if (m_Addon != null && !m_Addon.Deleted)
                     {
-                        var tool = m_Addon.Tools.Find(x => x.System == m_CraftSystem);
+                        RepairBenchDefinition tool = m_Addon.Tools.Find(x => x.System == m_CraftSystem);
 
                         tool.Charges--;
 
@@ -638,7 +549,7 @@ namespace Server.Engines.Craft
 
                         if (toDelete)
                             m_Deed.Delete();
-                    }                   
+                    }
                 }
             }
 
@@ -770,9 +681,6 @@ namespace Server.Engines.Craft
 
         public static bool AllowsRepair(object targeted, CraftSystem system)
         {
-            if (targeted is IFactionItem && ((IFactionItem)targeted).FactionItemState != null)
-                return false;
-
             if (targeted is BrokenAutomatonHead || targeted is IRepairableMobile)
                 return true;
 

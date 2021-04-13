@@ -1,6 +1,5 @@
-using System;
-using Server;
 using Server.Mobiles;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Items
@@ -8,11 +7,11 @@ namespace Server.Items
     public class SpiderWebbing : Item
     {
         private Timer m_Timer;
-        private static List<Mobile> m_WebVictims = new List<Mobile>();
+        private static readonly List<Mobile> m_WebVictims = new List<Mobile>();
 
         public SpiderWebbing(Mobile m)
             : base(0xEE3 + Utility.Random(4))
-        {            
+        {
             Movable = false;
 
             BeginWebbing(m);
@@ -27,9 +26,9 @@ namespace Server.Items
         }
 
         public void BeginWebbing(Mobile m)
-        {            
+        {
             m.RevealingAction();
-            m.Frozen = true;            
+            m.Frozen = true;
             m.SendLocalizedMessage(1113247); // You are wrapped in spider webbing and cannot move!
             m_WebVictims.Add(m);
             BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Webbing, 1153789, 1153825));
@@ -48,7 +47,7 @@ namespace Server.Items
             m_WebVictims.Remove(m);
         }
 
-        public override bool BlocksFit { get { return true; } }
+        public override bool BlocksFit => true;
 
         public override void OnDelete()
         {
@@ -58,9 +57,9 @@ namespace Server.Items
                 m_Timer = null;
             }
 
-            var list = new List<Mobile>(m_WebVictims);
+            List<Mobile> list = new List<Mobile>(m_WebVictims);
 
-            foreach (var m in list)
+            foreach (Mobile m in list)
             {
                 RemoveEffects(m);
             }
@@ -74,7 +73,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -102,8 +101,8 @@ namespace Server.Items
 
         private class InternalTimer : Timer
         {
-            private Mobile m_Target;
-            private Item m_Item;
+            private readonly Mobile m_Target;
+            private readonly Item m_Item;
             private int m_Ticks;
 
             public InternalTimer(Item item, Mobile target)

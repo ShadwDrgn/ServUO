@@ -13,9 +13,9 @@ namespace Server.Network
 	public class Listener : IDisposable
 	{
 		private Socket m_Listener;
-        private PingListener _PingListener;
+		private PingListener _PingListener;
 
-        private readonly Queue<Socket> m_Accepted;
+		private readonly Queue<Socket> m_Accepted;
 		private readonly object m_AcceptedSyncRoot;
 
 		private readonly AsyncCallback m_OnAccept;
@@ -37,12 +37,12 @@ namespace Server.Network
 			}
 
 			DisplayListener();
-            _PingListener = new PingListener(ipep);
+			_PingListener = new PingListener(ipep);
 
-            m_OnAccept = OnAccept;
+			m_OnAccept = OnAccept;
 			try
 			{
-				IAsyncResult res = m_Listener.BeginAccept(m_OnAccept, m_Listener);
+				var res = m_Listener.BeginAccept(m_OnAccept, m_Listener);
 			}
 			catch (SocketException ex)
 			{
@@ -54,12 +54,12 @@ namespace Server.Network
 
 		private Socket Bind(IPEndPoint ipep)
 		{
-			Socket s = new Socket(ipep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+			var s = new Socket(ipep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
 			try
 			{
 				s.LingerState.Enabled = false;
-				
+
 				// Default is 'false' starting Windows Vista and Server 2008. Source: https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.exclusiveaddressuse(v=vs.110).aspx?f=255&MSPPError=-2147217396
 				s.ExclusiveAddressUse = false;
 
@@ -72,7 +72,7 @@ namespace Server.Network
 			{
 				if (e is SocketException)
 				{
-					SocketException se = (SocketException)e;
+					var se = (SocketException)e;
 
 					if (se.ErrorCode == 10048)
 					{
@@ -103,7 +103,7 @@ namespace Server.Network
 
 		private void DisplayListener()
 		{
-			IPEndPoint ipep = m_Listener.LocalEndPoint as IPEndPoint;
+			var ipep = m_Listener.LocalEndPoint as IPEndPoint;
 
 			if (ipep == null)
 			{
@@ -113,10 +113,10 @@ namespace Server.Network
 			if (ipep.Address.Equals(IPAddress.Any) || ipep.Address.Equals(IPAddress.IPv6Any))
 			{
 				var adapters = NetworkInterface.GetAllNetworkInterfaces();
-				foreach (NetworkInterface adapter in adapters)
+				foreach (var adapter in adapters)
 				{
-					IPInterfaceProperties properties = adapter.GetIPProperties();
-					foreach (IPAddressInformation unicast in properties.UnicastAddresses)
+					var properties = adapter.GetIPProperties();
+					foreach (var unicast in properties.UnicastAddresses)
 					{
 						if (ipep.AddressFamily == unicast.Address.AddressFamily)
 						{
@@ -145,13 +145,13 @@ namespace Server.Network
 			}
 
 			Utility.PushColor(ConsoleColor.DarkGreen);
-			Console.WriteLine(@"----------------------------------------------------------------------");
+			Console.WriteLine("----------------------------------------------------------------------");
 			Utility.PopColor();
 		}
-		
+
 		private void OnAccept(IAsyncResult asyncResult)
 		{
-			Socket listener = (Socket)asyncResult.AsyncState;
+			var listener = (Socket)asyncResult.AsyncState;
 
 			Socket accepted = null;
 
@@ -196,7 +196,7 @@ namespace Server.Network
 		{
 			try
 			{
-				SocketConnectEventArgs args = new SocketConnectEventArgs(socket);
+				var args = new SocketConnectEventArgs(socket);
 
 				EventSink.InvokeSocketConnect(args);
 
@@ -261,20 +261,20 @@ namespace Server.Network
 
 		public void Dispose()
 		{
-			Socket socket = Interlocked.Exchange(ref m_Listener, null);
+			var socket = Interlocked.Exchange(ref m_Listener, null);
 
 			if (socket != null)
 			{
 				socket.Close();
 			}
 
-            if (_PingListener == null)
-            {
-                return;
-            }
+			if (_PingListener == null)
+			{
+				return;
+			}
 
-            _PingListener.Dispose();
-            _PingListener = null;
-        }
+			_PingListener.Dispose();
+			_PingListener = null;
+		}
 	}
 }

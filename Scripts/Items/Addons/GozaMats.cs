@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class GozaMatEastAddon : BaseAddon
@@ -13,9 +11,9 @@ namespace Server.Items
         [Constructable]
         public GozaMatEastAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28a4, 1030688), 1, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x28a5, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28a4, 1030688), 1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0x28a5, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public GozaMatEastAddon(Serial serial)
@@ -23,38 +21,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new GozaMatEastDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new GozaMatEastDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class GozaMatEastDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public GozaMatEastDeed()
@@ -66,32 +52,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new GozaMatEastAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030404;
-            }
-        }// goza (east)
+        public override BaseAddon Addon => new GozaMatEastAddon(Hue);
+        public override int LabelNumber => 1030404;// goza (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -106,9 +80,9 @@ namespace Server.Items
         [Constructable]
         public GozaMatSouthAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28a6, 1030688), 0, 1, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x28a7, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28a6, 1030688), 0, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0x28a7, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public GozaMatSouthAddon(Serial serial)
@@ -116,38 +90,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new GozaMatSouthDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new GozaMatSouthDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class GozaMatSouthDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public GozaMatSouthDeed()
@@ -159,32 +121,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new GozaMatSouthAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030405;
-            }
-        }// goza (south)
+        public override BaseAddon Addon => new GozaMatSouthAddon(Hue);
+        public override int LabelNumber => 1030405;// goza (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -199,8 +149,8 @@ namespace Server.Items
         [Constructable]
         public SquareGozaMatEastAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28a8, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28a8, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public SquareGozaMatEastAddon(Serial serial)
@@ -208,45 +158,27 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new SquareGozaMatEastDeed();
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030688;
-            }
-        }// goza mat
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new SquareGozaMatEastDeed();
+        public override int LabelNumber => 1030688;// goza mat
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class SquareGozaMatEastDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public SquareGozaMatEastDeed()
@@ -258,32 +190,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new SquareGozaMatEastAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030407;
-            }
-        }// square goza (east)
+        public override BaseAddon Addon => new SquareGozaMatEastAddon(Hue);
+        public override int LabelNumber => 1030407;// square goza (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -298,8 +218,8 @@ namespace Server.Items
         [Constructable]
         public SquareGozaMatSouthAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28a9, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28a9, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public SquareGozaMatSouthAddon(Serial serial)
@@ -307,38 +227,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new SquareGozaMatSouthDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new SquareGozaMatSouthDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class SquareGozaMatSouthDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public SquareGozaMatSouthDeed()
@@ -350,32 +258,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new SquareGozaMatSouthAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030406;
-            }
-        }// square goza (south)
+        public override BaseAddon Addon => new SquareGozaMatSouthAddon(Hue);
+        public override int LabelNumber => 1030406;// square goza (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -390,9 +286,9 @@ namespace Server.Items
         [Constructable]
         public BrocadeGozaMatEastAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28AB, 1030688), 0, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x28AA, 1030688), 1, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28AB, 1030688), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0x28AA, 1030688), 1, 0, 0);
+            Hue = hue;
         }
 
         public BrocadeGozaMatEastAddon(Serial serial)
@@ -400,38 +296,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new BrocadeGozaMatEastDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new BrocadeGozaMatEastDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class BrocadeGozaMatEastDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public BrocadeGozaMatEastDeed()
@@ -443,32 +327,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new BrocadeGozaMatEastAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030408;
-            }
-        }// brocade goza (east)
+        public override BaseAddon Addon => new BrocadeGozaMatEastAddon(Hue);
+        public override int LabelNumber => 1030408;// brocade goza (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -483,9 +355,9 @@ namespace Server.Items
         [Constructable]
         public BrocadeGozaMatSouthAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28AD, 1030688), 0, 0, 0);
-            this.AddComponent(new LocalizedAddonComponent(0x28AC, 1030688), 0, 1, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28AD, 1030688), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0x28AC, 1030688), 0, 1, 0);
+            Hue = hue;
         }
 
         public BrocadeGozaMatSouthAddon(Serial serial)
@@ -493,38 +365,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new BrocadeGozaMatSouthDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new BrocadeGozaMatSouthDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class BrocadeGozaMatSouthDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public BrocadeGozaMatSouthDeed()
@@ -536,32 +396,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new BrocadeGozaMatSouthAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030409;
-            }
-        }// brocade goza (south)
+        public override BaseAddon Addon => new BrocadeGozaMatSouthAddon(Hue);
+        public override int LabelNumber => 1030409;// brocade goza (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -576,8 +424,8 @@ namespace Server.Items
         [Constructable]
         public BrocadeSquareGozaMatEastAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28AE, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28AE, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public BrocadeSquareGozaMatEastAddon(Serial serial)
@@ -585,38 +433,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new BrocadeSquareGozaMatEastDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new BrocadeSquareGozaMatEastDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class BrocadeSquareGozaMatEastDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public BrocadeSquareGozaMatEastDeed()
@@ -628,32 +464,20 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new BrocadeSquareGozaMatEastAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030411;
-            }
-        }// brocade square goza (east)
+        public override BaseAddon Addon => new BrocadeSquareGozaMatEastAddon(Hue);
+        public override int LabelNumber => 1030411;// brocade square goza (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
@@ -668,8 +492,8 @@ namespace Server.Items
         [Constructable]
         public BrocadeSquareGozaMatSouthAddon(int hue)
         {
-            this.AddComponent(new LocalizedAddonComponent(0x28AF, 1030688), 0, 0, 0);
-            this.Hue = hue;
+            AddComponent(new LocalizedAddonComponent(0x28AF, 1030688), 0, 0, 0);
+            Hue = hue;
         }
 
         public BrocadeSquareGozaMatSouthAddon(Serial serial)
@@ -677,38 +501,26 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddonDeed Deed
-        {
-            get
-            {
-                return new BrocadeSquareGozaMatSouthDeed();
-            }
-        }
-        public override bool RetainDeedHue
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override BaseAddonDeed Deed => new BrocadeSquareGozaMatSouthDeed();
+        public override bool RetainDeedHue => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 
     public class BrocadeSquareGozaMatSouthDeed : BaseAddonDeed
     {
-        public override bool UseCraftResource { get { return false; } }
+        public override bool UseCraftResource => false;
 
         [Constructable]
         public BrocadeSquareGozaMatSouthDeed()
@@ -720,32 +532,89 @@ namespace Server.Items
         {
         }
 
-        public override BaseAddon Addon
-        {
-            get
-            {
-                return new BrocadeSquareGozaMatSouthAddon(this.Hue);
-            }
-        }
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1030410;
-            }
-        }// brocade square goza (south)
+        public override BaseAddon Addon => new BrocadeSquareGozaMatSouthAddon(Hue);
+        public override int LabelNumber => 1030410;// brocade square goza (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
+        }
+    }
+
+    public class SquareGozaMatAddon : BaseAddon
+    {
+        [Constructable]
+        public SquareGozaMatAddon()
+            : this(0)
+        {
+        }
+
+        [Constructable]
+        public SquareGozaMatAddon(int hue)
+        {
+            AddComponent(new LocalizedAddonComponent(0x2A3C, 1113621), 0, 0, 0);
+            Hue = hue;
+        }
+
+        public SquareGozaMatAddon(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override BaseAddonDeed Deed => new SquareGozaMatDeed();
+        public override bool RetainDeedHue => true;
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            reader.ReadInt();
+        }
+    }
+
+    public class SquareGozaMatDeed : BaseAddonDeed
+    {
+        public override bool UseCraftResource => false;
+
+        [Constructable]
+        public SquareGozaMatDeed()
+        {
+        }
+
+        public SquareGozaMatDeed(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override BaseAddon Addon => new SquareGozaMatAddon(Hue);
+        public override int LabelNumber => 1030410;// brocade square goza (south)
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            reader.ReadInt();
         }
     }
 }

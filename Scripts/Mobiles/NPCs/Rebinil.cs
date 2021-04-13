@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Server.Items;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -10,8 +9,8 @@ namespace Server.Mobiles
         [Constructable]
         public Rebinil()
             : base("the healer")
-        { 
-            this.Name = "Rebinil";
+        {
+            Name = "Rebinil";
         }
 
         public Rebinil(Serial serial)
@@ -19,61 +18,43 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool CanTeach
-        {
-            get
-            {
-                return false;
-            }
-        }
-        public override bool IsInvulnerable
-        {
-            get
-            {
-                return true;
-            }
-        }
-        protected override List<SBInfo> SBInfos
-        {
-            get
-            {
-                return this.m_SBInfos;
-            }
-        }
+        public override bool CanTeach => false;
+        public override bool IsInvulnerable => true;
+        protected override List<SBInfo> SBInfos => m_SBInfos;
         public override void InitSBInfo()
-        { 
+        {
         }
 
         public override void InitBody()
         {
-            this.InitStats(100, 100, 25);
-			
-            this.Female = true;
-            this.Race = Race.Elf;
-			
-            this.Hue = 0x83E7;
-            this.HairItemID = 0x2FD0;
-            this.HairHue = 0x26B;			
+            InitStats(100, 100, 25);
+
+            Female = true;
+            Race = Race.Elf;
+
+            Hue = 0x83E7;
+            HairItemID = 0x2FD0;
+            HairHue = 0x26B;
         }
 
         public override void InitOutfit()
         {
-            this.AddItem(new Sandals(0x719));
-            this.AddItem(new FemaleElvenRobe(0x757));
-            this.AddItem(new RoyalCirclet());
+            AddItem(new Sandals(0x719));
+            AddItem(new FemaleElvenRobe(0x757));
+            AddItem(new RoyalCirclet());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-	
-            writer.Write((int)0); // version
+
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-	
+
             int version = reader.ReadInt();
         }
     }

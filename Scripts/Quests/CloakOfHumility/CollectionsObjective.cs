@@ -1,18 +1,15 @@
-using System;
-using Server.Items;
 using Server.Mobiles;
-using System.Collections.Generic;
-using Server.Gumps;
+using System;
 namespace Server.Engines.Quests
 {
     public class CollectionsObtainObjective : ObtainObjective
     {
         private bool m_HasObtained;
 
-        public bool HasObtained 
-        { 
-            get { return m_HasObtained; } 
-            set { m_HasObtained = true; } 
+        public bool HasObtained
+        {
+            get { return m_HasObtained; }
+            set { m_HasObtained = true; }
         }
 
         public CollectionsObtainObjective(Type obtain, string name, int amount) : base(obtain, name, amount)
@@ -22,7 +19,7 @@ namespace Server.Engines.Quests
 
         public override bool Update(object o)
         {
-            if (this.Quest == null || this.Quest.Owner == null)
+            if (Quest == null || Quest.Owner == null)
                 return false;
 
             if (m_HasObtained)
@@ -49,12 +46,12 @@ namespace Server.Engines.Quests
                 }
             }
         }
- 
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
             writer.Write(m_HasObtained);
         }
 

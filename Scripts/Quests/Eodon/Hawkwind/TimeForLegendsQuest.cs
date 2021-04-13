@@ -1,31 +1,23 @@
-using System;
-using Server;
+using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using Server.Gumps;
 using Server.Spells.SkillMasteries;
+using System;
 
 namespace Server.Engines.Quests.TimeLord
 {
     public class TimeForLegendsQuest : QuestSystem
     {
-        private Type[] _TypeReferenceTable = new Type[]
-		{
-			typeof(TimeForLegendsObjective)
-		};
-
-        public override Type[] TypeReferenceTable { get { return _TypeReferenceTable; } }
-
-        public override object Name { get { return 1156338; } } 		// A Time For Legends
-        public override object OfferMessage { get { return 1156339; } }	/*Greetings Brave Traveler!<br><br>Throughout my travels in time I have forever 
+        public override object Name => 1156338;  		// A Time For Legends
+        public override object OfferMessage => 1156339; 	/*Greetings Brave Traveler!<br><br>Throughout my travels in time I have forever 
 																		  encountered those who've reached the pinnacle of their profession.  These Legends 
 																		  are told of in our most cherished tales and are the fabric by which heroes are born.
 																		  I offer you now a chance to walk the path of these Legends.  Complete my task and 
 																		  you too shall know the secrets of the Master.*/
 
-        public override TimeSpan RestartDelay { get { return TimeSpan.Zero; } }
-        public override bool IsTutorial { get { return false; } }
-        public override int Picture { get { return 0x1581; } }
+        public override TimeSpan RestartDelay => TimeSpan.Zero;
+        public override bool IsTutorial => false;
+        public override int Picture => 0x1581;
 
         public SkillName Mastery { get; set; }
         public Type ToSlay { get; set; }
@@ -56,19 +48,18 @@ namespace Server.Engines.Quests.TimeLord
 
             From.AddToBackpack(new BookOfMasteries());
 
-            var primer = new SkillMasteryPrimer(Mastery, 1);
+            SkillMasteryPrimer primer = new SkillMasteryPrimer(Mastery, 1);
 
-            if(primer != null)
-                From.AddToBackpack(primer);
+            From.AddToBackpack(primer);
         }
 
-        public static Type[] Targets { get { return _Targets; } }
-        private static Type[] _Targets = new Type[]
-		{	
-			typeof(Semidar), typeof(Mephitis), typeof(Rikktor), typeof(LordOaks), typeof(Neira), typeof(Barracoon), typeof(Serado), typeof(Meraktus), typeof(Ilhenir),
-			typeof(Twaulo), typeof(AbyssalInfernal), typeof(PrimevalLich), typeof(CorgulTheSoulBinder), typeof(CorgulTheSoulBinder) /*dragon turtle*/,
+        public static Type[] Targets => _Targets;
+        private static readonly Type[] _Targets =
+        {
+            typeof(Semidar), typeof(Mephitis), typeof(Rikktor), typeof(LordOaks), typeof(Neira), typeof(Barracoon), typeof(Serado), typeof(Meraktus), typeof(Ilhenir),
+            typeof(Twaulo), typeof(AbyssalInfernal), typeof(PrimevalLich), typeof(CorgulTheSoulBinder), typeof(CorgulTheSoulBinder) /*dragon turtle*/,
             typeof(DreadHorn), typeof(Travesty), typeof(ChiefParoxysmus), typeof(LadyMelisande), typeof(MonstrousInterredGrizzle), typeof(ShimmeringEffusion)
-		};
+        };
 
         public static Type TargetOfTheDay { get; set; }
         public static DateTime NextTarget { get; set; }
@@ -91,7 +82,7 @@ namespace Server.Engines.Quests.TimeLord
 
             TargetOfTheDay = _Targets[Utility.Random(_Targets.Length)];
 
-            Server.Commands.CommandSystem.Register("NewTargetOfTheDay", AccessLevel.GameMaster, e =>
+            Commands.CommandSystem.Register("NewTargetOfTheDay", AccessLevel.GameMaster, e =>
                 {
                     TargetOfTheDay = _Targets[Utility.Random(_Targets.Length)];
 
@@ -101,7 +92,7 @@ namespace Server.Engines.Quests.TimeLord
 
         public override void ChildSerialize(GenericWriter writer)
         {
-            writer.WriteEncodedInt((int)0); // version
+            writer.WriteEncodedInt(0); // version
 
             writer.Write((int)Mastery);
 
@@ -121,11 +112,11 @@ namespace Server.Engines.Quests.TimeLord
             Mastery = (SkillName)reader.ReadInt();
 
             string name = null;
-            
-            if(reader.ReadInt() == 0)
+
+            if (reader.ReadInt() == 0)
                 name = reader.ReadString();
 
-            if(name != null)
+            if (name != null)
                 ToSlay = ScriptCompiler.FindTypeByName(name);
         }
     }

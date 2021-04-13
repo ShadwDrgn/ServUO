@@ -1,11 +1,9 @@
-using System;
-
 namespace Server.Items
 {
     public class ConjurersGrimoire : Spellbook
     {
-        public override bool IsArtifact { get { return true; } }
-        public override int LabelNumber { get { return 1094799; } } // Conjurer's Grimoire
+        public override bool IsArtifact => true;
+        public override int LabelNumber => 1094799;  // Conjurer's Grimoire
 
         [Constructable]
         public ConjurersGrimoire()
@@ -28,7 +26,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

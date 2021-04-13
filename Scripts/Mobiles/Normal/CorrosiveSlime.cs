@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -38,39 +37,19 @@ namespace Server.Mobiles
             Fame = 300;
             Karma = -300;
 
-            VirtualArmor = 8;
-
             Tamable = true;
             ControlSlots = 1;
             MinTameSkill = 23.1;
         }
-           
+
         public CorrosiveSlime(Serial serial)
             : base(serial)
         {
         }
 
-        public override Poison PoisonImmune
-        {
-            get
-            {
-                return Poison.Regular;
-            }
-        }
-        public override Poison HitPoison
-        {
-            get
-            {
-                return Poison.Regular;
-            }
-        }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.Fish;
-            }
-        }
+        public override Poison PoisonImmune => Poison.Regular;
+        public override Poison HitPoison => Poison.Regular;
+        public override FoodType FavoriteFood => FoodType.Fish;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
@@ -89,8 +68,8 @@ namespace Server.Mobiles
                     case 2: item = new PartiallyDigestedTorso(); break;
                 }
 
-				if (item != null)
-					c.DropItem(item);
+                if (item != null)
+                    c.DropItem(item);
             }
 
             base.OnDeath(c);
@@ -99,7 +78,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)1);
+            writer.Write(1);
         }
 
         public override void Deserialize(GenericReader reader)

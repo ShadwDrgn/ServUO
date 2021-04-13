@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-
-using Server;
-using Server.Prompts;
-using Server.Mobiles;
-using Server.Items;
-using Server.SkillHandlers;
-using Server.Gumps;
-using Server.Network;
 using Server.Engines.Quests;
+using Server.Mobiles;
+using Server.Network;
+using Server.SkillHandlers;
 
 namespace Server.Engines.Khaldun
 {
@@ -31,7 +24,7 @@ namespace Server.Engines.Khaldun
             if (!m.Player)
                 return;
 
-            var quest = QuestHelper.GetQuest<GoingGumshoeQuest2>((PlayerMobile)m);
+            GoingGumshoeQuest2 quest = QuestHelper.GetQuest<GoingGumshoeQuest2>((PlayerMobile)m);
 
             if (quest != null)
             {
@@ -101,7 +94,7 @@ namespace Server.Engines.Khaldun
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
             writer.Write(Door);
         }
 

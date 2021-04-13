@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -12,7 +11,7 @@ namespace Server.Mobiles
         {
             Name = "a gibberling";
             Body = 307;
-            BaseSoundID = 422;
+            BaseSoundID = 0x44D;
 
             SetStr(141, 165);
             SetDex(101, 125);
@@ -39,8 +38,6 @@ namespace Server.Mobiles
             Fame = 1500;
             Karma = -1500;
 
-            VirtualArmor = 27;
-
             SetWeaponAbility(WeaponAbility.Dismount);
         }
 
@@ -49,13 +46,7 @@ namespace Server.Mobiles
         {
         }
 
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int TreasureMapLevel => 1;
 
         public override void GenerateLoot()
         {
@@ -65,7 +56,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

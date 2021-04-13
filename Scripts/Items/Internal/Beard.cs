@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public abstract class Beard : Item
@@ -9,20 +7,6 @@ namespace Server.Items
         {
         }
 
-        /*public static Beard CreateByID( int id, int hue )
-        {
-        switch ( id )
-        {
-        case 0x203E: return new LongBeard( hue );
-        case 0x203F: return new ShortBeard( hue );
-        case 0x2040: return new Goatee( hue );
-        case 0x2041: return new Mustache( hue );
-        case 0x204B: return new MediumShortBeard( hue );
-        case 0x204C: return new MediumLongBeard( hue );
-        case 0x204D: return new Vandyke( hue );
-        default: return new GenericBeard( id, hue );
-        }
-        }*/
         protected Beard(int itemID)
             : this(itemID, 0)
         {
@@ -31,18 +15,13 @@ namespace Server.Items
         protected Beard(int itemID, int hue)
             : base(itemID)
         {
-            this.LootType = LootType.Blessed;
-            this.Layer = Layer.FacialHair;
-            this.Hue = hue;
+            LootType = LootType.Blessed;
+            Layer = Layer.FacialHair;
+            Hue = hue;
         }
 
-        public override bool DisplayLootType
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool DisplayLootType => false;
+		
         public override bool VerifyMove(Mobile from)
         {
             return (from.AccessLevel >= AccessLevel.GameMaster);
@@ -50,9 +29,8 @@ namespace Server.Items
 
         public override DeathMoveResult OnParentDeath(Mobile parent)
         {
-            //Dupe( Amount );
-            parent.FacialHairItemID = this.ItemID;
-            parent.FacialHairHue = this.Hue;
+            parent.FacialHairItemID = ItemID;
+            parent.FacialHairHue = Hue;
 
             return DeathMoveResult.MoveToCorpse;
         }
@@ -60,15 +38,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            this.LootType = LootType.Blessed;
-
             int version = reader.ReadInt();
         }
     }
@@ -93,14 +68,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -125,14 +98,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -157,14 +128,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -189,14 +158,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -221,14 +188,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -253,14 +218,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -285,14 +248,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }
@@ -317,14 +278,12 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

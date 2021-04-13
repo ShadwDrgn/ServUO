@@ -1,16 +1,11 @@
 using System;
-using Server;
 using System.Collections.Generic;
 
 namespace Server.Items
 {
     public class ForceOfNature : WeaponAbility
     {
-        public ForceOfNature()
-        {
-        }
-
-        public override int BaseMana { get { return 35; } }
+        public override int BaseMana => 35;
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)
         {
@@ -35,20 +30,15 @@ namespace Server.Items
             m_Table[attacker] = t;
         }
 
-        private static Dictionary<Mobile, ForceOfNatureTimer> m_Table = new Dictionary<Mobile, ForceOfNatureTimer>();
+        private static readonly Dictionary<Mobile, ForceOfNatureTimer> m_Table = new Dictionary<Mobile, ForceOfNatureTimer>();
 
-        public static bool Remove(Mobile m)
+        public static void Remove(Mobile m)
         {
-            ForceOfNatureTimer t;
-
-            m_Table.TryGetValue(m, out t);
-
-            if (t == null)
-                return false;
-
-            t.Stop();
-            m_Table.Remove(m);
-            return true;
+            if (m_Table.ContainsKey(m))
+            {
+                m_Table[m].Stop();
+                m_Table.Remove(m);
+            }
         }
 
         public static void OnHit(Mobile from, Mobile target)
@@ -58,12 +48,16 @@ namespace Server.Items
                 ForceOfNatureTimer t = m_Table[from];
 
                 t.Hits++;
-                t.LastHit = DateTime.Now;
+                t.LastHit = DateTime.UtcNow;
 
                 if (t.Hits % 12 == 0)
                 {
                     int duration = target.Skills[SkillName.MagicResist].Value >= 90.0 ? 1 : 2;
                     target.Paralyze(TimeSpan.FromSeconds(duration));
+
+                    target.FixedEffect(0x376A, 9, 32);
+                    target.PlaySound(0x204);
+
                     t.Hits = 0;
 
                     from.SendLocalizedMessage(1004013); // You successfully stun your opponent!
@@ -72,7 +66,7 @@ namespace Server.Items
             }
         }
 
-        public static int GetBonus(Mobile from, Mobile target)
+        public static double GetDamageScalar(Mobile from, Mobile target)
         {
             if (m_Table.ContainsKey(from))
             {
@@ -80,24 +74,24 @@ namespace Server.Items
 
                 if (t.Target == target)
                 {
-                    int bonus = Math.Max(50, from.Str - 50);
-                    if (bonus > 100) bonus = 100;
-                    return bonus;
+                    double bonus = Math.Min(100, Math.Max(50, from.Str - 50));
+
+                    return (100 + bonus) / 100;
                 }
             }
 
-            return 0;
+            return 1.0;
         }
 
         private class ForceOfNatureTimer : Timer
         {
-            private Mobile m_Target, m_From;
+            private readonly Mobile m_Target, m_From;
 
             private DateTime m_LastHit;
             private int m_Tick, m_Hits;
 
-            public Mobile Target { get { return m_Target; } }
-            public Mobile From { get { return m_From; } }
+            public Mobile Target => m_Target;
+            public Mobile From => m_From;
             public int Hits { get { return m_Hits; } set { m_Hits = value; } }
             public DateTime LastHit { get { return m_LastHit; } set { m_LastHit = value; } }
 
@@ -108,16 +102,16 @@ namespace Server.Items
                 m_From = from;
                 m_Tick = 0;
                 m_Hits = 1;
-                m_LastHit = DateTime.Now;
+                m_LastHit = DateTime.UtcNow;
             }
 
             protected override void OnTick()
             {
                 m_Tick++;
 
-                if (!m_From.Alive || !m_Target.Alive || m_Target.Map != m_From.Map || m_Target.GetDistanceToSqrt(m_From.Location) > 10 || m_LastHit + TimeSpan.FromSeconds(20) < DateTime.Now || m_Tick > 36)
+                if (!m_From.Alive || !m_Target.Alive || m_Target.Map != m_From.Map || m_Target.GetDistanceToSqrt(m_From.Location) > 10 || m_LastHit + TimeSpan.FromSeconds(20) < DateTime.UtcNow || m_Tick > 36)
                 {
-                    Server.Items.ForceOfNature.Remove(m_From);
+                    Remove(m_From);
                     return;
                 }
 
@@ -125,7 +119,7 @@ namespace Server.Items
                 {
                     int damage = Utility.RandomMinMax(15, 35);
 
-                    AOS.Damage(m_Target, m_From, damage, false, 0, 0, 0, 0, 0, 0, 100, false, false, false);
+                    AOS.Damage(m_From, m_From, damage, false, 0, 0, 0, 0, 0, 0, 100, false, false, false);
                 }
             }
         }

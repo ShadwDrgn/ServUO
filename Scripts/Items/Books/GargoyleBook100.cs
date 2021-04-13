@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class GargoyleBook100 : BaseBook
@@ -44,7 +42,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
     }
 }

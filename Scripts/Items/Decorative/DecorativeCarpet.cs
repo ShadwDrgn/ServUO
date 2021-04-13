@@ -1,5 +1,3 @@
-using System;
-using Server;
 using Server.Multis;
 using Server.Regions;
 
@@ -33,7 +31,7 @@ namespace Server.Items
                 list.Add(1113267); // (Double Click to Lockdown)
         }
 
-        public override bool DisplayWeight { get { return Movable; } }
+        public override bool DisplayWeight => Movable;
 
         public override bool OnDroppedToWorld(Mobile from, Point3D p)
         {
@@ -85,7 +83,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

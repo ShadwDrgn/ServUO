@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class BagOfReagents : Bag
@@ -13,14 +11,14 @@ namespace Server.Items
         [Constructable]
         public BagOfReagents(int amount)
         {
-            this.DropItem(new BlackPearl(amount));
-            this.DropItem(new Bloodmoss(amount));
-            this.DropItem(new Garlic(amount));
-            this.DropItem(new Ginseng(amount));
-            this.DropItem(new MandrakeRoot(amount));
-            this.DropItem(new Nightshade(amount));
-            this.DropItem(new SulfurousAsh(amount));
-            this.DropItem(new SpidersSilk(amount));
+            DropItem(new BlackPearl(amount));
+            DropItem(new Bloodmoss(amount));
+            DropItem(new Garlic(amount));
+            DropItem(new Ginseng(amount));
+            DropItem(new MandrakeRoot(amount));
+            DropItem(new Nightshade(amount));
+            DropItem(new SulfurousAsh(amount));
+            DropItem(new SpidersSilk(amount));
         }
 
         public BagOfReagents(Serial serial)
@@ -32,7 +30,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

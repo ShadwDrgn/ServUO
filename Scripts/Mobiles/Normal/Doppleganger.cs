@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Mobiles
 {
     [CorpseName("a doppleganger corpse")]
@@ -33,8 +31,6 @@ namespace Server.Mobiles
 
             Fame = 1000;
             Karma = -1000;
-
-            VirtualArmor = 55;
         }
 
         public Doppleganger(Serial serial)
@@ -42,20 +38,8 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Hides
-        {
-            get
-            {
-                return 6;
-            }
-        }
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int Hides => 6;
+        public override int Meat => 1;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
@@ -64,7 +48,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

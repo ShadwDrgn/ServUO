@@ -1,9 +1,8 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a black order high executioner corpse")] 
+    [CorpseName("a black order high executioner corpse")]
     public class SerpentsFangHighExecutioner : SerpentsFangAssassin
     {
         [Constructable]
@@ -23,8 +22,6 @@ namespace Server.Mobiles
 
             Fame = 25000;
             Karma = -25000;
-
-            VirtualArmor = 60;
         }
 
         public SerpentsFangHighExecutioner(Serial serial)
@@ -32,12 +29,12 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AlwaysMurderer { get { return true; } }
-        public override bool ShowFameTitle { get { return false; } }
-		
+        public override bool AlwaysMurderer => true;
+        public override bool ShowFameTitle => false;
+
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.AosFilthyRich, 6);
+            AddLoot(LootPack.FilthyRich, 6);
         }
 
         public override void AlterMeleeDamageFrom(Mobile from, ref int damage)
@@ -48,9 +45,9 @@ namespace Server.Mobiles
 
         public override void OnDeath(Container c)
         {
-            base.OnDeath(c);	
+            base.OnDeath(c);
 
-                c.DropItem(new SerpentFangKey());
+            c.DropItem(new SerpentFangKey());
 
             if (Utility.RandomDouble() < 0.5)
                 c.DropItem(new SerpentFangSectBadge());
@@ -58,13 +55,13 @@ namespace Server.Mobiles
 
         public override void Serialize(GenericWriter writer)
         {
-            base.Serialize(writer);			
-            writer.Write((int)0); // version
+            base.Serialize(writer);
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
-            base.Deserialize(reader);			
+            base.Deserialize(reader);
             int version = reader.ReadInt();
         }
     }

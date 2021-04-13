@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
 using Server.Commands;
 using Server.Network;
 using Server.Targeting;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
     public abstract class BaseDoor : Item, ILockable, ITelekinesisable
     {
+        private static readonly string m_TimerID = "CloseDoorTimer";
         private static readonly Point3D[] m_Offsets = new Point3D[]
         {
             new Point3D(-1, 1, 0),
@@ -23,13 +24,14 @@ namespace Server.Items
             new Point3D(0, 0, 0),
             new Point3D(0, 0, 0)
         };
+
         private bool m_Open, m_Locked;
         private int m_OpenedID, m_OpenedSound;
         private int m_ClosedID, m_ClosedSound;
         private Point3D m_Offset;
         private BaseDoor m_Link;
         private uint m_KeyValue;
-        private Timer m_Timer;
+
         public BaseDoor(int closedID, int openedID, int openedSound, int closedSound, Point3D offset)
             : base(closedID)
         {
@@ -38,8 +40,6 @@ namespace Server.Items
             m_OpenedSound = openedSound;
             m_ClosedSound = closedSound;
             m_Offset = offset;
-
-            m_Timer = new InternalTimer(this);
 
             Movable = false;
         }
@@ -96,12 +96,17 @@ namespace Server.Items
                     Effects.PlaySound(this, Map, m_Open ? m_OpenedSound : m_ClosedSound);
 
                     if (m_Open)
-                        m_Timer.Start();
+                    {
+                        TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10), false, TimerPriority.OneSecond, door => door.InternalClose());
+                    }
                     else
-                        m_Timer.Stop();
+                    {
+                        TimerRegistry.RemoveFromRegistry(m_TimerID, this);
+                    }
                 }
             }
         }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int OpenedID
         {
@@ -177,20 +182,22 @@ namespace Server.Items
                 m_Link = value;
             }
         }
-        public virtual bool UseChainedFunctionality
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public virtual bool UseChainedFunctionality => false;
         // Called by RunUO
         public static void Initialize()
         {
-            EventSink.OpenDoorMacroUsed += new OpenDoorMacroEventHandler(EventSink_OpenDoorMacroUsed);
+            EventSink.OpenDoorMacroUsed += EventSink_OpenDoorMacroUsed;
 
-            CommandSystem.Register("Link", AccessLevel.GameMaster, new CommandEventHandler(Link_OnCommand));
-            CommandSystem.Register("ChainLink", AccessLevel.GameMaster, new CommandEventHandler(ChainLink_OnCommand));
+            CommandSystem.Register("Link", AccessLevel.GameMaster, Link_OnCommand);
+            CommandSystem.Register("ChainLink", AccessLevel.GameMaster, ChainLink_OnCommand);
+        }
+
+        private void InternalClose()
+        {
+            if (IsFreeToClose())
+            {
+                Open = false;
+            }
         }
 
         public static Point3D GetOffset(DoorFacing facing)
@@ -337,7 +344,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_KeyValue);
 
@@ -355,29 +362,21 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            reader.ReadInt();
 
-            switch ( version )
+            m_KeyValue = reader.ReadUInt();
+            m_Open = reader.ReadBool();
+            m_Locked = reader.ReadBool();
+            m_OpenedID = reader.ReadInt();
+            m_ClosedID = reader.ReadInt();
+            m_OpenedSound = reader.ReadInt();
+            m_ClosedSound = reader.ReadInt();
+            m_Offset = reader.ReadPoint3D();
+            m_Link = reader.ReadItem() as BaseDoor;
+
+            if (m_Open)
             {
-                case 0:
-                    {
-                        m_KeyValue = reader.ReadUInt();
-                        m_Open = reader.ReadBool();
-                        m_Locked = reader.ReadBool();
-                        m_OpenedID = reader.ReadInt();
-                        m_ClosedID = reader.ReadInt();
-                        m_OpenedSound = reader.ReadInt();
-                        m_ClosedSound = reader.ReadInt();
-                        m_Offset = reader.ReadPoint3D();
-                        m_Link = reader.ReadItem() as BaseDoor;
-
-                        m_Timer = new InternalTimer(this);
-
-                        if (m_Open)
-                            m_Timer.Start();
-
-                        break;
-                    }
+                TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10), false, TimerPriority.OneSecond, door => door.InternalClose());
             }
         }
 
@@ -385,7 +384,7 @@ namespace Server.Items
         [Description("Links two targeted doors together.")]
         private static void Link_OnCommand(CommandEventArgs e)
         {
-            e.Mobile.BeginTarget(-1, false, TargetFlags.None, new TargetCallback(Link_OnFirstTarget));
+            e.Mobile.BeginTarget(-1, false, TargetFlags.None, Link_OnFirstTarget);
             e.Mobile.SendMessage("Target the first door to link.");
         }
 
@@ -395,7 +394,7 @@ namespace Server.Items
 
             if (door == null)
             {
-                from.BeginTarget(-1, false, TargetFlags.None, new TargetCallback(Link_OnFirstTarget));
+                from.BeginTarget(-1, false, TargetFlags.None, Link_OnFirstTarget);
                 from.SendMessage("That is not a door. Try again.");
             }
             else
@@ -486,7 +485,7 @@ namespace Server.Items
             {
                 int x = m.X, y = m.Y;
 
-                switch ( m.Direction & Direction.Mask )
+                switch (m.Direction & Direction.Mask)
                 {
                     case Direction.North:
                         --y;
@@ -582,23 +581,6 @@ namespace Server.Items
             }
 
             return true;
-        }
-
-        private class InternalTimer : Timer
-        {
-            private readonly BaseDoor m_Door;
-            public InternalTimer(BaseDoor door)
-                : base(TimeSpan.FromSeconds(20.0), TimeSpan.FromSeconds(10.0))
-            {
-                Priority = TimerPriority.OneSecond;
-                m_Door = door;
-            }
-
-            protected override void OnTick()
-            {
-                if (m_Door.Open && m_Door.IsFreeToClose())
-                    m_Door.Open = false;
-            }
         }
     }
 }

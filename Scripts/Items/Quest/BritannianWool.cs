@@ -1,12 +1,8 @@
-using System;
-using Server.Items;
-using Server.Targeting;
-
 namespace Server.Items
 {
     public class BritannianWool : Wool
     {
-        public override int LabelNumber { get { return 1113242; } } // Britannian wool
+        public override int LabelNumber => 1113242;  // Britannian wool
 
         [Constructable]
         public BritannianWool() : this(1)
@@ -29,7 +25,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

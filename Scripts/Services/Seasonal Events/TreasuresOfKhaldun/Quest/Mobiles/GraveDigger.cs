@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-
-using Server;
+using Server.Engines.Quests;
 using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
-using Server.Engines.Quests;
+using System.Collections.Generic;
 
 namespace Server.Engines.Khaldun
 {
     public class GraveDigger : BaseVendor
     {
         protected readonly List<SBInfo> m_SBInfos = new List<SBInfo>();
-        protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
-        public override bool IsActiveVendor { get { return false; } }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
+        public override bool IsActiveVendor => false;
 
         public override void InitSBInfo()
         {
@@ -24,14 +21,11 @@ namespace Server.Engines.Khaldun
 
         public static void Initialize()
         {
-            if (Core.TOL)
+            if (TramInstance == null)
             {
-                if (TramInstance == null)
-                {
-                    TramInstance = new GraveDigger();
-                    TramInstance.MoveToWorld(new Point3D(1382, 1447, 10), Map.Trammel);
-                    TramInstance.Direction = Direction.South;
-                }
+                TramInstance = new GraveDigger();
+                TramInstance.MoveToWorld(new Point3D(1382, 1447, 10), Map.Trammel);
+                TramInstance.Direction = Direction.South;
             }
         }
 
@@ -113,7 +107,7 @@ namespace Server.Engines.Khaldun
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -126,13 +120,6 @@ namespace Server.Engines.Khaldun
             {
                 TramInstance = this;
             }
-            /*else if (Map == Map.Felucca)
-            {
-                FelInstance = this;
-            }*/
-
-            if (!Core.TOL)
-                Delete();
         }
     }
 }

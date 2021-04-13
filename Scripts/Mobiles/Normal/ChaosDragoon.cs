@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -80,33 +79,45 @@ namespace Server.Mobiles
             melee.Movable = false;
             AddItem(melee);
 
-            DragonHelm helm = new DragonHelm();
-            helm.Resource = res;
-            helm.Movable = false;
+            DragonHelm helm = new DragonHelm
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(helm);
 
-            DragonChest chest = new DragonChest();
-            chest.Resource = res;
-            chest.Movable = false;
+            DragonChest chest = new DragonChest
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(chest);
 
-            DragonArms arms = new DragonArms();
-            arms.Resource = res;
-            arms.Movable = false;
+            DragonArms arms = new DragonArms
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(arms);
 
-            DragonGloves gloves = new DragonGloves();
-            gloves.Resource = res;
-            gloves.Movable = false;
+            DragonGloves gloves = new DragonGloves
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(gloves);
 
-            DragonLegs legs = new DragonLegs();
-            legs.Resource = res;
-            legs.Movable = false;
+            DragonLegs legs = new DragonLegs
+            {
+                Resource = res,
+                Movable = false
+            };
             AddItem(legs);
 
-            ChaosShield shield = new ChaosShield();
-            shield.Movable = false;
+            ChaosShield shield = new ChaosShield
+            {
+                Movable = false
+            };
             AddItem(shield);
 
             AddItem(new Shirt());
@@ -114,7 +125,7 @@ namespace Server.Mobiles
 
             int amount = Utility.RandomMinMax(1, 3);
 
-            switch ( res )
+            switch (res)
             {
                 case CraftResource.BlackScales:
                     AddItem(new BlackScales(amount));
@@ -146,41 +157,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool AutoDispel
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool BardImmune
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool AlwaysMurderer
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool ShowFameTitle
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool AutoDispel => true;
+        public override bool CanRummageCorpses => true;
+        public override bool AlwaysMurderer => true;
+        public override bool ShowFameTitle => false;
         public override int GetIdleSound()
         {
             return 0x2CE;
@@ -225,7 +205,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Mobiles
+﻿namespace Server.Mobiles
 {
     [CorpseName("a ship bat corpse")]
     public class ShipBat : VampireBat
@@ -29,14 +27,11 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 15, 25);
             SetResistance(ResistanceType.Energy, 10, 15);
 
-            //SetSkill( SkillName.MagicResist, 70.1, 95.0 );
             SetSkill(SkillName.Tactics, 45.0, 55.0);
             SetSkill(SkillName.Wrestling, 90.0, 100.0);
 
             Fame = 1000;
             Karma = -1000;
-
-            VirtualArmor = 14;
         }
 
         public override void GenerateLoot()
@@ -56,7 +51,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

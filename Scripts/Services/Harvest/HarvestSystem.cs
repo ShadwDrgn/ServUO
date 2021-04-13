@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using Server.Items;
-using Server.Targeting;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
+using Server.Items;
 using Server.Mobiles;
+using Server.Targeting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Engines.Harvest
@@ -16,24 +16,16 @@ namespace Server.Engines.Harvest
             EventSink.TargetByResourceMacro += TargetByResource;
         }
 
-        private readonly List<HarvestDefinition> m_Definitions;
-
         public HarvestSystem()
         {
-            m_Definitions = new List<HarvestDefinition>();
+            Definitions = new List<HarvestDefinition>();
         }
 
-        public List<HarvestDefinition> Definitions
-        {
-            get
-            {
-                return m_Definitions;
-            }
-        }
+        public List<HarvestDefinition> Definitions { get; }
 
         public virtual bool CheckTool(Mobile from, Item tool)
         {
-            bool wornOut = (tool == null || tool.Deleted || (tool is IUsesRemaining && ((IUsesRemaining)tool).UsesRemaining <= 0));
+            bool wornOut = tool == null || tool.Deleted || (tool is IUsesRemaining && ((IUsesRemaining)tool).UsesRemaining <= 0);
 
             if (wornOut)
                 from.SendLocalizedMessage(1044038); // You have worn out your tool!
@@ -53,7 +45,7 @@ namespace Server.Engines.Harvest
 
         public virtual bool CheckRange(Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, bool timed)
         {
-            bool inRange = (from.Map == map && from.InRange(loc, def.MaxRange));
+            bool inRange = from.Map == map && from.InRange(loc, def.MaxRange);
 
             if (!inRange)
                 def.SendMessageTo(from, timed ? def.TimedOutOfRangeMessage : def.OutOfRangeMessage);
@@ -64,7 +56,7 @@ namespace Server.Engines.Harvest
         public virtual bool CheckResources(Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, bool timed)
         {
             HarvestBank bank = def.GetBank(map, loc.X, loc.Y);
-            bool available = (bank != null && bank.Current >= def.ConsumedPerHarvest);
+            bool available = bank != null && bank.Current >= def.ConsumedPerHarvest;
 
             if (!available)
                 def.SendMessageTo(from, timed ? def.DoubleHarvestMessage : def.NoResourcesMessage);
@@ -101,7 +93,7 @@ namespace Server.Engines.Harvest
             if (!CheckHarvest(from, tool))
                 return false;
 
-			EventSink.InvokeResourceHarvestAttempt(new ResourceHarvestAttemptEventArgs(from, tool, this));
+            EventSink.InvokeResourceHarvestAttempt(new ResourceHarvestAttemptEventArgs(from, tool, this));
             from.Target = new HarvestTarget(tool, this);
             return true;
         }
@@ -113,26 +105,23 @@ namespace Server.Engines.Harvest
             if (!CheckHarvest(from, tool))
                 return;
 
-            int tileID;
-            Map map;
-            Point3D loc;
+            if (!GetHarvestDetails(from, tool, toHarvest, out int tileID, out Map map, out Point3D loc))
+            {
+                OnBadHarvestTarget(from, tool, toHarvest);
+                return;
+            }
 
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
             {
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return;
             }
-            else if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
-            {
-                OnBadHarvestTarget(from, tool, toHarvest);
-                return;
-            }
-			
+
             if (!CheckRange(from, tool, def, map, loc, true))
                 return;
-            else if (!CheckResources(from, tool, def, map, loc, true))
+            if (!CheckResources(from, tool, def, map, loc, true))
                 return;
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+            if (!CheckHarvest(from, tool, def, toHarvest))
                 return;
 
             if (SpecialHarvest(from, tool, def, map, loc))
@@ -159,7 +148,7 @@ namespace Server.Engines.Harvest
 
             Type type = null;
 
-            if(CheckHarvestSkill(map, loc, from, resource, def))
+            if (CheckHarvestSkill(map, loc, from, resource, def))
             {
                 type = GetResourceType(from, tool, def, map, loc, resource);
 
@@ -226,20 +215,20 @@ namespace Server.Engines.Harvest
 
                         if (bonus != null && bonus.Type != null && skillBase >= bonus.ReqSkill)
                         {
-							if (bonus.RequiredMap == null || bonus.RequiredMap == from.Map)
-							{
-							    bonusItem = Construct(bonus.Type, from, tool);
+                            if (bonus.RequiredMap == null || bonus.RequiredMap == from.Map)
+                            {
+                                bonusItem = Construct(bonus.Type, from, tool);
                                 Caddellite.OnHarvest(from, tool, this, bonusItem);
 
-                                if (Give(from, bonusItem, true))	//Bonuses always allow placing at feet, even if pack is full irregrdless of def
-								{
+                                if (Give(from, bonusItem, true))    //Bonuses always allow placing at feet, even if pack is full irregrdless of def
+                                {
                                     bonus.SendSuccessTo(from);
-								}
-								else
-								{
+                                }
+                                else
+                                {
                                     bonusItem.Delete();
-								}
-							}
+                                }
+                            }
                         }
 
                         EventSink.InvokeResourceHarvestSuccess(new ResourceHarvestSuccessEventArgs(from, tool, item, bonusItem, this));
@@ -298,8 +287,9 @@ namespace Server.Engines.Harvest
             {
                 return Activator.CreateInstance(type) as Item;
             }
-            catch
+            catch (Exception e)
             {
+                Diagnostics.ExceptionLogging.LogException(e);
                 return null;
             }
         }
@@ -370,7 +360,7 @@ namespace Server.Engines.Harvest
 
         public virtual HarvestResource MutateResource(Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, HarvestVein vein, HarvestResource primary, HarvestResource fallback)
         {
-            bool racialBonus = (def.RaceBonus && from.Race == Race.Elf);
+            bool racialBonus = def.RaceBonus && from.Race == Race.Elf;
 
             if (vein.ChanceToFallback > (Utility.RandomDouble() + (racialBonus ? .20 : 0)))
                 return fallback;
@@ -391,33 +381,33 @@ namespace Server.Engines.Harvest
                 return false;
             }
 
-            int tileID;
-            Map map;
-            Point3D loc;
+            if (!GetHarvestDetails(from, tool, toHarvest, out int tileID, out Map map, out Point3D loc))
+            {
+                from.EndAction(locked);
+                OnBadHarvestTarget(from, tool, toHarvest);
+                return false;
+            }
 
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
             {
                 from.EndAction(locked);
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return false;
             }
-            else if (!def.Validate(tileID) && !def.ValidateSpecial(tileID))
-            {
-                from.EndAction(locked);
-                OnBadHarvestTarget(from, tool, toHarvest);
-                return false;
-            }
-            else if (!CheckRange(from, tool, def, map, loc, true))
+
+            if (!CheckRange(from, tool, def, map, loc, true))
             {
                 from.EndAction(locked);
                 return false;
             }
-            else if (!CheckResources(from, tool, def, map, loc, true))
+
+            if (!CheckResources(from, tool, def, map, loc, true))
             {
                 from.EndAction(locked);
                 return false;
             }
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+
+            if (!CheckHarvest(from, tool, def, toHarvest))
             {
                 from.EndAction(locked);
                 return false;
@@ -442,14 +432,7 @@ namespace Server.Engines.Harvest
 
             if (!from.Mounted)
             {
-                if (Core.SA)
-                {
-                    from.Animate(AnimationType.Attack, Utility.RandomList(def.EffectActions));
-                }
-                else
-                {
-                    from.Animate(Utility.RandomList(def.EffectActions), 5, 1, true, false, 0);
-                }
+                from.Animate(AnimationType.Attack, Utility.RandomList(def.EffectActions));
             }
         }
 
@@ -462,9 +445,9 @@ namespace Server.Engines.Harvest
         {
             HarvestDefinition def = null;
 
-            for (int i = 0; def == null && i < m_Definitions.Count; ++i)
+            for (int i = 0; def == null && i < Definitions.Count; ++i)
             {
-                HarvestDefinition check = m_Definitions[i];
+                HarvestDefinition check = Definitions[i];
 
                 if (check.Validate(tileID))
                     def = check;
@@ -478,9 +461,9 @@ namespace Server.Engines.Harvest
         {
             HarvestDefinition def = null;
 
-            for (int i = 0; def == null && i < m_Definitions.Count; ++i)
+            for (int i = 0; def == null && i < Definitions.Count; ++i)
             {
-                HarvestDefinition check = m_Definitions[i];
+                HarvestDefinition check = Definitions[i];
 
                 if (check.ValidateSpecial(tileID))
                     def = check;
@@ -495,11 +478,7 @@ namespace Server.Engines.Harvest
             if (!CheckHarvest(from, tool))
                 return;
 
-            int tileID;
-            Map map;
-            Point3D loc;
-
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!GetHarvestDetails(from, tool, toHarvest, out int tileID, out Map map, out Point3D loc))
             {
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return;
@@ -515,9 +494,9 @@ namespace Server.Engines.Harvest
 
             if (!CheckRange(from, tool, def, map, loc, false))
                 return;
-            else if (!CheckResources(from, tool, def, map, loc, false))
+            if (!CheckResources(from, tool, def, map, loc, false))
                 return;
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+            if (!CheckHarvest(from, tool, def, toHarvest))
                 return;
 
             object toLock = GetLock(from, tool, def, toHarvest);
@@ -550,10 +529,8 @@ namespace Server.Engines.Harvest
                 map = from.Map;
                 loc = obj.Location;
             }
-            else if (toHarvest is LandTarget)
+            else if (toHarvest is LandTarget obj)
             {
-                LandTarget obj = (LandTarget)toHarvest;
-
                 tileID = obj.TileID;
                 map = from.Map;
                 loc = obj.Location;
@@ -566,7 +543,7 @@ namespace Server.Engines.Harvest
                 return false;
             }
 
-            return (map != null && map != Map.Internal);
+            return map != null && map != Map.Internal;
         }
 
         #region Enhanced Client
@@ -577,7 +554,6 @@ namespace Server.Engines.Harvest
 
             HarvestSystem system = null;
             HarvestDefinition def = null;
-            object toHarvest;
 
             if (tool is IHarvestTool)
             {
@@ -610,7 +586,7 @@ namespace Server.Engines.Harvest
                         break;
                 }
 
-                if (def != null && FindValidTile(m, def, out toHarvest))
+                if (def != null && FindValidTile(m, def, out object toHarvest))
                 {
                     system.StartHarvesting(m, tool, toHarvest);
                     return;
@@ -625,7 +601,7 @@ namespace Server.Engines.Harvest
             Map map = m.Map;
             toHarvest = null;
 
-            if (m == null || map == null || map == Map.Internal)
+            if (map == null || map == Map.Internal)
                 return false;
 
             for (int x = m.X - 1; x <= m.X + 1; x++)
@@ -636,7 +612,7 @@ namespace Server.Engines.Harvest
 
                     if (tiles.Length > 0)
                     {
-                        foreach (var tile in tiles)
+                        foreach (StaticTile tile in tiles)
                         {
                             int id = (tile.ID & 0x3FFF) | 0x4000;
 
@@ -674,23 +650,19 @@ namespace Server.Engines.Harvest
                 {
                     StaticTile[] tiles = map.Tiles.GetStaticTiles(x, y, false);
 
-                    foreach (var tile in tiles)
+                    foreach (StaticTile tile in tiles)
                     {
                         int itemID = tile.ID;
 
                         if (itemID == 0xED3 || itemID == 0xEDF || itemID == 0xEE0 || itemID == 0xEE1 || itemID == 0xEE2 || itemID == 0xEE8)
                         {
-                            PlayerMobile player = m as PlayerMobile;
-
-                            if (player != null)
+                            if (m is PlayerMobile player)
                             {
                                 QuestSystem qs = player.Quest;
 
                                 if (qs is WitchApprenticeQuest)
                                 {
-                                    FindIngredientObjective obj = qs.FindObjective(typeof(FindIngredientObjective)) as FindIngredientObjective;
-
-                                    if (obj != null && !obj.Completed && obj.Ingredient == Ingredient.Bones)
+                                    if (qs.FindObjective(typeof(FindIngredientObjective)) is FindIngredientObjective obj && !obj.Completed && obj.Ingredient == Ingredient.Bones)
                                     {
                                         player.SendLocalizedMessage(1055037); // You finish your grim work, finding some of the specific bones listed in the Hag's recipe.
                                         obj.Complete();
@@ -720,23 +692,19 @@ namespace Server.Engines.Harvest
                 {
                     StaticTile[] tiles = map.Tiles.GetStaticTiles(x, y, false);
 
-                    foreach (var tile in tiles)
+                    foreach (StaticTile tile in tiles)
                     {
                         int itemID = tile.ID;
 
                         if (itemID == 0xD15 || itemID == 0xD16)
                         {
-                            PlayerMobile player = m as PlayerMobile;
-
-                            if (player != null)
+                            if (m is PlayerMobile player)
                             {
                                 QuestSystem qs = player.Quest;
 
                                 if (qs is WitchApprenticeQuest)
                                 {
-                                    FindIngredientObjective obj = qs.FindObjective(typeof(FindIngredientObjective)) as FindIngredientObjective;
-
-                                    if (obj != null && !obj.Completed && obj.Ingredient == Ingredient.RedMushrooms)
+                                    if (qs.FindObjective(typeof(FindIngredientObjective)) is FindIngredientObjective obj && !obj.Completed && obj.Ingredient == Ingredient.RedMushrooms)
                                     {
                                         player.SendLocalizedMessage(1055036); // You slice a red cap mushroom from its stem.
                                         obj.Complete();
@@ -772,19 +740,18 @@ namespace Server
     [AttributeUsage(AttributeTargets.Class)]
     public class FurnitureAttribute : Attribute
     {
-        public FurnitureAttribute()
-        {
-        }        
-
         private static bool IsNotChoppables(Item item)
         {
             return _NotChoppables.Any(t => t == item.GetType());
         }
 
-        private static Type[] _NotChoppables = new Type[]
+        private static readonly Type[] _NotChoppables =
         {
             typeof(CommodityDeedBox), typeof(ChinaCabinet), typeof(PieSafe), typeof(AcademicBookCase), typeof(JewelryBox),
-            typeof(WoodenBookcase), typeof(Countertop), typeof(Mailbox)
+            typeof(WoodenBookcase), typeof(Countertop), typeof(Mailbox), typeof(DecorativeMagesCrystalBall), typeof(DecorativeMageThrone),
+            typeof(DecorativeMagicBookStand), typeof(DecorativeSpecimenShelve), typeof(Feedbag), typeof(ChestOfDrawers), typeof(BarrelMailbox),
+            typeof(DolphinMailbox), typeof(ScarecrowMailbox), typeof(SquirrelMailbox), typeof(FootedChestOfDrawers), typeof(CustomizableRoundedDoorMat),
+            typeof(CowStatue), typeof(DecorativeStableFencing), typeof(OrnateBedDeed), typeof(FourPostBedDeed), typeof(FormalDiningTableDeed)
         };
 
         public static bool Check(Item item)
@@ -793,18 +760,18 @@ namespace Server
             {
                 return false;
             }
-			
-			if (IsNotChoppables(item))
-			{
-				return false;
-			}
+
+            if (IsNotChoppables(item))
+            {
+                return false;
+            }
 
             if (item.GetType().IsDefined(typeof(FurnitureAttribute), false))
             {
                 return true;
             }
 
-            if (item is AddonComponent && ((AddonComponent)item).Addon != null && ((AddonComponent)item).Addon.GetType().IsDefined(typeof(FurnitureAttribute), false))
+            if ((item as AddonComponent)?.Addon != null && ((AddonComponent)item).Addon.GetType().IsDefined(typeof(FurnitureAttribute), false))
             {
                 return true;
             }

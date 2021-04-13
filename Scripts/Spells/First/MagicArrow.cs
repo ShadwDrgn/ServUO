@@ -1,5 +1,5 @@
-using System;
 using Server.Targeting;
+using System;
 
 namespace Server.Spells.First
 {
@@ -15,28 +15,10 @@ namespace Server.Spells.First
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.First;
-            }
-        }
-        public override bool DelayedDamageStacking
-        {
-            get
-            {
-                return !Core.AOS;
-            }
-        }
-        public override bool DelayedDamage
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override Type[] DelayDamageFamily { get { return new Type[] { typeof(Server.Spells.Mysticism.NetherBoltSpell) }; } }
+        public override SpellCircle Circle => SpellCircle.First;
+        public override bool DelayedDamageStacking => false;
+        public override bool DelayedDamage => true;
+        public override Type[] DelayDamageFamily => new Type[] { typeof(Mysticism.NetherBoltSpell) };
         public override void OnCast()
         {
             Caster.Target = new InternalTarget(this);
@@ -55,13 +37,13 @@ namespace Server.Spells.First
 
                 SpellHelper.Turn(Caster, d);
 
-                if (Core.SA && HasDelayContext(d))
+                if (HasDelayContext(d))
                 {
                     DoHurtFizzle();
                     return;
                 }
 
-                if (SpellHelper.CheckReflect((int)Circle, ref source, ref target))
+                if (SpellHelper.CheckReflect(this, ref source, ref target))
                 {
                     Timer.DelayCall(TimeSpan.FromSeconds(.5), () =>
                     {
@@ -70,25 +52,7 @@ namespace Server.Spells.First
                     });
                 }
 
-                double damage = 0;
-				
-                if (Core.AOS)
-                {
-                    damage = GetNewAosDamage(10, 1, 4, d);
-                }
-                else if (target is Mobile)
-                {
-                    damage = Utility.Random(4, 4);
-
-                    if (CheckResisted((Mobile)target))
-                    {
-                        damage *= 0.75;
-
-                        ((Mobile)target).SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                    }
-
-                    damage *= GetDamageScalar((Mobile)target);
-                }
+                double damage = GetNewAosDamage(10, 1, 4, d);
 
                 if (damage > 0)
                 {
@@ -106,7 +70,7 @@ namespace Server.Spells.First
         {
             private readonly MagicArrowSpell m_Owner;
             public InternalTarget(MagicArrowSpell owner)
-                : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
+                : base(10, false, TargetFlags.Harmful)
             {
                 m_Owner = owner;
             }

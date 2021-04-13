@@ -1,19 +1,17 @@
-using System;
-
 namespace Server.Items
 {
     public class WildfireBow : ElvenCompositeLongbow
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
 
         [Constructable]
         public WildfireBow()
             : base()
         {
-            Hue = 1161;		
+            Hue = 1161;
             SkillBonuses.SetValues(0, SkillName.Archery, 10);
-            WeaponAttributes.ResistFireBonus = 25;			
-            Velocity = 15;			
+            WeaponAttributes.ResistFireBonus = 25;
+            Velocity = 15;
         }
 
         public WildfireBow(Serial serial)
@@ -21,27 +19,9 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1075044;
-            }
-        }// Wildfire Bow
-        public override int InitMinHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 255;
-            }
-        }
+        public override int LabelNumber => 1075044;// Wildfire Bow
+        public override int InitMinHits => 255;
+        public override int InitMaxHits => 255;
         public override void GetDamageTypes(Mobile wielder, out int phys, out int fire, out int cold, out int pois, out int nrgy, out int chaos, out int direct)
         {
             phys = cold = pois = nrgy = chaos = direct = 0;

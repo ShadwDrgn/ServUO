@@ -1,13 +1,11 @@
-using System;
-
-using Server;
 using Server.Events.Halloween;
+using System;
 
 namespace Server.Items
 {
     public class JacksBagOfTricks : Item
     {
-        public override int LabelNumber { get { return 1157656; } } // Jack's Bag of Tricks
+        public override int LabelNumber => 1157656;  // Jack's Bag of Tricks
 
         private DateTime _NextUse;
 
@@ -34,7 +32,7 @@ namespace Server.Items
 
                     if (0.1 > Utility.RandomDouble())
                     {
-                        item = HolidaySettings.RandomTreat;
+                        item = HalloweenSettings.RandomTreat;
                     }
                     else
                     {
@@ -76,7 +74,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(NextUse);
         }
@@ -93,7 +91,7 @@ namespace Server.Items
     [Flipable(0x1E90, 0x1E91)]
     public class RancidReindeerMeat : Item
     {
-        public override int LabelNumber { get { return 1157634; } } // Rancid Reindeer Meat
+        public override int LabelNumber => 1157634;  // Rancid Reindeer Meat
 
         [Constructable]
         public RancidReindeerMeat()
@@ -111,14 +109,14 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Server.Network.MessageType.Regular, 0, 1157635, m.NetState); // *It smells terrible!*
+                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157635, m.NetState); // *It smells terrible!*
             }
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -131,7 +129,7 @@ namespace Server.Items
     [Flipable(0x9DC3, 0x9DC4)]
     public class GlassyCandyCane : Item
     {
-        public override int LabelNumber { get { return 1157636; } } // Glass Candy Cane
+        public override int LabelNumber => 1157636;  // Glass Candy Cane
 
         [Constructable]
         public GlassyCandyCane()
@@ -148,7 +146,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -175,7 +173,7 @@ namespace Server.Items
             list.Add(1157637, _Name); // The Severed Ears of an Elf Named ~1_NAME~
         }
 
-        private string[] _Names =
+        private readonly string[] _Names =
         {
             "Alabaster Snowball", "Pepper Minstix", "Wunorse Openslae", "Sugarplum Mary"
         };
@@ -185,7 +183,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Server.Network.MessageType.Regular, 0, 1157638, m.NetState); // *You hear the faint jingle of cheery bells...*
+                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157638, m.NetState); // *You hear the faint jingle of cheery bells...*
             }
         }
 
@@ -197,7 +195,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(_Name);
         }
@@ -213,7 +211,7 @@ namespace Server.Items
 
     public class SuspiciousGiftBox : Container
     {
-        public override int LabelNumber { get { return 1157639; } } // Suspicious Gift Box
+        public override int LabelNumber => 1157639;  // Suspicious Gift Box
 
         [Constructable]
         public SuspiciousGiftBox()
@@ -226,7 +224,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Server.Network.MessageType.Regular, 0, 1157640, m.NetState); // Uh oh...
+                PrivateOverheadMessage(Network.MessageType.Regular, 0, 1157640, m.NetState); // Uh oh...
             }
         }
 
@@ -238,7 +236,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -251,7 +249,7 @@ namespace Server.Items
     [Flipable(0x48E2, 0x48E3)]
     public class InsultingDoll : Item
     {
-        public override int LabelNumber { get { return 1157641; } } // Insulting Doll
+        public override int LabelNumber => 1157641;  // Insulting Doll
 
         [Constructable]
         public InsultingDoll()
@@ -264,7 +262,7 @@ namespace Server.Items
         {
             if (IsChildOf(m.Backpack))
             {
-                PrivateOverheadMessage(Server.Network.MessageType.Regular, 0, Utility.RandomMinMax(1157642, 1157646), m.NetState);
+                PrivateOverheadMessage(Network.MessageType.Regular, 0, Utility.RandomMinMax(1157642, 1157646), m.NetState);
             }
         }
 
@@ -276,7 +274,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -288,7 +286,7 @@ namespace Server.Items
 
     public class SpikedEggnog : Item
     {
-        public override int LabelNumber { get { return 1157647; } } // Spiked Egg Nog
+        public override int LabelNumber => 1157647;  // Spiked Egg Nog
 
         [Constructable]
         public SpikedEggnog()
@@ -305,7 +303,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

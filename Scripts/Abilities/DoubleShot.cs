@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     /// <summary>
@@ -7,17 +5,7 @@ namespace Server.Items
     /// </summary>
     public class DoubleShot : WeaponAbility
     {
-        public DoubleShot()
-        {
-        }
-
-        public override int BaseMana
-        {
-            get
-            {
-                return Core.TOL ? 30 : 35;
-            }
-        }
+        public override int BaseMana => 30;
 
         public override bool OnBeforeDamage(Mobile attacker, Mobile defender)
         {
@@ -32,6 +20,23 @@ namespace Server.Items
         public override SkillName GetSecondarySkill(Mobile from)
         {
             return from.Skills[SkillName.Ninjitsu].Base > from.Skills[SkillName.Bushido].Base ? SkillName.Ninjitsu : SkillName.Bushido;
+        }
+
+        public override double GetRequiredSecondarySkill(Mobile from)
+        {
+            if (from.Weapon is BaseWeapon weapon)
+            {
+                if (weapon.PrimaryAbility == this)
+                {
+                    return 30.0;
+                }
+                else if (weapon.SecondaryAbility == this)
+                {
+                    return 50.0;
+                }
+            }
+
+            return 200.0;
         }
 
         public override void OnHit(Mobile attacker, Mobile defender, int damage)

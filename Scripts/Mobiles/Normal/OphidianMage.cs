@@ -1,10 +1,8 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
 {
     [CorpseName("an ophidian corpse")]
-    [TypeAlias("Server.Mobiles.OphidianShaman")]
     public class OphidianMage : BaseCreature
     {
         private static readonly string[] m_Names = new string[]
@@ -16,44 +14,34 @@ namespace Server.Mobiles
         public OphidianMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            this.Name = m_Names[Utility.Random(m_Names.Length)];
-            this.Body = 85;
-            this.BaseSoundID = 639;
+            Name = m_Names[Utility.Random(m_Names.Length)];
+            Body = 85;
+            BaseSoundID = 639;
 
-            this.SetStr(181, 205);
-            this.SetDex(191, 215);
-            this.SetInt(96, 120);
+            SetStr(181, 205);
+            SetDex(191, 215);
+            SetInt(96, 120);
 
-            this.SetHits(109, 123);
+            SetHits(109, 123);
 
-            this.SetDamage(5, 10);
+            SetDamage(5, 10);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 25, 35);
-            this.SetResistance(ResistanceType.Fire, 30, 40);
-            this.SetResistance(ResistanceType.Cold, 35, 45);
-            this.SetResistance(ResistanceType.Poison, 40, 50);
-            this.SetResistance(ResistanceType.Energy, 35, 45);
+            SetResistance(ResistanceType.Physical, 25, 35);
+            SetResistance(ResistanceType.Fire, 30, 40);
+            SetResistance(ResistanceType.Cold, 35, 45);
+            SetResistance(ResistanceType.Poison, 40, 50);
+            SetResistance(ResistanceType.Energy, 35, 45);
 
-            this.SetSkill(SkillName.EvalInt, 85.1, 100.0);
-            this.SetSkill(SkillName.Magery, 85.1, 100.0);
-            this.SetSkill(SkillName.MagicResist, 75.0, 97.5);
-            this.SetSkill(SkillName.Tactics, 65.0, 87.5);
-            this.SetSkill(SkillName.Wrestling, 20.2, 60.0);
+            SetSkill(SkillName.EvalInt, 85.1, 100.0);
+            SetSkill(SkillName.Magery, 85.1, 100.0);
+            SetSkill(SkillName.MagicResist, 75.0, 97.5);
+            SetSkill(SkillName.Tactics, 65.0, 87.5);
+            SetSkill(SkillName.Wrestling, 20.2, 60.0);
 
-            this.Fame = 4000;
-            this.Karma = -4000;
-
-            this.VirtualArmor = 30;
-
-            this.PackReg(10);
-
-			switch (Utility.Random(6))
-            {
-                case 0: PackItem(new PainSpikeScroll()); break;
-			}
-
+            Fame = 4000;
+            Karma = -4000;
         }
 
         public OphidianMage(Serial serial)
@@ -61,42 +49,25 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override int Meat => 1;
+        public override int TreasureMapLevel => 2;
 
-        public override TribeType Tribe { get { return TribeType.Ophidian; } }
+        public override TribeType Tribe => TribeType.Ophidian;
 
-        public override OppositionGroup OppositionGroup
-        {
-            get
-            {
-                return OppositionGroup.TerathansAndOphidians;
-            }
-        }
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.Average);
-            this.AddLoot(LootPack.LowScrolls);
-            this.AddLoot(LootPack.MedScrolls);
-            this.AddLoot(LootPack.Potions);
+            AddLoot(LootPack.Average);
+            AddLoot(LootPack.LowScrolls);
+            AddLoot(LootPack.MedScrolls);
+            AddLoot(LootPack.Potions);
+            AddLoot(LootPack.MageryRegs, 10);
+            AddLoot(LootPack.LootItem<PainSpikeScroll>(16.7));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

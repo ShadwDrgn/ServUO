@@ -1,7 +1,6 @@
+using Server.ContextMenus;
 using System;
 using System.Collections.Generic;
-using CustomsFramework;
-using Server.ContextMenus;
 
 namespace Server.Items
 {
@@ -103,7 +102,7 @@ namespace Server.Items
                 else
                 {
                     base.GetContextMenuEntries(from, list);
-                    StaffOrb.GetContextMenuEntries(from, this, list);
+                    GetContextMenuEntries(from, this, list);
                 }
             }
         }
@@ -160,7 +159,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)3); // version
+            writer.Write(3); // version
 
             // version 3
             writer.Write(m_AutoRes);
@@ -178,7 +177,7 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
-            switch ( version )
+            switch (version)
             {
                 case 3:
                     {
@@ -203,7 +202,7 @@ namespace Server.Items
         private void SwitchAccessLevels(Mobile from)
         {
             // check current access level
-            if (Utilities.IsPlayer(from))
+            if (from.IsPlayer())
             {
                 // return to staff status
                 from.AccessLevel = m_StaffLevel;

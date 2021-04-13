@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -49,23 +48,13 @@ namespace Server.Mobiles
         {
         }
 
-        public override int DragonBlood { get { return 6; } }
+        public override int DragonBlood => 6;
 
-        public override int Meat
-        {
-            get { return 1; }
-        }
+        public override int Meat => 1;
 
-        //public override int DragonBlood{ get{ return 6; } }
-        public override int Hides
-        {
-            get { return 12; }
-        }
+        public override int Hides => 12;
 
-        public override HideType HideType
-        {
-            get { return HideType.Spined; }
-        }
+        public override HideType HideType => HideType.Spined;
 
         public override void GenerateLoot()
         {
@@ -75,7 +64,7 @@ namespace Server.Mobiles
         public override void OnDeath(Container c)
         {
             base.OnDeath(c);
-            
+
             if (!Controlled && Utility.RandomDouble() <= 0.005)
             {
                 c.DropItem(new StoneSlithClaw());
@@ -97,8 +86,8 @@ namespace Server.Mobiles
                         c.DropItem(new TatteredAncientScroll());
                         break;
                 }
-            }        
-        }     
+            }
+        }
 
         public override void Serialize(GenericWriter writer)
         {
@@ -109,13 +98,7 @@ namespace Server.Mobiles
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            var version = reader.ReadInt();
-
-            if (version == 0)
-            {
-                SetSpecialAbility(SpecialAbility.GraspingClaw);
-                SetWeaponAbility(WeaponAbility.BleedAttack);
-            }
+            int version = reader.ReadInt();
         }
     }
 }

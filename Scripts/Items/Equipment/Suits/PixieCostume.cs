@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class PixieCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "pixie"; } }
+    public class PixieCostume : BaseCostume
+    {
+        public override string CreatureName => "pixie";
 
         [Constructable]
-		public PixieCostume() : base( )
-		{
-            this.CostumeBody = 128;
-		}
-		
-		public override int LabelNumber
+        public PixieCostume() : base()
         {
-            get
-            {
-                return 1114236;
-            }
-        }// pixie costume
+            CostumeBody = 128;
+        }
 
-		public PixieCostume( Serial serial ) : base( serial )
-		{
-		}
+        public override int LabelNumber => 1114236;// pixie costume
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public PixieCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

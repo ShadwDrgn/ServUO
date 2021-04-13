@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using Server.Engines.Craft;
 using Server.Engines.Plants;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
@@ -7,7 +6,8 @@ using Server.Engines.Quests.Matriarch;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using Server.Engines.Craft;
+using System;
+using System.Collections;
 
 namespace Server.Items
 {
@@ -38,33 +38,15 @@ namespace Server.Items
     [TypeAlias("Server.Items.BottleAle", "Server.Items.BottleLiquor", "Server.Items.BottleWine")]
     public class BeverageBottle : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1042959;
-            }
-        }// a bottle of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 5;
-            }
-        }
-        public override bool Fillable
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override int BaseLabelNumber => 1042959;// a bottle of Ale
+        public override int MaxQuantity => 5;
+        public override bool Fillable => false;
 
         public override int ComputeItemID()
         {
             if (!IsEmpty)
             {
-                switch( Content )
+                switch (Content)
                 {
                     case BeverageType.Ale:
                         return 0x99F;
@@ -100,7 +82,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -109,7 +91,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch( version )
+            switch (version)
             {
                 case 0:
                     {
@@ -139,29 +121,46 @@ namespace Server.Items
         }
     }
 
+    public class Shochu : BaseBeverage
+    {
+        public override int LabelNumber => 1075497; // Shochu
+        public override int MaxQuantity => 5;
+
+        [Constructable]
+        public Shochu()
+            : base(0x1956)
+        {
+            Hue = 700;
+            LootType = LootType.Blessed;
+        }
+
+        public override int ComputeItemID()
+        {
+            return 0x1956;
+        }
+
+        public Shochu(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(0); // version
+        }
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            reader.ReadInt();
+        }
+    }
+
     public class Jug : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1042965;
-            }
-        }// a jug of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 10;
-            }
-        }
-        public override bool Fillable
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override int BaseLabelNumber => 1042965;// a jug of Ale
+        public override int MaxQuantity => 10;
+        public override bool Fillable => false;
 
         public override int ComputeItemID()
         {
@@ -187,7 +186,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -222,7 +221,7 @@ namespace Server.Items
         {
             if (Quantity > 0 && Content == BeverageType.HotCocoa)
             {
-                from.PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
+                from.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
                 Pour_OnTarget(from, from);
             }
             else
@@ -239,7 +238,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -273,7 +272,7 @@ namespace Server.Items
         {
             if (Quantity > 0 && Content == BeverageType.GreenTea)
             {
-                from.PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
+                from.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
                 Pour_OnTarget(from, from);
             }
             else
@@ -290,7 +289,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -324,8 +323,8 @@ namespace Server.Items
         {
             if (Quantity > 0 && Content == BeverageType.Coffee)
             {
-                from.PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
-                Pour_OnTarget(from, from);                
+                from.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1155739); // *You sip from the mug*
+                Pour_OnTarget(from, from);
             }
             else
             {
@@ -341,7 +340,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -353,20 +352,8 @@ namespace Server.Items
 
     public class CeramicMug : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1042982;
-            }
-        }// a ceramic mug of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int BaseLabelNumber => 1042982;// a ceramic mug of Ale
+        public override int MaxQuantity => 1;
 
         public override int ComputeItemID()
         {
@@ -400,7 +387,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -413,20 +400,8 @@ namespace Server.Items
 
     public class PewterMug : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1042994;
-            }
-        }// a pewter mug with Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int BaseLabelNumber => 1042994;// a pewter mug with Ale
+        public override int MaxQuantity => 1;
 
         public override int ComputeItemID()
         {
@@ -458,7 +433,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -471,20 +446,8 @@ namespace Server.Items
 
     public class Goblet : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1043000;
-            }
-        }// a goblet of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int BaseLabelNumber => 1043000;// a goblet of Ale
+        public override int MaxQuantity => 1;
 
         public override int ComputeItemID()
         {
@@ -516,7 +479,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -531,34 +494,16 @@ namespace Server.Items
         "Server.Items.GlassMilk", "Server.Items.GlassWine", "Server.Items.GlassWater")]
     public class GlassMug : BaseBeverage
     {
-        public override int EmptyLabelNumber
-        {
-            get
-            {
-                return 1022456;
-            }
-        }// mug
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1042976;
-            }
-        }// a mug of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return 5;
-            }
-        }
+        public override int EmptyLabelNumber => 1022456;// mug
+        public override int BaseLabelNumber => 1042976;// a mug of Ale
+        public override int MaxQuantity => 5;
 
         public override int ComputeItemID()
         {
             if (IsEmpty)
                 return (ItemID >= 0x1F81 && ItemID <= 0x1F84 ? ItemID : 0x1F81);
 
-            switch( Content )
+            switch (Content)
             {
                 case BeverageType.Ale:
                     return (ItemID == 0x9EF ? 0x9EF : 0x9EE);
@@ -599,7 +544,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -608,7 +553,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch( version )
+            switch (version)
             {
                 case 0:
                     {
@@ -658,20 +603,8 @@ namespace Server.Items
         "Server.Items.GlassPitcher")]
     public class Pitcher : BaseBeverage
     {
-        public override int BaseLabelNumber
-        {
-            get
-            {
-                return 1048128;
-            }
-        }// a Pitcher of Ale
-        public override int MaxQuantity
-        {
-            get
-            {
-                return Content == BeverageType.Water ? 5 : 5;
-            }
-        }
+        public override int BaseLabelNumber => 1048128;// a Pitcher of Ale
+        public override int MaxQuantity => 5;
 
         public override int ComputeItemID()
         {
@@ -683,7 +616,7 @@ namespace Server.Items
                 return 0xFF6;
             }
 
-            switch( Content )
+            switch (Content)
             {
                 case BeverageType.Ale:
                     {
@@ -754,19 +687,19 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             if (CheckType("PitcherWater") || CheckType("GlassPitcher"))
-                base.InternalDeserialize(reader, false);
+                InternalDeserialize(reader, false);
             else
-                base.InternalDeserialize(reader, true);
+                InternalDeserialize(reader, true);
 
             int version = reader.ReadInt();
 
-            switch( version )
+            switch (version)
             {
                 case 0:
                     {
@@ -835,7 +768,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ItemQuality Quality { get { return _Quality; } set { _Quality = value; InvalidateProperties(); } }
 
-        public bool PlayerConstructed { get { return _Crafter != null; } }
+        public bool PlayerConstructed => _Crafter != null;
 
         public override int LabelNumber
         {
@@ -850,73 +783,25 @@ namespace Server.Items
             }
         }
 
-        public virtual bool ShowQuantity
-        {
-            get
-            {
-                return (MaxQuantity > 1);
-            }
-        }
-        public virtual bool Fillable
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public virtual bool Pourable
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public virtual bool ShowQuantity => (MaxQuantity > 1);
+        public virtual bool Fillable => true;
+        public virtual bool Pourable => true;
 
-        public virtual int EmptyLabelNumber
-        {
-            get
-            {
-                return base.LabelNumber;
-            }
-        }
-        public virtual int BaseLabelNumber
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public virtual int EmptyLabelNumber => base.LabelNumber;
+        public virtual int BaseLabelNumber => 0;
 
         public abstract int MaxQuantity { get; }
 
         public abstract int ComputeItemID();
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsEmpty
-        {
-            get
-            {
-                return (m_Quantity <= 0);
-            }
-        }
+        public bool IsEmpty => (m_Quantity <= 0);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool ContainsAlchohol
-        {
-            get
-            {
-                return (!IsEmpty && m_Content != BeverageType.Milk && m_Content != BeverageType.Water);
-            }
-        }
+        public bool ContainsAlchohol => (!IsEmpty && m_Content != BeverageType.Milk && m_Content != BeverageType.Water);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsFull
-        {
-            get
-            {
-                return (m_Quantity >= MaxQuantity);
-            }
-        }
+        public bool IsFull => (m_Quantity >= MaxQuantity);
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Poison Poison
@@ -1016,7 +901,7 @@ namespace Server.Items
         {
             if (_Resource > CraftResource.Iron)
             {
-                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), String.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
+                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), string.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
             }
             else
             {
@@ -1063,14 +948,6 @@ namespace Server.Items
             }
 
             return quality;
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            base.OnSingleClick(from);
-
-            if (ShowQuantity)
-                LabelTo(from, GetQuantityDescription());
         }
 
         public virtual bool ValidateUse(Mobile from, bool message)
@@ -1160,6 +1037,11 @@ namespace Server.Items
 
                 if (src == null || src.Quantity <= 0)
                 {
+                    if (item is DecorativeWishingWell dw)
+                    {
+                        dw.CheckWaterSource(from, this);
+                    }
+
                     if (item.ItemID >= 0xB41 && item.ItemID <= 0xB44)
                     {
                         Caddellite.CheckWaterSource(from, this, item);
@@ -1255,7 +1137,7 @@ namespace Server.Items
 
         public static void Initialize()
         {
-            EventSink.Login += new LoginEventHandler(EventSink_Login);
+            EventSink.Login += EventSink_Login;
         }
 
         private static void EventSink_Login(LoginEventArgs e)
@@ -1334,18 +1216,11 @@ namespace Server.Items
                             m_Drunk.Direction = (Direction)Utility.Random(8);
 
                             // heave
-                            if (Core.SA)
-                            {
-                                m_Drunk.Animate(AnimationType.Emote, 0);
-                            }
-                            else
-                            {
-                                m_Drunk.Animate(32, 5, 1, true, false, 0);
-                            }
+                            m_Drunk.Animate(AnimationType.Emote, 0);
                         }
 
                         // *hic*
-                        m_Drunk.PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, 500849);
+                        m_Drunk.PublicOverheadMessage(MessageType.Regular, 0x3B2, 500849);
                     }
 
                     if (m_Drunk.BAC <= 0)
@@ -1426,7 +1301,7 @@ namespace Server.Items
                 {
                     int bac = 0;
 
-                    switch( Content )
+                    switch (Content)
                     {
                         case BeverageType.Ale:
                             bac = 1;
@@ -1460,7 +1335,7 @@ namespace Server.Items
             else if (targ is BaseWaterContainer)
             {
                 BaseWaterContainer bwc = targ as BaseWaterContainer;
-				
+
                 if (Content != BeverageType.Water)
                 {
                     from.SendLocalizedMessage(500842); // Can't pour that in there.
@@ -1470,7 +1345,7 @@ namespace Server.Items
                     from.SendLocalizedMessage(500841); // That has something in it.
                 }
                 else
-                { 
+                {
                     int itNeeds = Math.Min((bwc.MaxQuantity - bwc.Quantity), Quantity);
 
                     if (itNeeds > 0)
@@ -1559,12 +1434,12 @@ namespace Server.Items
                 if (!Fillable || !ValidateUse(from, true))
                     return;
 
-                from.BeginTarget(-1, true, TargetFlags.None, new TargetCallback(Fill_OnTarget));
+                from.BeginTarget(-1, true, TargetFlags.None, Fill_OnTarget);
                 SendLocalizedMessageTo(from, 500837); // Fill from what?
             }
             else if (Pourable && ValidateUse(from, true))
             {
-                from.BeginTarget(-1, true, TargetFlags.None, new TargetCallback(Pour_OnTarget));
+                from.BeginTarget(-1, true, TargetFlags.None, Pour_OnTarget);
                 from.SendLocalizedMessage(1010086); // What do you want to use this on?
             }
         }
@@ -1640,18 +1515,18 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)1); // version
+            writer.Write(1); // version
 
-            writer.Write((Mobile)m_Poisoner);
+            writer.Write(m_Poisoner);
 
             Poison.Serialize(m_Poison, writer);
             writer.Write((int)m_Content);
-            writer.Write((int)m_Quantity);
+            writer.Write(m_Quantity);
         }
 
         protected bool CheckType(string name)
         {
-            return (World.LoadingType == String.Format("Server.Items.{0}", name));
+            return (World.LoadingType == string.Format("Server.Items.{0}", name));
         }
 
         public override void Deserialize(GenericReader reader)
@@ -1668,7 +1543,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch( version )
+            switch (version)
             {
                 case 1:
                     {

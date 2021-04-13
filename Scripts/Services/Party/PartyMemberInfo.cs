@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Engines.PartySystem
 {
     public class PartyMemberInfo
@@ -8,26 +6,20 @@ namespace Server.Engines.PartySystem
         private bool m_CanLoot;
         public PartyMemberInfo(Mobile m)
         {
-            this.m_Mobile = m;
-            this.m_CanLoot = !Core.ML;
+            m_Mobile = m;
+            m_CanLoot = false;
         }
 
-        public Mobile Mobile
-        {
-            get
-            {
-                return this.m_Mobile;
-            }
-        }
+        public Mobile Mobile => m_Mobile;
         public bool CanLoot
         {
             get
             {
-                return this.m_CanLoot;
+                return m_CanLoot;
             }
             set
             {
-                this.m_CanLoot = value;
+                m_CanLoot = value;
             }
         }
     }

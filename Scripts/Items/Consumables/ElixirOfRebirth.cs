@@ -1,5 +1,4 @@
-﻿using Server;
-using Server.Mobiles;
+﻿using Server.Mobiles;
 using Server.Targeting;
 
 namespace Server.Items
@@ -9,11 +8,11 @@ namespace Server.Items
         [Constructable]
         public ElixirOfRebirth() : base(0x24E2)
         {
-            this.Hue = 0x48E;
+            Hue = 0x48E;
         }
 
-        public override int LabelNumber { get { return 1112762; } } // elixir of rebirth
-        
+        public override int LabelNumber => 1112762;  // elixir of rebirth
+
         public override void OnDoubleClick(Mobile from)
         {
             if (!IsChildOf(from.Backpack))
@@ -24,7 +23,7 @@ namespace Server.Items
                 from.SendLocalizedMessage(1112763); // Which pet do you wish to revive?
             }
         }
-        
+
         private class ResurrectTarget : Target
         {
             private readonly ElixirOfRebirth m_Potion;
@@ -34,12 +33,12 @@ namespace Server.Items
                 m_Potion = potion;
             }
 
-            public ElixirOfRebirth Potion { get { return m_Potion; } }
+            public ElixirOfRebirth Potion => m_Potion;
 
             protected override void OnTarget(Mobile from, object targeted)
             {
                 if (m_Potion.Deleted)
-                    return;                
+                    return;
 
                 if (!m_Potion.IsChildOf(from.Backpack))
                 {

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     [Flipable]
@@ -21,17 +19,12 @@ namespace Server.Items
         {
             m_Name = name;
             Hue = Utility.RandomList(m_Hues);
-            Fill(level);
+            Fill(level + 1);
         }
 
         public ParagonChest(Serial serial)
             : base(serial)
         {
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, 1063449, m_Name);
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -43,18 +36,18 @@ namespace Server.Items
 
         public void Flip()
         {
-            switch ( ItemID )
+            switch (ItemID)
             {
-                case 0x9AB :
+                case 0x9AB:
                     ItemID = 0xE7C;
                     break;
-                case 0xE7C :
+                case 0xE7C:
                     ItemID = 0x9AB;
                     break;
-                case 0xE40 :
+                case 0xE40:
                     ItemID = 0xE41;
                     break;
-                case 0xE41 :
+                case 0xE41:
                     ItemID = 0xE40;
                     break;
             }
@@ -64,7 +57,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
             writer.Write(m_Name);
         }
@@ -121,7 +114,7 @@ namespace Server.Items
             TrapLevel = level;
             Locked = true;
 
-            switch ( level )
+            switch (level)
             {
                 case 1:
                     RequiredSkill = 36;
@@ -153,17 +146,11 @@ namespace Server.Items
 
             for (int i = 0; i < level * 2; ++i)
             {
-                Item item;
+                Item item = Loot.RandomArmorOrShieldOrWeaponOrJewelry();
 
-                if (Core.AOS)
-                    item = Loot.RandomArmorOrShieldOrWeaponOrJewelry();
-                else
-                    item = Loot.RandomArmorOrShieldOrWeapon();
-
-                if (item != null && Core.HS && RandomItemGenerator.Enabled)
+                if (item != null && RandomItemGenerator.Enabled)
                 {
-                    int min, max;
-                    TreasureMapChest.GetRandomItemStat(out min, out max);
+                    TreasureMapChest.GetRandomItemStat(out int min, out int max);
 
                     RunicReforging.GenerateRandomItem(item, 0, min, max);
 
@@ -175,21 +162,12 @@ namespace Server.Items
                 {
                     BaseWeapon weapon = (BaseWeapon)item;
 
-                    if (Core.AOS)
-                    {
-                        int attributeCount;
-                        int min, max;
+                    int attributeCount;
+                    int min, max;
 
-                        GetRandomAOSStats(out attributeCount, out min, out max);
+                    GetRandomAOSStats(out attributeCount, out min, out max);
 
-                        BaseRunicTool.ApplyAttributesTo(weapon, attributeCount, min, max);
-                    }
-                    else
-                    {
-                        weapon.DamageLevel = (WeaponDamageLevel)Utility.Random(6);
-                        weapon.AccuracyLevel = (WeaponAccuracyLevel)Utility.Random(6);
-                        weapon.DurabilityLevel = (WeaponDurabilityLevel)Utility.Random(6);
-                    }
+                    BaseRunicTool.ApplyAttributesTo(weapon, attributeCount, min, max);
 
                     DropItem(item);
                 }
@@ -197,20 +175,12 @@ namespace Server.Items
                 {
                     BaseArmor armor = (BaseArmor)item;
 
-                    if (Core.AOS)
-                    {
-                        int attributeCount;
-                        int min, max;
+                    int attributeCount;
+                    int min, max;
 
-                        GetRandomAOSStats(out attributeCount, out min, out max);
+                    GetRandomAOSStats(out attributeCount, out min, out max);
 
-                        BaseRunicTool.ApplyAttributesTo(armor, attributeCount, min, max);
-                    }
-                    else
-                    {
-                        armor.ProtectionLevel = (ArmorProtectionLevel)Utility.Random(6);
-                        armor.Durability = (ArmorDurabilityLevel)Utility.Random(6);
-                    }
+                    BaseRunicTool.ApplyAttributesTo(armor, attributeCount, min, max);
 
                     DropItem(item);
                 }
@@ -218,15 +188,12 @@ namespace Server.Items
                 {
                     BaseHat hat = (BaseHat)item;
 
-                    if (Core.AOS)
-                    {
-                        int attributeCount;
-                        int min, max;
+                    int attributeCount;
+                    int min, max;
 
-                        GetRandomAOSStats(out attributeCount, out min, out max);
+                    GetRandomAOSStats(out attributeCount, out min, out max);
 
-                        BaseRunicTool.ApplyAttributesTo(hat, attributeCount, min, max);
-                    }
+                    BaseRunicTool.ApplyAttributesTo(hat, attributeCount, min, max);
 
                     DropItem(item);
                 }
@@ -256,7 +223,7 @@ namespace Server.Items
                 DropItem(item);
             }
 
-            DropItem(new TreasureMap(TreasureMapInfo.ConvertLevel(level + 1), (Siege.SiegeShard ?  Map.Felucca : Utility.RandomBool() ? Map.Felucca : Map.Trammel)));
+            DropItem(new TreasureMap(TreasureMapInfo.ConvertLevel(level + 1), (Siege.SiegeShard ? Map.Felucca : Utility.RandomBool() ? Map.Felucca : Map.Trammel)));
         }
     }
 }

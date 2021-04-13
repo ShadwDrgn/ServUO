@@ -1,15 +1,11 @@
-using System;
-using Server;
-using System.Collections.Generic;
-using Server.Mobiles;
-using Server.Items;
 using Server.Gumps;
+using Server.Mobiles;
 
 namespace Server.Engines.VvV
 {
-	public class ForgedRoyalPardon : Item
-	{
-        public override int LabelNumber { get { return 1155524; } } // Forged Royal Pardon
+    public class ForgedRoyalPardon : Item
+    {
+        public override int LabelNumber => 1155524;  // Forged Royal Pardon
 
         [Constructable]
         public ForgedRoyalPardon()
@@ -28,7 +24,7 @@ namespace Server.Engines.VvV
                     {
                         m.SendMessage("You have no use for this item.");
                     }
-                    else if (Server.Spells.SpellHelper.CheckCombat(m))
+                    else if (Spells.SpellHelper.CheckCombat(m))
                     {
                         m.SendLocalizedMessage(1116588); //You cannot use a forged pardon while in combat.
                     }
@@ -66,19 +62,19 @@ namespace Server.Engines.VvV
 
         public ForgedRoyalPardon(Serial serial)
             : base(serial)
-		{
-		}
-		
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-			writer.Write(0);
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-			int version = reader.ReadInt();
-		}
-	}
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
 }

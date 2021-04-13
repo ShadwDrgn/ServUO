@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     [TypeAlias("Server.Items.Lollipop")]
     public class Lollipops : CandyCane
@@ -15,7 +13,7 @@ namespace Server.Items
         public Lollipops(int amount)
             : base(0x468D + Utility.Random(3))
         {
-            this.Stackable = true;
+            Stackable = true;
         }
 
         public Lollipops(Serial serial)
@@ -27,7 +25,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

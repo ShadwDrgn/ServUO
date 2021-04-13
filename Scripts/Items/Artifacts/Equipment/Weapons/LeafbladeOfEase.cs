@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class LeafbladeOfEase : Leafblade
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public LeafbladeOfEase()
         {
@@ -16,13 +14,7 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1073524;
-            }
-        }// leafblade of ease
+        public override int LabelNumber => 1073524;// leafblade of ease
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

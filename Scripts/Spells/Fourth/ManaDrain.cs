@@ -1,6 +1,6 @@
+using Server.Targeting;
 using System;
 using System.Collections.Generic;
-using Server.Targeting;
 
 namespace Server.Spells.Fourth
 {
@@ -19,74 +19,53 @@ namespace Server.Spells.Fourth
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.Fourth;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.Fourth;
         public override void OnCast()
         {
-            this.Caster.Target = new InternalTarget(this);
+            Caster.Target = new InternalTarget(this);
         }
 
         public void Target(Mobile m)
         {
-            if (!this.Caster.CanSee(m))
+            if (!Caster.CanSee(m))
             {
-                this.Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (this.CheckHSequence(m))
+            else if (CheckHSequence(m))
             {
-                SpellHelper.Turn(this.Caster, m);
+                SpellHelper.Turn(Caster, m);
 
-                SpellHelper.CheckReflect((int)this.Circle, this.Caster, ref m);
+                SpellHelper.CheckReflect(this, Caster, ref m);
 
                 if (m.Spell != null)
                     m.Spell.OnCasterHurt();
 
                 m.Paralyzed = false;
 
-                if (Core.AOS)
+                int toDrain = 40 + (int)(GetDamageSkill(Caster) - GetResistSkill(m));
+
+                if (toDrain < 0)
+                    toDrain = 0;
+                else if (toDrain > m.Mana)
+                    toDrain = m.Mana;
+
+                if (m_Table.ContainsKey(m))
+                    toDrain = 0;
+
+                m.FixedParticles(0x3789, 10, 25, 5032, EffectLayer.Head);
+                m.PlaySound(0x1F8);
+
+                if (toDrain > 0)
                 {
-                    int toDrain = 40 + (int)(this.GetDamageSkill(this.Caster) - this.GetResistSkill(m));
+                    m.Mana -= toDrain;
 
-                    if (toDrain < 0)
-                        toDrain = 0;
-                    else if (toDrain > m.Mana)
-                        toDrain = m.Mana;
-
-                    if (m_Table.ContainsKey(m))
-                        toDrain = 0;
-
-                    m.FixedParticles(0x3789, 10, 25, 5032, EffectLayer.Head);
-                    m.PlaySound(0x1F8);
-
-                    if (toDrain > 0)
-                    {
-                        m.Mana -= toDrain;
-
-                        m_Table[m] = Timer.DelayCall(TimeSpan.FromSeconds(5.0), new TimerStateCallback(AosDelay_Callback), new object[] { m, toDrain });
-                    }
-                }
-                else
-                {
-                    if (this.CheckResisted(m))
-                        m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                    else if (m.Mana >= 100)
-                        m.Mana -= Utility.Random(1, 100);
-                    else
-                        m.Mana -= Utility.Random(1, m.Mana);
-
-                    m.FixedParticles(0x374A, 10, 15, 5032, EffectLayer.Head);
-                    m.PlaySound(0x1F8);
+                    m_Table[m] = Timer.DelayCall(TimeSpan.FromSeconds(5.0), new TimerStateCallback(AosDelay_Callback), new object[] { m, toDrain });
                 }
 
-                this.HarmfulSpell(m);
+                HarmfulSpell(m);
             }
 
-            this.FinishSequence();
+            FinishSequence();
         }
 
         public override double GetResistPercent(Mobile target)
@@ -116,20 +95,20 @@ namespace Server.Spells.Fourth
         {
             private readonly ManaDrainSpell m_Owner;
             public InternalTarget(ManaDrainSpell owner)
-                : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
+                : base(10, false, TargetFlags.Harmful)
             {
-                this.m_Owner = owner;
+                m_Owner = owner;
             }
 
             protected override void OnTarget(Mobile from, object o)
             {
                 if (o is Mobile)
-                    this.m_Owner.Target((Mobile)o);
+                    m_Owner.Target((Mobile)o);
             }
 
             protected override void OnTargetFinish(Mobile from)
             {
-                this.m_Owner.FinishSequence();
+                m_Owner.FinishSequence();
             }
         }
     }

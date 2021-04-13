@@ -1,6 +1,6 @@
-using System;
 using Server.Mobiles;
 using Server.Network;
+using System;
 
 namespace Server.Items
 {
@@ -66,13 +66,7 @@ namespace Server.Items
             #endregion
         };
 
-        public static Type[] Creatures
-        {
-            get
-            {
-                return m_Creatures;
-            }
-        }
+        public static Type[] Creatures => m_Creatures;
 
         private Timer m_Timer;
         private DateTime m_NextSpawn;
@@ -80,13 +74,7 @@ namespace Server.Items
         private TimeSpan m_NextSpawnDelay;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime NextSpawn
-        {
-            get
-            {
-                return m_NextSpawn;
-            }
-        }
+        public DateTime NextSpawn => m_NextSpawn;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int SpawnRange
@@ -114,19 +102,13 @@ namespace Server.Items
             }
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1023633;
-            }
-        }// Brazier
+        public override int LabelNumber => 1023633;// Brazier
 
         [Constructable]
         public DeceitBrazier()
             : base(0xE31)
         {
-            Movable = false; 
+            Movable = false;
             Light = LightType.Circle225;
             m_NextSpawn = DateTime.UtcNow;
             m_NextSpawnDelay = TimeSpan.FromMinutes(15.0);
@@ -142,9 +124,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
 
-            writer.Write((int)m_SpawnRange);
+            writer.Write(m_SpawnRange);
             writer.Write(m_NextSpawnDelay);
         }
 
@@ -168,13 +150,7 @@ namespace Server.Items
             PublicOverheadMessage(MessageType.Regular, 0x3B2, 500761);// Heed this warning well, and use this brazier at your own peril.
         }
 
-        public override bool HandlesOnMovement
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool HandlesOnMovement => true;
 
         public override void OnMovement(Mobile m, Point3D oldLocation)
         {
@@ -183,7 +159,7 @@ namespace Server.Items
                 if (Utility.InRange(m.Location, Location, 1) && !Utility.InRange(oldLocation, Location, 1) && m.Player && !(m.IsStaff() || m.Hidden))
                 {
                     if (m_Timer == null || !m_Timer.Running)
-                        m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(2), new TimerCallback(HeedWarning));
+                        m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(2), HeedWarning);
                 }
             }
 
@@ -236,7 +212,7 @@ namespace Server.Items
 
                             DoEffect(spawnLoc, map);
 
-                            Timer.DelayCall(TimeSpan.FromSeconds(1), delegate()
+                            Timer.DelayCall(TimeSpan.FromSeconds(1), delegate ()
                             {
                                 bc.Home = Location;
                                 bc.RangeHome = m_SpawnRange;
@@ -257,8 +233,9 @@ namespace Server.Items
                         PublicOverheadMessage(MessageType.Regular, 0x3B2, 500760); // The brazier fizzes and pops, but nothing seems to happen.
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Diagnostics.ExceptionLogging.LogException(e);
                 }
             }
             else

@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using Server.Multis;
 
 namespace Server.Items
 {
-    [FlipableAttribute(0xE80, 0x9A8)]
+    [Flipable(0xE80, 0x9A8)]
     public class ShipsStrongbox : LockableContainer
     {
         [Constructable]
         public ShipsStrongbox()
-            : this (Utility.RandomMinMax(1, 3))
+            : this(Utility.RandomMinMax(1, 3))
         {
         }
 
@@ -57,14 +55,14 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber { get { return 1149959; } }// A ship's strongbox
-        public override int DefaultMaxWeight { get { return 400; } }
+        public override int LabelNumber => 1149959; // A ship's strongbox
+        public override int DefaultMaxWeight => 400;
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

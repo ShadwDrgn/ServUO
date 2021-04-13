@@ -1,42 +1,33 @@
-using System;
-using Server;
-
 namespace Server.Items
 {
-	public class TitanCostume : BaseCostume
-	{
-        public override string CreatureName { get { return "titan"; } }
+    public class TitanCostume : BaseCostume
+    {
+        public override string CreatureName => "titan";
 
         [Constructable]
-		public TitanCostume() : base( )
-		{
-            this.CostumeBody = 76;
-		}
-		
-		public override int LabelNumber
+        public TitanCostume() : base()
         {
-            get
-            {
-                return 1114238;
-            }
-        }// titan costume
+            CostumeBody = 76;
+        }
 
-		public TitanCostume( Serial serial ) : base( serial )
-		{
-		}
+        public override int LabelNumber => 1114238;// titan costume
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public TitanCostume(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write(0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

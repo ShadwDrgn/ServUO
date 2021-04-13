@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -42,12 +40,6 @@ namespace Server.Mobiles
             Fame = 15200;
             Karma = -15200;
 
-            PackReg(3);
-            PackItem(new Necklace());
-
-            if (0.25 > Utility.RandomDouble())
-                PackItem(Engines.Plants.Seed.RandomBonsaiSeed());
-
             SetWeaponAbility(WeaponAbility.ColdWind);
         }
 
@@ -56,27 +48,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool BleedImmune
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override bool CanRummageCorpses
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override int TreasureMapLevel
-        {
-            get
-            {
-                return 4;
-            }
-        }
+        public override bool BleedImmune => true;
+        public override bool CanRummageCorpses => true;
+        public override int TreasureMapLevel => 4;
         public override int GetDeathSound()
         {
             return 0x370;
@@ -86,19 +60,19 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
+            AddLoot(LootPack.MageryRegs, 3);
+            AddLoot(LootPack.BonsaiSeed);
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

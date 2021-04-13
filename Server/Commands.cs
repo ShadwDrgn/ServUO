@@ -16,15 +16,15 @@ namespace Server.Commands
 		private readonly string m_ArgString;
 		private readonly string[] m_Arguments;
 
-		public Mobile Mobile { get { return m_Mobile; } }
+		public Mobile Mobile => m_Mobile;
 
-		public string Command { get { return m_Command; } }
+		public string Command => m_Command;
 
-		public string ArgString { get { return m_ArgString; } }
+		public string ArgString => m_ArgString;
 
-		public string[] Arguments { get { return m_Arguments; } }
+		public string[] Arguments => m_Arguments;
 
-		public int Length { get { return m_Arguments.Length; } }
+		public int Length => m_Arguments.Length;
 
 		public string GetString(int index)
 		{
@@ -91,11 +91,11 @@ namespace Server.Commands
 		private readonly CommandEventHandler m_Handler;
 		private readonly AccessLevel m_AccessLevel;
 
-		public string Command { get { return m_Command; } }
+		public string Command => m_Command;
 
-		public CommandEventHandler Handler { get { return m_Handler; } }
+		public CommandEventHandler Handler => m_Handler;
 
-		public AccessLevel AccessLevel { get { return m_AccessLevel; } }
+		public AccessLevel AccessLevel => m_AccessLevel;
 
 		public CommandEntry(string command, CommandEventHandler handler, AccessLevel accessLevel)
 		{
@@ -115,7 +115,7 @@ namespace Server.Commands
 				return 1;
 			}
 
-			CommandEntry e = obj as CommandEntry;
+			var e = obj as CommandEntry;
 
 			if (e == null)
 			{
@@ -130,7 +130,7 @@ namespace Server.Commands
 	{
 		private static string m_Prefix = "[";
 
-		public static string Prefix { get { return m_Prefix; } set { m_Prefix = value; } }
+		public static string Prefix { get => m_Prefix; set => m_Prefix = value; }
 
 		public static string[] Split(string value)
 		{
@@ -141,7 +141,7 @@ namespace Server.Commands
 
 			while (start < array.Length)
 			{
-				char c = array[start];
+				var c = array[start];
 
 				if (c == '"')
 				{
@@ -195,7 +195,7 @@ namespace Server.Commands
 
 		private static readonly Dictionary<string, CommandEntry> m_Entries;
 
-		public static Dictionary<string, CommandEntry> Entries { get { return m_Entries; } }
+		public static Dictionary<string, CommandEntry> Entries => m_Entries;
 
 		static CommandSystem()
 		{
@@ -209,7 +209,7 @@ namespace Server.Commands
 
 		private static AccessLevel m_BadCommandIngoreLevel = AccessLevel.Player;
 
-		public static AccessLevel BadCommandIgnoreLevel { get { return m_BadCommandIngoreLevel; } set { m_BadCommandIngoreLevel = value; } }
+		public static AccessLevel BadCommandIgnoreLevel { get => m_BadCommandIngoreLevel; set => m_BadCommandIngoreLevel = value; }
 
 		public static bool Handle(Mobile from, string text)
 		{
@@ -225,7 +225,7 @@ namespace Server.Commands
 					text = text.Substring(m_Prefix.Length);
 				}
 
-				int indexOf = text.IndexOf(' ');
+				var indexOf = text.IndexOf(' ');
 
 				string command;
 				string[] args;
@@ -245,16 +245,15 @@ namespace Server.Commands
 					args = new string[0];
 				}
 
-				CommandEntry entry = null;
-				m_Entries.TryGetValue(command, out entry);
+				m_Entries.TryGetValue(command, out var entry);
 
 				if (entry != null)
 				{
-					if (from.AccessLevel >= entry.AccessLevel)
+					if (from == null || from.AccessLevel >= entry.AccessLevel)
 					{
 						if (entry.Handler != null)
 						{
-							CommandEventArgs e = new CommandEventArgs(from, command, argString, args);
+							var e = new CommandEventArgs(from, command, argString, args);
 							entry.Handler(e);
 							EventSink.InvokeCommand(e);
 						}
@@ -269,7 +268,7 @@ namespace Server.Commands
 						from.SendMessage("You do not have access to that command.");
 					}
 				}
-				else
+				else if (from != null)
 				{
 					if (from.AccessLevel <= m_BadCommandIngoreLevel)
 					{

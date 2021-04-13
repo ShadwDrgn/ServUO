@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using Server.Items;
+using System;
 
 namespace Server.Mobiles
 {
@@ -39,26 +38,6 @@ namespace Server.Mobiles
             Fame = 1700;
             Karma = -1700;
 
-            PackItem(new RawFishSteak(3));
-            for (int i = 0; i < 2; i++)
-            {
-                switch ( Utility.Random(6) )
-                {
-                    case 0:
-                        PackItem(new Gears());
-                        break;
-                    case 1:
-                        PackItem(new Hinge());
-                        break;
-                    case 2:
-                        PackItem(new Axle());
-                        break;
-                }
-            }
-
-            if (Core.ML && Utility.RandomDouble() < .33)
-                PackItem(Engines.Plants.Seed.RandomPeculiarSeed(2));
-
             SetSpecialAbility(SpecialAbility.LifeLeech);
         }
 
@@ -66,19 +45,16 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		
-		public override int TreasureMapLevel
-        {
-            get
-            {
-                return 2;
-            }
-        }
+
+        public override int TreasureMapLevel => 2;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.Average);
+            AddLoot(LootPack.LootItem<RawFishSteak>(3, true));
+            AddLoot(LootPack.RandomLootItem(new [] { typeof(Gears), typeof(Hinge), typeof(Axle) }, 50.0, 1));
+            AddLoot(LootPack.PeculiarSeed2);
         }
 
         public override int GetAngerSound()
@@ -111,13 +87,13 @@ namespace Server.Mobiles
             if (from != null && from.Map != null)
             {
                 int amt = 0;
-                Mobile target = this; 
+                Mobile target = this;
                 int rand = Utility.Random(1, 100);
                 if (willKill)
                 {
                     amt = (((rand % 5) >> 2) + 3);
                 }
-                if ((Hits < 100) && (rand < 21)) 
+                if ((Hits < 100) && (rand < 21))
                 {
                     target = (rand % 2) < 1 ? this : from;
                     amt++;
@@ -125,10 +101,10 @@ namespace Server.Mobiles
                 if (amt > 0)
                 {
                     SpillAcid(target, amt);
-                    from.SendLocalizedMessage(1070820); 
+                    from.SendLocalizedMessage(1070820);
+
                     if (Mana > 14)
                         Mana -= 15;
-                    amt ^= amt;
                 }
             }
             base.OnDamage(amount, from, willKill);
@@ -142,7 +118,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

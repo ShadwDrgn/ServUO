@@ -1,15 +1,13 @@
-using System;
-
 namespace Server.Items
 {
-    [FlipableAttribute(0x4037, 0x4038)]
+    [Flipable(0x4037, 0x4038)]
     public class GargishBanner : Item
     {
         [Constructable]
         public GargishBanner()
             : base(0x4037)
         {
-            this.Weight = 10;
+            Weight = 10;
         }
 
         public GargishBanner(Serial serial)
@@ -17,18 +15,13 @@ namespace Server.Items
         {
         }
 
-        public override bool ForceShowProperties
-        {
-            get
-            {
-                return ObjectPropertyList.Enabled;
-            }
-        }
+        public override bool ForceShowProperties => true;
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

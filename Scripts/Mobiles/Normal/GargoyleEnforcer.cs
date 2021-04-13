@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -40,11 +39,6 @@ namespace Server.Mobiles
             Fame = 5000;
             Karma = -5000;
 
-            VirtualArmor = 50;
-
-            if (0.2 > Utility.RandomDouble())
-                PackItem(new GargoylesPickaxe());
-
             SetWeaponAbility(WeaponAbility.WhirlwindAttack);
         }
 
@@ -53,31 +47,20 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
-        {
-            get
-            {
-                return 1;
-            }
-        }
-        public override bool CanFly
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override int Meat => 1;
+        public override bool CanFly => true;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls);
+            AddLoot(LootPack.LootItem<GargoylesPickaxe>(20.0));
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

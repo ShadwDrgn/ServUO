@@ -1,26 +1,23 @@
 using System;
-using Server;
-using Server.Spells;
-using Server.Network;
-using Server.Mobiles;
 
 namespace Server.Spells.SkillMasteries
 {
     public class ShadowSpell : SkillMasterySpell
     {
-        private static SpellInfo m_Info = new SpellInfo(
+        private static readonly SpellInfo m_Info = new SpellInfo(
                 "Shadow", "",
                 -1,
                 9002
             );
 
-        public override double UpKeep { get { return 4; } }
-        public override int RequiredMana { get { return 10; } }
-        public override bool RevealOnTick { get { return false; } }
-        public override bool RevealOnCast { get { return false; } }
+        public override double UpKeep => 4;
+        public override int RequiredMana => 10;
+        public override bool RevealOnTick => false;
+        public override bool RevealOnCast => false;
+        public override bool CheckManaBeforeCast => !HasSpell(Caster, GetType());
 
-        public override SkillName CastSkill { get { return SkillName.Ninjitsu; } }
-        public override SkillName DamageSkill { get { return SkillName.Stealth; } }
+        public override SkillName CastSkill => SkillName.Ninjitsu;
+        public override SkillName DamageSkill => SkillName.Stealth;
 
         public ShadowSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
@@ -29,7 +26,7 @@ namespace Server.Spells.SkillMasteries
 
         public override bool CheckCast()
         {
-            SkillMasterySpell spell = GetSpell(Caster, this.GetType());
+            SkillMasterySpell spell = GetSpell(Caster, GetType());
 
             if (spell != null)
             {
@@ -64,7 +61,7 @@ namespace Server.Spells.SkillMasteries
         {
             ShadowSpell spell = GetSpell(m, typeof(ShadowSpell)) as ShadowSpell;
 
-            if(spell != null)
+            if (spell != null)
                 return ((spell.Caster.Skills[spell.CastSkill].Value + spell.Caster.Skills[spell.DamageSkill].Value + (spell.GetMasteryLevel() * 40)) / 3) / 150;
 
             return 0.0;

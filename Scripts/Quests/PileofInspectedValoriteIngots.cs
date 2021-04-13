@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class PileofInspectedValoriteIngots : Item
@@ -8,9 +6,7 @@ namespace Server.Items
         public PileofInspectedValoriteIngots()
             : base(0x1BEA)
         {
-            this.Name = "Pile of Inspected Valorite Ingots";
-
-            this.Hue = 2219;
+            Hue = CraftResources.GetHue(CraftResource.Valorite);
         }
 
         public PileofInspectedValoriteIngots(Serial serial)
@@ -22,7 +18,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)

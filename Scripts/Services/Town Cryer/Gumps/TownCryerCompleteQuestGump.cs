@@ -1,9 +1,7 @@
-using Server;
-using System;
-using System.Linq;
-using Server.Mobiles;
-using Server.Gumps;
 using Server.Engines.Quests;
+using Server.Gumps;
+using Server.Mobiles;
+using System.Linq;
 
 namespace Server.Services.TownCryer
 {
@@ -27,7 +25,7 @@ namespace Server.Services.TownCryer
             Title = quest.Title;
             Body = quest.Complete;
 
-            var entry = TownCryerSystem.NewsEntries.FirstOrDefault(e => e.QuestType == quest.GetType());
+            TownCryerNewsEntry entry = TownCryerSystem.NewsEntries.FirstOrDefault(e => e.QuestType == quest.GetType());
 
             if (entry != null)
             {
@@ -43,7 +41,7 @@ namespace Server.Services.TownCryer
 
             if (Title is int)
             {
-                AddHtmlLocalized(0, 392, 454, 20, CenterLoc, String.Format("#{0}", (int)Title), 0, false, false);
+                AddHtmlLocalized(0, 392, 454, 20, CenterLoc, string.Format("#{0}", (int)Title), 0, false, false);
             }
             else if (Title is string)
             {

@@ -1,20 +1,20 @@
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
-using Server.Mobiles;
 
 namespace Server.Engines.MiniChamps
 {
     public class MiniChampSpawnInfo
     {
-        private MiniChamp Owner;
+        private readonly MiniChamp Owner;
         public List<Mobile> Creatures;
 
         public Type MonsterType { get; set; }
         public int Killed { get; set; }
         public int Spawned { get; set; }
         public int Required { get; set; }
-        public int MaxSpawned { get { return (Required * 2) - 1; } }
-        public bool Done { get { return Killed >= Required; } }
+        public int MaxSpawned => (Required * 2) - 1;
+        public bool Done => Killed >= Required;
 
         public MiniChampSpawnInfo(MiniChamp controller, MiniChampTypeInfo typeInfo)
         {
@@ -31,7 +31,7 @@ namespace Server.Engines.MiniChamps
         public bool Slice()
         {
             bool killed = false;
-            var list = new List<Mobile>(Creatures);
+            List<Mobile> list = new List<Mobile>(Creatures);
 
             for (int i = 0; i < list.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace Server.Engines.MiniChamps
 
             ColUtility.Free(list);
             return killed;
-        }        
+        }
 
         public bool Respawn()
         {
@@ -80,7 +80,7 @@ namespace Server.Engines.MiniChamps
                 bc.OnBeforeSpawn(loc, map);
                 bc.MoveToWorld(loc, map);
 
-                if ((!(bc is ClockworkScorpion || bc is ClanSSW || bc is ClanRibbonPlagueRat) && 10 >= Utility.Random(100)) || bc is BaseRenowned)
+                if (bc.Fame > Utility.Random(100000) || bc is BaseRenowned)
                 {
                     DropEssence(bc);
                 }
@@ -99,10 +99,7 @@ namespace Server.Engines.MiniChamps
         {
             Type essenceType = MiniChampInfo.GetInfo(Owner.Type).EssenceType;
 
-            Item essence = null;
-
-            try { essence = (Item)Activator.CreateInstance(essenceType); }
-            catch { }
+            Item essence = Loot.Construct(essenceType);
 
             if (essence != null)
             {
@@ -118,7 +115,7 @@ namespace Server.Engines.MiniChamps
 
         public void Serialize(GenericWriter writer)
         {
-            writer.WriteItem<MiniChamp>(Owner);
+            writer.WriteItem(Owner);
             writer.Write(Killed);
             writer.Write(Spawned);
             writer.Write(Required);
@@ -137,5 +134,5 @@ namespace Server.Engines.MiniChamps
             MonsterType = ScriptCompiler.FindTypeByFullName(reader.ReadString());
             Creatures = reader.ReadStrongMobileList();
         }
-    }   
+    }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Server.Items
 {
     public class BagOfSmokeBombs : Bag
@@ -14,7 +12,7 @@ namespace Server.Items
         public BagOfSmokeBombs(int amount)
         {
             for (int i = 0; i < amount; ++i)
-                this.DropItem(new SmokeBomb());
+                DropItem(new SmokeBomb());
         }
 
         public BagOfSmokeBombs(Serial serial)

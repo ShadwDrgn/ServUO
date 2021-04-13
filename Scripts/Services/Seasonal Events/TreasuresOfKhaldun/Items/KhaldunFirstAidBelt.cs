@@ -1,14 +1,13 @@
-using System;
-using System.Linq;
-
 namespace Server.Items
 {
     public class KhaldunFirstAidBelt : FirstAidBelt
     {
+        public override bool IsArtifact => true;
+
         [Constructable]
         public KhaldunFirstAidBelt()
         {
-			LootType = LootType.Blessed;
+            LootType = LootType.Blessed;
             WeightReduction = 50;
             Attributes.RegenHits = 2;
             HealingBonus = 10;
@@ -28,7 +27,7 @@ namespace Server.Items
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            reader.ReadInt();
         }
     }
 }

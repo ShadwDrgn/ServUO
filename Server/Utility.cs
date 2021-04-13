@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using System.Linq;
 #endregion
 
 namespace Server
@@ -82,9 +82,8 @@ namespace Server
 				_ipAddressTable = new Dictionary<IPAddress, IPAddress>();
 			}
 
-			IPAddress interned;
 
-			if (!_ipAddressTable.TryGetValue(ipAddress, out interned))
+			if (!_ipAddressTable.TryGetValue(ipAddress, out var interned))
 			{
 				interned = ipAddress;
 				_ipAddressTable[ipAddress] = interned;
@@ -100,7 +99,7 @@ namespace Server
 
 		public static bool IsValidIP(string text)
 		{
-			bool valid = true;
+			var valid = true;
 
 			IPMatch(text, IPAddress.None, ref valid);
 
@@ -109,7 +108,7 @@ namespace Server
 
 		public static bool IPMatch(string val, IPAddress ip)
 		{
-			bool valid = true;
+			var valid = true;
 
 			return IPMatch(val, ip, ref valid);
 		}
@@ -121,16 +120,16 @@ namespace Server
 				return "";
 			}
 
-			bool hasOpen = (str.IndexOf('<') >= 0);
-			bool hasClose = (str.IndexOf('>') >= 0);
-			bool hasPound = (str.IndexOf('#') >= 0);
+			var hasOpen = str.IndexOf('<') >= 0;
+			var hasClose = str.IndexOf('>') >= 0;
+			var hasPound = str.IndexOf('#') >= 0;
 
 			if (!hasOpen && !hasClose && !hasPound)
 			{
 				return str;
 			}
 
-			StringBuilder sb = new StringBuilder(str);
+			var sb = new StringBuilder(str);
 
 			if (hasOpen)
 			{
@@ -192,20 +191,20 @@ namespace Server
 
 			var bytes = new byte[4];
 			var split = cidr.Split('.');
-			bool cidrBits = false;
-			int cidrLength = 0;
+			var cidrBits = false;
+			var cidrLength = 0;
 
-			for (int i = 0; i < 4; i++)
+			for (var i = 0; i < 4; i++)
 			{
-				int part = 0;
+				var part = 0;
 
-				int partBase = 10;
+				var partBase = 10;
 
-				string pattern = split[i];
+				var pattern = split[i];
 
-				for (int j = 0; j < pattern.Length; j++)
+				for (var j = 0; j < pattern.Length; j++)
 				{
-					char c = pattern[j];
+					var c = pattern[j];
 
 					if (c == 'x' || c == 'X')
 					{
@@ -213,7 +212,7 @@ namespace Server
 					}
 					else if (c >= '0' && c <= '9')
 					{
-						int offset = c - '0';
+						var offset = c - '0';
 
 						if (cidrBits)
 						{
@@ -228,7 +227,7 @@ namespace Server
 					}
 					else if (c >= 'a' && c <= 'f')
 					{
-						int offset = 10 + (c - 'a');
+						var offset = 10 + (c - 'a');
 
 						if (cidrBits)
 						{
@@ -243,7 +242,7 @@ namespace Server
 					}
 					else if (c >= 'A' && c <= 'F')
 					{
-						int offset = 10 + (c - 'A');
+						var offset = 10 + (c - 'A');
 
 						if (cidrBits)
 						{
@@ -275,7 +274,7 @@ namespace Server
 				bytes[i] = (byte)part;
 			}
 
-			uint cidrPrefix = OrderedAddressValue(bytes);
+			var cidrPrefix = OrderedAddressValue(bytes);
 
 			return IPMatchCIDR(cidrPrefix, ip, cidrLength);
 		}
@@ -283,13 +282,13 @@ namespace Server
 		public static bool IPMatchCIDR(IPAddress cidrPrefix, IPAddress ip, int cidrLength)
 		{
 			if (cidrPrefix == null || ip == null || cidrPrefix.AddressFamily == AddressFamily.InterNetworkV6)
-				//Ignore IPv6 for now
+			//Ignore IPv6 for now
 			{
 				return false;
 			}
 
-			uint cidrValue = SwapUnsignedInt((uint)GetLongAddressValue(cidrPrefix));
-			uint ipValue = SwapUnsignedInt((uint)GetLongAddressValue(ip));
+			var cidrValue = SwapUnsignedInt((uint)GetLongAddressValue(cidrPrefix));
+			var ipValue = SwapUnsignedInt((uint)GetLongAddressValue(ip));
 
 			return IPMatchCIDR(cidrValue, ipValue, cidrLength);
 		}
@@ -301,7 +300,7 @@ namespace Server
 				return false;
 			}
 
-			uint ipValue = SwapUnsignedInt((uint)GetLongAddressValue(ip));
+			var ipValue = SwapUnsignedInt((uint)GetLongAddressValue(ip));
 
 			return IPMatchCIDR(cidrPrefixValue, ipValue, cidrLength);
 		}
@@ -313,9 +312,9 @@ namespace Server
 				return cidrPrefixValue == ipValue;
 			}
 
-			uint mask = uint.MaxValue << 32 - cidrLength;
+			var mask = UInt32.MaxValue << 32 - cidrLength;
 
-			return ((cidrPrefixValue & mask) == (ipValue & mask));
+			return (cidrPrefixValue & mask) == (ipValue & mask);
 		}
 
 		private static uint OrderedAddressValue(byte[] bytes)
@@ -325,13 +324,13 @@ namespace Server
 				return 0;
 			}
 
-			return (uint)((((bytes[0] << 0x18) | (bytes[1] << 0x10)) | (bytes[2] << 8)) | bytes[3]) & (0xffffffff);
+			return (uint)((bytes[0] << 0x18) | (bytes[1] << 0x10) | (bytes[2] << 8) | bytes[3]) & (0xffffffff);
 		}
 
 		private static uint SwapUnsignedInt(uint source)
 		{
-			return ((((source & 0x000000FF) << 0x18) | ((source & 0x0000FF00) << 8) | ((source & 0x00FF0000) >> 8) |
-					 ((source & 0xFF000000) >> 0x18)));
+			return ((source & 0x000000FF) << 0x18) | ((source & 0x0000FF00) << 8) | ((source & 0x00FF0000) >> 8) |
+					 ((source & 0xFF000000) >> 0x18);
 		}
 
 		public static bool TryConvertIPv6toIPv4(ref IPAddress address)
@@ -349,7 +348,7 @@ namespace Server
 					return false;
 				}
 
-				for (int i = 0; i < 10; i++)
+				for (var i = 0; i < 10; i++)
 				{
 					if (addr[i] != 0)
 					{
@@ -359,7 +358,7 @@ namespace Server
 
 				var v4Addr = new byte[4];
 
-				for (int i = 0; i < 4; i++)
+				for (var i = 0; i < 4; i++)
 				{
 					v4Addr[i] = addr[12 + i];
 				}
@@ -377,7 +376,7 @@ namespace Server
 
 			var split = val.Split('.');
 
-			for (int i = 0; i < 4; ++i)
+			for (var i = 0; i < 4; ++i)
 			{
 				int lowPart, highPart;
 
@@ -388,7 +387,7 @@ namespace Server
 				}
 				else
 				{
-					string pattern = split[i];
+					var pattern = split[i];
 
 					if (pattern == "*")
 					{
@@ -400,13 +399,13 @@ namespace Server
 						lowPart = 0;
 						highPart = 0;
 
-						bool highOnly = false;
-						int lowBase = 10;
-						int highBase = 10;
+						var highOnly = false;
+						var lowBase = 10;
+						var highBase = 10;
 
-						for (int j = 0; j < pattern.Length; ++j)
+						for (var j = 0; j < pattern.Length; ++j)
 						{
-							char c = pattern[j];
+							var c = pattern[j];
 
 							if (c == '?')
 							{
@@ -431,7 +430,7 @@ namespace Server
 							}
 							else if (c >= '0' && c <= '9')
 							{
-								int offset = c - '0';
+								var offset = c - '0';
 
 								if (!highOnly)
 								{
@@ -444,7 +443,7 @@ namespace Server
 							}
 							else if (c >= 'a' && c <= 'f')
 							{
-								int offset = 10 + (c - 'a');
+								var offset = 10 + (c - 'a');
 
 								if (!highOnly)
 								{
@@ -457,7 +456,7 @@ namespace Server
 							}
 							else if (c >= 'A' && c <= 'F')
 							{
-								int offset = 10 + (c - 'A');
+								var offset = 10 + (c - 'A');
 
 								if (!highOnly)
 								{
@@ -489,7 +488,7 @@ namespace Server
 
 		public static bool IPMatchClassC(IPAddress ip1, IPAddress ip2)
 		{
-			return ((GetAddressValue(ip1) & 0xFFFFFF) == (GetAddressValue(ip2) & 0xFFFFFF));
+			return (GetAddressValue(ip1) & 0xFFFFFF) == (GetAddressValue(ip2) & 0xFFFFFF);
 		}
 
 		public static int InsensitiveCompare(string first, string second)
@@ -505,24 +504,21 @@ namespace Server
 		#region To[Something]
 		public static bool ToBoolean(string value)
 		{
-			bool b;
-			bool.TryParse(value, out b);
+			Boolean.TryParse(value, out var b);
 
 			return b;
 		}
 
 		public static double ToDouble(string value)
 		{
-			double d;
-			double.TryParse(value, out d);
+			Double.TryParse(value, out var d);
 
 			return d;
 		}
 
 		public static TimeSpan ToTimeSpan(string value)
 		{
-			TimeSpan t;
-			TimeSpan.TryParse(value, out t);
+			TimeSpan.TryParse(value, out var t);
 
 			return t;
 		}
@@ -533,27 +529,27 @@ namespace Server
 
 			if (value.StartsWith("0x"))
 			{
-				int.TryParse(value.Substring(2), NumberStyles.HexNumber, null, out i);
+				Int32.TryParse(value.Substring(2), NumberStyles.HexNumber, null, out i);
 			}
 			else
 			{
-				int.TryParse(value, out i);
+				Int32.TryParse(value, out i);
 			}
 
 			return i;
 		}
 
-        public static long ToInt64(string value)
-        {
-            long i;
+		public static long ToInt64(string value)
+		{
+			long i;
 
-            if (value.StartsWith("0x"))
-                long.TryParse(value.Substring(2), NumberStyles.HexNumber, null, out i);
-            else
-                long.TryParse(value, out i);
+			if (value.StartsWith("0x"))
+				Int64.TryParse(value.Substring(2), NumberStyles.HexNumber, null, out i);
+			else
+				Int64.TryParse(value, out i);
 
-            return i;
-        }
+			return i;
+		}
 		#endregion
 
 		#region Get[Something]
@@ -565,8 +561,7 @@ namespace Server
 			}
 			catch
 			{
-				double val;
-				if (double.TryParse(doubleString, out val))
+				if (Double.TryParse(doubleString, out var val))
 				{
 					return val;
 				}
@@ -583,8 +578,7 @@ namespace Server
 			}
 			catch
 			{
-				int val;
-				if (int.TryParse(intString, out val))
+				if (Int32.TryParse(intString, out var val))
 				{
 					return val;
 				}
@@ -601,9 +595,8 @@ namespace Server
 			}
 			catch
 			{
-				DateTime d;
 
-				if (DateTime.TryParse(dateTimeString, out d))
+				if (DateTime.TryParse(dateTimeString, out var d))
 				{
 					return d;
 				}
@@ -620,9 +613,8 @@ namespace Server
 			}
 			catch
 			{
-				DateTimeOffset d;
 
-				if (DateTimeOffset.TryParse(dateTimeOffsetString, out d))
+				if (DateTimeOffset.TryParse(dateTimeOffsetString, out var d))
 				{
 					return d;
 				}
@@ -655,7 +647,7 @@ namespace Server
 				return defaultValue;
 			}
 
-			XmlAttribute attr = node.Attributes[attributeName];
+			var attr = node.Attributes[attributeName];
 
 			if (attr == null)
 			{
@@ -699,18 +691,18 @@ namespace Server
 
 		public static bool InUpdateRange(Point3D p1, Point3D p2)
 		{
-            int range = Core.GlobalUpdateRange;
+			var range = Core.GlobalUpdateRange;
 
-            return (p1.m_X >= (p2.m_X - range)) && (p1.m_X <= (p2.m_X + range)) && (p1.m_Y >= (p2.m_Y - range)) &&
-                   (p1.m_Y <= (p2.m_Y + range));
+			return (p1.m_X >= (p2.m_X - range)) && (p1.m_X <= (p2.m_X + range)) && (p1.m_Y >= (p2.m_Y - range)) &&
+				   (p1.m_Y <= (p2.m_Y + range));
 		}
 
 		public static bool InUpdateRange(Point2D p1, Point2D p2)
 		{
-            int range = Core.GlobalUpdateRange;
+			var range = Core.GlobalUpdateRange;
 
-            return (p1.m_X >= (p2.m_X - range)) && (p1.m_X <= (p2.m_X + range)) && (p1.m_Y >= (p2.m_Y - range)) &&
-                   (p1.m_Y <= (p2.m_Y + range));
+			return (p1.m_X >= (p2.m_X - range)) && (p1.m_X <= (p2.m_X + range)) && (p1.m_Y >= (p2.m_Y - range)) &&
+				   (p1.m_Y <= (p2.m_Y + range));
 		}
 
 		public static bool InUpdateRange(Mobile m, IPoint3D p)
@@ -720,7 +712,7 @@ namespace Server
 
 		public static bool InUpdateRange(Mobile m, IPoint3D p1, IPoint3D p2)
 		{
-			int range = Core.GlobalUpdateRange;
+			var range = Core.GlobalUpdateRange;
 
 			if (m.NetState != null)
 			{
@@ -738,16 +730,16 @@ namespace Server
 			}
 
 			return (p1.X >= (p2.X - range)) && (p1.X <= (p2.X + range)) && (p1.Y >= (p2.Y - range)) && (p1.Y <= (p2.Y + range));
-        }
+		}
 		#endregion
 
 		public static Direction GetDirection(IPoint2D from, IPoint2D to)
 		{
-			int dx = to.X - from.X;
-			int dy = to.Y - from.Y;
+			var dx = to.X - from.X;
+			var dy = to.Y - from.Y;
 
-			int adx = Math.Abs(dx);
-			int ady = Math.Abs(dy);
+			var adx = Math.Abs(dx);
+			var ady = Math.Abs(dy);
 
 			if (adx >= ady * 3)
 			{
@@ -822,11 +814,11 @@ namespace Server
 		}
 
 		#region Random
-        /// <summary>
-        /// Enables or disables floating dice. 
-        /// Floating dice uses a double to obtain a lower average value range.
-        /// Consistent average values for [1,000,000 x 1d6+0] rolls: [Integral: 3.50]  [Floating: 2.25]
-        /// </summary>
+		/// <summary>
+		/// Enables or disables floating dice. 
+		/// Floating dice uses a double to obtain a lower average value range.
+		/// Consistent average values for [1,000,000 x 1d6+0] rolls: [Integral: 3.50]  [Floating: 2.25]
+		/// </summary>
 		public static bool FloatingDice = false;
 
 		//4d6+8 would be: Utility.Dice( 4, 6, 8 )
@@ -841,7 +833,7 @@ namespace Server
 			{
 				double min = numDice, max = min;
 
-				for (int i = 0; i < numDice; ++i)
+				for (var i = 0; i < numDice; ++i)
 				{
 					max += Random(numSides);
 				}
@@ -849,9 +841,9 @@ namespace Server
 				return (int)Math.Round(RandomMinMax(min, max)) + bonus;
 			}
 
-			int total = 0;
+			var total = 0;
 
-			for (int i = 0; i < numDice; ++i)
+			for (var i = 0; i < numDice; ++i)
 			{
 				total += Random(numSides) + 1;
 			}
@@ -867,6 +859,62 @@ namespace Server
 		public static bool RandomBool()
 		{
 			return RandomImpl.NextBool();
+		}
+
+#if MONO
+		public static TEnum RandomEnum<TEnum>() where TEnum : struct, IConvertible            
+#else
+		public static TEnum RandomEnum<TEnum>() where TEnum : Enum
+#endif
+		{
+			if (Enum.GetValues(typeof(TEnum)) is TEnum[] values && values.Length > 0)
+				return RandomList(values);
+
+			return default(TEnum);
+		}
+
+#if MONO
+		public static TEnum RandomMinMax<TEnum>(TEnum min, TEnum max) where TEnum : struct, IConvertible            
+#else
+		public static TEnum RandomMinMax<TEnum>(TEnum min, TEnum max) where TEnum : Enum
+#endif
+		{
+			if (Enum.GetValues(typeof(TEnum)) is TEnum[] values && values.Length > 0)
+			{
+				var curIdx = -1;
+				var minIdx = -1;
+				var maxIdx = -1;
+
+				foreach (var val in values)
+				{
+					++curIdx;
+
+					if (Equals(val, min))
+						minIdx = curIdx;
+					else if (Equals(val, max))
+						maxIdx = curIdx;
+				}
+
+				if (minIdx == 0 && maxIdx == values.Length - 1)
+					return RandomList(values);
+
+				curIdx = -1;
+
+				if (minIdx >= 0)
+				{
+					if (minIdx == maxIdx)
+						curIdx = minIdx;
+					else if (maxIdx > minIdx)
+						curIdx = RandomMinMax(minIdx, maxIdx);
+				}
+
+				if (curIdx >= 0 && curIdx < values.Length)
+					return values[curIdx];
+
+				return RandomList(min, max);
+			}
+
+			return default(TEnum);
 		}
 
 		public static double RandomMinMax(double min, double max)
@@ -889,7 +937,7 @@ namespace Server
 		{
 			if (min > max)
 			{
-				int copy = min;
+				var copy = min;
 				min = max;
 				max = copy;
 			}
@@ -898,7 +946,7 @@ namespace Server
 				return min;
 			}
 
-			return min + RandomImpl.Next((max - min) + 1);
+			return min + RandomImpl.Next(max - min + 1);
 		}
 
 		public static int Random(int from, int count)
@@ -931,66 +979,66 @@ namespace Server
 		{
 			return RandomImpl.NextDouble();
 		}
-        #endregion
+		#endregion
 
-        #region FixValues
-        public static void FixMin(ref int value, int min)
-        {
-            if (value < min)
-                value = min;
-        }
+		#region FixValues
+		public static void FixMin(ref int value, int min)
+		{
+			if (value < min)
+				value = min;
+		}
 
-        public static void FixMin(ref double value, double min)
-        {
-            if (value < min)
-                value = min;
-        }
+		public static void FixMin(ref double value, double min)
+		{
+			if (value < min)
+				value = min;
+		}
 
-        public static void FixMax(ref int value, int max)
-        {
-            if (value > max)
-                value = max;
-        }
+		public static void FixMax(ref int value, int max)
+		{
+			if (value > max)
+				value = max;
+		}
 
-        public static void FixMax(ref double value, double max)
-        {
-            if (value > max)
-                value = max;
-        }
+		public static void FixMax(ref double value, double max)
+		{
+			if (value > max)
+				value = max;
+		}
 
-        public static void FixMinMax(ref int value, int min, int max)
-        {
-            FixMin(ref value, min);
-            FixMax(ref value, max);
-        }
+		public static void FixMinMax(ref int value, int min, int max)
+		{
+			FixMin(ref value, min);
+			FixMax(ref value, max);
+		}
 
-        public static void FixMinMax(ref double value, double min, double max)
-        {
-            FixMin(ref value, min);
-            FixMax(ref value, max);
-        }
-        #endregion
+		public static void FixMinMax(ref double value, double min, double max)
+		{
+			FixMin(ref value, min);
+			FixMax(ref value, max);
+		}
+		#endregion
 
-        #region Random Hues
-        /// <summary>
-        ///     Random pink, blue, green, orange, red or yellow hue
-        /// </summary>
-        public static int RandomNondyedHue()
+		#region Random Hues
+		/// <summary>
+		///     Random pink, blue, green, orange, red or yellow hue
+		/// </summary>
+		public static int RandomNondyedHue()
 		{
 			switch (Random(6))
 			{
 				case 0:
-					return RandomPinkHue();
+				return RandomPinkHue();
 				case 1:
-					return RandomBlueHue();
+				return RandomBlueHue();
 				case 2:
-					return RandomGreenHue();
+				return RandomGreenHue();
 				case 3:
-					return RandomOrangeHue();
+				return RandomOrangeHue();
 				case 4:
-					return RandomRedHue();
+				return RandomRedHue();
 				case 5:
-					return RandomYellowHue();
+				return RandomYellowHue();
 			}
 
 			return 0;
@@ -1202,7 +1250,7 @@ namespace Server
 
 		public static SkillName RandomSkill()
 		{
-			return m_AllSkills[Random(m_AllSkills.Length - (Core.ML ? 0 : Core.SE ? 1 : Core.AOS ? 3 : 6))];
+			return m_AllSkills[Random(m_AllSkills.Length)];
 		}
 
 		public static SkillName RandomCombatSkill()
@@ -1219,21 +1267,21 @@ namespace Server
 		{
 			if (bottom.m_X < top.m_X)
 			{
-				int swap = top.m_X;
+				var swap = top.m_X;
 				top.m_X = bottom.m_X;
 				bottom.m_X = swap;
 			}
 
 			if (bottom.m_Y < top.m_Y)
 			{
-				int swap = top.m_Y;
+				var swap = top.m_Y;
 				top.m_Y = bottom.m_Y;
 				bottom.m_Y = swap;
 			}
 
 			if (bottom.m_Z < top.m_Z)
 			{
-				int swap = top.m_Z;
+				var swap = top.m_Z;
 				top.m_Z = bottom.m_Z;
 				bottom.m_Z = swap;
 			}
@@ -1241,9 +1289,9 @@ namespace Server
 
 		public static ArrayList BuildArrayList(IEnumerable enumerable)
 		{
-			IEnumerator e = enumerable.GetEnumerator();
+			var e = enumerable.GetEnumerator();
 
-			ArrayList list = new ArrayList();
+			var list = new ArrayList();
 
 			while (e.MoveNext())
 			{
@@ -1263,19 +1311,19 @@ namespace Server
 			output.WriteLine("        0  1  2  3  4  5  6  7   8  9  A  B  C  D  E  F");
 			output.WriteLine("       -- -- -- -- -- -- -- --  -- -- -- -- -- -- -- --");
 
-			int byteIndex = 0;
+			var byteIndex = 0;
 
-			int whole = length >> 4;
-			int rem = length & 0xF;
+			var whole = length >> 4;
+			var rem = length & 0xF;
 
-			for (int i = 0; i < whole; ++i, byteIndex += 16)
+			for (var i = 0; i < whole; ++i, byteIndex += 16)
 			{
-				StringBuilder bytes = new StringBuilder(49);
-				StringBuilder chars = new StringBuilder(16);
+				var bytes = new StringBuilder(49);
+				var chars = new StringBuilder(16);
 
-				for (int j = 0; j < 16; ++j)
+				for (var j = 0; j < 16; ++j)
 				{
-					int c = input.ReadByte();
+					var c = input.ReadByte();
 
 					bytes.Append(c.ToString("X2"));
 
@@ -1307,14 +1355,14 @@ namespace Server
 
 			if (rem != 0)
 			{
-				StringBuilder bytes = new StringBuilder(49);
-				StringBuilder chars = new StringBuilder(rem);
+				var bytes = new StringBuilder(49);
+				var chars = new StringBuilder(rem);
 
-				for (int j = 0; j < 16; ++j)
+				for (var j = 0; j < 16; ++j)
 				{
 					if (j < rem)
 					{
-						int c = input.ReadByte();
+						var c = input.ReadByte();
 
 						bytes.Append(c.ToString("X2"));
 
@@ -1377,8 +1425,8 @@ namespace Server
 			}
 		}
 
-        public static void WriteConsoleColor(ConsoleColor color, string str)
-        {
+		public static void WriteConsoleColor(ConsoleColor color, string str)
+		{
 			lock (((ICollection)m_ConsoleColors).SyncRoot)
 			{
 				PushColor(color);
@@ -1398,8 +1446,10 @@ namespace Server
 					Console.ForegroundColor = color;
 				}
 			}
-			catch
-			{ }
+			catch (Exception e)
+			{
+				Diagnostics.ExceptionLogging.LogException(e);
+			}
 		}
 
 		public static void PopColor()
@@ -1411,31 +1461,33 @@ namespace Server
 					Console.ForegroundColor = m_ConsoleColors.Pop();
 				}
 			}
-			catch
-			{ }
+			catch (Exception e)
+			{
+				Diagnostics.ExceptionLogging.LogException(e);
+			}
 		}
 
 		public static bool NumberBetween(double num, int bound1, int bound2, double allowance)
 		{
 			if (bound1 > bound2)
 			{
-				int i = bound1;
+				var i = bound1;
 				bound1 = bound2;
 				bound2 = i;
 			}
 
-			return (num < bound2 + allowance && num > bound1 - allowance);
+			return num < bound2 + allowance && num > bound1 - allowance;
 		}
 
-        public static double GetDistanceToSqrt(Point3D p1, Point3D p2)
-        {
-            int xDelta = p1.X - p2.X;
-            int yDelta = p1.Y - p2.Y;
+		public static double GetDistanceToSqrt(Point3D p1, Point3D p2)
+		{
+			var xDelta = p1.X - p2.X;
+			var yDelta = p1.Y - p2.Y;
 
-            return Math.Sqrt((xDelta * xDelta) + (yDelta * yDelta));
-        }
+			return Math.Sqrt((xDelta * xDelta) + (yDelta * yDelta));
+		}
 
-        public static void AssignRandomHair(Mobile m)
+		public static void AssignRandomHair(Mobile m)
 		{
 			AssignRandomHair(m, true);
 		}
@@ -1479,16 +1531,16 @@ namespace Server
 
 		public static List<TOutput> CastConvertList<TInput, TOutput>(List<TInput> list) where TOutput : TInput
 		{
-			return list.ConvertAll(delegate(TInput value) { return (TOutput)value; });
+			return list.ConvertAll(delegate (TInput value) { return (TOutput)value; });
 		}
 
 		public static List<TOutput> SafeConvertList<TInput, TOutput>(List<TInput> list) where TOutput : class
 		{
 			var output = new List<TOutput>(list.Capacity);
 
-			for (int i = 0; i < list.Count; i++)
+			for (var i = 0; i < list.Count; i++)
 			{
-				TOutput t = list[i] as TOutput;
+				var t = list[i] as TOutput;
 
 				if (t != null)
 				{
@@ -1499,201 +1551,217 @@ namespace Server
 			return output;
 		}
 
-        public static String RemoveHtml(String str)
-        {
-            return str.Replace("<", "").Replace(">", "").Trim();
-        }
+		public static string RemoveHtml(string str)
+		{
+			return str.Replace("<", "").Replace(">", "").Trim();
+		}
 
-        public static bool IsNumeric(String str)
-        {
-            return !Regex.IsMatch(str, "[^0-9]");
-        }
+		public static bool IsNumeric(string str)
+		{
+			return !Regex.IsMatch(str, "[^0-9]");
+		}
 
-        public static bool IsAlpha(String str)
-        {
-            return !Regex.IsMatch(str, "[^a-z]", RegexOptions.IgnoreCase);
-        }
+		public static bool IsAlpha(string str)
+		{
+			return !Regex.IsMatch(str, "[^a-z]", RegexOptions.IgnoreCase);
+		}
 
-        public static bool IsAlphaNumeric(String str)
-        {
-            return !Regex.IsMatch(str, "[^a-z0-9]", RegexOptions.IgnoreCase);
-        }
-    }
+		public static bool IsAlphaNumeric(string str)
+		{
+			return !Regex.IsMatch(str, "[^a-z0-9]", RegexOptions.IgnoreCase);
+		}
+	}
 
-    public static class ColUtility
-    {
-        public static void Free<T>(List<T> l)
-        {
-            if (l == null)
-                return;
+	public static class ColUtility
+	{
+		public static void Free<T>(List<T> l)
+		{
+			if (l == null)
+				return;
 
-            l.Clear();
-            l.TrimExcess();
-        }
+			l.Clear();
+			l.TrimExcess();
+		}
 
-        public static void ForEach<T>(IEnumerable<T> list, Action<T> action)
-        {
-            if (list == null || action == null)
-                return;
+		public static void ForEach<T>(IEnumerable<T> list, Action<T> action)
+		{
+			if (list == null || action == null)
+				return;
 
-            List<T> l = list.ToList();
+			var l = list.ToList();
 
-            foreach (T o in l)
-                action(o);
+			foreach (var o in l)
+				action(o);
 
-            Free(l);
-        }
+			Free(l);
+		}
 
-        public static void ForEach<TKey, TValue>(
-            IDictionary<TKey, TValue> dictionary, Action<KeyValuePair<TKey, TValue>> action)
-        {
-            if (dictionary == null || dictionary.Count == 0 || action == null)
-                return;
+		public static void ForEach<TKey, TValue>(
+			IDictionary<TKey, TValue> dictionary, Action<KeyValuePair<TKey, TValue>> action)
+		{
+			if (dictionary == null || dictionary.Count == 0 || action == null)
+				return;
 
-            List<KeyValuePair<TKey, TValue>> l = dictionary.ToList();
+			var l = dictionary.ToList();
 
-            foreach (KeyValuePair<TKey, TValue> kvp in l)
-                action(kvp);
+			foreach (var kvp in l)
+				action(kvp);
 
-            Free(l);
-        }
+			Free(l);
+		}
 
-        public static void ForEach<TKey, TValue>(IDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
-        {
-            if (dictionary == null || dictionary.Count == 0 || action == null)
-                return;
+		public static void ForEach<TKey, TValue>(IDictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
+		{
+			if (dictionary == null || dictionary.Count == 0 || action == null)
+				return;
 
-            List<KeyValuePair<TKey, TValue>> l = dictionary.ToList();
+			var l = dictionary.ToList();
 
-            foreach (KeyValuePair<TKey, TValue> kvp in l)
-                action(kvp.Key, kvp.Value);
+			foreach (var kvp in l)
+				action(kvp.Key, kvp.Value);
 
-            Free(l);
-        }
+			Free(l);
+		}
 
-        public static void For<T>(IEnumerable<T> list, Action<int, T> action)
-        {
-            if (list == null || action == null)
-                return;
+		public static void For<T>(IEnumerable<T> list, Action<int, T> action)
+		{
+			if (list == null || action == null)
+				return;
 
-            List<T> l = list.ToList();
+			var l = list.ToList();
 
-            for (int i = 0; i < l.Count; i++)
-                action(i, l[i]);
+			for (var i = 0; i < l.Count; i++)
+				action(i, l[i]);
 
-            Free(l);
-        }
+			Free(l);
+		}
 
-        public static void For<TKey, TValue>(IDictionary<TKey, TValue> list, Action<int, TKey, TValue> action)
-        {
-            if (list == null || action == null)
-                return;
+		public static void For<TKey, TValue>(IDictionary<TKey, TValue> list, Action<int, TKey, TValue> action)
+		{
+			if (list == null || action == null)
+				return;
 
-            List<KeyValuePair<TKey, TValue>> l = list.ToList();
+			var l = list.ToList();
 
-            for (int i = 0; i < l.Count; i++)
-                action(i, l[i].Key, l[i].Value);
+			for (var i = 0; i < l.Count; i++)
+				action(i, l[i].Key, l[i].Value);
 
-            Free(l);
-        }
+			Free(l);
+		}
 
-        public static void IterateReverse<T>(this T[] list, Action<T> action)
-        {
-            if (list == null || action == null)
-            {
-                return;
-            }
+		public static void IterateReverse<T>(this T[] list, Action<T> action)
+		{
+			if (list == null || action == null)
+			{
+				return;
+			}
 
-            int i = list.Length;
+			var i = list.Length;
 
-            while (--i >= 0)
-            {
-                if (i < list.Length)
-                {
-                    action(list[i]);
-                }
-            }
-        }
+			while (--i >= 0)
+			{
+				if (i < list.Length)
+				{
+					action(list[i]);
+				}
+			}
+		}
 
-        public static void IterateReverse<T>(this List<T> list, Action<T> action)
-        {
-            if (list == null || action == null)
-            {
-                return;
-            }
+		public static void IterateReverse<T>(this List<T> list, Action<T> action)
+		{
+			if (list == null || action == null)
+			{
+				return;
+			}
 
-            int i = list.Count;
+			var i = list.Count;
 
-            while (--i >= 0)
-            {
-                if (i < list.Count)
-                {
-                    action(list[i]);
-                }
-            }
-        }
+			while (--i >= 0)
+			{
+				if (i < list.Count)
+				{
+					action(list[i]);
+				}
+			}
+		}
 
-        public static void IterateReverse<T>(this IEnumerable<T> list, Action<T> action)
-        {
-            if (list == null || action == null)
-            {
-                return;
-            }
+		public static void IterateReverse<T>(this IEnumerable<T> list, Action<T> action)
+		{
+			if (list == null || action == null)
+			{
+				return;
+			}
 
-            if (list is T[])
-            {
-                IterateReverse((T[])list, action);
-                return;
-            }
+			if (list is T[])
+			{
+				IterateReverse((T[])list, action);
+				return;
+			}
 
-            if (list is List<T>)
-            {
-                IterateReverse((List<T>)list, action);
-                return;
-            }
+			if (list is List<T>)
+			{
+				IterateReverse((List<T>)list, action);
+				return;
+			}
 
-            var toList = list.ToList();
+			var toList = list.ToList();
 
-            foreach (var o in toList)
-            {
-                action(o);
-            }
+			foreach (var o in toList)
+			{
+				action(o);
+			}
 
-            Free(toList);
-        }
+			Free(toList);
+		}
 
-        public static void SafeDelete<T>(List<T> list)
-        {
-            SafeDelete(list, null);
-        }
+		public static void SafeDelete<T>(List<T> list)
+		{
+			SafeDelete(list, null);
+		}
 
-        /// <summary>
-        /// Safely deletes any entities based on predicate from a list that by deleting such entity would cause the collection to be modified.
-        /// ie item.Items or mobile.Items. Omitting the predicate will delete all items in the collection.
-        /// </summary>
-        /// <param name="list"></param>
-        /// <param name="predicate"></param>
-        public static void SafeDelete<T>(List<T> list, Func<T, bool> predicate)
-        {
-            if (list == null)
-            {
-                return;
-            }
+		/// <summary>
+		/// Safely deletes any entities based on predicate from a list that by deleting such entity would cause the collection to be modified.
+		/// ie item.Items or mobile.Items. Omitting the predicate will delete all items in the collection.
+		/// </summary>
+		/// <param name="list"></param>
+		/// <param name="predicate"></param>
+		public static void SafeDelete<T>(List<T> list, Func<T, bool> predicate)
+		{
+			if (list == null)
+			{
+				return;
+			}
 
-            int i = list.Count;
+			var i = list.Count;
 
-            while (--i >= 0)
-            {
-                if (i < list.Count)
-                {
-                    var entity = list[i] as IEntity;
+			while (--i >= 0)
+			{
+				if (i < list.Count)
+				{
+					var entity = list[i] as IEntity;
 
-                    if (entity != null && !entity.Deleted && (predicate == null || predicate((T)entity)))
-                    {
-                        entity.Delete();
-                    }
-                }
-            }
-        }
-    }
+					if (entity != null && !entity.Deleted && (predicate == null || predicate((T)entity)))
+					{
+						entity.Delete();
+					}
+				}
+			}
+		}
+
+		public static void Shuffle<T>(List<T> list)
+		{
+			if (list == null || list.Count < 2)
+			{
+				return;
+			}
+
+			for (var i = 0; i < list.Count * 2; i++)
+			{
+				var select = list[0];
+				list.RemoveAt(0);
+
+				list.Insert(Utility.RandomMinMax(0, list.Count - 1), select);
+			}
+		}
+	}
 }

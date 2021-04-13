@@ -7,16 +7,16 @@ namespace Server
 {
     public class NameList
     {
-        private static Dictionary<string, NameList> m_Table;
+        private static readonly Dictionary<string, NameList> m_Table;
         private readonly string m_Type;
         private readonly string[] m_List;
         public NameList(string type, XmlElement xml)
         {
-            this.m_Type = type;
-            this.m_List = xml.InnerText.Split(',');
+            m_Type = type;
+            m_List = xml.InnerText.Split(',');
 
-            for (int i = 0; i < this.m_List.Length; ++i)
-                this.m_List[i] = Utility.Intern(this.m_List[i].Trim());
+            for (int i = 0; i < m_List.Length; ++i)
+                m_List[i] = Utility.Intern(m_List[i].Trim());
         }
 
         static NameList()
@@ -35,24 +35,12 @@ namespace Server
             catch (Exception e)
             {
                 Console.WriteLine("Warning: Exception caught loading name lists:");
-                Console.WriteLine(e);
+                Diagnostics.ExceptionLogging.LogException(e);
             }
         }
 
-        public string Type
-        {
-            get
-            {
-                return this.m_Type;
-            }
-        }
-        public string[] List
-        {
-            get
-            {
-                return this.m_List;
-            }
-        }
+        public string Type => m_Type;
+        public string[] List => m_List;
         public static NameList GetNameList(string type)
         {
             NameList n = null;
@@ -72,8 +60,8 @@ namespace Server
 
         public bool ContainsName(string name)
         {
-            for (int i = 0; i < this.m_List.Length; i++)
-                if (name == this.m_List[i])
+            for (int i = 0; i < m_List.Length; i++)
+                if (name == m_List[i])
                     return true;
 
             return false;
@@ -81,8 +69,8 @@ namespace Server
 
         public string GetRandomName()
         {
-            if (this.m_List.Length > 0)
-                return this.m_List[Utility.Random(this.m_List.Length)];
+            if (m_List.Length > 0)
+                return m_List[Utility.Random(m_List.Length)];
 
             return "";
         }
@@ -98,7 +86,7 @@ namespace Server
             {
                 string type = element.GetAttribute("type");
 
-                if (String.IsNullOrEmpty(type))
+                if (string.IsNullOrEmpty(type))
                     continue;
 
                 try
@@ -107,8 +95,9 @@ namespace Server
 
                     m_Table[type] = list;
                 }
-                catch
+                catch (Exception e)
                 {
+                    Diagnostics.ExceptionLogging.LogException(e);
                 }
             }
         }

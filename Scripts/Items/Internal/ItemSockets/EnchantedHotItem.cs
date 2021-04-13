@@ -6,7 +6,7 @@ namespace Server.Items
     {
         public Container Container { get; set; }
 
-        public override TimeSpan TickDuration { get { return TimeSpan.FromSeconds(3); } }
+        public override TimeSpan TickDuration => TimeSpan.FromSeconds(3);
 
         public EnchantedHotItemSocket()
         {
@@ -25,15 +25,15 @@ namespace Server.Items
             {
                 EndTimer();
             }
-            else if (Owner.RootParent is Mobile)
+            else if (Owner.RootParent is Mobile m)
             {
-                if (((Mobile)Owner.RootParent).Region.IsPartOf("Wrong"))
+                if (m.Region != null && m.Region.IsPartOf("Wrong"))
                 {
-                    AOS.Damage((Mobile)Owner.RootParent, Utility.RandomMinMax(10, 13), 0, 100, 0, 0, 0);
+                    AOS.Damage(m, Utility.RandomMinMax(10, 13), 0, 100, 0, 0, 0);
 
                     if (0.2 > Utility.RandomDouble())
                     {
-                        ((Mobile)Owner.RootParent).SendLocalizedMessage(1152086); // Ouch! These stolen items are hot!
+                        m.SendLocalizedMessage(1152086); // Ouch! These stolen items are hot!
                     }
                 }
             }
@@ -78,7 +78,7 @@ namespace Server.Items
 
                 m.Backpack.Items.IterateReverse(i =>
                 {
-                    var socket = i.GetSocket<EnchantedHotItemSocket>();
+                    EnchantedHotItemSocket socket = i.GetSocket<EnchantedHotItemSocket>();
 
                     if (socket != null)
                     {
@@ -96,7 +96,7 @@ namespace Server.Items
 
         public static bool CheckDrop(Mobile from, Container droppedTo, Item dropped)
         {
-            var socket = dropped.GetSocket<EnchantedHotItemSocket>();
+            EnchantedHotItemSocket socket = dropped.GetSocket<EnchantedHotItemSocket>();
 
             if (socket != null)
             {
@@ -124,7 +124,7 @@ namespace Server.Items
 
         public static bool CheckDrop(Mobile from, Item dropped)
         {
-            var socket = dropped.GetSocket<EnchantedHotItemSocket>();
+            EnchantedHotItemSocket socket = dropped.GetSocket<EnchantedHotItemSocket>();
 
             if (socket != null)
             {

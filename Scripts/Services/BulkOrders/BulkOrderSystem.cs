@@ -1,11 +1,9 @@
+using Server.Items;
+using Server.Mobiles;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
-
-using Server;
-using Server.Mobiles;
-using Server.Items;
 
 namespace Server.Engines.BulkOrders
 {
@@ -30,7 +28,7 @@ namespace Server.Engines.BulkOrders
         public static readonly int MaxCachedDeeds = 12;
         public static readonly int Delay = 6;
 
-        public static bool NewSystemEnabled = Core.TOL;
+        public static bool NewSystemEnabled = true;
         public static BulkOrderSystem Instance { get; set; }
 
         public Dictionary<PlayerMobile, BODContext> BODPlayerData { get; set; }
@@ -170,7 +168,7 @@ namespace Server.Engines.BulkOrders
 
             if (context != null && context.Entries.ContainsKey(type))
             {
-                var entry = context.Entries[type];
+                BODEntry entry = context.Entries[type];
 
                 if (entry != null)
                 {
@@ -261,7 +259,8 @@ namespace Server.Engines.BulkOrders
                     case BODType.Smith:
                         if (doLarge) return new LargeSmithBOD();
                         else return SmallSmithBOD.CreateRandomFor(pm);
-                    case BODType.Tailor: if (doLarge) return new LargeTailorBOD();
+                    case BODType.Tailor:
+                        if (doLarge) return new LargeTailorBOD();
                         else return SmallTailorBOD.CreateRandomFor(pm);
                     case BODType.Alchemy:
                         if (doLarge) return new LargeAlchemyBOD();
@@ -376,9 +375,6 @@ namespace Server.Engines.BulkOrders
 
         public static void ComputePoints(SmallBOD bod, out int points, out double banked)
         {
-            points = 0;
-            banked = 0.0;
-
             switch (bod.BODType)
             {
                 default:
@@ -392,14 +388,11 @@ namespace Server.Engines.BulkOrders
                 case BODType.Carpentry: points = CarpentryRewardCalculator.Instance.ComputePoints(bod); break;
             }
 
-            banked = (double)points * 0.02;
+            banked = points * 0.02;
         }
 
         public static void ComputePoints(LargeBOD bod, out int points, out double banked)
         {
-            points = 0;
-            banked = 0.0;
-
             switch (bod.BODType)
             {
                 default:
@@ -413,7 +406,7 @@ namespace Server.Engines.BulkOrders
                 case BODType.Carpentry: points = CarpentryRewardCalculator.Instance.ComputePoints(bod); break;
             }
 
-            banked = (double)points * .2;
+            banked = points * .2;
         }
 
         public static void AddToPending(Mobile m, BODType type, int points)
@@ -506,7 +499,7 @@ namespace Server.Engines.BulkOrders
                 default: return true;
                 case BODType.Alchemy:
                 case BODType.Inscription: return false;
-                case BODType.Tinkering: 
+                case BODType.Tinkering:
                 case BODType.Cooking:
                 case BODType.Fletching:
                     return !IsInExceptionalExcludeList(bod);
@@ -537,13 +530,13 @@ namespace Server.Engines.BulkOrders
             }
         }
 
-        private static Type[] _ExceptionalExcluded =
+        private static readonly Type[] _ExceptionalExcluded =
         {
             typeof(Arrow), typeof(Bolt), typeof(Kindling), typeof(Shaft),
 
-            typeof(EnchantedApple), typeof(TribalPaint), typeof(GrapesOfWrath), 
+            typeof(EnchantedApple), typeof(TribalPaint), typeof(GrapesOfWrath),
             typeof(EggBomb), typeof(CookedBird), typeof(FishSteak), typeof(FriedEggs),
-            typeof(LambLeg), typeof(Ribs), 
+            typeof(LambLeg), typeof(Ribs),
 
             typeof(Gears), typeof(Axle), typeof(Springs), typeof(AxleGears), typeof(ClockParts),
             typeof(Clock), typeof(PotionKeg), typeof(ClockFrame), typeof(MetalContainerEngraver)
@@ -646,7 +639,7 @@ namespace Server.Engines.BulkOrders
 
         public static void OnTick()
         {
-            foreach (var kvp in Instance.BODPlayerData)
+            foreach (KeyValuePair<PlayerMobile, BODContext> kvp in Instance.BODPlayerData)
             {
                 kvp.Value.CheckCache();
             }
@@ -741,7 +734,7 @@ namespace Server.Engines.BulkOrders
 
         public bool CanClaimRewards()
         {
-            foreach (var kvp in Entries)
+            foreach (KeyValuePair<BODType, BODEntry> kvp in Entries)
             {
                 if (kvp.Value.PendingRewardPoints > 0)
                 {
@@ -757,7 +750,7 @@ namespace Server.Engines.BulkOrders
             int version = reader.ReadInt();
             ConfigEntries();
 
-            this.PointsMode = (PointsMode)reader.ReadInt();
+            PointsMode = (PointsMode)reader.ReadInt();
             BOBFilter = new BOBFilter(reader);
 
             int count = reader.ReadInt();
@@ -776,7 +769,7 @@ namespace Server.Engines.BulkOrders
         {
             writer.Write(0);
 
-            writer.Write((int)this.PointsMode);
+            writer.Write((int)PointsMode);
             BOBFilter.Serialize(writer);
 
             // Lets do this dynamically incase we add new bods in the future
@@ -804,7 +797,7 @@ namespace Server.Engines.BulkOrders
 
         public void CheckCache()
         {
-            foreach (var kvp in Entries)
+            foreach (KeyValuePair<BODType, BODEntry> kvp in Entries)
             {
                 kvp.Value.CheckCache();
             }
@@ -822,8 +815,6 @@ namespace Server.Engines.BulkOrders
             get { return _CachedDeeds; }
             set
             {
-                int old = _CachedDeeds;
-
                 _CachedDeeds = Math.Max(0, Math.Min(BulkOrderSystem.MaxCachedDeeds, value));
             }
         }

@@ -1,4 +1,3 @@
-using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -10,33 +9,28 @@ namespace Server.Mobiles
         public Saliva()
             : base()
         {
-            this.Name = "a saliva";
-            this.Hue = 0x11E;
+            Name = "a saliva";
+            Hue = 0x11E;
 
-            this.SetStr(136, 206);
-            this.SetDex(123, 222);
-            this.SetInt(118, 127);
+            SetStr(136, 206);
+            SetDex(123, 222);
+            SetInt(118, 127);
 
-            this.SetHits(409, 842);
+            SetHits(409, 842);
 
-            this.SetDamage(19, 28);
+            SetDamage(19, 28);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 46, 47);
-            this.SetResistance(ResistanceType.Fire, 32, 40);
-            this.SetResistance(ResistanceType.Cold, 34, 49);
-            this.SetResistance(ResistanceType.Poison, 40, 48);
-            this.SetResistance(ResistanceType.Energy, 35, 39);
+            SetResistance(ResistanceType.Physical, 46, 47);
+            SetResistance(ResistanceType.Fire, 32, 40);
+            SetResistance(ResistanceType.Cold, 34, 49);
+            SetResistance(ResistanceType.Poison, 40, 48);
+            SetResistance(ResistanceType.Energy, 35, 39);
 
-            this.SetSkill(SkillName.Wrestling, 106.4, 128.8);
-            this.SetSkill(SkillName.Tactics, 129.9, 141.0);
-            this.SetSkill(SkillName.MagicResist, 84.3, 90.1);
-
-            for (int i = 0; i < Utility.RandomMinMax(0, 1); i++)
-            {
-                this.PackItem(Loot.RandomScroll(0, Loot.ArcanistScrollTypes.Length, SpellbookType.Arcanist));
-            }
+            SetSkill(SkillName.Wrestling, 106.4, 128.8);
+            SetSkill(SkillName.Tactics, 129.9, 141.0);
+            SetSkill(SkillName.MagicResist, 84.3, 90.1);
         }
 
         public Saliva(Serial serial)
@@ -46,30 +40,21 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            this.AddLoot(LootPack.AosUltraRich, 2);
-        }
-
-        public override void OnDeath(Container c)
-        {
-            base.OnDeath(c);		
-			
-            c.DropItem(new SalivasFeather());
-			
-            if (Utility.RandomDouble() < 0.1)				
-                c.DropItem(new ParrotItem());
+            AddLoot(LootPack.UltraRich, 2);
+            AddLoot(LootPack.ArcanistScrolls);
+            AddLoot(LootPack.Parrot);
+            AddLoot(LootPack.LootItem<SalivasFeather>());
         }
 
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-			
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-			
             int version = reader.ReadInt();
         }
     }

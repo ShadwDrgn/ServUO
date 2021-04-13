@@ -14,66 +14,42 @@ namespace Server.Commands.Generic
 
         private IConditional[] m_Conditionals;
 
-        public Type Type
-        {
-            get
-            {
-                return this.m_ObjectType;
-            }
-        }
+        public Type Type => m_ObjectType;
 
-        public bool IsItem
-        {
-            get
-            {
-                return (this.m_ObjectType == null || this.m_ObjectType == typeofItem || this.m_ObjectType.IsSubclassOf(typeofItem));
-            }
-        }
+        public bool IsItem => (m_ObjectType == null || m_ObjectType == typeofItem || m_ObjectType.IsSubclassOf(typeofItem));
 
-        public bool IsMobile
-        {
-            get
-            {
-                return (this.m_ObjectType == null || this.m_ObjectType == typeofMobile || this.m_ObjectType.IsSubclassOf(typeofMobile));
-            }
-        }
+        public bool IsMobile => (m_ObjectType == null || m_ObjectType == typeofMobile || m_ObjectType.IsSubclassOf(typeofMobile));
 
         public static readonly ObjectConditional Empty = new ObjectConditional(null, null);
 
-        public bool HasCompiled
-        {
-            get
-            {
-                return (this.m_Conditionals != null);
-            }
-        }
+        public bool HasCompiled => (m_Conditionals != null);
 
         public void Compile(ref AssemblyEmitter emitter)
         {
             if (emitter == null)
                 emitter = new AssemblyEmitter("__dynamic", false);
 
-            this.m_Conditionals = new IConditional[this.m_Conditions.Length];
+            m_Conditionals = new IConditional[m_Conditions.Length];
 
-            for (int i = 0; i < this.m_Conditionals.Length; ++i)
-                this.m_Conditionals[i] = ConditionalCompiler.Compile(emitter, this.m_ObjectType, this.m_Conditions[i], i);
+            for (int i = 0; i < m_Conditionals.Length; ++i)
+                m_Conditionals[i] = ConditionalCompiler.Compile(emitter, m_ObjectType, m_Conditions[i], i);
         }
 
         public bool CheckCondition(object obj)
         {
-            if (this.m_ObjectType == null)
+            if (m_ObjectType == null)
                 return true; // null type means no condition
 
-            if (!this.HasCompiled)
+            if (!HasCompiled)
             {
                 AssemblyEmitter emitter = null;
 
-                this.Compile(ref emitter);
+                Compile(ref emitter);
             }
 
-            for (int i = 0; i < this.m_Conditionals.Length; ++i)
+            for (int i = 0; i < m_Conditionals.Length; ++i)
             {
-                if (this.m_Conditionals[i].Verify(obj))
+                if (m_Conditionals[i].Verify(obj))
                     return true;
             }
 
@@ -104,20 +80,20 @@ namespace Server.Commands.Generic
                 }
             }
 
-            return ParseDirect(from, conditionArgs, 0, conditionArgs.Length);
+            return ParseDirect(from, conditionArgs, 0, conditionArgs == null ? 0 : conditionArgs.Length);
         }
 
         public static ObjectConditional ParseDirect(Mobile from, string[] args, int offset, int size)
         {
             if (args == null || size == 0)
-                return ObjectConditional.Empty;
+                return Empty;
 
             int index = 0;
 
             Type objectType = ScriptCompiler.FindTypeByName(args[offset + index], true);
 
             if (objectType == null)
-                throw new Exception(String.Format("No type with that name ({0}) was found.", args[offset + index]));
+                throw new Exception(string.Format("No type with that name ({0}) was found.", args[offset + index]));
 
             ++index;
 
@@ -177,7 +153,7 @@ namespace Server.Commands.Generic
 
                 ICondition condition = null;
 
-                switch ( oper )
+                switch (oper)
                 {
                     #region Equality
                     case "=":
@@ -188,9 +164,9 @@ namespace Server.Commands.Generic
                     case "!=":
                         condition = new ComparisonCondition(prop, inverse, ComparisonOperator.NotEqual, val);
                         break;
-                        #endregion
+                    #endregion
 
-                        #region Relational
+                    #region Relational
                     case ">":
                         condition = new ComparisonCondition(prop, inverse, ComparisonOperator.Greater, val);
                         break;
@@ -203,9 +179,9 @@ namespace Server.Commands.Generic
                     case "<=":
                         condition = new ComparisonCondition(prop, inverse, ComparisonOperator.LesserEqual, val);
                         break;
-                        #endregion
+                    #endregion
 
-                        #region Strings
+                    #region Strings
                     case "==~":
                     case "~==":
                     case "=~":
@@ -239,11 +215,11 @@ namespace Server.Commands.Generic
                     case "~contains":
                         condition = new StringCondition(prop, inverse, StringOperator.Contains, val, true);
                         break;
-                #endregion
+                        #endregion
                 }
 
                 if (condition == null)
-                    throw new InvalidOperationException(String.Format("Unrecognized operator (\"{0}\").", oper));
+                    throw new InvalidOperationException(string.Format("Unrecognized operator (\"{0}\").", oper));
 
                 current.Add(condition);
             }
@@ -255,8 +231,8 @@ namespace Server.Commands.Generic
 
         public ObjectConditional(Type objectType, ICondition[][] conditions)
         {
-            this.m_ObjectType = objectType;
-            this.m_Conditions = conditions;
+            m_ObjectType = objectType;
+            m_Conditions = conditions;
         }
     }
 }

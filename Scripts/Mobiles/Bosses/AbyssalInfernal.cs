@@ -1,8 +1,9 @@
 using System;
-using Server.Engines.CannedEvil;
-using Server.Items;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.CannedEvil;
+using Server.Items;
+using Server.Misc;
 using Server.Network;
 
 namespace Server.Mobiles
@@ -10,10 +11,10 @@ namespace Server.Mobiles
     [CorpseName("an abyssal infernal corpse")]
     public class AbyssalInfernal : BaseChampion
     {
-        private static Dictionary<Mobile, Point3D> m_Table = new Dictionary<Mobile, Point3D>();
+        private static readonly Dictionary<Mobile, Point3D> m_Table = new Dictionary<Mobile, Point3D>();
 
         private DateTime m_NextAbility;
-        
+
         [Constructable]
         public AbyssalInfernal()
             : base(AIType.AI_Mage)
@@ -50,25 +51,23 @@ namespace Server.Mobiles
 
             Fame = 28000;
             Karma = -28000;
-
-            VirtualArmor = 40;
         }
 
         public AbyssalInfernal(Serial serial)
             : base(serial)
         {
-        }        
+        }
 
-        public override ChampionSkullType SkullType { get { return ChampionSkullType.None; } }
-        public override Type[] UniqueList { get { return new Type[] { typeof(TongueOfTheBeast), typeof(DeathsHead), typeof(WallOfHungryMouths), typeof(AbyssalBlade) }; } }
-        public override Type[] SharedList { get { return new Type[] { typeof(RoyalGuardInvestigatorsCloak), typeof(DetectiveBoots), typeof(JadeArmband) }; } }
-        public override Type[] DecorativeList { get { return new Type[] { typeof(MagicalDoor) }; } }
-        public override MonsterStatuetteType[] StatueTypes { get { return new MonsterStatuetteType[] { MonsterStatuetteType.AbyssalInfernal, MonsterStatuetteType.ArchDemon }; } }
+        public override ChampionSkullType SkullType => ChampionSkullType.None;
+        public override Type[] UniqueList => new[] { typeof(TongueOfTheBeast), typeof(DeathsHead), typeof(WallOfHungryMouths), typeof(AbyssalBlade) };
+        public override Type[] SharedList => new[] { typeof(RoyalGuardInvestigatorsCloak), typeof(DetectiveBoots), typeof(JadeArmband) };
+        public override Type[] DecorativeList => new[] { typeof(MagicalDoor) };
+        public override MonsterStatuetteType[] StatueTypes => new[] { MonsterStatuetteType.AbyssalInfernal, MonsterStatuetteType.ArchDemon };
 
-        public override Poison PoisonImmune { get { return Poison.Lethal; } }
+        public override Poison PoisonImmune => Poison.Lethal;
 
-        public override ScaleType ScaleType { get { return ScaleType.All; } }
-        public override int Scales { get { return 20; } }
+        public override ScaleType ScaleType => ScaleType.All;
+        public override int Scales => 20;
 
         public override int GetAttackSound() { return 0x5D4; }
         public override int GetDeathSound() { return 0x5D5; }
@@ -153,8 +152,7 @@ namespace Server.Mobiles
         }
 
         #region Condemn
-        private static Point3D[] _Locs = new Point3D[]
-        {
+        private static readonly Point3D[] _Locs = {
             new Point3D(6949, 701, 32),
             new Point3D(6941, 761, 32),
             new Point3D(7015, 688, 32),
@@ -174,7 +172,7 @@ namespace Server.Mobiles
                 {
                     m_Table[toCondemn] = toCondemn.Location;
 
-                    var loc = _Locs[Utility.Random(_Locs.Length)];
+                    Point3D loc = _Locs[Utility.Random(_Locs.Length)];
                     toCondemn.MoveToWorld(loc, map);
 
                     toCondemn.FixedParticles(0x376A, 9, 32, 0x13AF, EffectLayer.Waist);
@@ -215,9 +213,9 @@ namespace Server.Mobiles
             //Flame Columns
             for (int i = 0; i < 2; i++)
             {
-                Misc.Geometry.Circle2D(Location, Map, i, (pnt, map) =>
+                Geometry.Circle2D(Location, Map, i, (pnt, map) =>
                 {
-                    Effects.SendLocationParticles(EffectItem.Create(pnt, map, EffectItem.DefaultDuration), 0x3709, 10, 30, 5052);                    
+                    Effects.SendLocationParticles(EffectItem.Create(pnt, map, EffectItem.DefaultDuration), 0x3709, 10, 30, 5052);
                 });
             }
 
@@ -241,7 +239,7 @@ namespace Server.Mobiles
 
                     for (int i = 0; i < range; i++)
                     {
-                        Misc.Geometry.Circle2D(Location, Map, i, (pnt, map) =>
+                        Geometry.Circle2D(Location, Map, i, (pnt, map) =>
                         {
                             Effects.SendLocationEffect(pnt, map, 14000, 14, 10, Utility.RandomMinMax(2497, 2499), 2);
                         });
@@ -297,7 +295,7 @@ namespace Server.Mobiles
         #region Spawn
         public List<BaseCreature> SummonedHelpers { get; set; }
 
-        private static Type[] SummonTypes = new Type[]
+        private static readonly Type[] SummonTypes =
         {
             typeof(HellHound),      typeof(Phoenix),
             typeof(FireSteed),      typeof(FireElemental),
@@ -311,14 +309,14 @@ namespace Server.Mobiles
             if (SummonedHelpers == null || SummonedHelpers.Count == 0)
                 return 0;
 
-            return SummonedHelpers.Where(bc => bc != null && bc.Alive).Count();
+            return SummonedHelpers.Count(bc => bc != null && bc.Alive);
         }
 
         public virtual void DoSummon()
         {
             if (Map == null || TotalSummons() > 0)
                 return;
-            
+
             Type type = SummonTypes[Utility.Random(SummonTypes.Length)];
 
             for (int i = 0; i < 3; i++)
@@ -349,9 +347,9 @@ namespace Server.Mobiles
                     spawn.Team = Team;
                     spawn.SummonMaster = this;
 
-                    Timer.DelayCall(TimeSpan.FromSeconds(1), (o) =>
+                    Timer.DelayCall(TimeSpan.FromSeconds(1), o =>
                     {
-                        BaseCreature s = o as BaseCreature;
+                        BaseCreature s = o;
 
                         if (s != null && s.Combatant != null)
                         {
@@ -389,7 +387,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write(0);
 
             writer.Write(SummonedHelpers == null ? 0 : SummonedHelpers.Count);
 

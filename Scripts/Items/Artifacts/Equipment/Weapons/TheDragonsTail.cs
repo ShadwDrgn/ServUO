@@ -1,10 +1,8 @@
-using System;
-
 namespace Server.Items
 {
     public class TheDragonsTail : NoDachi
-	{
-		public override bool IsArtifact { get { return true; } }
+    {
+        public override bool IsArtifact => true;
         [Constructable]
         public TheDragonsTail()
         {
@@ -19,27 +17,9 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber
-        {
-            get
-            {
-                return 1078015;
-            }
-        }// The Dragon's Tail
-        public override int InitMinHits
-        {
-            get
-            {
-                return 80;
-            }
-        }
-        public override int InitMaxHits
-        {
-            get
-            {
-                return 80;
-            }
-        }
+        public override int LabelNumber => 1078015;// The Dragon's Tail
+        public override int InitMinHits => 80;
+        public override int InitMaxHits => 80;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -7,37 +10,35 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Goat()
-            : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            this.Name = "a goat";
-            this.Body = 0xD1;
-            this.BaseSoundID = 0x99;
+            Name = "a goat";
+            Body = 0xD1;
+            BaseSoundID = 0x99;
 
-            this.SetStr(19);
-            this.SetDex(15);
-            this.SetInt(5);
+            SetStr(19);
+            SetDex(15);
+            SetInt(5);
 
-            this.SetHits(12);
-            this.SetMana(0);
+            SetHits(12);
+            SetMana(0);
 
-            this.SetDamage(3, 4);
+            SetDamage(3, 4);
 
-            this.SetDamageType(ResistanceType.Physical, 100);
+            SetDamageType(ResistanceType.Physical, 100);
 
-            this.SetResistance(ResistanceType.Physical, 5, 15);
+            SetResistance(ResistanceType.Physical, 5, 15);
 
-            this.SetSkill(SkillName.MagicResist, 5.0);
-            this.SetSkill(SkillName.Tactics, 5.0);
-            this.SetSkill(SkillName.Wrestling, 5.0);
+            SetSkill(SkillName.MagicResist, 5.0);
+            SetSkill(SkillName.Tactics, 5.0);
+            SetSkill(SkillName.Wrestling, 5.0);
 
-            this.Fame = 150;
-            this.Karma = 0;
+            Fame = 150;
+            Karma = 0;
 
-            this.VirtualArmor = 10;
-
-            this.Tamable = true;
-            this.ControlSlots = 1;
-            this.MinTameSkill = 11.1;
+            Tamable = true;
+            ControlSlots = 1;
+            MinTameSkill = 11.1;
         }
 
         public Goat(Serial serial)
@@ -45,38 +46,41 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat
+        public override int Meat => 2;
+        public override int Hides => 8;
+        public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
+
+        private static readonly Type[] _FeedTypes = new[]
         {
-            get
-            {
-                return 2;
-            }
-        }
-        public override int Hides
+            typeof(Backpack), typeof(BaseShoes), typeof(Bag)
+        };
+
+        public override bool CheckFoodPreference(Item f)
         {
-            get
+            if (!base.CheckFoodPreference(f))
             {
-                return 8;
+                if (f is BaseArmor && (((BaseArmor)f).MaterialType == ArmorMaterialType.Leather || ((BaseArmor)f).MaterialType == ArmorMaterialType.Studded))
+                {
+                    return true;
+                }
+
+                var type = f.GetType();
+
+                return _FeedTypes.Any(t => t == type || type.IsSubclassOf(t));
             }
+
+            return true;
         }
-        public override FoodType FavoriteFood
-        {
-            get
-            {
-                return FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
-            }
-        }
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
-
             int version = reader.ReadInt();
         }
     }

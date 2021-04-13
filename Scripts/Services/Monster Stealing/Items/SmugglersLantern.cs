@@ -1,13 +1,10 @@
-﻿using System;
-using Server;
-
-namespace Server.Items
+﻿namespace Server.Items
 {
     public class SmugglersLantern : Lantern
     {
-        public override int LabelNumber { get { return 1071521; } } // Smuggler's Lantern
+        public override int LabelNumber => 1071521;  // Smuggler's Lantern
 
-        [Constructable] 
+        [Constructable]
         public SmugglersLantern()
         {
             Hue = Utility.RandomMinMax(192, 291);
@@ -33,7 +30,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(GenericReader reader)

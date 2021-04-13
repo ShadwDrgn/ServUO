@@ -1,5 +1,3 @@
-using System;
-using Server.Engines.BulkOrders;
 using Server.Gumps;
 using Server.Mobiles;
 
@@ -16,9 +14,11 @@ namespace Server.Engines.BulkOrders
         {
             BODType = type;
             UsingBanked = points == 0;
-            
-            var entry = new GumpLabel(230, 65, 0x64, GetPoints(user).ToString("0.000000"));
-            entry.Parent = this;
+
+            GumpLabel entry = new GumpLabel(230, 65, 0x64, GetPoints(user).ToString("0.000000"))
+            {
+                Parent = this
+            };
 
             Entries.Insert(10, entry);
         }
@@ -42,7 +42,7 @@ namespace Server.Engines.BulkOrders
             if (Points > 0)
                 return Points;
 
-            return BulkOrderSystem.GetPoints(m, this.BODType);
+            return BulkOrderSystem.GetPoints(m, BODType);
         }
 
         public override void OnConfirmed(CollectionItem citem, int index)
@@ -58,7 +58,7 @@ namespace Server.Engines.BulkOrders
                     User.SendLocalizedMessage(1074361); // The reward could not be given.  Make sure you have room in your pack.
                     i.Delete();
 
-                    User.SendGump(new RewardsGump(Owner, User, this.BODType, (int)Points));
+                    User.SendGump(new RewardsGump(Owner, User, BODType, (int)Points));
                 }
                 else
                 {
@@ -67,11 +67,11 @@ namespace Server.Engines.BulkOrders
 
                     if (UsingBanked)
                     {
-                        BulkOrderSystem.DeductPoints(User, this.BODType, item.Points);
+                        BulkOrderSystem.DeductPoints(User, BODType, item.Points);
                     }
                     else
                     {
-                        BulkOrderSystem.RemovePending(User, this.BODType);
+                        BulkOrderSystem.RemovePending(User, BODType);
                     }
                 }
             }

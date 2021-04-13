@@ -1,61 +1,61 @@
-using System;
-using Server;
-using Server.Mobiles;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.Items
 {
-	public class PvPWarnTeleporter : Teleporter
-	{
-		[Constructable]
-		public PvPWarnTeleporter()
-		{
-		}
+    public class PvPWarnTeleporter : Teleporter
+    {
+        [Constructable]
+        public PvPWarnTeleporter()
+        {
+        }
 
-		public PvPWarnTeleporter( Serial serial )
-			: base( serial )
-		{
-		}
+        public PvPWarnTeleporter(Serial serial)
+            : base(serial)
+        {
+        }
 
-		public override bool OnMoveOver( Mobile m )
-		{
-			PlayerMobile pm = m as PlayerMobile;
+        public override bool OnMoveOver(Mobile m)
+        {
+            PlayerMobile pm = m as PlayerMobile;
 
-			if ( pm != null )
-			{
-				if ( pm.DisabledPvpWarning )
-					return base.OnMoveOver( m );
-				else if ( !pm.HasGump( typeof( PvpWarningGump ) ) )
-					pm.SendGump( new PvpWarningGump( this ) );
-			}
+            if (pm != null)
+            {
+                if (pm.DisabledPvpWarning)
+                    return base.OnMoveOver(m);
+                else if (!pm.HasGump(typeof(PvpWarningGump)))
+                    pm.SendGump(new PvpWarningGump(m, this));
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 
     public class PvpWarningGump : Gump
     {
-        private Teleporter m_Owner;
+        public ITeleporter Teleporter { get; set; }
+        public Point3D Location { get; set; }
 
-        public PvpWarningGump(Teleporter teleporter)
+        public PvpWarningGump(Mobile from, ITeleporter teleporter)
             : base(150, 50)
         {
-            m_Owner = teleporter;
+            Teleporter = teleporter;
+            Location = from.Location;
 
             AddPage(0);
 
@@ -95,10 +95,7 @@ namespace Server.Items
         {
             PlayerMobile pm = sender.Mobile as PlayerMobile;
 
-            if (pm == null)
-                return;
-
-            if (!pm.InRange(m_Owner.Location, 5))
+            if (pm == null || !pm.InRange(Location, 5))
                 return;
 
             switch (info.ButtonID)
@@ -112,8 +109,12 @@ namespace Server.Items
                     }
                 case 1: // Yes, I wish to proceed
                     {
-                        BaseCreature.TeleportPets(pm, m_Owner.PointDest, m_Owner.MapDest);
-                        pm.MoveToWorld(m_Owner.PointDest, m_Owner.MapDest);
+                        //BaseCreature.TeleportPets(pm, m_Owner.PointDest, m_Owner.MapDest);
+                        //pm.MoveToWorld(m_Owner.PointDest, m_Owner.MapDest);
+                        if (Teleporter != null)
+                        {
+                            Teleporter.DoTeleport(pm);
+                        }
 
                         break;
                     }

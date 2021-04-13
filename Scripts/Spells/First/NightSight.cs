@@ -1,4 +1,3 @@
-using System;
 using Server.Targeting;
 
 namespace Server.Spells.First
@@ -16,13 +15,7 @@ namespace Server.Spells.First
         {
         }
 
-        public override SpellCircle Circle
-        {
-            get
-            {
-                return SpellCircle.First;
-            }
-        }
+        public override SpellCircle Circle => SpellCircle.First;
 
         public override void OnCast()
         {
@@ -33,24 +26,20 @@ namespace Server.Spells.First
         {
             SpellHelper.Turn(Caster, targ);
 
+            targ.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
+            targ.PlaySound(0x1E3);
+
             if (targ.BeginAction(typeof(LightCycle)))
             {
                 new LightCycle.NightSightTimer(targ).Start();
-                int level = (int)(LightCycle.DungeonLevel * ((Core.AOS ? targ.Skills[SkillName.Magery].Value : Caster.Skills[SkillName.Magery].Value) / 100));
+                int level = (int)(LightCycle.DungeonLevel * targ.Skills[SkillName.Magery].Value);
 
                 if (level < 0)
                     level = 0;
 
                 targ.LightLevel = level;
 
-                targ.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
-                targ.PlaySound(0x1E3);
-
                 BuffInfo.AddBuff(targ, new BuffInfo(BuffIcon.NightSight, 1075643));	//Night Sight/You ignore lighting effects
-            }
-            else
-            {
-                Caster.SendMessage("{0} already have nightsight.", Caster == targ ? "You" : "They");
             }
         }
 
