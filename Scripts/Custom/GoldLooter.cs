@@ -5,7 +5,7 @@ using System;
 using Server.ContextMenus;
 using System.Collections.Generic;
 
-namespace GoldLooter
+namespace Server.Items
 {
     public class GoldLooter : Item
     {
@@ -21,11 +21,6 @@ namespace GoldLooter
 
         public GoldLooter( Serial serial ) : base( serial ) { }
 
-        public override void OnSingleClick( Mobile from )
-        {
-            this.LabelTo(from, "Account Balance: " + Banker.GetBalance(from));
-        }
-        
         public override void OnDoubleClick( Mobile from )
         {
             int looted = 0;
@@ -94,7 +89,7 @@ namespace GoldLooter
         {
             if ( corpse.Owner == null || corpse.Deleted || corpse.Owner is PlayerMobile
                 || (corpse.Owner is BaseCreature && ((BaseCreature)corpse.Owner).IsBonded)
-                || !corpse.CheckLoot(player, null) || corpse.IsCriminalAction(player)
+                || !corpse.CheckLoot(player) || corpse.IsCriminalAction(player)
                 )
                     return false;
             return true;

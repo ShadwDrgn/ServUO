@@ -45,8 +45,6 @@ Some simple info for beginners:
 
 Use right click to close this and other dialogs.
 
-You have a New Account Ticket if you're a new player. This is a very valuable item. Mouse over it in your backpack to see what it doees.
-
 Hold right click to move.
 
 Double click opens doors, containers, and activates objects (including yellow quest NPCs)

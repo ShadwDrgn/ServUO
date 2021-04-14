@@ -271,11 +271,12 @@ namespace Server.Mobiles
 
             double ourDif = Creature.BardingDifficulty;
             double theirDif = bc.BardingDifficulty;
+            double theirHits = bc.HitsMax;
             Mobile master = Creature.ControlMaster;
 
             if (Utility.Random(100) < 8 - (1 + (ControlSlots - ControlSlotsMin)))
             {
-                double toGain = GetAdvance(theirDif); // Math.Round(.25 + (Math.Max(0, (bc.BardingDifficulty / Creature.BardingDifficulty)) * 1.0), 2);
+                double toGain = GetAdvance(theirHits); // Math.Round(.25 + (Math.Max(0, (bc.BardingDifficulty / Creature.BardingDifficulty)) * 1.0), 2);
 
                 if (ourDif - theirDif <= 50 && CheckCanProgress(bc, toGain))
                 {
@@ -337,9 +338,9 @@ namespace Server.Mobiles
             }
         }
 
-        private double GetAdvance(double difficulty)
+        private double GetAdvance(double hits)
         {
-            double advance = difficulty / 64;
+            double advance = Math.Round(0.25+(Math.Min(hits,1300)/1300*2.25),2);
 
             if (advance >= 2.5)
                 advance = 2.5;

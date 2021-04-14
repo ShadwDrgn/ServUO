@@ -28,17 +28,11 @@ namespace Server.Items
             list.Add("Lockpick Trainer, Double click to set for your skill level.");
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            base.OnSingleClick(from);
-            this.LabelTo(from, "Lockpick Trainer, Double click to set for your skill level.");
-        }
-		
-		public override void Open(Mobile from)
-		{
-			double lockpicking = SetDifficulty(from);
-			from.SendMessage("This chest has been set for "+lockpicking+" lockpicking skill!");
-		}
+	public override void Open(Mobile from)
+	{
+		double lockpicking = SetDifficulty(from);
+		from.SendMessage("This chest has been set for "+lockpicking+" lockpicking skill!");
+	}
 			
         private double SetDifficulty(Mobile from)
         {
