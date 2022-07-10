@@ -13,8 +13,7 @@ namespace Server.Misc
         public static void Initialize()
         {
             Dictionary<Type, double> Entries = CleanUpBritanniaData.Entries;
-            Entries[typeof(NewAccountTicket)] = 300000.0;
-            Console.WriteLine("Added NewAccountTicket to Cleanup system");
+            Entries[typeof(GiftBox)] = 2500.0;
         }
     }
 

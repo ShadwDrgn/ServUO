@@ -9,7 +9,6 @@ namespace Server.Misc
 {
     public class FirstCharacterGift
     {
-        private static Mobile m_Mobile;
         public static void Initialize()
         {
             // Register our event handler
@@ -23,7 +22,6 @@ namespace Server.Misc
                 Mobile m_Mobile = e.Mobile;
                 Account a_Account = ((Account)m_Mobile.Account);
                 Container pack = m_Mobile.Backpack;
-                pack.DropItem(new GoldLooter() );
                 if (!Convert.ToBoolean(a_Account.GetTag("FirstChar"))) {
                         Console.WriteLine("Account: {0}", a_Account.Username);
                         if (pack != null)

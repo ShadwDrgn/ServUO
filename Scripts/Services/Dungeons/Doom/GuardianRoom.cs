@@ -280,7 +280,7 @@ namespace Server.Engines.Doom
 
                     foreach (Mobile m in Region.GetEnumeratedMobiles().Where(m => m is PlayerMobile && m.Alive && m.AccessLevel == AccessLevel.Player && m.Poison == null))
                     {
-                        m.ApplyPoison(m, Poison.Deadly);
+                        m.ApplyPoison(m, Poison.Greater);
                         m.SendSound(0x231);
                     }
 

@@ -93,8 +93,9 @@ namespace Server.SkillHandlers
                     else
                     {
                         from.PlaySound(0x241);
+			double tp = (targ.TrapPower <= 50) ? from.Skills[SkillName.RemoveTrap].Value : targ.TrapPower;
 
-                        if (from.CheckTargetSkill(SkillName.RemoveTrap, targ, targ.TrapPower - 10, targ.TrapPower + 10))
+                        if (from.CheckTargetSkill(SkillName.RemoveTrap, targ, tp - 10, targ.TrapPower + 10))
                         {
                             targ.TrapPower = 0;
                             targ.TrapLevel = 0;

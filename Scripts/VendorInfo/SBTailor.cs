@@ -58,6 +58,7 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Wool), 62, 20, 0xDF8, 0, true));
                 Add(new GenericBuyInfo(typeof(Flax), 102, 20, 0x1A9C, 0, true));
                 Add(new GenericBuyInfo(typeof(SpoolOfThread), 18, 20, 0xFA0, 0, true));
+		Add(new GenericBuyInfo(typeof(MannequinDeed), 10000, 20, 0x14F0, 0));
             }
         }
 

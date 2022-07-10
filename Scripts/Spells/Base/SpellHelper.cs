@@ -381,7 +381,7 @@ namespace Server.Spells
 
             offset *= -1;
 
-            target.AddStatMod(new StatMod(type, name, offset, TimeSpan.Zero));
+            target.AddStatMod(new StatMod(type, name, offset, duration));
             return true;
         }
 
@@ -854,7 +854,7 @@ namespace Server.Spells
             if (caster != null)
             {
                 BaseRegion destination = Region.Find(loc, map) as BaseRegion;
-                BaseRegion current = Region.Find(caster.Location, map) as BaseRegion;
+                BaseRegion current = Region.Find(caster.Location, caster.Map) as BaseRegion;
 
                 if (destination != null && !destination.CheckTravel(caster, loc, type))
                     isValid = false;

@@ -79,6 +79,17 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
+            double chance = Math.Min(HitsMax/1200.0, 0.95);
+
+            if (!m_HasMetalChest && Utility.RandomDouble() < chance)
+            {
+                if (Utility.RandomDouble() < 0.5) {
+                    PackItem(new MetalGoldenChest());
+                } else {
+                    PackItem(new MetalChest());
+                } 
+                m_HasMetalChest = true;
+            }
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Gems, Utility.Random(1, 3));
             AddLoot(LootPack.LootItem<PlagueBeastGland>(80.0));
@@ -205,19 +216,15 @@ namespace Server.Mobiles
             if (corpse == null || corpse.Owner == null) // sorry we can't devour because the corpse's owner is null
                 return false;
 
-            if (corpse.Owner.Body.IsHuman)
-                corpse.TurnToBones(); // Not bones yet, and we are a human body therefore we turn to bones.
-
             IncreaseHits((int)Math.Ceiling(corpse.Owner.HitsMax * 0.75));
-            m_DevourTotal++;
+
+            if (!corpse.GetFlag(CorpseFlag.NoBones)) {
+                corpse.TurnToBones(); // Not bones yet, and we are a human body therefore we turn to bones.
+            } else {
+                corpse.Delete();
+            }
 
             PublicOverheadMessage(MessageType.Emote, 0x3B2, 1053033); // * The plague beast absorbs the fleshy remains of the corpse *
-
-            if (!m_HasMetalChest && m_DevourTotal >= DevourGoal)
-            {
-                PackItem(new MetalChest());
-                m_HasMetalChest = true;
-            }
 
             return true;
         }

@@ -38,8 +38,8 @@ namespace Server.Engines.Harvest
                 BankHeight = 3,
 
                 // Every bank holds from 20 to 45 logs
-                MinTotal = 20,
-                MaxTotal = 45,
+                MinTotal = 40,
+                MaxTotal = 105,
 
                 // A resource bank will respawn its content every 20 to 30 minutes
                 MinRespawn = TimeSpan.FromMinutes(20.0),

@@ -126,6 +126,7 @@ namespace Server.Spells.Chivalry
         {
             min = RequiredSkill;
             max = RequiredSkill + 50.0;
+            // max = RequiredSkill + Math.Min(35, (RequiredSkill-15));
         }
 
         public override int GetMana()

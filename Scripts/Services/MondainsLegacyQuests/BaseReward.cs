@@ -128,8 +128,7 @@ namespace Server.Engines.Quests
             return item;
         }
 
-        public static Item SmithRecipe()
-        {
+        public static Item SmithRecipe() {
             return GetRecipe(new int[] { 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 350, 351, 352, 353, 354 });
         }
 
@@ -254,8 +253,10 @@ namespace Server.Engines.Quests
             }
 
             double ran = Utility.RandomDouble();
+            Console.WriteLine(ran);
+            Console.WriteLine(mid);
 
-            if (mid == -1 && ran <= 0.33) // only lesser recipes in list
+            if (mid == -1 && ran <= 0.5) // only lesser recipes in list
             {
                 return new RecipeScroll(recipes[Utility.Random(list.Length)]);
             }
@@ -269,7 +270,7 @@ namespace Server.Engines.Quests
                 {
                     return new RecipeScroll(recipes[Utility.RandomMinMax(mid, list.Length - 1)]);
                 }
-                else if (ran <= 0.33)
+                else if (ran <= 0.5)
                 {
                     return new RecipeScroll(recipes[Utility.Random(mid)]);
                 }

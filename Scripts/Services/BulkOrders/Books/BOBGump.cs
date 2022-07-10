@@ -138,7 +138,6 @@ namespace Server.Engines.BulkOrders
             if (canPrice)
             {
                 AddHtmlLocalized(516, 64, 200, 32, 1062218, LabelColor, false, false); // Price
-
                 if (canBuy)
                 {
                     AddHtmlLocalized(576, 64, 200, 32, 1062219, LabelColor, false, false); // Buy
@@ -185,7 +184,9 @@ namespace Server.Engines.BulkOrders
                     if (canDrop || (canBuy && e.Price > 0))
                     {
                         AddButton(579, y + 2, 2117, 2118, 6 + (i * 2), GumpButtonType.Reply, 0);
-                        AddLabel(495, y, 1152, e.Price.ToString());
+                        // AddLabel(495, y, 1152, e.Price.ToString());
+                        int points = BulkOrderSystem.ComputePoints( (LargeBOD)e.Reconstruct() );
+                        AddLabel(495, y, 1152, e.Price.ToString() + " (" + points.ToString() + ")" );
                     }
 
                     AddHtmlLocalized(61, y, 50, 32, 1062225, LabelColor, false, false); // Large
@@ -226,7 +227,9 @@ namespace Server.Engines.BulkOrders
                     if (canDrop || (canBuy && e.Price > 0))
                     {
                         AddButton(579, y + 2, 2117, 2118, 6 + (i * 2), GumpButtonType.Reply, 0);
-                        AddLabel(495, y, 1152, e.Price.ToString());
+                        // AddLabel(495, y, 1152, e.Price.ToString());
+                        int points = BulkOrderSystem.ComputePoints( (SmallBOD)e.Reconstruct() );
+                        AddLabel(495, y, 1152, e.Price.ToString() + " (" + points.ToString() + ")" );
                     }
 
                     AddHtmlLocalized(61, y, 50, 32, 1062224, LabelColor, false, false); // Small

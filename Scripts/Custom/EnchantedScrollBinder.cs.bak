@@ -1,0 +1,143 @@
+using Server.Gumps;
+using Server.Network;
+using Server.Targeting;
+
+namespace Server.Items
+{
+    public class EnchantedScrollBinderDeed : Item
+    {
+        private double m_Value;
+        private int m_Needed;
+        private double m_Has;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double Value { get { return m_Value; } set { m_Value = value; InvalidateProperties(); } }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Needed { get { return m_Needed; } set { m_Needed = value; InvalidateProperties(); } }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double Has { get { return m_Has; } set { m_Has = value; InvalidateProperties(); } }
+
+        public override int LabelNumber => 1113135;  // Scroll Binder
+
+        [Constructable]
+        public EnchantedScrollBinderDeed()
+            : base(0x14F0)
+        {
+            Name = "Enchanted Scroll Binder";
+            LootType = LootType.Cursed;
+            Hue = 1636;
+        }
+
+        public override void GetProperties(ObjectPropertyList list)
+        {
+            base.GetProperties(list);
+
+            int v = (int)Value;
+
+             list.Add(1113149, string.Format("{0}\t{1}\t{2}", v.ToString(), ((int)Has).ToString(), Needed.ToString())); // ~1_bonus~ ~2_type~: ~3_given~/~4_needed~
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (IsChildOf(from.Backpack))
+            {
+                from.Target = new InternalTarget(this);
+
+                from.SendLocalizedMessage(1113138); // Target the powerscroll you wish to bind.
+            }
+        }
+
+        public void OnTarget(Mobile from, object targeted)
+        {
+            if (targeted is Item && !((Item)targeted).IsChildOf(from.Backpack))
+            {
+                from.SendLocalizedMessage(1060640); // The item must be in your backpack to use it.
+                return;
+            }
+
+            PowerScroll ps = (PowerScroll)targeted;
+
+            if (ps.Value >= 120)
+            {
+                from.SendLocalizedMessage(1113144); // This scroll is already the highest of its type and cannot be bound.
+                return;
+            }
+
+            double value = ps.Value;
+            int needed = 0;
+
+            if (value == 105)
+                needed = 8;
+            else if (value == 110)
+                needed = 12;
+            else if (value == 115)
+                needed = 10;
+            else
+                return;
+
+            Value = value;
+            Needed = needed;
+            Has++;
+            if (Has >= Needed)
+            {
+                GiveItem(from, new PowerScrollChoice(Value + 5));
+                from.SendLocalizedMessage(1113145); // You've completed your binding and received an upgraded version of your scroll!
+                Delete();
+            }
+            ps.Delete();
+        }
+
+        public void GiveItem(Mobile from, Item item)
+        {
+            Container pack = from.Backpack;
+
+            if (pack == null || !pack.TryDropItem(from, item, false))
+                item.MoveToWorld(from.Location, from.Map);
+        }
+
+        private class InternalTarget : Target
+        {
+            private readonly EnchantedScrollBinderDeed m_Binder;
+
+            public InternalTarget(EnchantedScrollBinderDeed binder) : base(-1, false, TargetFlags.None)
+            {
+                m_Binder = binder;
+            }
+
+            protected override void OnTarget(Mobile from, object targeted)
+            {
+                if (m_Binder != null && !m_Binder.Deleted && m_Binder.IsChildOf(from.Backpack))
+                    m_Binder.OnTarget(from, targeted);
+            }
+        }
+
+        public EnchantedScrollBinderDeed(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(2);
+
+            writer.Write(m_Value);
+            writer.Write(m_Needed);
+            writer.Write(m_Has);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int v = reader.ReadInt();
+
+            m_Value = reader.ReadDouble();
+            m_Needed = reader.ReadInt();
+            m_Has = reader.ReadDouble();
+
+            if (Hue != 1636)
+                Hue = 1636;
+        }
+    }
+}

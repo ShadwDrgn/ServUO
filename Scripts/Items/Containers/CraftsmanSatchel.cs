@@ -69,14 +69,11 @@ namespace Server.Items
         public AlchemistCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.AlchemyRecipe();
+            Item recipe = Reward.AlchemyRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
         }
 
@@ -111,14 +108,11 @@ namespace Server.Items
         public FletcherCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.FletcherRecipe();
+            Item recipe = Reward.FletcherRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
 
             Item runic = Reward.FletcherRunic();
@@ -160,14 +154,11 @@ namespace Server.Items
         public TailorsCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.TailorRecipe();
+            Item recipe = Reward.TailorRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
         }
 
@@ -202,14 +193,11 @@ namespace Server.Items
         public SmithsCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.SmithRecipe();
+            Item recipe = Reward.SmithRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
         }
 
@@ -244,14 +232,11 @@ namespace Server.Items
         public TinkersCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.TinkerRecipe();
+            Item recipe = Reward.TinkerRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
         }
 
@@ -286,14 +271,11 @@ namespace Server.Items
         public CarpentersCraftsmanSatchel()
             : base()
         {
-            if (Items.Count < 2)
-            {
-                Item recipe = Reward.CarpentryRecipe();
+            Item recipe = Reward.CarpentryRecipe();
 
-                if (recipe != null)
-                {
-                    DropItem(recipe);
-                }
+            if (recipe != null)
+            {
+                DropItem(recipe);
             }
 
             Item runic = Reward.CarpenterRunic();

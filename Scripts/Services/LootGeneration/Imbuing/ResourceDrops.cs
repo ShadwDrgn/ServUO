@@ -134,20 +134,20 @@ namespace Server.Items
 
             m_IngredientTable.Add(new IngredientDropEntry(typeof(ChaosVortex), true, 0.25, typeof(ChagaMushroom)));
 
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Cavern of the Discarded", 0.05, typeof(DelicateScales),
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Cavern of the Discarded", 0.25, typeof(DelicateScales),
                 typeof(ArcanicRuneStone), typeof(PowderedIron), typeof(EssenceBalance), typeof(CrushedGlass), typeof(CrystallineBlackrock),
                 typeof(ElvenFletching), typeof(CrystalShards), typeof(Lodestone), typeof(AbyssalCloth), typeof(SeedOfRenewal)));
 
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Passage of Tears", 0.05, typeof(EssenceSingularity)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Fairy Dragon Lair", 0.05, typeof(EssenceDiligence)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Abyssal Lair", 0.05, typeof(EssenceAchievement)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Crimson Veins", 0.05, typeof(EssencePrecision)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Lava Caldera", 0.05, typeof(EssencePassion)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Fire Temple Ruins", 0.05, typeof(EssenceOrder)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Enslaved Goblins", 0.05, typeof(GoblinBlood), typeof(EssenceControl)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Lands of the Lich", 0.05, typeof(EssenceDirection)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Secret Garden", 0.05, typeof(EssenceFeeling)));
-            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Skeletal Dragon", 0.05, typeof(EssencePersistence)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Passage of Tears", 0.25, typeof(EssenceSingularity)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Fairy Dragon Lair", 0.25, typeof(EssenceDiligence)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Abyssal Lair", 0.25, typeof(EssenceAchievement)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Crimson Veins", 0.25, typeof(EssencePrecision)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Lava Caldera", 0.25, typeof(EssencePassion)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Fire Temple Ruins", 0.25, typeof(EssenceOrder)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Enslaved Goblins", 0.25, typeof(GoblinBlood), typeof(EssenceControl)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Lands of the Lich", 0.25, typeof(EssenceDirection)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Secret Garden", 0.25, typeof(EssenceFeeling)));
+            m_IngredientTable.Add(new IngredientDropEntry(typeof(BaseCreature), false, "Skeletal Dragon", 0.25, typeof(EssencePersistence)));
         }
 
         public static void OnCreatureDeath(CreatureDeathEventArgs e)

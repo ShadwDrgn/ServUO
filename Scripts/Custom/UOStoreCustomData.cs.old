@@ -1,0 +1,22 @@
+using System;
+using Server;
+using System.Collections.Generic;
+using Server.Items;
+using Server.Engines.UOStore;
+
+namespace Server.Misc
+{
+    public static class UOStoreCustomData
+    {
+
+        public static void Initialize()
+        {
+	    // StoreEntry entry = new StoreEntry(typeof(PowerScrollChanger), "Power Scroll Changer", 0, 5360, 0, 0, 2500, StoreCategory.Misc);
+	    // UltimaStore.Register(entry);
+            // Dictionary<Type, double> Entries = UltimaStore.Entries;
+            // Entries[typeof(NewAccountTicket)] = 300000.0;
+            Console.WriteLine("tried to do some store bullshit");
+        }
+    }
+
+}

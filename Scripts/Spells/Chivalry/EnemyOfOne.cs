@@ -37,8 +37,8 @@ namespace Server.Spells.Chivalry
 
             return delay;
         }
-
-        public override void OnCast()
+	
+	public override void OnCast()
         {
             if (UnderEffect(Caster))
             {

@@ -10,8 +10,6 @@ namespace Server.Items
 {
     public class LockpickTrainer : LockableContainer
     {
-        private bool m_Locked;
-
         [Constructable]
         public LockpickTrainer(): base(0x9AA)
         {
@@ -21,8 +19,8 @@ namespace Server.Items
             Weight = 4.0;
 
         }
-		
-		public override void AddNameProperties(ObjectPropertyList list)
+
+	public override void AddNameProperties(ObjectPropertyList list)
         {
             base.AddNameProperties(list);
             list.Add("Lockpick Trainer, Double click to set for your skill level.");
