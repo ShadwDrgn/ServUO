@@ -148,7 +148,6 @@ namespace Server.Misc
             if (value >= maxSkill)
                 return true; // No challenge
 
-
             return CheckSkill(from, skill, new Point2D(from.Location.X / LocationSize, from.Location.Y / LocationSize), chance);
         }
 
