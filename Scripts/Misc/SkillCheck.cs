@@ -140,6 +140,7 @@ namespace Server.Misc
                 value += 1;
 
             double chance = (value - minSkill) / (maxSkill - minSkill);
+
             CrystalBallOfKnowledge.TellSkillDifficulty(from, skillName, chance);
 
             if (value < minSkill)
