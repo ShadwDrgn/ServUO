@@ -7,7 +7,7 @@ namespace Server.Items
     public interface ISpinningWheel
     {
         bool Spinning { get; }
-        void BeginSpin(SpinCallback callback, Mobile from, int hue, Item m_Wool);
+        void BeginSpin(SpinCallback callback, Mobile from, Items m_Wool);
     }
 
     public class SpinningwheelEastAddon : BaseAddon, ISpinningWheel
@@ -74,7 +74,7 @@ namespace Server.Items
             }
         }
 
-        public void EndSpin(SpinCallback callback, Mobile from, int hue)
+        public void EndSpin(SpinCallback callback, Mobile from, int hue, int stacksize)
         {
             if (m_Timer != null)
                 m_Timer.Stop();
