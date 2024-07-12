@@ -27,9 +27,9 @@ namespace Server.Items
         TextDefinition ICommodity.Description => LabelNumber;
         bool ICommodity.IsDeedable => true;
 
-        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue)
+        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue, int amount)
         {
-            Item item = new DarkYarn(3)
+            Item item = new DarkYarn(8*amount)
             {
                 Hue = hue
             };
@@ -108,11 +108,11 @@ namespace Server.Items
                     }
                     else
                     {
-                        m_Wool.Consume();
+                        // m_Wool.Consume();
                         if (m_Wool is TaintedWool)
-                            wheel.BeginSpin(TaintedWool.OnSpun, from, m_Wool.Hue);
+                            wheel.BeginSpin(TaintedWool.OnSpun, from, m_Wool);
                         else
-                            wheel.BeginSpin(OnSpun, from, m_Wool.Hue);
+                            wheel.BeginSpin(OnSpun, from, m_Wool);
                     }
                 }
                 else
@@ -145,9 +145,9 @@ namespace Server.Items
         {
         }
 
-        new public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue)
+        new public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue, int amount)
         {
-            Item item = new DarkYarn(1)
+            Item item = new DarkYarn(amount*2)
             {
                 Hue = hue
             };
