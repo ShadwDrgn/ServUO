@@ -45,10 +45,12 @@ namespace Server.Items
             }
         }
 
-        public void BeginSpin(SpinCallback callback, Mobile from, int hue)
+        public void BeginSpin(SpinCallback callback, Mobile from, Item m_Wool)
         {
-            m_Timer = new SpinTimer(this, callback, from, hue);
+            m_Timer = new SpinTimer(this, callback, from, m_Wool.Hue, m_Wool.Amount);
             m_Timer.Start();
+            m_Wool.Delete();
+
 
             foreach (AddonComponent c in Components)
             {
@@ -94,7 +96,8 @@ namespace Server.Items
             private readonly SpinCallback m_Callback;
             private readonly Mobile m_From;
             private readonly int m_Hue;
-            public SpinTimer(SpinningwheelSouthAddon wheel, SpinCallback callback, Mobile from, int hue)
+            private readonly int m_Amount;
+            public SpinTimer(SpinningwheelEastAddon wheel, SpinCallback callback, Mobile from, int hue, int amount)
                 : base(TimeSpan.FromSeconds(6.0))
             {
                 m_Wheel = wheel;
@@ -102,11 +105,12 @@ namespace Server.Items
                 m_From = from;
                 m_Hue = hue;
                 Priority = TimerPriority.TwoFiftyMS;
+                m_Amount = amount;
             }
 
             protected override void OnTick()
             {
-                m_Wheel.EndSpin(m_Callback, m_From, m_Hue);
+                m_Wheel.EndSpin(m_Callback, m_From, m_Hue, m_Amount);
             }
         }
     }
