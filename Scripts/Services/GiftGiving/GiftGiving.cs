@@ -1,4 +1,5 @@
 using Server.Accounting;
+using Server.Mobiles;
 using System;
 using System.Collections.Generic;
 
@@ -21,8 +22,41 @@ namespace Server.Misc
         public static void Initialize()
         {
             EventSink.Login += EventSink_Login;
+            EventSink.Connected += EventSink_Connect;
         }
 
+        private static void EventSink_Connect(ConnectedEventArgs e) {
+            Account acct = e.Mobile.Account as Account;
+
+            if (acct == null)
+                return;
+
+            PlayerMobile pm = e.Mobile as PlayerMobile;
+
+            DateTime now = DateTime.UtcNow;
+
+            for (int i = 0; i < m_Givers.Count; ++i)
+            {
+                GiftGiver giver = m_Givers[i];
+
+                if (!giver.PerCharacter)
+                    continue; //not a per character gift
+
+                if (now < giver.Start || now >= giver.Finish)
+                    continue; // not in the correct timefream
+
+                if (pm.CreationTime > (giver.Start - giver.MinimumAge))
+                    continue; // newly created account
+
+                if (pm.LastOnline >= giver.Start)
+                    continue; // already got one
+
+                giver.DelayGiveGift(TimeSpan.FromSeconds(5.0), e.Mobile);
+            }
+
+            pm.LastOnline = now;
+
+        }
         private static void EventSink_Login(LoginEventArgs e)
         {
             Account acct = e.Mobile.Account as Account;
@@ -35,6 +69,9 @@ namespace Server.Misc
             for (int i = 0; i < m_Givers.Count; ++i)
             {
                 GiftGiver giver = m_Givers[i];
+
+                if (giver.PerCharacter)
+                    continue; //not a per character gift
 
                 if (now < giver.Start || now >= giver.Finish)
                     continue; // not in the correct timefream
@@ -58,6 +95,7 @@ namespace Server.Misc
         public abstract DateTime Start { get; }
         public abstract DateTime Finish { get; }
         public abstract void GiveGift(Mobile mob);
+        public virtual bool PerCharacter => false;
 
         public virtual void DelayGiveGift(TimeSpan delay, Mobile mob)
         {

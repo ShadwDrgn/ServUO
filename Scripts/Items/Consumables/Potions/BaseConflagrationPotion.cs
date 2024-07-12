@@ -118,7 +118,8 @@ namespace Server.Items
             if (timer != null)
                 timer.Stop();
 
-            m_Delay[m] = Timer.DelayCall(TimeSpan.FromSeconds(30), new TimerStateCallback(EndDelay_Callback), m);
+            int alchemyBonus = (m.Skills.Alchemy.Fixed == 1000) ? 20 : 0;
+            m_Delay[m] = Timer.DelayCall(TimeSpan.FromSeconds(30 - alchemyBonus), new TimerStateCallback(EndDelay_Callback), m);
         }
 
         public static int GetDelay(Mobile m)

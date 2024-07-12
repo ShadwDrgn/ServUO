@@ -49,8 +49,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 119.9);
             SetSkill(SkillName.Wrestling, 119.9);
 
-            Fame = 24000;
-            Karma = -24000;
+            Fame = 12500;
+            Karma = -12500;
 
             SetSpecialAbility(SpecialAbility.DragonBreath);
         }

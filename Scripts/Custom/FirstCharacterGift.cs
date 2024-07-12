@@ -26,6 +26,7 @@ namespace Server.Misc
                         Console.WriteLine("Account: {0}", a_Account.Username);
                         if (pack != null)
                         {
+                                /*
                                 Spellbook book = new NecromancerSpellbook();
                                 book.Content = book.BookCount == 64 ? book.Content = ulong.MaxValue : (1ul << book.BookCount) - 1;
                                 pack.DropItem(book);
@@ -38,6 +39,7 @@ namespace Server.Misc
 
                                 pack.DropItem( new Runebook( 10 ) );
                                 pack.DropItem( new MythicCharacterToken() );
+                                */
                                 pack.DropItem( new SoulstoneFragmentToken() );
                                 pack.DropItem( new SoulstoneFragmentToken() );
                                 a_Account.SetTag("FirstChar", "true");

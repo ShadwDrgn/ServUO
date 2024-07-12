@@ -42,8 +42,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 90.1, 100.0);
             SetSkill(SkillName.Wrestling, 95.1, 100.0);
 
-            Fame = 50000;
-            Karma = 50000;
+            Fame = 12500;
+            Karma = -12500;
 
             SetWearable(new Bow(), 1);
         }

@@ -323,12 +323,12 @@ namespace Server.Items
             {
                 list = _SpecialCacheHordeAndTrove;
             }
-
+            /*
             if (package > TreasurePackage.Artisan)
             {
                 list.Concat(_FunctionalMinorArtifacts);
             }
-
+            */
             return list;
         }
 
@@ -964,6 +964,18 @@ namespace Server.Items
 
                     list = null;
                 }
+            }
+
+            if (level == TreasureLevel.Hoard || level == TreasureLevel.Trove)
+            {
+                Item miniArti = Loot.Construct(_FunctionalMinorArtifacts[Utility.Random(_FunctionalMinorArtifacts.Length)]);
+                Container miniArtiPack = new Backpack
+                {
+                    Hue = 1278
+                };
+
+                miniArtiPack.DropItem(miniArti);
+                chest.DropItem(miniArtiPack);
             }
             #endregion
 

@@ -19,6 +19,7 @@ namespace Server.Engines.Craft
 
         private static readonly Type[] _GlobalNoConsume =
         {
+            typeof(UntappedPotential),
             typeof(CapturedEssence), typeof(EyeOfTheTravesty), typeof(DiseasedBark),  typeof(LardOfParoxysmus), typeof(GrizzledBones), typeof(DreadHornMane),
 
             typeof(Blight), typeof(Corruption), typeof(Muculent), typeof(Scourge), typeof(Putrefaction), typeof(Taint),

@@ -25,12 +25,15 @@ namespace Server.Engines.Despise
 
             Power = powerLevel;
             SetMagicalAbility(MagicalAbility.Discordance);
+            SetSkill(SkillName.Musicianship, 100);
         }
 
         protected override BaseAI ForcedAI => new DespiseMeleeAI(this);
         public override int StrStart => Utility.RandomMinMax(65, 75);
         public override int DexStart => Utility.RandomMinMax(100, 110);
         public override int IntStart => Utility.RandomMinMax(100, 110);
+
+        public override bool CanDiscord => true;
 
         public override Mobile GetBardTarget(bool creaturesOnly = false)
         {
@@ -67,7 +70,7 @@ namespace Server.Engines.Despise
             if ((m is DespiseCreature && ((DespiseCreature)m).Alignment != Alignment.Neutral && ((DespiseCreature)m).Alignment != Alignment) || m is DespiseBoss)
                 return true;
 
-            return m is PlayerMobile && !Controlled && ((m.Karma < 0 && Alignment == Alignment.Good) || (m.Karma > 0 && Alignment == Alignment.Evil));
+            return m is PlayerMobile && !Controlled;
         }
 
         public Silenii(Serial serial) : base(serial)
