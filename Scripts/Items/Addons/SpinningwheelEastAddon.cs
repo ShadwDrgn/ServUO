@@ -2,12 +2,12 @@ using System;
 
 namespace Server.Items
 {
-    public delegate void SpinCallback(ISpinningWheel sender, Mobile from, int hue);
+    public delegate void SpinCallback(ISpinningWheel sender, Mobile from, int hue, int amount);
 
     public interface ISpinningWheel
     {
         bool Spinning { get; }
-        void BeginSpin(SpinCallback callback, Mobile from, int hue);
+        void BeginSpin(SpinCallback callback, Mobile from, int hue, Item m_Wool);
     }
 
     public class SpinningwheelEastAddon : BaseAddon, ISpinningWheel
