@@ -7,7 +7,7 @@ namespace Server.Items
     public interface ISpinningWheel
     {
         bool Spinning { get; }
-        void BeginSpin(SpinCallback callback, Mobile from, Items m_Wool);
+        void BeginSpin(SpinCallback callback, Mobile from, Item m_Wool);
     }
 
     public class SpinningwheelEastAddon : BaseAddon, ISpinningWheel
