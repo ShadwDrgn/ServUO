@@ -87,7 +87,7 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly int m_Hue;
             private readonly int m_Amount;
-            public SpinTimer(SpinningwheelEastAddon wheel, SpinCallback callback, Mobile from, int hue, int amount)
+            public SpinTimer(ElvenSpinningwheelEastAddon wheel, SpinCallback callback, Mobile from, int hue, int amount)
                 : base(TimeSpan.FromSeconds(6.0))
             {
                 m_Wheel = wheel;
