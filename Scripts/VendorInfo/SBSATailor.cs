@@ -16,7 +16,7 @@ namespace Server.Mobiles
             public InternalBuyInfo()
             {
                 Add(new GenericBuyInfo(typeof(Cotton), 102, 20, 0xDF9, 0, true));
-                Add(new GenericBuyInfo(typeof(Wool), 62, 20, 0xDF8, 0, true));
+                Add(new GenericBuyInfo(typeof(Wool), 130, 20, 0xDF8, 0, true));
                 Add(new GenericBuyInfo(typeof(Flax), 102, 20, 0x1A9C, 0, true));
                 Add(new GenericBuyInfo(typeof(SpoolOfThread), 18, 20, 0xFA0, 0, true));
                 Add(new GenericBuyInfo(typeof(SewingKit), 3, 20, 0xF9D, 0));
