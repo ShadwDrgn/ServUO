@@ -24,9 +24,9 @@ namespace Server.Items
         {
         }
 
-        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue)
+        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue, int amount)
         {
-            Item item = new SpoolOfThread(6)
+            Item item = new SpoolOfThread(6*amount)
             {
                 Hue = hue
             };
@@ -95,7 +95,6 @@ namespace Server.Items
                     }
                     else
                     {
-                        m_Flax.Consume();
                         wheel.BeginSpin(OnSpun, from, m_Flax);
                     }
                 }

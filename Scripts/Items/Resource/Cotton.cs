@@ -27,9 +27,9 @@ namespace Server.Items
         TextDefinition ICommodity.Description => LabelNumber;
         bool ICommodity.IsDeedable => true;
 
-        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue)
+        public static void OnSpun(ISpinningWheel wheel, Mobile from, int hue, int amount)
         {
-            Item item = new SpoolOfThread(6)
+            Item item = new SpoolOfThread(6*amount)
             {
                 Hue = hue
             };
