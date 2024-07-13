@@ -96,7 +96,7 @@ namespace Server.Items
                     else
                     {
                         m_Flax.Consume();
-                        wheel.BeginSpin(OnSpun, from, m_Flax.Hue);
+                        wheel.BeginSpin(OnSpun, from, m_Flax);
                     }
                 }
                 else
