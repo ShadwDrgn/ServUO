@@ -108,8 +108,7 @@ namespace Server.Items
                     }
                     else
                     {
-                        m_Cotton.Consume();
-                        wheel.BeginSpin(OnSpun, from, m_Cotton.Hue);
+                        wheel.BeginSpin(OnSpun, from, m_Cotton);
                     }
                 }
                 else
