@@ -112,7 +112,7 @@ namespace Server.Multis
                 if (this == newest)
                     return DecayType.AutoRefresh;
 
-                return DecayType.ManualRefresh;
+                return DecayType.AutoRefresh;
             }
         }
 
