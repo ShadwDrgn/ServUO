@@ -10,7 +10,6 @@ namespace Server.Items
             Hue = 1266;
 
             DropItem(new PowerScroll(SkillName.Imbuing, 120.0));
-            DropItem(new ScrollOfTranscendence(SkillName.Imbuing, 5.0));
 
             if (0.05 >= Utility.RandomDouble())
             {
