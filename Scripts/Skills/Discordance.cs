@@ -2,6 +2,7 @@
 using Server.Engines.Quests;
 using Server.Items;
 using Server.Mobiles;
+using Server.Misc;
 using Server.Targeting;
 using System;
 using System.Collections;
@@ -87,7 +88,7 @@ namespace Server.SkillHandlers
             {
                 // According to uoherald bard must remain alive, visible, and 
                 // within range of the target or the effect ends in 15 seconds.
-                if (!targ.Alive || targ.Deleted || targ.IsDeadBondedPet || !from.Alive || from.Hidden || targ.Hidden || from.IsDeadBondedPet)
+                if (!targ.Alive || targ.Deleted || targ.IsDeadBondedPet || !from.Alive || from.Hidden || targ.Hidden || from.IsDeadBondedPet || info.m_Weakened)
                 {
                     ends = true;
                 }
@@ -120,7 +121,7 @@ namespace Server.SkillHandlers
                     if (ends && !info.m_Ending)
                     {
                         info.m_Ending = true;
-                        info.m_EndTime = DateTime.UtcNow + TimeSpan.FromSeconds(15);
+                        info.m_EndTime = DateTime.UtcNow + TimeSpan.FromSeconds((info.m_Weakened) ? 5 : 15);
                     }
                     else if (!ends)
                     {
@@ -196,7 +197,7 @@ namespace Server.SkillHandlers
                             m_Instrument.PlayInstrumentBadly(from);
                             m_Instrument.ConsumeUse(from);
                         }
-                        else if (from.CheckTargetSkill(SkillName.Discordance, target, diff - 25.0, diff + 25.0))
+                        else 
                         {
                             from.SendLocalizedMessage(1049539); // You play the song surpressing your targets strength
 
@@ -207,10 +208,11 @@ namespace Server.SkillHandlers
                             m_Instrument.ConsumeUse(from);
 
                             DiscordanceInfo info;
+                            var weakened = !from.CheckTargetSkill(SkillName.Discordance, target, diff - 25.0, diff + 25.0);
 
                             if (targ.Player && from.Player)
                             {
-                                info = new DiscordanceInfo(from, targ, 0, null, true, from.Skills.CurrentMastery == SkillName.Discordance ? 6 : 4);
+                                info = new DiscordanceInfo(from, targ, 0, null, true, from.Skills.CurrentMastery == SkillName.Discordance ? 6 : 4, weakened);
                                 from.DoHarmful(targ);
                             }
                             else
@@ -220,6 +222,15 @@ namespace Server.SkillHandlers
                                 double discord = from.Skills[SkillName.Discordance].Value;
 
                                 var effect = (int)Math.Max(-28.0, (discord / -4.0));
+                                if (weakened)
+                                {
+                                    if (Utility.Random(3) == 0)
+                                    {
+                                        SkillCheck.Gain(from, from.Skills[SkillName.Discordance], 1);
+                                    }
+                                    from.SendMessage("The effect was not very strong");
+                                    effect = (int)(effect * (discord / (diff + 25.0)));
+                                }
 
                                 if (BaseInstrument.GetBaseDifficulty(targ) >= 160.0)
                                 {
@@ -242,7 +253,7 @@ namespace Server.SkillHandlers
                                     }
                                 }
 
-                                info = new DiscordanceInfo(from, targ, Math.Abs(effect), mods);
+                                info = new DiscordanceInfo(from, targ, Math.Abs(effect), mods, weakened);
 
                                 #region Bard Mastery Quest
                                 if (from is PlayerMobile)
@@ -262,21 +273,6 @@ namespace Server.SkillHandlers
 
                             m_Table[targ] = info;
                             from.NextSkillTime = Core.TickCount + (8000 - ((masteryBonus / 5) * 1000));
-                        }
-                        else
-                        {
-                            if (from is BaseCreature)
-                                from.CheckSkill(SkillName.Discordance, 0, from.Skills[SkillName.Discordance].Cap);
-
-                            from.SendLocalizedMessage(1049540); // You attempt to disrupt your target, but fail.
-
-                            if (targ.Player)
-                                targ.SendLocalizedMessage(1072064); // You hear jarring music, but it fails to disrupt you.
-
-                            m_Instrument.PlayInstrumentBadly(from);
-                            m_Instrument.ConsumeUse(from);
-
-                            from.NextSkillTime = Core.TickCount + 5000;
                         }
                     }
                     else
@@ -304,18 +300,19 @@ namespace Server.SkillHandlers
             public readonly ArrayList m_Mods;
             public DateTime m_EndTime;
             public bool m_Ending;
+            public bool m_Weakened;
             public Timer m_Timer;
 
             // Pub 103 PVP Additions
             public DateTime m_Expires;
             public readonly bool m_PVP;
 
-            public DiscordanceInfo(Mobile from, Mobile creature, int effect, ArrayList mods)
-                : this(from, creature, effect, mods, false, 0)
+            public DiscordanceInfo(Mobile from, Mobile creature, int effect, ArrayList mods, bool weakened)
+                : this(from, creature, effect, mods, false, 0, weakened)
             {
             }
 
-            public DiscordanceInfo(Mobile from, Mobile creature, int effect, ArrayList mods, bool pvp, int duration)
+            public DiscordanceInfo(Mobile from, Mobile creature, int effect, ArrayList mods, bool pvp, int duration, bool weakened)
             {
                 m_From = from;
                 m_Target = creature;
@@ -324,6 +321,7 @@ namespace Server.SkillHandlers
                 m_Effect = effect;
                 m_Mods = mods;
                 m_PVP = pvp;
+                m_Weakened = weakened;
 
                 if (m_PVP)
                 {
