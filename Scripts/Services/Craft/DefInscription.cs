@@ -389,7 +389,7 @@ namespace Server.Engines.Craft
 
             AddCraft(typeof(BlankScroll), 1044294, 1023636, 50.0, 100.0, typeof(WoodPulp), 1113136, 1, 1044378);
 
-            index = AddCraft(typeof(ScrollBinderDeed), 1044294, 1113135, 75.0, 125.0, typeof(WoodPulp), 1113136, 1, 1044253);
+            index = AddCraft(typeof(ScrollBinderDeed), 1044294, 1113135, 75.0, 100.0, typeof(WoodPulp), 1113136, 1, 1044253);
             SetItemHue(index, 1641);
 
             index = AddCraft(typeof(GargoyleBook100), 1044294, 1113290, 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
