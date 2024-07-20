@@ -130,7 +130,7 @@ namespace Server.Engines.BulkOrders
 
                     InvalidateProperties();
 
-                    if (m_Entries.Count / 5 > m_ItemCount)
+                    if (m_Entries.Count / 15 > m_ItemCount)
                     {
                         m_ItemCount++;
                         InvalidateItems();
