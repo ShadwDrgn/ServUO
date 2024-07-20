@@ -8,11 +8,31 @@ namespace Server
 {
     public class LootPack
     {
-        public static int GetLuckChance(Mobile killer, Mobile victim)
+        public static int GetEffectiveLuck(Mobile killer, Mobile victim)
         {
-            int luck = killer is PlayerMobile ? ((PlayerMobile)killer).RealLuck : killer.Luck;
+            PlayerMobile pmKiller = null;
+            int luck = 0;
+            if (killer is BaseCreature)
+            {
+                BaseCreature bc = (BaseCreature)killer;
+                if (bc.Summoned && bc.SummonMaster is PlayerMobile)
+                {
+                    pmKiller = bc.SummonMaster as PlayerMobile;
+                    luck = pmKiller.RealLuck;
+                }
+                else if (bc.Controlled && bc.ControlMaster is PlayerMobile)
+                {
+                    pmKiller = bc.ControlMaster as PlayerMobile;
+                    luck = pmKiller.RealLuck;
+                }
+            }
+            else
+            {
+                luck = killer is PlayerMobile ? ((PlayerMobile)killer).RealLuck : killer.Luck;
+                pmKiller = killer as PlayerMobile;
+            }
 
-            PlayerMobile pmKiller = killer as PlayerMobile;
+
 
             if (pmKiller != null && pmKiller.SentHonorContext != null && pmKiller.SentHonorContext.Target == victim)
             {
@@ -24,6 +44,11 @@ namespace Server
                 return 0;
             }
 
+            return luck;
+        }
+        public static int GetLuckChance(Mobile killer, Mobile victim)
+        {
+            int luck = GetEffectiveLuck(killer, victim);
             return GetLuckChance(luck);
         }
 

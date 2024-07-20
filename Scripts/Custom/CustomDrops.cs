@@ -15,14 +15,16 @@ namespace Server.Items
         {
             BaseCreature bc = e.Creature as BaseCreature;
             Container c = e.Corpse;
-
+            Mobile killer = e.Killer;
+            int luck = LootPack.GetEffectiveLuck(e.Killer, bc);
+            
             if (bc != null && c != null && !c.Deleted && !bc.Controlled && !bc.Summoned)
             {
-                CheckDrop(bc, c);
+                CheckDrop(bc, c, luck);
             }
         }
 
-        public static void CheckDrop(BaseCreature bc, Container c)
+        public static void CheckDrop(BaseCreature bc, Container c, int luck)
         {
             const int MINIMUM_FAME = 3000;
             const int HIGHEST_FAME = 21000;
@@ -30,6 +32,8 @@ namespace Server.Items
             const double BOSS_BONUS = 0.2;
             List<Type> bossTypes = new List<Type>() { typeof(BaseChampion), typeof(BasePeerless) };
             double bonusChance = 0.0;
+            double luckScalar = 1.0;
+
 
             // Don't give potential on low fame creatures.
             if (bc.Fame <= MINIMUM_FAME) return;
@@ -38,13 +42,14 @@ namespace Server.Items
                 if ((bc.GetType() == t || bc.GetType().IsSubclassOf(t)) && bc.Fame > 15000)
                     bonusChance = BOSS_BONUS;
             }
+            luckScalar = Math.Max(1, Math.Pow(luck,0.536)/10); // Diminishing returns on luck.
 
-            double toBeat = (Math.Min(1, (double)bc.Fame / HIGHEST_FAME) * MAX_CHANCE) + bonusChance;
+            double toBeat = ((Math.Min(1, (double)bc.Fame / HIGHEST_FAME) * MAX_CHANCE) * luckScalar) + bonusChance;
 
-            Item item = new UntappedPotential();
-            
             if (Utility.RandomDouble() <= toBeat)
             {
+                Item item = new UntappedPotential();
+                c.PublicOverheadMessage(Network.MessageType.Regular, 0x3B2, false, "You sense a powerful essence from inside the corpse");
                 c.DropItem(item);
             }
         }
