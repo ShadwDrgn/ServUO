@@ -276,63 +276,56 @@ namespace Server.Mobiles
 
             if (Utility.Random(100) < 8 - (1 + (ControlSlots - ControlSlotsMin)))
             {
-                double toGain = GetAdvance(theirHits); // Math.Round(.25 + (Math.Max(0, (bc.BardingDifficulty / Creature.BardingDifficulty)) * 1.0), 2);
+                double toGain = GetAdvance(theirHits); // Math.Round(0.25+(Math.Min(hits,1300)/1300*2.25),2);
 
-                if (ourDif - theirDif <= 50 && CheckCanProgress(bc, toGain))
-                {
-                    if (PowerHourBegin + PowerHourDelay < DateTime.UtcNow)
-                    {
-                        _ProgressTable.Clear();
-
-                        PowerHourBegin = DateTime.UtcNow;
-                        InPowerHour = true;
-                        master.SendLocalizedMessage(1157569); // [Pet Training Power Hour]:  Your pet is under the effects of enhanced training progress for the next hour!
-                    }
-                    else if (InPowerHour && PowerHourBegin + PowerHourDuration < DateTime.UtcNow)
-                    {
-                        InPowerHour = false;
-                        master.SendLocalizedMessage(1157570); // [Pet Training Power Hour]:  Your pet is no longer under the effects of enhanced training progress.
-                    }
-
-                    TrainingProgress = Math.Min(TrainingProgressMax, TrainingProgress + toGain);
-
-                    if (!bc.Controlled && !bc.Summoned && master is PlayerMobile)
-                    {
-                        int cliloc = 1157574; // *The pet's battle experience has greatly increased!*
-
-                        if (toGain < 1.3)
-                            cliloc = 1157565; // *The pet's battle experience has slightly increased!*
-                        else if (toGain < 2.5)
-                            cliloc = 1157573; // *The pet's battle experience has fairly increased!*
-
-                        if (master.HasGump(typeof(PetTrainingProgressGump)))
-                        {
-                            ResendProgressGump(master);
-                        }
-                        else
-                        {
-                            if (master.InRange(Creature.Location, 12))
-                            {
-                                BaseGump.SendGump(new PetTrainingProgressGump((PlayerMobile)master, Creature));
-                            }
-                        }
-
-                        Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, cliloc, master.NetState);
-
-                        if (TrainingProgress >= TrainingProgressMax)
-                        {
-                            Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, 1157543, master.NetState); // *The creature surges with battle experience and is ready to train!*
-
-                            Engines.Quests.LeadingIntoBattleQuest.CheckComplete((PlayerMobile)master);
-                        }
+                if (PowerHourBegin + PowerHourDelay < DateTime.UtcNow)
+                {   
+                    _ProgressTable.Clear();
+                    
+                    PowerHourBegin = DateTime.UtcNow;
+                    InPowerHour = true;
+                    master.SendLocalizedMessage(1157569); // [Pet Training Power Hour]:  Your pet is under the effects of enhanced training progress for the next hour!
+                }
+                else if (InPowerHour && PowerHourBegin + PowerHourDuration < DateTime.UtcNow)
+                {   
+                    InPowerHour = false;
+                    master.SendLocalizedMessage(1157570); // [Pet Training Power Hour]:  Your pet is no longer under the effects of enhanced training progress.
+                }
+                
+                TrainingProgress = Math.Min(TrainingProgressMax, TrainingProgress + toGain);
+                
+                if (!bc.Controlled && !bc.Summoned && master is PlayerMobile)
+                {   
+                    int cliloc = 1157574; // *The pet's battle experience has greatly increased!*
+                    
+                    if (toGain < 1.3)
+                        cliloc = 1157565; // *The pet's battle experience has slightly increased!*
+                    else if (toGain < 2.5)
+                        cliloc = 1157573; // *The pet's battle experience has fairly increased!*
+                    
+                    if (master.HasGump(typeof(PetTrainingProgressGump)))
+                    {   
+                        ResendProgressGump(master);
                     }
                     else
-                    {
-                        Creature.PrivateOverheadMessage(MessageType.Regular, 0x21, 1157564, master.NetState); // *The pet does not appear to train from that*
+                    {   
+                        if (master.InRange(Creature.Location, 12))
+                        {   
+                            BaseGump.SendGump(new PetTrainingProgressGump((PlayerMobile)master, Creature));
+                        }
+                    }
+                    
+                    Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, cliloc, master.NetState);
+                    
+                    if (TrainingProgress >= TrainingProgressMax)
+                    {   
+                        Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, 1157543, master.NetState); // *The creature surges with battle experience and is ready to train!*
+                        
+                        Engines.Quests.LeadingIntoBattleQuest.CheckComplete((PlayerMobile)master);
                     }
                 }
                 else
-                {
+                {   
                     Creature.PrivateOverheadMessage(MessageType.Regular, 0x21, 1157564, master.NetState); // *The pet does not appear to train from that*
                 }
             }

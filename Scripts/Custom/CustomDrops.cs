@@ -18,7 +18,7 @@ namespace Server.Items
             Mobile killer = e.Killer;
             if (bc == null || c == null || c.Deleted || bc.Controlled || bc.Summoned)
             {
-                return
+                return;
             }
             int luck = (e.Killer != null) ? LootPack.GetEffectiveLuck(e.Killer, bc) : 0;
             CheckDrop(bc, c, luck);
