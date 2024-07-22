@@ -16,12 +16,12 @@ namespace Server.Items
             BaseCreature bc = e.Creature as BaseCreature;
             Container c = e.Corpse;
             Mobile killer = e.Killer;
-            int luck = LootPack.GetEffectiveLuck(e.Killer, bc);
-            
-            if (bc != null && c != null && !c.Deleted && !bc.Controlled && !bc.Summoned)
+            if (bc == null || c == null || c.Deleted || bc.Controlled || bc.Summoned)
             {
-                CheckDrop(bc, c, luck);
+                return
             }
+            int luck = (e.Killer != null) ? LootPack.GetEffectiveLuck(e.Killer, bc) : 0;
+            CheckDrop(bc, c, luck);
         }
 
         public static void CheckDrop(BaseCreature bc, Container c, int luck)
