@@ -105,7 +105,7 @@ namespace Server.Engines.BulkOrders
                 if (theirSkill >= 100)
                 {
                     Console.WriteLine("Skill over 100");
-                    Item foundItem = pm.Backpack.FindItemByType(typeof(LargeSmithBOD));
+                    Item foundItem = m.Backpack.FindItemByType(typeof(LargeSmithBOD));
                     if (foundItem != null)
                     {
                         Console.WriteLine("Found an LBOD");
