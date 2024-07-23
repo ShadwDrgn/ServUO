@@ -9,7 +9,7 @@ namespace Server.Misc
     public class Congrats
     {
         private static HttpClient client = new HttpClient();
-        private static string url = "https://discordapp.com/api/webhooks/583417865097445405/wwf6idFi9mZNKkzXz0niFGd2kEp8dygP5q1EhNISQeed-7dEMNZB053mrL4cgGaCttFV";
+        private static string url = "https://discord.com/api/webhooks/1265008799182360697/sgAjQks_Ef3hX8zWgWZeRTj5pRFXBebMFBPFr2cVCsGUjQCLarIoRPKo52oso7lCl20d";
         public static void Initialize()
         {
             // Register our event handler

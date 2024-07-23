@@ -315,7 +315,8 @@ namespace Server.Mobiles
                         }
                     }
                     
-                    Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, cliloc, master.NetState);
+                    // Do we really need to spam this? We have the progress gump.
+                    // Creature.PrivateOverheadMessage(MessageType.Regular, 0x59, cliloc, master.NetState);
                     
                     if (TrainingProgress >= TrainingProgressMax)
                     {   
