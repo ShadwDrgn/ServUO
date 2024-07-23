@@ -101,6 +101,37 @@ namespace Server.Engines.BulkOrders
             if (entries.Length > 0)
             {
                 double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Blacksmith);
+
+                if (theirSkill >= 100)
+                {
+                    Console.WriteLine("Skill over 100");
+                    Item foundItem = pm.Backpack.FindItemByType(typeof(LargeSmithBOD));
+                    if (foundItem != null)
+                    {
+                        Console.WriteLine("Found an LBOD");
+                        LargeBOD lbod = (LargeBOD)foundItem;
+                        List<SmallSmithBOD> sm_Entries = new List<SmallSmithBOD>();
+                        for (int i = 0; i < lbod.Entries.Length; i++)
+                        {
+                            if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                                continue;
+
+                            SmallSmithBOD smallSmithBOD = new SmallSmithBOD {
+                                Hue = lbod.Hue,
+                                AmountMax = lbod.AmountMax,
+                                AmountCur = 0,
+                                Type = lbod.Entries[i].Details.Type,
+                                Number = lbod.Entries[i].Details.Number,
+                                Graphic = lbod.Entries[i].Details.Graphic,
+                                RequireExceptional = lbod.RequireExceptional,
+                                Material = lbod.Material,
+                            };
+                            sm_Entries.Add(smallSmithBOD);
+                        }
+                        return Utility.RandomList(sm_Entries.ToArray());
+                    }
+                }
+
                 int amountMax;
 
                 if (theirSkill >= 70.1)
