@@ -88,6 +88,35 @@ namespace Server.Engines.BulkOrders
             SmallBulkEntry[] entries;
 
             double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Cooking);
+
+            if (theirSkill >= 100)
+            {
+                Item foundItem = m.Backpack.FindItemByType(typeof(LargeCookingBOD));
+                if (foundItem != null)
+                {
+                    LargeBOD lbod = (LargeBOD)foundItem;
+                    List<SmallCookingBOD> sm_Entries = new List<SmallCookingBOD>();
+                    for (int i = 0; i < lbod.Entries.Length; i++)
+                    {
+                        if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                            continue;
+
+                        SmallCookingBOD smallCookingBOD = new SmallCookingBOD {
+                            Hue = lbod.Hue,
+                            AmountMax = lbod.AmountMax,
+                            AmountCur = 0,
+                            Type = lbod.Entries[i].Details.Type,
+                            Number = lbod.Entries[i].Details.Number,
+                            Graphic = lbod.Entries[i].Details.Graphic,
+                            RequireExceptional = lbod.RequireExceptional,
+                            Material = lbod.Material,
+                        };
+                        sm_Entries.Add(smallCookingBOD);
+                    }
+                    return Utility.RandomList(sm_Entries.ToArray());
+                }
+            }
+
             bool nonexceptional = false;
 
             if (0.20 > Utility.RandomDouble())

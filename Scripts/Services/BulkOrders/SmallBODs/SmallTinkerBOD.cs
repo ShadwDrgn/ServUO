@@ -131,6 +131,37 @@ namespace Server.Engines.BulkOrders
             if (entries.Length > 0)
             {
                 double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Tinkering);
+
+                if (theirSkill >= 100)
+                {
+                    Item foundItem = m.Backpack.FindItemByType(typeof(LargeTinkerBOD));
+                    if (foundItem != null)
+                    {
+                        LargeBOD lbod = (LargeBOD)foundItem;
+                        List<SmallTinkerBOD> sm_Entries = new List<SmallTinkerBOD>();
+                        for (int i = 0; i < lbod.Entries.Length; i++)
+                        {
+                            if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                                continue;
+
+                            SmallTinkerBOD smallTinkerBOD = new SmallTinkerBOD {
+
+                                Hue = lbod.Hue,
+                                AmountMax = lbod.AmountMax,
+                                AmountCur = 0,
+                                Type = lbod.Entries[i].Details.Type,
+                                Number = lbod.Entries[i].Details.Number,
+                                Graphic = lbod.Entries[i].Details.Graphic,
+                                RequireExceptional = lbod.RequireExceptional,
+                                Material = lbod.Material,
+                                GemType = lbod.GemType,
+                            };
+                            sm_Entries.Add(smallTinkerBOD);
+                        }
+                        return Utility.RandomList(sm_Entries.ToArray());
+                    }
+                }
+
                 int amountMax;
 
                 if (theirSkill >= 70.1)

@@ -87,6 +87,34 @@ namespace Server.Engines.BulkOrders
 
             double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Carpentry);
 
+            if (theirSkill >= 100)
+            {
+                Item foundItem = m.Backpack.FindItemByType(typeof(LargeCarpentryBOD));
+                if (foundItem != null)
+                {
+                    LargeBOD lbod = (LargeBOD)foundItem;
+                    List<SmallCarpentryBOD> sm_Entries = new List<SmallCarpentryBOD>();
+                    for (int i = 0; i < lbod.Entries.Length; i++)
+                    {
+                        if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                            continue;
+
+                        SmallCarpentryBOD smallCarpentryBOD = new SmallCarpentryBOD {
+                            Hue = lbod.Hue,
+                            AmountMax = lbod.AmountMax,
+                            AmountCur = 0,
+                            Type = lbod.Entries[i].Details.Type,
+                            Number = lbod.Entries[i].Details.Number,
+                            Graphic = lbod.Entries[i].Details.Graphic,
+                            RequireExceptional = lbod.RequireExceptional,
+                            Material = lbod.Material,
+                        };
+                        sm_Entries.Add(smallCarpentryBOD);
+                    }
+                    return Utility.RandomList(sm_Entries.ToArray());
+                }
+            }
+
             entries = SmallBulkEntry.CarpentrySmalls;
 
             if (entries.Length > 0)

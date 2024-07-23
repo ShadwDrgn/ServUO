@@ -98,6 +98,35 @@ namespace Server.Engines.BulkOrders
             SmallBulkEntry[] entries;
 
             double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Fletching);
+
+            if (theirSkill >= 100)
+            {
+                Item foundItem = m.Backpack.FindItemByType(typeof(LargeFletchingBOD));
+                if (foundItem != null)
+                {
+                    LargeBOD lbod = (LargeBOD)foundItem;
+                    List<SmallFletchingBOD> sm_Entries = new List<SmallFletchingBOD>();
+                    for (int i = 0; i < lbod.Entries.Length; i++)
+                    {
+                        if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                            continue;
+
+                        SmallFletchingBOD smallFletchingBOD = new SmallFletchingBOD {
+                            Hue = lbod.Hue,
+                            AmountMax = lbod.AmountMax,
+                            AmountCur = 0,
+                            Type = lbod.Entries[i].Details.Type,
+                            Number = lbod.Entries[i].Details.Number,
+                            Graphic = lbod.Entries[i].Details.Graphic,
+                            RequireExceptional = lbod.RequireExceptional,
+                            Material = lbod.Material,
+                        };
+                        sm_Entries.Add(smallFletchingBOD);
+                    }
+                    return Utility.RandomList(sm_Entries.ToArray());
+                }
+            }
+
             bool useMaterials = false;
 
             if (theirSkill < 30.0 || .20 > Utility.RandomDouble())

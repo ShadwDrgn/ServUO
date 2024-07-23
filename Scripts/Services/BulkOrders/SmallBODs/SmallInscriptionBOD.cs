@@ -66,6 +66,34 @@ namespace Server.Engines.BulkOrders
 
             double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Inscribe);
 
+            if (theirSkill >= 100)
+            {
+                Item foundItem = m.Backpack.FindItemByType(typeof(LargeInscriptionBOD));
+                if (foundItem != null)
+                {
+                    LargeBOD lbod = (LargeBOD)foundItem;
+                    List<SmallInscriptionBOD> sm_Entries = new List<SmallInscriptionBOD>();
+                    for (int i = 0; i < lbod.Entries.Length; i++)
+                    {
+                        if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                            continue;
+
+                        SmallInscriptionBOD smallInscriptionBOD = new SmallInscriptionBOD {
+                            Hue = lbod.Hue,
+                            AmountMax = lbod.AmountMax,
+                            AmountCur = 0,
+                            Type = lbod.Entries[i].Details.Type,
+                            Number = lbod.Entries[i].Details.Number,
+                            Graphic = lbod.Entries[i].Details.Graphic,
+                            RequireExceptional = lbod.RequireExceptional,
+                            Material = lbod.Material,
+                        };
+                        sm_Entries.Add(smallInscriptionBOD);
+                    }
+                    return Utility.RandomList(sm_Entries.ToArray());
+                }
+            }
+
             entries = SmallBulkEntry.InscriptionSmalls;
 
             if (entries.Length > 0)
