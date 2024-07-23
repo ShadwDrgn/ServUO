@@ -55,7 +55,7 @@ namespace Server.Engines.Harvest
             oreAndStone.MaxRange = 2;
 
             // One ore per harvest action
-            oreAndStone.ConsumedPerHarvest = 1;
+            oreAndStone.ConsumedPerHarvest = 2;
             oreAndStone.ConsumedPerFeluccaHarvest = 2;
 
             // The digging effect

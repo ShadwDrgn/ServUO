@@ -55,7 +55,7 @@ namespace Server.Engines.Harvest
                 MaxRange = 2,
 
                 // Ten logs per harvest action
-                ConsumedPerHarvest = 10,
+                ConsumedPerHarvest = 20,
                 ConsumedPerFeluccaHarvest = 20,
 
                 // The chopping effect
