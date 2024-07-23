@@ -137,7 +137,7 @@ namespace Server.Engines.BulkOrders
                     Item foundItem = m.Backpack.FindItemByType(typeof(LargeTinkerBOD));
                     if (foundItem != null)
                     {
-                        LargeBOD lbod = (LargeTinkerBOD)foundItem;
+                        LargeTinkerBOD lbod = (LargeTinkerBOD)foundItem;
                         List<SmallTinkerBOD> sm_Entries = new List<SmallTinkerBOD>();
                         for (int i = 0; i < lbod.Entries.Length; i++)
                         {
