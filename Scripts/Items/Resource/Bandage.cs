@@ -687,18 +687,13 @@ namespace Server.Items
 
             double seconds;
 
-            if (healer == patient)
-            {
-                seconds = Math.Min(8, Math.Ceiling(11.0 - dex / 20));
-                seconds = Math.Max(seconds, 4);
-            }
-            else if (skill == SkillName.Veterinary)
+            if (skill == SkillName.Veterinary)
             {
                 seconds = 2.0;
             }
             else
             {
-                seconds = Math.Ceiling((double)4 - dex / 60);
+                seconds = Math.Ceiling((double)4 - dex / 50);
                 seconds = Math.Max(seconds, 2);
             }
 
