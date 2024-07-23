@@ -88,6 +88,35 @@ namespace Server.Engines.BulkOrders
             bool useMaterials = Utility.RandomBool();
 
             double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Tailoring);
+
+            if (theirSkill >= 100)
+            {
+                Item foundItem = m.Backpack.FindItemByType(typeof(LargeTailorBOD));
+                if (foundItem != null)
+                {
+                    LargeBOD lbod = (LargeBOD)foundItem;
+                    List<SmallTailorBOD> sm_Entries = new List<SmallTailorBOD>();
+                    for (int i = 0; i < lbod.Entries.Length; i++)
+                    {
+                        if (lbod.Entries[i].Amount >= lbod.AmountMax)
+                            continue;
+
+                        SmallTailorBOD smallTailorBOD = new SmallTailorBOD {
+                            Hue = lbod.Hue,
+                            AmountMax = lbod.AmountMax,
+                            AmountCur = 0,
+                            Type = lbod.Entries[i].Details.Type,
+                            Number = lbod.Entries[i].Details.Number,
+                            Graphic = lbod.Entries[i].Details.Graphic,
+                            RequireExceptional = lbod.RequireExceptional,
+                            Material = lbod.Material,
+                        };
+                        sm_Entries.Add(smallTailorBOD);
+                    }
+                    return Utility.RandomList(sm_Entries.ToArray());
+                }
+            }
+
             if (useMaterials && theirSkill >= 6.2) // Ugly, but the easiest leather BOD is Leather Cap which requires at least 6.2 skill.
                 entries = SmallBulkEntry.TailorLeather;
             else
