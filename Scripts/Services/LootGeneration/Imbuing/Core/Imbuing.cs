@@ -357,10 +357,11 @@ namespace Server.SkillHandlers
                 if (TimesImbued(i) < 20 && skill < from.Skills[SkillName.Imbuing].Cap)
                 {
                     double s = Math.Min(100, success);
-                    double mins = 120 - (s * 1.2);
-                    double maxs = Math.Max(120 / (s / 100), skill);
-
-                    from.CheckSkill(SkillName.Imbuing, mins, maxs);
+                    from.CheckSkill(SkillName.Imbuing, s/100);
+                }
+                else if (TimesImbued(i) >=20 && skill < from.Skills[SkillName.Imbuing].Cap)
+                {
+                    from.SendMessage("You can no longer gain skill from this item");
                 }
 
                 success /= 100;
