@@ -230,9 +230,6 @@ namespace Server.Items
 
         public static SkillName[] GetPowerScrollList(TreasureLevel level, TreasurePackage package, TreasureFacet facet)
         {
-            if (facet != TreasureFacet.Felucca)
-                return null;
-
             if (level >= TreasureLevel.Cache)
             {
                 return _PowerscrollTable[(int)package];
