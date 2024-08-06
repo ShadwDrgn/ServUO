@@ -296,13 +296,14 @@ namespace Server.Mobiles
                 
                 if (!bc.Controlled && !bc.Summoned && master is PlayerMobile)
                 {   
+                    /*
                     int cliloc = 1157574; // *The pet's battle experience has greatly increased!*
                     
                     if (toGain < 1.3)
                         cliloc = 1157565; // *The pet's battle experience has slightly increased!*
                     else if (toGain < 2.5)
                         cliloc = 1157573; // *The pet's battle experience has fairly increased!*
-                    
+                    */
                     if (master.HasGump(typeof(PetTrainingProgressGump)))
                     {   
                         ResendProgressGump(master);
