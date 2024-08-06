@@ -79,17 +79,6 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            double chance = Math.Min(HitsMax/1200.0, 0.95);
-
-            if (!m_HasMetalChest && Utility.RandomDouble() < chance)
-            {
-                if (Utility.RandomDouble() < 0.5) {
-                    PackItem(new MetalGoldenChest());
-                } else {
-                    PackItem(new MetalChest());
-                } 
-                m_HasMetalChest = true;
-            }
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Gems, Utility.Random(1, 3));
             AddLoot(LootPack.LootItem<PlagueBeastGland>(80.0));
@@ -257,6 +246,19 @@ namespace Server.Mobiles
                 Hits += hpToIncrease;
                 // Also provide heal for each devour
             }
+
+            double chance = Math.Min(HitsMax/maxhits, 0.95);
+
+            if (!m_HasMetalChest && Utility.RandomDouble() < chance)
+            {
+                if (Utility.RandomDouble() < 0.5) {
+                    PackItem(new MetalGoldenChest());
+                } else {
+                    PackItem(new MetalChest());
+                } 
+                m_HasMetalChest = true;
+            }
+
         }
     }
 }
