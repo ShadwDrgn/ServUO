@@ -320,8 +320,8 @@ namespace Server.Mobiles
         {
             int count = 0;
 
-            if (MagicalAbility != MagicalAbility.None)
-                count++;
+            //if (MagicalAbility != MagicalAbility.None)
+            //    count++;
 
             if (SpecialAbilities != null)
                 count += SpecialAbilities.Where(a => !a.NaturalAbility).Count();
@@ -330,7 +330,7 @@ namespace Server.Mobiles
                 count += AreaEffects.Length;
 
             if (WeaponAbilities != null)
-                count += WeaponAbilities.Length;
+                count += (int)Math.Floor(WeaponAbilities.Length / 2.0);
 
             return count;
         }
