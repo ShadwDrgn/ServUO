@@ -1017,8 +1017,10 @@ namespace Server.Mobiles
 
             if (o is SpecialAbility[])
             {
+                Console.WriteLine("Got here");
                 if (!AbilityProfile.CanChooseSpecialAbility((SpecialAbility[])o))
                 {
+                    Console.WriteLine("Should never get here");
                     return false;
                 }
 
@@ -1026,9 +1028,11 @@ namespace Server.Mobiles
                 {
                     return true;
                 }
-
+                SpecialAbility[] spabils = (SpecialAbility[])o;
+                Console.WriteLine("Fucking length: " + spabils.Length);
                 foreach (SpecialAbility ability in (SpecialAbility[])o)
                 {
+                    Console.WriteLine("Looping all abilities");
                     if (!AbilityProfile.HasAbility(ability))
                     {
                         return true;
@@ -1506,7 +1510,7 @@ namespace Server.Mobiles
                         {
                             if (TrainingPoint.Weight < 1.0)
                             {
-                                Value -= (int)(TrainingPoint.Weight * 100);
+                                Value -= (int)(1 / TrainingPoint.Weight);
                             }
                             else
                             {
@@ -1527,7 +1531,7 @@ namespace Server.Mobiles
                         {
                             if (TrainingPoint.Weight < 1.0)
                             {
-                                Value += (int)(TrainingPoint.Weight * 100);
+                                Value += (int)(1 / TrainingPoint.Weight);
                             }
                             else
                             {

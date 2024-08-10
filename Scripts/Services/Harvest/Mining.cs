@@ -129,8 +129,8 @@ namespace Server.Engines.Harvest
             sand.BankHeight = 8;
 
             // Every bank holds from 6 to 12 sand
-            sand.MinTotal = 6;
-            sand.MaxTotal = 13;
+            sand.MinTotal = 30;
+            sand.MaxTotal = 61;
 
             // A resource bank will respawn its content every 10 to 20 minutes
             sand.MinRespawn = TimeSpan.FromMinutes(10.0);
@@ -146,8 +146,8 @@ namespace Server.Engines.Harvest
             sand.MaxRange = 2;
 
             // One sand per harvest action
-            sand.ConsumedPerHarvest = 1;
-            sand.ConsumedPerFeluccaHarvest = 2;
+            sand.ConsumedPerHarvest = 5;
+            sand.ConsumedPerFeluccaHarvest = 5;
 
             // The digging effect
             sand.EffectActions = new int[] { 3 };

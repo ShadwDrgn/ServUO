@@ -498,6 +498,7 @@ namespace Server.Mobiles
     public class DragonBreath : SpecialAbility
     {
         public override int MaxRange => 12;
+        public override bool NaturalAbility => true;
         public override bool TriggerOnThink => true;
         public override int ManaCost => 30;
 

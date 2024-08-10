@@ -114,7 +114,7 @@ namespace Server.Engines.CannedEvil
             m_DamageEntries = new Dictionary<Mobile, int>();
             m_RandomizeType = false;
 
-            SpawnRadius = 35;
+            SpawnRadius = 30;
             SpawnMod = 1;
 
             Timer.DelayCall(TimeSpan.Zero, SetInitialSpawnArea);

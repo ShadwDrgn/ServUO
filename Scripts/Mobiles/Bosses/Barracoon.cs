@@ -194,7 +194,7 @@ namespace Server.Mobiles
             if (target.Player && 0.6 >= Utility.RandomDouble()) // 60% chance to polymorph attacker into a ratman
                 Polymorph(target);
 
-            if (0.1 >= Utility.RandomDouble()) // 10% chance to more ratmen
+            if (0.03 >= Utility.RandomDouble()) // 10% chance to more ratmen
                 SpawnRatmen(target);
 
             if (0.05 >= Utility.RandomDouble() && !IsBodyMod) // 5% chance to polymorph into a ratman

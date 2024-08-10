@@ -362,8 +362,12 @@ namespace Server.Mobiles
                 (AreaEffects == null || AreaEffects.Length == 0) &&
                 (SpecialAbilities == null || SpecialAbilities.Length == 0 || SpecialAbilities.All(a => a.NaturalAbility)))
                 return true;
-
-            return !HasSpecialMagicalAbility() && (SpecialAbilities == null || SpecialAbilities.Where(a => !a.NaturalAbility).Count() == 0) && AbilityCount() < 3;
+            Console.WriteLine("unnatural abilities = " + SpecialAbilities.Where(a => !a.NaturalAbility).Count());
+            Console.WriteLine("HSMA: " + HasSpecialMagicalAbility());
+            Console.WriteLine("AbilityCount: " + AbilityCount());
+            bool testit = !HasSpecialMagicalAbility() && (SpecialAbilities == null || SpecialAbilities.Where(a => !a.NaturalAbility).Count() == 0) && AbilityCount() < 3;
+            Console.WriteLine("CCSA:" + testit);
+            return testit;
         }
 
         public bool IsRuleBreaker(SpecialAbility ability)

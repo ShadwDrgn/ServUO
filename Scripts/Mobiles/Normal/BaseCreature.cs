@@ -1129,6 +1129,9 @@ namespace Server.Mobiles
 
         public bool CheckCanFlee()
         {
+            if (GetType().IsSubclassOf(typeof(BaseChampion)))
+                return false;
+
             if (ForceFleeUntil != DateTime.MinValue)
             {
                 if (ForceFleeUntil < DateTime.UtcNow)
